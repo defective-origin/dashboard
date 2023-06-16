@@ -173,11 +173,11 @@ export default function (plop) {
   // - Spread data between inner components via contexts
   //
   // Popular launchers:
-  //  - AppLauncher [All Launchers | Suspense | App | HotKeysContext]
-  //  - ThirdParty/FrameworkLauncher [UIContext | i18n | i10n | dayjs]
-  //  - OverlayLauncher [ModalWindowContext | SnackBarContext]
-  //  - AccountLauncher [UserContext | ThemeContext]
-  //  - SystemLauncher [LogContext | MonitorContext | ABTestingContext | EnvironmentContext]
+  //  - AppLauncher - All Launchers
+  //  - CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
+  //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
+  //  - AccountLauncher - providers: [User | Setting]
+  //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
   plop.setGenerator('Launcher', {
     description: 'Create a launcher component',
     prompts: prompts(
