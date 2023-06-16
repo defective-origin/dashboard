@@ -1,0 +1,11 @@
+@import "contexts/UI/UI.module.scss";
+
+.Board {
+	overflow: hidden;
+}
+
+.SelectionBoard,
+.ViewBoard {
+	position: absolute;
+	@include stretch;
+}

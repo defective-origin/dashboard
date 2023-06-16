@@ -1,0 +1,59 @@
+@import "contexts/UI/UI.module.scss";
+
+
+// gap
+$xs-gap: size(1);
+$sm-gap: size(2);
+$md-gap: size(3);
+$lg-gap: size(4);
+$xl-gap: size(5);
+
+:export {
+  xsGap: $xs-gap;
+  smGap: $sm-gap;
+  mdGap: $md-gap;
+  lgGap: $lg-gap;
+  xlGap: $xl-gap;
+}
+
+
+:global {
+  .grid {
+    display: grid;
+  }
+
+
+  // align items
+  .g-ai-s { align-items: start; }
+  .g-ai-c { align-items: center; }
+  .g-ai-e { align-items: end; }
+  .g-ai-st { align-items: stretch; }
+  .g-ai-b { align-items: baseline; }
+
+
+  // justify items
+  .g-ji-s { justify-items: start; }
+  .g-ji-c { justify-items: center; }
+  .g-ji-e { justify-items: end; }
+  .g-ji-st { justify-items: stretch; }
+
+
+  // justify content
+  .g-jc-s { justify-content: start; }
+  .g-jc-c { justify-content: center; }
+  .g-jc-e { justify-content: end; }
+  .g-jc-sb { justify-content: space-between; }
+  .g-jc-sa { justify-content: space-around; }
+  .g-jc-se { justify-content: space-evenly; }
+  .g-jc-st { justify-content: stretch; }
+
+
+  // align content
+  .g-ac-s { align-content: start; }
+  .g-ac-c { align-content: center; }
+  .g-ac-e { align-content: end; }
+  .g-ac-sb { align-content: space-between; }
+  .g-ac-sa { align-content: space-around; }
+  .g-ac-se { align-content: space-evenly; }
+  .g-ac-st { align-content: stretch; }
+}

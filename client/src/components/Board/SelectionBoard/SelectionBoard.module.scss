@@ -1,0 +1,25 @@
+@import "contexts/UI/UI.module.scss";
+
+// colors
+$invalid-area-color: rgba($red-6, $md-alpha);
+$valid-area-color: rgba($geekblue-6, $md-alpha);
+$outdated-area-color: rgba($gray-6, $md-alpha);
+
+$grid-line-color: $gray-6;
+
+// cursors
+$invalid-cursor: not-allowed;
+$valid-cursor: pointer;
+
+:export {
+  invalidCardColor: $invalid-area-color;
+  validCardColor: $valid-area-color;
+  outdatedCardColor: $outdated-area-color;
+  gridLineColor: $grid-line-color;
+  validCursor: $valid-cursor;
+  invalidCursor: $invalid-cursor;
+}
+
+.SelectionBoard {
+	@include stretch;
+}

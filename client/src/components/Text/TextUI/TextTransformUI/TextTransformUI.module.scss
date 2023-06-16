@@ -1,0 +1,49 @@
+@import "contexts/UI/UI.module.scss";
+
+// font size
+$xs-font-size: size(3);
+$sm-font-size: size(4);
+$md-font-size: size(5);
+$lg-font-size: size(6);
+$xl-font-size: size(7);
+
+:export {
+  xsFontSize: $xs-font-size;
+  smFontSize: $sm-font-size;
+  mdFontSize: $md-font-size;
+  lgFontSize: $lg-font-size;
+  xlFontSize: $xl-font-size;
+}
+
+
+:global {
+  // font size
+  .tt-fs-xs { font-size: $xs-font-size; line-height: $xs-font-size; }
+  .tt-fs-sm { font-size: $sm-font-size; line-height: $sm-font-size; }
+  .tt-fs-md { font-size: $md-font-size; line-height: $md-font-size; }
+  .tt-fs-lg { font-size: $lg-font-size; line-height: $lg-font-size; }
+  .tt-fs-xl { font-size: $xl-font-size; line-height: $xl-font-size; }
+
+
+  // font weight
+  .tt-fw-1 { font-weight: 100 }
+  .tt-fw-2 { font-weight: 200 }
+  .tt-fw-3 { font-weight: 300 }
+  .tt-fw-4 { font-weight: 400 }
+  .tt-fw-5 { font-weight: 500 }
+  .tt-fw-6 { font-weight: 600 }
+  .tt-fw-7 { font-weight: 700 }
+  .tt-fw-8 { font-weight: 800 }
+  .tt-fw-9 { font-weight: 900 }
+
+
+  // case
+  .tt-c-l { text-transform: lowercase; }
+  .tt-c-u { text-transform: uppercase; }
+  .tt-c-c { text-transform: capitalize; }
+
+
+  // direction
+  .tt-d-l { direction: ltr; }
+  .tt-d-r { direction: rtl; }
+}

@@ -1,0 +1,6 @@
+@import "contexts/UI/UI.module.scss";
+
+.Visible {
+  background: $shadow-color;
+  z-index: 1;
+}

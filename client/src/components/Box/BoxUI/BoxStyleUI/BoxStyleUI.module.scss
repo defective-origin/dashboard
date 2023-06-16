@@ -1,0 +1,29 @@
+@import "contexts/UI/UI.module.scss";
+
+// shape
+$shape-square: 2px;
+$shape-round: 0;
+$shape-circle: 50%;
+
+:export {
+  shapeRound: $shape-round;
+  shapeSquare: $shape-square;
+  shapeCircle: $shape-circle;
+}
+
+
+:global {
+  // status
+  .bs-secondary { border-color: $secondary-color; }
+  .bs-success { border-color: $success-color; }
+  .bs-warning { border-color: $warning-color; }
+  .bs-danger { border-color: $danger-color; }
+  .bs-info { border-color: $info-color; }
+  .bs-disable { border-color: $disabled-color; }
+
+
+  // shape
+  .bs-sp-r { border-radius: $shape-round; }
+  .bs-sp-s { border-radius: $shape-square; }
+  .bs-sp-c { border-radius: $shape-circle; }
+}

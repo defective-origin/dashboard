@@ -1,0 +1,39 @@
+// ---| tests |---
+import { renderHook } from '@testing-library/react-hooks'
+
+// ---| self |---
+import {{pascalCase name}} from './{{pascalCase name}}.hook'
+
+
+
+/**
+ * Hook descriptions
+ *
+ * @example
+ * const { result } = renderHook(() => useCounter())
+ * 
+ * act(() => {
+ *   result.current.increment()
+ * })
+ * 
+ * expect(result.current.count).toBe(1)
+ */
+describe('[{{pascalCase name}}] context', () => {
+  it('should return options', () => {
+    const { result } = renderHook(() => {{camelCase name}}())
+  
+    expect(result.current).toBe(null)
+  })
+})
+
+describe('[{{pascalCase name}}] tools', () => {
+  describe('[action name] action', () => {
+    it('should do something', () => {
+      const mockValue = 0
+
+      const result = doSomething(mockValue)
+  
+      expect(result).toBe()
+    })
+  })
+})

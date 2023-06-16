@@ -1,0 +1,36 @@
+@import "contexts/UI/UI.module.scss";
+
+$xs-size: 1;
+$sm-size: 2;
+$md-size: 3;
+$lg-size: 4;
+$xl-size: 5;
+
+.Button {
+  height: fit-content !important;
+}
+
+.IconButton {
+  padding: 0;
+  display: inline-flex;
+}
+
+.XS {
+  padding: bordered-size($xs-size) !important;
+}
+
+.SM {
+  padding: bordered-size($sm-size) !important;
+}
+
+.MD {
+  padding: bordered-size($md-size) !important;
+}
+
+.LG {
+  padding: bordered-size($lg-size) !important;
+}
+
+.XL {
+  padding: bordered-size($xl-size) !important;
+}

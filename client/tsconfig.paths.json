@@ -1,0 +1,99 @@
+// FIXME: this file cannot extend tsconfig.path.json (why it does not work)
+// FIXME: and also if we put this settings to tsconfig.json then after application launching (yarn start) path settings will be cleared :(
+// FIXME: make all paths with prefix @
+// variant 1
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".", // This must be specified if "paths" is.
+//     "paths": {
+//       "@pages/*": ["src/pages/*"],
+//       "@screens/*": ["src/screens/*"],
+//       "@components/*": ["src/components/*"],
+//       "@contexts/*": ["src/components/*"],
+//       "@common/*": ["src/common/*"],
+//       "@network/*": ["src/network/*"],
+//       "@locale/*": ["src/locale/*"],
+//       "@router/*": ["src/router/*"],
+//       "@store/*": ["src/store/*"],
+//       "@core/*": ["src/core/*"],
+//       "@assets/*": ["src/assets/*"],
+//       "@tests/*": ["src/tests/*"]
+//     }
+//   },
+//   "include": ["src"],
+//   "exclude": [
+//     "node_modules",
+//     "build",
+//     "**/*.test.ts"
+//   ]
+// }
+
+// // variant 2
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": ["src/*"]
+//     }
+//   },
+//   "include": ["src"],
+//   "exclude": [
+//     "node_modules",
+//     "build",
+//     "**/*.test.ts"
+//   ]
+// }
+
+// variant 3
+// {
+//   "compilerOptions": {
+//     "baseUrl": "src",
+//     "paths": {
+//       "*": ["*"]
+//     }
+//   },
+//   "include": ["src"],
+//   "exclude": [
+//     "node_modules",
+//     "build",
+//     "**/*.test.ts"
+//   ]
+// }
+
+// variant 4
+// {
+//   "compilerOptions": {
+//     "baseUrl": "src",
+//   }
+// }
+
+// variant 5
+// {
+//   "compilerOptions": {
+//     "baseUrl": "./",
+//     "paths": {
+//       "@*": ["src/*"]
+//     }
+//   },
+//   "include": ["src"],
+//   "exclude": [
+//     "node_modules",
+//     "build",
+//     "**/*.test.ts"
+//   ]
+// }
+
+// variant 6
+// {
+//   "compilerOptions": {
+//     "baseUrl": "src"
+//   },
+//   "include": [
+//     "src"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     "build",
+//     "**/*.test.ts"
+//   ]
+// }

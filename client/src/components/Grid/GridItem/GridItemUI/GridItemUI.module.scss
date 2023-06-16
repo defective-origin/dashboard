@@ -1,0 +1,16 @@
+@import "contexts/UI/UI.module.scss";
+
+:global {
+  // justify
+  .gi-j-s { justify-self: start; }
+  .gi-j-c { justify-self: center; }
+  .gi-j-e { justify-self: end; }
+  .gi-j-st { justify-self: stretch; }
+
+
+  // align
+  .gi-a-s { align-self: start; }
+  .gi-a-c { align-self: center; }
+  .gi-a-e { align-self: end; }
+  .gi-a-st { align-self: stretch; }
+}

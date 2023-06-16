@@ -1,0 +1,22 @@
+@import "contexts/UI/UI.module.scss";
+
+.Menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.PageSize {
+  width: size(17) !important;
+}
+
+.Page {
+  width: size(21) !important;
+}
+
+.Search {
+  width: size(40) !important;
+}
+
+.Report {
+  width: size(35) !important;
+}

@@ -1,0 +1,80 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module", // Allows for the use of imports
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript/base"
+  ],
+  "ignorePatterns": [ "dist/*", "setupTests.ts", "intl-test.utils.tsx" ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", "json"]
+      }
+    }
+  },
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "eol-last": ["error", "always"],
+    "semi": ["warn", "never"],
+    "@typescript-eslint/semi": ["warn", "never"],
+    "import/prefer-default-export": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-multi-spaces": "warn",
+
+    "object-curly-newline": ["error", {
+      "ImportDeclaration": "never",
+      "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+    }],
+
+    "@typescript-eslint/no-unused-vars": ["warn"],
+
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow"
+      }
+    ],
+
+    "no-underscore-dangle": "off",
+
+    "max-len": ["warn", { "code": 120 }],
+    
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["./src/store/**/*.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-param-reassign": ["error", { "props": false }]
+      }
+    },
+    {
+      "files": ["./src/common/models/general-props.ts"],
+      "rules": {
+        "@typescript-eslint/ban-types": "off"
+      }
+    }
+  ]
+}

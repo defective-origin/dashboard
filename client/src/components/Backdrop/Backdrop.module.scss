@@ -1,0 +1,10 @@
+@import "contexts/UI/UI.module.scss";
+
+.Backdrop {
+  pointer-events: none;
+}
+
+.Visible {
+  background: $shadow-color;
+  pointer-events: all;
+}

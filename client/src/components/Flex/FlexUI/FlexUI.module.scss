@@ -1,0 +1,62 @@
+@import "contexts/UI/UI.module.scss";
+
+// gap
+$xs-gap: size(1);
+$sm-gap: size(2);
+$md-gap: size(3);
+$lg-gap: size(4);
+$xl-gap: size(5);
+
+:export {
+  xsGap: $xs-gap;
+  smGap: $sm-gap;
+  mdGap: $md-gap;
+  lgGap: $lg-gap;
+  xlGap: $xl-gap;
+}
+
+
+:global {
+  .flex {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  // wrap
+  .f-fw-w { flex-wrap: wrap; }
+  .f-fw-nw { flex-wrap: nowrap; }
+
+
+  // align items
+  .f-ai-s { align-items: flex-start; }
+  .f-ai-c { align-items: center; }
+  .f-ai-e { align-items: flex-end; }
+  .f-ai-st { align-items: stretch; }
+  .f-ai-b { align-items: baseline; }
+
+
+  // justify
+  .f-j-s { justify-content: flex-start; }
+  .f-j-c { justify-content: center; }
+  .f-j-e { justify-content: flex-end; }
+  .f-j-sb { justify-content: space-between; }
+  .f-j-sa { justify-content: space-around; }
+  .f-j-se { justify-content: space-evenly; }
+  .f-j-st { justify-content: stretch; }
+
+
+  // align
+  .f-a-s { align-content: flex-start; }
+  .f-a-c { align-content: center; }
+  .f-a-e { align-content: flex-end; }
+  .f-a-sb { align-content: space-between; }
+  .f-a-sa { align-content: space-around; }
+  .f-a-se { align-content: space-evenly; }
+  .f-a-st { align-content: stretch; }
+
+
+  // direction
+  .f-d-y { flex-direction: column; }
+  .f-d-x { flex-direction: row; }
+}

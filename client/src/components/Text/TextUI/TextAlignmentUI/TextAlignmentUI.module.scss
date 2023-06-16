@@ -1,0 +1,52 @@
+@import "contexts/UI/UI.module.scss";
+
+// indent
+$xs-indent: size(1);
+$sm-indent: size(2);
+$md-indent: size(3);
+$lg-indent: size(4);
+$xl-indent: size(5);
+
+:export {
+  xsIndent: $xs-indent;
+  smIndent: $sm-indent;
+  mdIndent: $md-indent;
+  lgIndent: $lg-indent;
+  xlIndent: $xl-indent;
+}
+
+:global {
+  // align
+  .ta-a-s { text-align: start; }
+  .ta-a-e { text-align: end; }
+  .ta-a-c { text-align: center; }
+  .ta-a-j { text-align: justify; }
+
+
+  // align last
+  .ta-al-s { text-align: start; }
+  .ta-al-e { text-align: end; }
+  .ta-al-c { text-align: center; }
+  .ta-al-j { text-align: justify; }
+
+
+  // justify
+  .ta-j-iw { text-justify: inter-word; }
+  .ta-j-ic { text-justify: inter-character; }
+
+
+  // vertical
+  .ta-v-t { vertical-align: top; }
+  .ta-v-m { vertical-align: middle; }
+  .ta-v-b { vertical-align: bottom; }
+  .ta-v-sb { vertical-align: sub; }
+  .ta-v-sp { vertical-align: sup; }
+
+
+  // indent
+  .ta-ti-xs { text-indent: $xs-indent; }
+  .ta-ti-sm { text-indent: $sm-indent; }
+  .ta-ti-md { text-indent: $md-indent; }
+  .ta-ti-lg { text-indent: $lg-indent; }
+  .ta-ti-xl { text-indent: $xl-indent; }
+}
