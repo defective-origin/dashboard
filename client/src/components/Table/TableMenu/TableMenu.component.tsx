@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
 // ---| components |---
-import Input from 'components/Input'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import Box, { BoxProps } from 'components/Box'
@@ -54,7 +53,7 @@ export default function TableMenu(props: TableMenuProps): JSX.Element | null {
   return (
     <Box className={cn(css.Menu, className)} {...otherProps}>
       <Box className={css.LeftPanel}>
-        <Input
+        {/* <Input
           className={css.PageSize}
           prefix={<Icon type="table_rows" size='xs' />}
           placeholder="Page"
@@ -75,10 +74,10 @@ export default function TableMenu(props: TableMenuProps): JSX.Element | null {
           prefix={<Icon type="database" size='xs' />}
           placeholder="Report"
           value={report}
-        />
+        /> */}
       </Box>
 
-      <Input className={css.Search} suffix={<Icon type="search" size='xs' />} placeholder="Search" />
+      {/* <Input className={css.Search} suffix={<Icon type="search" size='xs' />} placeholder="Search" /> */}
 
       <Box className={css.RightPanel}>
         <Button icon="sort" size='xs' type="text" />

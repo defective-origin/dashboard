@@ -109,7 +109,7 @@ export default function Article(props: ArticleProps): JSX.Element {
   const [options, setOptions] = useState<Options>()
   const deviceOptions = useDeviceOptions()
   const menuToggler = useToggler()
-  const showMenu = !!options?.menu?.length && menuToggler.isOn
+  const showMenu = !!options?.menu?.length && menuToggler.isOn()
   const _className = cn(css.Article, {
     [css.ArticleWithMenu]: showMenu,
   }, className)

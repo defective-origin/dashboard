@@ -61,7 +61,7 @@ export default function CardHeader(props: CardHeaderProps): JSX.Element {
 
       <Flex className={css.Extra} direction="x" aitems="center">
         {extra}
-        {onClose && <Button icon="close" size="xs" type="text" shape="round" onClick={onClose} />}
+        {onClose && <Button icon="close" size="xs" type="text"onClick={onClose} />}
       </Flex>
     </Flex>
   )

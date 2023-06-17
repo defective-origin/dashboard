@@ -1,6 +1,5 @@
 // ---| components |---
 import Grid, { GridProps } from 'components/Grid'
-import Image, { ImageProps } from 'components/Image'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -8,7 +7,9 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './CardMedia.module.scss'
 
-export type CardMediaProps = GridProps & Pick<ImageProps, 'src'>
+export type CardMediaProps = GridProps & {
+  src?: string
+}
 
 export default function CardMedia(props: CardMediaProps): JSX.Element {
   const { src, padding = 'xs', className, children, ...otherProps } = props
@@ -27,7 +28,7 @@ export default function CardMedia(props: CardMediaProps): JSX.Element {
         {children}
       </Grid.Item>
 
-      <Image className={css.Image} preview={false} src={src} />
+      <img className={css.Image} src={src} />
     </Grid>
   )
 }

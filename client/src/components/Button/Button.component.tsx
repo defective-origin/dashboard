@@ -1,7 +1,6 @@
 import React from 'react'
 
 // ---| components |---
-import { Button as AntdButton, ButtonProps as AntdButtonProps } from 'antd'
 import Text, { TextProps } from 'components/Text'
 
 // ---| common |---
@@ -20,7 +19,7 @@ const ButtonSizeMap = {
 
 export type ButtonSizeTypes = keyof typeof ButtonSizeMap
 
-export type ButtonProps = TextProps & Omit<AntdButtonProps, 'size'> & {
+export type ButtonProps = TextProps & {
   size?: ButtonSizeTypes
   disable?: boolean
 }
@@ -34,10 +33,10 @@ export default function Button(props: ButtonProps): JSX.Element {
   }, className)
 
   return (
-    <AntdButton className={_className} {...otherProps}>
+    <div className={_className} {...otherProps}>
       <Text.Text text={text} icon={icon} ricon={ricon} prefix={prefix} suffix={suffix} size={size} />
 
       {children}
-    </AntdButton>
+    </div>
   )
 }

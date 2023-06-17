@@ -1,7 +1,6 @@
 import React from 'react'
 
 // ---| components |---
-import { Table as AntdTable, TableProps as AntdTableProps } from 'antd'
 import Text, { TextProps } from 'components/Text'
 import Pagination from 'components/Pagination'
 import Box, { BoxProps } from 'components/Box'
@@ -78,8 +77,8 @@ export default function Table(props: TableProps): JSX.Element | null {
       <TableMenu total={total} page={page} pageSize={pageSize} />
 
       <div className={css.TableWrapper}>
-        <AntdTable pagination={false} className={css.Table} size='small' />
-        <Pagination type='vertical' total={total} records={pageSize} showSizeChanger={false} onChange={() => {}} />
+        {/* <AntdTable pagination={false} className={css.Table} size='small' /> */}
+        <Pagination type='vertical' total={total} records={pageSize} onChange={() => {}} />
         <TablePanel />
       </div>
     </Box>

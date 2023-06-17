@@ -125,7 +125,7 @@ export const lineVectors =(line: Line): Vector[] => [line.v1, line.v2]
  * @param { Vector } center Center offset vector
  * @returns { Line } Return rotated Line
  */
-export const rotateSquare = (degree: number, l: Line, center: Vector = ZeroVector): Line => {
+export const rotateLine = (degree: number, l: Line, center: Vector = ZeroVector): Line => {
   return line(rotateVectors(degree, lineVectors(l), center))
 }
 
