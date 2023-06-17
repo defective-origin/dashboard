@@ -26,6 +26,7 @@
     "lodash-es": "^4.17.21",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
     "react-i18next": "^13.0.0",
     "react-nanny": "^2.15.0",
     "react-resize-detector": "^7.0.0",
