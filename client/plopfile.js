@@ -171,7 +171,7 @@ export default function (plop) {
   // - Spread data between inner components via contexts
   //
   // Popular launchers:
-  //  - AppLauncher - All Launchers
+  //  - AppLauncher - All Launchers + AppPage
   //  - CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
   //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
   //  - AccountLauncher - providers: [User | Setting]

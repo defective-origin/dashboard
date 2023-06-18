@@ -212,7 +212,7 @@ export default function Article(props: ArticleProps): JSX.Element {
         <ArticleContent
           size={size}
           upBtnTitle={upBtnTitle}
-          content={options?.content}
+          content={options?.content as any}
         />
 
         <ArticleNavigation

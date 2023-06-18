@@ -1,3 +1,5 @@
 module.exports = {
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "singleQuote": true,
+  "semi": false,
 }

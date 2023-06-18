@@ -1,20 +1,18 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
-    "sourceType": "module", // Allows for the use of imports
+    "ecmaVersion": 13,
+    "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb-typescript/base"
+    "prettier"
   ],
-  "ignorePatterns": [ "dist/*", "setupTests.ts", "intl-test.utils.tsx" ],
+  "ignorePatterns": [ "dist/*", "setupTests.ts", "dist" ],
   "settings": {
     "import/resolver": {
       "node": {
@@ -23,15 +21,15 @@
     }
   },
   "rules": {
-    "linebreak-style": ["error", "unix"],
-    "eol-last": ["error", "always"],
+    "linebreak-style": ["warn", "unix"],
+    "eol-last": ["warn", "always"],
     "semi": ["warn", "never"],
     "@typescript-eslint/semi": ["warn", "never"],
     "import/prefer-default-export": "off",
     "implicit-arrow-linebreak": "off",
     "no-multi-spaces": "warn",
 
-    "object-curly-newline": ["error", {
+    "object-curly-newline": ["warn", {
       "ImportDeclaration": "never",
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
@@ -39,7 +37,7 @@
     "@typescript-eslint/no-unused-vars": ["warn"],
 
     "@typescript-eslint/naming-convention": [
-      "error",
+      "warn",
       {
         "selector": "variable",
         "format": ["camelCase", "PascalCase", "UPPER_CASE"],
@@ -47,29 +45,14 @@
       }
     ],
 
+    "indent": "off",
+    "@typescript-eslint/indent": ["warn", 2, {"ignoredNodes": ["FunctionExpression[params]:has(Identifier[decorators])"]}],
+
     "no-underscore-dangle": "off",
 
-    "max-len": ["warn", { "code": 120 }],
-    
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
+    "max-len": ["warn", { "code": 120 }]
   },
   "overrides": [
-    {
-      "files": ["./src/store/**/*.ts"],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "no-param-reassign": ["error", { "props": false }]
-      }
-    },
     {
       "files": ["./src/common/models/general-props.ts"],
       "rules": {
