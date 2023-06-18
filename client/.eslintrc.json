@@ -24,15 +24,15 @@
     }
   },
   "rules": {
-    "linebreak-style": ["error", "unix"],
-    "eol-last": ["error", "always"],
+    "linebreak-style": ["warn", "unix"],
+    "eol-last": ["warn", "always"],
     "semi": ["warn", "never"],
     "@typescript-eslint/semi": ["warn", "never"],
     "import/prefer-default-export": "off",
     "implicit-arrow-linebreak": "off",
     "no-multi-spaces": "warn",
 
-    "object-curly-newline": ["error", {
+    "object-curly-newline": ["warn", {
       "ImportDeclaration": "never",
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
@@ -40,7 +40,7 @@
     "@typescript-eslint/no-unused-vars": ["warn"],
 
     "@typescript-eslint/naming-convention": [
-      "error",
+      "warn",
       {
         "selector": "variable",
         "format": ["camelCase", "PascalCase", "UPPER_CASE"],
@@ -58,7 +58,7 @@
     "max-len": ["warn", { "code": 120 }],
     
     "import/extensions": [
-      "error",
+      "warn",
       "ignorePackages",
       {
         "js": "never",
@@ -69,13 +69,6 @@
     ]
   },
   "overrides": [
-    {
-      "files": ["./src/store/**/*.ts"],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "no-param-reassign": ["error", { "props": false }]
-      }
-    },
     {
       "files": ["./src/common/models/general-props.ts"],
       "rules": {

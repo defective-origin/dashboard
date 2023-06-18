@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 // ---| pages |---
 // ---| screens |---
@@ -22,7 +22,11 @@ export type UILauncherProps = {
 export function UILauncher(props: UILauncherProps): JSX.Element {
   const { children } = props
 
-  return <>{children}</>
+  return (
+    <Suspense fallback={<h1>Loading...</h1>}>
+      {children}
+    </Suspense>
+  )
 }
 
 UILauncher.displayName = 'UILauncher'

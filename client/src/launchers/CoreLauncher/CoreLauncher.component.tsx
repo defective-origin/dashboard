@@ -21,7 +21,11 @@ export type CoreLauncherProps = {
 export function CoreLauncher(props: CoreLauncherProps): JSX.Element {
   const { children } = props
 
-  return <>{children}</>
+  return (
+    <React.StrictMode>
+      { children }
+    </React.StrictMode>
+  )
 }
 
 CoreLauncher.displayName = 'CoreLauncher'
