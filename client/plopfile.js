@@ -1,9 +1,8 @@
-  // TODO: tools, feature, web-workers, core, assets/icons/images
+// TODO: tools, feature, web-workers, core, assets/icons/images
 // TODO: add description
 // TODO: add  init  structure  script
-// TODO: add  TS yarn add @types/inquirer
-// TODO:  добавить  чтение  пути  для  сабпаса (launcher  ...)
-// TODO:  переместить плоп  конфиг  в темплейты
+// TODO: add перевести  на  typescript
+// TODO:  переместить плоп  конфиг  в темплейты и  разбить  на  файлы
 
 // Prompts
 const prompts = (...args) => args.filter(Boolean)
@@ -74,6 +73,27 @@ const injectModuleImportExportAction = (path, importTemplate, exportTemplate, is
     injectFileExportAction(path, exportTemplate),
   )
 
+// generations
+const genComponent = ({
+  description,
+  postfix,
+  defaultName,
+  defaultSubpath
+}) => ({
+  description,
+  prompts: prompts(
+    NameInputPrompt({ default: defaultName, postfix }),
+    SubpathInputPrompt({ default: defaultSubpath }),
+  ),
+  actions: actions(
+    addFolderAction(
+      'templates/Component/*.hbs',
+      'src/{{subpath}}/{{pascalCase name}}',
+    ),
+  ),
+})
+
+
 export default function (plop) {
   plop.setWelcomeMessage([
     'React app infrastructure creator.',
@@ -86,19 +106,11 @@ export default function (plop) {
   // - Can use only other Components inside
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in component name
-  plop.setGenerator('Component', {
+  plop.setGenerator('Component', genComponent({
     description: 'Create a reusable, pure, unified component',
-    prompts: prompts(
-      NameInputPrompt({ default: "Component" }),
-      SubpathInputPrompt(),
-    ),
-    actions: actions(
-      addFolderAction(
-        'templates/Component/*.hbs',
-        'src/components/{{subpath}}{{pascalCase name}}',
-      ),
-    ),
-  })
+    defaultName: "Component",
+    defaultSubpath: "components",
+  }))
 
   // Create a Screen component.
   // Screen required criteria:
@@ -107,19 +119,12 @@ export default function (plop) {
   // - Can have any business logic inside
   // - Should have Screen postfix in component name
   // - Spread data between inner Screens and Components
-  plop.setGenerator('Screen', {
+  plop.setGenerator('Screen', genComponent({
     description: 'Create a screen component',
-    prompts: prompts(
-      NameInputPrompt({ default: "Screen", postfix: 'Screen' }),
-      SubpathInputPrompt(),
-    ),
-    actions: actions(
-      addFolderAction(
-        'templates/Component/*.hbs',
-        'src/screens/{{subpath}}{{pascalCase name}}',
-      ),
-    ),
-  })
+    postfix: 'Screen',
+    defaultName: "Screen",
+    defaultSubpath: "screens",
+  }))
 
   // Create a Page component.
   // Page required criteria:
@@ -128,19 +133,12 @@ export default function (plop) {
   // - Can have any business logic inside
   // - Should have Page postfix in component name
   // - Spread data between inner Pages, Screens and Components
-  plop.setGenerator('Page', {
+  plop.setGenerator('Page', genComponent({
     description: 'Create a page component',
-    prompts: prompts(
-      NameInputPrompt({ default: "Page", postfix: 'Page' }),
-      SubpathInputPrompt(),
-    ),
-    actions: actions(
-      addFolderAction(
-        'templates/Component/*.hbs',
-        'src/pages/{{subpath}}{{pascalCase name}}',
-      ),
-    ),
-  })
+    postfix: 'Page',
+    defaultName: "Page",
+    defaultSubpath: "pages",
+  }))
 
   // Create a reusable, pure, unified Hook.
   // Hook required criteria:
@@ -178,29 +176,23 @@ export default function (plop) {
   //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
   //  - AccountLauncher - providers: [User | Setting]
   //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
-  plop.setGenerator('Launcher', {
+  plop.setGenerator('Launcher', genComponent({
     description: 'Create a launcher component',
-    prompts: prompts(
-      NameInputPrompt({ default: "Launcher", postfix: 'Launcher' }),
-    ),
-    actions: actions(
-      addFolderAction(
-        'templates/Component/*.hbs',
-        'src/launchers/{{pascalCase name}}',
-      )
-    ),
-  })
+    postfix: 'Launcher',
+    defaultName: "Launcher",
+    defaultSubpath: "launchers",
+  }))
 
   plop.setGenerator('Launcher Provider', {
     description: 'Create a Launcher Provider',
     prompts: prompts(
       NameInputPrompt({ default: "Provider", postfix: 'Provider' }),
-      SubpathInputPrompt({ default: "Launcher", postfix: 'Launcher' }),
+      SubpathInputPrompt({ default: "launchers" }),
     ),
     actions: actions(
       addFolderAction(
         'templates/Provider/*.hbs',
-        'src/launchers/{{pascalCase subpath}}/{{pascalCase name}}',
+        'src/{{pascalCase subpath}}/{{pascalCase name}}',
       ),
     ),
   })

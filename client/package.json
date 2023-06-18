@@ -15,7 +15,7 @@
     "lint:style": "stylelint src/**/*{.css,.scss}",
     "lint:style:fix": "stylelint src/**/*{.css,.scss} --fix",
     "check:changes": "yarn lint && yarn test --watchAll=false && yarn build",
-    "generate": "plop"
+    "gen": "plop"
   },
   "dependencies": {
     "@epam/uui": "^5.0.1",
