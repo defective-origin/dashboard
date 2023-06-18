@@ -1,21 +1,18 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
-    "sourceType": "module", // Allows for the use of imports
+    "ecmaVersion": 13,
+    "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "import"
-  ],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb-typescript/base"
+    "prettier"
   ],
-  "ignorePatterns": [ "dist/*", "setupTests.ts", "intl-test.utils.tsx" ],
+  "ignorePatterns": [ "dist/*", "setupTests.ts", "dist" ],
   "settings": {
     "import/resolver": {
       "node": {
@@ -48,25 +45,12 @@
       }
     ],
 
-    "@typescript-eslint/indent": [
-      "warn",
-      2
-    ],
+    "indent": "off",
+    "@typescript-eslint/indent": ["warn", 2, {"ignoredNodes": ["FunctionExpression[params]:has(Identifier[decorators])"]}],
 
     "no-underscore-dangle": "off",
 
-    "max-len": ["warn", { "code": 120 }],
-    
-    "import/extensions": [
-      "warn",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
+    "max-len": ["warn", { "code": 120 }]
   },
   "overrides": [
     {
