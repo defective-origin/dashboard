@@ -4,15 +4,16 @@ import { createRoot } from 'react-dom/client'
 import App from './pages/App'
 
 // ---| root |---
-import { Launcher, reportWebVitals } from './core'
+import reportWebVitals from 'reportWebVitals'
+import AppLauncher from 'launchers/AppLauncher'
 
 const rootElement = document.getElementById('root') as HTMLElement
 const root = createRoot(rootElement)
 
 root.render(
-  <Launcher>
+  <AppLauncher>
     <App />
-  </Launcher>,
+  </AppLauncher>,
 )
 
 // If you want to start measuring performance in your app, pass a function

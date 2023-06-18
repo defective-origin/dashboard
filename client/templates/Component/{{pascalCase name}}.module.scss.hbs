@@ -1,4 +1,9 @@
 @import "contexts/UIProvider/UI.module.scss";
 
+:global(.light),
+:global(.dark), {
+  --some-var: $white;
+}
+
 .{{pascalCase name}} {
 }
