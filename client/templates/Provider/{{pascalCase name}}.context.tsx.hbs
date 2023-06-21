@@ -1,22 +1,22 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
 export type {{pascalCase name}}Options = {
+  user: null | string,
+  login: () => void,
+  logout: () => void,
+  isAuthorized: boolean,
 }
 
-export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options = {
-}
-
-export const {{pascalCase name}}Context = React.createContext<{{pascalCase name}}Options>(DEFAULT_{{constantCase name}}_OPTIONS)
+export const {{pascalCase name}}Context = React.createContext<{{pascalCase name}}Options>({
+  user: null,
+  login: () => {},
+  logout: () => {},
+  isAuthorized: false,
+})
 
 export function use{{pascalCase name}}<T extends {{pascalCase name}}Options>(): T {
   return useContext({{pascalCase name}}Context) as T
 }
 
-export type {{pascalCase name}}Props = {{pascalCase name}}Options & React.PropsWithChildren
+export default use{{pascalCase name}}
 
-export default function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Element {
-  const combinedOptions = { ...DEFAULT_{{constantCase name}}_OPTIONS, props }
-  const [value, setValue] = useState(props)
-
-  return <{{pascalCase name}}Context.Provider value={value} />
-}

@@ -192,7 +192,7 @@ export default function (plop) {
     actions: actions(
       addFolderAction(
         'templates/Provider/*.hbs',
-        'src/{{pascalCase subpath}}/{{pascalCase name}}',
+        'src/{{subpath}}/{{pascalCase name}}',
       ),
     ),
   })

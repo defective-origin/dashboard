@@ -46,11 +46,21 @@
     ],
 
     "indent": "off",
-    "@typescript-eslint/indent": ["warn", 2, {"ignoredNodes": ["FunctionExpression[params]:has(Identifier[decorators])"]}],
+    "@typescript-eslint/indent": ["warn", 2, {
+        "ArrayExpression": 1,
+        "ObjectExpression": 1,
+        "ImportDeclaration": 1,
+        "VariableDeclarator": 1,
+        "flatTernaryExpressions": true,
+        "FunctionExpression": {"parameters": 1},
+        "CallExpression": { "arguments": 1 }
+      }
+    ],
 
     "no-underscore-dangle": "off",
 
-    "max-len": ["warn", { "code": 120 }]
+    "max-len": ["warn", { "code": 120 }],
+    "@typescript-eslint/no-empty-function": "off"
   },
   "overrides": [
     {
