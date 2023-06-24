@@ -7,12 +7,14 @@ export type {{pascalCase name}}Options = {
   isAuthorized: boolean,
 }
 
-export const {{pascalCase name}}Context = React.createContext<{{pascalCase name}}Options>({
+export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options = {
   user: null,
   login: () => {},
   logout: () => {},
   isAuthorized: false,
-})
+}
+
+export const {{pascalCase name}}Context = React.createContext(DEFAULT_{{constantCase name}}_OPTIONS)
 
 export function use{{pascalCase name}}<T extends {{pascalCase name}}Options>(): T {
   return useContext({{pascalCase name}}Context) as T

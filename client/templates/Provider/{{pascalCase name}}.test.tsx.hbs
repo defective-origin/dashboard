@@ -20,7 +20,7 @@ import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase na
 describe('[{{pascalCase name}}] context', () => {
   const wrapper = (props: {{pascalCase name}}Props) => <{{pascalCase name}} { ...props } />
 
-  it('should return context', () => {
+  it('should return options', () => {
     const { result } = renderHook(() => use{{pascalCase name}}(), { wrapper })
   
     expect(result.current).toBe(null)

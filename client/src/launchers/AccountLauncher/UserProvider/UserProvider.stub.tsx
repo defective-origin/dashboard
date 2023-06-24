@@ -1,19 +1,14 @@
 import React from 'react'
-import { UserProviderContext, UserProviderOptions } from './UserProvider.context'
+import { DEFAULT_USER_PROVIDER_OPTIONS, UserProviderContext, UserProviderOptions } from './UserProvider.context'
 
-export const UserProviderOptionSpy: UserProviderOptions = {
-  user: 'string',
-  login: () => {},
-  logout: () => {},
-  isAuthorized: true
+export type UserProviderStubProps = React.PropsWithChildren & {
+  value?: Partial<UserProviderOptions>
 }
-
-export type UserProviderStubProps = React.PropsWithChildren & { value?: UserProviderOptions }
 
 export function UserProviderStub(props: UserProviderStubProps): JSX.Element {
   const { value, children } = props
 
-  return <UserProviderContext.Provider value={{ ...UserProviderOptionSpy, ...value }} children={children} />
+  return <UserProviderContext.Provider value={{ ...DEFAULT_USER_PROVIDER_OPTIONS, ...value }} children={children} />
 }
 
 export default UserProviderStub

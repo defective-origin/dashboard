@@ -7,12 +7,14 @@ export type UserProviderOptions = {
   isAuthorized: boolean,
 }
 
-export const UserProviderContext = React.createContext<UserProviderOptions>({
+export const DEFAULT_USER_PROVIDER_OPTIONS: UserProviderOptions = {
   user: null,
   login: () => {},
   logout: () => {},
   isAuthorized: false,
-})
+}
+
+export const UserProviderContext = React.createContext(DEFAULT_USER_PROVIDER_OPTIONS)
 
 export function useUserProvider<T extends UserProviderOptions>(): T {
   return useContext(UserProviderContext) as T
