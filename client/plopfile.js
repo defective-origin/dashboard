@@ -3,93 +3,37 @@
 // TODO: add  init  structure  script
 // TODO: add перевести  на  typescript
 // TODO:  переместить плоп  конфиг  в темплейты и  разбить  на  файлы
-
-// Prompts
-const prompts = (...args) => args.filter(Boolean)
-const InputPrompt = (options = {}) => ({
-  message: `Enter ${options.name}`,
-  type: 'input',
-  ...options
-})
-const StringInputPrompt = (options = {}) => InputPrompt({
-  ...options,
-  filter: (input) => {
-    const filteredInput = [
-      options.prefix ?? '',
-      input ?? '',
-      options.postfix ?? '',
-    ].join('')
-    
-    return options.filter?.(filteredInput) ?? filteredInput
-  },
-})
-
-const NameInputPrompt = (options = {}) => StringInputPrompt({ name: 'name', ...options })
-const SubpathInputPrompt = (options = {}) => StringInputPrompt({ name: 'subpath', ...options })
-
-// Actions
-const actions = (...args) => args.flat().filter(Boolean)
-
-const addFolderAction = (templateFiles, destination) => ({
-  type: 'addMany',
-  skipIfExists: true,
-  templateFiles,
-  destination,
-  base: templateFiles.slice(0, templateFiles.lastIndexOf('/')),
-})
-const addFileAction = (path, templateFile) => ({
-  type: 'add',
-  path,
-  templateFile,
-  skipIfExists: true,
-})
-const addModuleFileAction = (path, isSplitModule = false) =>
-  addFileAction(
-    path,
-    isSplitModule ? 'templates/split-module.index.ts.hbs' : 'templates/module.index.ts.hbs',
-  )
-const injectAction = (place, path, template) => ({
-  type: 'append',
-  path,
-  pattern: `/* INJECT_${place}_PLACE */`,
-  template,
-})
-const injectFileExportAction = (path, template) => injectAction('EXPORT', path, template)
-const injectFileImportAction = (path, template) => injectAction('IMPORT', path, template)
-const injectModuleImportAction = (path, template, isSplitModule = false) =>
-  actions(
-    addModuleFileAction(path, isSplitModule),
-    injectFileImportAction(path, template),
-  )
-const injectModuleExportAction = (path, template, isSplitModule = false) =>
-  actions(
-    addModuleFileAction(path, isSplitModule),
-    injectFileExportAction(path, template),
-  )
-const injectModuleImportExportAction = (path, importTemplate, exportTemplate, isSplitModule = false) =>
-  actions(
-    addModuleFileAction(path, isSplitModule),
-    injectFileImportAction(path, importTemplate),
-    injectFileExportAction(path, exportTemplate),
-  )
+// TODO:  add  ERROR templates
+// TODO:  add  subdir prefix
+// TODO:  add  generator for component from lib
+import Prompt from './plopfile.prompts.js'
+import Action from './plopfile.actions.js'
+import Tool from './plopfile.tool.js'
 
 // generations
 const genComponent = ({
   description,
   postfix,
   defaultName,
-  defaultSubpath
+  defaultSubpath,
+  files = ['component', 'test', 'module'],
+  module = {
+    notExports: ['test', 'module', 'story'],
+    defaultExport: 'component',
+  },
 }) => ({
   description,
-  prompts: prompts(
-    NameInputPrompt({ default: defaultName, postfix }),
-    SubpathInputPrompt({ default: defaultSubpath }),
+  prompts: Tool.list(
+    Prompt.NameInput({ default: defaultName, postfix }),
+    Prompt.SubpathInput({ default: defaultSubpath }),
   ),
-  actions: actions(
-    addFolderAction(
-      'templates/Component/*.hbs',
-      'src/{{subpath}}/{{pascalCase name}}',
-    ),
+  actions: Tool.list(
+    Action.Folder({
+      target: 'src/{{subpath}}/{{pascalCase name}}',
+      template: 'templates/Component',
+      files,
+      module,
+    }),
   ),
 })
 
@@ -147,149 +91,169 @@ export default function (plop) {
   // - Doesn`t have any postfix in hook name
   plop.setGenerator('Hook', {
     description: 'Create a reusable, pure, unified react hook',
-    prompts: prompts(
-      NameInputPrompt({ prefix: 'use' }),
+    prompts: Tool.list(
+      Prompt.NameInput({ prefix: 'use' }),
     ),
-    actions: actions(
-      addFolderAction(
-        'templates/Hook/*.hbs',
-        'src/common/hooks/{{pascalCase name}}',
-      ),
-      injectModuleExportAction(
-        'src/common/hooks/index.ts',
-        `export * from './{{pascalCase name}}'`,
-      ),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/common/hooks/{{pascalCase name}}',
+        template: 'templates/Hook',
+        files: ['hook', 'test'],
+        module: {
+          notExports: ['test'],
+          defaultExport: 'hook',
+        },
+        isSubmodule: true,
+      }),
     ),
   })
 
-  // Create a launcher which includes typed contexts.
-  // Launcher required criteria:
-  // - Receive default options from props or default config
-  // - Can receive data from API
-  // - Can use only other Launchers inside
-  // - Should have Launcher postfix in component name
-  // - Spread data between inner components via contexts
-  //
-  // Popular launchers:
-  //  - AppLauncher - All Launchers + AppPage
-  //  - CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
-  //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
-  //  - AccountLauncher - providers: [User | Setting]
-  //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
+  // // Create a launcher which includes typed contexts.
+  // // Launcher required criteria:
+  // // - Receive default options from props or default config
+  // // - Can receive data from API
+  // // - Can use only other Launchers inside
+  // // - Should have Launcher postfix in component name
+  // // - Spread data between inner components via contexts
+  // //
+  // // Popular launchers:
+  // //  - AppLauncher - All Launchers + AppPage
+  // //  - CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
+  // //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
+  // //  - AccountLauncher - providers: [User | Setting]
+  // //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
   plop.setGenerator('Launcher', genComponent({
     description: 'Create a launcher component',
     postfix: 'Launcher',
     defaultName: "Launcher",
     defaultSubpath: "launchers",
+    files: ['component', 'conf', 'stub']
   }))
 
   plop.setGenerator('Launcher Provider', {
     description: 'Create a Launcher Provider',
-    prompts: prompts(
-      NameInputPrompt({ default: "Provider", postfix: 'Provider' }),
-      SubpathInputPrompt({ default: "launchers" }),
+    prompts: Tool.list(
+      Prompt.NameInput({ default: "Provider", postfix: 'Provider' }),
+      Prompt.SubpathInput({ default: "launchers" }),
     ),
-    actions: actions(
-      addFolderAction(
-        'templates/Provider/*.hbs',
-        'src/{{pascalCase subpath}}/{{pascalCase name}}',
-      ),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/{{subpath}}/{{pascalCase name}}',
+        template: 'templates/Provider',
+        files: ['component', 'context', 'stub', 'test'],
+        module: {
+          notExports: ['test'],
+          defaultExport: 'component',
+        },
+      }),
     ),
   })
 
   plop.setGenerator('Locale', {
     description: 'Create a Locale',
-    prompts: prompts(),
-    actions: actions(
-      addFolderAction(
-        'templates/Locale/*.hbs',
-        'src/locale',
-      ),
-    ),
-  })
+    prompts: Tool.list(),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/locale',
+        template: 'templates/Locale',
+        abortOnFail: false,
+        files: ['component', 'test', 'tool'],
+        module: {
+          notExports: ['test', 'tool'],
+          defaultExport: 'component',
+        },
+        data: { name: 'LocaleProvider' },
+      }),
 
-  plop.setGenerator('Locale Language', {
-    description: 'Create a Locale Language',
-    prompts: prompts(
-      NameInputPrompt(),
-    ),
-    actions: actions(
-      addFolderAction(
-        'templates/Locale/i18n/*.hbs',
-        'src/locale/i18n',
-      ),
-      injectModuleImportExportAction(
-        'src/locale/i18n/index.ts',
-        `import {{constantCase name}} from './{{dashCase name}}.json'`,
-        `  '{{dashCase name}}': {{constantCase name}},`,
-        true,
-      ),
-      addFolderAction(
-        'templates/Locale/l10n/*.hbs',
-        'src/locale/l10n',
-      ),
-      injectModuleImportExportAction(
-        'src/locale/l10n/index.ts',
-        `import {{constantCase name}} from './{{dashCase name}}.json'`,
-        `  '{{dashCase name}}': {{constantCase name}},`,
-        true,
-      ),
+      // generate all language map files for translates and locale formatters
+      [ 'i18n', 'l10n' ].map((submodule) => [
+        Action.ModuleFile({
+          type: 'partial',
+          target: `src/locale/${submodule}`,
+        }),
+        [ 'en', 'ru' ].map((language) => Action.File({
+          target: `src/locale/${submodule}/${language}.json`,
+          template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
+          module: {
+            target: `src/locale/${submodule}`,
+            type: 'partial',
+            import: true,
+            export: true,
+          },
+          data: { name: language },
+        }))
+      ]),
     ),
   })
 
   plop.setGenerator('Store', {
     description: 'Create a Store',
-    prompts: prompts(),
-    actions: actions(
-      addFolderAction(
-        'templates/Store/*.hbs',
-        'src/store',
-      ),
+    prompts: Tool.list(),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/store',
+        template: 'templates/Store',
+        files: ['component', 'selector', 'action', 'mock'],
+        module: {
+          notExports: [],
+          defaultExport: 'component',
+        },
+      }),
     ),
   })
 
   plop.setGenerator('Store Slice', {
     description: 'Create a Store Slice',
-    prompts: prompts(
-      NameInputPrompt({ default: "Store", postfix: 'Store' }),
+    prompts: Tool.list(
+      Prompt.NameInput({ default: "Slice", postfix: 'Slice' }),
     ),
-    actions: actions(
-      addFolderAction(
-        'templates/Store/StoreSlice/*.hbs',
-        'src/store/{{pascalCase name}}',
-      ),
-      injectModuleExportAction(
-        'src/store/index.ts',
-        `export * from './{{pascalCase name}}'`,
-      ),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/store/{{pascalCase name}}',
+        template: 'templates/Store/StoreSlice',
+        moduleType: 'common',
+        files: ['store', 'selector', 'action', 'mock', 'test'],
+        module: {
+          notExports: ['test'],
+          defaultExport: 'store',
+        },
+        isSubmodule: true,
+      }),
     ),
   })
 
   plop.setGenerator('Api', {
     description: 'Create a Api',
-    prompts: prompts(),
-    actions: actions(
-      addFolderAction(
-        'templates/Api/*.hbs',
-        'src/api',
-      ),
+    prompts: Tool.list(),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/api',
+        template: 'templates/Api',
+        files: ['request', 'tool', 'component', 'mock'],
+        module: {
+          notExports: [],
+          defaultExport: 'component',
+        },
+      }),
     ),
   })
 
   plop.setGenerator('Api Slice', {
     description: 'Create a Api Slice',
-    prompts: prompts(
-      NameInputPrompt({ default: "Api", postfix: 'Api' }),
+    prompts: Tool.list(
+      Prompt.NameInput({ default: "Api", postfix: 'Api' }),
     ),
-    actions: actions(
-      addFolderAction(
-        'templates/Api/ApiSlice/*.hbs',
-        'src/api/{{pascalCase name}}',
-      ),
-      injectModuleExportAction(
-        'src/api/index.ts',
-        `export * from './{{pascalCase name}}'`,
-      ),
+    actions: Tool.list(
+      Action.Folder({
+        target: 'src/api/{{pascalCase name}}',
+        template: 'templates/Api/ApiSlice',
+        files: ['request', 'tool', 'schema', 'mock'],
+        module: {
+          notExports: [],
+          defaultExport: 'request',
+        },
+        isSubmodule: true,
+      }),
     ),
   })
 }

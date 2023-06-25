@@ -1,11 +1,7 @@
 import React from 'react'
 
-// ---| pages |---
-// ---| screens |---
-// ---| components |---
-// ---| root |---
-// ---| common |---
 // ---| self |---
+import UserProvider from './UserProvider'
 
 export type AccountLauncherProps = {
   children?: React.ReactNode
@@ -21,7 +17,11 @@ export type AccountLauncherProps = {
 export function AccountLauncher(props: AccountLauncherProps): JSX.Element {
   const { children } = props
 
-  return <>{children}</>
+  return (
+    <UserProvider>
+      {children}
+    </UserProvider>
+  )
 }
 
 AccountLauncher.displayName = 'AccountLauncher'

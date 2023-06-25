@@ -2,7 +2,8 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import {{pascalCase name}}, { use{{pascalCase name}}, {{pascalCase name}}Props } from './{{pascalCase name}}.context'
+import { use{{pascalCase name}} } from './{{pascalCase name}}.context'
+import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase name}}.component'
 
 /**
  * Context descriptions
@@ -19,7 +20,7 @@ import {{pascalCase name}}, { use{{pascalCase name}}, {{pascalCase name}}Props }
 describe('[{{pascalCase name}}] context', () => {
   const wrapper = (props: {{pascalCase name}}Props) => <{{pascalCase name}} { ...props } />
 
-  it('should return context', () => {
+  it('should return options', () => {
     const { result } = renderHook(() => use{{pascalCase name}}(), { wrapper })
   
     expect(result.current).toBe(null)
