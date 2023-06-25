@@ -16,7 +16,7 @@
     "lint:style:fix": "stylelint src/**/*{.css,.scss} --fix",
     "prettify": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts)\"",
     "check:changes": "yarn lint && yarn test --watchAll=false && yarn build",
-    "gen": "plop"
+    "gen": "plop --plopfile ./generator/generator.config.js --dest ./src"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

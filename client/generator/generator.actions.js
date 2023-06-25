@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import Tool from './plopfile.tool.js'
+import Tool from './generator.tool.js'
 
 export const InjectAction = ({ place, target, template, abortOnFail = false, data }) => ({
   type: 'append',
@@ -30,9 +30,6 @@ export const MODULE_INJECT_TEMPLATES = {
  * @param {string} target - Path for file to inject template.
  */
 export const ModuleInjectAction = ({place, type, target, filePath, removeExt = ['.tsx?'], data}) => {
-
-  console.log(place, target, MODULE_INJECT_TEMPLATES[type][place].replace('{FILE_PATH}', filePath).replace(new RegExp(removeExt.join('|')), ''))
-
   const template = MODULE_INJECT_TEMPLATES[type][place]
     .replace('{FILE_PATH}', filePath)
     .replace(new RegExp(removeExt.join('|')), '')
@@ -114,7 +111,7 @@ export const FolderAction = ({
   indexName,
   data,
 }) => {
-  const folderFiles = fs.readdirSync(template)
+  const folderFiles = fs.readdirSync(`generator/${template}`)
     // take only necessary files
     .filter((fileName) => Tool.hasMatch(files, fileName))
     // remove template extension
