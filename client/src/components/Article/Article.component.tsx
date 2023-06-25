@@ -28,7 +28,7 @@ export type ArticleProps = DrawerProps
   menuTitle?: React.ReactNode
 }
 
-// TODO: do as RichText in uui
+// TODO: do as RichText in lib
 /**
  * View article with menu and navigation buttons.
  * @example
@@ -119,7 +119,7 @@ export default function Article(props: ArticleProps): JSX.Element {
     [],
   )
 
-  // FIXME:  move  to react  utils  
+  // FIXME:  move  to react  utils
   const getNodeText = useCallback((node: React.ReactNode): string => {
     if (node instanceof Array) return node.map(getNodeText).join('')
     if (React.isValidElement(node)) return getNodeText(node.props.children)

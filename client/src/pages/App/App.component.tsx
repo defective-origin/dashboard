@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 
 // ---| Components |---
 import Table from 'components/Table'
+import AppPage from '../AppPage'
+import Board, { BoardItem } from 'components/Board'
 
 // ---| self |---
 import './App.module.scss'
-import Board, { BoardItem } from 'components/Board'
 import { Square } from 'common/tools/Placement'
 import { Placement } from 'common/tools'
 
@@ -32,15 +33,16 @@ export default function App(): JSX.Element {
   }
   const TestComponent = (props = {}) => <div {...props}>TEST ITEM</div>
   return (
-    <Board
-      rows={9}
-      columns={9}
-      gap={10}
-      widget={TestComponent}
-      reselect={items[0]}
-      items={items}
-      select
-      onSelect={handleSelect as any}
-    />
+    <AppPage />
+    // <Board
+    //   rows={9}
+    //   columns={9}
+    //   gap={10}
+    //   widget={TestComponent}
+    //   reselect={items[0]}
+    //   items={items}
+    //   select
+    //   onSelect={handleSelect as any}
+    // />
   )
 }
