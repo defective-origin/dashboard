@@ -33,6 +33,7 @@ export function AppPage(props: AppPageProps): JSX.Element {
       <Page.LeftAside>
         <AppMenuScreen />
       </Page.LeftAside>
+
       <Page.Content />
     </Page>
   )

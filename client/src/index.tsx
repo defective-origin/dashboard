@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 
 // ---| pages |---
-import App from './pages/App'
+import AppPage from 'pages/AppPage'
 
 // ---| root |---
 import reportWebVitals from 'reportWebVitals'
@@ -12,7 +12,7 @@ const root = createRoot(rootElement)
 
 root.render(
   <AppLauncher>
-    <App />
+    <AppPage />
   </AppLauncher>,
 )
 

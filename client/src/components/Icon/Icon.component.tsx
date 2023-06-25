@@ -1,5 +1,4 @@
 import React from 'react'
-
 // ---| common |---
 import { cn } from 'common/tools'
 
@@ -11,7 +10,7 @@ export type IconTypes = 'light_mode' | 'dark_mode'
 | 'savings' | 'settings'
 | 'star' | 'grade'
 | 'login' | 'logout'
-| 'person' | 'person_add'
+| 'person' | 'person_add' | 'account_circle'
 | 'dashboard' | 'insert_chart'
 | 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_right' | 'keyboard_arrow_down' | 'keyboard_arrow_left'
 | 'menu' | 'open_in_new' | 'support' | 'tab' | 'verified' | 'cloud_download' | 'library_books'
