@@ -29,7 +29,7 @@ export function AppPage(props: AppPageProps): JSX.Element {
   const _className = cn(css.AppPage, className)
 
   return (
-    <Page title='App' className={_className} {...otherProps}>
+    <Page title='App' className={_className} stretch='xy' {...otherProps}>
       <Page.LeftAside>
         <AppMenuScreen />
       </Page.LeftAside>

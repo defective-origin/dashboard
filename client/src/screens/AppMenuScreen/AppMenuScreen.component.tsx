@@ -5,6 +5,7 @@ import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItem
 // ---| screens |---
 // ---| components |---
 import Icon from 'components/Icon'
+import Grid from 'components/Grid'
 
 // ---| root |---
 
@@ -42,10 +43,18 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const open = Boolean(anchorEl)
 
   return (
-    <div className={_className} {...otherProps}>
-      <Avatar onClick={handleClick}><Icon type='account_circle' /></Avatar>
-      <Divider />
-      <Popover
+    <Grid
+      className={_className}
+      stretch='y'
+      rtemplate='auto 1fr auto'
+      {...otherProps}
+    >
+      <Grid.Item>
+        <Avatar onClick={handleClick}>
+          <Icon type='account_circle' />
+        </Avatar>
+
+        <Popover
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -91,9 +100,18 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
           </ListItem>
         </List>
       </Popover>
+      </Grid.Item>
+
+      <Grid.Item justify='stretch'>
+
+      </Grid.Item>
+      
+      <Grid.Item>
+
+      </Grid.Item>
 
       {children}
-    </div>
+    </Grid>
   )
 }
 
