@@ -6,14 +6,15 @@
 // TODO:  add  ERROR templates
 // TODO:  add  subdir prefix
 // TODO:  add  generator for component from lib
-import Prompt from './plopfile.prompts.js'
-import Action from './plopfile.actions.js'
-import Tool from './plopfile.tool.js'
+// TODO:  add  doc  to generator folder
+import Prompt from './generator.prompts.js'
+import Action from './generator.actions.js'
+import Tool from './generator.tool.js'
 
 // generations
-const genComponent = ({
+const ComponentGenerator = ({
   description,
-  postfix,
+  postfixName,
   defaultName,
   defaultSubpath,
   files = ['component', 'test', 'module'],
@@ -24,12 +25,12 @@ const genComponent = ({
 }) => ({
   description,
   prompts: Tool.list(
-    Prompt.NameInput({ default: defaultName, postfix }),
+    Prompt.NameInput({ default: defaultName, postfix: postfixName }),
     Prompt.SubpathInput({ default: defaultSubpath }),
   ),
   actions: Tool.list(
     Action.Folder({
-      target: 'src/{{subpath}}/{{pascalCase name}}',
+      target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Component',
       files,
       module,
@@ -50,10 +51,15 @@ export default function (plop) {
   // - Can use only other Components inside
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in component name
-  plop.setGenerator('Component', genComponent({
+  plop.setGenerator('Component', ComponentGenerator({
     description: 'Create a reusable, pure, unified component',
     defaultName: "Component",
     defaultSubpath: "components",
+  }))
+  plop.setGenerator('Library Component Override', ComponentGenerator({
+    description: 'Create a reusable, pure, unified component',
+    defaultName: "Component",
+    defaultSubpath: "components/lib",
   }))
 
   // Create a Screen component.
@@ -63,9 +69,9 @@ export default function (plop) {
   // - Can have any business logic inside
   // - Should have Screen postfix in component name
   // - Spread data between inner Screens and Components
-  plop.setGenerator('Screen', genComponent({
+  plop.setGenerator('Screen', ComponentGenerator({
     description: 'Create a screen component',
-    postfix: 'Screen',
+    postfixName: 'Screen',
     defaultName: "Screen",
     defaultSubpath: "screens",
   }))
@@ -77,9 +83,9 @@ export default function (plop) {
   // - Can have any business logic inside
   // - Should have Page postfix in component name
   // - Spread data between inner Pages, Screens and Components
-  plop.setGenerator('Page', genComponent({
+  plop.setGenerator('Page', ComponentGenerator({
     description: 'Create a page component',
-    postfix: 'Page',
+    postfixName: 'Page',
     defaultName: "Page",
     defaultSubpath: "pages",
   }))
@@ -96,7 +102,7 @@ export default function (plop) {
     ),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/common/hooks/{{pascalCase name}}',
+        target: 'common/hooks/{{pascalCase name}}',
         template: 'templates/Hook',
         files: ['hook', 'test'],
         module: {
@@ -108,23 +114,23 @@ export default function (plop) {
     ),
   })
 
-  // // Create a launcher which includes typed contexts.
-  // // Launcher required criteria:
-  // // - Receive default options from props or default config
-  // // - Can receive data from API
-  // // - Can use only other Launchers inside
-  // // - Should have Launcher postfix in component name
-  // // - Spread data between inner components via contexts
-  // //
-  // // Popular launchers:
-  // //  - AppLauncher - All Launchers + AppPage
-  // //  - CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
-  // //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
-  // //  - AccountLauncher - providers: [User | Setting]
-  // //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
-  plop.setGenerator('Launcher', genComponent({
+  // Create a launcher which includes typed contexts.
+  // Launcher required criteria:
+  // - Receive default options from props or default config
+  // - Can receive data from API
+  // - Can use only other Launchers inside
+  // - Should have Launcher postfix in component name
+  // - Spread data between inner components via contexts
+  //
+  // Popular launchers:
+  //  - AppLauncher - All Launchers + AppPage
+  //  - CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
+  //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
+  //  - AccountLauncher - providers: [User | Setting]
+  //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
+  plop.setGenerator('Launcher', ComponentGenerator({
     description: 'Create a launcher component',
-    postfix: 'Launcher',
+    postfixName: 'Launcher',
     defaultName: "Launcher",
     defaultSubpath: "launchers",
     files: ['component', 'conf', 'stub']
@@ -138,7 +144,7 @@ export default function (plop) {
     ),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/{{subpath}}/{{pascalCase name}}',
+        target: '{{subpath}}/{{pascalCase name}}',
         template: 'templates/Provider',
         files: ['component', 'context', 'stub', 'test'],
         module: {
@@ -154,7 +160,7 @@ export default function (plop) {
     prompts: Tool.list(),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/locale',
+        target: 'locale',
         template: 'templates/Locale',
         abortOnFail: false,
         files: ['component', 'test', 'tool'],
@@ -169,13 +175,13 @@ export default function (plop) {
       [ 'i18n', 'l10n' ].map((submodule) => [
         Action.ModuleFile({
           type: 'partial',
-          target: `src/locale/${submodule}`,
+          target: `locale/${submodule}`,
         }),
         [ 'en', 'ru' ].map((language) => Action.File({
-          target: `src/locale/${submodule}/${language}.json`,
+          target: `locale/${submodule}/${language}.json`,
           template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
           module: {
-            target: `src/locale/${submodule}`,
+            target: `locale/${submodule}`,
             type: 'partial',
             import: true,
             export: true,
@@ -191,7 +197,7 @@ export default function (plop) {
     prompts: Tool.list(),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/store',
+        target: 'store',
         template: 'templates/Store',
         files: ['component', 'selector', 'action', 'mock'],
         module: {
@@ -209,7 +215,7 @@ export default function (plop) {
     ),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/store/{{pascalCase name}}',
+        target: 'store/{{pascalCase name}}',
         template: 'templates/Store/StoreSlice',
         moduleType: 'common',
         files: ['store', 'selector', 'action', 'mock', 'test'],
@@ -227,7 +233,7 @@ export default function (plop) {
     prompts: Tool.list(),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/api',
+        target: 'api',
         template: 'templates/Api',
         files: ['request', 'tool', 'component', 'mock'],
         module: {
@@ -245,7 +251,7 @@ export default function (plop) {
     ),
     actions: Tool.list(
       Action.Folder({
-        target: 'src/api/{{pascalCase name}}',
+        target: 'api/{{pascalCase name}}',
         template: 'templates/Api/ApiSlice',
         files: ['request', 'tool', 'schema', 'mock'],
         module: {
