@@ -17,7 +17,18 @@ Project
 ```sh
   "scripts": {
     "gen": "plop --plopfile ./generator/generator.config.js --dest ./src"
+    "gen:init": "plop --plopfile ./generator/generator.config.js --dest ./src"
   },
+```
+
+## Generate base infrastructure
+```sh
+	yarn gen:init
+```
+
+## Generate part of infrastructure
+```sh
+	yarn gen
 ```
 
 ## Allowed infrastructure
@@ -105,7 +116,8 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- variables.scss - paddings, margins, ...
 			- index.scss
 	
-	- launchers/
+	- Launcher/
+		- Component structure
 		- AppLauncher - All Launchers + AppPage  - contains tools and settings without which the application cannot or should not work
 		- CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
 		- SystemLauncher - providers: [Log | Analytic | ABTesting]

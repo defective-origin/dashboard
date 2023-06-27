@@ -6,7 +6,7 @@ import { cn } from 'common/tools'
 import useIconUIProps, { IconUIProps } from './IconUI'
 
 export type IconTypes = 'light_mode' | 'dark_mode'
-| 'add' | 'delete' | 'edit' | 'close' | 'search' | 'download' | 'upload' | 'refresh' | 'sort' | 'reorder'
+| 'add' | 'delete' | 'edit' | 'close' | 'search' | 'download' | 'upload' | 'refresh' | 'sort' | 'reorder' | 'sync'
 | 'savings' | 'settings'
 | 'star' | 'grade'
 | 'login' | 'logout'

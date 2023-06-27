@@ -6,7 +6,7 @@ import { ComponentUIProps, useComponentUIProps } from 'components/Component'
 // ---| self |---
 import useLayoutItemUIProps, { LayoutItemUIProps } from './LayoutItemUI'
 
-export type LayoutItemProps =  ComponentUIProps & LayoutItemUIProps
+export type LayoutItemProps = ComponentUIProps & LayoutItemUIProps
 
 export const LayoutElementMap = {
   'right-aside': 'aside',
