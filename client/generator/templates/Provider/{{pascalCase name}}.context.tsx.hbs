@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 
+export type {{pascalCase name}}State = null | object
+
 export type {{pascalCase name}}Options = {
-  user: null | string,
-  login: () => void,
-  logout: () => void,
-  isAuthorized: boolean,
+  current: {{pascalCase name}}State,
+  change: (patch: Partial<Exclude<{{pascalCase name}}State, 'null'>>) => void,
+  isLoaded: boolean,
 }
 
 export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options = {
-  user: null,
-  login: () => {},
-  logout: () => {},
-  isAuthorized: false,
+  current: null,
+  change: () => {},
+  isLoaded: false,
 }
 
 export const {{pascalCase name}}Context = React.createContext(DEFAULT_{{constantCase name}}_OPTIONS)
@@ -21,4 +21,3 @@ export function use{{pascalCase name}}<T extends {{pascalCase name}}Options>(): 
 }
 
 export default use{{pascalCase name}}
-

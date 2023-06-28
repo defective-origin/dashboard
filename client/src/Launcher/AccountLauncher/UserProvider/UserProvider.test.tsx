@@ -20,7 +20,7 @@ import UserProvider, { UserProviderProps } from './UserProvider.component'
 describe('[UserProvider] context', () => {
   const wrapper = (props: UserProviderProps) => <UserProvider { ...props } />
 
-  it('should return context', () => {
+  it('should return options', () => {
     const { result } = renderHook(() => useUserProvider(), { wrapper })
   
     expect(result.current).toBe(null)

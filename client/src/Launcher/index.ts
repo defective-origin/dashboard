@@ -4,9 +4,9 @@
 export { default } from './Launcher.component'
 
 /* INJECT_EXPORT_PLACE */
+export * from './MonitorLauncher'
 export * from './AccountLauncher'
 export * from './UILauncher'
-export * from './CoreLauncher'
 export * from './SystemLauncher'
 export * from './Launcher.stub'
 export * from './Launcher.conf'

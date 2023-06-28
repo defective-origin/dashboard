@@ -1,16 +1,10 @@
 import React from 'react'
 
-// ---| pages |---
-// ---| screens |---
-// ---| components |---
-
-// ---| common |---
-
 // ---| self |---
-import CoreLauncher from './CoreLauncher'
 import SystemLauncher from './SystemLauncher'
-import AccountLauncher from './AccountLauncher'
 import UILauncher from './UILauncher'
+import AccountLauncher from './AccountLauncher'
+import MonitorLauncher from './MonitorLauncher'
 
 export type LauncherProps = {
   children?: React.ReactNode
@@ -27,15 +21,15 @@ export function Launcher(props: LauncherProps): JSX.Element {
   const { children } = props
 
   return (
-    <CoreLauncher>
-      <SystemLauncher>
-        <AccountLauncher>
-          <UILauncher>
+    <SystemLauncher>
+      <MonitorLauncher>
+        <UILauncher>
+          <AccountLauncher>
             { children }
-          </UILauncher>
-        </AccountLauncher>
-      </SystemLauncher>
-    </CoreLauncher>
+          </AccountLauncher>
+        </UILauncher>
+      </MonitorLauncher>
+    </SystemLauncher>
   )
 }
 

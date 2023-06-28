@@ -4,6 +4,6 @@
 export { default } from './UserProvider.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './UserProvider.component'
-export * from './UserProvider.context'
 export * from './UserProvider.stub'
+export * from './UserProvider.context'
+export * from './UserProvider.component'

@@ -72,7 +72,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 				- UseHookName.hook.ts
 				- UseHookName.test.ts
 				- UseHookName.tool.ts
-				- UseHookName.constant.ts
+				- UseHookName.conf.ts
 			- index.ts
 		- errors/ - containes errors
 			- ErrorUsageTypeName.error.ts
@@ -92,7 +92,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- ApiTypeName.tool.ts
 			- index.ts
 
-		- api.constant.ts
+		- api.conf.ts
 		- api.context.ts
 		- api.tool.ts
 		- api.hook.ts
@@ -116,13 +116,12 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- variables.scss - paddings, margins, ...
 			- index.scss
 	
-	- Launcher/
+	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work  + env settings in constants
 		- Component structure
-		- AppLauncher - All Launchers + AppPage  - contains tools and settings without which the application cannot or should not work
-		- CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
-		- SystemLauncher - providers: [Log | Analytic | ABTesting]
-		- AccountLauncher - providers: [User | Setting]
-		- UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
+		- SystemLauncher - providers: [StrictMode | Suspense | Router | Store | locale + dayjs | HotKeys]
+		- MonitorLauncher - providers: [Log | Analytics | ABTest + FeatureFlag]
+		- UILauncher - providers: [Theme | SnackBar | ModalWindow]
+		- AccountLauncher - providers: [User | Settings]
 			- Component structure
 			- ProviderNameProvider
 				- ProviderNameProvider.component.ts
@@ -154,7 +153,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- ComponentName.style.scss
 			- ComponentName.hook.ts
 			- ComponentName.context.ts
-			- ComponentName.constant.ts
+			- ComponentName.conf.ts
 			- ComponentName.tool.ts
 			- ComponentName.error.ts
 			- ComponentName.test.ts
@@ -173,7 +172,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	- locale/ - contains localized labels, texts, digits, signs, ...
 		- index.ts - configurations and settings
 		- locale.tool.ts
-		- locale.component.tsx
+		- locale.conf.tsx
 		- locale.error.ts
 		- locale.test.ts
 		- i18n/
@@ -201,7 +200,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- __tests__/
 			- GuardName.guard.ts
 			- index.ts
-		- router.constant.ts
+		- router.conf.ts
 		- router.tool.ts
 		- router.hook.ts
 		- router.model.ts
@@ -211,7 +210,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 
 	- store/ - contains project store (use redux-toolkit)
 		- index.ts - store configurations and settings
-		- store.constant.ts
+		- store.conf.ts
 		- store.tool.ts
 		- store.hook.ts
 		- store.model.ts

@@ -1,12 +1,9 @@
 import React from 'react'
 
-// ---| pages |---
-// ---| screens |---
-// ---| components |---
-
-// ---| common |---
-
 // ---| self |---
+import RouterProvider from './RouterProvider'
+import { HotKeysProvider } from './HotKeysProvider'
+import LocaleProvider from './LocaleProvider'
 
 export type SystemLauncherProps = {
   children?: React.ReactNode
@@ -22,7 +19,19 @@ export type SystemLauncherProps = {
 export function SystemLauncher(props: SystemLauncherProps): JSX.Element {
   const { children } = props
 
-  return <>{children}</>
+  return (
+    <React.StrictMode>
+      <React.Suspense fallback={<h1>Loading...</h1>}>
+        <RouterProvider>
+          <LocaleProvider>
+            <HotKeysProvider>
+              { children }
+            </HotKeysProvider>
+          </LocaleProvider>
+        </RouterProvider>
+      </React.Suspense>
+    </React.StrictMode>
+  )
 }
 
 SystemLauncher.displayName = 'SystemLauncher'

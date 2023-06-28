@@ -168,11 +168,10 @@ export default function (plop) {
       Action.Folder({
         target: 'locale',
         template: 'templates/Locale',
-        abortOnFail: false,
-        files: ['component', 'test', 'tool'],
+        files: ['conf', 'test', 'tool'],
         module: {
-          notExports: ['test', 'tool'],
-          defaultExport: 'component',
+          notExports: ['test'],
+          defaultExport: ['conf'],
         },
         data: { name: 'LocaleProvider' },
       }),

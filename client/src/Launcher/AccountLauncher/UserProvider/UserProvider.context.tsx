@@ -1,14 +1,16 @@
 import React, { useContext } from 'react'
 
+export type UserProviderState = null | object
+
 export type UserProviderOptions = {
-  user: null | string,
+  current: UserProviderState,
   login: () => void,
   logout: () => void,
   isAuthorized: boolean,
 }
 
 export const DEFAULT_USER_PROVIDER_OPTIONS: UserProviderOptions = {
-  user: null,
+  current: null,
   login: () => {},
   logout: () => {},
   isAuthorized: false,

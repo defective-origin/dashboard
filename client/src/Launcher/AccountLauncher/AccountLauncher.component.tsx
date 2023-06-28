@@ -2,6 +2,7 @@ import React from 'react'
 
 // ---| self |---
 import UserProvider from './UserProvider'
+import SettingsProvider from './SettingsProvider'
 
 export type AccountLauncherProps = {
   children?: React.ReactNode
@@ -19,7 +20,9 @@ export function AccountLauncher(props: AccountLauncherProps): JSX.Element {
 
   return (
     <UserProvider>
-      {children}
+      <SettingsProvider>
+        {children}
+      </SettingsProvider>
     </UserProvider>
   )
 }

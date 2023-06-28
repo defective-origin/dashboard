@@ -1,12 +1,10 @@
 import React from 'react'
 
-// ---| pages |---
-// ---| screens |---
-// ---| components |---
-// ---| root |---
-// ---| common |---
 // ---| self |---
 import './UILauncher.module.scss'
+import { ThemeProvider } from './ThemeProvider'
+import { ModalWindowProvider } from './ModalWindowProvider'
+import { SnackBarProvider } from './SnackBarProvider'
 
 export type UILauncherProps = {
   children?: React.ReactNode
@@ -23,9 +21,13 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
   const { children } = props
 
   return (
-    <>
-      {children}
-    </>
+    <ThemeProvider>
+      <SnackBarProvider>
+        <ModalWindowProvider>
+          {children}
+        </ModalWindowProvider>
+      </SnackBarProvider>
+    </ThemeProvider>
   )
 }
 

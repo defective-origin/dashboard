@@ -1,19 +1,20 @@
 import React, { useMemo, useState } from 'react'
 
+// ---| core |---
+
 // ---| self |---
-import { {{pascalCase name}}Context } from './{{pascalCase name}}.context'
+import { {{pascalCase name}}Context, {{pascalCase name}}Options, {{pascalCase name}}State } from './{{pascalCase name}}.context'
 
 export type {{pascalCase name}}Props = React.PropsWithChildren
 
 export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Element {
-  const [user, setUser] = useState<null | string>(null)
+  const [current, setCurrent] = useState<{{pascalCase name}}State>(null)
 
-  const options = useMemo(() => ({
-    user,
-    login: () => setUser('user'),
-    logout: () => setUser(null),
-    isAuthorized: !!user,
-  }), [user])
+  const options = useMemo<{{pascalCase name}}Options>(() => ({
+    current,
+    change: (patch) => setCurrent((state) => state && { ...state, ...patch }),
+    isLoaded: !!current,
+  }), [current])
 
   return <{{pascalCase name}}Context.Provider value={options} {...props} />
 }

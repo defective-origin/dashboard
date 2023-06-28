@@ -5,5 +5,7 @@ export { default } from './AccountLauncher.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './UserProvider'
+export * from './SettingsProvider'
 export * from './AccountLauncher.component'
+export * from './AccountLauncher.conf'
 export * from './AccountLauncher.stub'
