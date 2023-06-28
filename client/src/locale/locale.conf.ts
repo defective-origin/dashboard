@@ -62,8 +62,19 @@ i18next
   })
 
 
+export type FlattenObjectKeys<
+  T extends Record<string, unknown>,
+  Sep extends string = '.',
+  Key = keyof T
+> = Key extends string
+  ? T[Key] extends Record<string, unknown>
+    ? `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
+    : `${Key}`
+  : never
+
+
 export type Languages = keyof typeof i18n
-export type TranslateKeys = keyof typeof i18n.en | string
+export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
 
 export default i18next
 export { I18nextProvider } from 'react-i18next'
