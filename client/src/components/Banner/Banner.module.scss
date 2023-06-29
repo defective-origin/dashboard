@@ -1,8 +1,13 @@
 @import "Launcher/UILauncher/ThemeProvider/ThemeProvider.module.scss";
 
-:global(.light),
-:global(.dark), {
-  // --some-var: $white;
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
 }
 
 .Banner {

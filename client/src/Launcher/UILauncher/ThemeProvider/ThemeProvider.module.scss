@@ -23,7 +23,6 @@
   }
 }
 
-
 // taken from https://ant.design/docs/spec/colors
 // Dust Red
 $red-1: #fff1f0;
@@ -468,18 +467,6 @@ $transition: all 1s;
 // @return {number} Calculated size without border.
 @function bordered-size($exponent, $border: $base-border-size, $base: $base-size) {
   @return size($exponent, $base) - size(1, 2);
-}
-
-:global {
-  .dark {
-    // background: $dark-theme-background-color;
-    // color: $dark-theme-text-color;
-  }
-
-  .light {
-    // background: $light-theme-background-color;
-    // color: $light-theme-text-color;
-  }
 }
 
 /// Set height and width for tag.
