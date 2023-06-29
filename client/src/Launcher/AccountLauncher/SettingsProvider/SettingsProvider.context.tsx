@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 
-export type SettingsProviderState = null | object
+export type SettingsProviderState = null | {
+  theme: 'light' | 'dark'
+}
 
 export type SettingsProviderOptions = {
   current: SettingsProviderState,

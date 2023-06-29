@@ -1,5 +1,5 @@
 // ---| self |---
-import css from './UI.module.scss'
+import css from './ThemeProvider.module.scss'
 
 export const Colors = {
   red1: css.red1,

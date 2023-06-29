@@ -1,17 +1,21 @@
 import React, { useContext } from 'react'
 
-export type ThemeProviderState = null | object
+export type ThemeProviderState = 'light' | 'dark'
 
 export type ThemeProviderOptions = {
   current: ThemeProviderState,
-  change: (patch: Partial<Exclude<ThemeProviderState, 'null'>>) => void,
-  isLoaded: boolean,
+  opposite: ThemeProviderState,
+  is: (theme: ThemeProviderState) => boolean,
+  toggle: () => void,
+  change: (theme: ThemeProviderState) => void,
 }
 
 export const DEFAULT_THEME_PROVIDER_OPTIONS: ThemeProviderOptions = {
-  current: null,
-  change: () => {},
-  isLoaded: false,
+  current: 'light',
+  opposite: 'dark',
+  is: () => true,
+  toggle: () => { },
+  change: () => { },
 }
 
 export const ThemeProviderContext = React.createContext(DEFAULT_THEME_PROVIDER_OPTIONS)

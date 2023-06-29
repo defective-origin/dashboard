@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
 // ---| core |---
-import { useLocaleProvider } from 'Launcher/SystemLauncher/LocaleProvider'
+import { useThemeProvider } from 'Launcher/UILauncher'
 
 // ---| self |---
 import { SettingsProviderContext, SettingsProviderOptions, SettingsProviderState } from './SettingsProvider.context'
@@ -10,15 +10,13 @@ export type SettingsProviderProps = React.PropsWithChildren
 
 export function SettingsProvider(props: SettingsProviderProps): JSX.Element {
   const [current, setCurrent] = useState<SettingsProviderState>(null)
-  // const theme = useThemeProvider()
-  // const locale = useLocaleProvider()
+  const theme = useThemeProvider()
 
-  // show spinner until user loaded?
+  // FIXME: show spinner until user loaded?
 
   useEffect(() => {
     if (current) {
-      // theme.setTheme(current.theme)
-      // locale.change(current.theme)
+      theme.change(current.theme)
     }
   }, [current])
 

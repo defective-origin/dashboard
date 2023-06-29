@@ -7,7 +7,7 @@ export type LocaleProviderOptions = {
   current: LocaleProviderState,
   languages: Languages[],
   t: typeof t,
-  change: (patch: Exclude<LocaleProviderState, 'null'>) => void,
+  change: (patch: LocaleProviderState) => void,
 }
 
 export const DEFAULT_LOCALE_PROVIDER_OPTIONS: LocaleProviderOptions = {

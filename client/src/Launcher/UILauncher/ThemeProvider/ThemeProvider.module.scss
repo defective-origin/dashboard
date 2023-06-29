@@ -1,3 +1,29 @@
+:global {
+  html,
+  body,
+  #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+  }
+}
+
+
 // taken from https://ant.design/docs/spec/colors
 // Dust Red
 $red-1: #fff1f0;
@@ -445,14 +471,14 @@ $transition: all 1s;
 }
 
 :global {
-  .dark, .dark * {
-    background: $dark-theme-background-color;
-    color: $dark-theme-text-color;
+  .dark {
+    // background: $dark-theme-background-color;
+    // color: $dark-theme-text-color;
   }
 
-  .light, .light * {
-    background: $light-theme-background-color;
-    color: $light-theme-text-color;
+  .light {
+    // background: $light-theme-background-color;
+    // color: $light-theme-text-color;
   }
 }
 

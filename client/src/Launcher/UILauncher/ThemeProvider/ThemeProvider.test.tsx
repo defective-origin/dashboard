@@ -1,8 +1,8 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { RenderResult, renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import { useThemeProvider } from './ThemeProvider.context'
+import { ThemeProviderOptions, useThemeProvider } from './ThemeProvider.context'
 import ThemeProvider, { ThemeProviderProps } from './ThemeProvider.component'
 
 /**
@@ -18,11 +18,20 @@ import ThemeProvider, { ThemeProviderProps } from './ThemeProvider.component'
  * expect(result.current.count).toBe(1)
  */
 describe('[ThemeProvider] context', () => {
+  let hookRef: RenderResult<ThemeProviderOptions>
   const wrapper = (props: ThemeProviderProps) => <ThemeProvider { ...props } />
 
-  it('should return options', () => {
-    const { result } = renderHook(() => useThemeProvider(), { wrapper })
-  
-    expect(result.current).toBe(null)
+  beforeEach(() => {
+    hookRef = renderHook(useThemeProvider, { wrapper }).result
+  })
+
+  it('should set light theme by default', () => {
+    expect(hookRef.current.is('light')).toBeTruthy()
+  })
+
+  it('should switch theme', () => {
+    hookRef.current.toggle()
+
+    expect(hookRef.current.is('dark')).toBeTruthy()
   })
 })

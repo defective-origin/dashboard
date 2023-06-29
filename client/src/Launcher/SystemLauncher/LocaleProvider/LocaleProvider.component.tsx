@@ -14,9 +14,10 @@ export function LocaleProvider(props: LocaleProviderProps): JSX.Element {
     current,
     languages: i18next.languages as Languages[],
     t,
-    change: (language) => {
-      setCurrent(language)
-      i18next.changeLanguage(language as string)
+    change: (locale) => {
+      // TODO: analytics.register({ name: 'Locale', value: locale })
+      setCurrent(locale)
+      i18next.changeLanguage(locale as string)
     },
   }), [current])
 

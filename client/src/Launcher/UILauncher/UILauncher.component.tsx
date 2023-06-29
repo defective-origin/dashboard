@@ -1,7 +1,6 @@
 import React from 'react'
 
 // ---| self |---
-import './UILauncher.module.scss'
 import { ThemeProvider } from './ThemeProvider'
 import { ModalWindowProvider } from './ModalWindowProvider'
 import { SnackBarProvider } from './SnackBarProvider'

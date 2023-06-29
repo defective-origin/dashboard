@@ -1,8 +1,8 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { RenderResult, renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import { use{{pascalCase name}} } from './{{pascalCase name}}.context'
+import { {{pascalCase name}}Options, use{{pascalCase name}} } from './{{pascalCase name}}.context'
 import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase name}}.component'
 
 /**
@@ -18,11 +18,14 @@ import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase na
  * expect(result.current.count).toBe(1)
  */
 describe('[{{pascalCase name}}] context', () => {
+  let hookRef: RenderResult<{{pascalCase name}}Options>
   const wrapper = (props: {{pascalCase name}}Props) => <{{pascalCase name}} { ...props } />
 
+  beforeEach(() => {
+    hookRef = renderHook(use{pascalCase name}}, { wrapper }).result
+  })
+
   it('should return options', () => {
-    const { result } = renderHook(() => use{{pascalCase name}}(), { wrapper })
-  
-    expect(result.current).toBe(null)
+    expect(hookRef.current).toBe(null)
   })
 })
