@@ -42,7 +42,7 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
         className={css.Banner}
         position='absolute'
         placement='center-center'
-        src={status.src}
+        imageType={status.image}
         title={locale.t(status.title)}
         subtitle={locale.t(status.subtitle)}
         text={locale.t(status.text)}

@@ -13,13 +13,13 @@ export type LauncherStubProps = React.PropsWithChildren
   & UILauncherStubProps
 
 export function LauncherStub(props: LauncherStubProps): JSX.Element {
-  const { userProvider, settingsProvider, children } = props
+  const { userProvider, accountSettingsProvider, children } = props
 
   return (
     <SystemLauncherStub>
       <MonitorLauncherStub>
         <UILauncherStub>
-          <AccountLauncherStub userProvider={userProvider} settingsProvider={settingsProvider}>
+          <AccountLauncherStub userProvider={userProvider} accountSettingsProvider={accountSettingsProvider}>
             { children }
           </AccountLauncherStub>
         </UILauncherStub>

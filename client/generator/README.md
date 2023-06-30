@@ -118,10 +118,10 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	
 	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work  + env settings in constants
 		- Component structure
-		- SystemLauncher - providers: [StrictMode | Suspense | Router | Store | locale + dayjs | HotKeys]
+		- SystemLauncher - providers: [StrictMode | Suspense | Router | Store | Api | locale + dayjs | HotKeys]
 		- MonitorLauncher - providers: [Log | Analytics | ABTest + FeatureFlag]
-		- UILauncher - providers: [Theme | SnackBar | ModalWindow]
-		- AccountLauncher - providers: [User | Settings]
+		- UILauncher - providers: [UISettings | SnackBar | ModalWindow]
+		- AccountLauncher - providers: [AccountSettings | User]
 			- Component structure
 			- ProviderNameProvider
 				- ProviderNameProvider.component.ts

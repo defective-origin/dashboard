@@ -3,12 +3,17 @@ import React, { useMemo, useState } from 'react'
 // ---| core |---
 
 // ---| self |---
-import { {{pascalCase name}}Context, {{pascalCase name}}Options, {{pascalCase name}}State } from './{{pascalCase name}}.context'
+import {
+  {{pascalCase name}}Context,
+  {{pascalCase name}}Options,
+  {{pascalCase name}}State,
+  DEFAULT_{{constantCase name}}_STATE,
+} from './{{pascalCase name}}.context'
 
 export type {{pascalCase name}}Props = React.PropsWithChildren
 
 export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Element {
-  const [current, setCurrent] = useState<{{pascalCase name}}State>(null)
+  const [current, setCurrent] = useState<{{pascalCase name}}State>(DEFAULT_{{constantCase name}}_STATE)
 
   const options = useMemo<{{pascalCase name}}Options>(() => ({
     current,

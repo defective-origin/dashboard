@@ -4,6 +4,7 @@ import React from 'react'
 import Icon from 'components/Icon'
 import Text, { TextProps } from 'components/Text'
 import Box, { BoxProps } from 'components/Box'
+import Image, { ImageTypes } from 'components/Image'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -14,7 +15,8 @@ import css from './Banner.module.scss'
 export type BannerProps = BoxProps & {
   className?: string
   children?: React.ReactNode
-  src?: string
+  imageSrc?: string
+  imageType?: ImageTypes
   title?: React.ReactNode
   titleType?: TextProps['type']
   subtitle?: React.ReactNode
@@ -43,7 +45,21 @@ export type BannerProps = BoxProps & {
  * </Banner>
  */
 export function Banner(props: BannerProps): JSX.Element | null {
-  const { show = true, src, title, subtitle, text, titleType, subtitleType, textType, loading, children, className, ...otherProps } = props
+  const {
+    show = true,
+    imageSrc,
+    imageType,
+    title,
+    subtitle,
+    text,
+    titleType,
+    subtitleType,
+    textType,
+    loading,
+    children,
+    className,
+    ...otherProps
+  } = props
   const _className = cn(css.Banner, className)
 
   if (!loading && !show) {
@@ -60,7 +76,7 @@ export function Banner(props: BannerProps): JSX.Element | null {
 
   return (
     <Box className={_className} {...otherProps}>
-      {src && <img className={css.Image} src={src} />}
+      {imageSrc || imageType && <Image className={css.Image} src={imageSrc} type={imageType} />}
 
       {title && <Text.H2 weight={6} align='center' className={css.Title} type={titleType} text={title} />}
       {subtitle && <Text.H3 weight={4} align='center' className={css.Subtitle} type={subtitleType} text={subtitle} />}

@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 
 export type {{pascalCase name}}State = null | object
 
+export const DEFAULT_{{constantCase name}}_STATE: {{pascalCase name}}State = null
+
 export type {{pascalCase name}}Options = {
   current: {{pascalCase name}}State,
   change: (patch: Partial<Exclude<{{pascalCase name}}State, 'null'>>) => void,
@@ -9,7 +11,7 @@ export type {{pascalCase name}}Options = {
 }
 
 export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options = {
-  current: null,
+  current: DEFAULT_{{constantCase name}}_STATE,
   change: () => {},
   isLoaded: false,
 }

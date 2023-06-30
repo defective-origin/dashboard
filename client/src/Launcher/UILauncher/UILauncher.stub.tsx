@@ -3,7 +3,7 @@ import React from 'react'
 // ---| self |---
 import { ModalWindowProviderStub } from './ModalWindowProvider'
 import { SnackBarProviderStub } from './SnackBarProvider'
-import { ThemeProviderStub } from './ThemeProvider'
+import { UISettingsProviderStub } from './UISettingsProvider'
 
 export type UILauncherStubProps = React.PropsWithChildren
 
@@ -11,13 +11,13 @@ export function UILauncherStub(props: UILauncherStubProps): JSX.Element {
   const { children } = props
 
   return (
-    <ThemeProviderStub>
+    <UISettingsProviderStub>
       <SnackBarProviderStub>
         <ModalWindowProviderStub>
           {children}
         </ModalWindowProviderStub>
       </SnackBarProviderStub>
-    </ThemeProviderStub>
+    </UISettingsProviderStub>
   )
 }
 

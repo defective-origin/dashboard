@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| self |---
-import { ThemeProvider } from './ThemeProvider'
+import { UISettingsProvider } from './UISettingsProvider'
 import { ModalWindowProvider } from './ModalWindowProvider'
 import { SnackBarProvider } from './SnackBarProvider'
 
@@ -20,13 +20,13 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
   const { children } = props
 
   return (
-    <ThemeProvider>
+    <UISettingsProvider>
       <SnackBarProvider>
         <ModalWindowProvider>
           {children}
         </ModalWindowProvider>
       </SnackBarProvider>
-    </ThemeProvider>
+    </UISettingsProvider>
   )
 }
 

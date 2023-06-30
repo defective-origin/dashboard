@@ -145,7 +145,7 @@ export default function (plop) {
     description: 'Create a Launcher Provider',
     prompts: Tool.list(
       Prompt.NameInput({ default: "Provider", postfix: 'Provider' }),
-      Prompt.SubpathInput({ default: "launchers" }),
+      Prompt.SubpathInput({ default: "Launcher" }),
     ),
     actions: Tool.list(
       Action.Folder({
