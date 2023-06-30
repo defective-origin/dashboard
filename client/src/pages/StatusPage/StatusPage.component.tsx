@@ -37,7 +37,7 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
   const status = STATUS_MAP[type]
 
   return (
-    <Page className={_className} position='relative' {...otherProps}>
+    <Page name={type.toString()} className={_className} position='relative' {...otherProps}>
       <Banner
         className={css.Banner}
         position='absolute'

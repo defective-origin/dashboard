@@ -41,7 +41,7 @@ export function AppPage(props: AppPageProps): JSX.Element {
 
       <Page.Content>
         <Router>
-          <StatusPage path="/" type='WELCOME' />
+          <StatusPage path="/" type='welcome' />
           {/* <DashboardPage path="/dashboard/:id" />
           <WidgetPage path="/widget/:id" />
           <AccountPage path="/account" />

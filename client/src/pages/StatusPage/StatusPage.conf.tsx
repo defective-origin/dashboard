@@ -4,7 +4,7 @@ import { TranslateKeys } from 'locale'
 // ---| components |---
 import { ImageTypes } from 'components/Image'
 
-export type StatusType = 'WELCOME' | 401 | 403 | 404 | 500 | 502 | 503 | 'default'
+export type StatusType = 'welcome' | 401 | 403 | 404 | 500 | 502 | 503 | 'default'
 
 export const STATUS_MAP: Record<StatusType, {
   image: ImageTypes,
@@ -12,7 +12,7 @@ export const STATUS_MAP: Record<StatusType, {
   subtitle: TranslateKeys,
   text?: TranslateKeys,
 }> = {
-  WELCOME: {
+  welcome: {
     image: 'welcome',
     title: 'STATUS.WELCOME.TITLE',
     subtitle: 'STATUS.WELCOME.SUBTITLE',
