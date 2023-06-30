@@ -17,6 +17,7 @@ export const DEFAULT_USER_PROVIDER_OPTIONS: UserProviderOptions = {
 }
 
 export const UserProviderContext = React.createContext(DEFAULT_USER_PROVIDER_OPTIONS)
+UserProviderContext.displayName = 'UserProviderContext'
 
 export function useUserProvider<T extends UserProviderOptions>(): T {
   return useContext(UserProviderContext) as T

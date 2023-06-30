@@ -30,6 +30,7 @@ export const DEFAULT_UI_SETTINGS_PROVIDER_OPTIONS: UISettingsProviderOptions = {
 }
 
 export const UISettingsProviderContext = React.createContext(DEFAULT_UI_SETTINGS_PROVIDER_OPTIONS)
+UISettingsProviderContext.displayName = 'UISettingsProviderContext'
 
 export function useUISettingsProvider<T extends UISettingsProviderOptions>(): T {
   return useContext(UISettingsProviderContext) as T

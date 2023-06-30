@@ -17,6 +17,7 @@ export const DEFAULT_ACCOUNT_SETTINGS_PROVIDER_OPTIONS: AccountSettingsProviderO
 }
 
 export const AccountSettingsProviderContext = React.createContext(DEFAULT_ACCOUNT_SETTINGS_PROVIDER_OPTIONS)
+AccountSettingsProviderContext.displayName = 'AccountSettingsProviderContext'
 
 export function useAccountSettingsProvider<T extends AccountSettingsProviderOptions>(): T {
   return useContext(AccountSettingsProviderContext) as T

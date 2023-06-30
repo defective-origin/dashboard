@@ -18,6 +18,7 @@ export const DEFAULT_LOCALE_PROVIDER_OPTIONS: LocaleProviderOptions = {
 }
 
 export const LocaleProviderContext = React.createContext(DEFAULT_LOCALE_PROVIDER_OPTIONS)
+LocaleProviderContext.displayName = 'LocaleProviderContext'
 
 export function useLocaleProvider<T extends LocaleProviderOptions>(): T {
   return useContext(LocaleProviderContext) as T

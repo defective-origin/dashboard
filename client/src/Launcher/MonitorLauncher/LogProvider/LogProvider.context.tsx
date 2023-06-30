@@ -15,6 +15,7 @@ export const DEFAULT_LOG_PROVIDER_OPTIONS: LogProviderOptions = {
 }
 
 export const LogProviderContext = React.createContext(DEFAULT_LOG_PROVIDER_OPTIONS)
+LogProviderContext.displayName = 'LogProviderContext'
 
 export function useLogProvider<T extends LogProviderOptions>(): T {
   return useContext(LogProviderContext) as T

@@ -15,6 +15,7 @@ export const DEFAULT_HOT_KEYS_PROVIDER_OPTIONS: HotKeysProviderOptions = {
 }
 
 export const HotKeysProviderContext = React.createContext(DEFAULT_HOT_KEYS_PROVIDER_OPTIONS)
+HotKeysProviderContext.displayName = 'HotKeysProviderContext'
 
 export function useHotKeysProvider<T extends HotKeysProviderOptions>(): T {
   return useContext(HotKeysProviderContext) as T

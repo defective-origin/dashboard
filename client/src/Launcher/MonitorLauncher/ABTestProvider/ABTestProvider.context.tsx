@@ -15,6 +15,7 @@ export const DEFAULT_A_B_TEST_PROVIDER_OPTIONS: ABTestProviderOptions = {
 }
 
 export const ABTestProviderContext = React.createContext(DEFAULT_A_B_TEST_PROVIDER_OPTIONS)
+ABTestProviderContext.displayName = 'ABTestProviderContext'
 
 export function useABTestProvider<T extends ABTestProviderOptions>(): T {
   return useContext(ABTestProviderContext) as T

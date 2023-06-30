@@ -15,6 +15,7 @@ export const DEFAULT_SNACK_BAR_PROVIDER_OPTIONS: SnackBarProviderOptions = {
 }
 
 export const SnackBarProviderContext = React.createContext(DEFAULT_SNACK_BAR_PROVIDER_OPTIONS)
+SnackBarProviderContext.displayName = 'SnackBarProviderContext'
 
 export function useSnackBarProvider<T extends SnackBarProviderOptions>(): T {
   return useContext(SnackBarProviderContext) as T

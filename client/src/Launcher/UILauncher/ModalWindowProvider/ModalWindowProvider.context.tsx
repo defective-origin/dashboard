@@ -15,6 +15,7 @@ export const DEFAULT_MODAL_WINDOW_PROVIDER_OPTIONS: ModalWindowProviderOptions =
 }
 
 export const ModalWindowProviderContext = React.createContext(DEFAULT_MODAL_WINDOW_PROVIDER_OPTIONS)
+ModalWindowProviderContext.displayName = 'ModalWindowProviderContext'
 
 export function useModalWindowProvider<T extends ModalWindowProviderOptions>(): T {
   return useContext(ModalWindowProviderContext) as T

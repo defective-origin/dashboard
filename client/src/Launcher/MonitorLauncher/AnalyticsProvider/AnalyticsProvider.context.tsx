@@ -15,6 +15,7 @@ export const DEFAULT_ANALYTICS_PROVIDER_OPTIONS: AnalyticsProviderOptions = {
 }
 
 export const AnalyticsProviderContext = React.createContext(DEFAULT_ANALYTICS_PROVIDER_OPTIONS)
+AnalyticsProviderContext.displayName = 'AnalyticsProviderContext'
 
 export function useAnalyticsProvider<T extends AnalyticsProviderOptions>(): T {
   return useContext(AnalyticsProviderContext) as T

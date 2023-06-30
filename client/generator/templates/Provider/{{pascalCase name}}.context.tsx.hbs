@@ -17,6 +17,7 @@ export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options =
 }
 
 export const {{pascalCase name}}Context = React.createContext(DEFAULT_{{constantCase name}}_OPTIONS)
+{{pascalCase name}}Context.displayName = '{{pascalCase name}}Context'
 
 export function use{{pascalCase name}}<T extends {{pascalCase name}}Options>(): T {
   return useContext({{pascalCase name}}Context) as T
