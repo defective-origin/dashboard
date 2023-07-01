@@ -2,11 +2,8 @@
 // TODO: add description
 // TODO: add  init  structure  script
 // TODO: add перевести  на  typescript
-// TODO:  переместить плоп  конфиг  в темплейты и  разбить  на  файлы
 // TODO:  add  ERROR templates
 // TODO:  add  subdir prefix
-// TODO:  add  generator for component from lib
-// TODO:  add  doc  to generator folder
 import Prompt from './generator.prompts.js'
 import Action from './generator.actions.js'
 import Tool from './generator.tool.js'
@@ -22,11 +19,13 @@ const ComponentGenerator = ({
     notExports: ['test', 'module', 'story'],
     defaultExport: 'component',
   },
+  data,
+  isSubmodule,
 }) => ({
   description,
   prompts: Tool.list(
-    Prompt.NameInput({ default: defaultName, postfix: postfixName }),
-    Prompt.SubpathInput({ default: defaultSubpath }),
+    (postfixName || defaultName) && Prompt.NameInput({ default: defaultName, postfix: postfixName }),
+    defaultSubpath && Prompt.SubpathInput({ default: defaultSubpath }),
   ),
   actions: Tool.list(
     Action.Folder({
@@ -34,10 +33,11 @@ const ComponentGenerator = ({
       template: 'templates/Component',
       files,
       module,
+      data,
+      isSubmodule,
     }),
   ),
 })
-
 
 export default function (plop) {
   plop.setWelcomeMessage([
@@ -72,7 +72,6 @@ export default function (plop) {
   plop.setGenerator('Screen', ComponentGenerator({
     description: 'Create a screen component',
     postfixName: 'Screen',
-    defaultName: "Screen",
     defaultSubpath: "screens",
   }))
 
@@ -86,7 +85,6 @@ export default function (plop) {
   plop.setGenerator('Page', ComponentGenerator({
     description: 'Create a page component',
     postfixName: 'Page',
-    defaultName: "Page",
     defaultSubpath: "pages",
   }))
 
@@ -128,19 +126,26 @@ export default function (plop) {
   //  - SystemLauncher - providers: [Log | Analytic | ABTesting]
   //  - AccountLauncher - providers: [User | Setting]
   //  - UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
+  plop.setGenerator('Core Launcher', ComponentGenerator({
+    description: 'Create root launcher component',
+    files: ['component', 'conf', 'stub'],
+    data: {
+      subpath: './',
+      name: 'Launcher',
+    }
+  }))
   plop.setGenerator('Launcher', ComponentGenerator({
     description: 'Create a launcher component',
     postfixName: 'Launcher',
-    defaultName: "Launcher",
-    defaultSubpath: "launchers",
-    files: ['component', 'conf', 'stub']
+    defaultSubpath: "Launcher",
+    files: ['component', 'conf', 'stub'],
+    isSubmodule: true,
   }))
-
-  plop.setGenerator('Launcher Provider', {
+  plop.setGenerator('Provider', {
     description: 'Create a Launcher Provider',
     prompts: Tool.list(
       Prompt.NameInput({ default: "Provider", postfix: 'Provider' }),
-      Prompt.SubpathInput({ default: "launchers" }),
+      Prompt.SubpathInput({ default: "Launcher" }),
     ),
     actions: Tool.list(
       Action.Folder({
@@ -151,6 +156,7 @@ export default function (plop) {
           notExports: ['test'],
           defaultExport: 'component',
         },
+        isSubmodule: true,
       }),
     ),
   })
@@ -162,11 +168,10 @@ export default function (plop) {
       Action.Folder({
         target: 'locale',
         template: 'templates/Locale',
-        abortOnFail: false,
-        files: ['component', 'test', 'tool'],
+        files: ['conf', 'test', 'tool'],
         module: {
-          notExports: ['test', 'tool'],
-          defaultExport: 'component',
+          notExports: ['test'],
+          defaultExport: ['conf'],
         },
         data: { name: 'LocaleProvider' },
       }),

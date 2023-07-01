@@ -1,0 +1,37 @@
+{
+  "STATUS": {
+    "WELCOME": {
+      "TITLE": "WELCOME TO OUR APP!",
+      "SUBTITLE": "Please read the guide before start work.",
+      "TEXT": "insert button links to guide and dashboard page"
+    },
+    "401": {
+      "TITLE": "NOT AUTHORIZED!",
+      "SUBTITLE": "Sorry but it seems like we can't let you in."
+    },
+    "403": {
+      "TITLE": "YOU HAVE NO PERMISSION!",
+      "SUBTITLE": "Sorry but it seems like we can't let you in."
+    },
+    "404": {
+      "TITLE": "OOOOPS! WE COULDN'T FIND THIS PAGE!",
+      "SUBTITLE": "It could be deleted or never existed."
+    },
+    "500": {
+      "TITLE": "500 ERROR! SOMETHING WENT WRONG!",
+      "SUBTITLE": "Looks like we are having some server issues. We'll get it fixed as soon as possible. Please try again later."
+    },
+    "502": {
+      "TITLE": "BAD GATEWAY!",
+      "SUBTITLE": "Looks like we are having some server issues. We'll get it fixed as soon as possible. Please try again later."
+    },
+    "503": {
+      "TITLE": "SERVICE UNAVAILABLE!",
+      "SUBTITLE": "Looks like we are having some server issues. We'll get it fixed as soon as possible. Please try again later."
+    },
+    "DEFAULT": {
+      "TITLE": "SOMETHING WENT WRONG!",
+      "SUBTITLE": "Looks like we are having some issues. We'll get it fixed as soon as possible. Please try again later."
+    }
+  }
+}

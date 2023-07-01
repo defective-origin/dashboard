@@ -1,8 +1,13 @@
-@import "contexts/UIProvider/UI.module.scss";
+@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
 
-:global(.light),
-:global(.dark), {
-  --some-var: $white;
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
 }
 
 .{{pascalCase name}} {

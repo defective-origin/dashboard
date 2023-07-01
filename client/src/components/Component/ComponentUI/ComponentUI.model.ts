@@ -1,6 +1,3 @@
-// ---| common |---
-import { MagicFunc } from 'common/models'
-
 export type GeneralProps<T extends HTMLElement = HTMLElement> = React.DOMAttributes<T> & React.HTMLAttributes<T>
 
 export type GeneralUIProps<
@@ -16,5 +13,5 @@ export type ReturnUIProps<
   TResult = Pick<UIProps, keyof Omit<UIProps, keyof UIConf>> & { ui: UIConf & UIProps['ui'] },
 > = TResult
 
-export type HocComponent = MagicFunc
+export type HocComponent = (...args: any[]) => any
 export type MagicComponent = React.ComponentType<any> | HocComponent

@@ -1,0 +1,18 @@
+@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+}
+
+.StatusPage {
+}
+
+.Banner {
+  width: 450px;
+}

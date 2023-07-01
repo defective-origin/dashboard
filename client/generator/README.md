@@ -17,7 +17,18 @@ Project
 ```sh
   "scripts": {
     "gen": "plop --plopfile ./generator/generator.config.js --dest ./src"
+    "gen:init": "plop --plopfile ./generator/generator.config.js --dest ./src"
   },
+```
+
+## Generate base infrastructure
+```sh
+	yarn gen:init
+```
+
+## Generate part of infrastructure
+```sh
+	yarn gen
 ```
 
 ## Allowed infrastructure
@@ -61,7 +72,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 				- UseHookName.hook.ts
 				- UseHookName.test.ts
 				- UseHookName.tool.ts
-				- UseHookName.constant.ts
+				- UseHookName.conf.ts
 			- index.ts
 		- errors/ - containes errors
 			- ErrorUsageTypeName.error.ts
@@ -71,7 +82,8 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- index.ts
 
 	- api/ - contains tools and handlers for work with network interaction
-		- ApiName - Each api  endpoint does default export. Methods receive data from server API or browser API
+		- ApiSliceName - Each api  endpoint does default export. Methods receive data from server API or browser API
+			- ApiTypeName.conf.ts
 			- ApiTypeName.hook.ts - containes unified api useApiNameApiManager hook to handle equals server reponse, caching, cancellation of requests
 			- ApiTypeName.mock.ts - has mock object hook for jest.spy and mock data
 			- ApiTypeName.schema.ts - contains data validations and models for METADATA, RESPONSE, ERROR RESPONSE
@@ -81,7 +93,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- ApiTypeName.tool.ts
 			- index.ts
 
-		- api.constant.ts
+		- api.conf.ts
 		- api.context.ts
 		- api.tool.ts
 		- api.hook.ts
@@ -105,12 +117,12 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- variables.scss - paddings, margins, ...
 			- index.scss
 	
-	- launchers/
-		- AppLauncher - All Launchers + AppPage  - contains tools and settings without which the application cannot or should not work
-		- CoreLauncher - providers: [Suspense | HotKeys | Router | Store | Environment]
-		- SystemLauncher - providers: [Log | Analytic | ABTesting]
-		- AccountLauncher - providers: [User | Setting]
-		- UILauncher - providers: [UI + Theme | ModalWindow | SnackBar, locale + dayjs]
+	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work  + env settings in constants
+		- Component structure
+		- SystemLauncher - providers: [StrictMode | Suspense | Router | Store | Api | locale + dayjs | HotKeys]
+		- MonitorLauncher - providers: [Log | Analytics | ABTest + FeatureFlag]
+		- UILauncher - providers: [UISettings | SnackBar | ModalWindow]
+		- AccountLauncher - providers: [AccountSettings | User]
 			- Component structure
 			- ProviderNameProvider
 				- ProviderNameProvider.component.ts
@@ -142,7 +154,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- ComponentName.style.scss
 			- ComponentName.hook.ts
 			- ComponentName.context.ts
-			- ComponentName.constant.ts
+			- ComponentName.conf.ts
 			- ComponentName.tool.ts
 			- ComponentName.error.ts
 			- ComponentName.test.ts
@@ -161,7 +173,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	- locale/ - contains localized labels, texts, digits, signs, ...
 		- index.ts - configurations and settings
 		- locale.tool.ts
-		- locale.component.tsx
+		- locale.conf.tsx
 		- locale.error.ts
 		- locale.test.ts
 		- i18n/
@@ -189,7 +201,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- __tests__/
 			- GuardName.guard.ts
 			- index.ts
-		- router.constant.ts
+		- router.conf.ts
 		- router.tool.ts
 		- router.hook.ts
 		- router.model.ts
@@ -199,7 +211,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 
 	- store/ - contains project store (use redux-toolkit)
 		- index.ts - store configurations and settings
-		- store.constant.ts
+		- store.conf.ts
 		- store.tool.ts
 		- store.hook.ts
 		- store.model.ts
@@ -245,3 +257,4 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	- README.md - project description
 	- tsconfig.json - program language config
 	- yarn.lock - package manager cache
+
