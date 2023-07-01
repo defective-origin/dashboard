@@ -1,7 +1,4 @@
-import { useCallback, useState, useEffect, useMemo } from 'react'
-
-// ---| common |---
-import { buildHookWithOptionalRef } from 'common/hooks'
+import { useCallback, useState, useEffect, useMemo, useRef } from 'react'
 
 export const DEFAULT_SCROLL_PARAMS: ScrollToOptions = {
   top: 0,
@@ -32,8 +29,9 @@ export const DEFAULT_SCROLL_OPTIONS: ScrollOptions = {
 }
 
 export type ScrollManager<TElement extends HTMLElement> = {
-  elem: TElement | null,
-  options: ScrollOptions,
+  ref: React.MutableRefObject<TElement>
+  elem: TElement
+  options: ScrollOptions
   move: ScrollFunc
   moveTop: ScrollPartFunc
   moveLeft: ScrollPartFunc
@@ -44,7 +42,7 @@ export type ScrollManager<TElement extends HTMLElement> = {
 }
 
 export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
-  ref: React.MutableRefObject<TElement | null>,
+  ref: React.MutableRefObject<TElement>,
   defaultParams = DEFAULT_SCROLL_PARAMS,
 ): ScrollManager<TElement> {
   const params: ScrollToOptions = { ...DEFAULT_SCROLL_PARAMS, ...defaultParams }
@@ -83,7 +81,7 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     nestedElem?.scrollIntoView(arg)
   }, [])
 
-  const buildOptions = useCallback((elem: TElement | null): ScrollOptions => {
+  const buildOptions = useCallback((elem: TElement): ScrollOptions => {
     if (!elem) {
       return DEFAULT_SCROLL_OPTIONS
     }
@@ -111,6 +109,7 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
   }, [ref.current])
 
   const manager: ScrollManager<TElement> = useMemo(() => ({
+    ref,
     elem: ref.current,
     options,
     move,
@@ -125,4 +124,10 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
   return manager
 }
 
-export const useScrollManager = buildHookWithOptionalRef(useScrollManagerWithoutRef)
+export function useScrollManager<TElement extends HTMLElement>(
+  defaultParams = DEFAULT_SCROLL_PARAMS,
+): ScrollManager<TElement> {
+  const newRef = useRef<TElement>(null)
+
+  return useScrollManagerWithoutRef(newRef as any, defaultParams)
+}

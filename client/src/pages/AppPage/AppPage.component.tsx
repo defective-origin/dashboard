@@ -1,11 +1,16 @@
 import React from 'react'
 
+// ---| core |---
+import { Router } from 'Launcher'
+
 // ---| pages |---
+import StatusPage from 'pages/StatusPage'
+
 // ---| screens |---
 import AppMenuScreen from '../../screens/AppMenuScreen'
+
 // ---| components |---
 import Page from '../../components/Page'
-// ---| root |---
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -29,12 +34,25 @@ export function AppPage(props: AppPageProps): JSX.Element {
   const _className = cn(css.AppPage, className)
 
   return (
-    <Page title='App' className={_className} stretch='xy' {...otherProps}>
+    <Page name='App' className={_className} stretch='xy' {...otherProps}>
       <Page.LeftAside>
         <AppMenuScreen />
       </Page.LeftAside>
 
-      <Page.Content />
+      <Page.Content>
+        <Router>
+          <StatusPage path="/" type='welcome' />
+          {/* <DashboardPage path="/dashboard/:id" />
+          <WidgetPage path="/widget/:id" />
+          <AccountPage path="/account" />
+          <GuidePage path="/guide" />
+          <DonationPage path="/donation" />
+          <HotkeysPage path="/hotkeys" />
+          <SupportPage path="/support" /> */}
+          <StatusPage path="/error/:type" />
+          <StatusPage default type={404} />
+        </Router>
+      </Page.Content>
     </Page>
   )
 }

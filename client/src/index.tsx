@@ -5,15 +5,15 @@ import AppPage from 'pages/AppPage'
 
 // ---| root |---
 import reportWebVitals from 'reportWebVitals'
-import AppLauncher from 'launchers/AppLauncher'
+import Launcher from 'Launcher'
 
 const rootElement = document.getElementById('root') as HTMLElement
 const root = createRoot(rootElement)
 
 root.render(
-  <AppLauncher>
+  <Launcher>
     <AppPage />
-  </AppLauncher>,
+  </Launcher>,
 )
 
 // If you want to start measuring performance in your app, pass a function

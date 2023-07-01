@@ -122,7 +122,7 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
 
   // extend functionality
   useLayoutEffect(() => {
-    ref.registerHandler = (name, handler) =>  {
+    ref.registerHandler = (name, handler) => {
       ref[name] = (...args: any[]) => ref.change((val) => handler(val, ...args))
       ref[`${name}Silent`] = (...args: any[]) => ref.changeSilent((val) => handler(val, ...args))
     }
@@ -130,7 +130,7 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
     ref.registerHandler('clear', () => options.clear ?? init)
 
 
-    ref.registerFormat = (arg0, arg1?: Formatter<S>) =>  {
+    ref.registerFormat = (arg0, arg1?: Formatter<S>) => {
       const opt = typeof arg0 === 'string' ? options[arg0] : options
       const handler = arg1 ? arg1 : arg0 as Formatter<S>
       

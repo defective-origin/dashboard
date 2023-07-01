@@ -1,19 +1,17 @@
 import React from 'react'
-import { Helmet } from '../Helmet'
-// ---| pages |---
-// ---| screens |---
+
 // ---| components |---
-// ---| root |---
+import Layout, { LayoutProps } from 'components/Layout'
+import Helmet from 'components/lib/Helmet'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Page.module.scss'
-import Layout, {LayoutProps} from '../Layout'
 
 export type PageProps = LayoutProps & {
-  title?: string
+  name?: string
   className?: string
   children?: React.ReactNode
 }
@@ -26,16 +24,28 @@ export type PageProps = LayoutProps & {
  * <Page />
  */
 export function Page(props: PageProps): JSX.Element {
-  const { title, children, className, ...otherProps } = props
+  const { name, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
+  const isHeadChanged = name
+  const hasPageComponents = React.Children
+    .toArray(children)
+    .some((child) => React.isValidElement(child) && PAGE_ITEMS.includes((child as JSX.Element).type))
 
   return (
-    <Layout className={_className} {...otherProps}>
-      <Helmet>
-        { title && <title>{title}</title> }
-      </Helmet>
+    <Layout className={_className} stretch='xy' {...otherProps}>
+      {isHeadChanged && (
+        <Helmet>
+          { name && <title>{name}</title> }
+        </Helmet>
+      )}
 
-      {children}
+      {!hasPageComponents && (
+        <Page.Content>
+          {children}
+        </Page.Content>
+      )}
+
+      {hasPageComponents && children}
     </Layout>
   )
 }
@@ -48,3 +58,4 @@ Page.Footer = Layout.Footer
 Page.Header = Layout.Header
 Page.Content = Layout.Content
 
+export const PAGE_ITEMS = [Page.LeftAside, Page.RightAside, Page.Footer, Page.Header, Page.Content]

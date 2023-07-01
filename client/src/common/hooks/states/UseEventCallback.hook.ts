@@ -1,7 +1,6 @@
 import { useCallback } from 'react'
 
 // ---| common |---
-import { MagicFunc } from 'common/models'
 import useStateful from './UseStateful.hook'
 
 /**
@@ -10,7 +9,7 @@ import useStateful from './UseStateful.hook'
  * @example
  * const eventCallback = useEventCallback(() => newValue)
  */
-export function useEventCallback<T extends MagicFunc>(handler: T): T {
+export function useEventCallback<T extends (...args: any[]) => any>(handler: T): T {
   const handlerRef = useStateful<T>(handler, [handler])
   const callback = useCallback<any>((...args: any[]) => handlerRef.current?.(...args), [])
 

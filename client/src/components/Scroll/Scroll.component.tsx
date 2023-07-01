@@ -62,9 +62,8 @@ export default function Scroll(props: ScrollProps): JSX.Element {
     ...otherProps
   } = useScrollUIProps(props)
 
-  // TODO: fix manager type in buildHookWithOptionalRef
   //  TODO: add  shift scroll  from border on 10  px
-  const [ref, scrollManager] = useScrollManager<HTMLDivElement>()
+  const scrollManager = useScrollManager<HTMLDivElement>()
   const backToTop = useCallback(() => scrollManager.moveTop(), [scrollManager])
   const backToLeft = useCallback(() => scrollManager.moveLeft(), [scrollManager])
   const showLeftButton = showButtonsOn < scrollManager.options.left
@@ -73,11 +72,11 @@ export default function Scroll(props: ScrollProps): JSX.Element {
   const scrollClassName = cn(css.Content, className)
 
   // subscription on scroll manager
-  useImperativeHandle(manager, () => scrollManager as ScrollManager<HTMLDivElement>, [manager, scrollManager])
+  useImperativeHandle(manager, () => scrollManager, [manager, scrollManager])
 
   return (
     <Box className={_className} stretch="xy" position="relative" {...otherProps}>
-      <div className={scrollClassName} ref={ref}>
+      <div className={scrollClassName} ref={scrollManager.ref}>
         {children}
       </div>
 
