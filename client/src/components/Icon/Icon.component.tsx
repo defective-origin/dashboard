@@ -8,15 +8,14 @@ import { cn } from 'common/tools'
 import useIconUIProps, { IconUIProps } from './IconUI'
 
 export type IconTypes = 'light_mode' | 'dark_mode'
-| 'add' | 'delete' | 'edit' | 'close' | 'search' | 'download' | 'upload' | 'refresh' | 'sort' | 'reorder' | 'sync'
-| 'savings' | 'settings'
-| 'star' | 'grade'
+| 'paid'
 | 'login' | 'logout'
-| 'person' | 'person_add' | 'account_circle'
+| 'developer_mode_tv' | 'tv'
+| 'person' | 'person_add' | 'account_circle' | 'support_agent'
 | 'dashboard' | 'insert_chart'
-| 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_right' | 'keyboard_arrow_down' | 'keyboard_arrow_left'
-| 'menu' | 'open_in_new' | 'support' | 'tab' | 'verified' | 'cloud_download' | 'library_books'
-| 'filter_list' | 'view_column' | 'more_vert' | 'table_rows' | 'auto_stories' | 'database'
+| 'keyboard'
+| 'auto_stories'
+| 'settings'
 
 export type IconProps = MuiIconProps & IconUIProps & {
   type: IconTypes

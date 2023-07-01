@@ -7,16 +7,16 @@ import { Router } from 'Launcher'
 import StatusPage from 'pages/StatusPage'
 
 // ---| screens |---
-import AppMenuScreen from '../../screens/AppMenuScreen'
 
 // ---| components |---
-import Page from '../../components/Page'
+import Page from 'components/Page'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './AppPage.module.scss'
+import AppMenuScreen from './AppMenuScreen'
 
 export type AppPageProps = {
   className?: string

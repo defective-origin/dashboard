@@ -20,6 +20,7 @@ export function UISettingsProvider(props: UISettingsProviderProps): JSX.Element 
   const options = useMemo<UISettingsProviderOptions>(() => ({
     current,
     isTheme: (value) => current.theme === value,
+    isMode: (value) => current.mode === value,
     change: (patch) => { setCurrent((state) => ({ ...state, ...patch})) },
     toggleTheme: () => {
       // TODO: analytic.register({ name: 'UITheme', value: oppositeTheme })
