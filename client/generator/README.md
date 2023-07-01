@@ -82,7 +82,8 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- index.ts
 
 	- api/ - contains tools and handlers for work with network interaction
-		- ApiName - Each api  endpoint does default export. Methods receive data from server API or browser API
+		- ApiSliceName - Each api  endpoint does default export. Methods receive data from server API or browser API
+			- ApiTypeName.conf.ts
 			- ApiTypeName.hook.ts - containes unified api useApiNameApiManager hook to handle equals server reponse, caching, cancellation of requests
 			- ApiTypeName.mock.ts - has mock object hook for jest.spy and mock data
 			- ApiTypeName.schema.ts - contains data validations and models for METADATA, RESPONSE, ERROR RESPONSE
@@ -256,3 +257,4 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	- README.md - project description
 	- tsconfig.json - program language config
 	- yarn.lock - package manager cache
+
