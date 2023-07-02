@@ -1,8 +1,7 @@
 import React from 'react'
-import { RouteComponentProps } from '@reach/router'
 
 // ---| core |---
-import { useLocaleProvider } from 'Launcher'
+import { useLocaleProvider, RouteProps } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -17,7 +16,7 @@ import { cn } from 'common/tools'
 import css from './StatusPage.module.scss'
 import { STATUS_MAP, StatusType } from './StatusPage.conf'
 
-export type StatusPageProps = RouteComponentProps & {
+export type StatusPageProps = RouteProps & {
   className?: string
   children?: React.ReactNode
   type?: StatusType
@@ -37,11 +36,9 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
   const status = STATUS_MAP[type]
 
   return (
-    <Page name={type.toString()} className={_className} position='relative' {...otherProps}>
+    <Page name={type.toString()} className={_className} {...otherProps}>
       <Banner
         className={css.Banner}
-        position='absolute'
-        placement='center-center'
         imageType={status.image}
         title={locale.t(status.title)}
         subtitle={locale.t(status.subtitle)}

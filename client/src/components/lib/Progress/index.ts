@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './LayoutItem.component'
+export { default } from './Progress.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './LayoutItem.component'
+export * from './Progress.component'

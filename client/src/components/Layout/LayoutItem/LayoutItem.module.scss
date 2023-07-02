@@ -1,0 +1,23 @@
+@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+
+  .layout-item {
+    justify-self: stretch;
+    align-self: stretch;
+  }
+  
+  
+  .li-ga-la { grid-area: left-aside; }
+  .li-ga-ra { grid-area: right-aside; }
+  .li-ga-f { grid-area: footer; }
+  .li-ga-h { grid-area: header; }
+  .li-ga-c { grid-area: content; }
+}

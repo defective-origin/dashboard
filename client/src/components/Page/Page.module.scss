@@ -1,4 +1,5 @@
 @import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
 
 .Page {
+  @include stretch;
 }

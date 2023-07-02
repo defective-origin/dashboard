@@ -1,0 +1,34 @@
+@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+
+:global {
+  .dark {
+    --border-color: white;
+  }
+
+  .light {
+    --border-color: black;
+  }
+}
+
+.Card {
+  display: flex;
+  flex-direction: column;
+}
+
+.Horizontal {
+  flex-direction: row;
+}
+
+.Divided {
+  border-bottom: 1px solid var(--border-color);
+
+  &.Horizontal > * {
+    border-right: 1px solid var(--border-color);
+  }
+
+  &.Vertical > :last-child,
+  &.Horizontal > :last-child {
+    border-right: none;
+    border-bottom: none;
+  }
+}

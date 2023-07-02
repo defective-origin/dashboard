@@ -27,25 +27,16 @@ export function Page(props: PageProps): JSX.Element {
   const { name, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
   const isHeadChanged = name
-  const hasPageComponents = React.Children
-    .toArray(children)
-    .some((child) => React.isValidElement(child) && PAGE_ITEMS.includes((child as JSX.Element).type))
 
   return (
-    <Layout className={_className} stretch='xy' {...otherProps}>
+    <Layout className={_className} {...otherProps}>
       {isHeadChanged && (
         <Helmet>
           { name && <title>{name}</title> }
         </Helmet>
       )}
 
-      {!hasPageComponents && (
-        <Page.Content>
-          {children}
-        </Page.Content>
-      )}
-
-      {hasPageComponents && children}
+      {children}
     </Layout>
   )
 }

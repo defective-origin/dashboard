@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router as ReachRouter, RouterProps } from '@reach/router'
+import { Router as ReachRouter, RouteComponentProps, RouterProps } from '@reach/router'
 
 // ---| self |---
 import css from './RouterProvider.module.scss'
@@ -16,6 +16,8 @@ RouterProvider.displayName = 'RouterProvider'
 
 
 export default RouterProvider
+
+export type RouteProps = RouteComponentProps
 
 export type Router = RouterProps & React.HTMLProps<HTMLDivElement>
 

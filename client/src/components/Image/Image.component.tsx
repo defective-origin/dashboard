@@ -9,7 +9,7 @@ import React from 'react'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './Image.module.scss'
+import './Image.module.scss'
 
 export const IMAGE_MAP = {
   400: 'https://png.pngtree.com/png-vector/20230416/ourmid/pngtree-unicorn-full-body-beautiful-pattern-png-image_6704420.png',
@@ -34,7 +34,7 @@ export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLIma
  */
 export function Image(props: ImageProps): JSX.Element {
   const { type, src, children, className, ...otherProps } = props
-  const _className = cn(css.Image, className)
+  const _className = cn('image', className)
   const imgSrc = src ?? IMAGE_MAP[type as ImageTypes]
 
   return <img className={_className} src={imgSrc} {...otherProps}>{children}</img>

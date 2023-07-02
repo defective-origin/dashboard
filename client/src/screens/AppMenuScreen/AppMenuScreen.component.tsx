@@ -1,11 +1,10 @@
 import React from 'react'
-import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Divider } from '@mui/material'
+import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon from 'components/Icon'
-import Grid from 'components/Grid'
+import Icon from 'components/lib/Icon'
 
 // ---| root |---
 
@@ -43,75 +42,65 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const open = Boolean(anchorEl)
 
   return (
-    <Grid
+    <div
       className={_className}
-      stretch='y'
-      rtemplate='auto 1fr auto'
       {...otherProps}
     >
-      <Grid.Item>
+      <div>
         <Avatar onClick={handleClick}>
           <Icon type='account_circle' />
         </Avatar>
 
         <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'center',
-          horizontal: 'left',
-        }}
-      >
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon><Icon type='person' /></ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon><Icon type='settings' /></ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon><Icon type='account_circle' /></ListItemIcon>
-              <ListItemText primary="Registration" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon><Icon type='login' /></ListItemIcon>
-              <ListItemText primary="Sign In" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon><Icon type='logout' /></ListItemIcon>
-              <ListItemText primary="Sign Out" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Popover>
-      </Grid.Item>
-
-      <Grid.Item justify='stretch'>
-
-      </Grid.Item>
-      
-      <Grid.Item>
-
-      </Grid.Item>
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'center',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'center',
+            horizontal: 'left',
+          }}
+        >
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon><Icon type='person' /></ListItemIcon>
+                <ListItemText primary="Profile" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon><Icon type='settings' /></ListItemIcon>
+                <ListItemText primary="Settings" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon><Icon type='account_circle' /></ListItemIcon>
+                <ListItemText primary="Registration" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon><Icon type='login' /></ListItemIcon>
+                <ListItemText primary="Sign In" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon><Icon type='logout' /></ListItemIcon>
+                <ListItemText primary="Sign Out" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Popover>
+      </div>
 
       {children}
-    </Grid>
+    </div>
   )
 }
 

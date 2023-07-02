@@ -11,8 +11,17 @@
 }
 
 .StatusPage {
+  position: relative;
 }
 
 .Banner {
   width: 450px;
+  position: absolute;
+
+  // todo: fix via @include absolute-position(center, center);
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
 }
