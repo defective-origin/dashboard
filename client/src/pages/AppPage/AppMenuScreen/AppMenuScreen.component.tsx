@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, IconButton, Button } from '@mui/material'
 
 // ---| core |---
@@ -7,8 +7,8 @@ import { useLocaleProvider, useUISettingsProvider, useUserProvider } from 'Launc
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon from 'components/Icon'
-import Grid from 'components/Grid'
+import Icon from 'components/lib/Icon'
+import Grid from 'components/lib/Grid'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -47,8 +47,8 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const open = Boolean(anchorEl)
 
   return (
-    <Grid className={_className} {...otherProps}>
-      <Grid.Item className={css.TopActions}>
+    <Grid className={_className} display='flex' direction='column' {...otherProps}>
+      <Grid.Item className={css.TopActions} display='flex' direction='column'>
         <Avatar onClick={handleClick}>
           <Icon type='account_circle' fontSize='large' />
         </Avatar>
@@ -95,19 +95,19 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
                 </ListItem>
               </>
             )}
-          {user.isAuthorized && (
-            <ListItem disablePadding>
-              <ListItemButton onClick={user.logout}>
-                <ListItemIcon><Icon type='logout' /></ListItemIcon>
-                <ListItemText primary="Sign Out" />
-              </ListItemButton>
-            </ListItem>
-          )}
+            {user.isAuthorized && (
+              <ListItem disablePadding>
+                <ListItemButton onClick={user.logout}>
+                  <ListItemIcon><Icon type='logout' /></ListItemIcon>
+                  <ListItemText primary="Sign Out" />
+                </ListItemButton>
+              </ListItem>
+            )}
           </List>
         </Popover>
       </Grid.Item>
 
-      <Grid.Item className={css.MiddleActions}>
+      <Grid.Item className={css.MiddleActions} display='flex' direction='column'>
         <IconButton>
           <Icon className={css.ActiveButton} type='dashboard' fontSize='large'/>
         </IconButton>
@@ -116,7 +116,7 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
         </IconButton>
       </Grid.Item>
       
-      <Grid.Item className={css.BottomActions}>
+      <Grid.Item className={css.BottomActions} display='flex' direction='column'>
         <IconButton>
           <Icon type='auto_stories' fontSize='large' />
         </IconButton>

@@ -34,7 +34,7 @@ export function AppPage(props: AppPageProps): JSX.Element {
   const _className = cn(css.AppPage, className)
 
   return (
-    <Page name='App' className={_className} {...otherProps}>
+    <Page name='App' type='left-aside' className={_className} {...otherProps}>
       <Page.LeftAside>
         <AppMenuScreen />
       </Page.LeftAside>
