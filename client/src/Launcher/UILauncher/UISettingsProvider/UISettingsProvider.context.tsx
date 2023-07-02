@@ -16,6 +16,7 @@ export const DEFAULT_UI_SETTINGS_PROVIDER_STATE: UISettingsProviderState = {
 export type UISettingsProviderOptions = {
   current: UISettingsProviderState,
   isTheme: (theme: UIThemeType) => boolean,
+  isMode: (mode: UIModeType) => boolean,
   change: (patch: Partial<UISettingsProviderState>) => void,
   toggleTheme: () => void,
   toggleMode: () => void,
@@ -24,6 +25,7 @@ export type UISettingsProviderOptions = {
 export const DEFAULT_UI_SETTINGS_PROVIDER_OPTIONS: UISettingsProviderOptions = {
   current: DEFAULT_UI_SETTINGS_PROVIDER_STATE,
   isTheme: () => true,
+  isMode: () => true,
   change: () => {},
   toggleTheme: () => {},
   toggleMode: () => {},
