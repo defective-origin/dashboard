@@ -1,4 +1,5 @@
 import React from 'react'
+import MuiTable, { TableProps as MuiTableProps } from '@mui/material/Table';
 
 // ---| core |---
 // ---| pages |---

@@ -42,13 +42,13 @@ export function AppPage(props: AppPageProps): JSX.Element {
 
       <Page.Content>
         <Router>
-          <StatusPage path="/" type='welcome' />
+          <StatusPage path="/hotkeys" type='welcome' />
           {/* <DashboardPage path="/dashboard/:id" />
           <WidgetPage path="/widget/:id" />
           <AccountPage path="/account" />
           <GuidePage path="/guide" />
           <DonationPage path="/donation" /> */}
-          <HotKeysPage path="/hotkeys" />
+          <HotKeysPage path="/" />
           {/* <SupportPage path="/support" /> */}
           <StatusPage path="/error/:type" />
           <StatusPage default type={404} />

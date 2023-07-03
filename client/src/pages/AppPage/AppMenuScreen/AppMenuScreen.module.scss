@@ -1,15 +1,12 @@
 @import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
 
 .AppMenuScreen {
-  grid-template-rows: auto 1fr auto;
-  justify-items: center;
-  height: 100%;
   border-right: 1px solid #d8cfcf;
 }
 
 .MiddleActions {
   width: 100%;
-  box-shadow: inset 0px 11px 15px -5px #CCC, inset 0px -11px 15px -5px #CCC;
+  box-shadow: 0px -5px 5px 0px rgba(34, 60, 80, 0.06) inset, 0px 5px 5px 0px rgba(34, 60, 80, 0.06) inset;
   flex-grow: 1;
 }
 
@@ -19,10 +16,24 @@
 .TopActions,
 .MiddleActions,
 .BottomActions {
-  padding: 10px;
-  gap: 10px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.SquareButton:focus,
+.SquareButton {
+  min-height: 40px;
+  min-width: 40px;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  margin-bottom: 2px;
 }
 
 .ActiveButton {
-  background-color: #00000044;
+  background-color: #0000001F;
+  color: #FFFFFF;
 }

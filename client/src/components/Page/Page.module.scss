@@ -1,5 +1,15 @@
 @import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
 
-.Page {
-  @include stretch;
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+
+  .page {
+    @include stretch;
+  }
 }

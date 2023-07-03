@@ -7,19 +7,13 @@ import { cn } from 'common/tools'
 import './Layout.module.scss'
 import LayoutItem from './LayoutItem'
 
-export const LAYOUT_TYPE_MAP = {
-  row: 'l-t-r',
-  column: 'l-t-c',
-  'left-aside': 'l-t-la',
-  'right-aside': 'l-t-ra',
-}
-
-export type LayoutType = keyof typeof LAYOUT_TYPE_MAP
+export type LayoutType = 'row' | 'column' | 'left-aside' | 'right-aside'
 
 export type LayoutProps = {
   className?: string
   children?: React.ReactNode
   type?: LayoutType
+  gap?: string | number
 }
 
 /**
@@ -30,14 +24,14 @@ export type LayoutProps = {
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element {
-  const { type = 'row', children, className, ...otherProps } = props
-  const _className = cn('layout', LAYOUT_TYPE_MAP[type], className)
+  const { gap, type = 'row', children, className, ...otherProps } = props
+  const _className = cn('layout', `layout--${type}`, className)
   const hasSelfComponents = React.Children
     .toArray(children)
     .some((child) => React.isValidElement(child) && LAYOUT_ITEMS.includes((child as JSX.Element).type))
 
   return (
-    <div className={_className} {...otherProps}>
+    <div className={_className} {...otherProps} style={{ gap }}>
       {!hasSelfComponents && (
         <Layout.Content>
           {children}

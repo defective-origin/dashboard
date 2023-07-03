@@ -108,19 +108,19 @@ export function attachOverride<C extends React.FunctionComponent>(
  */
 export function attachOverrides<
   C extends React.FunctionComponent,
-  M extends object = Record<string, React.ComponentProps<C>>,
+  K extends string,
 >(
   component: C,
-  overridePropMap: M,
+  overridePropMap: Record<K, React.ComponentProps<C>>,
   options: OverrideComponentOptions = {},
-): C & Record<keyof M, C> {
+): C & Record<K, C> {
   Object.keys(overridePropMap).forEach((name) =>
     attachOverride(
       component,
-      overridePropMap[name as keyof M],
+      overridePropMap[name as K],
       { name, ...options },
     )
   )
 
-  return component as C & Record<keyof M, C>
+  return component as C & Record<K, C>
 }

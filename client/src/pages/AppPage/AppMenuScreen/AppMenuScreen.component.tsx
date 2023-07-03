@@ -1,5 +1,6 @@
 import React from 'react'
-import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, IconButton, Button } from '@mui/material'
+import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, IconButton } from '@mui/material'
+import Block from 'components/Block'
 
 // ---| core |---
 import { useLocaleProvider, useUISettingsProvider, useUserProvider } from 'Launcher'
@@ -8,7 +9,7 @@ import { useLocaleProvider, useUISettingsProvider, useUserProvider } from 'Launc
 // ---| screens |---
 // ---| components |---
 import Icon from 'components/lib/Icon'
-import Grid from 'components/lib/Grid'
+import Button from 'components/lib/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -47,8 +48,8 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const open = Boolean(anchorEl)
 
   return (
-    <Grid className={_className} display='flex' direction='column' {...otherProps}>
-      <Grid.Item className={css.TopActions} item display='flex' direction='column'>
+    <Block className={_className} type='column-center' {...otherProps}>
+      <Block.Start className={css.TopActions}>
         <Avatar onClick={handleClick}>
           <Icon type='account_circle' fontSize='large' />
         </Avatar>
@@ -105,44 +106,25 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
             )}
           </List>
         </Popover>
-      </Grid.Item>
+      </Block.Start>
 
-      <Grid.Item className={css.MiddleActions} item display='flex' direction='column'>
-        <IconButton>
-          <Icon className={css.ActiveButton} type='dashboard' fontSize='large'/>
-        </IconButton>
-        <IconButton>
-          <Icon type='insert_chart' fontSize='large' />
-        </IconButton>
-      </Grid.Item>
+      <Block.Center className={css.MiddleActions}>
+        <Button className={css.SquareButton} icon='dashboard' size='large' />
+        <Button className={css.SquareButton} icon='insert_chart' size='large' />
+      </Block.Center>
       
-      <Grid.Item className={css.BottomActions} item display='flex' direction='column'>
-        <IconButton>
-          <Icon type='auto_stories' fontSize='large' />
-        </IconButton>
-        <IconButton>
-          <Icon type='paid' fontSize='large' />
-        </IconButton>
-        <IconButton>
-          <Icon type='keyboard' fontSize='large' />
-        </IconButton>
-        <IconButton>
-          <Icon type='support_agent' fontSize='large' />
-        </IconButton>
-        <IconButton onClick={ui.toggleTheme}>
-          <Icon type={`${ui.current.theme}_mode`} fontSize='large' />
-        </IconButton>
-        <Button>{locale.current}</Button>
-        <IconButton onClick={ui.toggleMode}>
-          <Icon
-            type={ ui.isMode('edit') ? 'developer_mode_tv' : 'tv' }
-            fontSize='large'
-          />
-        </IconButton>
-      </Grid.Item>
+      <Block.End className={css.BottomActions}>
+        <Button className={`${css.SquareButton} ${css.ActiveButton}`} icon='auto_stories' size='large' />
+        <Button className={css.SquareButton} icon='paid' size='large' />
+        <Button className={css.SquareButton} icon='keyboard' size='large' />
+        <Button className={css.SquareButton} icon='support_agent' size='large' />
+        <Button className={css.SquareButton} icon={`${ui.current.theme}_mode`} size='large' onClick={ui.toggleTheme} />
+        <Button className={css.SquareButton} size='small' text={locale.current} />
+        <Button className={css.SquareButton} icon={ui.isMode('edit') ? 'developer_mode_tv' : 'tv'} size='large' onClick={ui.toggleMode} />
+      </Block.End>
 
       {children}
-    </Grid>
+    </Block>
   )
 }
 

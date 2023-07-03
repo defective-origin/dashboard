@@ -2,13 +2,14 @@ import React from 'react'
 
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
+import Block from 'components/Block'
 import Helmet from 'components/lib/Helmet'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './Page.module.scss'
+import './Page.module.scss'
 
 export type PageProps = LayoutProps & {
   name?: string
@@ -25,7 +26,7 @@ export type PageProps = LayoutProps & {
  */
 export function Page(props: PageProps): JSX.Element {
   const { name, children, className, ...otherProps } = props
-  const _className = cn(css.Page, className)
+  const _className = cn('page', className)
   const isHeadChanged = name
 
   return (
@@ -48,3 +49,4 @@ Page.RightAside = Layout.RightAside
 Page.Footer = Layout.Footer
 Page.Header = Layout.Header
 Page.Content = Layout.Content
+Page.Block = Block

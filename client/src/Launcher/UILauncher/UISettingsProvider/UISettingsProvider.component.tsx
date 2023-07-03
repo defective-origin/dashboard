@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { StyledEngineProvider } from '@mui/material/styles'
 
 // ---| core |---
 
@@ -14,6 +15,7 @@ import {
 export type UISettingsProviderProps = React.PropsWithChildren
 
 export function UISettingsProvider(props: UISettingsProviderProps): JSX.Element {
+  const { children } = props
   const [current, setCurrent] = useState<UISettingsProviderState>(DEFAULT_UI_SETTINGS_PROVIDER_STATE)
   const oppositeTheme = current.theme === 'light' ? 'dark' : 'light'
 
@@ -39,7 +41,14 @@ export function UISettingsProvider(props: UISettingsProviderProps): JSX.Element 
     document.body.classList.remove(oppositeTheme)
   }, [current, oppositeTheme])
 
-  return <UISettingsProviderContext.Provider value={options} {...props} />
+  return (
+    <UISettingsProviderContext.Provider value={options}>
+      {/* injectFirst allows override Material UI's styles. */}
+      <StyledEngineProvider injectFirst>
+        { children }
+      </StyledEngineProvider>
+    </UISettingsProviderContext.Provider>
+  )
 }
 
 UISettingsProvider.displayName = 'UISettingsProvider'

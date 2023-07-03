@@ -17,6 +17,7 @@ export type ButtonProps = MuiButtonProps & {
   children?: React.ReactNode
   icon?: IconTypes
   loading?: boolean
+  text?: React.ReactNode
 }
 
 /**
@@ -27,7 +28,7 @@ export type ButtonProps = MuiButtonProps & {
  * <Button />
  */
 export function Button(props: ButtonProps): JSX.Element {
-  const { icon, loading, children, className, ...otherProps } = props
+  const { text, icon, loading, children, className, ...otherProps } = props
   const _className = cn(css.Button, className)
 
   if (icon) {
@@ -39,7 +40,12 @@ export function Button(props: ButtonProps): JSX.Element {
     )
   }
   // todo: LoadingButton 
-  return <MuiButton className={_className} {...otherProps}>{children}</MuiButton>
+  return (
+    <MuiButton className={_className} {...otherProps}>
+      {text}
+      {children}
+    </MuiButton>
+  )
 }
 
 Button.displayName = 'Button'

@@ -1,0 +1,19 @@
+@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+
+  .block-item {
+    // @include stretch;
+
+    &--start { grid-area: start; justify-self: start; align-self: start; }
+    &--center { grid-area: center; justify-self: center; align-self: center; }
+    &--end { grid-area: end; justify-self: end; align-self: end; }
+  }
+}
