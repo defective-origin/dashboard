@@ -7,7 +7,7 @@ import { useLocaleProvider, RouteProps } from 'Launcher'
 // ---| screens |---
 // ---| components |---
 import Banner from 'components/Banner'
-import { Page } from 'components/Page'
+import Page, { PageProps } from 'components/Page'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -16,7 +16,7 @@ import { cn } from 'common/tools'
 import css from './StatusPage.module.scss'
 import { STATUS_MAP, StatusType } from './StatusPage.conf'
 
-export type StatusPageProps = RouteProps & {
+export type StatusPageProps = RouteProps & Omit<PageProps, 'type'> & {
   className?: string
   children?: React.ReactNode
   type?: StatusType

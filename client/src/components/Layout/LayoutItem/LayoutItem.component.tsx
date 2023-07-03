@@ -6,20 +6,13 @@ import { cn, UI } from 'common/tools'
 // ---| self |---
 import './LayoutItem.module.scss'
 
-const CSS_MAP_BY_TYPE = {
-  'left-aside': 'li-ga-la',
-  'right-aside': 'li-ga-ra',
-  footer: 'li-ga-f',
-  header: 'li-ga-h',
-  content: 'li-ga-c',
-}
-
-export type LayoutItemType = keyof typeof CSS_MAP_BY_TYPE
+export type LayoutItemType = 'left-aside' | 'right-aside' | 'footer' | 'header' | 'content'
 
 export type LayoutItemProps = {
   className?: string
   children?: React.ReactNode
   type?: LayoutItemType
+  scroll?: 'x' | 'y' | 'xy'
 }
 
 /**
@@ -30,8 +23,8 @@ export type LayoutItemProps = {
  * <LayoutItem />
  */
 export function LayoutItem(props: LayoutItemProps): JSX.Element {
-  const { type = 'content', children, className, ...otherProps } = props
-  const _className = cn('layout-item', CSS_MAP_BY_TYPE[type], className)
+  const { scroll, type = 'content', children, className, ...otherProps } = props
+  const _className = cn('layout-item', `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
 
   return <div className={_className} {...otherProps}>{children}</div>
 }

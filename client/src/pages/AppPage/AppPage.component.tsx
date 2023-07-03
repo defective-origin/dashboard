@@ -5,6 +5,7 @@ import { Router } from 'Launcher'
 
 // ---| pages |---
 import StatusPage from 'pages/StatusPage'
+import HotKeysPage from 'pages/HotKeysPage'
 
 // ---| screens |---
 
@@ -46,9 +47,9 @@ export function AppPage(props: AppPageProps): JSX.Element {
           <WidgetPage path="/widget/:id" />
           <AccountPage path="/account" />
           <GuidePage path="/guide" />
-          <DonationPage path="/donation" />
-          <HotkeysPage path="/hotkeys" />
-          <SupportPage path="/support" /> */}
+          <DonationPage path="/donation" /> */}
+          <HotKeysPage path="/hotkeys" />
+          {/* <SupportPage path="/support" /> */}
           <StatusPage path="/error/:type" />
           <StatusPage default type={404} />
         </Router>

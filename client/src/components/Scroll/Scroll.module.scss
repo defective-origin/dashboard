@@ -1,3 +1,5 @@
+@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+
 .Scroll {
   overflow: hidden;
   position: relative;
@@ -22,97 +24,4 @@
   &:hover {
     opacity: 1;
   }
-}
-
-
-@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
-
-// scroll size
-$xs-scroll-size: size(1);
-$sm-scroll-size: size(2);
-$md-scroll-size: size(3);
-$lg-scroll-size: size(4);
-$xl-scroll-size: size(5);
-
-:export {
-  xsScrollSize: $xs-scroll-size;
-  smScrollSize: $sm-scroll-size;
-  mdScrollSize: $md-scroll-size;
-  lgScrollSize: $lg-scroll-size;
-  xlScrollSize: $xl-scroll-size;
-}
-
-// scroll color
-$scroll-track-color: transparent;
-$scroll-track-hover-color: rgba($gray-5, $md-alpha);
-$scroll-thumb-color: rgba($gray-6, $md-alpha);
-$scroll-thumb-hover-color: rgba($gray-7, $md-alpha);
-
-:export {
-  scrollTrackColor: $scroll-track-color;
-  scrollTrackHoverColor: $scroll-track-hover-color;
-  scrollThumbColor: $scroll-thumb-color;
-  scrollThumbHoverColor: $scroll-thumb-hover-color;
-}
-
-/// Set scrollbar weight.
-///
-/// @param {number} $size The number of scrollbar weight.
-@mixin scroll-width($size) {
-  @at-root #{&}::-webkit-scrollbar {
-    width: $size;
-    height: $size;
-  }
-}
-
-
-/// Set style of scrollbar track.
-///
-/// @param {color} $color The color of scrollbar track.
-/// @param {color} $hover-color The color of scrollbar track on hover.
-@mixin scroll-track($color, $hover-color) {
-  @at-root #{&}::-webkit-scrollbar-track {
-    background: $color;
-
-    &:hover {
-      background: $hover-color;
-    }
-  }
-}
-
-
-/// Set style of scrollbar thumb.
-///
-/// @param {color} $color The color of scrollbar thumb.
-/// @param {color} $hover-color The color of scrollbar thumb on hover.
-@mixin scroll-thumb($color, $hover-color) {
-  @at-root #{&}::-webkit-scrollbar-thumb {
-    background: $color;
-
-    &:hover {
-      background: $hover-color;
-    }
-  }
-}
-
-
-:global {
-  .scroll {
-    @include scroll-track($scroll-track-color, $scroll-track-hover-color);
-    @include scroll-thumb($scroll-thumb-color, $scroll-thumb-hover-color);
-  }
-
-
-  // size
-  .sl-s-xs { @include scroll-width($xs-scroll-size) }
-  .sl-s-sm { @include scroll-width($sm-scroll-size) }
-  .sl-s-md { @include scroll-width($md-scroll-size) }
-  .sl-s-lg { @include scroll-width($lg-scroll-size) }
-  .sl-s-xl { @include scroll-width($xl-scroll-size) }
-
-
-  // direction
-  .sl-d-x { overflow-x: auto; overflow-y: hidden; }  
-  .sl-d-y { overflow-x: hidden; overflow-y: auto; }  
-  .sl-d-xy { overflow-x: auto; overflow-y: auto; }
 }

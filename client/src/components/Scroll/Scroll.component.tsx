@@ -10,23 +10,8 @@ import { cn } from 'common/tools'
 import css from './Scroll.module.scss'
 import { ScrollManager, useScrollManager } from './Scroll.hook'
 
-export const SCROLL_SIZE_MAP = {
-  xs: 'sl-s-xs',
-  sm: 'sl-s-sm',
-  md: 'sl-s-md',
-  lg: 'sl-s-lg',
-  xl: 'sl-s-xl',
-}
-
-export type ScrollSizeType = keyof typeof SCROLL_SIZE_MAP
-
-export const SCROLL_DIRECTION_MAP = {
-  x: 'sl-d-x',
-  y: 'sl-d-y',
-  xy: 'sl-d-xy',
-}
-
-export type ScrollDirectionType = keyof typeof SCROLL_DIRECTION_MAP
+export type ScrollSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type ScrollDirectionType = 'x' | 'y' | 'xy'
 
 export type ScrollProps = {
   className?: string
@@ -68,8 +53,8 @@ export type ScrollProps = {
  */
 export default function Scroll(props: ScrollProps): JSX.Element {
   const {
-    size,
-    direction,
+    size = 'md',
+    direction = 'xy',
     buttons,
     extra,
     manager,
@@ -81,7 +66,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
     ...otherProps
   } = props
   const _className = cn(css.Scroll, className)
-  const _contentClassName = cn(css.Content, 'scroll', size && SCROLL_SIZE_MAP[size], direction && SCROLL_DIRECTION_MAP[direction], contentClassName)
+  const _contentClassName = cn(css.Content, `scroll-${direction}`, `scroll--${size}`, contentClassName)
   const scrollManager = useScrollManager<HTMLDivElement>()
   const showLeftButton = showButtonsOn < scrollManager.options.left
   const showUpButton = showButtonsOn < scrollManager.options.top

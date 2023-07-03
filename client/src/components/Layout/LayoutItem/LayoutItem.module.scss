@@ -12,12 +12,11 @@
   .layout-item {
     justify-self: stretch;
     align-self: stretch;
+
+    &--left-aside { grid-area: left-aside; }
+    &--right-aside { grid-area: right-aside; }
+    &--footer { grid-area: footer; }
+    &--header { grid-area: header; }
+    &--content { grid-area: content; }
   }
-  
-  
-  .li-ga-la { grid-area: left-aside; }
-  .li-ga-ra { grid-area: right-aside; }
-  .li-ga-f { grid-area: footer; }
-  .li-ga-h { grid-area: header; }
-  .li-ga-c { grid-area: content; }
 }

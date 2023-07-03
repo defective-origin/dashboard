@@ -48,5 +48,3 @@ Page.RightAside = Layout.RightAside
 Page.Footer = Layout.Footer
 Page.Header = Layout.Header
 Page.Content = Layout.Content
-
-export const PAGE_ITEMS = [Page.LeftAside, Page.RightAside, Page.Footer, Page.Header, Page.Content]
