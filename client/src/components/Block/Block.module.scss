@@ -18,16 +18,14 @@
       width: 100%;
       grid-auto-flow: row;
       grid-template-areas: "start center end";
-
-      & > .block-item { align-self: center; }
     }
 
     &--row { grid-template-columns: 1fr auto 1fr; }
-    &--row-center {
-      grid-template-columns: auto 1fr auto;
+    &--row-center { grid-template-columns: auto 1fr auto; }
 
-      & > .block-item { justify-self: stretch; }
-    }
+    &--row > .block-item,
+    &--row-center > .block-item { align-self: center; }
+    &--row-center > .block-item { justify-self: stretch; }
 
     &--column,
     &--column-center {
@@ -37,15 +35,13 @@
       "start"
       "center"
       "end";
-
-      & > .block-item { justify-self: center; }
     }
 
     &--column { grid-template-rows: 1fr auto 1fr; }
-    &--column-center {
-      grid-template-rows: auto 1fr auto;
+    &--column-center { grid-template-rows: auto 1fr auto; }
 
-      & > .block-item { align-self: stretch; }
-    }
+    &--column > .block-item,
+    &--column-center > .block-item { justify-self: center; }
+    &--column-center > .block-item { align-self: stretch; }
   }
 }

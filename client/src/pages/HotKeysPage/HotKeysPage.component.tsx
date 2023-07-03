@@ -32,24 +32,24 @@ export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
   return (
     <Page name='Hot Keys Page' className={_className} {...otherProps}>
       <Page.Header>
-        <Page.Block style={{ height: '200px' }}>
+        <Page.Block>
           <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
           <Page.Block.Center><span>2</span></Page.Block.Center>
           <Page.Block.End><span>3</span></Page.Block.End>
         </Page.Block>
 
-        <Page.Block type='column' style={{ width: '200px' }}>
+        <Page.Block type='column'>
           <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
           <Page.Block.Center><span>2</span></Page.Block.Center>
           <Page.Block.End><span>3</span></Page.Block.End>
         </Page.Block>
-        <Page.Block type='row-center' style={{ height: '200px' }}>
+        <Page.Block type='row-center'>
           <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
           <Page.Block.Center><span>2</span></Page.Block.Center>
           <Page.Block.End><span>3</span></Page.Block.End>
         </Page.Block>
 
-        <Page.Block type='column-center' style={{ width: '200px' }}>
+        <Page.Block type='column-center' >
           <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
           <Page.Block.Center><span>2</span></Page.Block.Center>
           <Page.Block.End><span>3</span></Page.Block.End>
