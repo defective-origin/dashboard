@@ -42,12 +42,9 @@ export function Progress(props: ProgressProps): JSX.Element | null {
 
 Progress.displayName = 'Progress'
 
-export default UI.attachOverrides([
-  'Circular',
-  'Linear',
-],
-Progress, {
-  nameSelector: (item) => item,
-  propSelector: (item) => ({ type: item.toLowerCase() as ProgressType }),
+export default UI.attachOverrides(Progress, {
+  Circular: { type: 'circular' },
+  Linear: { type: 'linear' },
+}, {
   memoize: true,
 })

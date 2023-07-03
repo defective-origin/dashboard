@@ -48,7 +48,7 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
 
   return (
     <Grid className={_className} display='flex' direction='column' {...otherProps}>
-      <Grid.Item className={css.TopActions} display='flex' direction='column'>
+      <Grid.Item className={css.TopActions} item display='flex' direction='column'>
         <Avatar onClick={handleClick}>
           <Icon type='account_circle' fontSize='large' />
         </Avatar>
@@ -107,7 +107,7 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
         </Popover>
       </Grid.Item>
 
-      <Grid.Item className={css.MiddleActions} display='flex' direction='column'>
+      <Grid.Item className={css.MiddleActions} item display='flex' direction='column'>
         <IconButton>
           <Icon className={css.ActiveButton} type='dashboard' fontSize='large'/>
         </IconButton>
@@ -116,7 +116,7 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
         </IconButton>
       </Grid.Item>
       
-      <Grid.Item className={css.BottomActions} display='flex' direction='column'>
+      <Grid.Item className={css.BottomActions} item display='flex' direction='column'>
         <IconButton>
           <Icon type='auto_stories' fontSize='large' />
         </IconButton>

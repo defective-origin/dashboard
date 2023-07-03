@@ -28,11 +28,11 @@ export function Grid(props: GridProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Grid, className)
 
-  return <MuiGrid className={_className} {...otherProps}>{children}</MuiGrid>
+  return <MuiGrid className={_className} container {...otherProps}>{children}</MuiGrid>
 }
 
 Grid.displayName = 'Grid'
 
-Grid.Item = MuiGrid
+Grid.Item = Grid
 
 export default Grid

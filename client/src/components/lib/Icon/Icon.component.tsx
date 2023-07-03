@@ -13,7 +13,7 @@ export type IconTypes = 'light_mode' | 'dark_mode'
 | 'developer_mode_tv' | 'tv'
 | 'person' | 'person_add' | 'account_circle' | 'support_agent'
 | 'dashboard' | 'insert_chart'
-| 'keyboard'
+| 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_left'
 | 'auto_stories'
 | 'settings'
 

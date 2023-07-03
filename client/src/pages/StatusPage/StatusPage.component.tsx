@@ -30,7 +30,7 @@ export type StatusPageProps = RouteProps & {
  * <StatusPage />
  */
 export function StatusPage(props: StatusPageProps): JSX.Element {
-  const { type = 'default', children, className, ...otherProps } = props
+  const { navigate, type = 'default', children, className, ...otherProps } = props
   const locale = useLocaleProvider()
   const _className = cn(css.StatusPage, className)
   const status = STATUS_MAP[type]

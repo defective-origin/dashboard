@@ -36,14 +36,20 @@ function Text(props: TextProps): JSX.Element {
 
 Text.displayName = 'Text'
 
-export default UI.attachOverrides([
-  'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
-  'Body1', 'Body2',
-  'Subtitle1', 'Subtitle2',
-  'Button', 'Caption', 'Overline',
-],
-Text, {
-  nameSelector: (item) => item,
-  propSelector: (item) => ({ variant: item.toLowerCase() as MuiTypographyProps['variant'] }),
+export default UI.attachOverrides(Text, {
+  H1: { variant: 'h1' },
+  H2: { variant: 'h2' },
+  H3: { variant: 'h3' },
+  H4: { variant: 'h4' },
+  H5: { variant: 'h5' },
+  H6: { variant: 'h6' },
+  Body1: { variant: 'body1' },
+  Body2: { variant: 'body2' },
+  Subtitle1: { variant: 'subtitle1' },
+  Subtitle2: { variant: 'subtitle2' },
+  Button: { variant: 'button' },
+  Caption: { variant: 'caption' },
+  Overline: { variant: 'overline' },
+}, {
   memoize: true,
 })

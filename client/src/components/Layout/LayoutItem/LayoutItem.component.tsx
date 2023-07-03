@@ -38,14 +38,10 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element {
 
 LayoutItem.displayName = 'LayoutItem'
 
-export default UI.attachOverrides([
-  'LeftAside',
-  'RightAside',
-  'Footer',
-  'Header',
-  'Content',
-], LayoutItem, {
-  nameSelector: (item) => item,
-  propSelector: (item) => ({ type: item.toLowerCase().replace('aside', '-aside') as LayoutItemType }),
-  memoize: true,
+export default UI.attachOverrides(LayoutItem, {
+  LeftAside: { type: 'left-aside' },
+  RightAside: { type: 'right-aside' },
+  Footer: { type: 'footer' },
+  Header: { type: 'header' },
+  Content: { type: 'content' },
 })

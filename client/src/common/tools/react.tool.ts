@@ -1,50 +1,126 @@
 import React from 'react'
 
+export type GeneralProps<T extends HTMLElement = HTMLElement> = React.DOMAttributes<T> & React.HTMLAttributes<T>
+
+export type ClearObject<
+  T extends Record<string, unknown>,
+  Key = keyof T,
+  ClearKeys extends string = Key extends string
+    ? T[Key] extends undefined
+      ? never
+      : Key
+    : never,
+  TResult = { [key in ClearKeys]: T[key] }
+> = TResult
+
+export function clearProps<
+  P extends Record<string, unknown>,
+>(props: P): ClearObject<P> {
+  Object.keys(props).forEach((key) => {
+    if (props[key] === undefined) {
+      delete props[key]
+    }
+  })
+
+  return props as ClearObject<P>
+}
+
+export function getDisplayName(component: React.ComponentType, defaultName = 'Component'): string {
+  return component.displayName || component.name || defaultName
+}
+
+export function setDisplayName(component: React.ComponentType, name = getDisplayName(component)): void {
+  component.displayName = name
+}
+
 export type OverrideComponentOptions = {
   name?: string
   memoize?: boolean
 }
 
-export function overrideComponent<T extends React.FunctionComponent>(
-  component: T,
-  overrideProps: Partial<React.ComponentProps<T>>,
+/**
+ * Set new default props or override old props for component.
+ *
+ * @example 
+ * const BoldText = overrideComponent(Text, { fontSize: 13, fontWeight: 600 }, { name: 'BoldText', memoize: true })
+ * 
+ * <BoldText />
+ */
+export function overrideComponent<C extends React.FunctionComponent>(
+  component: C,
+  overrideProps: Partial<React.ComponentProps<C>>,
   options: OverrideComponentOptions = {},
-): T {
-  let overrideComponent: React.FunctionComponent<React.ComponentProps<T>> = (props) => component.apply(null, [{ ...overrideProps, ...props }])
+): C {
+  let overrideComponent: React.FunctionComponent = (props) => component.apply(null, [{ ...overrideProps, ...props }])
   
   if (options.memoize) {
     overrideComponent = React.memo(overrideComponent)
   }
 
-  overrideComponent.displayName = options.name ?? component.displayName ?? component.name
+  setDisplayName(overrideComponent, options.name ?? getDisplayName(component))
 
-  return overrideComponent as T
+  return overrideComponent as C
 }
 
-export type AttachOverridesOptions<I, P> = {
-  nameSelector: (item: I) => string
-  propSelector: (item: I) => Partial<P>
-  memoize?: boolean
-}
-
-export function attachOverrides<I extends string, C extends React.FunctionComponent>(
-  items: I[],
+/**
+ * Attache 'dot' override component(sub component) with new default props or override old props.
+ *
+ * @example 
+ * const Text = attachOverride(Text, { fontSize: 13, fontWeight: 600 }, { name: 'Bold', memoize: true })
+ * 
+ * <Text />
+ * <Text.Bold /> // displayName = 'Text.Bold'
+ */
+export function attachOverride<C extends React.FunctionComponent>(
   component: C,
-  options: AttachOverridesOptions<I, React.ComponentProps<C>>,
-): C & Record<I, C> {
-  items.forEach((item) => {
-    const name = options.nameSelector(item)
-    const displayName = `${component.displayName ?? component.name}.${name}`;
+  overrideProps: Partial<React.ComponentProps<C>>,
+  options: OverrideComponentOptions = {},
+): C & Record<string, C> {
+  const name = options.name ?? getDisplayName(component);
 
-    (component as any)[name] = overrideComponent(
+  (component as any)[name] = overrideComponent(
+    component,
+    overrideProps,
+    {
+      name: `${getDisplayName(component)}.${name}`,
+      memoize: options.memoize,
+    },
+  )
+
+  return component as C & Record<string, C>
+}
+
+/**
+ * Attache 'dot' override components(sub components) with new default props or override old props.
+ *
+ * @example 
+ * const Text = attachOverrides(
+ *    Text, {
+ *      Light: { fontSize: 11, fontWeight: 200 },
+ *      Bold: { fontSize: 13, fontWeight: 600 },
+ *    }, {
+ *      memoize: true,
+ *    })
+ * 
+ * <Text />
+ * <Text.Light /> // displayName = 'Light.Bold'
+ * <Text.Bold /> // displayName = 'Text.Bold'
+ */
+export function attachOverrides<
+  C extends React.FunctionComponent,
+  M extends object = Record<string, React.ComponentProps<C>>,
+>(
+  component: C,
+  overridePropMap: M,
+  options: OverrideComponentOptions = {},
+): C & Record<keyof M, C> {
+  Object.keys(overridePropMap).forEach((name) =>
+    attachOverride(
       component,
-      options.propSelector(item),
-      {
-        name: displayName,
-        memoize: options.memoize,
-      },
+      overridePropMap[name as keyof M],
+      { name, ...options },
     )
-  })
+  )
 
-  return component as C & Record<I, C>
+  return component as C & Record<keyof M, C>
 }
