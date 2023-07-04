@@ -10,7 +10,7 @@ import HotKeysPage from 'pages/HotKeysPage'
 // ---| screens |---
 
 // ---| components |---
-import Page from 'components/Page'
+import Page, { PageProps } from 'components/Page'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -19,7 +19,7 @@ import { cn } from 'common/tools'
 import css from './AppPage.module.scss'
 import AppMenuScreen from './AppMenuScreen'
 
-export type AppPageProps = {
+export type AppPageProps = PageProps & {
   className?: string
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| common |---
-import { cn, UI } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
 import './LayoutItem.module.scss'
@@ -31,7 +31,7 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element {
 
 LayoutItem.displayName = 'LayoutItem'
 
-export default UI.attachOverrides(LayoutItem, {
+export default react.attachOverrides(LayoutItem, {
   LeftAside: { type: 'left-aside' },
   RightAside: { type: 'right-aside' },
   Footer: { type: 'footer' },

@@ -5,6 +5,7 @@ import { useLocaleProvider, RouteProps } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
+
 // ---| components |---
 import Banner from 'components/Banner'
 import Page, { PageProps } from 'components/Page'
@@ -31,8 +32,8 @@ export type StatusPageProps = RouteProps & Omit<PageProps, 'type'> & {
  */
 export function StatusPage(props: StatusPageProps): JSX.Element {
   const { navigate, type = 'default', children, className, ...otherProps } = props
-  const locale = useLocaleProvider()
   const _className = cn(css.StatusPage, className)
+  const locale = useLocaleProvider()
   const status = STATUS_MAP[type]
 
   return (

@@ -2,10 +2,10 @@ import React, { useLayoutEffect, useMemo, useState } from 'react'
 
 // ---| common |---
 import { useResizeDetector } from 'common/hooks'
-import { Placement } from 'common/tools/'
+import { placement } from 'common/tools/'
 
 export type GridItem = {
-  placement: Placement.Square
+  placement: placement.Square
   [key: string]: unknown
 }
 

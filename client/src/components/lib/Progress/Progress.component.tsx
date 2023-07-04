@@ -3,7 +3,7 @@ import MuiCircularProgress, { CircularProgressProps as MuiCircularProgressProps 
 import MuiLinearProgress, { LinearProgressProps as MuiLinearProgressProps } from '@mui/material/LinearProgress'
 
 // ---| common |---
-import { cn, UI } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './Progress.module.scss'
@@ -42,7 +42,7 @@ export function Progress(props: ProgressProps): JSX.Element | null {
 
 Progress.displayName = 'Progress'
 
-export default UI.attachOverrides(Progress, {
+export default react.attachOverrides(Progress, {
   Circular: { type: 'circular' },
   Linear: { type: 'linear' },
 }, {

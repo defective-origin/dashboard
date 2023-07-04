@@ -78,4 +78,4 @@ export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
 
 export default i18next
 export { I18nextProvider } from 'react-i18next'
-export const t = (key?: TranslateKeys) => key && i18next.t(key)
+export const t = (key?: TranslateKeys, options?: object) => key && i18next.t(key, options)

@@ -1,5 +1,6 @@
 import React from 'react'
 
+// work with props
 export type GeneralProps<T extends HTMLElement = HTMLElement> = React.DOMAttributes<T> & React.HTMLAttributes<T>
 
 export type ClearObject<
@@ -25,6 +26,7 @@ export function clearProps<
   return props as ClearObject<P>
 }
 
+// work with components
 export function getDisplayName(component: React.ComponentType, defaultName = 'Component'): string {
   return component.displayName || component.name || defaultName
 }
@@ -123,4 +125,13 @@ export function attachOverrides<
   )
 
   return component as C & Record<K, C>
+}
+
+// work with children
+export const isExemplar = (component: React.ComponentType, exemplar: React.ReactNode) => {
+  return React.isValidElement(exemplar) && exemplar.type === component
+}
+
+export const hasExemplar = (items: React.ComponentType[], exemplar: React.ReactNode) => {
+  return items.some((item) => isExemplar(item, exemplar))
 }

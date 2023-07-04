@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { RouteProps } from 'Launcher'
+import { RouteProps, useLocaleProvider } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -28,33 +28,38 @@ export type HotKeysPageProps = RouteProps & PageProps & {
 export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
   const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.HotKeysPage, className)
+  const locale = useLocaleProvider()
+  const title = locale.t('PAGES.HOTKEYS')
 
   return (
-    <Page name='Hot Keys Page' className={_className} {...otherProps}>
-      <Page.Header>
-        <Page.Block>
-          <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
-          <Page.Block.Center><span>2</span></Page.Block.Center>
-          <Page.Block.End><span>3</span></Page.Block.End>
-        </Page.Block>
+    <Page
+      name={locale.t('SYSTEM.TAB_NAME', { title })}
+      title={title}
+      className={_className}
+      {...otherProps}
+    >
 
-        <Page.Block type='column'>
-          <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
-          <Page.Block.Center><span>2</span></Page.Block.Center>
-          <Page.Block.End><span>3</span></Page.Block.End>
-        </Page.Block>
-        <Page.Block type='row-center'>
-          <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
-          <Page.Block.Center><span>2</span></Page.Block.Center>
-          <Page.Block.End><span>3</span></Page.Block.End>
-        </Page.Block>
-
-        <Page.Block type='column-center' >
-          <Page.Block.Start><span>long long long long long long long long long long long long text</span></Page.Block.Start>
-          <Page.Block.Center><span>2</span></Page.Block.Center>
-          <Page.Block.End><span>3</span></Page.Block.End>
-        </Page.Block>
-      </Page.Header>
+      <div>TEST CONTENT</div>
+      <div>TEST CONTENT</div>
+      <div>TEST CONTENT</div>
+      <div>TEST CONTENT</div>
+      <div>TEST CONTENT</div>
+      <div>TEST CONTENT</div>
+      <Page.Footer>
+            FOOTER
+      </Page.Footer>
+      <Page.LeftAside>
+            LEFT ASIDE
+      </Page.LeftAside>
+      <Page.RightAside>
+            RIGHT ASIDE
+      </Page.RightAside>
+      <Page.RightAside>
+            -------------------
+      </Page.RightAside>
+      <Page.RightAside>
+            CONTENT
+      </Page.RightAside>
 
       {children}
     </Page>

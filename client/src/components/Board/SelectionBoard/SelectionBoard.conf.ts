@@ -1,4 +1,4 @@
-import { Canvas } from 'common/tools'
+import { canvas } from 'common/tools'
 
 // ---| self |---
 import styles from './SelectionBoard.module.scss'
@@ -6,11 +6,11 @@ import styles from './SelectionBoard.module.scss'
 export type SelectionBoardStyles = {
   card?: {
     radius?: number
-    invalid?: Canvas.ShapeStyleOptions
-    valid?: Canvas.ShapeStyleOptions
-    outdated?: Canvas.ShapeStyleOptions
+    invalid?: canvas.ShapeStyleOptions
+    valid?: canvas.ShapeStyleOptions
+    outdated?: canvas.ShapeStyleOptions
   }
-  grid?: Canvas.ShapeStyleOptions
+  grid?: canvas.ShapeStyleOptions
 }
 
 export const DEFAULT_STYLES: Required<SelectionBoardStyles> = {

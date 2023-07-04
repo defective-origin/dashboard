@@ -6,7 +6,7 @@ import React from 'react'
 // ---| components |---
 
 // ---| common |---
-import { cn, UI } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
 import './BlockItem.module.scss'
@@ -33,7 +33,7 @@ export function BlockItem(props: BlockItemProps): JSX.Element {
 
 BlockItem.displayName = 'BlockItem'
 
-export default UI.attachOverrides(BlockItem, {
+export default react.attachOverrides(BlockItem, {
   Start: { type: 'start' },
   Center: { type: 'center' },
   End: { type: 'end' },

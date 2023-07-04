@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| common |---
-import { cn } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
 import './Layout.module.scss'
@@ -26,19 +26,23 @@ export type LayoutProps = {
 export function Layout(props: LayoutProps): JSX.Element {
   const { gap, type = 'row', children, className, ...otherProps } = props
   const _className = cn('layout', `layout--${type}`, className)
-  const hasSelfComponents = React.Children
-    .toArray(children)
-    .some((child) => React.isValidElement(child) && LAYOUT_ITEMS.includes((child as JSX.Element).type))
+
+  const items = React.Children.toArray(children)
+  const layoutItems = items.filter((child) => react.hasExemplar(LAYOUT_ITEMS, child))
+  const otherItems = items.filter((child) => !react.hasExemplar(LAYOUT_ITEMS, child))
+  const hasContentItem = items.some((child) => react.isExemplar(Layout.Content, child))
 
   return (
     <div className={_className} {...otherProps} style={{ gap }}>
-      {!hasSelfComponents && (
+      {hasContentItem && otherItems}
+
+      {!hasContentItem && (
         <Layout.Content>
-          {children}
+          {otherItems}
         </Layout.Content>
       )}
 
-      {hasSelfComponents && children}
+      {layoutItems}
     </div>
   )
 }

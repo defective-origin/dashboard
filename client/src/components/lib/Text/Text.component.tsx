@@ -4,7 +4,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 // ---| core |---
 
 // ---| common |---
-import { cn, UI } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './Text.module.scss'
@@ -36,7 +36,7 @@ function Text(props: TextProps): JSX.Element {
 
 Text.displayName = 'Text'
 
-export default UI.attachOverrides(Text, {
+export default react.attachOverrides(Text, {
   H1: { variant: 'h1' },
   H2: { variant: 'h2' },
   H3: { variant: 'h3' },

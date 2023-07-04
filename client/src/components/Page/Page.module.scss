@@ -11,5 +11,21 @@
 
   .page {
     @include stretch;
+
+    &__header {
+      padding: 1rem;
+
+      &-title {
+    
+      }
+
+      &-info {
+    
+      }
+
+      &-extra {
+    
+      }
+    }
   }
 }
