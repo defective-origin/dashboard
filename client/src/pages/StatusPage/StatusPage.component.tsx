@@ -35,9 +35,14 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
   const _className = cn(css.StatusPage, className)
   const locale = useLocaleProvider()
   const status = STATUS_MAP[type]
+  
 
   return (
-    <Page name={type.toString()} className={_className} {...otherProps}>
+    <Page
+      className={_className}
+      name={locale.t('SYSTEM.TAB_NAME', { title: locale.t('PAGES.STATUS') })}
+      {...otherProps}
+    >
       <Banner
         className={css.Banner}
         imageType={status.image}

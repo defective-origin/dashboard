@@ -2,9 +2,9 @@ import React from 'react'
 
 // ---| components |---
 import { GridCell, GridItem } from 'common/hooks'
-import { GeneralProps } from 'components/Component'
+import { react } from 'common/tools'
 
-export type ViewBoardItemPrototype = React.ComponentType<GeneralProps>
+export type ViewBoardItemPrototype = React.ComponentType<react.GeneralProps>
 
 export type ViewBoardItemProps = GridItem & {
   // margin around widget

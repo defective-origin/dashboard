@@ -33,9 +33,9 @@ export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
 
   return (
     <Page
+      className={_className}
       name={locale.t('SYSTEM.TAB_NAME', { title })}
       title={title}
-      className={_className}
       {...otherProps}
     >
 

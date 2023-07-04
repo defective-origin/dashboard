@@ -1,11 +1,9 @@
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 
-// ---| components |---
-import { GeneralProps } from 'components/Component'
-
 // ---| common |---
 import { cn, _, placement, canvas } from 'common/tools'
 import { GridConf, GridItem, useGrid, useCanvas2D, Canvas2DPainterOptions } from 'common/hooks'
+import { react } from 'common/tools'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
@@ -14,7 +12,7 @@ import css from './SelectionBoard.module.scss'
 
 export type SelectionBoardItem = GridItem
 
-export type SelectionBoardProps = GeneralProps & GridConf & {
+export type SelectionBoardProps = react.GeneralProps & GridConf & {
   // set margin around each widget
   gap?: number
   // items which displays on board
