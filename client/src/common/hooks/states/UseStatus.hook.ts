@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react'
-import { ObjectReturnOptions, useObject } from '.';
-import { TypeHandler } from './UseType.hook';
+import { ObjectReturnOptions, useObject } from '.'
+import { TypeHandler } from './UseType.hook'
 
 export type StatusReturnOptions<T extends Record<string, boolean>> = ObjectReturnOptions<T>
   & TypeHandler<'toggle', (key: keyof T) => void>

@@ -74,7 +74,7 @@ export function useCounter(init = COUNTER_DEFAULT_VALUE, options: CounterOptions
     ref.registerFormat('min', (val, min: number) => Math.max(val, min))
     ref.registerFormat('max', (val, max: number) => Math.min(val, max))
     ref.registerFormat('round', (val) => Math.round(val))
-  }, [ref])
+  }, [ref, updatedOptions.step])
 
   return ref
 }

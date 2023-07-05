@@ -1,6 +1,6 @@
 module.exports = {
-  "endOfLine": "auto",
-  "singleQuote": true,
-  "jsxSingleQuote": true,
-  "semi": false,
+  endOfLine: 'auto',
+  singleQuote: true,
+  jsxSingleQuote: true,
+  semi: false,
 }

@@ -35,7 +35,7 @@ export function useResize<TElement extends Element = HTMLDivElement>(
 
       setOptions(newOptions)
     }
-  }, [])
+  }, [ref])
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(onResize)
@@ -43,7 +43,7 @@ export function useResize<TElement extends Element = HTMLDivElement>(
     resizeObserver.observe(ref.current as Element)
 
     return () => resizeObserver.disconnect()
-  }, [])
+  }, [onResize, ref])
 
   return options
 }

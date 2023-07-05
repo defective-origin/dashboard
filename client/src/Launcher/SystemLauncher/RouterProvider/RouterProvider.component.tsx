@@ -21,5 +21,5 @@ export type RouteProps = RouteComponentProps
 
 export type Router = RouterProps & React.HTMLProps<HTMLDivElement>
 
-export const Router = (props: Router) => <ReachRouter className={css.Router} {...props as any} />
+export const Router = (props: Router) => <ReachRouter className={css.Router} {...props as RouterProps} />
 Router.displayName = 'Router'

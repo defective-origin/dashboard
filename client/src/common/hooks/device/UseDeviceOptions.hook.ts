@@ -89,7 +89,7 @@ export function useDeviceOptions(): DeviceOptions {
     window.addEventListener('resize', onResize, false)
     onResize()
     return () => window.removeEventListener('resize', onResize, false)
-  }, [])
+  }, [onResize])
 
   return options
 }

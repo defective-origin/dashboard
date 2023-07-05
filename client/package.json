@@ -5,17 +5,18 @@
   "type": "module",
   "scripts": {
     "start:dev": "vite",
-    "build": "tsc && vite build",
+    "build:dev": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "yarn lint:es && lint:css",
+    "lint": "yarn lint:es && yarn lint:css",
     "lint:fix": "yarn lint:es:fix && lint:css:fix",
     "lint:es": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:es:fix": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "lint:css": "stylelint \"**/*.scss\"",
     "lint:css:fix": "stylelint \"**/*.scss\" --fix",
-    "prettier": "prettier src test --check",
-    "prettier:fix": "prettier -- --write",
+    "prettier": "prettier --ignore-path .gitignore src --check",
+    "prettier:fix": "prettier --ignore-path .gitignore src --write",
+    "check:changes": "yarn lint && yarn test && yarn build:dev",
     "gen": "plop --plopfile ./generator/generator.config.js --dest ./src"
   },
   "dependencies": {
