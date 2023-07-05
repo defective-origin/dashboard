@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, IconButton } from '@mui/material'
+import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material'
 import Block from 'components/Block'
 
 // ---| core |---
@@ -32,12 +32,12 @@ export type AppMenuScreenProps = {
 export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppMenuScreen, className)
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
+  const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null)
   const ui = useUISettingsProvider()
   const locale = useLocaleProvider()
   const user = useUserProvider()
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -71,13 +71,13 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon><Icon type='person' /></ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText primary='Profile' />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon><Icon type='settings' /></ListItemIcon>
-                <ListItemText primary="Settings" />
+                <ListItemText primary='Settings' />
               </ListItemButton>
             </ListItem>
             {!user.isAuthorized && (
@@ -85,13 +85,13 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
                 <ListItem disablePadding>
                   <ListItemButton onClick={user.login}>
                     <ListItemIcon><Icon type='account_circle' /></ListItemIcon>
-                    <ListItemText primary="Registration" />
+                    <ListItemText primary='Registration' />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                   <ListItemButton onClick={user.login}>
                     <ListItemIcon><Icon type='login' /></ListItemIcon>
-                    <ListItemText primary="Sign In" />
+                    <ListItemText primary='Sign In' />
                   </ListItemButton>
                 </ListItem>
               </>
@@ -100,7 +100,7 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
               <ListItem disablePadding>
                 <ListItemButton onClick={user.logout}>
                   <ListItemIcon><Icon type='logout' /></ListItemIcon>
-                  <ListItemText primary="Sign Out" />
+                  <ListItemText primary='Sign Out' />
                 </ListItemButton>
               </ListItem>
             )}

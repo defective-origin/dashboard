@@ -40,7 +40,7 @@ export const TOGGLER_DEFAULT_VALUE = false
  * modalToggler.current
  * modalToggler.value
  * 
- * // for each handler you have the same named  function with "Silent" postfix
+ * // for each handler you have the same named  function with 'Silent' postfix
  * // which doesn't call rerender
  * copyCounter.toggleSilent()
  * copyCounter.turnOnSilent()

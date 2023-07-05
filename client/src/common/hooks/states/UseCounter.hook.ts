@@ -50,7 +50,7 @@ export const COUNTER_DEFAULT_VALUE = 0
  * // restore init value
  * copyCounter.reset()
  *
- * // for each handler you have the same named  function with "Silent" postfix
+ * // for each handler you have the same named  function with 'Silent' postfix
  * // which doesn't call rerender
  * copyCounter.increaseSilent()
  * copyCounter.decreaseSilent()

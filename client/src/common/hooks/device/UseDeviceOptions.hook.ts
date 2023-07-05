@@ -34,7 +34,6 @@ const DEVICE_TYPE_CONFIGS = [
 ]
 
 function getDeviceType(agent: string, width: number): DeviceType {
-  // eslint-disable-next-line no-restricted-syntax
   for (const deviceConfig of DEVICE_TYPE_CONFIGS) {
     if (deviceConfig.regexp.test(agent)
     || (deviceConfig.minWidth <= width && deviceConfig.maxWidth >= width)) {

@@ -1,7 +1,6 @@
 export { default as _ } from 'lodash-es'
 export { default as cn } from 'classnames'
 export { default as wk } from 'weak-key'
-export * as rn from 'react-nanny'
 
 export * as placement from './Placement'
 export * as canvas from './Canvas'

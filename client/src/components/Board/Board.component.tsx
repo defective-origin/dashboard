@@ -76,7 +76,7 @@ function Board(props: BoardProps): JSX.Element {
     <Box
       className={cn(css.Board, className)}
       style={style}
-      position="relative"
+      position='relative'
       stretch='xy'
     >
       <ViewBoard

@@ -54,27 +54,27 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
 
   const move = useCallback<ScrollFunc>((top = params.top, left = params.left, behavior = params.behavior) => {
     ref.current?.scrollTo({ top, left, behavior })
-  }, [])
+  }, [params.behavior, params.left, params.top, ref])
 
   const moveTop = useCallback<ScrollPartFunc>((top = params.top, behavior = params.behavior) => {
     ref.current?.scrollTo({ top, behavior })
-  }, [])
+  }, [params.behavior, params.top, ref])
 
   const moveLeft = useCallback<ScrollPartFunc>((left = params.left, behavior = params.behavior) => {
     ref.current?.scrollTo({ left, behavior })
-  }, [])
+  }, [params.behavior, params.left, ref])
 
   const moveBy = useCallback<ScrollFunc>((top = params.top, left = params.left, behavior = params.behavior) => {
     ref.current?.scrollBy({ top, left, behavior })
-  }, [])
+  }, [params.behavior, params.left, params.top, ref])
 
   const moveTopBy = useCallback<ScrollPartFunc>((top = params.top, behavior = params.behavior) => {
     ref.current?.scrollBy({ top, behavior })
-  }, [])
+  }, [params.behavior, params.top, ref])
 
   const moveLeftBy = useCallback<ScrollPartFunc>((left = params.left, behavior = params.behavior) => {
     ref.current?.scrollBy({ left, behavior })
-  }, [])
+  }, [params.behavior, params.left, ref])
 
   const moveIntoView = useCallback<ScrollIntoViewFunc>((
     idOrElem: string | HTMLElement,
@@ -83,12 +83,12 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     const nestedElem = typeof idOrElem === 'string' ? ref.current?.querySelector(`#${idOrElem}`) : idOrElem
 
     nestedElem?.scrollIntoView(arg)
-  }, [])
+  }, [ref])
 
   const moveStartX = useCallback(() => moveTop(0), [moveTop])
-  const moveEndX = useCallback(() => moveTop(ref.current.scrollWidth), [moveTop])
+  const moveEndX = useCallback(() => moveTop(ref.current.scrollWidth), [moveTop, ref])
   const moveStartY = useCallback(() => moveLeft(0), [moveLeft])
-  const moveEndY = useCallback(() => moveLeft(ref.current.scrollHeight), [moveLeft])
+  const moveEndY = useCallback(() => moveLeft(ref.current.scrollHeight), [moveLeft, ref])
 
   const buildOptions = useCallback((elem: TElement): ScrollOptions => {
     if (!elem) {
@@ -105,7 +105,7 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     }
   }, [])
 
-  const onScroll = useCallback((e: Event) => setOptions(buildOptions(e.target as TElement)), [])
+  const onScroll = useCallback((e: Event) => setOptions(buildOptions(e.target as TElement)), [buildOptions])
 
   useEffect(() => {
     ref.current?.addEventListener('scroll', onScroll, false)
@@ -115,7 +115,7 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     return function cleanup() {
       ref.current?.removeEventListener('scroll', onScroll, false)
     }
-  }, [ref.current])
+  }, [buildOptions, onScroll, ref])
 
   const manager: ScrollManager<TElement> = useMemo(() => ({
     ref,
@@ -132,7 +132,7 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     moveEndX,
     moveStartY,
     moveEndY,
-  }), [options, move, moveTop, moveLeft, moveIntoView, moveBy, moveTopBy, moveLeftBy])
+  }), [ref, options, move, moveTop, moveLeft, moveIntoView, moveBy, moveTopBy, moveLeftBy, moveStartX, moveEndX, moveStartY, moveEndY])
 
   return manager
 }
