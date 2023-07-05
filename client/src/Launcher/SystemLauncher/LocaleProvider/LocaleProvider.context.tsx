@@ -4,10 +4,10 @@ import { Languages, t } from 'locale'
 export type LocaleProviderState = Languages
 
 export type LocaleProviderOptions = {
-  current: LocaleProviderState,
-  languages: Languages[],
-  t: typeof t,
-  change: (patch: LocaleProviderState) => void,
+  current: LocaleProviderState
+  languages: Languages[]
+  t: typeof t
+  change: (patch: LocaleProviderState) => void
 }
 
 export const DEFAULT_LOCALE_PROVIDER_OPTIONS: LocaleProviderOptions = {
