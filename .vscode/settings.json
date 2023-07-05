@@ -1,27 +1,13 @@
 {
+  "cSpell.words": ["subarticle"],
+
   "files.eol": "\n",
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
 
-  "eslint.workingDirectories": ["./client", "./server"],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
-    "typescript"
-  ],
-
-  "scss.validate": false,
-  "css.validate": false,
-  "less.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": true
-  },
-  "cSpell.words": ["subarticle"],
-
-  "prettier.configPath": ".prettierrc.cjs",
+  "prettier.configPath": "./client/.prettierrc.cjs",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": false
 }
