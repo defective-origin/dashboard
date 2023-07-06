@@ -23,6 +23,6 @@ describe('[AnalyticsProvider] context', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useAnalyticsProvider(), { wrapper })
   
-    expect(result.current).toBe(null)
+    expect(result.current.current).toBe(null)
   })
 })

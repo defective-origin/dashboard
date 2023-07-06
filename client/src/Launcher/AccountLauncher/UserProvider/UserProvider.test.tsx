@@ -23,6 +23,6 @@ describe('[UserProvider] context', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useUserProvider(), { wrapper })
   
-    expect(result.current).toBe(null)
+    expect(result.current.current).toBe(null)
   })
 })

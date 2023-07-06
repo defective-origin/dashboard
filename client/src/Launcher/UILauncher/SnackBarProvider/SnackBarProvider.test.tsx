@@ -10,11 +10,11 @@ import SnackBarProvider, { SnackBarProviderProps } from './SnackBarProvider.comp
  *
  * @example
  * const { result } = renderHook(() => useCounter())
- * 
+ *
  * act(() => {
  *   result.current.increment()
  * })
- * 
+ *
  * expect(result.current.count).toBe(1)
  */
 describe('[SnackBarProvider] context', () => {
@@ -22,7 +22,7 @@ describe('[SnackBarProvider] context', () => {
 
   it('should return options', () => {
     const { result } = renderHook(() => useSnackBarProvider(), { wrapper })
-  
-    expect(result.current).toBe(null)
+
+    expect(result.current.current).toBe(null)
   })
 })

@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[StatusPage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--row page _StatusPage_eba8ea"
+  >
+    <div
+      class="layout-item layout-item--content"
+    >
+      <div
+        class="_Banner_fd7a36 _Banner_eba8ea"
+      >
+        <img
+          class="image _Image_fd7a36"
+          src="https://d1k5j68ob7clqb.cloudfront.net/processed/with_watermark/6d3H7wV3NUrpA7.png"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

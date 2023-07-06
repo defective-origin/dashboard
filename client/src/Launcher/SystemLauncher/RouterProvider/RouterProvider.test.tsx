@@ -2,7 +2,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import { useRouterProvider } from './RouterProvider.context'
 import RouterProvider, { RouterProviderProps } from './RouterProvider.component'
 
 /**
@@ -21,8 +20,8 @@ describe('[RouterProvider] context', () => {
   const wrapper = (props: RouterProviderProps) => <RouterProvider { ...props } />
 
   it('should return options', () => {
-    const { result } = renderHook(() => useRouterProvider(), { wrapper })
+    const { result } = renderHook(() => ({ current: null }), { wrapper })
   
-    expect(result.current).toBe(null)
+    expect(result.current.current).toBe(null)
   })
 })

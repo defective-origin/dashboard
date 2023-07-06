@@ -22,6 +22,7 @@ module.exports = {
     'space-in-parens': ['warn', 'never'],
     'no-trailing-spaces': 'warn',
     'key-spacing': ['warn', { beforeColon: false }],
+    'comma-dangle': ['warn', 'always-multiline'],
 
     // typescript
     '@typescript-eslint/no-empty-function': 'off',

@@ -6,10 +6,10 @@ export type LocaleCode = {
   region?: string
 }
 
-export function getLocaleCode(defaultLocaleCode = 'en-en'): LocaleCode {
-  const code = (navigator.languages && navigator.languages[0])
+export function getLocaleCode(defaultLocaleCode?: string): LocaleCode {
+  const code = defaultLocaleCode
       || navigator.language
-      || defaultLocaleCode
+      ||(navigator.languages && navigator.languages[0])
 
   return {
     code,

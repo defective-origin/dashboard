@@ -23,6 +23,6 @@ describe('[LocaleProvider] context', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useLocaleProvider(), { wrapper })
   
-    expect(result.current).toBe(null)
+    expect(result.current.current).toBe('en-US')
   })
 })
