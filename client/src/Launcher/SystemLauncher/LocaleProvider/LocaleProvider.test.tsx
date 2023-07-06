@@ -10,11 +10,11 @@ import LocaleProvider, { LocaleProviderProps } from './LocaleProvider.component'
  *
  * @example
  * const { result } = renderHook(() => useCounter())
- * 
+ *
  * act(() => {
  *   result.current.increment()
  * })
- * 
+ *
  * expect(result.current.count).toBe(1)
  */
 describe('[LocaleProvider] context', () => {
@@ -22,7 +22,7 @@ describe('[LocaleProvider] context', () => {
 
   it('should return options', () => {
     const { result } = renderHook(() => useLocaleProvider(), { wrapper })
-  
+
     expect(result.current.current).toBe('en-US')
   })
 })
