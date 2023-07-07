@@ -11,7 +11,6 @@ export type TextOptions = TypeOptions<string> & {
 export type TextReturnOptions = TypeReturnOptions<string, TextOptions>
   & TypeHandler<'concat', (...args: Parameters<string['concat']>) => void>
   & TypeHandler<'replace', (...args: Parameters<string['replace']>) => void>
-  & TypeHandler<'replaceAll', (...args: Parameters<string['replaceAll']>) => void>
   & TypeHandler<'slice', (...args: Parameters<string['slice']>) => void>
   & TypeHandler<'toLowerCase', () => void>
   & TypeHandler<'toUpperCase', () => void>
@@ -28,7 +27,6 @@ export function useText(init = TEXT_DEFAULT_VALUE, options: TextOptions = {}): T
     // handlers
     ref.registerHandler('concat', (val, ...args: Parameters<string['concat']>) => val.concat(...args))
     ref.registerHandler('replace', (val, ...args: Parameters<string['replace']>) => val.replace(...args))
-    ref.registerHandler('replaceAll', (val, ...args: Parameters<string['replaceAll']>) => val.replaceAll(...args))
     ref.registerHandler('slice', (val, ...args: Parameters<string['slice']>) => val.slice(...args))
     ref.registerHandler('toLowerCase', (val) => val.toLowerCase())
     ref.registerHandler('toUpperCase', (val) => val.toUpperCase())

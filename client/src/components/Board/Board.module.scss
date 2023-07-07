@@ -2,6 +2,9 @@
 
 .Board {
 	overflow: hidden;
+	position: relative;
+
+	@include stretch;
 }
 
 .SelectionBoard,

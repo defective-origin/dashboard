@@ -73,7 +73,7 @@ export const squareHeight = (square: Square) => Math.abs(square.v1.y - square.v2
 export type LineVector = 'start' | 'center' | 'end'
 
 const LineVectorHandler: Record<LineVector, (pos: number, length: number) => number> = {
-  start: (pos, length) => pos,
+  start: (pos) => pos,
   center: (pos, length) => pos + (length / 2),
   end: (pos, length) => pos + length,
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 
 // ---| component |---
-import Box from 'components/Box'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -57,7 +56,7 @@ export type BoardProps = SelectionBoardProps & ViewBoardProps & {
  *   )
  * }
  */
-function Board(props: BoardProps): JSX.Element {
+export function Board(props: BoardProps): JSX.Element {
   const {
     rows,
     columns,
@@ -70,15 +69,11 @@ function Board(props: BoardProps): JSX.Element {
     className,
     ...selectionBoardProps
   } = props
+  const _className = cn(css.Board, className)
   const isSelectMode = select || reselect
 
   return (
-    <Box
-      className={cn(css.Board, className)}
-      style={style}
-      position='relative'
-      stretch='xy'
-    >
+    <div className={_className} style={style}>
       <ViewBoard
         className={css.ViewBoard}
         columns={columns}
@@ -99,8 +94,8 @@ function Board(props: BoardProps): JSX.Element {
           {...selectionBoardProps}
         />
       )}
-    </Box>
+    </div>
   )
 }
 
-export default React.memo(Board) as typeof Board
+export default Board

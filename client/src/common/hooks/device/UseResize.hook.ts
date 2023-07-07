@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react'
 
 export type RectOptions = {
   width: number,
@@ -49,11 +49,11 @@ export function useResize<TElement extends Element = HTMLDivElement>(
 }
 
 export function useResizeWithRef<TElement extends Element = HTMLDivElement>()
-: [React.MutableRefObject<TElement | null>, RectOptions] {
+: RectOptions & { ref: React.MutableRefObject<TElement | null> } {
   const ref = useRef(null)
   const options = useResize<TElement>(ref)
 
-  return [ref, options]
+  return useMemo(() => ({ ref, ...options }), [ref, options])
 }
 
 export default useResizeWithRef
