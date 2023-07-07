@@ -50,7 +50,7 @@ export const COUNTER_DEFAULT_VALUE = 0
  * // restore init value
  * copyCounter.reset()
  *
- * // for each handler you have the same named  function with "Silent" postfix
+ * // for each handler you have the same named  function with 'Silent' postfix
  * // which doesn't call rerender
  * copyCounter.increaseSilent()
  * copyCounter.decreaseSilent()
@@ -74,7 +74,7 @@ export function useCounter(init = COUNTER_DEFAULT_VALUE, options: CounterOptions
     ref.registerFormat('min', (val, min: number) => Math.max(val, min))
     ref.registerFormat('max', (val, max: number) => Math.min(val, max))
     ref.registerFormat('round', (val) => Math.round(val))
-  }, [ref])
+  }, [ref, updatedOptions.step])
 
   return ref
 }

@@ -18,12 +18,12 @@ import l10n from './l10n'
  * const resources = {
  *   en: {
  *     translation: {
- *       "Welcome to React": "Welcome to React and react-i18next"
+ *       'Welcome to React': 'Welcome to React and react-i18next'
  *     },
  *   },
  *   fr: {
  *     translation: {
- *       "Welcome to React": "Bienvenue à React et react-i18next"
+ *       'Welcome to React': 'Bienvenue à React et react-i18next'
  *     },
  *   },
  * }
@@ -51,7 +51,7 @@ i18next
 
     // preload?: false | readonly string[];
 
-    // Allows "en-US" and "en-UK" to be implcitly supported when "en" is supported
+    // Allows 'en-US' and 'en-UK' to be implcitly supported when 'en' is supported
     nonExplicitSupportedLngs: true,
 
     fallbackLng: 'en',

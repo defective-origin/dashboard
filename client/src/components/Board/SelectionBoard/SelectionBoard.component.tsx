@@ -156,7 +156,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     }
   }, [hoveredCell, getHoveredCell])
 
-  const endSelection = useCallback((e: React.MouseEvent) => {
+  const endSelection = useCallback(() => {
     const placement = getSelectedArea()
 
     // if cursor is over free area and area is valid
@@ -187,7 +187,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     }
 
     setIsIntersected(isInvalid)
-  }, [boardRef.current, hoveredCell, isPlacementForbidden, getSelectedArea])
+  }, [hoveredCell, isPlacementForbidden, getSelectedArea, boardRef])
 
   // --- painting ---
   const buildAreaOptions = useCallback((item: placement.Square): canvas.SquareShapeOptions => {
@@ -207,12 +207,12 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
   const paintGrid = useCallback((options: Canvas2DPainterOptions) => {
     const area = placement.square(0, 0, options.context.canvas.width, options.context.canvas.height)
 
-    options.paintGrid({ rows, columns, ...area },  boardStyles.grid)
+    options.paintGrid({ rows, columns, ...area }, boardStyles.grid)
   }, [columns, rows, boardStyles])
 
   const paintCard = useCallback((options: Canvas2DPainterOptions, item: placement.Square | null, styles?: canvas.ShapeStyleOptions) => {
     if (item) {
-      options.paintCard(buildAreaOptions(item),  styles)
+      options.paintCard(buildAreaOptions(item), styles)
     }
   }, [buildAreaOptions])
 

@@ -1,46 +1,130 @@
-# Getting Started with Create React App
+# Dashboard Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Allows users to create boards which show different widgets.
+
+## Before start
+
+Install extensions which described in __.vscode/.settings__ file
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### Installs all neccesary packages.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+yarn
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Launches application on [url](http://localhost:5173/).
 
-### `yarn test`
+```
+yarn dev
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Production Preview
 
-### `yarn build`
+```
+yarn build // Build application for production.
+yarn preview // Launch built application.
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Launches the test runner in the interactive watch mode.
+```
+yarn test
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Code checkers
 
-### `yarn eject`
+Commands with __:fix__ prefix - fix linter errors.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Other commands just check parts of code.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Launches all lint checkers for code and styles.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```sh
+yarn lint
+yarn lint:fix
+yarn lint:es
+yarn lint:es:fix
+yarn lint:css
+yarn lint:css:fix
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+#### Also you can use prettier to check and fix linter issues.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```sh
+yarn prettier
+yarn prettier:fix
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Check code after changes for production
+
+```
+yarn check:changes
+```
+
+#### Code generator
+
+Allows to generate parts of code.
+
+```
+yarn gen
+```
+
+For more information check file __generator/README.md__
+
+## Short Structure description
+
+For more information check file __generator/README.md__
+Adapter pattern
+- build/ - built application
+
+- public/ - assets which will be loaded after page loading
+
+- generator/ - generator of application parts
+	
+- src/
+	- common/ - contains general code/features (this features can be moved into packages), overriding packages.
+
+	- api/ - contains tools and handlers for work with network
+
+	- assets/ - contains all asset files which should be loaded with application
+
+	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work
+
+	- pages/ - contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
+	- screens/ - contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component has postfix: Screen]
+	- components(UI)/ - contains pure, unified components without logic which gets data out, all data must be get from props (can work only with components) [don't have postfix]
+
+	- features/ - the same structure as in app but is used for feature flag. After feature flag implementation All feature code should be merged/should be sorted files into app files 
+
+	- locale/ - contains localization configs and localized labels, texts, digits, signs, ...
+
+	- router/ - contains router configs, handlers and so on
+
+	- store/ - contains store configs, handlers and so on
+	
+	- types/ - contains all type definition
+
+	- tests/ - contains configs and settings for tests
+
+	- web-workers/ - contains configs and settings for web-workers
+
+## [Environment settings](https://vitejs.dev/guide/env-and-mode.html)
+
+All config variables are in one of the file
+
+```
+.env                # loaded in all cases
+.env.local          # loaded in all cases, ignored by git
+.env.[mode]         # only loaded in specified mode
+.env.[mode].local   # only loaded in specified mode, ignored by git
+```
+
+Only variables prefixed with VITE_ are exposed to your Vite-processed code. e.g. for the following env variables:
+```
+VITE_SOME_KEY=123
+```

@@ -10,11 +10,11 @@ import ModalWindowProvider, { ModalWindowProviderProps } from './ModalWindowProv
  *
  * @example
  * const { result } = renderHook(() => useCounter())
- * 
+ *
  * act(() => {
  *   result.current.increment()
  * })
- * 
+ *
  * expect(result.current.count).toBe(1)
  */
 describe('[ModalWindowProvider] context', () => {
@@ -22,7 +22,7 @@ describe('[ModalWindowProvider] context', () => {
 
   it('should return options', () => {
     const { result } = renderHook(() => useModalWindowProvider(), { wrapper })
-  
-    expect(result.current).toBe(null)
+
+    expect(result.current.current).toBe(null)
   })
 })

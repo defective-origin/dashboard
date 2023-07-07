@@ -7,7 +7,8 @@ import MuiCardHeader from '@mui/material/CardHeader'
 import MuiCardMedia from '@mui/material/CardMedia'
 
 // ---| components |---
-import { Divider } from 'components/lib/Divider'
+import Divider from 'components/lib/Divider'
+import Button from 'components/lib/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -49,5 +50,6 @@ Card.Content = MuiCardContent
 Card.Header = MuiCardHeader
 Card.Media = MuiCardMedia
 Card.Divider = Divider
+Card.Button = Button
 
 export default Card

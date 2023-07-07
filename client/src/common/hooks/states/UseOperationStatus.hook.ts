@@ -1,6 +1,6 @@
-import { useCallback, useLayoutEffect } from 'react';
-import { StatusReturnOptions, useStatus } from './UseStatus.hook';
-import { TypeHandler } from './UseType.hook';
+import { useLayoutEffect } from 'react'
+import { StatusReturnOptions, useStatus } from './UseStatus.hook'
+import { TypeHandler } from './UseType.hook'
 
 export type OperationStatus = {
   started: boolean;

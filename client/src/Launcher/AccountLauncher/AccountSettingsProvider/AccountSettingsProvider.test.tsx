@@ -26,6 +26,6 @@ describe('[AccountSettingsProvider] context', () => {
   })
 
   it('should return options', () => {
-    expect(hookRef.current).toBe(null)
+    expect(hookRef.current.current).toBe(null)
   })
 })

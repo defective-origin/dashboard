@@ -1,7 +1,10 @@
-@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+@import "src/Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
 
 .Board {
 	overflow: hidden;
+	position: relative;
+
+	@include stretch;
 }
 
 .SelectionBoard,

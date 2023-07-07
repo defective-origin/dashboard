@@ -38,9 +38,9 @@ export type ScrollProps = {
  *   return (
  *     <Scroll
  *       manager={managerRef}
- *       upBtnTitle="Back to start of page"
- *       leftBtnTitle="Back to left side of page"
- *       direction="xy"
+ *       upBtnTitle='Back to start of page'
+ *       leftBtnTitle='Back to left side of page'
+ *       direction='xy'
  *       buttons
  *     >
  *       <div style={{
@@ -72,7 +72,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
   const showUpButton = showButtonsOn < scrollManager.options.top
 
   // subscription on scroll manager
-  useImperativeHandle(manager, () => scrollManager, [manager, scrollManager])
+  useImperativeHandle(manager, () => scrollManager, [scrollManager])
 
   return (
     <div className={_className} {...otherProps}>
@@ -85,7 +85,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
           {showUpButton && (
             <Button
               size='large'
-              icon="keyboard_arrow_up"
+              icon='keyboard_arrow_up'
               onClick={scrollManager.moveStartY}
             />
           )}
@@ -93,7 +93,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
           {showLeftButton && (
             <Button
               size='large'
-              icon="keyboard_arrow_left"
+              icon='keyboard_arrow_left'
               onClick={scrollManager.moveStartX}
             />
           )}

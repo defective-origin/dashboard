@@ -82,7 +82,6 @@ export const compareAndSelectBy = <T>(items: Array<T>, compare: (a: T, b: T) => 
 
   let line: T = items[0]
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const item of items) {
     if (compare(item, line)) {
       line = item

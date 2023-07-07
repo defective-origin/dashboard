@@ -11,17 +11,17 @@ import {{camelCase name}} from './{{pascalCase name}}.hook'
  *
  * @example
  * const { result } = renderHook(() => useCounter())
- * 
+ *
  * act(() => {
  *   result.current.increment()
  * })
- * 
+ *
  * expect(result.current.count).toBe(1)
  */
 describe('[{{pascalCase name}}] context', () => {
   it('should return options', () => {
     const { result } = renderHook(() => {{camelCase name}}())
-  
+
     expect(result.current).toBe(null)
   })
 })

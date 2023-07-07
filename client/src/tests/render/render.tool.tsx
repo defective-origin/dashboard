@@ -1,10 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { RenderOptions, render as renderTestComponent } from '@testing-library/react'
 import React from 'react'
 
 export function withWrapper<
   TWrapper extends React.ComponentType<TProps>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
   TProps extends object = React.ComponentProps<TWrapper>,
 >(Component: React.JSXElementConstructor<TProps>) {
   return function wrapProps(wrappedProps?: Omit<TProps, 'children'>): React.FC<TProps> {
@@ -19,10 +17,10 @@ export type CustomRenderOptions = Omit<RenderOptions, 'queries' | 'wrapper'>
 /**
  * Build custom render function with wrapper and override default options.
  * @example
- * import { renderHook } from "@testing-library/react-hooks"
- * import React from "react"
- * import ComponentTestUtil from "./component.utils"
- * import { buildCustomRender } from "./render.utils"
+ * import { renderHook } from '@testing-library/react-hooks'
+ * import React from 'react'
+ * import ComponentTestUtil from './component.utils'
+ * import { buildCustomRender } from './render.utils'
  *
  * const ThemeContext = React.createContext('light')
  * const LocalizationContext = React.createContext(null)
@@ -63,7 +61,6 @@ export type CustomRenderOptions = Omit<RenderOptions, 'queries' | 'wrapper'>
  * @param defaultOptions Default options for render which can be overrided.
  * @returns Custom render function.
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function buildCustomRender<
   TRender extends (...args: Parameters<typeof renderTestComponent>) => any,
   TWrapper extends React.ComponentType<any>,

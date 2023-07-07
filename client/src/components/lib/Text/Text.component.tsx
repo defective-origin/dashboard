@@ -22,12 +22,12 @@ export type TextProps = MuiTypographyProps & {
  * @example
  * <Text />
  */
-function Text(props: TextProps): JSX.Element {
+export function Text(props: TextProps): JSX.Element {
   const { text, children, className, ...otherProps } = props
   const _className = cn(css.Banner, className)
 
   return (
-    <MuiTypography className={_className} variant="body1" {...otherProps}>
+    <MuiTypography className={_className} variant='body1' {...otherProps}>
       {text}
       {children}
     </MuiTypography>
@@ -36,6 +36,7 @@ function Text(props: TextProps): JSX.Element {
 
 Text.displayName = 'Text'
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default react.attachOverrides(Text, {
   H1: { variant: 'h1' },
   H2: { variant: 'h2' },
