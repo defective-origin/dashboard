@@ -2,8 +2,6 @@
 
 /* INJECT_EXPORT_PLACE */
 
-export * from 'react-resize-detector'
-
 export * from './device'
 export * from './states'
 export * from './events'

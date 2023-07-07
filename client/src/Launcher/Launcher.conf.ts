@@ -1,14 +1,9 @@
 export const ENV = {
   MODE: {
-    IS_DEV: true,
-    IS_PROD: false,
+    IS_DEV: import.meta.env.DEV,
+    IS_PROD: import.meta.env.PROD,
+    IS_STAGE: import.meta.env.MODE === 'staging',
+    IS_TEST: import.meta.env.MODE === 'testing',
   },
+  BASE_URL: import.meta.env.BASE_URL,
 }
-
-
-// export const ENV = {
-//   MODE: {
-//     IS_DEV: process.env.APP_ENV === 'development',
-//     IS_PROD: process.env.APP_ENV === 'production',
-//   },
-// }
