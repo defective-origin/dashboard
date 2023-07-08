@@ -33,5 +33,13 @@
       "TITLE": "SOMETHING WENT WRONG!",
       "SUBTITLE": "Looks like we are having some issues. We'll get it fixed as soon as possible. Please try again later."
     }
+  },
+  "PAGES": {
+    "APP": "App",
+    "STATUS": "Status",
+    "HOTKEYS": "Hotkeys"
+  },
+  "SYSTEM": {
+    "TAB_NAME": "{{title}} Page"
   }
 }

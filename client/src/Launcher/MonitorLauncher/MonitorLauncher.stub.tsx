@@ -1,24 +1,17 @@
 import React from 'react'
+import {
+  DEFAULT_MONITOR_LAUNCHER_OPTIONS,
+  MonitorLauncherContext,
+  MonitorLauncherOptions,
+} from './MonitorLauncher.context'
 
-// ---| self |---
-import { ABTestProviderStub } from './ABTestProvider'
-import { AnalyticsProviderStub } from './AnalyticsProvider'
-import { LogProviderStub } from './LogProvider'
-
-export type MonitorLauncherStubProps = React.PropsWithChildren
+export type MonitorLauncherStubProps = React.PropsWithChildren & Partial<MonitorLauncherOptions>
 
 export function MonitorLauncherStub(props: MonitorLauncherStubProps): JSX.Element {
-  const { children } = props
+  const { children, ...otherProps } = props
+  const combinedValue = { ...DEFAULT_MONITOR_LAUNCHER_OPTIONS, ...otherProps }
 
-  return (
-    <LogProviderStub>
-      <AnalyticsProviderStub>
-        <ABTestProviderStub>
-          {children}
-        </ABTestProviderStub>
-      </AnalyticsProviderStub>
-    </LogProviderStub>
-  )
+  return <MonitorLauncherContext.Provider value={combinedValue} children={children} />
 }
 
 export default MonitorLauncherStub

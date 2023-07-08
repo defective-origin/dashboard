@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, IconButton, Button } from '@mui/material'
+import React from 'react'
+import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material'
+import Block from 'components/Block'
 
 // ---| core |---
-import { useLocaleProvider, useUISettingsProvider, useUserProvider } from 'Launcher'
+import { useUILauncher, useSystemLauncher, useAccountLauncher } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon from 'components/Icon'
-import Grid from 'components/Grid'
+import Icon from 'components/lib/Icon'
+import Button from 'components/lib/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -31,12 +32,12 @@ export type AppMenuScreenProps = {
 export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppMenuScreen, className)
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
-  const ui = useUISettingsProvider()
-  const locale = useLocaleProvider()
-  const user = useUserProvider()
+  const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null)
+  const ui = useUILauncher()
+  const system = useSystemLauncher()
+  const account = useAccountLauncher()
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -47,8 +48,8 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const open = Boolean(anchorEl)
 
   return (
-    <Grid className={_className} {...otherProps}>
-      <Grid.Item className={css.TopActions}>
+    <Block className={_className} type='column-center' {...otherProps}>
+      <Block.Start className={css.TopActions}>
         <Avatar onClick={handleClick}>
           <Icon type='account_circle' fontSize='large' />
         </Avatar>
@@ -70,79 +71,60 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon><Icon type='person' /></ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText primary='Profile' />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon><Icon type='settings' /></ListItemIcon>
-                <ListItemText primary="Settings" />
+                <ListItemText primary='Settings' />
               </ListItemButton>
             </ListItem>
-            {!user.isAuthorized && (
+            {!account.isAuthorized && (
               <>
                 <ListItem disablePadding>
-                  <ListItemButton onClick={user.login}>
+                  <ListItemButton onClick={account.login}>
                     <ListItemIcon><Icon type='account_circle' /></ListItemIcon>
-                    <ListItemText primary="Registration" />
+                    <ListItemText primary='Registration' />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                  <ListItemButton onClick={user.login}>
+                  <ListItemButton onClick={account.login}>
                     <ListItemIcon><Icon type='login' /></ListItemIcon>
-                    <ListItemText primary="Sign In" />
+                    <ListItemText primary='Sign In' />
                   </ListItemButton>
                 </ListItem>
               </>
             )}
-          {user.isAuthorized && (
-            <ListItem disablePadding>
-              <ListItemButton onClick={user.logout}>
-                <ListItemIcon><Icon type='logout' /></ListItemIcon>
-                <ListItemText primary="Sign Out" />
-              </ListItemButton>
-            </ListItem>
-          )}
+            {account.isAuthorized && (
+              <ListItem disablePadding>
+                <ListItemButton onClick={account.logout}>
+                  <ListItemIcon><Icon type='logout' /></ListItemIcon>
+                  <ListItemText primary='Sign Out' />
+                </ListItemButton>
+              </ListItem>
+            )}
           </List>
         </Popover>
-      </Grid.Item>
+      </Block.Start>
 
-      <Grid.Item className={css.MiddleActions}>
-        <IconButton>
-          <Icon className={css.ActiveButton} type='dashboard' fontSize='large'/>
-        </IconButton>
-        <IconButton>
-          <Icon type='insert_chart' fontSize='large' />
-        </IconButton>
-      </Grid.Item>
+      <Block.Center className={css.MiddleActions}>
+        <Button className={css.SquareButton} icon='dashboard' size='large' />
+        <Button className={css.SquareButton} icon='insert_chart' size='large' />
+      </Block.Center>
       
-      <Grid.Item className={css.BottomActions}>
-        <IconButton>
-          <Icon type='auto_stories' fontSize='large' />
-        </IconButton>
-        <IconButton>
-          <Icon type='paid' fontSize='large' />
-        </IconButton>
-        <IconButton>
-          <Icon type='keyboard' fontSize='large' />
-        </IconButton>
-        <IconButton>
-          <Icon type='support_agent' fontSize='large' />
-        </IconButton>
-        <IconButton onClick={ui.toggleTheme}>
-          <Icon type={`${ui.current.theme}_mode`} fontSize='large' />
-        </IconButton>
-        <Button>{locale.current}</Button>
-        <IconButton onClick={ui.toggleMode}>
-          <Icon
-            type={ ui.isMode('edit') ? 'developer_mode_tv' : 'tv' }
-            fontSize='large'
-          />
-        </IconButton>
-      </Grid.Item>
+      <Block.End className={css.BottomActions}>
+        <Button className={`${css.SquareButton} ${css.ActiveButton}`} icon='auto_stories' size='large' />
+        <Button className={css.SquareButton} icon='paid' size='large' />
+        <Button className={css.SquareButton} icon='keyboard' size='large' />
+        <Button className={css.SquareButton} icon='support_agent' size='large' />
+        <Button className={css.SquareButton} icon={`${ui.theme}_mode`} size='large' onClick={ui.toggleTheme} />
+        <Button className={css.SquareButton} size='small' text={system.language} />
+        <Button className={css.SquareButton} icon={ui.isMode('edit') ? 'developer_mode_tv' : 'tv'} size='large' onClick={ui.toggleMode} />
+      </Block.End>
 
       {children}
-    </Grid>
+    </Block>
   )
 }
 

@@ -6,20 +6,21 @@ import { MonitorLauncherStub, MonitorLauncherStubProps } from './MonitorLauncher
 import { SystemLauncherStub, SystemLauncherStubProps } from './SystemLauncher'
 import { UILauncherStub, UILauncherStubProps } from './UILauncher'
 
-export type LauncherStubProps = React.PropsWithChildren
-  & MonitorLauncherStubProps
-  & SystemLauncherStubProps
-  & AccountLauncherStubProps
-  & UILauncherStubProps
+export type LauncherStubProps = React.PropsWithChildren & {
+  system: SystemLauncherStubProps,
+  monitor: MonitorLauncherStubProps,
+  account: AccountLauncherStubProps,
+  ui: UILauncherStubProps,
+}
 
 export function LauncherStub(props: LauncherStubProps): JSX.Element {
-  const { userProvider, accountSettingsProvider, children } = props
+  const { system, monitor, account, ui, children } = props
 
   return (
-    <SystemLauncherStub>
-      <MonitorLauncherStub>
-        <UILauncherStub>
-          <AccountLauncherStub userProvider={userProvider} accountSettingsProvider={accountSettingsProvider}>
+    <SystemLauncherStub {...system}>
+      <MonitorLauncherStub {...monitor}>
+        <UILauncherStub {...account}>
+          <AccountLauncherStub {...ui}>
             { children }
           </AccountLauncherStub>
         </UILauncherStub>

@@ -1,0 +1,43 @@
+@import "src/Launcher/UILauncher/UILauncher.module.scss";
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+
+    // template
+    &--row {
+      grid-template-areas: 
+      "header header header"
+      "left-aside content right-aside"
+      "footer footer footer";
+    }
+    &--column {
+      grid-template-areas: 
+      "left-aside header right-aside"
+      "left-aside content right-aside"
+      "left-aside footer right-aside";
+    }
+    &--left-aside {
+      grid-template-areas: 
+      "left-aside header header"
+      "left-aside content right-aside"
+      "left-aside footer footer";
+    }
+    &--right-aside {
+      grid-template-areas: 
+      "header header right-aside"
+      "left-aside content right-aside"
+      "footer footer right-aside";
+    }
+  }
+}

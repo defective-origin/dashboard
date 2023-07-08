@@ -1,0 +1,23 @@
+import React, { useContext } from 'react'
+
+export type {{pascalCase name}}State = object
+
+export const DEFAULT_{{constantCase name}}_STATE: {{pascalCase name}}State = {}
+
+export type {{pascalCase name}}Options = {{pascalCase name}}State & {
+  change: (patch: Partial<{{pascalCase name}}State>) => void,
+}
+
+export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options = {
+  ...DEFAULT_{{constantCase name}}_STATE,
+  change: () => {},
+}
+
+export const {{pascalCase name}}Context = React.createContext(DEFAULT_{{constantCase name}}_OPTIONS)
+{{pascalCase name}}Context.displayName = '{{pascalCase name}}Context'
+
+export function use{{pascalCase name}}(): {{pascalCase name}}Options {
+  return useContext({{pascalCase name}}Context)
+}
+
+export default use{{pascalCase name}}

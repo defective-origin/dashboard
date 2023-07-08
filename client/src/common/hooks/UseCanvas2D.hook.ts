@@ -1,26 +1,26 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 
 // ---| common |---
-import { Canvas } from 'common/tools'
+import { canvas } from 'common/tools'
 
 export const PAINTER_MAP = {
-  line: Canvas.LinePainter2D.paint,
-  grid: Canvas.GridPainter2D.paint,
-  card: Canvas.SquarePainter2D.paint,
+  line: canvas.LinePainter2D.paint,
+  grid: canvas.GridPainter2D.paint,
+  card: canvas.SquarePainter2D.paint,
 }
 
-export type Item = { type: 'line', options?: Canvas.LineShapeOptions, styles?: Canvas.ShapeStyleOptions }
-| { type: 'card', options?: Canvas.SquareShapeOptions, styles?: Canvas.ShapeStyleOptions }
-| { type: 'grid', options?: Canvas.GridShapeOptions, styles?: Canvas.ShapeStyleOptions }
+export type Item = { type: 'line', options?: canvas.LineShapeOptions, styles?: canvas.ShapeStyleOptions }
+| { type: 'card', options?: canvas.SquareShapeOptions, styles?: canvas.ShapeStyleOptions }
+| { type: 'grid', options?: canvas.GridShapeOptions, styles?: canvas.ShapeStyleOptions }
 
 export type Canvas2DPainterOptions = {
   context: CanvasRenderingContext2D
-  paintLine: (options?: Canvas.LineShapeOptions, styles?: Canvas.ShapeStyleOptions) => void
-  paintGrid: (options?: Canvas.GridShapeOptions, styles?: Canvas.ShapeStyleOptions) => void
-  paintCard: (options?: Canvas.SquareShapeOptions, styles?: Canvas.ShapeStyleOptions) => void
+  paintLine: (options?: canvas.LineShapeOptions, styles?: canvas.ShapeStyleOptions) => void
+  paintGrid: (options?: canvas.GridShapeOptions, styles?: canvas.ShapeStyleOptions) => void
+  paintCard: (options?: canvas.SquareShapeOptions, styles?: canvas.ShapeStyleOptions) => void
   paint: (item: Item) => void
   paintItems: (item: Item[]) => void
-  clear: (area?: Canvas.SquareShapeOptions) => void
+  clear: (area?: canvas.SquareShapeOptions) => void
 }
 
 export type Canvas2DReturnOptions = Omit<Canvas2DPainterOptions, 'context'> & {
@@ -41,14 +41,14 @@ export function useCanvas2D(
 
   useLayoutEffect(() => { canvasRef.current = ref.current }, [ref.current])
 
-  const paintLine = useCallback(Canvas.LinePainter2D.paint.bind(null, context), [context])
-  const paintGrid = useCallback(Canvas.GridPainter2D.paint.bind(null, context), [context])
-  const paintCard = useCallback(Canvas.SquarePainter2D.paint.bind(null, context), [context])
+  const paintLine = useCallback(canvas.LinePainter2D.paint.bind(null, context), [context])
+  const paintGrid = useCallback(canvas.GridPainter2D.paint.bind(null, context), [context])
+  const paintCard = useCallback(canvas.SquarePainter2D.paint.bind(null, context), [context])
 
   const paint = useCallback((item: Item) => PAINTER_MAP[item.type](context, item.options, item.styles), [context])
   const paintItems = useCallback((items: Item[] = []) => items.forEach(paint), [paint])
 
-  const clear = useCallback((area?: Canvas.SquareShapeOptions) => Canvas.clear(context, area), [context])
+  const clear = useCallback((area?: canvas.SquareShapeOptions) => canvas.clear(context, area), [context])
 
   const redraw = useCallback(() => {
     if (context) {

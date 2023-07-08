@@ -1,23 +1,41 @@
 import React from 'react'
 
-// ---| components |---
-import { ComponentUIProps, useComponentUIProps } from 'components/Component'
+// ---| common |---
+import { cn, react } from 'common/tools'
 
 // ---| self |---
-import useLayoutItemUIProps, { LayoutItemUIProps } from './LayoutItemUI'
+import './LayoutItem.module.scss'
 
-export type LayoutItemProps = ComponentUIProps & LayoutItemUIProps
+export type LayoutItemType = 'left-aside' | 'right-aside' | 'footer' | 'header' | 'content'
 
-export const LayoutElementMap = {
-  'right-aside': 'aside',
-  'left-aside': 'aside',
-  footer: 'footer',
-  header: 'header',
-  content: 'main',
-} as const
-
-export default function LayoutItem(props: LayoutItemProps): JSX.Element | null {
-  const _props = useLayoutItemUIProps(props, { map: LayoutElementMap })
-
-  return useComponentUIProps(_props)
+export type LayoutItemProps = {
+  className?: string
+  children?: React.ReactNode
+  type?: LayoutItemType
+  scroll?: 'x' | 'y' | 'xy'
 }
+
+/**
+ * Component description.
+ *
+ * How to use
+ * @example
+ * <LayoutItem />
+ */
+export function LayoutItem(props: LayoutItemProps): JSX.Element {
+  const { scroll, type = 'content', children, className, ...otherProps } = props
+  const _className = cn('layout-item', `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
+
+  return <div className={_className} {...otherProps}>{children}</div>
+}
+
+LayoutItem.displayName = 'LayoutItem'
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default react.attachOverrides(LayoutItem, {
+  LeftAside: { type: 'left-aside' },
+  RightAside: { type: 'right-aside' },
+  Footer: { type: 'footer' },
+  Header: { type: 'header' },
+  Content: { type: 'content' },
+})

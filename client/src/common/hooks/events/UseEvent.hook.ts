@@ -31,7 +31,7 @@ export const useEvent = (
     return () => {
       element.removeEventListener(eventName, eventListener, opts)
     }
-  }, [eventName, element, capture, passive, once])
+  }, [eventName, element, capture, passive, once, handlerRef])
 }
 
 export default useEvent

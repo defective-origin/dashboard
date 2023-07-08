@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Text] component > should render component 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 _Banner_1425e6 css-ahj2mt-MuiTypography-root"
+  />
+</DocumentFragment>
+`;

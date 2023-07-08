@@ -1,7 +1,7 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { render, fireEvent, RenderResult, waitForElementToBeRemoved, waitFor, Matcher, RenderOptions } from '@testing-library/react'
 
-// FIXME: В testing-library/react события не нужно оборачивать в act(он содержится в waitFor). Следовательно также не нужен вэйтер https://testing-library.com/docs/react-testing-library/migrate-from-enzyme/#using-act-and-wrapperupdate
+// В testing-library/react события не нужно оборачивать в act(он содержится в waitFor).
+// Следовательно также не нужен вэйтер https://testing-library.com/docs/react-testing-library/migrate-from-enzyme/#using-act-and-wrapperupdate
 
 // TESTING LIBRARY IMPLEMENTATION
 export default class ComponentTestUtil {
@@ -76,7 +76,6 @@ export default class ComponentTestUtil {
   }
 
   // findBy = getBy + waitFor
-  // eslint-disable-next-line max-len
   // public find<T extends HTMLElement = HTMLElement>(...args: Parameters<RenderResult['findByTestId']>) {
   //   return this.render.findByTestId(...args) as Promise<T>
   // }

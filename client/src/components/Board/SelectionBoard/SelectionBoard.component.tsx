@@ -1,11 +1,9 @@
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 
-// ---| components |---
-import { GeneralProps } from 'components/Component'
-
 // ---| common |---
-import { cn, _, Placement, Canvas } from 'common/tools'
+import { cn, _, placement, canvas } from 'common/tools'
 import { GridConf, GridItem, useGrid, useCanvas2D, Canvas2DPainterOptions } from 'common/hooks'
+import { react } from 'common/tools'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
@@ -14,7 +12,7 @@ import css from './SelectionBoard.module.scss'
 
 export type SelectionBoardItem = GridItem
 
-export type SelectionBoardProps = GeneralProps & GridConf & {
+export type SelectionBoardProps = react.GeneralProps & GridConf & {
   // set margin around each widget
   gap?: number
   // items which displays on board
@@ -26,7 +24,7 @@ export type SelectionBoardProps = GeneralProps & GridConf & {
   // styles for grid lines, items, selected area
   styles?: SelectionBoardStyles
   // triggers on select new area
-  onSelect?: (position: Placement.Square) => void
+  onSelect?: (position: placement.Square) => void
   // triggers on reselect area for reselect item
   onReselect?: (newItem: SelectionBoardItem, oldItem: SelectionBoardItem) => void
   // triggers when there is a problem with selected area
@@ -108,12 +106,12 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     onError,
   } = props
   const { ref: boardRef, cell, width, height } = useGrid<HTMLCanvasElement>({ columns, rows })
-  const [startCell, setStartCell] = useState<Placement.Square | null>(null)
-  const [hoveredCell, setHoveredCell] = useState<Placement.Square | null>(null)
+  const [startCell, setStartCell] = useState<placement.Square | null>(null)
+  const [hoveredCell, setHoveredCell] = useState<placement.Square | null>(null)
   const [isIntersected, setIsIntersected] = useState(false)
   const boardStyles = useMemo(() => _.merge(DEFAULT_STYLES, styles), [styles])
 
-  const isPlacementForbidden = useCallback((item: Placement.Square | null) => items.some((i) => {
+  const isPlacementForbidden = useCallback((item: placement.Square | null) => items.some((i) => {
     // don't check item which should be reselected
     // or we can overlap other items
     if (overlap || !item || i === reselect) {
@@ -121,20 +119,20 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     }
 
     // check intersections
-    return Placement.crossSquare(i.placement, item)
+    return placement.crossSquare(i.placement, item)
   }), [items, reselect, overlap])
 
-  const getHoveredCell = useCallback((e: React.MouseEvent): Placement.Square => {
+  const getHoveredCell = useCallback((e: React.MouseEvent): placement.Square => {
     const rect = (e.target as HTMLCanvasElement).getBoundingClientRect()
     const cellSize = 1
     const x = Math.trunc((e.clientX - rect.left) / cell.width)
     const y = Math.trunc((e.clientY - rect.top) / cell.height)
 
-    return Placement.square(x, y, x + cellSize, y + cellSize)
+    return placement.square(x, y, x + cellSize, y + cellSize)
   }, [cell])
 
-  const getSelectedArea = useCallback((): Placement.Square | null =>
-    startCell && hoveredCell && Placement.outerBox([startCell, hoveredCell])
+  const getSelectedArea = useCallback((): placement.Square | null =>
+    startCell && hoveredCell && placement.outerBox([startCell, hoveredCell])
   , [startCell, hoveredCell])
 
   const hideContextMenu = useCallback((e: React.MouseEvent) => e.preventDefault(), [])
@@ -150,7 +148,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
 
   const updateSelection = useCallback((e: React.MouseEvent) => {
     const currentCell = getHoveredCell(e)
-    const isCellChanged = !hoveredCell || !Placement.equalSquare(currentCell, hoveredCell)
+    const isCellChanged = !hoveredCell || !placement.equalSquare(currentCell, hoveredCell)
 
     // update only if cell was changed
     if (isCellChanged) {
@@ -158,7 +156,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     }
   }, [hoveredCell, getHoveredCell])
 
-  const endSelection = useCallback((e: React.MouseEvent) => {
+  const endSelection = useCallback(() => {
     const placement = getSelectedArea()
 
     // if cursor is over free area and area is valid
@@ -189,14 +187,14 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     }
 
     setIsIntersected(isInvalid)
-  }, [boardRef.current, hoveredCell, isPlacementForbidden, getSelectedArea])
+  }, [hoveredCell, isPlacementForbidden, getSelectedArea, boardRef])
 
   // --- painting ---
-  const buildAreaOptions = useCallback((item: Placement.Square): Canvas.SquareShapeOptions => {
+  const buildAreaOptions = useCallback((item: placement.Square): canvas.SquareShapeOptions => {
     const cardMargin = gap / 2
 
     return {
-      ...Placement.square(
+      ...placement.square(
         item.v1.x * cell.width + cardMargin,
         item.v1.y * cell.height + cardMargin,
         item.v2.x * cell.width - cardMargin,
@@ -207,14 +205,14 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
   }, [cell, gap, boardStyles.card.radius])
 
   const paintGrid = useCallback((options: Canvas2DPainterOptions) => {
-    const area = Placement.square(0, 0, options.context.canvas.width, options.context.canvas.height)
+    const area = placement.square(0, 0, options.context.canvas.width, options.context.canvas.height)
 
-    options.paintGrid({ rows, columns, ...area },  boardStyles.grid)
+    options.paintGrid({ rows, columns, ...area }, boardStyles.grid)
   }, [columns, rows, boardStyles])
 
-  const paintCard = useCallback((options: Canvas2DPainterOptions, item: Placement.Square | null, styles?: Canvas.ShapeStyleOptions) => {
+  const paintCard = useCallback((options: Canvas2DPainterOptions, item: placement.Square | null, styles?: canvas.ShapeStyleOptions) => {
     if (item) {
-      options.paintCard(buildAreaOptions(item),  styles)
+      options.paintCard(buildAreaOptions(item), styles)
     }
   }, [buildAreaOptions])
 

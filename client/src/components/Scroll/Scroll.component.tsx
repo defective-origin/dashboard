@@ -1,29 +1,32 @@
-import React, { useCallback, useImperativeHandle } from 'react'
+import React, { useImperativeHandle } from 'react'
 
 // ---| components |---
-import Box, { BoxProps } from 'components/Box'
-import Button from 'components/Button'
-import Backdrop from 'components/Backdrop'
+import Button from 'components/lib/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Scroll.module.scss'
-import { ScrollManager, ScrollUIProps, useScrollManager, useScrollUIProps } from './hooks'
+import { ScrollManager, useScrollManager } from './Scroll.hook'
 
-export type ScrollProps = BoxProps & ScrollUIProps & {
+export type ScrollSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type ScrollDirectionType = 'x' | 'y' | 'xy'
+
+export type ScrollProps = {
+  className?: string
+  contentClassName?: string
+  children?: React.ReactNode
+  size?: ScrollSizeType
+  direction?: ScrollDirectionType
   // show navigation buttons after scrolling
   buttons?: boolean
   // subscription on manager
   manager?: React.MutableRefObject<ScrollManager<HTMLDivElement> | null>
   // extra components which is injected into container
   extra?: React.ReactNode
-  // hovering title for up button
-  upBtnTitle?: string
-  // hovering title for left button
-  leftBtnTitle?: string
   showButtonsOn?: number
+  buttonsStyle?: React.CSSProperties
 }
 
 /**
@@ -35,9 +38,9 @@ export type ScrollProps = BoxProps & ScrollUIProps & {
  *   return (
  *     <Scroll
  *       manager={managerRef}
- *       upBtnTitle="Back to start of page"
- *       leftBtnTitle="Back to left side of page"
- *       direction="xy"
+ *       upBtnTitle='Back to start of page'
+ *       leftBtnTitle='Back to left side of page'
+ *       direction='xy'
  *       buttons
  *     >
  *       <div style={{
@@ -50,49 +53,54 @@ export type ScrollProps = BoxProps & ScrollUIProps & {
  */
 export default function Scroll(props: ScrollProps): JSX.Element {
   const {
-    ui,
-    upBtnTitle,
-    leftBtnTitle,
+    size = 'md',
+    direction = 'xy',
     buttons,
     extra,
     manager,
     showButtonsOn = 50,
+    buttonsStyle,
     children,
     className,
+    contentClassName,
     ...otherProps
-  } = useScrollUIProps(props)
-
-  //  TODO: add  shift scroll  from border on 10  px
+  } = props
+  const _className = cn(css.Scroll, className)
+  const _contentClassName = cn(css.Content, `scroll-${direction}`, `scroll--${size}`, contentClassName)
   const scrollManager = useScrollManager<HTMLDivElement>()
-  const backToTop = useCallback(() => scrollManager.moveTop(), [scrollManager])
-  const backToLeft = useCallback(() => scrollManager.moveLeft(), [scrollManager])
   const showLeftButton = showButtonsOn < scrollManager.options.left
   const showUpButton = showButtonsOn < scrollManager.options.top
-  const _className = cn(css.Scroll, props.className)
-  const scrollClassName = cn(css.Content, className)
 
   // subscription on scroll manager
-  useImperativeHandle(manager, () => scrollManager, [manager, scrollManager])
+  useImperativeHandle(manager, () => scrollManager, [scrollManager])
 
   return (
-    <Box className={_className} stretch="xy" position="relative" {...otherProps}>
-      <div className={scrollClassName} ref={scrollManager.ref}>
+    <div className={_className} {...otherProps}>
+      <div className={_contentClassName} ref={scrollManager.ref}>
         {children}
       </div>
 
-      <Backdrop className={css.ButtonContainer} open={buttons}>
-        <Backdrop.Item placement="start-end">
+      {buttons && (
+        <div className={css.Actions} style={buttonsStyle}>
           {showUpButton && (
-            <Button size={ui.size} icon="keyboard_arrow_up" title={upBtnTitle} onClick={backToTop} />
+            <Button
+              size='large'
+              icon='keyboard_arrow_up'
+              onClick={scrollManager.moveStartY}
+            />
           )}
 
           {showLeftButton && (
-            <Button size={ui.size} icon="keyboard_arrow_left" title={leftBtnTitle} onClick={backToLeft} />
+            <Button
+              size='large'
+              icon='keyboard_arrow_left'
+              onClick={scrollManager.moveStartX}
+            />
           )}
-        </Backdrop.Item>
-      </Backdrop>
+        </div>
+      )}
 
       {extra}
-    </Box>
+    </div>
   )
 }

@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Icon] component > should render component 1`] = `
+<DocumentFragment>
+  <span
+    aria-hidden="true"
+    class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium _Icon_867a49 material-symbols-outlined css-kp9ftd-MuiIcon-root"
+  >
+    dark_mode
+  </span>
+</DocumentFragment>
+`;

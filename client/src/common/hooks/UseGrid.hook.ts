@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useMemo, useState } from 'react'
 
 // ---| common |---
-import { useResizeDetector } from 'common/hooks'
-import { Placement } from 'common/tools/'
+import { useResizeWithRef } from 'common/hooks'
+import { placement } from 'common/tools/'
 
 export type GridItem = {
-  placement: Placement.Square
+  placement: placement.Square
   [key: string]: unknown
 }
 
@@ -41,7 +41,7 @@ export type GridOptions<TRef> = {
 // FIXME: recalculate coordinates of items if base changed
 export function useGrid<TRef extends HTMLElement>(options: GridConf): GridOptions<TRef> {
   const { columns, rows } = options
-  const { width, height, ref } = useResizeDetector<HTMLElement>()
+  const { width, height, ref } = useResizeWithRef<HTMLElement>()
   const [cell, setCell] = useState<GridCell>(DEFAULT_CELL)
 
   // on board resizing

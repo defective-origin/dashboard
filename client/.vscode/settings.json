@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [
+    "neccesary",
+    "subarticle"
+  ],
+
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+
+  "prettier.configPath": ".prettierrc.cjs",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": false,
+
+  "vitest.commandLine": "yarn test --"
+}

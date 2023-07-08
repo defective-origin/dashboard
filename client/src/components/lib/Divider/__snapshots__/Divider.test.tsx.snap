@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Divider] component > should render component 1`] = `
+<DocumentFragment>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth _Divider_d244f6 css-9mgopn-MuiDivider-root"
+  />
+</DocumentFragment>
+`;

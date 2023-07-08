@@ -1,0 +1,32 @@
+import React, { useMemo, useState } from 'react'
+
+// ---| self |---
+import {
+  {{pascalCase name}}Context,
+  {{pascalCase name}}Options,
+  DEFAULT_{{constantCase name}}_STATE,
+} from './{{pascalCase name}}.context'
+
+export type {{pascalCase name}}Props = React.PropsWithChildren
+
+/**
+ * Setup {{pascalCase name}} context providers.
+ *
+ * How to use
+ * @example
+ * <{{pascalCase name}} defaultProp={1} />
+ */
+export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Element {
+  const [current, setCurrent] = useState(DEFAULT_{{constantCase name}}_STATE)
+
+  const options = useMemo<{{pascalCase name}}Options>(() => ({
+    ...current,
+    change: (patch) => setCurrent((state) => ({ ...state, ...patch })),
+  }), [current])
+
+  return <{{pascalCase name}}Context.Provider value={options} {...props} />
+}
+
+{{pascalCase name}}.displayName = '{{pascalCase name}}'
+
+export default {{pascalCase name}}

@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react'
 
 export type RectOptions = {
   width: number,
@@ -35,7 +35,7 @@ export function useResize<TElement extends Element = HTMLDivElement>(
 
       setOptions(newOptions)
     }
-  }, [])
+  }, [ref])
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(onResize)
@@ -43,17 +43,17 @@ export function useResize<TElement extends Element = HTMLDivElement>(
     resizeObserver.observe(ref.current as Element)
 
     return () => resizeObserver.disconnect()
-  }, [])
+  }, [onResize, ref])
 
   return options
 }
 
 export function useResizeWithRef<TElement extends Element = HTMLDivElement>()
-: [React.MutableRefObject<TElement | null>, RectOptions] {
+: RectOptions & { ref: React.MutableRefObject<TElement | null> } {
   const ref = useRef(null)
   const options = useResize<TElement>(ref)
 
-  return [ref, options]
+  return useMemo(() => ({ ref, ...options }), [ref, options])
 }
 
 export default useResizeWithRef

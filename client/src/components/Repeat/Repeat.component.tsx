@@ -4,8 +4,6 @@ import React, { ComponentProps } from 'react'
 // ---| common |---
 import { wk } from 'common/tools'
 
-const first = <T extends unknown>(x: T) => x
-
 export type ExtensionItem<ItemProps extends Record<string, any>> = Partial<ItemProps> & {
   [key: string]: any
 }
@@ -118,7 +116,7 @@ export default function Repeat<
     nested,
     flatten,
     selectKey = wk,
-    selectProps = first,
+    selectProps = (...args) => args[0],
     ...sharedProps
   } = props
 

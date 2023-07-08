@@ -1,7 +1,7 @@
 export const InputPrompt = (options = {}) => ({
   message: `Enter ${options.name}`,
   type: 'input',
-  ...options
+  ...options,
 })
 
 export const StringInputPrompt = (options = {}) => InputPrompt({
@@ -12,7 +12,7 @@ export const StringInputPrompt = (options = {}) => InputPrompt({
       input ?? '',
       options.postfix ? ` ${options.postfix}` : '',
     ].join('')
-    
+
     return options.filter?.(filteredInput) ?? filteredInput
   },
 })

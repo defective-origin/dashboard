@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Banner] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="_Banner_fd7a36"
+  />
+</DocumentFragment>
+`;

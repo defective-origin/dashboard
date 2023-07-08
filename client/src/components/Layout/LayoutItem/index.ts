@@ -1,5 +1,7 @@
-export { default } from './LayoutItem.component'
-export * from './LayoutItem.component'
+/* INJECT_IMPORT_PLACE */
 
-export * from './LayoutItemUI'
-export { default as useLayoutItemUIProps } from './LayoutItemUI'
+/* INJECT_DEFAULT_EXPORT_PLACE */
+export { default } from './LayoutItem.component'
+
+/* INJECT_EXPORT_PLACE */
+export * from './LayoutItem.component'

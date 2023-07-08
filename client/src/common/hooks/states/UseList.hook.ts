@@ -45,7 +45,7 @@ export function useList<T>(init: T[] = LIST_DEFAULT_VALUE, options: ListOptions<
     ref.registerHandler('remove', (val, index) => {
       const indexSet = new Set(Array.isArray(index) ? index : [index])
       
-      return val.filter((_,  idx) => !indexSet.has(idx))
+      return val.filter((_, idx) => !indexSet.has(idx))
     })
     ref.registerHandler('replace', (val, index, item) => {
       const newList = [...val]
@@ -58,7 +58,7 @@ export function useList<T>(init: T[] = LIST_DEFAULT_VALUE, options: ListOptions<
       const item = val[from]
       const items = val.filter((i) => i !== item)
 
-      return  [...items.slice(0, to), item, ...items.slice(to)]
+      return [...items.slice(0, to), item, ...items.slice(to)]
     })
 
     // formats

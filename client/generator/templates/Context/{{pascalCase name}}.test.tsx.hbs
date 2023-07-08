@@ -1,0 +1,28 @@
+// ---| tests |---
+import { renderHook } from '@testing-library/react-hooks'
+
+// ---| self |---
+import { use{{pascalCase name}} } from './{{pascalCase name}}.context'
+import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase name}}.component'
+
+/**
+ * Context descriptions
+ *
+ * @example
+ * const { result } = renderHook(() => useCounter())
+ *
+ * act(() => {
+ *   result.current.increment()
+ * })
+ *
+ * expect(result.current.count).toBe(1)
+ */
+describe('[{{pascalCase name}}] context', () => {
+  const wrapper = (props: {{pascalCase name}}Props) => <{{pascalCase name}} { ...props } />
+
+  it('should return options', () => {
+    const { result } = renderHook(() => use{{pascalCase name}}(), { wrapper })
+
+    expect(result.current).toBeTruthy()
+  })
+})

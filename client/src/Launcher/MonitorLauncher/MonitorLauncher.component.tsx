@@ -1,33 +1,18 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 // ---| self |---
-import { LogProvider } from './LogProvider'
-import { AnalyticsProvider } from './AnalyticsProvider'
-import { ABTestProvider } from './ABTestProvider'
+import { MonitorLauncherContext, MonitorLauncherOptions } from './MonitorLauncher.context'
 
-export type MonitorLauncherProps = {
-  children?: React.ReactNode
-}
+export type MonitorLauncherProps = React.PropsWithChildren
 
-/**
- * Setup all monitor context providers.
- *
- * How to use
- * @example
- * <MonitorLauncher />
- */
 export function MonitorLauncher(props: MonitorLauncherProps): JSX.Element {
-  const { children } = props
+  const options = useMemo<MonitorLauncherOptions>(() => ({
+    flag: (type) => !!new URLSearchParams(window.location.search).get(type),
+    log: (type, options) => { console.log('LOG:', type, options) },
+    event: (type, options) => { console.log('EVENT:', type, options) },
+  }), [])
 
-  return (
-    <LogProvider>
-      <AnalyticsProvider>
-        <ABTestProvider>
-          {children}
-        </ABTestProvider>
-      </AnalyticsProvider>
-    </LogProvider>
-  )
+  return <MonitorLauncherContext.Provider value={options} {...props} />
 }
 
 MonitorLauncher.displayName = 'MonitorLauncher'

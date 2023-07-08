@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Card] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _Card_92e1e1 css-bhp9pd-MuiPaper-root-MuiCard-root"
+  />
+</DocumentFragment>
+`;

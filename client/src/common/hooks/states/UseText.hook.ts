@@ -9,10 +9,9 @@ export type TextOptions = TypeOptions<string> & {
 }
 
 export type TextReturnOptions = TypeReturnOptions<string, TextOptions>
-  & TypeHandler<'concat', (...args: Parameters<String['concat']>) => void>
-  & TypeHandler<'replace', (...args: Parameters<String['replace']>) => void>
-  & TypeHandler<'replaceAll', (...args: Parameters<String['replaceAll']>) => void>
-  & TypeHandler<'slice', (...args: Parameters<String['slice']>) => void>
+  & TypeHandler<'concat', (...args: Parameters<string['concat']>) => void>
+  & TypeHandler<'replace', (...args: Parameters<string['replace']>) => void>
+  & TypeHandler<'slice', (...args: Parameters<string['slice']>) => void>
   & TypeHandler<'toLowerCase', () => void>
   & TypeHandler<'toUpperCase', () => void>
   & TypeHandler<'trim', () => void>
@@ -26,10 +25,9 @@ export function useText(init = TEXT_DEFAULT_VALUE, options: TextOptions = {}): T
   // extend functionality
   useLayoutEffect(() => {
     // handlers
-    ref.registerHandler('concat', (val, ...args: Parameters<String['concat']>) => val.concat(...args))
-    ref.registerHandler('replace', (val, ...args: Parameters<String['replace']>) => val.replace(...args))
-    ref.registerHandler('replaceAll', (val, ...args: Parameters<String['replaceAll']>) => val.replaceAll(...args))
-    ref.registerHandler('slice', (val, ...args: Parameters<String['slice']>) => val.slice(...args))
+    ref.registerHandler('concat', (val, ...args: Parameters<string['concat']>) => val.concat(...args))
+    ref.registerHandler('replace', (val, ...args: Parameters<string['replace']>) => val.replace(...args))
+    ref.registerHandler('slice', (val, ...args: Parameters<string['slice']>) => val.slice(...args))
     ref.registerHandler('toLowerCase', (val) => val.toLowerCase())
     ref.registerHandler('toUpperCase', (val) => val.toUpperCase())
     ref.registerHandler('trim', (val) => val.trim())

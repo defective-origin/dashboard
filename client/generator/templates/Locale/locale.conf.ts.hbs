@@ -18,12 +18,12 @@ import l10n from './l10n'
  * const resources = {
  *   en: {
  *     translation: {
- *       "Welcome to React": "Welcome to React and react-i18next"
+ *       'Welcome to React': 'Welcome to React and react-i18next'
  *     },
  *   },
  *   fr: {
  *     translation: {
- *       "Welcome to React": "Bienvenue à React et react-i18next"
+ *       'Welcome to React': 'Bienvenue à React et react-i18next'
  *     },
  *   },
  * }
@@ -51,7 +51,7 @@ i18next
 
     // preload?: false | readonly string[];
 
-    // Allows "en-US" and "en-UK" to be implcitly supported when "en" is supported
+    // Allows 'en-US' and 'en-UK' to be implcitly supported when 'en' is supported
     nonExplicitSupportedLngs: true,
 
     fallbackLng: 'en',
@@ -78,4 +78,4 @@ export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
 
 export default i18next
 export { I18nextProvider } from 'react-i18next'
-export const t = (key?: TranslateKeys) => key && i18next.t(key)
+export const t = (key?: TranslateKeys, options?: object) => key && i18next.t(key, options)

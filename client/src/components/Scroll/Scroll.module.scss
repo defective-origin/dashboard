@@ -1,5 +1,10 @@
+@import "src/Launcher/UILauncher/UILauncher.module.scss";
+
 .Scroll {
   overflow: hidden;
+  position: relative;
+
+  @include stretch;
 }
 
 .Content {
@@ -10,11 +15,13 @@
   bottom: 0;
 }
 
-.ButtonContainer {
+.Actions {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
   opacity: 0.5;
 
   &:hover {
     opacity: 1;
   }
 }
-

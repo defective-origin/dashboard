@@ -1,6 +1,5 @@
 import { Square, square, squareHeight, squareWidth } from '../Placement'
 
-/* eslint-disable max-len */
 export type ShapeStyleOptions =
   Partial<CanvasShadowStyles> & // shadow
   Partial<Omit<CanvasPathDrawingStyles, 'getLineDash' | 'setLineDash'>> & // line

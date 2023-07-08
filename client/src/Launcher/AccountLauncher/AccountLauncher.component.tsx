@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 
 // ---| self |---
-import UserProvider from './UserProvider'
-import AccountSettingsProvider from './AccountSettingsProvider'
+import {
+  AccountLauncherContext,
+  AccountLauncherOptions,
+  DEFAULT_ACCOUNT_LAUNCHER_STATE,
+} from './AccountLauncher.context'
 
-export type AccountLauncherProps = {
-  children?: React.ReactNode
-}
+export type AccountLauncherProps = React.PropsWithChildren
 
 /**
  * Setup account context providers.
@@ -16,15 +17,16 @@ export type AccountLauncherProps = {
  * <AccountLauncher defaultProp={1} />
  */
 export function AccountLauncher(props: AccountLauncherProps): JSX.Element {
-  const { children } = props
+  const [current, setCurrent] = useState(DEFAULT_ACCOUNT_LAUNCHER_STATE)
 
-  return (
-    <AccountSettingsProvider>
-      <UserProvider>
-        {children}
-      </UserProvider>
-    </AccountSettingsProvider>
-  )
+  const options = useMemo<AccountLauncherOptions>(() => ({
+    ...current,
+    login: () => setCurrent((state) => ({ ...state, user: {} })),
+    logout: () => setCurrent((state) => ({ ...state, user: null })),
+    isAuthorized: !!current.user,
+  }), [current])
+
+  return <AccountLauncherContext.Provider value={options} {...props} />
 }
 
 AccountLauncher.displayName = 'AccountLauncher'

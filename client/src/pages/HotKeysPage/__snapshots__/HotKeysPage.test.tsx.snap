@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[HotKeysPage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--row page _HotKeysPage_a8be87"
+  >
+    <div
+      class="layout-item layout-item--content"
+    >
+      <div>
+        TEST CONTENT
+      </div>
+      <div>
+        TEST CONTENT
+      </div>
+      <div>
+        TEST CONTENT
+      </div>
+      <div>
+        TEST CONTENT
+      </div>
+      <div>
+        TEST CONTENT
+      </div>
+      <div>
+        TEST CONTENT
+      </div>
+    </div>
+    <div
+      class="layout-item layout-item--footer"
+    >
+      FOOTER
+    </div>
+    <div
+      class="layout-item layout-item--left-aside"
+    >
+      LEFT ASIDE
+    </div>
+    <div
+      class="layout-item layout-item--right-aside"
+    >
+      RIGHT ASIDE
+    </div>
+    <div
+      class="layout-item layout-item--right-aside"
+    >
+      -------------------
+    </div>
+    <div
+      class="layout-item layout-item--right-aside"
+    >
+      CONTENT
+    </div>
+  </div>
+</DocumentFragment>
+`;

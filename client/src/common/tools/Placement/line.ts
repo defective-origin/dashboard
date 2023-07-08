@@ -82,16 +82,16 @@ export const geByLength = (a: Line, b: Line): boolean => geBy(a, b, lineLength)
  * @returns { Line } Return true if line is crossed otherwise false.
  */
 export const crossByLine = (a: Line, b: Line): boolean => {
-  const det = (a.v2.x - a.v1.x) * (b.v2.y - b.v1.y) - (b.v2.x - b.v1.x) * (a.v2.y - a.v1.y);
+  const det = (a.v2.x - a.v1.x) * (b.v2.y - b.v1.y) - (b.v2.x - b.v1.x) * (a.v2.y - a.v1.y)
   if (det === 0) {
-    return false;
+    return false
   }
 
-  const lambda = ((b.v2.y - b.v1.y) * (b.v2.x - a.v1.x) + (b.v1.x - b.v2.x) * (b.v2.y - a.v1.y)) / det;
-  const gamma = ((a.v1.y - a.v2.y) * (b.v2.x - a.v1.x) + (a.v2.x - a.v1.x) * (b.v2.y - a.v1.y)) / det;
+  const lambda = ((b.v2.y - b.v1.y) * (b.v2.x - a.v1.x) + (b.v1.x - b.v2.x) * (b.v2.y - a.v1.y)) / det
+  const gamma = ((a.v1.y - a.v2.y) * (b.v2.x - a.v1.x) + (a.v2.x - a.v1.x) * (b.v2.y - a.v1.y)) / det
 
-  return (0 < lambda && lambda < 1) && (0 < gamma && gamma < 1);
-};
+  return (0 < lambda && lambda < 1) && (0 < gamma && gamma < 1)
+}
 
 // ---------------------- SELECTION ----------------------
 

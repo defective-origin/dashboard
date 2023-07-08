@@ -1,22 +1,60 @@
-// ---| components |---
-import { ComponentUIProps, useComponentUIProps } from 'components/Component'
+import React from 'react'
+
+// ---| common |---
+import { cn, react } from 'common/tools'
 
 // ---| self |---
-import LayoutItem, { LayoutItemProps } from './LayoutItem'
-import useLayoutUIProps, { LayoutUIProps } from './LayoutUI'
+import './Layout.module.scss'
+import LayoutItem from './LayoutItem'
 
-export type LayoutProps = LayoutUIProps & ComponentUIProps
+export type LayoutType = 'row' | 'column' | 'left-aside' | 'right-aside'
 
-export default function Layout(props: LayoutProps): JSX.Element | null {
-  const _props = useLayoutUIProps(props)
-
-  return useComponentUIProps(_props)
+export type LayoutProps = {
+  className?: string
+  children?: React.ReactNode
+  type?: LayoutType
+  gap?: string | number
 }
 
+/**
+ * Component description.
+ *
+ * How to use
+ * @example
+ * <Layout />
+ */
+export function Layout(props: LayoutProps): JSX.Element {
+  const { gap, type = 'row', children, className, ...otherProps } = props
+  const _className = cn('layout', `layout--${type}`, className)
 
-Layout.Item = LayoutItem
-Layout.LeftAside = (props: LayoutItemProps) => <LayoutItem type="left-aside" {...props} />
-Layout.RightAside = (props: LayoutItemProps) => <LayoutItem type="right-aside" {...props} />
-Layout.Footer = (props: LayoutItemProps) => <LayoutItem type="footer" {...props} />
-Layout.Header = (props: LayoutItemProps) => <LayoutItem type="header" {...props} />
-Layout.Content = (props: LayoutItemProps) => <LayoutItem type="content" {...props} />
+  const items = React.Children.toArray(children)
+  const layoutItems = items.filter((child) => react.hasExemplar(LAYOUT_ITEMS, child))
+  const otherItems = items.filter((child) => !react.hasExemplar(LAYOUT_ITEMS, child))
+  const hasContentItem = items.some((child) => react.isExemplar(Layout.Content, child))
+
+  return (
+    <div className={_className} {...otherProps} style={{ gap }}>
+      {hasContentItem && otherItems}
+
+      {!hasContentItem && (
+        <Layout.Content>
+          {otherItems}
+        </Layout.Content>
+      )}
+
+      {layoutItems}
+    </div>
+  )
+}
+
+Layout.displayName = 'Layout'
+
+Layout.LeftAside = LayoutItem.LeftAside
+Layout.RightAside = LayoutItem.RightAside
+Layout.Footer = LayoutItem.Footer
+Layout.Header = LayoutItem.Header
+Layout.Content = LayoutItem.Content
+
+export const LAYOUT_ITEMS = [Layout.LeftAside, Layout.RightAside, Layout.Footer, Layout.Header, Layout.Content]
+
+export default Layout

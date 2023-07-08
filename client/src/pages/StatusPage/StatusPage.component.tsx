@@ -1,14 +1,14 @@
 import React from 'react'
-import { RouteComponentProps } from '@reach/router'
 
 // ---| core |---
-import { useLocaleProvider } from 'Launcher'
+import { useSystemLauncher, RouteProps } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
+
 // ---| components |---
 import Banner from 'components/Banner'
-import { Page } from 'components/Page'
+import Page, { PageProps } from 'components/Page'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -17,7 +17,7 @@ import { cn } from 'common/tools'
 import css from './StatusPage.module.scss'
 import { STATUS_MAP, StatusType } from './StatusPage.conf'
 
-export type StatusPageProps = RouteComponentProps & {
+export type StatusPageProps = RouteProps & Omit<PageProps, 'type'> & {
   className?: string
   children?: React.ReactNode
   type?: StatusType
@@ -31,21 +31,23 @@ export type StatusPageProps = RouteComponentProps & {
  * <StatusPage />
  */
 export function StatusPage(props: StatusPageProps): JSX.Element {
-  const { type = 'default', children, className, ...otherProps } = props
-  const locale = useLocaleProvider()
+  const { navigate, type = 'default', children, className, ...otherProps } = props
   const _className = cn(css.StatusPage, className)
+  const system = useSystemLauncher()
   const status = STATUS_MAP[type]
 
   return (
-    <Page name={type.toString()} className={_className} position='relative' {...otherProps}>
+    <Page
+      className={_className}
+      name={system.t('SYSTEM.TAB_NAME', { title: system.t('PAGES.STATUS') })}
+      {...otherProps}
+    >
       <Banner
         className={css.Banner}
-        position='absolute'
-        placement='center-center'
         imageType={status.image}
-        title={locale.t(status.title)}
-        subtitle={locale.t(status.subtitle)}
-        text={locale.t(status.text)}
+        title={system.t(status.title)}
+        subtitle={system.t(status.subtitle)}
+        text={system.t(status.text)}
       >
         {children}
       </Banner>

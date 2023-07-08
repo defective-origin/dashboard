@@ -7,7 +7,7 @@ export type Vector = {
 
 export function vector(point: number | Vector): Vector
 export function vector(x: number, y: number): Vector
-export function vector(x_or_point: any, y?: any) {
+export function vector(x_or_point: number | Vector, y?: number) {
     if (isNumber(y)) {
       return { x: x_or_point, y }
     } else if (isNumber(x_or_point)) {

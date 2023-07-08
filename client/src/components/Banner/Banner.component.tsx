@@ -1,10 +1,9 @@
 import React from 'react'
 
 // ---| components |---
-import Icon from 'components/Icon'
-import Text, { TextProps } from 'components/Text'
-import Box, { BoxProps } from 'components/Box'
+import Text from 'components/lib/Text'
 import Image, { ImageTypes } from 'components/Image'
+import Progress from 'components/lib/Progress'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -12,17 +11,14 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Banner.module.scss'
 
-export type BannerProps = BoxProps & {
+export type BannerProps = {
   className?: string
   children?: React.ReactNode
   imageSrc?: string
   imageType?: ImageTypes
   title?: React.ReactNode
-  titleType?: TextProps['type']
   subtitle?: React.ReactNode
-  subtitleType?: TextProps['type']
   text?: React.ReactNode
-  textType?: TextProps['type']
   loading?: boolean
   show?: boolean
 }
@@ -52,9 +48,6 @@ export function Banner(props: BannerProps): JSX.Element | null {
     title,
     subtitle,
     text,
-    titleType,
-    subtitleType,
-    textType,
     loading,
     children,
     className,
@@ -68,22 +61,22 @@ export function Banner(props: BannerProps): JSX.Element | null {
 
   if (loading) {
     return (
-      <Box className={_className} {...otherProps}>
-        <Icon className={css.Spinner} type='sync' loading />
-      </Box>
+      <div className={_className} {...otherProps}>
+        <Progress className={css.Progress} show />
+      </div>
     )
   }
 
   return (
-    <Box className={_className} {...otherProps}>
+    <div className={_className} {...otherProps}>
       {imageSrc || imageType && <Image className={css.Image} src={imageSrc} type={imageType} />}
 
-      {title && <Text.H2 weight={6} align='center' className={css.Title} type={titleType} text={title} />}
-      {subtitle && <Text.H3 weight={4} align='center' className={css.Subtitle} type={subtitleType} text={subtitle} />}
-      {text && <Text.Paragraph align='center' className={css.Text} type={textType} text={text} />}
+      {title && <Text.H4 align='center' className={css.Title} text={title} />}
+      {subtitle && <Text.H5 align='center' className={css.Subtitle} text={subtitle} />}
+      {text && <Text.Body1 align='center' className={css.Text} text={text} />}
 
       {children}
-    </Box>
+    </div>
   )
 }
 

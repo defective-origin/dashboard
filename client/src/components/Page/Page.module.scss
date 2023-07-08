@@ -1,4 +1,31 @@
-@import "Launcher/UILauncher/UISettingsProvider/UISettingsProvider.module.scss";
+@import "src/Launcher/UILauncher/UILauncher.module.scss";
 
-.Page {
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+
+  .page {
+    @include stretch;
+
+    &__header {
+      padding: 1rem;
+
+      &-title {
+    
+      }
+
+      &-info {
+    
+      }
+
+      &-extra {
+    
+      }
+    }
+  }
 }

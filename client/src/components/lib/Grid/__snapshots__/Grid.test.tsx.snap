@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Grid] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiGrid-root MuiGrid-container _Grid_ce6039 css-11lq3yg-MuiGrid-root"
+  />
+</DocumentFragment>
+`;

@@ -1,0 +1,22 @@
+@import "src/Launcher/UILauncher/UILauncher.module.scss";
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+
+  .layout-item {
+    justify-self: stretch;
+    align-self: stretch;
+
+    &--left-aside { grid-area: left-aside; }
+    &--right-aside { grid-area: right-aside; }
+    &--footer { grid-area: footer; }
+    &--header { grid-area: header; }
+    &--content { grid-area: content; }
+  }
+}

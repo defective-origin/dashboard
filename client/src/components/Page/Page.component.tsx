@@ -2,19 +2,26 @@ import React from 'react'
 
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
+import Block from 'components/Block'
 import Helmet from 'components/lib/Helmet'
+import Text from 'components/lib/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './Page.module.scss'
+import './Page.module.scss'
 
 export type PageProps = LayoutProps & {
-  name?: string
   className?: string
   children?: React.ReactNode
+  name?: string
+  title?: React.ReactNode
+  info?: React.ReactNode
+  extra?: React.ReactNode
 }
+
+const NAME = 'page'
 
 /**
  * Component description.
@@ -24,28 +31,38 @@ export type PageProps = LayoutProps & {
  * <Page />
  */
 export function Page(props: PageProps): JSX.Element {
-  const { name, children, className, ...otherProps } = props
-  const _className = cn(css.Page, className)
-  const isHeadChanged = name
-  const hasPageComponents = React.Children
-    .toArray(children)
-    .some((child) => React.isValidElement(child) && PAGE_ITEMS.includes((child as JSX.Element).type))
+  const { name, title, info, extra, children, className, ...otherProps } = props
+  const _className = cn(NAME, className)
+  const isMetaChanged = name
+  const hasHeader = title || extra || info
 
   return (
-    <Layout className={_className} stretch='xy' {...otherProps}>
-      {isHeadChanged && (
+    <Layout className={_className} {...otherProps}>
+      {isMetaChanged && (
         <Helmet>
           { name && <title>{name}</title> }
         </Helmet>
       )}
 
-      {!hasPageComponents && (
-        <Page.Content>
-          {children}
-        </Page.Content>
+      {hasHeader && (
+        <Layout.Header className={`${NAME}__header`}>
+          <Block>
+            <Block.Start className={`${NAME}__header-title`}>
+              <Text.H4>{title}</Text.H4>
+            </Block.Start>
+
+            <Block.Center className={`${NAME}__header-info`}>
+              {info}
+            </Block.Center>
+
+            <Block.End className={`${NAME}__header-extra`}>
+              {extra}
+            </Block.End>
+          </Block>
+        </Layout.Header>
       )}
 
-      {hasPageComponents && children}
+      {children}
     </Layout>
   )
 }
@@ -57,5 +74,4 @@ Page.RightAside = Layout.RightAside
 Page.Footer = Layout.Footer
 Page.Header = Layout.Header
 Page.Content = Layout.Content
-
-export const PAGE_ITEMS = [Page.LeftAside, Page.RightAside, Page.Footer, Page.Header, Page.Content]
+Page.Block = Block

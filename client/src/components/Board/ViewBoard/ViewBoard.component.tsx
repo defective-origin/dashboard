@@ -1,10 +1,10 @@
 // ---| components |---
 import Repeat from 'components/Repeat'
-import { GeneralProps } from 'components/Component'
 
 // ---| common |---
 import { cn } from 'common/tools'
 import { GridConf, GridItem, useGrid } from 'common/hooks'
+import { react } from 'common/tools'
 
 // ---| self |---
 import ViewBoardItemComponent, { ViewBoardItemPrototype } from './ViewBoardItem'
@@ -12,7 +12,7 @@ import css from './ViewBoard.module.scss'
 
 export type ViewBoardItem = GridItem
 
-export type ViewBoardProps = GeneralProps & GridConf & {
+export type ViewBoardProps = react.GeneralProps & GridConf & {
   // item which should be displayed as widget builder
   widget?: ViewBoardItemPrototype
   // set margin around each widget
