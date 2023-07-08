@@ -17,7 +17,8 @@
     "prettier": "prettier --ignore-path .gitignore src --check",
     "prettier:fix": "prettier --ignore-path .gitignore src --write",
     "check:changes": "yarn lint && yarn test && yarn build",
-    "gen": "plop --plopfile ./generator/generator.conf.js --dest ./src"
+    "gen": "plop --plopfile ./generator/generator.parts.js --dest ./src",
+    "gen:init": "plop --plopfile ./generator/generator.init.js --dest ./src"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

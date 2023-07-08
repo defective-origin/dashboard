@@ -112,6 +112,13 @@ export default function (plop) {
     ),
   })
 
+  // Create a launcher which includes typed contexts.
+  // Launcher required criteria:
+  // - Receive default options from props or default config
+  // - Can receive data from API
+  // - Can use only other Launchers inside
+  // - Should have Launcher postfix in component name
+  // - Spread data between inner components via contexts
   plop.setGenerator('Context', {
     description: 'Create a Context',
     prompts: Tool.list(
@@ -132,80 +139,6 @@ export default function (plop) {
     ),
   })
 
-  // Create a launcher which includes typed contexts.
-  // Launcher required criteria:
-  // - Receive default options from props or default config
-  // - Can receive data from API
-  // - Can use only other Launchers inside
-  // - Should have Launcher postfix in component name
-  // - Spread data between inner components via contexts
-  //
-  // Popular launchers:
-  // - SystemLauncher - [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
-  // - MonitorLauncher - [Log | Analytics | ABTest + FeatureFlag]
-  // - UILauncher - [UISettings | SnackBar | ModalWindow | Suspense]
-  // - AccountLauncher - [AccountSettings | AccountUser]
-  plop.setGenerator('Init Launcher', ComponentGenerator({
-    description: 'Create Launcher Component',
-    files: ['component', 'conf', 'stub'],
-    data: {
-      subpath: './',
-      name: 'Launcher',
-    },
-  }))
-
-  plop.setGenerator('Init Locale', {
-    description: 'Create a Locale config with translate maps',
-    prompts: Tool.list(),
-    actions: Tool.list(
-      Action.Folder({
-        target: 'locale',
-        template: 'templates/Locale',
-        files: ['conf', 'test', 'tool'],
-        module: {
-          notExports: ['test'],
-          defaultExport: ['conf'],
-        },
-        data: { name: 'LocaleProvider' },
-      }),
-
-      // generate all language map files for translates and locale formatters
-      [ 'i18n', 'l10n' ].map((submodule) => [
-        Action.ModuleFile({
-          type: 'partial',
-          target: `locale/${submodule}`,
-        }),
-        [ 'en', 'ru' ].map((language) => Action.File({
-          target: `locale/${submodule}/${language}.json`,
-          template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
-          module: {
-            target: `locale/${submodule}`,
-            type: 'partial',
-            import: true,
-            export: true,
-          },
-          data: { name: language },
-        })),
-      ]),
-    ),
-  })
-
-  plop.setGenerator('Store', {
-    description: 'Create a Store',
-    prompts: Tool.list(),
-    actions: Tool.list(
-      Action.Folder({
-        target: 'store',
-        template: 'templates/Store',
-        files: ['component', 'selector', 'action', 'mock'],
-        module: {
-          notExports: [],
-          defaultExport: 'component',
-        },
-      }),
-    ),
-  })
-
   plop.setGenerator('Store Slice', {
     description: 'Create a Store Slice',
     prompts: Tool.list(
@@ -222,22 +155,6 @@ export default function (plop) {
           defaultExport: 'store',
         },
         isSubmodule: true,
-      }),
-    ),
-  })
-
-  plop.setGenerator('Api', {
-    description: 'Create a Api',
-    prompts: Tool.list(),
-    actions: Tool.list(
-      Action.Folder({
-        target: 'api',
-        template: 'templates/Api',
-        files: ['request', 'tool', 'component', 'mock'],
-        module: {
-          notExports: [],
-          defaultExport: 'component',
-        },
       }),
     ),
   })

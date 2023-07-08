@@ -16,8 +16,8 @@ Project
 ## Add scripts to package json
 ```sh
   "scripts": {
-    "gen": "plop --plopfile ./generator/generator.conf.js --dest ./src"
-    "gen:init": "plop --plopfile ./generator/generator.conf.js --dest ./src"
+    "gen": "plop --plopfile ./generator/generator.parts.js --dest ./src"
+    "gen:init": "plop --plopfile ./generator/generator.init.js --dest ./src"
   },
 ```
 
@@ -48,7 +48,8 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 - public/ - assests which will be loaded after page loading
 - generator/ - generator of application parts
 	- templates/
-	- generator.conf.ts
+	- generator.init.ts
+	- generator.parts.ts
 	- generator.tool.ts
 	- generator.prompt.ts
 	- generator.action.ts
@@ -119,17 +120,17 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	
 	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work  + env settings in constants
 		- Component structure
-		- SystemLauncher - providers: [StrictMode | Suspense | Router | Store | Api | locale + dayjs | HotKeys]
-		- MonitorLauncher - providers: [Log | Analytics | ABTest + FeatureFlag]
-		- UILauncher - providers: [UISettings | SnackBar | ModalWindow]
-		- AccountLauncher - providers: [AccountSettings | User]
-			- Component structure
-			- ProviderNameProvider
-				- ProviderNameProvider.component.ts
-				- ProviderNameProvider.context.ts
-				- ProviderNameProvider.test.ts
-				- ProviderNameProvider.stub.ts
-				- index.ts
+  	- SystemLauncher - [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
+  	- MonitorLauncher - [Log | Analytics | ABTest + FeatureFlag]
+  	- UILauncher - [UISettings | SnackBar | ModalWindow | Suspense]
+  	- AccountLauncher - [AccountSettings | AccountUser]
+    	- Context structure
+  		- LauncherNameLauncher.component.ts
+  		- LauncherNameLauncher.context.ts
+  		- LauncherNameLauncher.conf.ts
+  		- LauncherNameLauncher.test.ts
+  		- LauncherNameLauncher.stub.ts
+  		- index.ts
 
 	- web-workers/
 		- WebWorkerNameWW/

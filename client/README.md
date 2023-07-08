@@ -68,7 +68,13 @@ yarn check:changes
 
 #### Code generator
 
-Allows to generate parts of code.
+To generate structure parts of code.
+
+```
+yarn gen:init
+```
+
+To generate small parts of code.
 
 ```
 yarn gen
