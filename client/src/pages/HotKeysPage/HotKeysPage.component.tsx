@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { RouteProps, useLocaleProvider } from 'Launcher'
+import { RouteProps, useSystemLauncher } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -28,13 +28,13 @@ export type HotKeysPageProps = RouteProps & PageProps & {
 export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
   const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.HotKeysPage, className)
-  const locale = useLocaleProvider()
-  const title = locale.t('PAGES.HOTKEYS')
+  const system = useSystemLauncher()
+  const title = system.t('PAGES.HOTKEYS')
 
   return (
     <Page
       className={_className}
-      name={locale.t('SYSTEM.TAB_NAME', { title })}
+      name={system.t('SYSTEM.TAB_NAME', { title })}
       title={title}
       {...otherProps}
     >

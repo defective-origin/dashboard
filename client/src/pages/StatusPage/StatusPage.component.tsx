@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useLocaleProvider, RouteProps } from 'Launcher'
+import { useSystemLauncher, RouteProps } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -33,22 +33,21 @@ export type StatusPageProps = RouteProps & Omit<PageProps, 'type'> & {
 export function StatusPage(props: StatusPageProps): JSX.Element {
   const { navigate, type = 'default', children, className, ...otherProps } = props
   const _className = cn(css.StatusPage, className)
-  const locale = useLocaleProvider()
+  const system = useSystemLauncher()
   const status = STATUS_MAP[type]
-  
 
   return (
     <Page
       className={_className}
-      name={locale.t('SYSTEM.TAB_NAME', { title: locale.t('PAGES.STATUS') })}
+      name={system.t('SYSTEM.TAB_NAME', { title: system.t('PAGES.STATUS') })}
       {...otherProps}
     >
       <Banner
         className={css.Banner}
         imageType={status.image}
-        title={locale.t(status.title)}
-        subtitle={locale.t(status.subtitle)}
-        text={locale.t(status.text)}
+        title={system.t(status.title)}
+        subtitle={system.t(status.subtitle)}
+        text={system.t(status.text)}
       >
         {children}
       </Banner>

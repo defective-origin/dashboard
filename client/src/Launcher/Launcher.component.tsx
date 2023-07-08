@@ -6,9 +6,7 @@ import UILauncher from './UILauncher'
 import AccountLauncher from './AccountLauncher'
 import MonitorLauncher from './MonitorLauncher'
 
-export type LauncherProps = {
-  children?: React.ReactNode
-}
+export type LauncherProps = React.PropsWithChildren
 
 /**
  * Run all launchers with main app page.

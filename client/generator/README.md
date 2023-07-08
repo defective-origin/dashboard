@@ -16,8 +16,8 @@ Project
 ## Add scripts to package json
 ```sh
   "scripts": {
-    "gen": "plop --plopfile ./generator/generator.config.js --dest ./src"
-    "gen:init": "plop --plopfile ./generator/generator.config.js --dest ./src"
+    "gen": "plop --plopfile ./generator/generator.conf.js --dest ./src"
+    "gen:init": "plop --plopfile ./generator/generator.conf.js --dest ./src"
   },
 ```
 
@@ -48,7 +48,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 - public/ - assests which will be loaded after page loading
 - generator/ - generator of application parts
 	- templates/
-	- generator.config.ts
+	- generator.conf.ts
 	- generator.tool.ts
 	- generator.prompt.ts
 	- generator.action.ts

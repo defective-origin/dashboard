@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useLocaleProvider, Router } from 'Launcher'
+import { useSystemLauncher, Router } from 'Launcher'
 
 // ---| pages |---
 import StatusPage from 'pages/StatusPage'
@@ -33,12 +33,12 @@ export type AppPageProps = PageProps & {
 export function AppPage(props: AppPageProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.AppPage, className)
-  const locale = useLocaleProvider()
+  const system = useSystemLauncher()
 
   return (
     <Page
       className={_className}
-      name={locale.t('SYSTEM.TAB_NAME', { title: locale.t('PAGES.STATUS') })}
+      name={system.t('SYSTEM.TAB_NAME', { title: system.t('PAGES.STATUS') })}
       type='left-aside'
       {...otherProps}
     >

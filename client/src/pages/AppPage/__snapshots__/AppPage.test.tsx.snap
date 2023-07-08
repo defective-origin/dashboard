@@ -169,7 +169,7 @@ exports[`[AppPage] component > should render component 1`] = `
       class="layout-item layout-item--content"
     >
       <div
-        class="_Router_004e4e"
+        class="_Router_318ffa"
         style="outline: none;"
         tabindex="-1"
       >

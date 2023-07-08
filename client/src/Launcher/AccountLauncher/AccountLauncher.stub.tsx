@@ -1,24 +1,17 @@
 import React from 'react'
+import {
+  DEFAULT_ACCOUNT_LAUNCHER_OPTIONS,
+  AccountLauncherContext,
+  AccountLauncherOptions,
+} from './AccountLauncher.context'
 
-// ---| self |---
-import { UserProviderOptions, UserProviderStub } from './UserProvider'
-import { AccountSettingsProviderOptions, AccountSettingsProviderStub } from './AccountSettingsProvider'
-
-export type AccountLauncherStubProps = React.PropsWithChildren & {
-  userProvider: UserProviderOptions
-  accountSettingsProvider: AccountSettingsProviderOptions
-}
+export type AccountLauncherStubProps = React.PropsWithChildren & Partial<AccountLauncherOptions>
 
 export function AccountLauncherStub(props: AccountLauncherStubProps): JSX.Element {
-  const { userProvider, accountSettingsProvider, children } = props
+  const { children, ...otherProps } = props
+  const combinedValue = { ...DEFAULT_ACCOUNT_LAUNCHER_OPTIONS, ...otherProps }
 
-  return (
-    <AccountSettingsProviderStub value={accountSettingsProvider}>
-      <UserProviderStub value={userProvider}>
-        {children}
-      </UserProviderStub>
-    </AccountSettingsProviderStub>
-  )
+  return <AccountLauncherContext.Provider value={combinedValue} children={children} />
 }
 
 export default AccountLauncherStub

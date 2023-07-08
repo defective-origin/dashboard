@@ -3,7 +3,7 @@ import { Popover, Avatar, List, ListItem, ListItemButton, ListItemText, ListItem
 import Block from 'components/Block'
 
 // ---| core |---
-import { useLocaleProvider, useUISettingsProvider, useUserProvider } from 'Launcher'
+import { useUILauncher, useSystemLauncher, useAccountLauncher } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -33,9 +33,9 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppMenuScreen, className)
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null)
-  const ui = useUISettingsProvider()
-  const locale = useLocaleProvider()
-  const user = useUserProvider()
+  const ui = useUILauncher()
+  const system = useSystemLauncher()
+  const account = useAccountLauncher()
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget)
@@ -80,25 +80,25 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
                 <ListItemText primary='Settings' />
               </ListItemButton>
             </ListItem>
-            {!user.isAuthorized && (
+            {!account.isAuthorized && (
               <>
                 <ListItem disablePadding>
-                  <ListItemButton onClick={user.login}>
+                  <ListItemButton onClick={account.login}>
                     <ListItemIcon><Icon type='account_circle' /></ListItemIcon>
                     <ListItemText primary='Registration' />
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                  <ListItemButton onClick={user.login}>
+                  <ListItemButton onClick={account.login}>
                     <ListItemIcon><Icon type='login' /></ListItemIcon>
                     <ListItemText primary='Sign In' />
                   </ListItemButton>
                 </ListItem>
               </>
             )}
-            {user.isAuthorized && (
+            {account.isAuthorized && (
               <ListItem disablePadding>
-                <ListItemButton onClick={user.logout}>
+                <ListItemButton onClick={account.logout}>
                   <ListItemIcon><Icon type='logout' /></ListItemIcon>
                   <ListItemText primary='Sign Out' />
                 </ListItemButton>
@@ -118,8 +118,8 @@ export function AppMenuScreen(props: AppMenuScreenProps): JSX.Element {
         <Button className={css.SquareButton} icon='paid' size='large' />
         <Button className={css.SquareButton} icon='keyboard' size='large' />
         <Button className={css.SquareButton} icon='support_agent' size='large' />
-        <Button className={css.SquareButton} icon={`${ui.current.theme}_mode`} size='large' onClick={ui.toggleTheme} />
-        <Button className={css.SquareButton} size='small' text={locale.current} />
+        <Button className={css.SquareButton} icon={`${ui.theme}_mode`} size='large' onClick={ui.toggleTheme} />
+        <Button className={css.SquareButton} size='small' text={system.language} />
         <Button className={css.SquareButton} icon={ui.isMode('edit') ? 'developer_mode_tv' : 'tv'} size='large' onClick={ui.toggleMode} />
       </Block.End>
 
