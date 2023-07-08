@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build:dev": "tsc && vite build --mode dev",
+    "build:prod": "tsc && vite build",
+    "build:test": "tsc && vite build --mode testing",
+    "build:stage": "tsc && vite build --mode staging",
     "preview": "vite preview",
     "test": "vitest",
     "lint": "yarn lint:es && yarn lint:css",

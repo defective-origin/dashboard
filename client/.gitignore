@@ -26,9 +26,10 @@ dist-ssr
 # Project
 .env
 .env.local
-.env.development
-.env.test
-.env.production
+.env.development.local
+.env.testing.local
+.env.staging.local
+.env.production.local
 
 # cache
 .eslintcache
