@@ -33,16 +33,14 @@ const NAME = 'page'
 export function Page(props: PageProps): JSX.Element {
   const { name, title, info, extra, children, className, ...otherProps } = props
   const _className = cn(NAME, className)
-  const isMetaChanged = name
   const hasHeader = title || extra || info
 
   return (
     <Layout className={_className} {...otherProps}>
-      {isMetaChanged && (
-        <Helmet>
-          { name && <title>{name}</title> }
-        </Helmet>
-      )}
+      {/* Add page metadata */}
+      <Helmet>
+        { name && <title>{name}</title> }
+      </Helmet>
 
       {hasHeader && (
         <Layout.Header className={`${NAME}__header`}>

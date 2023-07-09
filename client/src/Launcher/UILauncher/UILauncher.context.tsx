@@ -1,11 +1,33 @@
 import React, { useContext } from 'react'
 
-export type UIThemeType = 'light' | 'dark'
-export type UIModeType = 'view' | 'edit'
+export type UITheme = 'light' | 'dark'
+export type UIMode = 'view' | 'edit'
+
+export type UIStatus = 'warning' | 'error' | 'info' | 'success'
+export type UITypedItem<T = UIStatus, P extends object = object> = { type?: T } & P
+export type UIBlockItem = {
+  content?: React.ReactNode
+  actions?: UITypedItem[]
+}
+export type UICardItem = {
+  closable?: boolean
+  title?: React.ReactNode
+  content?: React.ReactNode
+  actions?: UITypedItem[]
+}
 
 export type UILauncherState = {
-  theme: UIThemeType
-  mode: UIModeType
+  theme: UITheme
+  mode: UIMode
+  menu?: UIBlockItem
+  alert?: UITypedItem[]
+  drawer?: UICardItem
+  guard?: UIBlockItem
+  leftAside?: UICardItem
+  header?: UIBlockItem
+  rightAside?: UICardItem
+  snackbar?: UITypedItem[]
+  modal?: UICardItem
 }
 
 export const DEFAULT_UI_LAUNCHER_STATE: UILauncherState = {
@@ -14,8 +36,8 @@ export const DEFAULT_UI_LAUNCHER_STATE: UILauncherState = {
 }
 
 export type UILauncherOptions = UILauncherState & {
-  isTheme: (theme: UIThemeType) => boolean,
-  isMode: (mode: UIModeType) => boolean,
+  isTheme: (theme: UITheme) => boolean,
+  isMode: (mode: UIMode) => boolean,
   change: (patch: Partial<UILauncherState>) => void,
   toggleTheme: () => void,
   toggleMode: () => void,

@@ -1,4 +1,5 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+/* stylelint-disable-next-line scss/at-import-partial-extension */
+@import 'src/Launcher/UILauncher/UILauncher.module.scss';
 
 :global {
   .dark {
@@ -16,15 +17,15 @@
       padding: 1rem;
 
       &-title {
-    
+
       }
 
       &-info {
-    
+
       }
 
       &-extra {
-    
+
       }
     }
   }

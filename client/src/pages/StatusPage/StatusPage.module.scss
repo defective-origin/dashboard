@@ -1,4 +1,4 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+@import 'src/Launcher/UILauncher/UILauncher.module';
 
 :global {
   .dark {
@@ -22,6 +22,5 @@
 
   left: 50%;
   top: 50%;
-
   transform: translate(-50%, -50%);
 }

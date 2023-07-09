@@ -1,4 +1,4 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+@import 'src/Launcher/UILauncher/UILauncher.module';
 
 :global {
   .dark {
@@ -17,7 +17,7 @@
     &--row-center {
       width: 100%;
       grid-auto-flow: row;
-      grid-template-areas: "start center end";
+      grid-template-areas: 'start center end';
     }
 
     &--row { grid-template-columns: 1fr auto 1fr; }
@@ -31,10 +31,10 @@
     &--column-center {
       height: 100%;
       grid-auto-flow: column;
-      grid-template-areas: 
-      "start"
-      "center"
-      "end";
+      grid-template-areas:
+        'start'
+        'center'
+        'end';
     }
 
     &--column { grid-template-rows: 1fr auto 1fr; }

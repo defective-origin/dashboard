@@ -1,14 +1,15 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+@import 'src/Launcher/UILauncher/UILauncher.module';
 
 .Board {
-	overflow: hidden;
-	position: relative;
+  overflow: hidden;
+  position: relative;
 
-	@include stretch;
+  @include stretch;
 }
 
 .SelectionBoard,
 .ViewBoard {
-	position: absolute;
-	@include stretch;
+  position: absolute;
+
+  @include stretch;
 }
