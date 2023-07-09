@@ -1,12 +1,12 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+@import 'src/Launcher/UILauncher/UILauncher.module';
 
 .AppMenuScreen {
-  border-right: 1px solid #cacdd1;
+  border-right: 1px solid #CACDD1;
 }
 
 .MiddleActions {
   width: 100%;
-  box-shadow: 0px -5px 5px 0px rgba(34, 60, 80, 0.06) inset, 0px 5px 5px 0px rgba(34, 60, 80, 0.06) inset;
+  box-shadow: 0 -5px 5px 0 rgb(34 60 80 / 6%) inset, 0 5px 5px 0 rgb(34 60 80 / 6%) inset;
   flex-grow: 1;
 }
 
@@ -22,8 +22,8 @@
   box-sizing: border-box;
 }
 
-.SquareButton:focus,
-.SquareButton {
+.SquareButton,
+.SquareButton:focus {
   min-height: 40px;
   min-width: 40px;
   width: 48px;

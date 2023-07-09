@@ -2,9 +2,13 @@
 
 Allows users to create boards which show different widgets.
 
+# Code part
+
+We don't use **Prettier** because of [issue with printWidth](https://github.com/prettier/prettier/issues/3468)
+
 ## Before start
 
-Install extensions which described in __.vscode/.settings__ file
+Install extensions which described in **.vscode/.settings** file
 
 ## Available Scripts
 
@@ -30,14 +34,14 @@ yarn preview // Launch built application.
 ```
 
 ### Launches the test runner in the interactive watch mode.
+
 ```
 yarn test
 ```
 
-
 ### Code checkers
 
-Commands with __:fix__ prefix - fix linter errors.
+Commands with **:fix** prefix - fix linter errors.
 
 Other commands just check parts of code.
 
@@ -50,14 +54,6 @@ yarn lint:es
 yarn lint:es:fix
 yarn lint:css
 yarn lint:css:fix
-```
-
-
-#### Also you can use prettier to check and fix linter issues.
-
-```sh
-yarn prettier
-yarn prettier:fix
 ```
 
 #### Check code after changes for production
@@ -80,44 +76,45 @@ To generate small parts of code.
 yarn gen
 ```
 
-For more information check file __generator/README.md__
+For more information check file **generator/README.md**
 
 ## Short Structure description
 
-For more information check file __generator/README.md__
+For more information check file **generator/README.md**
 Adapter pattern
+
 - build/ - built application
 
 - public/ - assets which will be loaded after page loading
 
 - generator/ - generator of application parts
-	
 - src/
-	- common/ - contains general code/features (this features can be moved into packages), overriding packages.
 
-	- api/ - contains tools and handlers for work with network
+  - common/ - contains general code/features (this features can be moved into packages), overriding packages.
 
-	- assets/ - contains all asset files which should be loaded with application
+  - api/ - contains tools and handlers for work with network
 
-	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work
+  - assets/ - contains all asset files which should be loaded with application
 
-	- pages/ - contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
-	- screens/ - contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component has postfix: Screen]
-	- components(UI)/ - contains pure, unified components without logic which gets data out, all data must be get from props (can work only with components) [don't have postfix]
+  - Launcher/ - All Launchers - contains tools and settings without which the application cannot or should not work
 
-	- features/ - the same structure as in app but is used for feature flag. After feature flag implementation All feature code should be merged/should be sorted files into app files 
+  - pages/ - contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
+  - screens/ - contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component has postfix: Screen]
+  - components(UI)/ - contains pure, unified components without logic which gets data out, all data must be get from props (can work only with components) [don't have postfix]
 
-	- locale/ - contains localization configs and localized labels, texts, digits, signs, ...
+  - features/ - the same structure as in app but is used for feature flag. After feature flag implementation All feature code should be merged/should be sorted files into app files
 
-	- router/ - contains router configs, handlers and so on
+  - locale/ - contains localization configs and localized labels, texts, digits, signs, ...
 
-	- store/ - contains store configs, handlers and so on
-	
-	- types/ - contains all type definition
+  - router/ - contains router configs, handlers and so on
 
-	- tests/ - contains configs and settings for tests
+  - store/ - contains store configs, handlers and so on
 
-	- web-workers/ - contains configs and settings for web-workers
+  - types/ - contains all type definition
+
+  - tests/ - contains configs and settings for tests
+
+  - web-workers/ - contains configs and settings for web-workers
 
 ## [Environment settings](https://vitejs.dev/guide/env-and-mode.html)
 
@@ -130,7 +127,8 @@ All config variables are in one of the file
 .env.[mode].local   # only loaded in specified mode, ignored by git
 ```
 
-Only variables prefixed with VITE_ are exposed to your Vite-processed code. e.g. for the following env variables:
+Only variables prefixed with VITE\_ are exposed to your Vite-processed code. e.g. for the following env variables:
+
 ```
 VITE_SOME_KEY=123
 ```

@@ -251,7 +251,6 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 - conf/
 	- .eslintrc.json - program language style config
 	- .stylelintrc.json - styles style config
-	- .prettierrc.json - config of auto style fixes 
 	- .gitignore
 	- .package.json - project config
 	- .storybook/ - config of tool for UI development

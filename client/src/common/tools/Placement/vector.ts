@@ -8,13 +8,13 @@ export type Vector = {
 export function vector(point: number | Vector): Vector
 export function vector(x: number, y: number): Vector
 export function vector(x_or_point: number | Vector, y?: number) {
-    if (isNumber(y)) {
-      return { x: x_or_point, y }
-    } else if (isNumber(x_or_point)) {
-      return { x: x_or_point, y: x_or_point }
-    }
-    
-    return { ...x_or_point }
+  if (isNumber(y)) {
+    return { x: x_or_point, y }
+  } else if (isNumber(x_or_point)) {
+    return { x: x_or_point, y: x_or_point }
+  }
+
+  return { ...x_or_point }
 }
 
 export default vector
@@ -109,7 +109,7 @@ export const moveByX = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     x: item.x + deltaVector.x,
@@ -127,7 +127,7 @@ export const moveByY = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     y: item.y + deltaVector.y,
@@ -145,7 +145,7 @@ export const moveByXY = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     x: item.x + deltaVector.x,
@@ -230,7 +230,7 @@ export const multiplyByX = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     x: item.x * deltaVector.x,
@@ -248,7 +248,7 @@ export const multiplyByY = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     y: item.y * deltaVector.y,
@@ -266,7 +266,7 @@ export const multiplyByXY = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     x: item.x * deltaVector.x,
@@ -285,7 +285,7 @@ export const divideByX = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     x: deltaVector.x ? item.x / deltaVector.x : item.x,
@@ -303,7 +303,7 @@ export const divideByY = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     y: deltaVector.y ? item.y / deltaVector.y : item.y,
@@ -321,7 +321,7 @@ export const divideByXY = <
   T extends Vector
 >(item: T, delta: number | Vector): T => {
   const deltaVector = vector(delta)
-  
+
   return {
     ...item,
     x: deltaVector.x ? item.x / deltaVector.x : item.x,
@@ -544,7 +544,7 @@ export const minByXY = (items: Vector[]): Vector | null => {
   if (!items.length) {
     return null
   }
-  
+
   return {
     x: (minByX(items) as Vector).x,
     y: (minByY(items) as Vector).y,

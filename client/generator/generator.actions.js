@@ -123,9 +123,6 @@ export const FolderAction = ({
   const defaultExport = module?.defaultExport && folderFiles.find((fileName) => Tool.isMatch(module?.defaultExport, fileName))
   const filePatterns = files.length ? `*{${files.join(',')}}*` : '*'
 
-
-  console.log(template, target, `${template}/${filePatterns}${ext}`, template)
-
   return [
     {
       type: 'addMany',

@@ -12,12 +12,15 @@
 // 320px — 480px: Mobile devices
 $xxs-width: 320px;
 $xs-width: 480px;
+
 // 481px — 768px: iPads, Tablets
 $sm-width: 576px;
 $md-width: 768px;
+
 // 769px — 1024px: Small screens, laptops
 // 1025px — 1200px: Desktops, large screens
 $lg-width: 992px;
+
 // 1201px and more — Extra large screens, TV
 $xl-width: 1200px;
 $xxl-width: 1600px;
@@ -41,7 +44,7 @@ $xxl-width: 1600px;
     left: $indent;
   } @else if $x == center {
     left: 50%;
-  }  @else {
+  } @else {
     right: $indent;
   }
 
@@ -50,7 +53,7 @@ $xxl-width: 1600px;
     top: $indent;
   } @else if $y == center {
     top: 50%;
-  }  @else {
+  } @else {
     bottom: $indent;
   }
 
@@ -66,9 +69,9 @@ $xxl-width: 1600px;
 :root {
   // scroll
   --scroll-track-color: transparent;
-  --scroll-track-color--hover: #d9d9d9;
-  --scroll-thumb-color: #bfbfbf;
-  --scroll-thumb-color--hover: #8c8c8c;
+  --scroll-track-color--hover: #D9D9D9;
+  --scroll-thumb-color: #BFBFBF;
+  --scroll-thumb-color--hover: #8C8C8C;
   --scroll-size: 12px;
 }
 
@@ -87,20 +90,20 @@ $xxl-width: 1600px;
 
     &::-webkit-scrollbar-thumb {
       background: var(--scroll-thumb-color);
-  
+
       &:hover {
         background: var(--scroll-thumb-color--hover);
       }
     }
-  
+
     &::-webkit-scrollbar-track {
       background: var(--scroll-track-color);
-  
+
       &:hover {
         background: var(--scroll-track-color--hover);
       }
     }
-  
+
     &::-webkit-scrollbar {
       width: var(--scroll-size);
       height: var(--scroll-size);
@@ -113,11 +116,11 @@ $xxl-width: 1600px;
     &--md { --scroll-size: 12px; }
     &--lg { --scroll-size: 16px; }
     &--xl { --scroll-size: 20px; }
-  
-  
+
+
     // direction
-    &-x { overflow-x: auto; overflow-y: hidden; }  
-    &-y { overflow-x: hidden; overflow-y: auto; }  
+    &-x { overflow-x: auto; overflow-y: hidden; }
+    &-y { overflow-x: hidden; overflow-y: auto; }
     &-xy { overflow-x: auto; overflow-y: auto; }
   }
 }

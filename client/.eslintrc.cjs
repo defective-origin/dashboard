@@ -4,7 +4,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'eslint-config-prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
@@ -23,6 +22,17 @@ module.exports = {
     'no-trailing-spaces': 'warn',
     'key-spacing': ['warn', { beforeColon: false }],
     'comma-dangle': ['warn', 'always-multiline'],
+    'operator-linebreak': ['warn', 'before'],
+    'padding-line-between-statements': ['warn',
+      { blankLine: 'always', prev: 'let', next: 'return' },
+      { blankLine: 'always', prev: 'const', next: 'return' },
+      { blankLine: 'always', prev: 'block-like', next: 'return' },
+    ],
+    'object-curly-newline': ['warn', {
+      multiline: true,
+      consistent: true,
+      minProperties: Infinity,
+    }],
 
     // typescript
     '@typescript-eslint/no-empty-function': 'off',
@@ -31,56 +41,45 @@ module.exports = {
     'jsx-quotes': ['warn', 'prefer-single'],
 
     // custom
-    'no-restricted-syntax': [
-      'warn',
-      {
-        selector: 'TSEnumDeclaration',
-        message: 'Use object look up instead',
-      },
-    ],
-    'no-restricted-imports': [
-      'warn',
-      {
-        patterns: [
-          {
-            group: ['lodash', 'lodash-es', 'classnames', 'weak-key'],
-            message: 'Use import from "common" instead.',
-          },
-          {
-            group: [
-              '**/../*',
-              '**/../common/*',
-              '**/../Launcher/*',
-              '**/../components/*',
-              '**/../pages/*',
-              '**/../screens/*',
-              '**/../tests/*',
-            ],
-            message: 'Use direct import, example "components".',
-          },
-          {
-            group: [
-              'locale',
-              'store',
-              'api',
-              'i18next',
-              '@reach/router',
-              'react-i18next',
-            ],
-            message: 'Use import from "Launcher" instead.',
-          },
-          {
-            group: [
-              '@emotion/react',
-              '@emotion/styled',
-              '@mui/material',
-              'react-helmet',
-            ],
-            message: 'Use component overrides from "components".',
-          },
+    'no-restricted-syntax': ['warn', {
+      selector: 'TSEnumDeclaration',
+      message: 'Use object look up instead',
+    }],
+    'no-restricted-imports': ['warn', {
+      patterns: [{
+        message: 'Use import from "common" instead.',
+        group: ['lodash', 'lodash-es', 'classnames', 'weak-key'],
+      }, {
+        message: 'Use direct import, example "components".',
+        group: [
+          '**/../*',
+          '**/../common/*',
+          '**/../Launcher/*',
+          '**/../components/*',
+          '**/../pages/*',
+          '**/../screens/*',
+          '**/../tests/*',
         ],
-      },
-    ],
+      }, {
+        message: 'Use import from "Launcher" instead.',
+        group: [
+          'locale',
+          'store',
+          'api',
+          'i18next',
+          '@reach/router',
+          'react-i18next',
+        ],
+      }, {
+        message: 'Use component overrides from "components".',
+        group: [
+          '@emotion/react',
+          '@emotion/styled',
+          '@mui/material',
+          'react-helmet',
+        ],
+      }],
+    }],
   },
   overrides: [
     // cancel the ban on imports for their initialization files

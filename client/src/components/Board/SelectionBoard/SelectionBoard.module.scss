@@ -1,10 +1,9 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+@import 'src/Launcher/UILauncher/UILauncher.module';
 
 // colors
 $invalid-area-color: rgba($red-6, $md-alpha);
 $valid-area-color: rgba($geekblue-6, $md-alpha);
 $outdated-area-color: rgba($gray-6, $md-alpha);
-
 $grid-line-color: $gray-6;
 
 // cursors
@@ -21,5 +20,5 @@ $valid-cursor: pointer;
 }
 
 .SelectionBoard {
-	@include stretch;
+  @include stretch;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 
 // ---| self |---
+import App from './App'
 import SystemLauncher from './SystemLauncher'
 import UILauncher from './UILauncher'
 import AccountLauncher from './AccountLauncher'
@@ -23,7 +24,9 @@ export function Launcher(props: LauncherProps): JSX.Element {
       <MonitorLauncher>
         <UILauncher>
           <AccountLauncher>
-            { children }
+            <App>
+              { children }
+            </App>
           </AccountLauncher>
         </UILauncher>
       </MonitorLauncher>

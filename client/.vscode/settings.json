@@ -1,18 +1,24 @@
 {
-  "cSpell.words": [
-    "neccesary",
-    "subarticle"
-  ],
+  "cSpell.words": ["neccesary", "subarticle"],
 
+  // file configs
   "files.eol": "\n",
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
 
-  "prettier.configPath": ".prettierrc.cjs",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": false,
+  // linter configs
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "eslint.validate": ["javascript"],
+  "stylelint.validate": ["css", "scss", "less"],
+  "css.lint.emptyRules": "ignore",
+  "scss.lint.emptyRules": "ignore",
+  "less.lint.emptyRules": "ignore",
 
+  // test configs
   "vitest.commandLine": "yarn test --"
 }

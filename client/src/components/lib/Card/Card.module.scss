@@ -1,12 +1,12 @@
-@import "src/Launcher/UILauncher/UILauncher.module.scss";
+@import 'src/Launcher/UILauncher/UILauncher.module';
 
 :global {
   .dark {
-    --border-color: white;
+    --border-color: #FFFFFF;
   }
 
   .light {
-    --border-color: black;
+    --border-color: #000000;
   }
 }
 
