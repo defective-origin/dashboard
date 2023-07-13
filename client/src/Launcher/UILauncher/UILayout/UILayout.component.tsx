@@ -37,8 +37,8 @@ export function initArray<T>(value: T | T[] = []): T[] {
 export type UILayoutProps = {
   className?: string
   children?: React.ReactNode
+  toastConfig?: ToastContainerProps
   map: Partial<UIItemMap>
-  toastConfig: ToastContainerProps
 }
 
 /**

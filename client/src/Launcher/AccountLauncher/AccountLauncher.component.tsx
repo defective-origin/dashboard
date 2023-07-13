@@ -1,4 +1,7 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
+
+// ---| common |---
+import { useObject } from 'common/hooks'
 
 // ---| self |---
 import {
@@ -17,14 +20,14 @@ export type AccountLauncherProps = React.PropsWithChildren
  * <AccountLauncher defaultProp={1} />
  */
 export function AccountLauncher(props: AccountLauncherProps): JSX.Element {
-  const [current, setCurrent] = useState(DEFAULT_ACCOUNT_LAUNCHER_STATE)
+  const account = useObject(DEFAULT_ACCOUNT_LAUNCHER_STATE)
 
   const options = useMemo<AccountLauncherOptions>(() => ({
-    ...current,
-    login: () => setCurrent((state) => ({ ...state, user: {} })),
-    logout: () => setCurrent((state) => ({ ...state, user: null })),
-    isAuthorized: !!current.user,
-  }), [current])
+    ...account.current,
+    login: () => account.merge({ user: {} }),
+    logout: () => account.merge({ user: null }),
+    isAuthorized: !!account.current.user,
+  }), [account])
 
   return <AccountLauncherContext.Provider value={options} {...props} />
 }

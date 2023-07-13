@@ -111,6 +111,7 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
     return formatsRef.current
       .reduce((acc, handler) => handler?.(acc) ?? acc, currentValue)
   }, [options])
+
   const ref = useStateful(formatValue(init)) as TypeReturnOptions<S, O> & { [key: string]: any }
 
   // override

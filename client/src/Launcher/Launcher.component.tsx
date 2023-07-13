@@ -7,10 +7,10 @@ import AccountLauncher, { AccountLauncherProps } from './AccountLauncher'
 import MonitorLauncher, { MonitorLauncherProps } from './MonitorLauncher'
 
 export type LauncherProps = React.PropsWithChildren & {
-  system: SystemLauncherProps,
-  monitor: MonitorLauncherProps,
-  account: AccountLauncherProps,
-  ui: UILauncherProps
+  system?: SystemLauncherProps,
+  monitor?: MonitorLauncherProps,
+  account?: AccountLauncherProps,
+  ui?: UILauncherProps
 }
 
 /**
