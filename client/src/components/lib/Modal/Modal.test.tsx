@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import App from './App.component'
+import Modal from './Modal.component'
 
-describe('[App] component', () => {
+describe('[Modal] component', () => {
   it('should render component', () => {
-    const container = render(<App />)
+    const container = render(<Modal />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

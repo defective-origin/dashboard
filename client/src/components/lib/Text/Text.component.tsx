@@ -9,10 +9,10 @@ import { cn, react } from 'common/tools'
 // ---| self |---
 import css from './Text.module.scss'
 
-export type TextProps = MuiTypographyProps & {
+export type TextProps = Omit<MuiTypographyProps, 'content'> & {
   className?: string
   children?: React.ReactNode
-  text?: React.ReactNode
+  content?: React.ReactNode
 }
 
 /**
@@ -23,12 +23,11 @@ export type TextProps = MuiTypographyProps & {
  * <Text />
  */
 export function Text(props: TextProps): JSX.Element {
-  const { text, children, className, ...otherProps } = props
+  const { content, children = content, className, ...otherProps } = props
   const _className = cn(css.Banner, className)
 
   return (
     <MuiTypography className={_className} variant='body1' {...otherProps}>
-      {text}
       {children}
     </MuiTypography>
   )
@@ -36,7 +35,6 @@ export function Text(props: TextProps): JSX.Element {
 
 Text.displayName = 'Text'
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default react.attachOverrides(Text, {
   H1: { variant: 'h1' },
   H2: { variant: 'h2' },

@@ -1,55 +1,53 @@
 import React, { useContext } from 'react'
+import { UIItemMap, UIPlace } from './UILayout'
 
 export type UITheme = 'light' | 'dark'
 export type UIMode = 'view' | 'edit'
-
-export type UIStatus = 'warning' | 'error' | 'info' | 'success'
-export type UITypedItem<T = UIStatus, P extends object = object> = { type?: T } & P
-export type UIBlockItem = {
-  content?: React.ReactNode
-  actions?: UITypedItem[]
-}
-export type UICardItem = {
-  closable?: boolean
-  title?: React.ReactNode
-  content?: React.ReactNode
-  actions?: UITypedItem[]
-}
+export type UIMenu = 'opened' | 'closed'
 
 export type UILauncherState = {
   theme: UITheme
   mode: UIMode
-  menu?: UIBlockItem
-  alert?: UITypedItem[]
-  drawer?: UICardItem
-  guard?: UIBlockItem
-  leftAside?: UICardItem
-  header?: UIBlockItem
-  rightAside?: UICardItem
-  snackbar?: UITypedItem[]
-  modal?: UICardItem
+  menu: UIMenu
 }
 
 export const DEFAULT_UI_LAUNCHER_STATE: UILauncherState = {
   theme: 'light',
   mode: 'view',
+  menu: 'closed',
 }
 
 export type UILauncherOptions = UILauncherState & {
-  isTheme: (theme: UITheme) => boolean,
-  isMode: (mode: UIMode) => boolean,
   change: (patch: Partial<UILauncherState>) => void,
+
+  isTheme: (theme: UITheme) => boolean,
   toggleTheme: () => void,
+
+  isMode: (mode: UIMode) => boolean,
   toggleMode: () => void,
+
+  isMenu: (mode: UIMenu) => boolean,
+  toggleMenu: () => void,
+
+  show: (options: Partial<UIItemMap>) => void
+  hide: (...args: UIPlace[]) => void
 }
 
 export const DEFAULT_UI_LAUNCHER_OPTIONS: UILauncherOptions = {
   ...DEFAULT_UI_LAUNCHER_STATE,
-  isTheme: () => true,
-  isMode: () => true,
   change: () => {},
+
+  isTheme: () => true,
   toggleTheme: () => {},
+
+  isMode: () => true,
   toggleMode: () => {},
+
+  isMenu: () => true,
+  toggleMenu: () => {},
+
+  show: () => {},
+  hide: () => {},
 }
 
 export const UILauncherContext = React.createContext(DEFAULT_UI_LAUNCHER_OPTIONS)

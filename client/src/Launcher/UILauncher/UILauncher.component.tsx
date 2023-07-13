@@ -1,15 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { StyledEngineProvider } from '@mui/material/styles'
 
 // ---| self |---
 import './UILauncher.module.scss'
+import UILayout, { UIItemMap, UIPlace, UILayoutProps } from './UILayout'
 import {
+  UILauncherState,
   UILauncherContext,
   UILauncherOptions,
   DEFAULT_UI_LAUNCHER_STATE,
 } from './UILauncher.context'
 
-export type UILauncherProps = React.PropsWithChildren
+export type UILauncherProps = React.PropsWithChildren & {
+  toastConfig: UILayoutProps['toastConfig']
+}
 
 /**
  * Setup all ui context providers.
@@ -19,26 +23,43 @@ export type UILauncherProps = React.PropsWithChildren
  * <UILauncher defaultProp={1} />
  */
 export function UILauncher(props: UILauncherProps): JSX.Element {
-  const { children } = props
+  const { toastConfig, children } = props
   const [current, setCurrent] = useState(DEFAULT_UI_LAUNCHER_STATE)
   const oppositeTheme = current.theme === 'light' ? 'dark' : 'light'
+  // todo: переписать на UseList
+  const [layoutMap, setLayoutMap] = useState({} as UIItemMap)
+
+  const update = useCallback((patch: Partial<UILauncherState>) => {
+    // TODO: analytic.register and api.update for each handler
+    setCurrent((state) => ({ ...state, ...patch }))
+  }, [])
 
   const options = useMemo<UILauncherOptions>(() => ({
     ...current,
-    isTheme: (value) => current.theme === value,
-    isMode: (value) => current.mode === value,
     change: (patch) => { setCurrent((state) => ({ ...state, ...patch})) },
-    toggleTheme: () => {
-      // TODO: analytic.register({ name: 'UITheme', value: oppositeTheme })
-      // TODO: api.update({ name: 'UITheme', value: oppositeTheme })
-      setCurrent((state) => ({ ...state, theme: oppositeTheme }))
+
+    isTheme: (value) => current.theme === value,
+    toggleTheme: () => update({ theme: oppositeTheme }),
+
+    isMode: (value) => current.mode === value,
+    toggleMode: () => update({ mode: current.mode === 'view' ? 'edit' : 'view' }),
+
+    isMenu: (value) => current.menu === value,
+    toggleMenu: () => update({ menu: current.menu === 'opened' ? 'closed' : 'opened' }),
+
+    show: (items) => setLayoutMap((state) => ({ ...state, ...items })),
+    hide: (...items) => {
+      setLayoutMap((state) => {
+        const copy = {...state}
+
+        items.forEach((item) => {
+          delete copy[item as UIPlace]
+        })
+
+        return copy
+      })
     },
-    toggleMode: () => {
-      // TODO: analytic.register({ name: 'UIMode', value: state.mode === 'view' ? 'edit' : 'view' })
-      // TODO: api.update({ name: 'UIMode', value: state.mode === 'view' ? 'edit' : 'view' })
-      setCurrent((state) => ({ ...state, mode: state.mode === 'view' ? 'edit' : 'view' }))
-    },
-  }), [current, oppositeTheme])
+  }), [current, oppositeTheme, update])
 
   useEffect(() => {
     document.body.classList.add(current.theme)
@@ -50,7 +71,9 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
       <UILauncherContext.Provider value={options}>
         {/* injectFirst allows override Material UI's styles. */}
         <StyledEngineProvider injectFirst>
-          { children }
+          <UILayout toastConfig={toastConfig} map={layoutMap}>
+            { children }
+          </UILayout>
         </StyledEngineProvider>
       </UILauncherContext.Provider>
     </React.Suspense>

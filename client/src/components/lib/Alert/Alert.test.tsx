@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import AppMenuScreen from './AppMenuScreen.component'
+import Alert from './Alert.component'
 
-describe('[AppMenuScreen] component', () => {
+describe('[Alert] component', () => {
   it('should render component', () => {
-    const container = render(<AppMenuScreen />)
+    const container = render(<Alert />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

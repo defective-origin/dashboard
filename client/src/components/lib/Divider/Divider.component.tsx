@@ -12,7 +12,9 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Divider.module.scss'
 
-export type DividerProps = MuiDividerProps
+export type DividerProps = MuiDividerProps & {
+  content?: React.ReactNode
+}
 
 /**
  * Component description.
@@ -22,10 +24,14 @@ export type DividerProps = MuiDividerProps
  * <Divider />
  */
 export function Divider(props: DividerProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { content, children = content, className, ...otherProps } = props
   const _className = cn(css.Divider, className)
 
-  return <MuiDivider className={_className} {...otherProps}>{children}</MuiDivider>
+  return (
+    <MuiDivider className={_className} {...otherProps}>
+      {children}
+    </MuiDivider>
+  )
 }
 
 Divider.displayName = 'Divider'

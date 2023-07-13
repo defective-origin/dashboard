@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useLayoutEffect, useRef, useState, SetStateAction, MutableRefObject } from 'react'
 
 export const getValue = <S>(arg: SetStateAction<S>, prevState: S) => {
@@ -61,10 +62,12 @@ export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturn
     ref.sync = () => ref.change(ref.current)
   }, [ref, setValue])
 
-  ref.reset = useCallback(() => ref.change(initial), [ref.change, ...deps])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ref.reset = useCallback(() => ref.change(initial), [ref, ...deps])
   ref.value = value
 
   // In a real implementation, this would run before layout effects
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(() => ref.changeSilent(initial), [ref, ...deps])
 
   return ref

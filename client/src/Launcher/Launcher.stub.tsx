@@ -1,7 +1,6 @@
 import React from 'react'
 
 // ---| self |---
-import App from './App'
 import { AccountLauncherStub, AccountLauncherStubProps } from './AccountLauncher'
 import { MonitorLauncherStub, MonitorLauncherStubProps } from './MonitorLauncher'
 import { SystemLauncherStub, SystemLauncherStubProps } from './SystemLauncher'
@@ -20,11 +19,9 @@ export function LauncherStub(props: LauncherStubProps): JSX.Element {
   return (
     <SystemLauncherStub {...system}>
       <MonitorLauncherStub {...monitor}>
-        <UILauncherStub {...account}>
-          <AccountLauncherStub {...ui}>
-            <App>
-              { children }
-            </App>
+        <UILauncherStub {...ui}>
+          <AccountLauncherStub {...account}>
+            { children }
           </AccountLauncherStub>
         </UILauncherStub>
       </MonitorLauncherStub>

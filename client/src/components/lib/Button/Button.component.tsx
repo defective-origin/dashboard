@@ -4,7 +4,6 @@ import MuiIconButton from '@mui/material/IconButton'
 
 // ---| components |---
 import Icon, { IconTypes } from 'components/lib/Icon'
-import Progress from 'components/lib/Progress'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -16,8 +15,7 @@ export type ButtonProps = MuiButtonProps & {
   className?: string
   children?: React.ReactNode
   icon?: IconTypes
-  loading?: boolean
-  text?: React.ReactNode
+  content?: React.ReactNode
 }
 
 /**
@@ -28,21 +26,19 @@ export type ButtonProps = MuiButtonProps & {
  * <Button />
  */
 export function Button(props: ButtonProps): JSX.Element {
-  const { text, icon, loading, children, className, ...otherProps } = props
+  const { content, icon, children = content, className, ...otherProps } = props
   const _className = cn(css.Button, className)
 
   if (icon) {
     return (
-      <MuiIconButton disabled={loading} className={_className} {...otherProps}>
-        {!loading && <Icon type={icon} />}
-        <Progress show={loading} />
+      <MuiIconButton className={_className} {...otherProps}>
+        <Icon type={icon} />
       </MuiIconButton>
     )
   }
-  // todo: LoadingButton 
+
   return (
     <MuiButton className={_className} {...otherProps}>
-      {text}
       {children}
     </MuiButton>
   )

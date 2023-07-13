@@ -1,9 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLayoutEffect } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
+export const omit = <T extends object, K extends keyof T>(val: T, ...keys: K[]) => {
+  const copy = {...val}
+
+  keys.forEach((key) => {
+    delete copy[key]
+  })
+
+  return copy
+}
+
 export type ObjectReturnOptions<T extends Record<string, unknown>> = TypeReturnOptions<T>
   & TypeHandler<'merge', (...args: Partial<T>[]) => void>
-  & TypeHandler<'delete', (key: keyof T) => void>
+  & TypeHandler<'omit', (...keys: (keyof T)[]) => void>
   & TypeHandler<'set', (key: keyof T, value: any) => void>
   & {
     has: (key: keyof T) => boolean
@@ -27,12 +38,12 @@ export function useObject<T extends Record<string, unknown>>(init: T = OBJECT_DE
     // handlers
     ref.registerHandler('merge', (val, ...args) => Object.assign({}, val, ...args))
     ref.registerHandler('set', (val, key, value) => ({...val, [key]: value }))
-    ref.registerHandler('delete', (val, key) => {
+    ref.registerHandler('omit', omit)
+    ref.registerHandler('pick', (val, ...keys) => {
       const copy = {...val}
+      const omitKeys = Object.keys(copy).filter((key) => !keys.includes(key))
 
-      delete copy[key]
-
-      return copy
+      return omit(val, ...omitKeys)
     })
   }, [ref])
 

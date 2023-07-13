@@ -31,6 +31,13 @@
         'left-aside footer right-aside';
     }
 
+    &--header {
+      grid-template-areas:
+        'header header header'
+        'left-aside content right-aside'
+        'left-aside footer right-aside';
+    }
+
     &--left-aside {
       grid-template-areas:
         'left-aside header header'

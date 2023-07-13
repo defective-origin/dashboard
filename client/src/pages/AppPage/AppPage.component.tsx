@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // ---| core |---
-import { useSystemLauncher, Router } from 'Launcher'
+import { useSystemLauncher, Router, useUILauncher } from 'Launcher'
 
 // ---| pages |---
 import StatusPage from 'pages/StatusPage'
@@ -17,7 +17,6 @@ import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './AppPage.module.scss'
-import AppMenuScreen from './AppMenuScreen'
 
 export type AppPageProps = PageProps & {
   className?: string
@@ -34,6 +33,25 @@ export function AppPage(props: AppPageProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.AppPage, className)
   const system = useSystemLauncher()
+  const ui = useUILauncher()
+
+  useEffect(() => {
+    ui.show({
+      // content: <div>CONTENT</div>,
+      toast: { content: 'TOAST' },
+      // modal: { content: 'TOAST' },
+      alert: { content: 'ALERT' },
+      drawer: { title: 'DRAWER' },
+      leftAside: <div>LEFT ASIDE</div>,
+      rightAside: <div>RIGHT ASIDE</div>,
+      footer: { start: <div>FOOTER START</div>, center: <div>FOOTER CENTER</div>, end: <div>FOOTER END</div> },
+      header: { start: <div>HEADER START</div>, center: <div>HEADER CENTER</div>, end: <div>HEADER END</div> },
+      guard: { start: <div>GUARD START</div>, center: <div>GUARD CENTER</div>, end: <div>GUARD END</div> },
+    })
+
+    setInterval(() => ui.show({ toast: { content: 'TOAST +' } }), 500)
+  }, [])
+
 
   return (
     <Page
@@ -43,7 +61,6 @@ export function AppPage(props: AppPageProps): JSX.Element {
       {...otherProps}
     >
       <Page.LeftAside>
-        <AppMenuScreen />
       </Page.LeftAside>
 
       <Page.Content>

@@ -1,13 +1,17 @@
 import React from 'react'
 
 // ---| self |---
-import App from './App'
-import SystemLauncher from './SystemLauncher'
-import UILauncher from './UILauncher'
-import AccountLauncher from './AccountLauncher'
-import MonitorLauncher from './MonitorLauncher'
+import SystemLauncher, { SystemLauncherProps } from './SystemLauncher'
+import UILauncher, { UILauncherProps } from './UILauncher'
+import AccountLauncher, { AccountLauncherProps } from './AccountLauncher'
+import MonitorLauncher, { MonitorLauncherProps } from './MonitorLauncher'
 
-export type LauncherProps = React.PropsWithChildren
+export type LauncherProps = React.PropsWithChildren & {
+  system: SystemLauncherProps,
+  monitor: MonitorLauncherProps,
+  account: AccountLauncherProps,
+  ui: UILauncherProps
+}
 
 /**
  * Run all launchers with main app page.
@@ -17,16 +21,14 @@ export type LauncherProps = React.PropsWithChildren
  * <Launcher />
  */
 export function Launcher(props: LauncherProps): JSX.Element {
-  const { children } = props
+  const { system, monitor, account, ui, children } = props
 
   return (
-    <SystemLauncher>
-      <MonitorLauncher>
-        <UILauncher>
-          <AccountLauncher>
-            <App>
-              { children }
-            </App>
+    <SystemLauncher {...system}>
+      <MonitorLauncher {...monitor}>
+        <UILauncher {...ui} >
+          <AccountLauncher {...account}>
+            { children }
           </AccountLauncher>
         </UILauncher>
       </MonitorLauncher>

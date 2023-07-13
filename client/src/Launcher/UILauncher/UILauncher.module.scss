@@ -73,6 +73,8 @@ $xxl-width: 1600px;
   --scroll-thumb-color: #BFBFBF;
   --scroll-thumb-color--hover: #8C8C8C;
   --scroll-size: 12px;
+
+  --border-color: #CACDD1;
 }
 
 :global {
@@ -86,30 +88,6 @@ $xxl-width: 1600px;
   }
 
   .scroll {
-    overflow: auto;
-
-    &::-webkit-scrollbar-thumb {
-      background: var(--scroll-thumb-color);
-
-      &:hover {
-        background: var(--scroll-thumb-color--hover);
-      }
-    }
-
-    &::-webkit-scrollbar-track {
-      background: var(--scroll-track-color);
-
-      &:hover {
-        background: var(--scroll-track-color--hover);
-      }
-    }
-
-    &::-webkit-scrollbar {
-      width: var(--scroll-size);
-      height: var(--scroll-size);
-    }
-
-
     // size
     &--xs { --scroll-size: 4px; }
     &--sm { --scroll-size: 8px; }
@@ -122,5 +100,33 @@ $xxl-width: 1600px;
     &-x { overflow-x: auto; overflow-y: hidden; }
     &-y { overflow-x: hidden; overflow-y: auto; }
     &-xy { overflow-x: auto; overflow-y: auto; }
+
+    
+    
+    // style
+    &-x,
+    &-y,
+    &-xy {
+      &::-webkit-scrollbar-thumb {
+        background: var(--scroll-thumb-color);
+
+        &:hover {
+          background: var(--scroll-thumb-color--hover);
+        }
+      }
+
+      &::-webkit-scrollbar-track {
+        background: var(--scroll-track-color);
+
+        &:hover {
+          background: var(--scroll-track-color--hover);
+        }
+      }
+
+      &::-webkit-scrollbar {
+        width: var(--scroll-size);
+        height: var(--scroll-size);
+      }
+    }
   }
 }

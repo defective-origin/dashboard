@@ -1,0 +1,43 @@
+@import "src/Launcher/UILauncher/UILauncher.module";
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+}
+
+.UILayoutMenu {
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.StartActions,
+.CenterActions,
+.EndActions {
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  margin: 5px 0;
+}
+
+.Button,
+.Button:focus {
+  min-height: 40px;
+  min-width: 40px;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  margin-bottom: 2px;
+  color: #000000;
+}
+
+.ActiveButton {
+  background-color: #0000001F;
+}

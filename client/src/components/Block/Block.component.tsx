@@ -17,6 +17,9 @@ export type BlockProps = {
   children?: React.ReactNode
   type?: 'row' | 'row-center' | 'column' | 'column-center'
   gap?: string | number
+  start?: React.ReactNode
+  center?: React.ReactNode
+  end?: React.ReactNode
 }
 
 /**
@@ -26,11 +29,23 @@ export type BlockProps = {
  * @example
  * <Block />
  */
-export function Block(props: BlockProps): JSX.Element {
-  const { gap, type = 'row', children, className, ...otherProps } = props
+export function Block(props: BlockProps): JSX.Element | null {
+  const { start, center, end, gap, type = 'row', children, className, ...otherProps } = props
   const _className = cn('block', `block--${type}`, className)
 
-  return <div className={_className} {...otherProps} style={{ gap }}>{children}</div>
+  if (!start && !center && !end && !children) {
+    return null
+  }
+
+  return (
+    <div className={_className} {...otherProps} style={{ gap }}>
+      {start && <Block.Start>{start}</Block.Start>}
+      {center && <Block.Center>{center}</Block.Center>}
+      {end && <Block.End>{end}</Block.End>}
+
+      {children}
+    </div>
+  )
 }
 
 Block.displayName = 'Block'

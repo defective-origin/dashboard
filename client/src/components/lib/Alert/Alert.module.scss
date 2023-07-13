@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import "src/Launcher/UILauncher/UILauncher.module.scss";
 
 :global {
   .dark {
@@ -10,6 +10,5 @@
   }
 }
 
-.App {
-
+.Alert {
 }
