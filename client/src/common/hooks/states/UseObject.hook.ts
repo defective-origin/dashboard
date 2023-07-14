@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
 export const omit = <T extends object, K extends keyof T>(val: T, ...keys: K[]) => {
@@ -30,7 +30,7 @@ export function useObject<T extends Record<string, unknown>>(init: T = OBJECT_DE
   const ref = useType(init, updatedOptions) as ObjectReturnOptions<T>
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     // extra
     ref.has = (key) => key in ref.current
     ref.get = (key) => ref.current[key]

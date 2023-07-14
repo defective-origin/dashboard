@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useLayoutEffect, useRef } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import useStateful, { StatefulReturnOptions, getValue } from './UseStateful.hook'
 
 export type TypeHandler<
@@ -115,7 +115,7 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
   const ref = useStateful(formatValue(init)) as TypeReturnOptions<S, O> & { [key: string]: any }
 
   // override
-  useLayoutEffect(() => {
+  useMemo(() => {
     const { change, changeSilent } = ref
 
     ref.change = (val) => change(formatValue(getValue(val, ref.current)))
@@ -124,7 +124,7 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
   }, [ref])
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     ref.registerHandler = (name, handler) => {
       ref[name] = (...args: any[]) => ref.change((val) => handler(val, ...args))
       ref[`${name}Silent`] = (...args: any[]) => ref.changeSilent((val) => handler(val, ...args))

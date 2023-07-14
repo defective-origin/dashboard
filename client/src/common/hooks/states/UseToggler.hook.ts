@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
 export type TogglerReturnOptions = TypeReturnOptions<boolean>
@@ -39,7 +39,7 @@ export const TOGGLER_DEFAULT_VALUE = false
  * modalToggler.isOff()
  * modalToggler.current
  * modalToggler.value
- * 
+ *
  * // for each handler you have the same named  function with 'Silent' postfix
  * // which doesn't call rerender
  * copyCounter.toggleSilent()
@@ -52,7 +52,7 @@ export function useToggler(init = TOGGLER_DEFAULT_VALUE, options: TogglerOptions
   const ref = useType(init, updatedOptions) as TogglerReturnOptions
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     // extra
     ref.isOn = () => ref.current
     ref.isOff = () => !ref.current

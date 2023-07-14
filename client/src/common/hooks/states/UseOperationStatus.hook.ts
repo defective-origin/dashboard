@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import { StatusReturnOptions, useStatus } from './UseStatus.hook'
 import { TypeHandler } from './UseType.hook'
 
@@ -62,7 +62,7 @@ export const useOperationStatus = (): OperationStatusReturnOptions => {
   const ref = useStatus(OPERATION_STATUS_DEFAULT_VALUE) as OperationStatusReturnOptions
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     ref.registerHandler('start', () => ({ ...OPERATION_STATUS_DEFAULT_VALUE, started: true }))
     ref.registerHandler('stop', () => ({ ...OPERATION_STATUS_DEFAULT_VALUE, stopped: true }))
     ref.registerHandler('cancel', () => ({ ...OPERATION_STATUS_DEFAULT_VALUE, canceled: true }))

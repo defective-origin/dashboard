@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
 export type ListOptions<T> = TypeOptions<T[]> & {
@@ -30,7 +30,7 @@ export function useList<T>(init: T[] = LIST_DEFAULT_VALUE, options: ListOptions<
   const ref = useType(init, updatedOptions) as ListReturnOptions<T>
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     // handlers
     ref.registerHandler('concat', (val, ...args: Parameters<Array<T>['concat']>) => val.concat(...args))
     ref.registerHandler('fill', (val, ...args: Parameters<Array<T>['fill']>) => [...val].fill(...args))

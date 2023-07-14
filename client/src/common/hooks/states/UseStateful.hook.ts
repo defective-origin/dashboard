@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useLayoutEffect, useRef, useState, SetStateAction, MutableRefObject } from 'react'
+import { useCallback, useRef, useState, SetStateAction, MutableRefObject, useMemo, useLayoutEffect } from 'react'
 
 export const getValue = <S>(arg: SetStateAction<S>, prevState: S) => {
   if (typeof arg === 'function') {
@@ -52,19 +52,20 @@ export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturn
   const [value, setValue] = useState<S>(initial)
   const ref = useRef<S>(initial) as StatefulReturnOptions<S>
 
-  useLayoutEffect(() => {
+  ref.unstable = value
+
+  useMemo(() => {
+    ref.sync = () => ref.change(ref.current)
+    ref.changeSilent = (val) => { ref.current = getValue(val, ref.current) }
     ref.change = (val) => {
       ref.changeSilent(val)
 
       setValue(getValue(val, ref.current))
     }
-    ref.changeSilent = (val) => { ref.current = getValue(val, ref.current) }
-    ref.sync = () => ref.change(ref.current)
   }, [ref, setValue])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ref.reset = useCallback(() => ref.change(initial), [ref, ...deps])
-  ref.unstable = value
 
   // In a real implementation, this would run before layout effects
   // eslint-disable-next-line react-hooks/exhaustive-deps
