@@ -13,10 +13,13 @@ export const Item = ({
   actions = [],
   data = {},
 } = {}) => {
-  const filteredPrompts = Object.keys(prompts).reduce((acc, prompt) => {
+  const filteredPrompts = Object.keys(prompts).reduce((acc, name) => {
     // remove fields from input if we pass value via data
-    if (!(prompt.name in data)) {
-      acc.push(prompt)
+    if (!(name in data)) {
+      const prompt = ITEM_PROMPT_MAP[name]
+      const options = prompts[name]
+
+      acc.push(prompt(options))
     }
 
     return acc
@@ -44,13 +47,13 @@ export const Component = ({
   },
   data,
   isSubmodule,
-} = {}) => ({
+} = {}) => Item({
   description,
-  prompts: Tool.list(
-    !data?.name && Prompt.NameInput({ default: defaultName, postfix: postfixName }),
-    !data?.subpath && Prompt.SubpathInput({ default: defaultSubpath }),
-  ),
-  actions: Tool.list(
+  prompts: {
+    name: { default: defaultName, postfix: postfixName },
+    subpath: { default: defaultSubpath },
+  },
+  actions: [
     Action.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Component',
@@ -59,7 +62,8 @@ export const Component = ({
       data,
       isSubmodule,
     }),
-  ),
+  ],
+  data,
 })
 
 export const Context = ({
@@ -74,13 +78,13 @@ export const Context = ({
   },
   data,
   isSubmodule = true,
-} = {}) => ({
+} = {}) => Item({
   description,
-  prompts: Tool.list(
-    !data?.name && Prompt.NameInput({ default: defaultName, postfix: postfixName }),
-    !data?.subpath && Prompt.SubpathInput({ default: defaultSubpath }),
-  ),
-  actions: Tool.list(
+  prompts: {
+    name: { default: defaultName, postfix: postfixName },
+    subpath: { default: defaultSubpath },
+  },
+  actions: [
     Action.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Context',
@@ -89,7 +93,8 @@ export const Context = ({
       data,
       isSubmodule,
     }),
-  ),
+    data,
+  ],
 })
 
 export const Hook = ({
@@ -104,13 +109,13 @@ export const Hook = ({
   },
   data,
   isSubmodule = true,
-} = {}) => ({
+} = {}) => Item({
   description,
-  prompts: Tool.list(
-    !data?.name && Prompt.NameInput({ prefix: 'use', default: defaultName, postfix: postfixName }),
-    !data?.subpath && Prompt.SubpathInput({ default: defaultSubpath }),
-  ),
-  actions: Tool.list(
+  prompts: {
+    name: { prefix: 'use', default: defaultName, postfix: postfixName },
+    subpath: { default: defaultSubpath },
+  },
+  actions: [
     Action.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Hook',
@@ -119,7 +124,7 @@ export const Hook = ({
       data,
       isSubmodule,
     }),
-  ),
+  ],
 })
 
 export const Store = ({
@@ -128,17 +133,16 @@ export const Store = ({
     notExports: [],
     defaultExport: 'component',
   },
-} = {}) => ({
+} = {}) => Item({
   description: 'Init Store config folder',
-  prompts: Tool.list(),
-  actions: Tool.list(
+  actions: [
     Action.Folder({
       target: 'store',
       template: 'templates/Store',
       files,
       module,
     }),
-  ),
+  ],
 })
 
 export const StoreSlice = ({
@@ -153,13 +157,13 @@ export const StoreSlice = ({
   },
   data,
   isSubmodule = true,
-} = {}) => ({
+} = {}) => Item({
   description,
-  prompts: Tool.list(
-    !data?.name && Prompt.NameInput({ default: defaultName, postfix: postfixName }),
-    !data?.subpath && Prompt.SubpathInput({ default: defaultSubpath }),
-  ),
-  actions: Tool.list(
+  prompts: {
+    name: { default: defaultName, postfix: postfixName },
+    subpath: { default: defaultSubpath },
+  },
+  actions: [
     Action.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Store/StoreSlice',
@@ -168,7 +172,8 @@ export const StoreSlice = ({
       data,
       isSubmodule,
     }),
-  ),
+  ],
+  data,
 })
 
 export const Api = ({
@@ -177,17 +182,16 @@ export const Api = ({
     notExports: [],
     defaultExport: 'component',
   },
-} = {}) => ({
+} = {}) => Item({
   description: 'Init Api config folder',
-  prompts: Tool.list(),
-  actions: Tool.list(
+  actions: [
     Action.Folder({
       target: 'api',
       template: 'templates/Api',
       files,
       module,
     }),
-  ),
+  ],
 })
 
 export const ApiSlice = ({
@@ -202,13 +206,13 @@ export const ApiSlice = ({
   },
   data,
   isSubmodule = true,
-} = {}) => ({
+} = {}) => Item({
   description,
-  prompts: Tool.list(
-    !data?.name && Prompt.NameInput({ default: defaultName, postfix: postfixName }),
-    !data?.subpath && Prompt.SubpathInput({ default: defaultSubpath }),
-  ),
-  actions: Tool.list(
+  prompts: {
+    name: { default: defaultName, postfix: postfixName },
+    subpath: { default: defaultSubpath },
+  },
+  actions: [
     Action.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Api/ApiSlice',
@@ -217,23 +221,26 @@ export const ApiSlice = ({
       data,
       isSubmodule,
     }),
-  ),
+  ],
+  data,
 })
 
 export const Language = ({
   description = 'Create Language format and translate maps',
-  language = 'en',
-} = {}) => ({
+  defaultName = 'en',
+} = {}) => Item({
   description,
-  prompts: Tool.list(),
-  actions: Tool.list(
+  prompts: {
+    name: { default: defaultName },
+  },
+  actions: [
     [ 'i18n', 'l10n' ].map((submodule) => [
       Action.ModuleFile({
         type: 'partial',
         target: `locale2/${submodule}`,
       }),
       Action.File({
-        target: `locale2/${submodule}/${language}.json`,
+        target: `locale2/${submodule}/{{snakeCase name}}.json`,
         template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
         module: {
           target: `locale2/${submodule}`,
@@ -241,10 +248,9 @@ export const Language = ({
           import: true,
           export: true,
         },
-        data: { name: language },
       }),
     ]),
-  ),
+  ],
 })
 
 export const Locale = ({
@@ -254,18 +260,20 @@ export const Locale = ({
     notExports: ['test'],
     defaultExport: ['conf'],
   },
-} = {}) => ({
+} = {}) => Item({
   description,
-  prompts: Tool.list(),
-  actions: Tool.list(
+  prompts: {
+    name: { default: 'en' },
+  },
+  actions: [
     Action.Folder({
       target: 'locale2',
       template: 'templates/Locale',
       files,
       module,
     }),
-    Language().actions,
-  ),
+    Language(),
+  ],
 })
 
 

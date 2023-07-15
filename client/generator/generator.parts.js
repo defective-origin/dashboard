@@ -66,6 +66,6 @@ export default function (plop) {
   plop.setGenerator('Context', Item.Context())
 
   plop.setGenerator('Store Slice', Item.StoreSlice())
-
   plop.setGenerator('Api Slice', Item.ApiSlice())
+  plop.setGenerator('Language', Item.Language())
 }
