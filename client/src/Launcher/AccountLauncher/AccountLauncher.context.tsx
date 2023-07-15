@@ -8,26 +8,30 @@ export type AccountSettings = {
 export type AccountLauncherState = {
   user: null | AccountUser
   settings: null | AccountSettings
+  isAuthorized: boolean,
 }
 
 export const DEFAULT_ACCOUNT_LAUNCHER_STATE: AccountLauncherState = {
   user: null,
   settings: null,
+  isAuthorized: false,
 }
 
 export type AccountLauncherActions = {
   login: () => void,
   logout: () => void,
-  isAuthorized: boolean,
+}
+
+export const DEFAULT_ACCOUNT_LAUNCHER_ACTIONS: AccountLauncherActions = {
+  login: () => {},
+  logout: () => {},
 }
 
 export type AccountLauncherOptions = AccountLauncherState & AccountLauncherActions
 
 export const DEFAULT_ACCOUNT_LAUNCHER_OPTIONS: AccountLauncherOptions = {
   ...DEFAULT_ACCOUNT_LAUNCHER_STATE,
-  login: () => {},
-  logout: () => {},
-  isAuthorized: false,
+  ...DEFAULT_ACCOUNT_LAUNCHER_ACTIONS,
 }
 
 export const AccountLauncherContext = React.createContext(DEFAULT_ACCOUNT_LAUNCHER_OPTIONS)

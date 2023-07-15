@@ -8,6 +8,7 @@ import { useObject } from 'common/hooks'
 // ---| self |---
 import {
   SystemLauncherContext,
+  SystemLauncherActions,
   SystemLauncherOptions,
   DEFAULT_SYSTEM_LAUNCHER_STATE,
 } from './SystemLauncher.context'
@@ -26,13 +27,13 @@ export function SystemLauncher(props: SystemLauncherProps): JSX.Element {
   const { children } = props
   const system = useObject(DEFAULT_SYSTEM_LAUNCHER_STATE)
 
-  const options = useMemo<SystemLauncherOptions>(() => ({
-    ...system.current,
-    languages: i18next.languages as Languages[],
+  // actions are separated to prevent side effects
+  // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
+  const actions = useMemo<SystemLauncherActions>(() => ({
     t,
     changeLanguage: (language) => {
       // TODO: analytics.register({ name: 'Language', value: language })
-      system.merge({ language })
+      system.merge({ language, languages: i18next.languages as Languages[] })
       i18next.changeLanguage(language)
     },
     // TODO: click analytics.register({ name: 'Hotkey', value: Hotkey })
@@ -44,9 +45,10 @@ export function SystemLauncher(props: SystemLauncherProps): JSX.Element {
 
       system.merge({ hotkeys })
     },
-  }), [system.current])
+  }), [system])
 
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const options = useMemo<SystemLauncherOptions>(() => Object.assign(actions, system.current), [system.current, actions])
 
   return (
     <React.StrictMode>
