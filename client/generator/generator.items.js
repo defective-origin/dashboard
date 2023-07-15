@@ -237,13 +237,13 @@ export const Language = ({
     [ 'i18n', 'l10n' ].map((submodule) => [
       Action.ModuleFile({
         type: 'partial',
-        target: `locale2/${submodule}`,
+        target: `locale/${submodule}`,
       }),
       Action.File({
-        target: `locale2/${submodule}/{{snakeCase name}}.json`,
+        target: `locale/${submodule}/{{snakeCase name}}.json`,
         template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
         module: {
-          target: `locale2/${submodule}`,
+          target: `locale/${submodule}`,
           type: 'partial',
           import: true,
           export: true,
@@ -267,7 +267,7 @@ export const Locale = ({
   },
   actions: [
     Action.Folder({
-      target: 'locale2',
+      target: 'locale',
       template: 'templates/Locale',
       files,
       module,
