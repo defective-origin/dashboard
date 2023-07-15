@@ -43,9 +43,9 @@ export type OverrideComponentOptions = {
 /**
  * Set new default props or override old props for component.
  *
- * @example 
+ * @example
  * const BoldText = overrideComponent(Text, { fontSize: 13, fontWeight: 600 }, { name: 'BoldText', memoize: true })
- * 
+ *
  * <BoldText />
  */
 export function overrideComponent<C extends React.FunctionComponent>(
@@ -54,7 +54,7 @@ export function overrideComponent<C extends React.FunctionComponent>(
   options: OverrideComponentOptions = {},
 ): C {
   let overrideComponent: React.FunctionComponent = (props) => component.apply(null, [{ ...overrideProps, ...props }])
-  
+
   if (options.memoize) {
     overrideComponent = React.memo(overrideComponent)
   }
@@ -67,9 +67,9 @@ export function overrideComponent<C extends React.FunctionComponent>(
 /**
  * Attache 'dot' override component(sub component) with new default props or override old props.
  *
- * @example 
+ * @example
  * const Text = attachOverride(Text, { fontSize: 13, fontWeight: 600 }, { name: 'Bold', memoize: true })
- * 
+ *
  * <Text />
  * <Text.Bold /> // displayName = 'Text.Bold'
  */
@@ -95,7 +95,7 @@ export function attachOverride<C extends React.FunctionComponent>(
 /**
  * Attache 'dot' override components(sub components) with new default props or override old props.
  *
- * @example 
+ * @example
  * const Text = attachOverrides(
  *    Text, {
  *      Light: { fontSize: 11, fontWeight: 200 },
@@ -103,7 +103,7 @@ export function attachOverride<C extends React.FunctionComponent>(
  *    }, {
  *      memoize: true,
  *    })
- * 
+ *
  * <Text />
  * <Text.Light /> // displayName = 'Light.Bold'
  * <Text.Bold /> // displayName = 'Text.Bold'
@@ -113,7 +113,7 @@ export function attachOverrides<
   K extends string,
 >(
   component: C,
-  overridePropMap: Record<K, React.ComponentProps<C>>,
+  overridePropMap: Record<K, Partial<React.ComponentProps<C>>>,
   options: OverrideComponentOptions = {},
 ): C & Record<K, C> {
   Object.keys(overridePropMap).forEach((name) =>
@@ -121,7 +121,7 @@ export function attachOverrides<
       component,
       overridePropMap[name as K],
       { name, ...options },
-    )
+    ),
   )
 
   return component as C & Record<K, C>

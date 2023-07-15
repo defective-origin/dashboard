@@ -19,7 +19,7 @@ module.exports = {
     'declaration-block-single-line-max-declarations': null,
     'declaration-block-trailing-semicolon': 'always',
     'selector-pseudo-class-no-unknown': [true, {
-        'ignorePseudoClasses': ['global', 'export']
+      'ignorePseudoClasses': ['global', 'export']
     }],
   },
 }

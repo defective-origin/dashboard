@@ -11,23 +11,29 @@ export type SystemLauncherState = {
 
 export const DEFAULT_SYSTEM_LAUNCHER_STATE: SystemLauncherState = {
   language: 'en',
-  languages: ['en', 'ru'],
+  languages: ['en'],
   hotkeys: {},
 }
 
-export type SystemLauncherOptions = SystemLauncherState & {
+export type SystemLauncherActions = {
   t: typeof t
   changeLanguage: (patch: SystemLanguage) => void
   addHotkey: (key: string, handler: () => void) => void
   removeHotkey: (key: string) => void
 }
 
-export const DEFAULT_SYSTEM_LAUNCHER_OPTIONS: SystemLauncherOptions = {
-  ...DEFAULT_SYSTEM_LAUNCHER_STATE,
+export const DEFAULT_SYSTEM_LAUNCHER_ACTIONS: SystemLauncherActions = {
   t: () => '',
   changeLanguage: () => {},
   addHotkey: () => {},
   removeHotkey: () => {},
+}
+
+export type SystemLauncherOptions = SystemLauncherState & SystemLauncherActions
+
+export const DEFAULT_SYSTEM_LAUNCHER_OPTIONS: SystemLauncherOptions = {
+  ...DEFAULT_SYSTEM_LAUNCHER_STATE,
+  ...DEFAULT_SYSTEM_LAUNCHER_ACTIONS,
 }
 
 export const SystemLauncherContext = React.createContext(DEFAULT_SYSTEM_LAUNCHER_OPTIONS)

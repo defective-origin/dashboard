@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
 export type CounterOptions = TypeOptions<number> & {
@@ -22,7 +22,7 @@ export const COUNTER_DEFAULT_VALUE = 0
  *
  * @example
  * const copyCounter = useCounter(1)
- * 
+ *
  *
  * // step forward
  * copyCounter.increase()
@@ -62,7 +62,7 @@ export function useCounter(init = COUNTER_DEFAULT_VALUE, options: CounterOptions
   const ref = useType(init, updatedOptions) as CounterReturnOptions
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     // handlers
     ref.registerHandler('increase', (val, num = updatedOptions.step) => val + num)
     ref.registerHandler('decrease', (val, num = updatedOptions.step) => val - num)

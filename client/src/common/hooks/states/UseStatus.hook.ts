@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import { ObjectReturnOptions, useObject } from '.'
 import { TypeHandler } from './UseType.hook'
 
@@ -31,8 +31,9 @@ export const useStatus = <T extends Record<string, boolean>>(init: T): StatusRet
   const ref = useObject<T>(init, { clear: init }) as StatusReturnOptions<T>
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     ref.registerHandler('toggle', (_, key) => ({ ...init, [key]: true }))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref])
 
   return ref

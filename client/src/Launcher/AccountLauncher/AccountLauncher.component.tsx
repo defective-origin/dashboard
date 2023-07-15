@@ -1,8 +1,12 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
+
+// ---| common |---
+import { useObject } from 'common/hooks'
 
 // ---| self |---
 import {
   AccountLauncherContext,
+  AccountLauncherActions,
   AccountLauncherOptions,
   DEFAULT_ACCOUNT_LAUNCHER_STATE,
 } from './AccountLauncher.context'
@@ -17,14 +21,17 @@ export type AccountLauncherProps = React.PropsWithChildren
  * <AccountLauncher defaultProp={1} />
  */
 export function AccountLauncher(props: AccountLauncherProps): JSX.Element {
-  const [current, setCurrent] = useState(DEFAULT_ACCOUNT_LAUNCHER_STATE)
+  const account = useObject(DEFAULT_ACCOUNT_LAUNCHER_STATE)
 
-  const options = useMemo<AccountLauncherOptions>(() => ({
-    ...current,
-    login: () => setCurrent((state) => ({ ...state, user: {} })),
-    logout: () => setCurrent((state) => ({ ...state, user: null })),
-    isAuthorized: !!current.user,
-  }), [current])
+  // actions are separated to prevent side effects
+  // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
+  const actions = useMemo<AccountLauncherActions>(() => ({
+    login: () => account.merge({ user: {}, isAuthorized: true }),
+    logout: () => account.merge({ user: null, isAuthorized: false }),
+  }), [account])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const options = useMemo<AccountLauncherOptions>(() => ({ ...account.current, ...actions }), [account.current, actions])
 
   return <AccountLauncherContext.Provider value={options} {...props} />
 }

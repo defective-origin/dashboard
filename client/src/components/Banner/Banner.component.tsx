@@ -71,9 +71,9 @@ export function Banner(props: BannerProps): JSX.Element | null {
     <div className={_className} {...otherProps}>
       {imageSrc || imageType && <Image className={css.Image} src={imageSrc} type={imageType} />}
 
-      {title && <Text.H4 align='center' className={css.Title} text={title} />}
-      {subtitle && <Text.H5 align='center' className={css.Subtitle} text={subtitle} />}
-      {text && <Text.Body1 align='center' className={css.Text} text={text} />}
+      {title && <Text.H4 align='center' className={css.Title} content={title} />}
+      {subtitle && <Text.H5 align='center' className={css.Subtitle} content={subtitle} />}
+      {text && <Text.Body1 align='center' className={css.Text} content={text} />}
 
       {children}
     </div>

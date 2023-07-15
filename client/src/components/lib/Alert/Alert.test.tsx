@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import AppPage from './AppPage.component'
+import Alert from './Alert.component'
 
-describe('[AppPage] component', () => {
+describe('[Alert] component', () => {
   it('should render component', () => {
-    const container = render(<AppPage />)
+    const container = render(<Alert />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

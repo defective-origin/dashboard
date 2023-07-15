@@ -1,4 +1,5 @@
-import { useCallback, useLayoutEffect, useRef } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCallback, useMemo, useRef } from 'react'
 import useStateful, { StatefulReturnOptions, getValue } from './UseStateful.hook'
 
 export type TypeHandler<
@@ -84,8 +85,8 @@ export type TypeReturnOptions<S, O extends TypeOptions<S> = TypeOptions<S>> = St
  *   // extend functionality
  *   useLayoutEffect(() => {
  *     // extra
- *     ref.equal = (val) => val === ref.current 
- * 
+ *     ref.equal = (val) => val === ref.current
+ *
  *     // handlers
  *     ref.registerHandler('toLowerCase', (val) => val.toLowerCase())
  *     ref.registerHandler('toUpperCase', (val) => val.toUpperCase())
@@ -109,31 +110,33 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
 
     return formatsRef.current
       .reduce((acc, handler) => handler?.(acc) ?? acc, currentValue)
-  }, [])
+  }, [options])
+
   const ref = useStateful(formatValue(init)) as TypeReturnOptions<S, O> & { [key: string]: any }
 
   // override
-  useLayoutEffect(() => {
+  useMemo(() => {
     const { change, changeSilent } = ref
 
     ref.change = (val) => change(formatValue(getValue(val, ref.current)))
     ref.changeSilent = (val) => changeSilent(formatValue(getValue(val, ref.current)))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref])
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     ref.registerHandler = (name, handler) => {
       ref[name] = (...args: any[]) => ref.change((val) => handler(val, ...args))
       ref[`${name}Silent`] = (...args: any[]) => ref.changeSilent((val) => handler(val, ...args))
     }
-  
+
     ref.registerHandler('clear', () => options.clear ?? init)
 
 
     ref.registerFormat = (arg0, arg1?: Formatter<S>) => {
       const opt = typeof arg0 === 'string' ? options[arg0] : options
       const handler = arg1 ? arg1 : arg0 as Formatter<S>
-      
+
       if (typeof opt !== 'undefined') {
         formatsRef.current.push((val) => handler(val, opt))
       }
@@ -147,6 +150,7 @@ export const useType = <S, O extends TypeOptions<S>>(init: S, options = {} as O)
 
       return ref.current !== init
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref])
 
   return ref

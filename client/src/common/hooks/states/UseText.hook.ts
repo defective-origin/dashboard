@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useMemo } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
 export type TextOptions = TypeOptions<string> & {
@@ -23,7 +23,7 @@ export function useText(init = TEXT_DEFAULT_VALUE, options: TextOptions = {}): T
   const ref = useType(init, updatedOptions) as TextReturnOptions
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     // handlers
     ref.registerHandler('concat', (val, ...args: Parameters<string['concat']>) => val.concat(...args))
     ref.registerHandler('replace', (val, ...args: Parameters<string['replace']>) => val.replace(...args))

@@ -1,4 +1,5 @@
-import { useLayoutEffect } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useMemo } from 'react'
 import useType, { TypeHandler, TypeOptions, TypeReturnOptions } from './UseType.hook'
 
 export type ListOptions<T> = TypeOptions<T[]> & {
@@ -19,7 +20,7 @@ export type ListReturnOptions<T> = TypeReturnOptions<Array<T>, ListOptions<T>>
   & TypeHandler<'shift', (...args: Parameters<Array<T>['shift']>) => void>
   & TypeHandler<'pop', (...args: Parameters<Array<T>['pop']>) => void>
   & TypeHandler<'remove', (index: number | number[]) => void>
-  & TypeHandler<'replace', (index: number, item: any) => void>
+  & TypeHandler<'replace', (index: number, item: T) => void>
   & TypeHandler<'move', (from: number, to: number) => void>
 
 export const LIST_DEFAULT_VALUE = []
@@ -29,7 +30,7 @@ export function useList<T>(init: T[] = LIST_DEFAULT_VALUE, options: ListOptions<
   const ref = useType(init, updatedOptions) as ListReturnOptions<T>
 
   // extend functionality
-  useLayoutEffect(() => {
+  useMemo(() => {
     // handlers
     ref.registerHandler('concat', (val, ...args: Parameters<Array<T>['concat']>) => val.concat(...args))
     ref.registerHandler('fill', (val, ...args: Parameters<Array<T>['fill']>) => [...val].fill(...args))
@@ -44,7 +45,7 @@ export function useList<T>(init: T[] = LIST_DEFAULT_VALUE, options: ListOptions<
     ref.registerHandler('pop', (val) => val.slice(0, -1))
     ref.registerHandler('remove', (val, index) => {
       const indexSet = new Set(Array.isArray(index) ? index : [index])
-      
+
       return val.filter((_, idx) => !indexSet.has(idx))
     })
     ref.registerHandler('replace', (val, index, item) => {
@@ -65,13 +66,13 @@ export function useList<T>(init: T[] = LIST_DEFAULT_VALUE, options: ListOptions<
     ref.registerFormat('sort', (val, ...args) => val.sort(...args))
     ref.registerFormat('uniq', (val, selector) => {
       const uniqValueSet = new Set()
-  
+
       return val.filter((i) => {
         const value = selector(i)
         const isFirstValue = !uniqValueSet.has(value)
-  
+
         uniqValueSet.add(value)
-  
+
         return isFirstValue
       })
     })

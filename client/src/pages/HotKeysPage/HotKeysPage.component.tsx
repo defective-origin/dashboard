@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { RouteProps, useSystemLauncher } from 'Launcher'
+import { RouteProps, useSystemLauncher, useUILauncher } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -30,6 +30,7 @@ export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
   const _className = cn(css.HotKeysPage, className)
   const system = useSystemLauncher()
   const title = system.t('PAGES.HOTKEYS')
+  const ui = useUILauncher()
 
   return (
     <Page
@@ -38,27 +39,26 @@ export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
       title={title}
       {...otherProps}
     >
-
-      <div>TEST CONTENT</div>
-      <div>TEST CONTENT</div>
-      <div>TEST CONTENT</div>
-      <div>TEST CONTENT</div>
-      <div>TEST CONTENT</div>
-      <div>TEST CONTENT</div>
+      <Page.Header>
+        PAGE HEADER
+      </Page.Header>
+      <Page.Content>
+        PAGE CONTENT
+        <br/>
+        THEME - {ui.theme}
+        <br/>
+        MODE - {ui.mode}
+        <br/>
+        MENU - {ui.menu}
+      </Page.Content>
       <Page.Footer>
-            FOOTER
+        PAGE FOOTER
       </Page.Footer>
       <Page.LeftAside>
-            LEFT ASIDE
+        PAGE LEFT ASIDE
       </Page.LeftAside>
       <Page.RightAside>
-            RIGHT ASIDE
-      </Page.RightAside>
-      <Page.RightAside>
-            -------------------
-      </Page.RightAside>
-      <Page.RightAside>
-            CONTENT
+        PAGE RIGHT ASIDE
       </Page.RightAside>
 
       {children}

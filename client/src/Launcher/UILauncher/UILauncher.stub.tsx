@@ -2,12 +2,15 @@ import React from 'react'
 import { StyledEngineProvider } from '@mui/material/styles'
 
 // ---| self |---
+import UILayout, { UIItemMap } from './UILayout'
 import { DEFAULT_UI_LAUNCHER_OPTIONS, UILauncherContext, UILauncherOptions } from './UILauncher.context'
 
-export type UILauncherStubProps = React.PropsWithChildren & Partial<UILauncherOptions>
+export type UILauncherStubProps = React.PropsWithChildren & Partial<UILauncherOptions> & {
+  items: UIItemMap[]
+}
 
 export function UILauncherStub(props: UILauncherStubProps): JSX.Element {
-  const { children, ...otherProps } = props
+  const { items, children, ...otherProps } = props
   const combinedValue = { ...DEFAULT_UI_LAUNCHER_OPTIONS, ...otherProps }
 
   return (
@@ -15,7 +18,9 @@ export function UILauncherStub(props: UILauncherStubProps): JSX.Element {
       <UILauncherContext.Provider value={combinedValue}>
         {/* injectFirst allows override Material UI's styles. */}
         <StyledEngineProvider injectFirst>
-          { children }
+          <UILayout items={items}>
+            { children }
+          </UILayout>
         </StyledEngineProvider>
       </UILauncherContext.Provider>
     </React.Suspense>

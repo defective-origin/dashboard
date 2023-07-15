@@ -1,4 +1,5 @@
-import { useCallback, useLayoutEffect, useRef, useState, SetStateAction, MutableRefObject } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCallback, useRef, useState, SetStateAction, MutableRefObject, useMemo, useLayoutEffect } from 'react'
 
 export const getValue = <S>(arg: SetStateAction<S>, prevState: S) => {
   if (typeof arg === 'function') {
@@ -9,7 +10,7 @@ export const getValue = <S>(arg: SetStateAction<S>, prevState: S) => {
 }
 
 export type StatefulReturnOptions<S> = MutableRefObject<S> & {
-  value: S
+  unstable: S
   change: (val: SetStateAction<S>) => void
   changeSilent: (val: SetStateAction<S>) => void
   reset: () => void
@@ -48,23 +49,26 @@ export type StatefulReturnOptions<S> = MutableRefObject<S> & {
  */
 export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturnOptions<S> => {
   // it exists for component rerendering and can have old value
-  const [value, setValue] = useState<S>(initial)
+  const [unstableValue, setUnstableValue] = useState<S>(initial)
   const ref = useRef<S>(initial) as StatefulReturnOptions<S>
 
-  useLayoutEffect(() => {
+  ref.unstable = unstableValue
+
+  useMemo(() => {
+    ref.sync = () => ref.change(ref.current)
+    ref.changeSilent = (val) => { ref.current = getValue(val, ref.current) }
     ref.change = (val) => {
       ref.changeSilent(val)
 
-      setValue(getValue(val, ref.current))
+      setUnstableValue(getValue(val, ref.current))
     }
-    ref.changeSilent = (val) => { ref.current = getValue(val, ref.current) }
-    ref.sync = () => ref.change(ref.current)
-  }, [ref, setValue])
+  }, [ref, setUnstableValue])
 
-  ref.reset = useCallback(() => ref.change(initial), [ref.change, ...deps])
-  ref.value = value
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ref.reset = useCallback(() => ref.change(initial), [ref, ...deps])
 
   // In a real implementation, this would run before layout effects
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(() => ref.changeSilent(initial), [ref, ...deps])
 
   return ref

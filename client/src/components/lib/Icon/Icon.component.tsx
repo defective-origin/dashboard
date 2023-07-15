@@ -14,8 +14,9 @@ export type IconTypes = 'light_mode' | 'dark_mode'
 | 'person' | 'person_add' | 'account_circle' | 'support_agent'
 | 'dashboard' | 'insert_chart'
 | 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_left'
-| 'auto_stories'
+| 'auto_stories' | 'logo_dev'
 | 'settings'
+| 'close' | 'left_panel_open' | 'left_panel_close'
 
 export type IconProps = MuiIconProps & {
   className?: string

@@ -7,7 +7,7 @@ import { cn, react } from 'common/tools'
 import './Layout.module.scss'
 import LayoutItem from './LayoutItem'
 
-export type LayoutType = 'row' | 'column' | 'left-aside' | 'right-aside'
+export type LayoutType = 'row' | 'column' | 'header' | 'left-aside' | 'right-aside'
 
 export type LayoutProps = {
   className?: string

@@ -8,7 +8,7 @@ import MuiCardMedia from '@mui/material/CardMedia'
 
 // ---| components |---
 import Divider from 'components/lib/Divider'
-import Button from 'components/lib/Button'
+import Button, { ButtonProps } from 'components/lib/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -16,11 +16,16 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Card.module.scss'
 
-export type CardProps = MuiCardProps & {
+export type CardProps = Omit<MuiCardProps, 'title' | 'content'> & {
   className?: string
   children?: React.ReactNode
   horizontal?: boolean
   divided?: boolean
+  scroll?: 'x' | 'y' | 'xy'
+  content?: React.ReactNode
+  title?: React.ReactNode | null
+  actions?: ButtonProps | ButtonProps[]
+  onClose?: () => void
 }
 
 /**
@@ -30,8 +35,9 @@ export type CardProps = MuiCardProps & {
  * @example
  * <Card />
  */
-export function Card(props: CardProps): JSX.Element {
-  const { divided, horizontal, children, className, ...otherProps } = props
+export function Card(props: CardProps): JSX.Element | null {
+  const { scroll, actions = [], title, content, divided, horizontal, onClose, children, className, ...otherProps } = props
+  const buttons = Array.isArray(actions) ? actions : [actions]
   const _className = cn(
     css.Card,
     horizontal && css.Horizontal,
@@ -39,7 +45,33 @@ export function Card(props: CardProps): JSX.Element {
     className,
   )
 
-  return <MuiCard className={_className} {...otherProps}>{children}</MuiCard>
+  if (!title && !content && !buttons.length && !children) {
+    return null
+  }
+
+  return (
+    <MuiCard
+      className={_className}
+      {...otherProps}
+    >
+      {(title || onClose) && (
+        <Card.Header
+          title={title}
+          action={onClose && <Button icon='close' onClick={onClose} />}
+        />
+      )}
+
+      {content && <Card.Content className={scroll && `scroll-${scroll}`}>{content}</Card.Content>}
+
+      {!!buttons.length && (
+        <Card.Actions>
+          {buttons.map((action) => <Card.Button {...action} />)}
+        </Card.Actions>
+      )}
+
+      {children}
+    </MuiCard>
+  )
 }
 
 Card.displayName = 'Card'

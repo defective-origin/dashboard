@@ -4,7 +4,8 @@ Allows users to create boards which show different widgets.
 
 # Code part
 
-We don't use **Prettier** because of [issue with printWidth](https://github.com/prettier/prettier/issues/3468)
+- The first time you open a project, you will be prompted to install all required __VS Code extensions__. You can also install them __manually__ by opening the extensions tab and start searching for __@recommended__.
+- We don't use **Prettier** because of [issue with printWidth](https://github.com/prettier/prettier/issues/3468)
 
 ## Before start
 

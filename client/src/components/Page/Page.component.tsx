@@ -4,7 +4,6 @@ import React from 'react'
 import Layout, { LayoutProps } from 'components/Layout'
 import Block from 'components/Block'
 import Helmet from 'components/lib/Helmet'
-import Text from 'components/lib/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -16,9 +15,6 @@ export type PageProps = LayoutProps & {
   className?: string
   children?: React.ReactNode
   name?: string
-  title?: React.ReactNode
-  info?: React.ReactNode
-  extra?: React.ReactNode
 }
 
 const NAME = 'page'
@@ -31,9 +27,8 @@ const NAME = 'page'
  * <Page />
  */
 export function Page(props: PageProps): JSX.Element {
-  const { name, title, info, extra, children, className, ...otherProps } = props
+  const { name, children, className, ...otherProps } = props
   const _className = cn(NAME, className)
-  const hasHeader = title || extra || info
 
   return (
     <Layout className={_className} {...otherProps}>
@@ -41,24 +36,6 @@ export function Page(props: PageProps): JSX.Element {
       <Helmet>
         { name && <title>{name}</title> }
       </Helmet>
-
-      {hasHeader && (
-        <Layout.Header className={`${NAME}__header`}>
-          <Block>
-            <Block.Start className={`${NAME}__header-title`}>
-              <Text.H4>{title}</Text.H4>
-            </Block.Start>
-
-            <Block.Center className={`${NAME}__header-info`}>
-              {info}
-            </Block.Center>
-
-            <Block.End className={`${NAME}__header-extra`}>
-              {extra}
-            </Block.End>
-          </Block>
-        </Layout.Header>
-      )}
 
       {children}
     </Layout>

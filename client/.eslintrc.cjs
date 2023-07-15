@@ -9,7 +9,7 @@ module.exports = {
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': 'warn',
+    'react-refresh/only-export-components': 'off',
 
     // general
     indent: ['warn', 2],
@@ -36,6 +36,7 @@ module.exports = {
 
     // typescript
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
 
     // react
     'jsx-quotes': ['warn', 'prefer-single'],

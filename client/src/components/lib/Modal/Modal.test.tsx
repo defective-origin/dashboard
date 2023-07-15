@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import AppMenuScreen from './AppMenuScreen.component'
+import Modal from './Modal.component'
 
-describe('[AppMenuScreen] component', () => {
+describe('[Modal] component', () => {
   it('should render component', () => {
-    const container = render(<AppMenuScreen />)
+    const container = render(<Modal />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

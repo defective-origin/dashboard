@@ -22,7 +22,7 @@ export type LayoutItemProps = {
  * @example
  * <LayoutItem />
  */
-export function LayoutItem(props: LayoutItemProps): JSX.Element {
+export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
   const { scroll, type = 'content', children, className, ...otherProps } = props
   const _className = cn('layout-item', `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
 
@@ -31,7 +31,6 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element {
 
 LayoutItem.displayName = 'LayoutItem'
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default react.attachOverrides(LayoutItem, {
   LeftAside: { type: 'left-aside' },
   RightAside: { type: 'right-aside' },
