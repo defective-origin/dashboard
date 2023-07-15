@@ -1,0 +1,38 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "mrmlnc.vscode-scss",
+
+    "zixuanchen.vitest-explorer",
+    "deinsoftware.vitest-snippets",
+
+    "christian-kohler.path-intellisense",
+
+    "zainchen.json",
+    "doggy8088.quicktype-refresh",
+
+    "yzhang.markdown-all-in-one",
+
+    "emilast.logfilehighlighter",
+    "oderwat.indent-rainbow",
+    "wix.vscode-import-cost",
+    "kisstkondoros.vscode-gutter-preview",
+    "mikestead.dotenv",
+    "streetsidesoftware.code-spell-checker",
+    "aaron-bond.better-comments",
+
+    "gruntfuggly.todo-tree",
+
+    "formulahendry.auto-complete-tag",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+
+    "kisstkondoros.csstriggers",
+    "dsznajder.es7-react-js-snippets",
+
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "donjayamanne.githistory"
+  ]
+}

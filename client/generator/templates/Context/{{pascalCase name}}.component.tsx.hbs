@@ -1,8 +1,12 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
+
+// ---| common |---
+import { useObject } from 'common/hooks'
 
 // ---| self |---
 import {
   {{pascalCase name}}Context,
+  {{pascalCase name}}Actions,
   {{pascalCase name}}Options,
   DEFAULT_{{constantCase name}}_STATE,
 } from './{{pascalCase name}}.context'
@@ -17,12 +21,16 @@ export type {{pascalCase name}}Props = React.PropsWithChildren
  * <{{pascalCase name}} defaultProp={1} />
  */
 export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Element {
-  const [current, setCurrent] = useState(DEFAULT_{{constantCase name}}_STATE)
+  const value = useObject(DEFAULT_{{constantCase name}}_STATE)
 
-  const options = useMemo<{{pascalCase name}}Options>(() => ({
-    ...current,
-    change: (patch) => setCurrent((state) => ({ ...state, ...patch })),
-  }), [current])
+  // actions are separated to prevent side effects
+  // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
+  const actions = useMemo<{{pascalCase name}}Actions>(() => ({
+    change: value.merge,
+  }), [value])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const options = useMemo<{{pascalCase name}}Options>(() => Object.assign(actions, value.current), [value.current, actions])
 
   return <{{pascalCase name}}Context.Provider value={options} {...props} />
 }

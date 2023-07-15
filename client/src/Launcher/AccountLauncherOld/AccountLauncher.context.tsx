@@ -15,11 +15,13 @@ export const DEFAULT_ACCOUNT_LAUNCHER_STATE: AccountLauncherState = {
   settings: null,
 }
 
-export type AccountLauncherOptions = AccountLauncherState & {
+export type AccountLauncherActions = {
   login: () => void,
   logout: () => void,
   isAuthorized: boolean,
 }
+
+export type AccountLauncherOptions = AccountLauncherState & AccountLauncherActions
 
 export const DEFAULT_ACCOUNT_LAUNCHER_OPTIONS: AccountLauncherOptions = {
   ...DEFAULT_ACCOUNT_LAUNCHER_STATE,

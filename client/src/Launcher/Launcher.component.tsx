@@ -1,9 +1,9 @@
 import React from 'react'
 
 // ---| self |---
-import SystemLauncher, { SystemLauncherProps } from './SystemLauncher'
+import SystemLauncher, { SystemLauncherProps } from './SystemLauncherOld'
 import UILauncher, { UILauncherProps } from './UILauncher'
-import AccountLauncher, { AccountLauncherProps } from './AccountLauncher'
+import AccountLauncher, { AccountLauncherProps } from './AccountLauncherOld'
 import MonitorLauncher, { MonitorLauncherProps } from './MonitorLauncher'
 
 export type LauncherProps = React.PropsWithChildren & {

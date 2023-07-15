@@ -1,9 +1,9 @@
 import React from 'react'
 
 // ---| self |---
-import { AccountLauncherStub, AccountLauncherStubProps } from './AccountLauncher'
+import { AccountLauncherStub, AccountLauncherStubProps } from './AccountLauncherOld'
 import { MonitorLauncherStub, MonitorLauncherStubProps } from './MonitorLauncher'
-import { SystemLauncherStub, SystemLauncherStubProps } from './SystemLauncher'
+import { SystemLauncherStub, SystemLauncherStubProps } from './SystemLauncherOld'
 import { UILauncherStub, UILauncherStubProps } from './UILauncher'
 
 export type LauncherStubProps = React.PropsWithChildren & {

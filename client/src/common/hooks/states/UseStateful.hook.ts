@@ -49,10 +49,10 @@ export type StatefulReturnOptions<S> = MutableRefObject<S> & {
  */
 export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturnOptions<S> => {
   // it exists for component rerendering and can have old value
-  const [value, setValue] = useState<S>(initial)
+  const [unstableValue, setUnstableValue] = useState<S>(initial)
   const ref = useRef<S>(initial) as StatefulReturnOptions<S>
 
-  ref.unstable = value
+  ref.unstable = unstableValue
 
   useMemo(() => {
     ref.sync = () => ref.change(ref.current)
@@ -60,9 +60,9 @@ export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturn
     ref.change = (val) => {
       ref.changeSilent(val)
 
-      setValue(getValue(val, ref.current))
+      setUnstableValue(getValue(val, ref.current))
     }
-  }, [ref, setValue])
+  }, [ref, setUnstableValue])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ref.reset = useCallback(() => ref.change(initial), [ref, ...deps])

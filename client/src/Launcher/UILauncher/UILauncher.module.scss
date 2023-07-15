@@ -74,6 +74,7 @@ $xxl-width: 1600px;
   --scroll-thumb-color--hover: #8C8C8C;
   --scroll-size: 12px;
 
+  // common
   --border-color: #CACDD1;
 }
 
@@ -101,8 +102,8 @@ $xxl-width: 1600px;
     &-y { overflow-x: hidden; overflow-y: auto; }
     &-xy { overflow-x: auto; overflow-y: auto; }
 
-    
-    
+
+
     // style
     &-x,
     &-y,

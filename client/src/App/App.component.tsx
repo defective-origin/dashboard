@@ -34,8 +34,6 @@ export function App(props: AppProps): JSX.Element {
   const ui = useUILauncher()
 
   useEffect(() => {
-
-    console.log(ui)
     ui.show({
       // content: <div>CONTENT</div>,
       toast: { content: 'TOAST' },
@@ -49,8 +47,9 @@ export function App(props: AppProps): JSX.Element {
       guard: { start: <div>GUARD START</div>, center: <div>GUARD CENTER</div>, end: <div>GUARD END</div> },
     })
 
+    // setTimeout(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)
     setInterval(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)
-  }, [])
+  }, [ui])
 
 
   return (

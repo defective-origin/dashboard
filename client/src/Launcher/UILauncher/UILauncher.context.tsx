@@ -17,7 +17,7 @@ export const DEFAULT_UI_LAUNCHER_STATE: UILauncherState = {
   menu: 'closed',
 }
 
-export type UILauncherOptions = UILauncherState & {
+export type UILauncherActions = {
   change: (patch: Partial<UILauncherState>) => void,
 
   isTheme: (theme: UITheme) => boolean,
@@ -33,8 +33,7 @@ export type UILauncherOptions = UILauncherState & {
   hide: (...args: UIPlace[]) => void
 }
 
-export const DEFAULT_UI_LAUNCHER_OPTIONS: UILauncherOptions = {
-  ...DEFAULT_UI_LAUNCHER_STATE,
+export const DEFAULT_UI_LAUNCHER_ACTIONS: UILauncherActions = {
   change: () => {},
 
   isTheme: () => true,
@@ -48,6 +47,13 @@ export const DEFAULT_UI_LAUNCHER_OPTIONS: UILauncherOptions = {
 
   show: () => {},
   hide: () => {},
+}
+
+export type UILauncherOptions = UILauncherState & UILauncherActions
+
+export const DEFAULT_UI_LAUNCHER_OPTIONS: UILauncherOptions = {
+  ...DEFAULT_UI_LAUNCHER_STATE,
+  ...DEFAULT_UI_LAUNCHER_ACTIONS,
 }
 
 export const UILauncherContext = React.createContext(DEFAULT_UI_LAUNCHER_OPTIONS)

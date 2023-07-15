@@ -5,13 +5,14 @@ import { StyledEngineProvider } from '@mui/material/styles'
 import { useObject } from 'common/hooks'
 
 // ---| self |---
-import './UILauncher.module.scss'
 import UILayout, { UIItemMap, UILayoutProps } from './UILayout'
 import {
   UILauncherContext,
+  UILauncherActions,
   UILauncherOptions,
   DEFAULT_UI_LAUNCHER_STATE,
 } from './UILauncher.context'
+import './UILauncher.module.scss'
 
 export function toggle<T>(current: T, a: T, b: T): T {
   return current === a ? b : a
@@ -31,10 +32,11 @@ export type UILauncherProps = React.PropsWithChildren & {
 export function UILauncher(props: UILauncherProps): JSX.Element {
   const { toastConfig, children } = props
   const ui = useObject(DEFAULT_UI_LAUNCHER_STATE)
-  const layout = useObject({} as UIItemMap)
+  const layout = useObject<Partial<UIItemMap>>({})
 
-  const options = useMemo<UILauncherOptions>(() => ({
-    ...ui.current,
+  // actions are separated to prevent side effects
+  // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
+  const actions = useMemo<UILauncherActions>(() => ({
     change: ui.merge,
 
     isTheme: (value) => ui.current.theme === value,
@@ -46,9 +48,12 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
     isMenu: (value) => ui.current.menu === value,
     toggleMenu: () => ui.merge({ menu: toggle(ui.current.menu, 'opened', 'closed') }),
 
-    show: (...args) => layout.merge(...args),
-    hide: (...args) => layout.omit(...args),
+    show: layout.merge,
+    hide: layout.omit,
   }), [ui, layout])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const options = useMemo<UILauncherOptions>(() => Object.assign(actions, ui.current), [ui.current, actions])
 
   useEffect(() => {
     document.body.classList.add(ui.current.theme)
