@@ -49,7 +49,7 @@ export function App(props: AppProps): JSX.Element {
 
     // setTimeout(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)
     // setInterval(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)
-  }, [ui])
+  }, [ui.show])
 
 
   return (

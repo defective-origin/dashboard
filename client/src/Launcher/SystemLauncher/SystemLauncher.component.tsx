@@ -48,7 +48,7 @@ export function SystemLauncher(props: SystemLauncherProps): JSX.Element {
   }), [system])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const options = useMemo<SystemLauncherOptions>(() => Object.assign(actions, system.current), [system.current, actions])
+  const options = useMemo<SystemLauncherOptions>(() => ({ ...system.current, ...actions }), [system.current, actions])
 
   return (
     <React.StrictMode>

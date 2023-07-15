@@ -30,7 +30,7 @@ export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Elemen
   }), [value])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const options = useMemo<{{pascalCase name}}Options>(() => Object.assign(actions, value.current), [value.current, actions])
+  const options = useMemo<{{pascalCase name}}Options>(() => ({ ...value.current, ...actions }), [value.current, actions])
 
   return <{{pascalCase name}}Context.Provider value={options} {...props} />
 }

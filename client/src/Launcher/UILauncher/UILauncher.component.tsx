@@ -53,7 +53,7 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
   }), [ui, layout])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const options = useMemo<UILauncherOptions>(() => Object.assign(actions, ui.current), [ui.current, actions])
+  const options = useMemo<UILauncherOptions>(() => ({ ...ui.current, ...actions }), [ui.current, actions])
 
   useEffect(() => {
     document.body.classList.add(ui.current.theme)

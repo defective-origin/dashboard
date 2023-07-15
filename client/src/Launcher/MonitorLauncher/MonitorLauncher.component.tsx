@@ -25,7 +25,7 @@ export function MonitorLauncher(props: MonitorLauncherProps): JSX.Element {
   }), [])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const options = useMemo<MonitorLauncherOptions>(() => Object.assign(actions, monitor.current), [monitor.current, actions])
+  const options = useMemo<MonitorLauncherOptions>(() => ({ ...monitor.current, ...actions }), [monitor.current, actions])
 
   return <MonitorLauncherContext.Provider value={options} {...props} />
 }

@@ -31,7 +31,7 @@ export function AccountLauncher(props: AccountLauncherProps): JSX.Element {
   }), [account])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const options = useMemo<AccountLauncherOptions>(() => Object.assign(actions, account.current), [account.current, actions])
+  const options = useMemo<AccountLauncherOptions>(() => ({ ...account.current, ...actions }), [account.current, actions])
 
   return <AccountLauncherContext.Provider value={options} {...props} />
 }
