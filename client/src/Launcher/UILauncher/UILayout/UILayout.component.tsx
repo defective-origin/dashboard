@@ -67,7 +67,7 @@ export function UILayout(props: UILayoutProps): JSX.Element {
 
   return (
     <Layout className={_className} type='header' {...otherProps}>
-      <Layout.LeftAside className={css.Menu}>
+      <Layout.LeftAside className={css.Menu} as='nav'>
         <UILayoutMenu items={initArray(map.menu)} />
       </Layout.LeftAside>
 
@@ -75,7 +75,7 @@ export function UILayout(props: UILayoutProps): JSX.Element {
         <Alert {...map.alert} onClose={onAlertClose} />
       </Layout.Header>
 
-      <Layout.RightAside className={css.Drawer}>
+      <Layout.RightAside className={css.Drawer} as='aside'>
         <Card {...map.drawer} scroll='y' onClose={onDrawerClose} />
       </Layout.RightAside>
 
@@ -85,23 +85,23 @@ export function UILayout(props: UILayoutProps): JSX.Element {
 
       <Layout.Content className={css.SecondLayout}>
         <Layout className={css.Layout} type='header'>
-          <Layout.LeftAside className={css.LeftAside} scroll='y'>
+          <Layout.LeftAside className={css.LeftAside} as='aside' scroll='y'>
             {map.leftAside}
           </Layout.LeftAside>
 
-          <Layout.Header className={css.Header}>
+          <Layout.Header className={css.Header} as='header'>
             <Block {...map.header} />
           </Layout.Header>
 
-          <Layout.RightAside className={css.RightAside} scroll='y'>
+          <Layout.RightAside className={css.RightAside} as='aside' scroll='y'>
             {map.rightAside}
           </Layout.RightAside>
 
-          <Layout.Footer className={css.Footer}>
+          <Layout.Footer className={css.Footer} as='footer'>
             <Block {...map.footer} />
           </Layout.Footer>
 
-          <Layout.Content className={css.Content} scroll='y'>
+          <Layout.Content className={css.Content} as='main' scroll='y'>
             {map.content}
             {children}
           </Layout.Content>

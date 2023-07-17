@@ -118,6 +118,10 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- variables.scss - paddings, margins, ...
 			- index.scss
 	
+	
+	- App/ - component which contains app settings for launcher
+		- Component structure
+
 	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work  + env settings in constants
 		- Component structure
   	- SystemLauncher - [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]

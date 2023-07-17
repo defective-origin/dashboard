@@ -13,6 +13,7 @@ export type LayoutItemProps = {
   children?: React.ReactNode
   type?: LayoutItemType
   scroll?: 'x' | 'y' | 'xy'
+  as?: keyof JSX.IntrinsicElements | React.ComponentType
 }
 
 /**
@@ -23,10 +24,10 @@ export type LayoutItemProps = {
  * <LayoutItem />
  */
 export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
-  const { scroll, type = 'content', children, className, ...otherProps } = props
+  const { as: Tag = 'div', scroll, type = 'content', children, className, ...otherProps } = props
   const _className = cn('layout-item', `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
 
-  return <div className={_className} {...otherProps}>{children}</div>
+  return <Tag className={_className} {...otherProps}>{children}</Tag>
 }
 
 LayoutItem.displayName = 'LayoutItem'
