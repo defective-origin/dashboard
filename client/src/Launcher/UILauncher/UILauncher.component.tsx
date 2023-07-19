@@ -14,8 +14,12 @@ import {
 } from './UILauncher.context'
 import './UILauncher.module.scss'
 
+export function is<T>(a: T, b: T): a is T {
+  return a === b
+}
+
 export function toggle<T>(current: T, a: T, b: T): T {
-  return current === a ? b : a
+  return is(current, a) ? b : a
 }
 
 export type UILauncherProps = React.PropsWithChildren & {
@@ -39,13 +43,13 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
   const actions = useMemo<UILauncherActions>(() => ({
     change: ui.merge,
 
-    isTheme: (value) => ui.current.theme === value,
+    isTheme: (value) => is(ui.current.theme, value),
     toggleTheme: () => ui.merge({ theme: toggle(ui.current.theme, 'light', 'dark') }),
 
-    isMode: (value) => ui.current.mode === value,
+    isMode: (value) => is(ui.current.mode, value),
     toggleMode: () => ui.merge({ mode: toggle(ui.current.mode, 'edit', 'view')}),
 
-    isMenu: (value) => ui.current.menu === value,
+    isMenu: (value) => is(ui.current.menu, value),
     toggleMenu: () => ui.merge({ menu: toggle(ui.current.menu, 'opened', 'closed') }),
 
     show: layout.merge,
