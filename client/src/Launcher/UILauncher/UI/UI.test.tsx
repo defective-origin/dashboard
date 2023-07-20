@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import UILayout from './UILayout.component'
+import UI from './UI.component'
 
-describe('[UILayout] component', () => {
+describe('[UI] component', () => {
   it('should render component', () => {
-    const container = render(<UILayout />)
+    const container = render(<UI />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

@@ -15,6 +15,7 @@ import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './App.module.scss'
+import AppMenu from './AppMenu'
 
 export type AppProps = {
   className?: string
@@ -35,16 +36,16 @@ export function App(props: AppProps): JSX.Element {
 
   useEffect(() => {
     ui.show({
-      // content: <div>CONTENT</div>,
-      toast: { content: 'TOAST' },
-      // modal: { content: 'TOAST' },
-      alert: { content: 'ALERT' },
-      drawer: { title: 'DRAWER' },
+      menu: <AppMenu />,
+      // modal: <div>MODAL</div>,
+      alert: <div>ALERT</div>,
+      drawer: <div>DRAWER</div>,
       leftAside: <div>LEFT ASIDE</div>,
       rightAside: <div>RIGHT ASIDE</div>,
-      footer: { start: <div>FOOTER START</div>, center: <div>FOOTER CENTER</div>, end: <div>FOOTER END</div> },
-      header: { start: <div>HEADER START</div>, center: <div>HEADER CENTER</div>, end: <div>HEADER END</div> },
-      guard: { start: <div>GUARD START</div>, center: <div>GUARD CENTER</div>, end: <div>GUARD END</div> },
+      footer: <div>FOOTER</div>,
+      header: <div>HEADER</div>,
+      guard: <div>GUARD</div>,
+      toast: { content: 'TOAST' },
     })
 
     // setTimeout(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)

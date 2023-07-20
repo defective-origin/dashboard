@@ -12,20 +12,20 @@ import Block from 'components/Block'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './UILayoutMenu.module.scss'
+import css from './AppMenu.module.scss'
 
-export type UIMenuItem<T extends string, O extends object = object> = O & {
+export type MenuItem<T extends string, O extends object = object> = O & {
   type: T,
   icon?: ButtonProps['icon'],
   content?: React.ReactNode
 }
-export type UILayoutMenuLogo = UIMenuItem<'logo'>
-export type UILayoutMenuButton = UIMenuItem<'button', { main?: boolean, group?: string }>
-export type UILayoutMenuGroup = UIMenuItem<'group', { key: string, place?: 'top' | 'bottom' }>
-export type UILayoutMenuItem = UILayoutMenuLogo | UILayoutMenuGroup | UILayoutMenuButton
+export type UIMenuLogo = MenuItem<'logo'>
+export type UIMenuButton = MenuItem<'button', { main?: boolean, group?: string }>
+export type UIMenuGroup = MenuItem<'group', { key: string, place?: 'top' | 'bottom' }>
+export type UIMenuItem = UIMenuLogo | UIMenuGroup | UIMenuButton
 
 
-const TEST_MENU_ITEMS: UILayoutMenuItem[] = [
+const TEST_MENU_ITEMS: UIMenuItem[] = [
   { type: 'button', icon: 'close', content: '1', main: true },
   { type: 'button', icon: 'close', content: '2', group: 'group2' },
   { type: 'button', icon: 'close', content: '3', group: 'group3' },
@@ -35,10 +35,10 @@ const TEST_MENU_ITEMS: UILayoutMenuItem[] = [
   { type: 'logo', icon: 'close', content: '5' },
 ]
 
-export type UILayoutMenuProps = {
+export type AppMenuProps = {
   className?: string
   children?: React.ReactNode
-  items?: UILayoutMenuItem[]
+  // items?: UIMenuItem[]
 }
 
 /**
@@ -46,30 +46,30 @@ export type UILayoutMenuProps = {
  *
  * How to use
  * @example
- * <UILayoutMenu />
+ * <AppMenu />
  */
-export function UILayoutMenu(props: UILayoutMenuProps): JSX.Element {
-  const { items = [], children, className, ...otherProps } = props
-  const _className = cn(css.UILayoutMenu, className)
+export function AppMenu(props: AppMenuProps): JSX.Element {
+  const { children, className, ...otherProps } = props
+  const _className = cn(css.AppMenu, className)
   const ui = useUILauncher()
   const system = useSystemLauncher()
 
-  const menuMap = useMemo(() => {
-    const logo = items.find((item) => item.type === 'logo')
-    const buttons = items.filter((item) => item.type === 'button') as UILayoutMenuButton[]
-    const groups = [
-      { type: 'group', key: 'top', place: 'top' },
-      ...(items as UILayoutMenuGroup[]),
-      { type: 'group', key: 'bottom', place: 'bottom' },
-    ]
-      .filter((item) => item.type === 'group')
-      .map((item) => ({
-        ...item,
-        items: buttons.filter((btn) => btn.group === item.key),
-      }))
+  // const menuMap = useMemo(() => {
+  //   const logo = items.find((item) => item.type === 'logo')
+  //   const buttons = items.filter((item) => item.type === 'button') as UIMenuButton[]
+  //   const groups = [
+  //     { type: 'group', key: 'top', place: 'top' },
+  //     ...(items as UIMenuGroup[]),
+  //     { type: 'group', key: 'bottom', place: 'bottom' },
+  //   ]
+  //     .filter((item) => item.type === 'group')
+  //     .map((item) => ({
+  //       ...item,
+  //       items: buttons.filter((btn) => btn.group === item.key),
+  //     }))
 
-    return { logo }
-  }, [items])
+  //   return { logo }
+  // }, [items])
 
   // TODO: if groups items length is 0 then not render divider
 
@@ -103,6 +103,6 @@ export function UILayoutMenu(props: UILayoutMenuProps): JSX.Element {
   )
 }
 
-UILayoutMenu.displayName = 'UILayoutMenu'
+AppMenu.displayName = 'AppMenu'
 
-export default UILayoutMenu
+export default AppMenu

@@ -2,11 +2,11 @@ import React from 'react'
 import { StyledEngineProvider } from '@mui/material/styles'
 
 // ---| self |---
-import UILayout, { UIItemMap } from './UILayout'
+import UI, { UIItemMap } from './UI'
 import { DEFAULT_UI_LAUNCHER_OPTIONS, UILauncherContext, UILauncherOptions } from './UILauncher.context'
 
 export type UILauncherStubProps = React.PropsWithChildren & Partial<UILauncherOptions> & {
-  items: UIItemMap[]
+  items: UIItemMap
 }
 
 export function UILauncherStub(props: UILauncherStubProps): JSX.Element {
@@ -18,9 +18,9 @@ export function UILauncherStub(props: UILauncherStubProps): JSX.Element {
       <UILauncherContext.Provider value={combinedValue}>
         {/* injectFirst allows override Material UI's styles. */}
         <StyledEngineProvider injectFirst>
-          <UILayout items={items}>
+          <UI map={items}>
             { children }
-          </UILayout>
+          </UI>
         </StyledEngineProvider>
       </UILauncherContext.Provider>
     </React.Suspense>

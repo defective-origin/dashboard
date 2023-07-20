@@ -10,9 +10,10 @@
   }
 }
 
-.UILayoutMenu {
+.AppMenu {
   padding: 6px;
   box-sizing: border-box;
+  border-right: 1px solid var(--border-color);
 }
 
 .StartActions,

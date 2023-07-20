@@ -11,7 +11,9 @@ export type LayoutItemType = 'left-aside' | 'right-aside' | 'footer' | 'header' 
 export type LayoutItemProps = {
   className?: string
   children?: React.ReactNode
-  type?: LayoutItemType
+  content?: React.ReactNode
+  type?: LayoutItemType | string
+  area?: React.CSSProperties['gridArea']
   scroll?: 'x' | 'y' | 'xy'
   as?: keyof JSX.IntrinsicElements | React.ComponentType
 }
@@ -24,10 +26,15 @@ export type LayoutItemProps = {
  * <LayoutItem />
  */
 export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
-  const { as: Tag = 'div', scroll, type = 'content', children, className, ...otherProps } = props
-  const _className = cn('layout-item', `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
+  const { as: Tag = 'div', scroll, area, type = 'content', content, children = content, className, ...otherProps } = props
+  const _className = cn('layout-item', !area && `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
+  const _style = { gridArea: area }
 
-  return <Tag className={_className} {...otherProps}>{children}</Tag>
+  if (!children && !content) {
+    return null
+  }
+
+  return <Tag className={_className} {...otherProps} style={_style}>{children}</Tag>
 }
 
 LayoutItem.displayName = 'LayoutItem'

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UIItemMap, UIPlace } from './UILayout'
+import { UIItemMap, UIPlace } from './UI'
 
 export type UITheme = 'light' | 'dark'
 export type UIMode = 'view' | 'edit'

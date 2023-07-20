@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import UILayoutMenu from './UILayoutMenu.component'
+import AppMenu from './AppMenu.component'
 
-describe('[UILayoutMenu] component', () => {
+describe('[AppMenu] component', () => {
   it('should render component', () => {
-    const container = render(<UILayoutMenu />)
+    const container = render(<AppMenu />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

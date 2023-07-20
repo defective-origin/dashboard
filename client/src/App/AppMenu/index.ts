@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './UILayout.component'
+export { default } from './AppMenu.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './UILayout.component'
+export * from './AppMenu.component'

@@ -5,7 +5,7 @@ import { StyledEngineProvider } from '@mui/material/styles'
 import { useObject } from 'common/hooks'
 
 // ---| self |---
-import UILayout, { UIItemMap, UILayoutProps } from './UILayout'
+import UI, { UIItemMap, UIProps } from './UI'
 import {
   UILauncherContext,
   UILauncherActions,
@@ -23,7 +23,7 @@ export function toggle<T>(current: T, a: T, b: T): T {
 }
 
 export type UILauncherProps = React.PropsWithChildren & {
-  toastConfig?: UILayoutProps['toastConfig']
+  toaster?: UIProps['toaster']
 }
 
 /**
@@ -34,7 +34,7 @@ export type UILauncherProps = React.PropsWithChildren & {
  * <UILauncher defaultProp={1} />
  */
 export function UILauncher(props: UILauncherProps): JSX.Element {
-  const { toastConfig, children } = props
+  const { toaster, children } = props
   const ui = useObject(DEFAULT_UI_LAUNCHER_STATE)
   const layout = useObject<Partial<UIItemMap>>({})
 
@@ -69,9 +69,9 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
       <UILauncherContext.Provider value={options}>
         {/* injectFirst allows override Material UI's styles. */}
         <StyledEngineProvider injectFirst>
-          <UILayout toastConfig={toastConfig} map={layout.current}>
+          <UI toaster={toaster} map={layout.current}>
             { children }
-          </UILayout>
+          </UI>
         </StyledEngineProvider>
       </UILauncherContext.Provider>
     </React.Suspense>
