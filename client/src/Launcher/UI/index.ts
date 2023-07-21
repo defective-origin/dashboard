@@ -5,3 +5,4 @@ export { default } from './UI.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './UI.component'
+export * from './UI.conf'

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 // ---| core |---
-import { Router, useUILauncher } from 'Launcher'
+import { Router, useLauncher } from 'Launcher'
 
 // ---| pages |---
 import StatusPage from 'pages/StatusPage'
@@ -32,26 +32,29 @@ export type AppProps = {
 export function App(props: AppProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.App, className)
-  const ui = useUILauncher()
+  const app = useLauncher()
+
+  console.log(app)
 
   useEffect(() => {
-    ui.show({
-      menu: <AppMenu />,
-      // modal: <div>MODAL</div>,
-      alert: <div>ALERT</div>,
-      drawer: <div>DRAWER</div>,
-      leftAside: <div>LEFT ASIDE</div>,
-      rightAside: <div>RIGHT ASIDE</div>,
-      footer: <div>FOOTER</div>,
-      header: <div>HEADER</div>,
-      guard: <div>GUARD</div>,
-      toast: { content: 'TOAST' },
-    })
+    // app.attach({
+    //   menu: <AppMenu />,
+    //   // modal: <div>MODAL</div>,
+    //   alert: <div>ALERT</div>,
+    //   drawer: <div>DRAWER</div>,
+    //   leftAside: <div>LEFT ASIDE</div>,
+    //   rightAside: <div>RIGHT ASIDE</div>,
+    //   footer: <div>FOOTER</div>,
+    //   header: <div>HEADER</div>,
+    //   guard: <div>GUARD</div>,
+    // })
+
+    // app.message({content: 'test'})
 
     // setTimeout(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)
     // setInterval(() => ui.show({ toast: { content: 'TOAST +' } }), 5000)
-  }, [ui.show])
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Router className={_className} {...otherProps}>

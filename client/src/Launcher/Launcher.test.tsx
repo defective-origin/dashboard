@@ -2,8 +2,8 @@
 import { RenderResult, renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import { UILauncherOptions, useUILauncher } from './UILauncher.context'
-import UILauncher, { UILauncherProps } from './UILauncher.component'
+import { LauncherOptions, useLauncher } from './Launcher.context'
+import Launcher, { LauncherProps } from './Launcher.component'
 
 /**
  * Context descriptions
@@ -17,12 +17,12 @@ import UILauncher, { UILauncherProps } from './UILauncher.component'
  *
  * expect(result.current.count).toBe(1)
  */
-describe('[UILauncher] context', () => {
-  let hookRef: RenderResult<UILauncherOptions>
-  const wrapper = (props: UILauncherProps) => <UILauncher { ...props } />
+describe('[Launcher] context', () => {
+  let hookRef: RenderResult<LauncherOptions>
+  const wrapper = (props: LauncherProps) => <Launcher { ...props } />
 
   beforeEach(() => {
-    hookRef = renderHook(useUILauncher, { wrapper }).result
+    hookRef = renderHook(useLauncher, { wrapper }).result
   })
 
   it('should set light theme by default', () => {

@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 // ---| core |---
-import { useUILauncher, useSystemLauncher } from 'Launcher'
+import { useLauncher } from 'Launcher'
 
 // ---| components |---
 import Divider, { DividerProps } from 'components/lib/Divider'
@@ -23,6 +23,16 @@ export type UIMenuLogo = MenuItem<'logo'>
 export type UIMenuButton = MenuItem<'button', { main?: boolean, group?: string }>
 export type UIMenuGroup = MenuItem<'group', { key: string, place?: 'top' | 'bottom' }>
 export type UIMenuItem = UIMenuLogo | UIMenuGroup | UIMenuButton
+
+
+
+export function is<T>(a: T, b: T): a is T {
+  return a === b
+}
+
+export function toggle<T>(current: T, a: T, b: T): T {
+  return is(current, a) ? b : a
+}
 
 
 const TEST_MENU_ITEMS: UIMenuItem[] = [
@@ -51,27 +61,33 @@ export type AppMenuProps = {
 export function AppMenu(props: AppMenuProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppMenu, className)
-  const ui = useUILauncher()
-  const system = useSystemLauncher()
-
-  // const menuMap = useMemo(() => {
-  //   const logo = items.find((item) => item.type === 'logo')
-  //   const buttons = items.filter((item) => item.type === 'button') as UIMenuButton[]
-  //   const groups = [
-  //     { type: 'group', key: 'top', place: 'top' },
-  //     ...(items as UIMenuGroup[]),
-  //     { type: 'group', key: 'bottom', place: 'bottom' },
-  //   ]
-  //     .filter((item) => item.type === 'group')
-  //     .map((item) => ({
-  //       ...item,
-  //       items: buttons.filter((btn) => btn.group === item.key),
-  //     }))
-
-  //   return { logo }
-  // }, [items])
+  const app = useLauncher()
 
   // TODO: if groups items length is 0 then not render divider
+  useEffect(() => {
+    const actions = {
+      isTheme: (store: any, value: any) => is(store.current.theme, value),
+      toggleTheme: (store: any) => app.update({ theme: toggle(store.current.theme, 'light', 'dark') }),
+
+      isMode: (store: any, value: any) => is(store.current.mode, value),
+      toggleMode: (store: any) => app.update({ mode: toggle(store.current.mode, 'edit', 'view')}),
+
+      isMenu: (store: any, value: any) => is(store.current.menu, value),
+      toggleMenu: (store: any) => app.update({ menu: toggle(store.current.menu, 'opened', 'closed') }),
+    }
+
+    app.register(actions)
+
+    return () => app.unregister(actions)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+
+
+  useEffect(() => {
+    document.body.classList.add(app.theme)
+    document.body.classList.remove(toggle(app.theme, 'light', 'dark'))
+  }, [app, app.theme])
 
   return (
     <Block className={_className} type='column-center' {...otherProps}>
@@ -91,11 +107,11 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
         <Button className={css.Button} icon='keyboard' size='large' />
         <Button className={css.Button} icon='support_agent' size='large' />
         <Divider className={css.divider} />
-        <Button className={css.Button} icon={`${ui.theme}_mode`} size='large' onClick={ui.toggleTheme} />
-        <Button className={css.Button} size='large' content={system.language} />
-        <Button className={css.Button} icon={ui.isMode('edit') ? 'developer_mode_tv' : 'tv'} size='large' onClick={ui.toggleMode} />
+        <Button className={css.Button} icon={`${app.theme}_mode`} size='large' onClick={app.toggleTheme} />
+        <Button className={css.Button} size='large' content={app.language} />
+        <Button className={css.Button} icon={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} size='large' onClick={app.toggleMode} />
         <Divider className={css.divider} />
-        <Button className={css.Button} icon={ui.isMenu('opened') ? 'left_panel_close' : 'left_panel_open'} size='large' onClick={ui.toggleMenu} />
+        <Button className={css.Button} icon={app.isMenu('opened') ? 'left_panel_close' : 'left_panel_open'} size='large' onClick={app.toggleMenu} />
       </Block.End>
 
       {children}
