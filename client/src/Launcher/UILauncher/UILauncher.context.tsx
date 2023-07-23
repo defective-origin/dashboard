@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { UIItemMap, UIPlace } from './UI'
+import { ToastOptions } from 'components/lib/Toast'
 
 export type UITheme = 'light' | 'dark'
 export type UIMode = 'view' | 'edit'
@@ -29,8 +30,9 @@ export type UILauncherActions = {
   isMenu: (mode: UIMenu) => boolean,
   toggleMenu: () => void,
 
-  show: (options: Partial<UIItemMap>) => void
-  hide: (...args: UIPlace[]) => void
+  attach: (options: Partial<UIItemMap>) => void,
+  detach: (...args: UIPlace[]) => void,
+  message: (...args: ToastOptions[]) => void,
 }
 
 export const DEFAULT_UI_LAUNCHER_ACTIONS: UILauncherActions = {
@@ -45,8 +47,9 @@ export const DEFAULT_UI_LAUNCHER_ACTIONS: UILauncherActions = {
   isMenu: () => true,
   toggleMenu: () => {},
 
-  show: () => {},
-  hide: () => {},
+  attach: () => {},
+  detach: () => {},
+  message: () => {},
 }
 
 export type UILauncherOptions = UILauncherState & UILauncherActions

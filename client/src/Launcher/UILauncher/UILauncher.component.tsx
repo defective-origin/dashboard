@@ -4,6 +4,9 @@ import { StyledEngineProvider } from '@mui/material/styles'
 // ---| common |---
 import { useObject } from 'common/hooks'
 
+// ---| components |---
+import { toast } from 'components/lib/Toast'
+
 // ---| self |---
 import UI, { UIItemMap, UIProps } from './UI'
 import {
@@ -36,7 +39,7 @@ export type UILauncherProps = React.PropsWithChildren & {
 export function UILauncher(props: UILauncherProps): JSX.Element {
   const { toaster, children } = props
   const ui = useObject(DEFAULT_UI_LAUNCHER_STATE)
-  const layout = useObject<Partial<UIItemMap>>({})
+  const itemMap = useObject({ content: children } as UIItemMap)
 
   // actions are separated to prevent side effects
   // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
@@ -52,9 +55,10 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
     isMenu: (value) => is(ui.current.menu, value),
     toggleMenu: () => ui.merge({ menu: toggle(ui.current.menu, 'opened', 'closed') }),
 
-    show: layout.merge,
-    hide: layout.omit,
-  }), [ui, layout])
+    attach: (options: Partial<UIItemMap>) => itemMap.merge(options),
+    detach: (...args) => itemMap.omit(...args),
+    message: (...args) => args.forEach((item) => toast(item.content, item)),
+  }), [ui, itemMap])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const options = useMemo<UILauncherOptions>(() => ({ ...ui.current, ...actions }), [ui.current, actions])
@@ -69,7 +73,7 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
       <UILauncherContext.Provider value={options}>
         {/* injectFirst allows override Material UI's styles. */}
         <StyledEngineProvider injectFirst>
-          <UI toaster={toaster} map={layout.current}>
+          <UI toaster={toaster} map={itemMap.current}>
             { children }
           </UI>
         </StyledEngineProvider>

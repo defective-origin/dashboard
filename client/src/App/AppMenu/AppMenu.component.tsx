@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 
 // ---| core |---
-import { useUILauncher, useSystemLauncher } from 'Launcher'
+import { useUILauncher, useSystemLauncher, Link } from 'Launcher'
 
 // ---| components |---
 import Divider, { DividerProps } from 'components/lib/Divider'
@@ -53,25 +53,10 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const _className = cn(css.AppMenu, className)
   const ui = useUILauncher()
   const system = useSystemLauncher()
-
-  // const menuMap = useMemo(() => {
-  //   const logo = items.find((item) => item.type === 'logo')
-  //   const buttons = items.filter((item) => item.type === 'button') as UIMenuButton[]
-  //   const groups = [
-  //     { type: 'group', key: 'top', place: 'top' },
-  //     ...(items as UIMenuGroup[]),
-  //     { type: 'group', key: 'bottom', place: 'bottom' },
-  //   ]
-  //     .filter((item) => item.type === 'group')
-  //     .map((item) => ({
-  //       ...item,
-  //       items: buttons.filter((btn) => btn.group === item.key),
-  //     }))
-
-  //   return { logo }
-  // }, [items])
+  const getProps = (obj: any) => ({ className: obj.isPartiallyCurrent ? cn(css.Button, css.ActiveButton) : css.Button })
 
   // TODO: if groups items length is 0 then not render divider
+  // TODO: groups, items, position top bottom
 
   return (
     <Block className={_className} type='column-center' {...otherProps}>
@@ -81,15 +66,15 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
 
       <Block.Center className={css.CenterActions}>
         <Divider className={css.divider} />
-        <Button className={css.Button} icon='dashboard' size='large' />
-        <Button className={css.Button} icon='insert_chart' size='large' />
+        <Link getProps={getProps} to='/dashboard'><Button className={css.Button} icon='dashboard' size='large' /></Link>
+        <Link getProps={getProps} to='/widget'><Button className={css.Button} icon='insert_chart' size='large' /></Link>
       </Block.Center>
 
       <Block.End className={css.EndActions}>
-        <Button className={`${css.Button} ${css.ActiveButton}`} icon='auto_stories' size='large' />
-        <Button className={css.Button} icon='paid' size='large' />
-        <Button className={css.Button} icon='keyboard' size='large' />
-        <Button className={css.Button} icon='support_agent' size='large' />
+        <Link getProps={getProps} to='/guide'><Button className={css.Button} icon='auto_stories' size='large' /></Link>
+        <Link getProps={getProps} to='/donation'><Button className={css.Button} icon='paid' size='large' /></Link>
+        <Link getProps={getProps} to='/hotkeys'><Button className={css.Button} icon='keyboard' size='large' /></Link>
+        <Link getProps={getProps} to='/support'><Button className={css.Button} icon='support_agent' size='large' /></Link>
         <Divider className={css.divider} />
         <Button className={css.Button} icon={`${ui.theme}_mode`} size='large' onClick={ui.toggleTheme} />
         <Button className={css.Button} size='large' content={system.language} />
