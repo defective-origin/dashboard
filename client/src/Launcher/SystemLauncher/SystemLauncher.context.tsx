@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Languages, t } from 'locale'
+import i18next, { Languages, changeLanguage, t } from 'locale'
 
 export type SystemLanguage = Languages
 
@@ -11,20 +11,20 @@ export type SystemLauncherState = {
 
 export const DEFAULT_SYSTEM_LAUNCHER_STATE: SystemLauncherState = {
   language: 'en',
-  languages: ['en'],
+  languages: i18next.languages as Languages[],
   hotkeys: {},
 }
 
 export type SystemLauncherActions = {
   t: typeof t
-  changeLanguage: (patch: SystemLanguage) => void
+  changeLanguage: typeof changeLanguage
   addHotkey: (key: string, handler: () => void) => void
   removeHotkey: (key: string) => void
 }
 
 export const DEFAULT_SYSTEM_LAUNCHER_ACTIONS: SystemLauncherActions = {
-  t: () => '',
-  changeLanguage: () => {},
+  t,
+  changeLanguage,
   addHotkey: () => {},
   removeHotkey: () => {},
 }

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import i18next, { I18nextProvider, Languages, t } from 'locale'
+import i18next, { I18nextProvider, changeLanguage, t } from 'locale'
 
 // ---| common |---
 import { useObject } from 'common/hooks'
@@ -29,12 +29,7 @@ export function SystemLauncher(props: SystemLauncherProps): JSX.Element {
   // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
   const actions = useMemo<SystemLauncherActions>(() => ({
     t,
-    changeLanguage: (language) => {
-      // TODO: analytics.register({ name: 'Language', value: language })
-      system.merge({ language, languages: i18next.languages as Languages[] })
-      i18next.changeLanguage(language)
-    },
-    // TODO: click analytics.register({ name: 'Hotkey', value: Hotkey })
+    changeLanguage,
     addHotkey: (key, handler) => system.merge({ hotkeys: { ...system.current.hotkeys, [key]: handler } }),
     removeHotkey: (key) => {
       const hotkeys = { ...system.current.hotkeys }

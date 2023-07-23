@@ -36,7 +36,6 @@ export const DEFAULT_UI_LAYOUT: UILayout = {
 
 export type UIProps = LayoutProps & {
   className?: string
-  children?: React.ReactNode
   toaster?: ToastContainerProps
   map?: Partial<UIItemMap>
 }
@@ -49,7 +48,7 @@ export type UIProps = LayoutProps & {
  * <UI />
  */
 export function UI(props: UIProps): JSX.Element {
-  const { toaster, map = {}, children, className, ...otherProps } = props
+  const { toaster, map = {}, className, ...otherProps } = props
   const _className = cn(css.UI, className)
   const ui = useUILauncher()
 
