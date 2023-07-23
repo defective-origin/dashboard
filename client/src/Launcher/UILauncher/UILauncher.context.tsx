@@ -30,7 +30,7 @@ export type UILauncherActions = {
   isMenu: (mode: UIMenu) => boolean,
   toggleMenu: () => void,
 
-  attach: (options: Partial<UIItemMap>) => void,
+  attach: (options: Partial<UIItemMap>) => () => void,
   detach: (...args: UIPlace[]) => void,
   message: (...args: ToastOptions[]) => void,
 }
@@ -47,7 +47,7 @@ export const DEFAULT_UI_LAUNCHER_ACTIONS: UILauncherActions = {
   isMenu: () => true,
   toggleMenu: () => {},
 
-  attach: () => {},
+  attach: () => () => {},
   detach: () => {},
   message: () => {},
 }

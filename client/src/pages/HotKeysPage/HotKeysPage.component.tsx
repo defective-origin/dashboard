@@ -1,6 +1,8 @@
 import React from 'react'
 
-import { RouteProps, useSystemLauncher, useUILauncher } from 'Launcher'
+// ---| core |---
+import { useSystemLauncher, useUILauncher } from 'Launcher'
+import { RouteProps } from 'router'
 
 // ---| pages |---
 // ---| screens |---

@@ -206,12 +206,12 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- __tests__/
 			- GuardName.guard.ts
 			- index.ts
+		- router.component.ts
 		- router.conf.ts
 		- router.tool.ts
 		- router.hook.ts
 		- router.model.ts
 		- router.error.ts
-		- router.tree.ts
 		- index.ts - configurations and settings
 
 	- store/ - contains project store (use redux-toolkit)

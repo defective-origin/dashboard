@@ -55,18 +55,18 @@ export function UILauncher(props: UILauncherProps): JSX.Element {
     isMenu: (value) => is(ui.current.menu, value),
     toggleMenu: () => ui.merge({ menu: toggle(ui.current.menu, 'opened', 'closed') }),
 
-    attach: (options: Partial<UIItemMap>) => itemMap.merge(options),
+    attach: (options: Partial<UIItemMap>) => {
+      itemMap.merge(options)
+
+      return () => itemMap.omit(...Object.keys(options) as (keyof UIItemMap)[])
+    },
     detach: (...args) => itemMap.omit(...args),
+
     message: (...args) => args.forEach((item) => toast(item.content, item)),
   }), [ui, itemMap])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const options = useMemo<UILauncherOptions>(() => ({ ...ui.current, ...actions }), [ui.current, actions])
-
-  useEffect(() => {
-    document.body.classList.add(ui.current.theme)
-    document.body.classList.remove(toggle(ui.current.theme, 'light', 'dark'))
-  }, [ui, ui.current.theme])
 
   return (
     <React.Suspense fallback={<h1>Loading...</h1>}>

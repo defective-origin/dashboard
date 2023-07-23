@@ -62,17 +62,14 @@ module.exports = {
           '**/../tests/*',
         ],
       }, {
-        message: 'Use import from "Launcher" instead.',
+        message: 'Use import from "locale", "router", "store" or "api" instead as ---| core |--- import.',
         group: [
-          'locale',
-          'store',
-          'api',
           'i18next',
           '@reach/router',
           'react-i18next',
         ],
       }, {
-        message: 'Use component overrides from "components".',
+        message: 'Use component overrides from "components" instead as ---| components |--- import..',
         group: [
           '@emotion/react',
           '@emotion/styled',
@@ -88,8 +85,11 @@ module.exports = {
       files: [
         '**/components/lib/**/*component.ts*',
         '**/common/tools/index.ts',
-        '**/locale/locale.conf.ts',
         '**/Launcher/**/*.ts*',
+        '**/locale/**/*.ts*',
+        '**/router/**/*.ts*',
+        '**/store/**/*.ts*',
+        '**/api/**/*.ts*',
       ],
       rules: {
         'no-restricted-imports': 'off',

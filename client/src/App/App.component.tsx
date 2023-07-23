@@ -1,17 +1,8 @@
 import React, { useEffect } from 'react'
 
 // ---| core |---
-import { Router, useUILauncher } from 'Launcher'
-
-// ---| pages |---
-import StatusPage from 'pages/StatusPage'
-import HotKeysPage from 'pages/HotKeysPage'
-import AccountPage from 'pages/AccountPage'
-import DonationPage from 'pages/DonationPage'
-import GuidePage from 'pages/GuidePage'
-import SupportPage from 'pages/SupportPage'
-import DashboardPage from 'pages/DashboardPage'
-import WidgetPage from 'pages/WidgetPage'
+import Router, { APP_ROUTES } from 'router'
+import { useUILauncher } from 'Launcher'
 
 // ---| screens |---
 // ---| components |---
@@ -26,7 +17,6 @@ import AppHeader from './AppHeader'
 
 export type AppProps = {
   className?: string
-  children?: React.ReactNode
 }
 
 /**
@@ -37,12 +27,17 @@ export type AppProps = {
  * <App />
  */
 export function App(props: AppProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { className, ...otherProps } = props
   const _className = cn(css.App, className)
   const ui = useUILauncher()
 
   useEffect(() => {
-    ui.attach({
+    ui.message({ content: 'TOAST +' })
+
+    // setTimeout(() => ui.message({ content: 'TOAST +' }), 5000)
+    // setInterval(() => ui.message({ content: 'TOAST +' }), 1000)
+
+    return ui.attach({
       menu: <AppMenu />,
       header: <AppHeader />,
       // modal: <div>MODAL</div>,
@@ -53,30 +48,16 @@ export function App(props: AppProps): JSX.Element {
       footer: <div>FOOTER</div>,
       guard: <div>GUARD</div>,
     })
-
-    ui.message({ content: 'TOAST +' })
-
-    // setTimeout(() => ui.message({ content: 'TOAST +' }), 5000)
-    // setInterval(() => ui.message({ content: 'TOAST +' }), 1000)
   }, [])
 
+  useEffect(() => {
+    document.body.classList.add(ui.theme)
+    document.body.classList.remove(ui.theme === 'dark' ? 'light' : 'dark')
+    // document.body.classList.remove(toggle(ui.theme, 'light', 'dark'))
+  }, [ui, ui.theme])
 
-  return (
-    <Router className={_className} {...otherProps}>
-      <StatusPage path='/' type='welcome' />
-      <DashboardPage path='/dashboard/:id' />
-      <WidgetPage path='/widget/?:id' />
-      <AccountPage path='/account' />
-      <GuidePage path='/guide' />
-      <DonationPage path='/donation' />
-      <HotKeysPage path='/hotkeys' />
-      <SupportPage path='/support' />
-      <StatusPage path='/error/:type' />
-      <StatusPage default type={404} />
 
-      {children}
-    </Router>
-  )
+  return <Router className={_className} items={APP_ROUTES} {...otherProps} />
 }
 
 App.displayName = 'App'

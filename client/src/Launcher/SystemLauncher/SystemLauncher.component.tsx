@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react'
-import { Router as ReachRouter, RouteComponentProps, RouterProps } from '@reach/router'
 import i18next, { I18nextProvider, Languages, t } from 'locale'
 
 // ---| common |---
 import { useObject } from 'common/hooks'
-import { cn } from 'common/tools'
 
 // ---| self |---
 import {
@@ -13,7 +11,6 @@ import {
   SystemLauncherOptions,
   DEFAULT_SYSTEM_LAUNCHER_STATE,
 } from './SystemLauncher.context'
-import './SystemLauncher.module.scss'
 
 export type SystemLauncherProps = React.PropsWithChildren
 
@@ -65,12 +62,3 @@ export function SystemLauncher(props: SystemLauncherProps): JSX.Element {
 SystemLauncher.displayName = 'SystemLauncher'
 
 export default SystemLauncher
-
-
-export * from '@reach/router'
-export type RouteProps = RouteComponentProps
-
-export type Router = RouterProps & React.HTMLProps<HTMLDivElement>
-
-export const Router = (props: Router) => <ReachRouter {...props as RouterProps} className={cn('router', props.className)} />
-Router.displayName = 'Router'

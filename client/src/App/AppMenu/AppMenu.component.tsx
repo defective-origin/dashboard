@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react'
 
 // ---| core |---
-import { useUILauncher, useSystemLauncher, Link } from 'Launcher'
+import { useUILauncher, useSystemLauncher } from 'Launcher'
+import { Link } from 'router'
 
 // ---| components |---
 import Divider, { DividerProps } from 'components/lib/Divider'

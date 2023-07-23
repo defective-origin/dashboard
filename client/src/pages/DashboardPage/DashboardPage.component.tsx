@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { RouteProps } from 'Launcher'
+import { RouteProps } from 'router'
 
 // ---| pages |---
 // ---| screens |---
