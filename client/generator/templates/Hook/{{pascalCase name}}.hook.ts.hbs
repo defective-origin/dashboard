@@ -8,7 +8,7 @@ export type {{pascalCase name}}ReturnOptions = null
  * Hook descriptions
  *
  * @example
- * const options = {{pascalCase name}}(conf)
+ * const options = {{camelCase name}}(conf)
  */
 export const {{camelCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions | null => {
   const [state] = useState<{{pascalCase name}}ReturnOptions | null>(null)
