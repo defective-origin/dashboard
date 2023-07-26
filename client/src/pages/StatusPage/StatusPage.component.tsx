@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useSystemLauncher } from 'Launcher'
+import { useLauncher } from 'Launcher'
 import { RouteProps } from 'router'
 
 // ---| pages |---
@@ -34,21 +34,21 @@ export type StatusPageProps = RouteProps & Omit<PageProps, 'type'> & {
 export function StatusPage(props: StatusPageProps): JSX.Element {
   const { navigate, type = 'default', children, className, ...otherProps } = props
   const _className = cn(css.StatusPage, className)
-  const system = useSystemLauncher()
+  const app = useLauncher()
   const status = STATUS_MAP[type]
 
   return (
     <Page
       className={_className}
-      name={system.t('SYSTEM.TAB_NAME', { title: system.t('PAGES.STATUS') })}
+      name={app.t('SYSTEM.TAB_NAME', { title: app.t('PAGES.STATUS') })}
       {...otherProps}
     >
       <Banner
         className={css.Banner}
         imageType={status.image}
-        title={system.t(status.title)}
-        subtitle={system.t(status.subtitle)}
-        text={system.t(status.text)}
+        title={app.t(status.title)}
+        subtitle={app.t(status.subtitle)}
+        text={app.t(status.text)}
       >
         {children}
       </Banner>

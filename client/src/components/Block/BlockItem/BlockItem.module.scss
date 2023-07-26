@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import 'src/App/App.module';
 
 :global {
   .dark {
@@ -10,8 +10,6 @@
   }
 
   .block-item {
-    // @include stretch;
-
     &--start { grid-area: start; justify-self: start; align-self: start; }
     &--center { grid-area: center; justify-self: center; align-self: center; }
     &--end { grid-area: end; justify-self: end; align-self: end; }

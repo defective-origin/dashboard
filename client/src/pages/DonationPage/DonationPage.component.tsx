@@ -26,7 +26,7 @@ export type DonationPageProps = RouteProps & {
  * <DonationPage />
  */
 export function DonationPage(props: DonationPageProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.DonationPage, className)
 
   return <div className={_className} {...otherProps}>{children}</div>

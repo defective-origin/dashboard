@@ -26,7 +26,7 @@ export type GuidePageProps = RouteProps & {
  * <GuidePage />
  */
 export function GuidePage(props: GuidePageProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.GuidePage, className)
 
   return <div className={_className} {...otherProps}>{children}</div>

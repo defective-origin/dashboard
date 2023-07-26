@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import 'src/App/App.module';
 
 :global {
   .dark {
@@ -11,4 +11,11 @@
 }
 
 .Button {
+  min-width: 0;
 }
+
+.xs { padding: 1px; }
+.sm { padding: 3px; }
+.md { padding: 5px; }
+.lg { padding: 7px; }
+.xl { padding: 9px; }

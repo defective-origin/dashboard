@@ -1,0 +1,20 @@
+@import 'src/App/App.module';
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+}
+
+.AppFooter {
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 15px;
+}

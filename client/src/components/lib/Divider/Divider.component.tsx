@@ -5,6 +5,7 @@ import MuiDivider, { DividerProps as MuiDividerProps } from '@mui/material/Divid
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Text, { TextIcon } from 'components/lib/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -12,8 +13,11 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Divider.module.scss'
 
-export type DividerProps = MuiDividerProps & {
+export type DividerProps = Omit<MuiDividerProps, 'content'> & {
   content?: React.ReactNode
+  icon?: TextIcon
+  prefix?: TextIcon
+  postfix?: TextIcon
 }
 
 /**
@@ -24,14 +28,12 @@ export type DividerProps = MuiDividerProps & {
  * <Divider />
  */
 export function Divider(props: DividerProps): JSX.Element {
-  const { content, children = content, className, ...otherProps } = props
+  const { icon, prefix = icon, postfix, content, children, className, ...otherProps } = props
   const _className = cn(css.Divider, className)
+  const hasContent = icon || prefix || content || postfix || children
+  const _content = children ?? <Text prefix={icon ?? prefix} content={content ?? children} postfix={postfix} />
 
-  return (
-    <MuiDivider className={_className} {...otherProps}>
-      {children}
-    </MuiDivider>
-  )
+  return <MuiDivider className={_className} {...otherProps} children={hasContent && _content} />
 }
 
 Divider.displayName = 'Divider'

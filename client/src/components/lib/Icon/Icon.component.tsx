@@ -8,7 +8,7 @@ import { cn } from 'common/tools'
 import css from './Icon.module.scss'
 
 export type IconTypes = 'light_mode' | 'dark_mode'
-| 'paid'
+| 'paid' | 'language'
 | 'login' | 'logout'
 | 'developer_mode_tv' | 'tv'
 | 'person' | 'person_add' | 'account_circle' | 'support_agent'
@@ -17,10 +17,14 @@ export type IconTypes = 'light_mode' | 'dark_mode'
 | 'auto_stories' | 'logo_dev'
 | 'settings'
 | 'close' | 'left_panel_open' | 'left_panel_close'
+| 'warning' | 'error'
 
-export type IconProps = MuiIconProps & {
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
+export type IconProps = Omit<MuiIconProps, 'size'> & {
   className?: string
   type: IconTypes
+  size?: IconSize
 }
 
 /**
@@ -31,8 +35,8 @@ export type IconProps = MuiIconProps & {
  * <Icon />
  */
 export function Icon(props: IconProps): JSX.Element {
-  const { type, className, ...otherProps } = props
-  const _className = cn(css.Icon, 'material-symbols-outlined', className)
+  const { size = 'md', type, className, ...otherProps } = props
+  const _className = cn(css.Icon, css[size], 'material-symbols-outlined', className)
 
   return <MuiIcon className={_className} {...otherProps}>{type}</MuiIcon>
 }

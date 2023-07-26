@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import 'src/App/App.module';
 
 :global {
   .dark {
@@ -11,4 +11,23 @@
 }
 
 .Text {
+  display: flex;
+  align-items: center;
 }
+
+.Icon {
+}
+
+.Prefix {
+  margin-right: 10px;
+}
+
+.Postfix {
+  margin-left: 10px;
+}
+
+.xs { font-size: var(--text-size-xs); }
+.sm { font-size: var(--text-size-sm); }
+.md { font-size: var(--text-size-md); }
+.lg { font-size: var(--text-size-lg); }
+.xl { font-size: var(--text-size-xl); }

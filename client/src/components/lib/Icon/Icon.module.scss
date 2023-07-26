@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import 'src/App/App.module';
 
 :global {
   .dark {
@@ -12,3 +12,9 @@
 
 .Icon {
 }
+
+.xs { font-size: var(--icon-size-xs); }
+.sm { font-size: var(--icon-size-sm); }
+.md { font-size: var(--icon-size-md); }
+.lg { font-size: var(--icon-size-lg); }
+.xl { font-size: var(--icon-size-xl); }

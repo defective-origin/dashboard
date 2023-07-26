@@ -26,7 +26,7 @@ export type DashboardPageProps = RouteProps & {
  * <DashboardPage />
  */
 export function DashboardPage(props: DashboardPageProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.DashboardPage, className)
 
   return <div className={_className} {...otherProps}>{children}</div>

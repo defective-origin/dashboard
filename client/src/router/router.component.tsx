@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Router as ReachRouter, RouteComponentProps, RouterProps as ReachRouterProps } from '@reach/router'
+import { Router as ReachRouter, RouteComponentProps, RouterProps as ReachRouterProps, createHistory, createMemorySource } from '@reach/router'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -34,4 +34,8 @@ Router.displayName = 'Router'
 
 export default Router
 
-export { Link } from '@reach/router'
+export { Link, useMatch, useNavigate, useParams, useLocation, LocationProvider } from '@reach/router'
+export type { LinkProps, LinkGetProps } from '@reach/router'
+
+export const source = createMemorySource('/')
+export const history = createHistory(window as any)

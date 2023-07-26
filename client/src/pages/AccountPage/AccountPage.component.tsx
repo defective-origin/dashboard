@@ -26,7 +26,7 @@ export type AccountPageProps = RouteProps & {
  * <AccountPage />
  */
 export function AccountPage(props: AccountPageProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.AccountPage, className)
 
   return <div className={_className} {...otherProps}>{children}</div>

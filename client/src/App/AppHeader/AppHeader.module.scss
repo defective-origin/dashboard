@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import 'src/App/App.module';
 
 :global {
   .dark {
@@ -11,4 +11,7 @@
 }
 
 .AppHeader {
+  border-bottom: 1px solid var(--border-color);
+  box-sizing: border-box;
+  height: 60px;
 }

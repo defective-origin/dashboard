@@ -1,4 +1,4 @@
-@import 'src/Launcher/UILauncher/UILauncher.module';
+@import 'src/App/App.module';
 
 :global {
   .dark {
@@ -11,34 +11,25 @@
 }
 
 .AppMenu {
-  padding: 6px;
+  padding: 15px;
   box-sizing: border-box;
   border-right: 1px solid var(--border-color);
-}
+  height: 100%;
 
-.StartActions,
-.CenterActions,
-.EndActions {
-  display: flex;
-  flex-direction: column;
-}
+  .StartActions,
+  .CenterActions,
+  .EndActions {
+    display: flex;
+    flex-direction: column;
+    justify-self: stretch;
+    align-self: stretch;
 
-.divider {
-  margin: 5px 0;
-}
+    > * {
+      margin-bottom: 9px;
+    }
+  }
 
-.Button,
-.Button:focus {
-  min-height: 40px;
-  min-width: 40px;
-  width: 48px;
-  height: 48px;
-  box-sizing: border-box;
-  border-radius: 14px;
-  margin-bottom: 2px;
-  color: #000000;
-}
-
-.ActiveButton {
-  background-color: #0000001F;
+  .EndActions > :last-child {
+    margin: 0;
+  }
 }

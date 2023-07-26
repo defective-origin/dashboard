@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { StyledEngineProvider } from '@mui/material'
+
+// ---| core |---
+import i18next, { I18nextProvider } from 'locale'
+import { LocationProvider, history } from 'router'
 
 // ---| self |---
-import SystemLauncher, { SystemLauncherProps } from './SystemLauncher'
-import UILauncher, { UILauncherProps } from './UILauncher'
-import AccountLauncher, { AccountLauncherProps } from './AccountLauncher'
-import MonitorLauncher, { MonitorLauncherProps } from './MonitorLauncher'
+import { LauncherContext, LauncherOptions } from './Launcher.context'
+import useSystem from './UseSystem'
+import useAccount from './UseAccount'
+import useMonitor from './UseMonitor'
+import useUI from './UseUI'
 
-export type LauncherProps = React.PropsWithChildren & {
-  system?: SystemLauncherProps,
-  monitor?: MonitorLauncherProps,
-  account?: AccountLauncherProps,
-  ui?: UILauncherProps
-}
+export type LauncherProps = React.PropsWithChildren & LauncherOptions
 
 /**
  * Run all launchers with main app page.
@@ -21,18 +22,29 @@ export type LauncherProps = React.PropsWithChildren & {
  * <Launcher />
  */
 export function Launcher(props: LauncherProps): JSX.Element {
-  const { system, monitor, account, ui, children } = props
+  const { children, ...defaultOptions } = props
+  const ui = useUI()
+  const system = useSystem()
+  const monitor = useMonitor()
+  const account = useAccount()
+
+  const options = useMemo<LauncherOptions>(() => Object.assign({}, system, monitor, ui, account, defaultOptions), [system, monitor, ui, account])
 
   return (
-    <SystemLauncher {...system}>
-      <MonitorLauncher {...monitor}>
-        <UILauncher {...ui} >
-          <AccountLauncher {...account}>
-            { children }
-          </AccountLauncher>
-        </UILauncher>
-      </MonitorLauncher>
-    </SystemLauncher>
+    <React.StrictMode>
+      <I18nextProvider i18n={i18next}>
+        <LocationProvider history={history}>
+          <React.Suspense fallback={<h1>Loading...</h1>}>
+            {/* injectFirst allows override Material UI's styles. */}
+            <StyledEngineProvider injectFirst>
+              <LauncherContext.Provider value={options}>
+                { children }
+              </LauncherContext.Provider>
+            </StyledEngineProvider>
+          </React.Suspense>
+        </LocationProvider>
+      </I18nextProvider>
+    </React.StrictMode>
   )
 }
 

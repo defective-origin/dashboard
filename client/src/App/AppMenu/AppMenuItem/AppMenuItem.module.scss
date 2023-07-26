@@ -1,0 +1,22 @@
+@import 'src/App/App.module';
+
+:global {
+  .dark {
+  }
+
+  .light {
+  }
+}
+
+.Button {
+  display: flex;
+  justify-content: start;
+  border-radius: 9px;
+
+  &.Active {
+  }
+
+  &:focus,
+  &:hover {
+  }
+}

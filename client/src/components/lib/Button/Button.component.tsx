@@ -1,9 +1,8 @@
 import React from 'react'
 import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button'
-import MuiIconButton from '@mui/material/IconButton'
 
 // ---| components |---
-import Icon, { IconTypes } from 'components/lib/Icon'
+import Text, { TextIcon } from 'components/lib/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -11,11 +10,16 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Button.module.scss'
 
-export type ButtonProps = MuiButtonProps & {
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
+export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'content'> & {
   className?: string
   children?: React.ReactNode
-  icon?: IconTypes
   content?: React.ReactNode
+  size?: IconSize
+  icon?: TextIcon
+  prefix?: TextIcon
+  postfix?: TextIcon
 }
 
 /**
@@ -26,20 +30,12 @@ export type ButtonProps = MuiButtonProps & {
  * <Button />
  */
 export function Button(props: ButtonProps): JSX.Element {
-  const { content, icon, children = content, className, ...otherProps } = props
-  const _className = cn(css.Button, className)
-
-  if (icon) {
-    return (
-      <MuiIconButton className={_className} {...otherProps}>
-        <Icon type={icon} />
-      </MuiIconButton>
-    )
-  }
+  const { icon, prefix = icon, postfix, size = 'xl', content, children, className, ...otherProps } = props
+  const _className = cn(css.Button, css[size], className)
 
   return (
     <MuiButton className={_className} {...otherProps}>
-      {children}
+      {children ?? <Text prefix={icon ?? prefix} content={content ?? children} postfix={postfix} />}
     </MuiButton>
   )
 }

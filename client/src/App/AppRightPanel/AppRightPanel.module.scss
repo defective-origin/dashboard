@@ -1,0 +1,17 @@
+@import 'src/App/App.module';
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+}
+
+.AppRightPanel {
+  border-left: 1px solid var(--border-color);
+  height: 100%;
+  box-sizing: border-box;
+}

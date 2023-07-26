@@ -30,7 +30,7 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
   const _className = cn('layout-item', !area && `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
   const _style = { gridArea: area }
 
-  if (!children && !content) {
+  if (!children && !content && typeof Tag !== 'function') {
     return null
   }
 

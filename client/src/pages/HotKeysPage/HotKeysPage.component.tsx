@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useSystemLauncher, useUILauncher } from 'Launcher'
+import { useLauncher } from 'Launcher'
 import { RouteProps } from 'router'
 
 // ---| pages |---
@@ -30,14 +30,13 @@ export type HotKeysPageProps = RouteProps & PageProps & {
 export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
   const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.HotKeysPage, className)
-  const system = useSystemLauncher()
-  const title = system.t('PAGES.HOTKEYS')
-  const ui = useUILauncher()
+  const app = useLauncher()
+  const title = app.t('PAGES.HOTKEYS')
 
   return (
     <Page
       className={_className}
-      name={system.t('SYSTEM.TAB_NAME', { title })}
+      name={app.t('SYSTEM.TAB_NAME', { title })}
       title={title}
       {...otherProps}
     >
@@ -47,11 +46,11 @@ export function HotKeysPage(props: HotKeysPageProps): JSX.Element {
       <Page.Content>
         PAGE CONTENT
         <br/>
-        THEME - {ui.theme}
+        THEME - {app.theme}
         <br/>
-        MODE - {ui.mode}
+        MODE - {app.mode}
         <br/>
-        MENU - {ui.menu}
+        MENU - {app.menu}
       </Page.Content>
       <Page.Footer>
         PAGE FOOTER

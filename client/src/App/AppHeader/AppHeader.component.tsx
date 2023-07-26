@@ -1,13 +1,15 @@
 import React from 'react'
-import { Tooltip, IconButton, Avatar, Menu, MenuItem, Divider, ListItemIcon } from '@mui/material'
+import { Tooltip, IconButton, Avatar, Menu, MenuItem } from '@mui/material'
 
 // ---| core |---
-import { useAccountLauncher } from 'Launcher'
+import { useLauncher } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { Block } from 'components/Block'
+import Block from 'components/Block'
+import Text from 'components/lib/Text'
+import Divider from 'components/lib/Divider'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -30,7 +32,7 @@ export type AppHeaderProps = {
 export function AppHeader(props: AppHeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
-  const account = useAccountLauncher()
+  const app = useLauncher()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -42,7 +44,9 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
   return (
     <Block className={_className} {...otherProps}>
-      <Block.Start>{account.isAuthorized.toString()}</Block.Start>
+      <Block.Start>
+        <Text.H1 color='primary'>Page Name</Text.H1>
+      </Block.Start>
       <Block.Center>{children}</Block.Center>
       <Block.End>
         <Tooltip title='Account menu'>
@@ -52,7 +56,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar />
+            <Avatar sx={{ width: 36, height: 36 }} />
           </IconButton>
         </Tooltip>
         <Menu
@@ -61,17 +65,17 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
           onClose={handleClose}
           onClick={handleClose}
         >
-          {account.isAuthorized && (
+          {app.isAuthorized() && (
             [
               <MenuItem key='profile'>Profile</MenuItem>,
               <Divider key='divider' />,
-              <MenuItem key='logout' onClick={account.logout}>Logout</MenuItem>,
+              <MenuItem key='logout' onClick={app.logout}>Logout</MenuItem>,
             ]
           )}
-          {!account.isAuthorized && (
+          {!app.isAuthorized() && (
             [
-              <MenuItem key='registration' onClick={account.login}>Sign in</MenuItem>,
-              <MenuItem key='login' onClick={account.login}>Login</MenuItem>,
+              <MenuItem key='registration' onClick={app.login}>Sign in</MenuItem>,
+              <MenuItem key='login' onClick={app.login}>Login</MenuItem>,
             ]
           )}
         </Menu>

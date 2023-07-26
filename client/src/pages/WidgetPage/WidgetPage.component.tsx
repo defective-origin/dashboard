@@ -26,7 +26,7 @@ export type WidgetPageProps = RouteProps & {
  * <WidgetPage />
  */
 export function WidgetPage(props: WidgetPageProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.WidgetPage, className)
 
   return <div className={_className} {...otherProps}>{children}</div>
