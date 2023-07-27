@@ -30,7 +30,7 @@ export function AppFooter(props: AppFooterProps): JSX.Element {
 
   return (
     <div className={_className} {...otherProps}>
-      <Text.H5 color='secondary' content='© 2023 EPAM Systems. All Rights Reserved.' />
+      <Text.H5 color='secondary' content='© 2023 now Systems. All Rights Reserved.' />
 
       {children}
     </div>

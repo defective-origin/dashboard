@@ -15,20 +15,9 @@ import { cn } from 'common/tools'
 import css from './AppMenu.module.scss'
 import AppMenuItem from './AppMenuItem'
 
-export type MenuItem<T extends string, O extends object = object> = O & {
-  type: T,
-  icon?: ButtonProps['icon'],
-  content?: React.ReactNode
-}
-export type UIMenuLogo = MenuItem<'logo'>
-export type UIMenuButton = MenuItem<'button', { main?: boolean, group?: string }>
-export type UIMenuGroup = MenuItem<'group', { key: string, place?: 'top' | 'bottom' }>
-export type UIMenuItem = UIMenuLogo | UIMenuGroup | UIMenuButton
-
 export type AppMenuProps = {
   className?: string
   children?: React.ReactNode
-  // items?: UIMenuItem[]
 }
 
 /**
@@ -42,9 +31,6 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppMenu, className)
   const app = useLauncher()
-
-  // TODO: if groups items length is 0 then not render divider
-  // TODO: groups, items, position top bottom
 
   return (
     <Block className={_className} type='column-center' {...otherProps}>
@@ -61,7 +47,6 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <Block.End className={css.EndActions}>
         <AppMenuItem icon='auto_stories' content='GUIDE' to='/guide' />
         <AppMenuItem icon='paid' content='DONATION' to='/donation' />
-        <AppMenuItem icon='keyboard' content='HOTKEYS' to='/hotkeys' />
         <AppMenuItem icon='support_agent' content='SUPPORT' to='/support' />
 
         <Divider />
