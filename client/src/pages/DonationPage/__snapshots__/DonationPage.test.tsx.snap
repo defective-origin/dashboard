@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[DonationPage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="_DonationPage_49efe2"
+  />
+</DocumentFragment>
+`;

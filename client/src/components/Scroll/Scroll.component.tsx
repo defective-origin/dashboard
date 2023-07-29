@@ -84,7 +84,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
         <div className={css.Actions} style={buttonsStyle}>
           {showUpButton && (
             <Button
-              size='large'
+              size='xl'
               icon='keyboard_arrow_up'
               onClick={scrollManager.moveStartY}
             />
@@ -92,7 +92,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
 
           {showLeftButton && (
             <Button
-              size='large'
+              size='xl'
               icon='keyboard_arrow_left'
               onClick={scrollManager.moveStartX}
             />

@@ -1,0 +1,30 @@
+@import 'src/App/App.module';
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+}
+
+.Actions {
+  padding: 5px;
+  display: flex;
+}
+
+.x {
+  flex-direction: row;
+  align-items: center;
+}
+
+.y {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.xy {
+  flex-wrap: wrap;
+}

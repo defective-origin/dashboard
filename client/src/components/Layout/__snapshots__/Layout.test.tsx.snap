@@ -1,13 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`[Layout] component > should render component 1`] = `
-<DocumentFragment>
-  <div
-    class="layout layout--row"
-  >
-    <div
-      class="layout-item layout-item--content"
-    />
-  </div>
-</DocumentFragment>
-`;
+exports[`[Layout] component > should render component 1`] = `<DocumentFragment />`;

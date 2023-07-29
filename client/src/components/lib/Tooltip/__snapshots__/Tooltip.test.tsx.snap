@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Tooltip] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="_Tooltip_2060c3"
+    data-mui-internal-clone-element="true"
+  />
+</DocumentFragment>
+`;

@@ -5,6 +5,7 @@ import MuiAlert, { AlertProps as MuiAlertProps } from '@mui/material/Alert'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Text from 'components/lib/Text'
 
 // ---| common |---
 import { cn, react } from 'common/tools'
@@ -35,7 +36,7 @@ export function Alert(props: AlertProps): JSX.Element | null {
 
   return (
     <MuiAlert className={_className} {...otherProps}>
-      {children}
+      <Text.H6 size='xs' content={children ?? content} />
     </MuiAlert>
   )
 }

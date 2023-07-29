@@ -1,5 +1,13 @@
 @import 'src/App/App.module';
 
+:root {
+  --text-size-xs: 12px;
+  --text-size-sm: 16px;
+  --text-size-md: 20px;
+  --text-size-lg: 24px;
+  --text-size-xl: 28px;
+}
+
 :global {
   .dark {
     // --text-color: white;

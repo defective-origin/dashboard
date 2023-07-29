@@ -3,7 +3,7 @@
 exports[`[Text] component > should render component 1`] = `
 <DocumentFragment>
   <p
-    class="MuiTypography-root MuiTypography-body1 _Banner_1425e6 css-ahj2mt-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 _Text_1425e6 _md_1425e6 css-ahj2mt-MuiTypography-root"
   />
 </DocumentFragment>
 `;

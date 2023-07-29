@@ -38,7 +38,7 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
   const app = useLauncher()
   const match = useMatch(to ?? 'not-valid')
   const navigate = useNavigate()
-  const _className = cn(css.Button, match && css.Active, app.isMenu('opened') && css.Open, className)
+  const _className = cn(css.AppMenuItem, match && css.Active, app.isMenu('opened') && css.Open, className)
   const redirect = useCallback(() => to && navigate(to, { replace: true }), [navigate, to])
   const item = (
     <Button
@@ -46,6 +46,8 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
       prefix={icon}
       content={app.isMenu('opened') && content}
       color='primary'
+      size='md'
+      iconSize='xl'
       onClick={redirect}
       {...otherProps}
     />

@@ -4,8 +4,7 @@ import React from 'react'
 import { useLauncher } from 'Launcher'
 
 // ---| components |---
-import Divider, { DividerProps } from 'components/lib/Divider'
-import Button, { ButtonProps } from 'components/lib/Button'
+import Divider from 'components/lib/Divider'
 import Block from 'components/Block'
 
 // ---| common |---
@@ -39,17 +38,18 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       </Block.Start>
 
       <Block.Center className={css.CenterActions}>
-        <Divider />
+        <Divider textAlign='left' content={app.isMenu('opened') && 'Navigation'} />
         <AppMenuItem icon='dashboard' content='DASHBOARD' to='/dashboard' />
         <AppMenuItem icon='insert_chart' content='WIDGET' to='/widget' />
       </Block.Center>
 
       <Block.End className={css.EndActions}>
+        <Divider textAlign='left' content={app.isMenu('opened') && 'Help'} />
         <AppMenuItem icon='auto_stories' content='GUIDE' to='/guide' />
         <AppMenuItem icon='paid' content='DONATION' to='/donation' />
         <AppMenuItem icon='support_agent' content='SUPPORT' to='/support' />
 
-        <Divider />
+        <Divider textAlign='left' content={app.isMenu('opened') && 'System'} />
         <AppMenuItem icon={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
         <AppMenuItem icon='language' content={app.language.toUpperCase()} />
         <AppMenuItem icon={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />

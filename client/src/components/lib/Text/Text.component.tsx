@@ -7,12 +7,11 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 import { cn, react } from 'common/tools'
 
 // ---| components |---
-import Icon, { IconTypes } from 'components/lib/Icon'
+import Icon, { IconSize, IconTypes } from 'components/lib/Icon'
 
 // ---| self |---
 import css from './Text.module.scss'
 
-export type TextIcon = IconTypes
 export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export type TextProps = Omit<MuiTypographyProps, 'content'> & {
@@ -20,8 +19,10 @@ export type TextProps = Omit<MuiTypographyProps, 'content'> & {
   children?: React.ReactNode
   content?: React.ReactNode
   size?: TextSize
-  prefix?: TextIcon
-  postfix?: TextIcon
+  iconSize?: IconSize
+  prefix?: IconTypes
+  postfix?: IconTypes
+  icon?: IconTypes
 }
 
 /**
@@ -32,16 +33,16 @@ export type TextProps = Omit<MuiTypographyProps, 'content'> & {
  * <Text />
  */
 export function Text(props: TextProps): JSX.Element {
-  const { size = 'md', prefix, postfix, content, children, className, ...otherProps } = props
+  const { size = 'md', iconSize = size, icon, prefix = icon, postfix, content, children, className, ...otherProps } = props
   const _className = cn(css.Text, css[size], className)
   const hasContent = !!content || !!children
 
   return (
     <MuiTypography className={_className} variant='body1' {...otherProps}>
-      {prefix && <Icon className={cn(css.Icon, hasContent && css.Prefix)} type={prefix} size={size} />}
+      {prefix && <Icon className={cn(css.Icon, hasContent && css.Prefix)} type={prefix} size={iconSize} />}
       {content}
       {children}
-      {postfix && <Icon className={cn(css.Icon, hasContent && css.Postfix)} type={postfix} size={size} />}
+      {postfix && <Icon className={cn(css.Icon, hasContent && css.Postfix)} type={postfix} size={iconSize} />}
     </MuiTypography>
   )
 }

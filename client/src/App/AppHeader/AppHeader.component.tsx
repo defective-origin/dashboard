@@ -10,6 +10,7 @@ import { useLauncher } from 'Launcher'
 import Block from 'components/Block'
 import Text from 'components/lib/Text'
 import Divider from 'components/lib/Divider'
+import Actions, { Action } from 'components/Actions'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -41,6 +42,12 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  const testActions: Action[] = [
+    { key: '1', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'warning', color: 'warning' },
+    { key: '2', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'error', color: 'error' },
+    { key: '3', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'primary', color: 'primary' },
+    !app.isAuthorized() && { key: '4', icon: 'login', size: 'xs', variant: 'outlined', content: 'login', color: 'secondary', onClick: app.login },
+  ].filter(Boolean) as Action[]
 
   return (
     <Block className={_className} {...otherProps}>
@@ -48,36 +55,31 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
         <Text.H1 color='primary'>Page Name</Text.H1>
       </Block.Start>
       <Block.Center>{children}</Block.Center>
-      <Block.End>
-        <Tooltip title='Account menu'>
-          <IconButton
-            onClick={handleClick}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup='true'
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar sx={{ width: 36, height: 36 }} />
-          </IconButton>
-        </Tooltip>
+      <Block.End className={css.End}>
+        <Actions items={testActions} />
+
+        {app.isAuthorized() && (
+          <Tooltip title='Account menu'>
+            <IconButton
+              onClick={handleClick}
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup='true'
+              aria-expanded={open ? 'true' : undefined}
+              sx={{ padding: 0 }}
+            >
+              <Avatar sx={{ width: 36, height: 36 }} />
+            </IconButton>
+          </Tooltip>
+        )}
         <Menu
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
           onClick={handleClose}
         >
-          {app.isAuthorized() && (
-            [
-              <MenuItem key='profile'>Profile</MenuItem>,
-              <Divider key='divider' />,
-              <MenuItem key='logout' onClick={app.logout}>Logout</MenuItem>,
-            ]
-          )}
-          {!app.isAuthorized() && (
-            [
-              <MenuItem key='registration' onClick={app.login}>Sign in</MenuItem>,
-              <MenuItem key='login' onClick={app.login}>Login</MenuItem>,
-            ]
-          )}
+          <MenuItem key='profile'>Profile</MenuItem>
+          <Divider key='divider' />
+          <MenuItem key='logout' onClick={app.logout}>Logout</MenuItem>
         </Menu>
       </Block.End>
     </Block>
