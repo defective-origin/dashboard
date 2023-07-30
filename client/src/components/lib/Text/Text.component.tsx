@@ -33,16 +33,14 @@ export type TextProps = Omit<MuiTypographyProps, 'content'> & {
  * <Text />
  */
 export function Text(props: TextProps): JSX.Element {
-  const { size = 'md', iconSize = size, icon, prefix = icon, postfix, content, children, className, ...otherProps } = props
+  const { size = 'md', iconSize = size, icon, prefix = icon, postfix, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Text, css[size], className)
-  const hasContent = !!content || !!children
 
   return (
     <MuiTypography className={_className} variant='body1' {...otherProps}>
-      {prefix && <Icon className={cn(css.Icon, hasContent && css.Prefix)} type={prefix} size={iconSize} />}
-      {content}
-      {children}
-      {postfix && <Icon className={cn(css.Icon, hasContent && css.Postfix)} type={postfix} size={iconSize} />}
+      {prefix && <Icon className={cn(css.Icon, content && css.Prefix)} type={prefix} size={iconSize} />}
+      {children && <span className={css.Content}>{children}</span>}
+      {postfix && <Icon className={cn(css.Icon, content && css.Postfix)} type={postfix} size={iconSize} />}
     </MuiTypography>
   )
 }

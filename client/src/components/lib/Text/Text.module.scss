@@ -27,15 +27,13 @@
 }
 
 .Prefix {
-  margin-right: 10px;
 }
 
 .Postfix {
-  margin-left: 10px;
 }
 
-.xs { font-size: var(--text-size-xs); }
-.sm { font-size: var(--text-size-sm); }
-.md { font-size: var(--text-size-md); }
-.lg { font-size: var(--text-size-lg); }
-.xl { font-size: var(--text-size-xl); }
+.xs { font-size: var(--text-size-xs); gap: 2px; }
+.sm { font-size: var(--text-size-sm); gap: 4px; }
+.md { font-size: var(--text-size-md); gap: 6px; }
+.lg { font-size: var(--text-size-lg); gap: 8px; }
+.xl { font-size: var(--text-size-xl); gap: 10px; }
