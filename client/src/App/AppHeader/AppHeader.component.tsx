@@ -47,6 +47,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
     { key: '2', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'error', color: 'error' },
     { key: '3', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'primary', color: 'primary' },
     !app.isAuthorized() && { key: '4', icon: 'login', size: 'xs', variant: 'outlined', content: 'login', color: 'secondary', onClick: app.login },
+    app.isAuthorized() && { key: '4', icon: 'logout', size: 'xs', variant: 'outlined', content: 'logout', color: 'secondary', onClick: app.logout },
   ].filter(Boolean) as Action[]
 
   return (

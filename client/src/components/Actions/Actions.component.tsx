@@ -21,6 +21,8 @@ export type ActionsProps = {
   items?: Action[]
   direction?: ActionsDirectionType
   gap?: React.CSSProperties['gap']
+  size?: ButtonProps['size']
+  iconSize?: ButtonProps['iconSize']
 }
 
 /**
@@ -31,9 +33,9 @@ export type ActionsProps = {
  * <Actions />
  */
 export function Actions(props: ActionsProps): JSX.Element {
-  const { items, direction = 'x', gap = 5, children, className, ...otherProps } = props
+  const { items, direction = 'x', gap = 5, size, iconSize, children, className, ...otherProps } = props
   const _className = cn(css.Actions, css[direction], className)
-  const actions = items?.map((item, idx) => <Button key={idx} className={css.Action} {...item} />)
+  const actions = items?.map((item, idx) => <Button key={idx} className={css.Action} size={size} iconSize={iconSize} {...item} />)
 
   return (
     <div className={_className} {...otherProps} style={{ gap }}>

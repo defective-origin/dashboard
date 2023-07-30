@@ -28,8 +28,8 @@ export type AppMenuProps = {
  */
 export function AppMenu(props: AppMenuProps): JSX.Element {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.AppMenu, className)
   const app = useLauncher()
+  const _className = cn(css.AppMenu, app.isMenu('opened') && css.Open, className)
 
   return (
     <Block className={_className} type='column-center' {...otherProps}>
@@ -38,23 +38,23 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       </Block.Start>
 
       <Block.Center className={css.CenterActions}>
-        <Divider textAlign='left' content={app.isMenu('opened') && 'Navigation'} />
+        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && 'Navigation'} />
         <AppMenuItem icon='dashboard' content='DASHBOARD' to='/dashboard' />
         <AppMenuItem icon='insert_chart' content='WIDGET' to='/widget' />
       </Block.Center>
 
       <Block.End className={css.EndActions}>
-        <Divider textAlign='left' content={app.isMenu('opened') && 'Help'} />
+        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && 'Help'} />
         <AppMenuItem icon='auto_stories' content='GUIDE' to='/guide' />
         <AppMenuItem icon='paid' content='DONATION' to='/donation' />
         <AppMenuItem icon='support_agent' content='SUPPORT' to='/support' />
 
-        <Divider textAlign='left' content={app.isMenu('opened') && 'System'} />
+        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && 'System'} />
         <AppMenuItem icon={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
         <AppMenuItem icon='language' content={app.language.toUpperCase()} />
         <AppMenuItem icon={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />
 
-        <Divider />
+        <Divider className={css.Divider} />
         <AppMenuItem icon={app.isMenu('opened') ? 'left_panel_close' : 'left_panel_open'} content='MENU' onClick={app.toggleMenu} />
       </Block.End>
 
