@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tooltip, IconButton, Avatar } from '@mui/material'
+import { IconButton, Avatar } from '@mui/material'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
@@ -9,6 +9,7 @@ import { useLauncher } from 'Launcher'
 // ---| components |---
 import Block from 'components/Block'
 import Text from 'components/lib/Text'
+import Tooltip from 'components/lib/Tooltip'
 import Actions, { Action } from 'components/Actions'
 
 // ---| common |---
@@ -38,7 +39,6 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
     { key: '2', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'error', color: 'error' },
     { key: '3', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'primary', color: 'primary' },
     !app.isAuthorized() && { key: '4', icon: 'login', size: 'xs', variant: 'outlined', content: 'login', color: 'secondary', onClick: app.login },
-    app.isAuthorized() && { key: '4', icon: 'logout', size: 'xs', variant: 'outlined', content: 'logout', color: 'secondary', onClick: app.logout },
   ].filter(Boolean) as Action[]
 
   return (
@@ -52,7 +52,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
         {app.isAuthorized() && (
           <Tooltip title='Account'>
-            <IconButton sx={{ padding: 0 }}>
+            <IconButton sx={{ padding: 0 }} onClick={app.logout}>
               <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
             </IconButton>
           </Tooltip>
