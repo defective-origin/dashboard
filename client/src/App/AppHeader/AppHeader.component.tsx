@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tooltip, IconButton, Avatar, Menu, MenuItem } from '@mui/material'
+import { Tooltip, IconButton, Avatar } from '@mui/material'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
@@ -9,7 +9,6 @@ import { useLauncher } from 'Launcher'
 // ---| components |---
 import Block from 'components/Block'
 import Text from 'components/lib/Text'
-import Divider from 'components/lib/Divider'
 import Actions, { Action } from 'components/Actions'
 
 // ---| common |---
@@ -34,14 +33,6 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
   const app = useLauncher()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
   const testActions: Action[] = [
     { key: '1', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'warning', color: 'warning' },
     { key: '2', icon: 'developer_mode_tv', size: 'xs', variant: 'outlined', content: 'error', color: 'error' },
@@ -60,28 +51,12 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
         <Actions items={testActions} />
 
         {app.isAuthorized() && (
-          <Tooltip title='Account menu'>
-            <IconButton
-              onClick={handleClick}
-              aria-controls={open ? 'account-menu' : undefined}
-              aria-haspopup='true'
-              aria-expanded={open ? 'true' : undefined}
-              sx={{ padding: 0 }}
-            >
-              <Avatar sx={{ width: 36, height: 36 }} />
+          <Tooltip title='Account'>
+            <IconButton sx={{ padding: 0 }}>
+              <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
             </IconButton>
           </Tooltip>
         )}
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-        >
-          <MenuItem key='profile'>Profile</MenuItem>
-          <Divider key='divider' />
-          <MenuItem key='logout' onClick={app.logout}>Logout</MenuItem>
-        </Menu>
       </Block.End>
     </Block>
   )
