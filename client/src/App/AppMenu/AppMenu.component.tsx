@@ -6,6 +6,7 @@ import { useLauncher } from 'Launcher'
 // ---| components |---
 import Divider from 'components/lib/Divider'
 import Block from 'components/Block'
+import Logo from 'components/Logo'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -34,22 +35,22 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   return (
     <Block className={_className} type='column-center' {...otherProps}>
       <Block.Start className={css.StartActions}>
-        <AppMenuItem icon='logo_dev' content='LOGO' to='/' />
+        <Logo icon='logo_dev' href='/' content={app.isMenu('opened') && 'logo'} />
       </Block.Start>
 
       <Block.Center className={css.CenterActions}>
-        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('NAVIGATION.DISPLAY')} />
-        <AppMenuItem icon='dashboard' content={app.t('NAVIGATION.DASHBOARD')} to='/dashboard' />
-        <AppMenuItem icon='insert_chart' content={app.t('NAVIGATION.WIDGET')} to='/widget' />
+        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.DISPLAY')} />
+        <AppMenuItem icon='dashboard' content={app.t('LINKS.DASHBOARD')} to='/dashboard' />
+        <AppMenuItem icon='insert_chart' content={app.t('LINKS.WIDGET')} to='/widget' />
       </Block.Center>
 
       <Block.End className={css.EndActions}>
-        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('NAVIGATION.HELP')} />
-        <AppMenuItem icon='auto_stories' content={app.t('NAVIGATION.GUIDE')} to='/guide' />
-        <AppMenuItem icon='paid' content={app.t('NAVIGATION.DONATION')} to='/donation' />
-        <AppMenuItem icon='support_agent' content={app.t('NAVIGATION.SUPPORT')} to='/support' />
+        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.HELP')} />
+        <AppMenuItem icon='auto_stories' content={app.t('LINKS.GUIDE')} to='/guide' />
+        <AppMenuItem icon='paid' content={app.t('LINKS.DONATION')} to='/donation' />
+        <AppMenuItem icon='support_agent' content={app.t('LINKS.SUPPORT')} to='/support' />
 
-        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('NAVIGATION.SYSTEM')} />
+        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.SYSTEM')} />
         <AppMenuItem icon={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
         <AppMenuItem icon='language' content={app.language.toUpperCase()} />
         <AppMenuItem icon={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />

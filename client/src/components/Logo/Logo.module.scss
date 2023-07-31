@@ -1,0 +1,17 @@
+@import 'src/App/App.module';
+
+:global {
+  .dark {
+    // --text-color: white;
+  }
+
+  .light {
+    // --text-color: black;
+  }
+}
+
+.Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}

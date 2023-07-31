@@ -48,10 +48,12 @@
     "OPEN_MENU": "Open menu",
     "CLOSE_MENU": "Close menu"
   },
-  "NAVIGATION": {
+  "GROUPS": {
     "DISPLAY": "Display",
     "HELP": "Help",
-    "SYSTEM": "System",
+    "SYSTEM": "System"
+  },
+  "LINKS": {
     "DASHBOARD": "Dashboard",
     "WIDGET": "Widget",
     "GUIDE": "Guide",
