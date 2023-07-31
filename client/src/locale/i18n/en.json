@@ -41,5 +41,25 @@
   },
   "SYSTEM": {
     "TAB_NAME": "{{title}} Page"
+  },
+  "BUTTONS": {
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "OPEN_MENU": "Open menu",
+    "CLOSE_MENU": "Close menu"
+  },
+  "NAVIGATION": {
+    "DISPLAY": "Display",
+    "HELP": "Help",
+    "SYSTEM": "System",
+    "DASHBOARD": "Dashboard",
+    "WIDGET": "Widget",
+    "GUIDE": "Guide",
+    "DONATION": "Donation",
+    "SUPPORT": "Support",
+    "ACCOUNT": "Account"
+  },
+  "MESSAGES": {
+    "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
   }
 }

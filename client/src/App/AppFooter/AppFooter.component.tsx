@@ -1,6 +1,8 @@
 import React from 'react'
 
 // ---| core |---
+import { useLauncher } from 'Launcher'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
@@ -27,10 +29,11 @@ export type AppFooterProps = {
 export function AppFooter(props: AppFooterProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppFooter, className)
+  const app = useLauncher()
 
   return (
     <div className={_className} {...otherProps}>
-      <Text.H5 size='xs' color='secondary' content='© 2023 now Systems. All Rights Reserved.' />
+      <Text.H5 size='xs' color='secondary' content={app.t('MESSAGES.COPYRIGHT')} />
 
       {children}
     </div>

@@ -15,8 +15,6 @@
   box-sizing: border-box;
   border-right: 1px solid var(--border-color);
   height: 100%;
-  width: 70px;
-  transition: all 1s;
   overflow: hidden;
 
   .StartActions,
@@ -43,8 +41,4 @@
   .EndActions > :last-child {
     margin: 0;
   }
-}
-
-.Open {
-  width: 210px;
 }
