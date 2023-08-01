@@ -16,29 +16,16 @@
   border-right: 1px solid var(--border-color);
   height: 100%;
   overflow: hidden;
+}
 
-  .StartActions,
-  .CenterActions,
-  .EndActions {
-    display: flex;
-    flex-direction: column;
-    justify-self: stretch;
-    align-self: stretch;
+.Nav {
+  height: 100%;
+}
 
-    > * {
-      margin-bottom: 9px;
-    }
+.Divider {
+  margin-bottom: 0;
+}
 
-    > .Divider {
-      margin-bottom: 0;
-    }
-
-    > hr.Divider {
-      margin: 8.5px 0;
-    }
-  }
-
-  .EndActions > :last-child {
-    margin: 0;
-  }
+hr.Divider {
+  margin: 8.5px 0;
 }

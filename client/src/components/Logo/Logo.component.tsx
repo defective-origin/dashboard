@@ -1,11 +1,10 @@
-import React, { AnchorHTMLAttributes } from 'react'
+import React from 'react'
 
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon, { IconSize, IconTypes } from 'components/lib/Icon'
-import Image from 'components/Image'
+import Image, { ImageTypes } from 'components/Image'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -17,9 +16,7 @@ export type LogoProps = Omit<React.HTMLProps<HTMLAnchorElement>, 'content'> & {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  icon?: IconTypes
-  image?: string
-  size?: IconSize
+  image?: ImageTypes
 }
 
 /**
@@ -30,13 +27,12 @@ export type LogoProps = Omit<React.HTMLProps<HTMLAnchorElement>, 'content'> & {
  * <Logo />
  */
 export function Logo(props: LogoProps): JSX.Element {
-  const { size, icon, image, content, children = content, className, ...otherProps } = props
+  const { image, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Logo, className)
 
   return (
     <a className={_className} {...otherProps}>
-      {icon && <Icon className={css.Icon} size={size} type={icon} />}
-      {image && <Image className={css.Image} src={image} />}
+      {image && <Image className={css.Image} type={image} />}
 
       {children}
     </a>

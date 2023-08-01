@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './BlockItem.component'
+export { default } from './Spacer.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './BlockItem.component'
+export * from './Spacer.component'

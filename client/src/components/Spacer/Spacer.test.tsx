@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import BlockItem from './BlockItem.component'
+import Spacer from './Spacer.component'
 
-describe('[BlockItem] component', () => {
+describe('[Spacer] component', () => {
   it('should render component', () => {
-    const container = render(<BlockItem />)
+    const container = render(<Spacer />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

@@ -4,22 +4,26 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Divider from 'components/lib/Divider'
+import Spacer from 'components/Spacer'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
 import './Block.module.scss'
-import BlockItem from './BlockItem'
+
+export type BlockDirectionType = 'x' | 'y' | 'xy'
 
 export type BlockProps = {
   className?: string
   children?: React.ReactNode
-  type?: 'row' | 'row-center' | 'column' | 'column-center'
   gap?: string | number
-  start?: React.ReactNode
-  center?: React.ReactNode
-  end?: React.ReactNode
+  direction?: BlockDirectionType
+  grow?: React.CSSProperties['flexGrow']
+  align?: React.CSSProperties['alignItems']
+  justify?: React.CSSProperties['justifyContent']
+  items?: BlockProps[]
 }
 
 /**
@@ -30,19 +34,14 @@ export type BlockProps = {
  * <Block />
  */
 export function Block(props: BlockProps): JSX.Element | null {
-  const { start, center, end, gap, type = 'row', children, className, ...otherProps } = props
-  const _className = cn('block', `block--${type}`, className)
-
-  if (!start && !center && !end && !children) {
-    return null
-  }
+  const { grow, items, align, justify, gap, direction = 'x', children, className, ...otherProps } = props
+  const _className = cn('block', `block--${direction}`, className)
+  const style: React.CSSProperties = { gap, alignItems: align, justifyContent: justify, flexGrow: grow }
+  const blockItems = items?.map((item, idx) => <Block key={idx} {...item} />)
 
   return (
-    <div className={_className} {...otherProps} style={{ gap }}>
-      {start && <Block.Start>{start}</Block.Start>}
-      {center && <Block.Center>{center}</Block.Center>}
-      {end && <Block.End>{end}</Block.End>}
-
+    <div className={_className} {...otherProps} style={style}>
+      {blockItems}
       {children}
     </div>
   )
@@ -50,8 +49,7 @@ export function Block(props: BlockProps): JSX.Element | null {
 
 Block.displayName = 'Block'
 
-Block.Start = BlockItem.Start
-Block.Center = BlockItem.Center
-Block.End = BlockItem.End
+Block.Divider = Divider
+Block.Spacer = Spacer
 
 export default Block

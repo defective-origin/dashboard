@@ -10,9 +10,6 @@
   }
 }
 
-.AppHeader {
-  border-bottom: 1px solid var(--border-color);
-  box-sizing: border-box;
-  height: 60px;
-  padding: 12px;
+.Spacer {
+  flex-grow: 1;
 }

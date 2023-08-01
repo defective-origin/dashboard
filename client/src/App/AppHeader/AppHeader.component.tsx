@@ -7,7 +7,6 @@ import { useLauncher } from 'Launcher'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Logo from 'components/Logo'
 import Block from 'components/Block'
 import Text from 'components/lib/Text'
 import Tooltip from 'components/lib/Tooltip'
@@ -41,22 +40,18 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
   return (
     <Block className={_className} {...otherProps}>
-      <Block.Start>
-        <Logo icon='logo_dev' href='/' content='logo' />
-        <Text.H1 color='primary'>Page Name</Text.H1>
-      </Block.Start>
-      <Block.Center>{children}</Block.Center>
-      <Block.End className={css.End}>
-        <Actions items={testActions} />
+      <Text.H1 color='primary'>Page Name</Text.H1>
 
-        {app.isAuthorized() && (
-          <Tooltip title={app.t('LINKS.ACCOUNT')}>
-            <IconButton sx={{ padding: 0 }} onClick={app.logout}>
-              <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
-            </IconButton>
-          </Tooltip>
-        )}
-      </Block.End>
+      <Block.Spacer />
+
+      <Actions items={testActions} />
+      {app.isAuthorized() && (
+        <Tooltip title={app.t('LINKS.ACCOUNT')}>
+          <IconButton sx={{ padding: 0 }} onClick={app.logout}>
+            <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
+          </IconButton>
+        </Tooltip>
+      )}
     </Block>
   )
 }
