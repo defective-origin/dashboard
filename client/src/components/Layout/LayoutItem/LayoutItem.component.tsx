@@ -28,13 +28,13 @@ export type LayoutItemProps = {
 export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
   const { as: Tag = 'div', scroll, area, type = 'content', content, children = content, className, ...otherProps } = props
   const _className = cn('layout-item', !area && `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
-  const _style = { gridArea: area }
+  const style = { gridArea: area }
 
   if (!children && !content && typeof Tag !== 'function') {
     return null
   }
 
-  return <Tag className={_className} {...otherProps} style={_style}>{children}</Tag>
+  return <Tag className={_className} {...otherProps} style={style}>{children}</Tag>
 }
 
 LayoutItem.displayName = 'LayoutItem'

@@ -88,6 +88,15 @@ $xxl-width: 1600px;
     @include stretch;
   }
 
+  .gap {
+    // size
+    &--xs {  gap: 4px; }
+    &--sm {  gap: 8px; }
+    &--md {  gap: 12px; }
+    &--lg {  gap: 16px; }
+    &--xl {  gap: 20px; }
+  }
+
   .scroll {
     // size
     &--xs { --scroll-size: 4px; }
@@ -96,13 +105,10 @@ $xxl-width: 1600px;
     &--lg { --scroll-size: 16px; }
     &--xl { --scroll-size: 20px; }
 
-
     // direction
     &-x { overflow-x: auto; overflow-y: hidden; }
     &-y { overflow-x: hidden; overflow-y: auto; }
     &-xy { overflow-x: auto; overflow-y: auto; }
-
-
 
     // style
     &-x,

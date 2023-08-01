@@ -1,10 +1,10 @@
 import React from 'react'
+import { useTheme } from '@mui/material'
 
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { useTheme } from '@mui/material'
 
 // ---| common |---
 import { cn } from 'common/tools'

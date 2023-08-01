@@ -11,19 +11,19 @@ import Spacer from 'components/Spacer'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import './Block.module.scss'
+import css from './Block.module.scss'
 
+export type BlockGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type BlockDirectionType = 'x' | 'y' | 'xy'
 
 export type BlockProps = {
   className?: string
   children?: React.ReactNode
-  gap?: string | number
+  gap?: BlockGap
   direction?: BlockDirectionType
   grow?: React.CSSProperties['flexGrow']
   align?: React.CSSProperties['alignItems']
   justify?: React.CSSProperties['justifyContent']
-  items?: BlockProps[]
 }
 
 /**
@@ -34,14 +34,12 @@ export type BlockProps = {
  * <Block />
  */
 export function Block(props: BlockProps): JSX.Element | null {
-  const { grow, items, align, justify, gap, direction = 'x', children, className, ...otherProps } = props
-  const _className = cn('block', `block--${direction}`, className)
-  const style: React.CSSProperties = { gap, alignItems: align, justifyContent: justify, flexGrow: grow }
-  const blockItems = items?.map((item, idx) => <Block key={idx} {...item} />)
+  const { grow, align, justify, gap, direction = 'x', children, className, ...otherProps } = props
+  const _className = cn(css.Block, css[direction], gap && `gap--${gap}`, className)
+  const style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow }
 
   return (
     <div className={_className} {...otherProps} style={style}>
-      {blockItems}
       {children}
     </div>
   )

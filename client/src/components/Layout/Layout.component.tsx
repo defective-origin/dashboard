@@ -7,6 +7,7 @@ import { cn, react } from 'common/tools'
 import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
 
+export type LayoutGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type LayoutType = 'row' | 'column' | 'header' | 'left-aside' | 'right-aside'
 export type LayoutItem = LayoutItemProps
 
@@ -15,7 +16,7 @@ export type LayoutProps = {
   className?: string
   children?: React.ReactNode
   type?: LayoutType
-  gap?: React.CSSProperties['gap']
+  gap?: LayoutGap
   areas?: React.CSSProperties['gridTemplateAreas']
   columns?: React.CSSProperties['gridTemplateColumns']
   rows?: React.CSSProperties['gridTemplateRows']
@@ -31,9 +32,8 @@ export type LayoutProps = {
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
   const { gap, type = 'row', areas, columns, rows, items = [], children, className, ...otherProps } = props
-  const _className = cn('layout', !areas && `layout--${type}`, className)
-  const _style = {
-    gap,
+  const _className = cn('layout', !areas && `layout--${type}`, gap && `gap--${gap}`, className)
+  const style = {
     gridTemplateAreas: areas,
     gridTemplateColumns: columns,
     gridTemplateRows: rows,
@@ -50,7 +50,7 @@ export function Layout(props: LayoutProps): JSX.Element | null {
   const hasContentItem = allItems.some((child) => react.isExemplar(Layout.Content, child))
 
   return (
-    <div className={_className} {...otherProps} style={_style}>
+    <div className={_className} {...otherProps} style={style}>
       {hasContentItem && otherItems}
 
       {!hasContentItem && (

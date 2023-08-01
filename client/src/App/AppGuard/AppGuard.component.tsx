@@ -40,7 +40,7 @@ export function AppGuard(props: AppGuardProps): JSX.Element {
     <div className={_className} {...otherProps}>
       <Text size='xs' color='primary' prefix='error' content='You have unsaved changes. Are you sure you want to leave without save?' />
 
-      <Actions items={testActions} />
+      <Actions items={testActions} gap='xs' />
 
       {children}
     </div>

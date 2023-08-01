@@ -8,20 +8,20 @@
   .light {
     // --text-color: black;
   }
+}
 
-  .block {
-    display: flex;
+.Block {
+  display: flex;
+}
 
-    &--x {
-      flex-direction: row;
-    }
+.x {
+  flex-direction: row;
+}
 
-    &--y {
-      flex-direction: column;
-    }
+.y {
+  flex-direction: column;
+}
 
-    &--xy {
-      flex-flow: row wrap;
-    }
-  }
+.xy {
+  flex-flow: row wrap;
 }
