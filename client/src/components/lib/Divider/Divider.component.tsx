@@ -21,7 +21,7 @@ export const DIVIDER_DIRECTION_MAP: Record<'x' | 'y', MuiDividerProps['orientati
 export type DividerDirectionType = keyof typeof DIVIDER_DIRECTION_MAP
 
 export type DividerProps = Omit<MuiDividerProps, 'content'>
-                        & Pick<TextProps, 'icon' | 'prefix' | 'postfix' | 'content' | 'size' | 'iconSize'> & {
+                        & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'> & {
                           direction?: DividerDirectionType
                         }
 
@@ -33,19 +33,19 @@ export type DividerProps = Omit<MuiDividerProps, 'content'>
  * <Divider />
  */
 export function Divider(props: DividerProps): JSX.Element {
-  const { icon, prefix, postfix, content, direction ='x', size = 'xs', iconSize, children, className, ...otherProps } = props
+  const { align, start, end, content, direction ='x', size = 'xs', iconSize, children, className, ...otherProps } = props
   const _className = cn(css.Divider, className)
-  const hasContent = icon || prefix || content || postfix || children
+  const hasContent = start || content || end || children
   const _content = children ?? (
     <Text
       className={css.Text}
       color='secondary'
       size={size}
       iconSize={iconSize}
-      icon={icon}
-      prefix={prefix}
+      start={start}
       content={content}
-      postfix={postfix}
+      end={end}
+      align={align}
     />
   )
 

@@ -16,14 +16,14 @@ export type IconTypes = 'light_mode' | 'dark_mode'
 | 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_left'
 | 'auto_stories' | 'logo_dev'
 | 'settings'
-| 'close' | 'left_panel_open' | 'left_panel_close'
+| 'close' | 'left_panel_open' | 'left_panel_close' | 'open_in_new'
 | 'warning' | 'error'
 
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export type IconProps = Omit<MuiIconProps, 'size'> & {
   className?: string
-  type: IconTypes
+  v: IconTypes
   size?: IconSize
 }
 
@@ -35,10 +35,10 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
  * <Icon />
  */
 export function Icon(props: IconProps): JSX.Element {
-  const { size = 'md', type, className, ...otherProps } = props
+  const { size = 'md', v, className, ...otherProps } = props
   const _className = cn(css.Icon, css[size], 'material-symbols-outlined', className)
 
-  return <MuiIcon className={_className} {...otherProps}>{type}</MuiIcon>
+  return <MuiIcon className={_className} {...otherProps}>{v}</MuiIcon>
 }
 
 Icon.displayName = 'Icon'

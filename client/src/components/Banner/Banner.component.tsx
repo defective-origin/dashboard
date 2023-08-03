@@ -4,6 +4,7 @@ import React from 'react'
 import Text from 'components/lib/Text'
 import Image, { ImageTypes } from 'components/Image'
 import Progress from 'components/lib/Progress'
+import Block from 'components/Block'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -68,15 +69,15 @@ export function Banner(props: BannerProps): JSX.Element | null {
   }
 
   return (
-    <div className={_className} {...otherProps}>
-      {imageSrc || imageType && <Image className={css.Image} src={imageSrc} type={imageType} />}
+    <Block className={_className} direction='y' {...otherProps}>
+      {imageSrc || imageType && <Image className={css.Image} src={imageSrc} v={imageType} />}
 
       {title && <Text.H4 align='center' className={css.Title} color='primary' content={title} />}
       {subtitle && <Text.H5 align='center' className={css.Subtitle} color='primary' content={subtitle} />}
       {text && <Text.Body1 align='center' className={css.Text} color='primary' content={text} />}
 
       {children}
-    </div>
+    </Block>
   )
 }
 

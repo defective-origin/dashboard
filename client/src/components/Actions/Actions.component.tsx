@@ -5,7 +5,8 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/lib/Button'
-import Block, { BlockProps } from 'components/Block'
+import Block, { BLOCK_ITEM_MAP, BlockItem, BlockProps } from 'components/Block'
+import Link from 'components/lib/Link'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -13,13 +14,16 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Actions.module.scss'
 
-export type Action = ButtonProps
-export type ActionsDirectionType = 'x' | 'y' | 'xy'
+export const ACTION_MAP = {
+  ...BLOCK_ITEM_MAP,
+  button: Button,
+  link: Link,
+}
 
-export type ActionsProps = BlockProps & {
+export type Action = BlockItem<typeof ACTION_MAP>
+
+export type ActionsProps = BlockProps<typeof ACTION_MAP> & {
   className?: string
-  children?: React.ReactNode
-  items?: Action[]
   size?: ButtonProps['size']
   iconSize?: ButtonProps['iconSize']
 }
@@ -32,19 +36,17 @@ export type ActionsProps = BlockProps & {
  * <Actions />
  */
 export function Actions(props: ActionsProps): JSX.Element {
-  const { items, size, iconSize, children, className, ...otherProps } = props
+  const { className, ...otherProps } = props
   const _className = cn(css.Actions, className)
-  const actions = items?.map((item, idx) => <Button key={idx} className={css.Action} size={size} iconSize={iconSize} {...item} />)
 
-  return (
-    <Block className={_className} align='center' {...otherProps}>
-      {actions}
-
-      {children}
-    </Block>
-  )
+  return <Block className={_className} align='center' map={ACTION_MAP} defaultType='button' {...otherProps} />
 }
 
 Actions.displayName = 'Actions'
+
+Actions.Divider = Block.Divider
+Actions.Spacer = Block.Spacer
+Actions.Link = Link
+Actions.Button = Button
 
 export default Actions

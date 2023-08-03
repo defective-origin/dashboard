@@ -35,7 +35,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const _className = cn(css.AppHeader, className)
   const app = useLauncher()
   const testActions: Action[] = [
-    !app.isAuthorized() && { key: '4', icon: 'login', size: 'xs', variant: 'outlined', content: app.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login },
+    !app.isAuthorized() && { key: '0', start: 'login', size: 'xs', variant: 'outlined', content: app.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login },
   ].filter(Boolean) as Action[]
 
   return (
@@ -45,6 +45,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
       <Block.Spacer />
 
       <Actions items={testActions} />
+
       {app.isAuthorized() && (
         <Tooltip title={app.t('LINKS.ACCOUNT')}>
           <IconButton sx={{ padding: 0 }} onClick={app.logout}>

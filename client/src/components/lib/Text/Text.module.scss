@@ -26,10 +26,8 @@
 .Icon {
 }
 
-.Prefix {
-}
-
-.Postfix {
+.Content {
+  flex-grow: 1;
 }
 
 .xs { font-size: var(--text-size-xs); gap: 2px; }

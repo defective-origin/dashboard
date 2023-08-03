@@ -57,7 +57,7 @@ export function Card(props: CardProps): JSX.Element | null {
       {(title || onClose) && (
         <Card.Header
           title={title}
-          action={onClose && <Button icon='close' onClick={onClose} />}
+          action={onClose && <Button start='close' onClick={onClose} />}
         />
       )}
 

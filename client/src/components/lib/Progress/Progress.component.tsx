@@ -18,7 +18,7 @@ export type ProgressType = keyof typeof PROGRESS_MAP
 export type ProgressProps = {
   className?: string
   show?: boolean
-  type?: ProgressType
+  v?: ProgressType
 }
 
 /**
@@ -29,9 +29,9 @@ export type ProgressProps = {
  * <Progress />
  */
 export function Progress(props: ProgressProps): JSX.Element | null {
-  const { show, type = 'circular', className, ...otherProps } = props
+  const { show, v = 'circular', className, ...otherProps } = props
   const _className = cn(css.Progress, className)
-  const Tag = PROGRESS_MAP[type]
+  const Tag = PROGRESS_MAP[v]
 
   if (!show) {
     return null
@@ -43,8 +43,8 @@ export function Progress(props: ProgressProps): JSX.Element | null {
 Progress.displayName = 'Progress'
 
 export default react.attachOverrides(Progress, {
-  Circular: { type: 'circular' },
-  Linear: { type: 'linear' },
+  Circular: { v: 'circular' },
+  Linear: { v: 'linear' },
 }, {
   memoize: true,
 })

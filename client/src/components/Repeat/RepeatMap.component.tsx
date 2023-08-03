@@ -32,13 +32,13 @@
 //  * }
 //  *
 //  * const items: RepeatItem<ProxyItemProps>[] = [
-//  *   { type: 'header', componentProp: 1 },
-//  *   { type: 'footer' },
+//  *   { v: 'header', componentProp: 1 },
+//  *   { v: 'footer' },
 //  *   {
-//  *     type: 'div',
+//  *     v: 'div',
 //  *     for: [
-//  *       { type: 'div', },
-//  *       { type: 'div', },
+//  *       { v: 'div', },
+//  *       { v: 'div', },
 //  *     ],
 //  *   },
 //  * ]

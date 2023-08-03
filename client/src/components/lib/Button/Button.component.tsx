@@ -11,7 +11,7 @@ import { cn } from 'common/tools'
 import css from './Button.module.scss'
 
 export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'content' | 'size'>
-                        & Pick<TextProps, 'icon' | 'prefix' | 'postfix' | 'content' | 'size' | 'iconSize'>
+                        & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'>
 
 /**
  * Component description.
@@ -21,19 +21,20 @@ export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'conten
  * <Button />
  */
 export function Button(props: ButtonProps): JSX.Element {
-  const { icon, prefix, postfix, size = 'md', iconSize, content, children, className, ...otherProps } = props
+  const { align, start, end, size = 'md', iconSize, content, children, className, ...otherProps } = props
   const _className = cn(css.Button, css[size], className)
 
   return (
     <MuiButton className={_className} {...otherProps}>
       {children ?? (
         <Text
-          icon={icon}
-          prefix={prefix}
+          width='inherit'
+          start={start}
           content={content}
-          postfix={postfix}
+          end={end}
           size={size}
           iconSize={iconSize}
+          align={align}
         />
       )}
     </MuiButton>

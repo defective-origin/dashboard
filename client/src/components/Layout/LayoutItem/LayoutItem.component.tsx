@@ -12,7 +12,7 @@ export type LayoutItemProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  type?: LayoutItemType | string
+  v?: LayoutItemType | string
   area?: React.CSSProperties['gridArea']
   scroll?: 'x' | 'y' | 'xy'
   as?: keyof JSX.IntrinsicElements | React.ComponentType
@@ -26,8 +26,8 @@ export type LayoutItemProps = {
  * <LayoutItem />
  */
 export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
-  const { as: Tag = 'div', scroll, area, type = 'content', content, children = content, className, ...otherProps } = props
-  const _className = cn('layout-item', !area && `layout-item--${type}`, scroll && `scroll-${scroll}`, className)
+  const { as: Tag = 'div', scroll, area, v = 'content', content, children = content, className, ...otherProps } = props
+  const _className = cn('layout-item', !area && `layout-item--${v}`, scroll && `scroll-${scroll}`, className)
   const style = { gridArea: area }
 
   if (!children && !content && typeof Tag !== 'function') {
@@ -40,9 +40,9 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
 LayoutItem.displayName = 'LayoutItem'
 
 export default react.attachOverrides(LayoutItem, {
-  LeftAside: { type: 'left-aside' },
-  RightAside: { type: 'right-aside' },
-  Footer: { type: 'footer' },
-  Header: { type: 'header' },
-  Content: { type: 'content' },
+  LeftAside: { v: 'left-aside' },
+  RightAside: { v: 'right-aside' },
+  Footer: { v: 'footer' },
+  Header: { v: 'header' },
+  Content: { v: 'content' },
 })

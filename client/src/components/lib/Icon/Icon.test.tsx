@@ -6,7 +6,7 @@ import Icon from './Icon.component'
 
 describe('[Icon] component', () => {
   it('should render component', () => {
-    const container = render(<Icon type='dark_mode' />)
+    const container = render(<Icon v='dark_mode' />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

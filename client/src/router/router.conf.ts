@@ -11,13 +11,13 @@ import WidgetPage from 'pages/WidgetPage'
 import { RouteItem } from './router.component'
 
 export const APP_ROUTES: RouteItem[] = [
-  { comp: StatusPage, path: '/', type: 'welcome' },
+  { comp: StatusPage, path: '/', v: 'welcome' },
   { comp: DashboardPage, path: '/dashboard/:id' },
   { comp: WidgetPage, path: '/widget/:id' },
   { comp: AccountPage, path: '/account' },
   { comp: GuidePage, path: '/guide' },
   { comp: DonationPage, path: '/donation' },
   { comp: SupportPage, path: '/support' },
-  { comp: StatusPage, path: '/error/:type' },
-  { comp: StatusPage, default: true, type: 404 },
+  { comp: StatusPage, path: '/error/:v' },
+  { comp: StatusPage, default: true, v: 404 },
 ]

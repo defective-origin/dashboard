@@ -16,7 +16,9 @@ export type LogoProps = Omit<React.HTMLProps<HTMLAnchorElement>, 'content'> & {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  image?: ImageTypes
+  short?: ImageTypes
+  full?: ImageTypes
+  open?: boolean
 }
 
 /**
@@ -27,12 +29,16 @@ export type LogoProps = Omit<React.HTMLProps<HTMLAnchorElement>, 'content'> & {
  * <Logo />
  */
 export function Logo(props: LogoProps): JSX.Element {
-  const { image, content, children = content, className, ...otherProps } = props
-  const _className = cn(css.Logo, className)
+  const { open, full, short, content, children = content, className, ...otherProps } = props
+  const _className = cn(css.Logo, open && css.Full, className)
+  const hasOneLogo = !(full && short)
+  const isShortActive = hasOneLogo || !open
+  const isFullActive = hasOneLogo || open
 
   return (
     <a className={_className} {...otherProps}>
-      {image && <Image className={css.Image} type={image} />}
+      {short && <Image className={cn(css.Image, isShortActive && css.Active)} v={short} />}
+      {full && <Image className={cn(css.Image, isFullActive && css.Active)} v={full} />}
 
       {children}
     </a>

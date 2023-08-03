@@ -4,8 +4,7 @@ import React from 'react'
 import { useLauncher } from 'Launcher'
 
 // ---| components |---
-import Divider from 'components/lib/Divider'
-import Block from 'components/Block'
+import Actions from 'components/Actions'
 import Logo from 'components/Logo'
 
 // ---| common |---
@@ -33,36 +32,33 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const _className = cn(css.AppMenu, className)
 
   return (
-    <Block className={_className} direction='y' gap='sm' {...otherProps}>
-      <Logo image={app.isMenu('opened') ? 'full logo' : 'short logo'} href='/' />
+    <Actions className={_className} direction='y' gap='sm' align='stretch' {...otherProps}>
+      <Logo full='full logo' short='short logo' open={app.isMenu('opened')} href='/' />
 
-      <Block grow={1} gap='sm' direction='y'>
-        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.DISPLAY')} />
-        <AppMenuItem icon='dashboard' content={app.t('LINKS.DASHBOARD')} to='/dashboard' />
-        <AppMenuItem icon='insert_chart' content={app.t('LINKS.WIDGET')} to='/widget' />
+      <Actions grow={1} gap='sm' direction='y' align='stretch'>
+        <Actions.Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.DISPLAY')} />
+        <AppMenuItem start='dashboard' content={app.t('LINKS.DASHBOARD')} href='/dashboard' />
+        <AppMenuItem start='insert_chart' content={app.t('LINKS.WIDGET')} href='/widget' />
 
-        <Block.Spacer />
+        <Actions.Spacer />
 
-        <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.HELP')} />
-        <AppMenuItem icon='auto_stories' content={app.t('LINKS.GUIDE')} to='/guide' />
-        <AppMenuItem icon='paid' content={app.t('LINKS.DONATION')} to='/donation' />
-        <AppMenuItem icon='support_agent' content={app.t('LINKS.SUPPORT')} to='/support' />
-      </Block>
+        <Actions.Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.HELP')} />
+        <AppMenuItem start='auto_stories' content={app.t('LINKS.GUIDE')} href='/guide' />
+        <AppMenuItem start='paid' content={app.t('LINKS.DONATION')} href='/donation' />
+        <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href='/support' />
+      </Actions>
 
-      <Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.SYSTEM')} />
-      <AppMenuItem icon={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
-      <AppMenuItem icon='language' content={app.language.toUpperCase()} />
-      <AppMenuItem icon={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />
+      <Actions.Divider className={css.Divider} textAlign='left' content={app.isMenu('opened') && app.t('GROUPS.SYSTEM')} />
+      <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
+      <AppMenuItem start='language' content={app.language.toUpperCase()} />
+      <AppMenuItem start={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />
 
-      <Divider className={css.Divider} />
-      <AppMenuItem
-        icon={app.isMenu('opened') ? 'left_panel_close' : 'left_panel_open'}
-        content={app.isMenu('opened') ? app.t('BUTTONS.CLOSE_MENU') : app.t('BUTTONS.OPEN_MENU')}
-        onClick={app.toggleMenu}
-      />
+      <Actions.Divider className={css.Divider} />
+      {app.isMenu('opened') && <AppMenuItem start='left_panel_close' content={app.t('BUTTONS.CLOSE_MENU')} onClick={app.toggleMenu} />}
+      {app.isMenu('closed') && <AppMenuItem start='left_panel_open' content={app.t('BUTTONS.OPEN_MENU')} onClick={app.toggleMenu} />}
 
       {children}
-    </Block>
+    </Actions>
   )
 }
 

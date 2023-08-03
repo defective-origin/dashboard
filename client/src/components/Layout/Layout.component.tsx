@@ -15,7 +15,7 @@ export type LayoutItem = LayoutItemProps
 export type LayoutProps = {
   className?: string
   children?: React.ReactNode
-  type?: LayoutType
+  v?: LayoutType
   gap?: LayoutGap
   areas?: React.CSSProperties['gridTemplateAreas']
   columns?: React.CSSProperties['gridTemplateColumns']
@@ -31,8 +31,8 @@ export type LayoutProps = {
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
-  const { gap, type = 'row', areas, columns, rows, items = [], children, className, ...otherProps } = props
-  const _className = cn('layout', !areas && `layout--${type}`, gap && `gap--${gap}`, className)
+  const { gap, v = 'row', areas, columns, rows, items = [], children, className, ...otherProps } = props
+  const _className = cn('layout', !areas && `layout--${v}`, gap && `gap--${gap}`, className)
   const style = {
     gridTemplateAreas: areas,
     gridTemplateColumns: columns,

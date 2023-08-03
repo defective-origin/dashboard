@@ -25,7 +25,7 @@ export type ImageTypes = keyof typeof IMAGE_MAP
 export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
   className?: string
   children?: React.ReactNode
-  type?: ImageTypes
+  v?: ImageTypes
 }
 
 /**
@@ -36,9 +36,9 @@ export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLIma
  * <Image />
  */
 export function Image(props: ImageProps): JSX.Element {
-  const { type, src, children, className, ...otherProps } = props
+  const { v, src, children, className, ...otherProps } = props
   const _className = cn('image', className)
-  const imgSrc = src ?? IMAGE_MAP[type as ImageTypes]
+  const imgSrc = src ?? IMAGE_MAP[v as ImageTypes]
 
   return <img className={_className} src={imgSrc} {...otherProps}>{children}</img>
 }
