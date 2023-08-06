@@ -5,3 +5,4 @@ export { default } from './Link.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Link.component'
+export * from './Link.tool'

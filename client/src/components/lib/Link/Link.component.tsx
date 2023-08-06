@@ -9,6 +9,7 @@ import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Link.module.scss'
+import { isNewTabLink } from './Link.tool'
 
 export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
                       & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'>
@@ -23,10 +24,8 @@ export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
 export function Link(props: LinkProps): JSX.Element {
   const { align, href, target, start, end, size, iconSize, content, children, className, ...otherProps } = props
   const _className = cn(css.Link, className)
-  const link = href ?? ''
-  const hasSameHost = ['/', '?'].includes(link[0]) || link.includes(window.location.host)
-  const linkTarget = target ?? (hasSameHost ? undefined : '_blank')
-  const isOpenInNewTab = !hasSameHost || linkTarget === '_blank'
+  const isOpenInNewTab = isNewTabLink(href, target)
+  const linkTarget = isOpenInNewTab ? '_blank' : target
 
   return (
     <MuiLink
