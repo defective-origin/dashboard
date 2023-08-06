@@ -14,7 +14,7 @@ describe('[Repeat] component', () => {
       { content: '2' },
       { content: '3' },
     ]
-    const container = render(<Repeat as={Item} items={items} />)
+    const container = render(<Repeat cmp={Item} items={items} />)
 
     expect(container.getAll('item')).toHaveLength(3)
     expect(container.snapshot()).toMatchSnapshot()
@@ -34,7 +34,7 @@ describe('[Repeat] component', () => {
       { v: 'b', b: '2' },
       { v: 'c', c: '3' },
     ]
-    const container = render(<Repeat as={itemMap} items={items} />)
+    const container = render(<Repeat cmp={itemMap} items={items} />)
 
     expect(container.getAll('itemA')).toHaveLength(1)
     expect(container.getAll('itemB')).toHaveLength(1)
@@ -56,7 +56,7 @@ describe('[Repeat] component', () => {
       { content: '2', v: 'b' },
       { content: '3' },
     ]
-    const container = render(<Repeat as={itemMap} items={items} v='a' />)
+    const container = render(<Repeat cmp={itemMap} items={items} v='a' />)
 
     expect(container.getAll('itemA')).toHaveLength(2)
     expect(container.getAll('itemB')).toHaveLength(1)

@@ -50,7 +50,7 @@ export function Block<C extends RepeatComponent = typeof BLOCK_ITEM_MAP>(props: 
 
   return (
     <div className={_className} style={style}>
-      <Repeat as={BLOCK_ITEM_MAP} v={v} {...otherProps} />
+      <Repeat cmp={BLOCK_ITEM_MAP} v={v} {...otherProps} />
       {children}
     </div>
   )

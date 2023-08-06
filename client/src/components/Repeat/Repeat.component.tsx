@@ -15,7 +15,7 @@ export type RepeatItem<
   TResult = C extends ((args: any) => any) ? ComponentProps<C> : TypedProps<C>
 > = TResult
 
-export type RepeatPropKeys = 'as' | 'items' | 'selectKey' | 'selectProps' | 'v'
+export type RepeatPropKeys = 'cmp' | 'items' | 'selectKey' | 'selectProps' | 'v'
 export type OnlyRepeatProps<C extends RepeatComponent> = Pick<RepeatProps<C>, RepeatPropKeys>
 
 export type RepeatProps<
@@ -23,7 +23,7 @@ export type RepeatProps<
   P = RepeatItem<C>,
 > = Partial<P> & {
   // Component or Component map which should be used for item rendering
-  as?: C
+  cmp?: C
   // array with item props
   items?: P[]
   // select key for reconciliation [default: index]
@@ -46,7 +46,7 @@ export type RepeatProps<
  *   { content: '3' },
  * ]
  *
- * <Repeat as={Item} items={items} shared_propA shared_propB />
+ * <Repeat cmp={Item} items={items} shared_propA shared_propB />
  * // <React.Fragment>
  * //   <Item content='1' />
  * //   <Item content='2' />
@@ -71,7 +71,7 @@ export type RepeatProps<
  *   { v: 'c', content: '3' },
  * ]
  *
- * <Repeat as={itemMap} items={items} shared_propA shared_propB />
+ * <Repeat cmp={itemMap} items={items} shared_propA shared_propB />
  * // <React.Fragment>
  * //   <ItemA content='1' />
  * //   <ItemB content='2' />
@@ -80,19 +80,19 @@ export type RepeatProps<
  *
  *
  * // Setup default component type for items
- * <Repeat as={itemMap} items={items} v='DEFAULT TYPE' />
+ * <Repeat cmp={itemMap} items={items} v='DEFAULT TYPE' />
  */
 export function Repeat<
   Item extends RepeatComponent,
 >(props: RepeatProps<Item>): JSX.Element | null {
-  const { v: defaultItemType, as, items = [], selectKey, selectProps, ...sharedProps } = props
+  const { v: defaultItemType, cmp, items = [], selectKey, selectProps, ...sharedProps } = props
 
-  if (!as || !items.length) {
+  if (!cmp || !items.length) {
     return null
   }
 
   const list = items.map(({ v = defaultItemType, ...otherItemProps }, idx) => {
-    const Tag = typeof as === 'object' ? as[v] : as as React.ComponentType
+    const Tag = typeof cmp === 'object' ? cmp[v] : cmp as React.ComponentType
     const combinedProps = { ...sharedProps, ...otherItemProps } as ComponentProps<any>
     const itemProps = selectProps?.(combinedProps) ?? combinedProps
     const itemKey = selectKey?.(itemProps) ?? idx

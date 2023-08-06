@@ -1,5 +1,5 @@
 // ---| components |---
-import Repeat from 'components/Repeat'
+import Repeat, { OnlyRepeatProps } from 'components/Repeat'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -12,13 +12,11 @@ import css from './ViewBoard.module.scss'
 
 export type ViewBoardItem = GridItem
 
-export type ViewBoardProps = react.GeneralProps & GridConf & {
+export type ViewBoardProps = react.GeneralProps & GridConf & Pick<OnlyRepeatProps<typeof ViewBoardItemComponent>, 'items'> & {
   // item which should be displayed as widget builder
   widget?: ViewBoardItemPrototype
   // set margin around each widget
   gap?: number
-  // items which displays on board
-  items?: ViewBoardItem[]
 }
 
 /**
@@ -42,21 +40,21 @@ export type ViewBoardProps = react.GeneralProps & GridConf & {
  */
 export default function ViewBoard(props: ViewBoardProps): JSX.Element {
   const { columns, rows, widget, gap = 0, items = [], className, style } = props
-  const { ref, cell } = useGrid<HTMLDivElement>({ columns, rows })
+  const grid = useGrid<HTMLDivElement>({ columns, rows })
   const widgetMargin = gap / 2
 
   return (
     <div
-      ref={ref}
+      ref={grid.ref}
       className={cn(css.ViewBoard, className)}
       style={style}
     >
       <Repeat
-        item={ViewBoardItemComponent}
-        for={items}
         as={widget}
+        cmp={ViewBoardItemComponent}
+        items={items}
         margin={widgetMargin}
-        cell={cell}
+        cell={grid.cell}
       />
     </div>
   )

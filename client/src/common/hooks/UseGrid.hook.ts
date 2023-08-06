@@ -6,7 +6,6 @@ import { placement } from 'common/tools/'
 
 export type GridItem = {
   placement: placement.Square
-  [key: string]: unknown
 }
 
 export type GridCell = {
