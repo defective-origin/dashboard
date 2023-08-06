@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Repeat] component > should render items with default component type 1`] = `
+<DocumentFragment>
+  <p
+    data-testid="itemA"
+  >
+    1
+  </p>
+  <p
+    data-testid="itemB"
+  >
+    2
+  </p>
+  <p
+    data-testid="itemA"
+  >
+    3
+  </p>
+</DocumentFragment>
+`;
+
+exports[`[Repeat] component > should render items with item component 1`] = `
+<DocumentFragment>
+  <p
+    data-testid="item"
+  >
+    1
+  </p>
+  <p
+    data-testid="item"
+  >
+    2
+  </p>
+  <p
+    data-testid="item"
+  >
+    3
+  </p>
+</DocumentFragment>
+`;
+
+exports[`[Repeat] component > should render items with item component from map 1`] = `
+<DocumentFragment>
+  <p
+    data-testid="itemA"
+  >
+    1
+  </p>
+  <p
+    data-testid="itemB"
+  >
+    2
+  </p>
+  <p
+    data-testid="itemC"
+  >
+    3
+  </p>
+</DocumentFragment>
+`;

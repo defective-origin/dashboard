@@ -26,13 +26,6 @@ export function clearProps<
   return props as ClearObject<P>
 }
 
-export type TypedProps<
-    O extends object,
-    T0 = {
-        [key in keyof O]: { v?: key } & React.ComponentProps<O[key]>
-    }[keyof O],
-> = T0
-
 // work with components
 export function getDisplayName(component: React.ComponentType, defaultName = 'Component'): string {
   return component.displayName || component.name || defaultName

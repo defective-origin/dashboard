@@ -1,5 +1,7 @@
 {
-  "cSpell.words": ["neccesary", "subarticle"],
+  "cSpell.words": [
+    "testid"
+  ],
 
   // file configs
   "files.eol": "\n",

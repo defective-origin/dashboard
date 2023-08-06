@@ -4,8 +4,8 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Button, { ButtonProps } from 'components/lib/Button'
 import Block, { BLOCK_ITEM_MAP, BlockItem, BlockProps } from 'components/Block'
+import Button from 'components/lib/Button'
 import Link from 'components/lib/Link'
 
 // ---| common |---
@@ -24,8 +24,6 @@ export type Action = BlockItem<typeof ACTION_MAP>
 
 export type ActionsProps = BlockProps<typeof ACTION_MAP> & {
   className?: string
-  size?: ButtonProps['size']
-  iconSize?: ButtonProps['iconSize']
 }
 
 /**
@@ -39,7 +37,7 @@ export function Actions(props: ActionsProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.Actions, className)
 
-  return <Block className={_className} align='center' map={ACTION_MAP} defaultType='button' {...otherProps} />
+  return <Block className={_className} align='center' as={ACTION_MAP} v='button' {...otherProps} />
 }
 
 Actions.displayName = 'Actions'

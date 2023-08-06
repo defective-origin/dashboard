@@ -9,17 +9,18 @@ export const PAINTER_MAP = {
   card: canvas.SquarePainter2D.paint,
 }
 
-export type Item = { type: 'line', options?: canvas.LineShapeOptions, styles?: canvas.ShapeStyleOptions }
-| { type: 'card', options?: canvas.SquareShapeOptions, styles?: canvas.ShapeStyleOptions }
-| { type: 'grid', options?: canvas.GridShapeOptions, styles?: canvas.ShapeStyleOptions }
+export type Item<T extends string, P extends object> = { type: T, options?: P, styles?: canvas.ShapeStyleOptions }
+export type PaintItem = Item<'line', canvas.LineShapeOptions>
+                      | Item<'card', canvas.SquareShapeOptions>
+                      | Item<'grid', canvas.GridShapeOptions>
 
 export type Canvas2DPainterOptions = {
   context: CanvasRenderingContext2D
   paintLine: (options?: canvas.LineShapeOptions, styles?: canvas.ShapeStyleOptions) => void
   paintGrid: (options?: canvas.GridShapeOptions, styles?: canvas.ShapeStyleOptions) => void
   paintCard: (options?: canvas.SquareShapeOptions, styles?: canvas.ShapeStyleOptions) => void
-  paint: (item: Item) => void
-  paintItems: (item: Item[]) => void
+  paint: (item: PaintItem) => void
+  paintItems: (item: PaintItem[]) => void
   clear: (area?: canvas.SquareShapeOptions) => void
 }
 
@@ -32,7 +33,7 @@ export function useCanvas2D(
   ref: React.MutableRefObject<HTMLCanvasElement | null>,
   options: {
     painter?: (options: Canvas2DPainterOptions) => void
-    items?: Item[]
+    items?: PaintItem[]
   } & CanvasRenderingContext2DSettings = {},
   deps: any[] = [],
 ): Canvas2DReturnOptions {
@@ -45,8 +46,8 @@ export function useCanvas2D(
   const paintGrid = useCallback(canvas.GridPainter2D.paint.bind(null, context), [context])
   const paintCard = useCallback(canvas.SquarePainter2D.paint.bind(null, context), [context])
 
-  const paint = useCallback((item: Item) => PAINTER_MAP[item.type](context, item.options, item.styles), [context])
-  const paintItems = useCallback((items: Item[] = []) => items.forEach(paint), [paint])
+  const paint = useCallback((item: PaintItem) => PAINTER_MAP[item.type](context, item.options, item.styles), [context])
+  const paintItems = useCallback((items: PaintItem[] = []) => items.forEach(paint), [paint])
 
   const clear = useCallback((area?: canvas.SquareShapeOptions) => canvas.clear(context, area), [context])
 

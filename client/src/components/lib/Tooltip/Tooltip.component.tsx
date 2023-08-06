@@ -12,7 +12,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Tooltip.module.scss'
 
-export type TooltipProps = MuiTooltipProps & {
+export type TooltipProps = Omit<MuiTooltipProps, 'children'> & {
   className?: string
   children?: React.ReactNode
 }

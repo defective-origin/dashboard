@@ -1,147 +1,108 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ComponentProps } from 'react'
 
-// ---| common |---
-import { wk } from 'common/tools'
+export type TypedProps<
+    O extends object,
+    TResult = {
+        [key in keyof O]: { v?: key } & React.ComponentProps<O[key]>
+    }[keyof O],
+> = TResult
 
-export type ExtensionItem<ItemProps extends Record<string, any>> = Partial<ItemProps> & {
-  [key: string]: any
-}
+export type RepeatComponent = React.ComponentType<any> | Record<any, React.ComponentType<any>>
 
-export type RepeatItem<ItemProps extends Record<string, any>> = ExtensionItem<ItemProps> & {
-  items?: RepeatItem<ItemProps>[]
-}
+export type RepeatItem<
+  C extends RepeatComponent,
+  TResult = C extends ((args: any) => any) ? ComponentProps<C> : TypedProps<C>
+> = TResult
+
+export type RepeatPropKeys = 'as' | 'items' | 'selectKey' | 'selectProps' | 'v'
+export type OnlyRepeatProps<C extends RepeatComponent> = Pick<RepeatProps<C>, RepeatPropKeys>
 
 export type RepeatProps<
-  Item extends React.ComponentType<any>,
-  BlockItem extends React.ComponentType<any> = Item,
-  ItemProps extends Record<string, unknown> = ComponentProps<Item> | ComponentProps<BlockItem>,
-  OptionalItemProps = ExtensionItem<ItemProps>,
-> = OptionalItemProps & {
-  // Component which will be used for each array item which has no sub items
-  item?: Item
-  // Component which will be used for each array item which has sub items or Item if block is not set
-  block?: BlockItem
-  // array which should be iterated
-  for?: RepeatItem<ItemProps>[]
-  // should nested arrays be iterated
-  nested?: boolean
-  // should nested arrays be unwrapped into first array
-  flatten?: boolean
-  // select key for reconciliation (default = weak-key)
-  selectKey?: (item: OptionalItemProps, isBlock: boolean) => React.Key
-  // customize props (default = shared props + item props)
-  selectProps?: (item: OptionalItemProps, isBlock: boolean) => ItemProps
+  C extends RepeatComponent,
+  P = RepeatItem<C>,
+> = Partial<P> & {
+  // Component or Component map which should be used for item rendering
+  as?: C
+  // array with item props
+  items?: P[]
+  // select key for reconciliation [default: index]
+  selectKey?: (item: P) => React.Key
+  // customize props [default: shared props + item props]
+  selectProps?: (item: P) => P
 }
 
 /**
  * Build array with rendered components in it.
  * @example
- * type ProxyItemProps = {
- *   text: string
- *   title: string
- *   children?: React.ReactNode
+ * // Render items with one component type
+ * function Item({ content }): JSX.Element {
+ *   return <p className='item'>{content}</p>
  * }
  *
- * // To do proxy component if we need use two component types (treeNode, leafNode)
- * function ProxyItem(props: ProxyItemProps): JSX.Element {
- *   // if item is tree node and has nested items
- *   if (props.children) {
- *     return <div className='block'>{props.children}</div>
- *   }
- *
- *   // if item is leaf node
- *   return <p className='item'>{props.text}</p>
- * }
- *
- * const items: RepeatItem<ProxyItemProps>[] = [
- *   { title: 'title', text: 'text' },
- *   { text: 'text' },
- *   {
- *     title: 'title',
- *     for: [
- *       { text: 'text' },
- *       { text: 'text' },
- *     ],
- *   },
+ * const items: RepeatItem<ItemProps>[] = [
+ *   { content: '1' },
+ *   { content: '2' },
+ *   { content: '3' },
  * ]
  *
- * const renderWithNestedItems = <Repeat block={block} item={item} for={items} additional_prop />
- * const renderWithNestedItems = <Repeat item={ProxyItem} for={items} additional_prop />
- * // // render only first level of array
+ * <Repeat as={Item} items={items} shared_propA shared_propB />
  * // <React.Fragment>
- * //   <ProxyItem title='title' text='text' />
- * //   <ProxyItem text='text' />
- * //   <ProxyItem title='title' />
+ * //   <Item content='1' />
+ * //   <Item content='2' />
+ * //   <Item content='3' />
  * // </React.Fragment>
  *
- * const renderWithNestedItems = <Repeat block={block} item={item} for={items} nested additional_prop />
- * const renderWithNestedItems = <Repeat item={ProxyItem} for={items} nested additional_prop />
- * // // render all nested arrays
+ *
+ * // Render items with several component types
+ * const ItemA = ({ content }) => <p className='itemA'>{content}</p>
+ * const ItemB = ({ content }) => <p className='itemB'>{content}</p>
+ * const ItemC = ({ content }) => <p className='itemC'>{content}</p>
+ *
+ * const itemMap = {
+ *    a: ItemA,
+ *    b: ItemB,
+ *    c: ItemC,
+ * }
+ *
+ * const items: RepeatItem<ItemProps>[] = [
+ *   { v: 'a', content: '1' },
+ *   { v: 'b', content: '2' },
+ *   { v: 'c', content: '3' },
+ * ]
+ *
+ * <Repeat as={itemMap} items={items} shared_propA shared_propB />
  * // <React.Fragment>
- * //   <ProxyItem title='title' text='text' />
- * //   <ProxyItem text='text' />
- * //   <ProxyItem title='title'>
- * //      <React.Fragment>
- * //        <ProxyItem text='text' />
- * //        <ProxyItem text='text' />
- * //      </React.Fragment>
- * //   </ProxyItem>
+ * //   <ItemA content='1' />
+ * //   <ItemB content='2' />
+ * //   <ItemC content='3' />
  * // </React.Fragment>
  *
- * const renderWithNestedItems = <Repeat block={block} item={item} for={items} flatten additional_prop />
- * const renderWithNestedItems = <Repeat item={ProxyItem} for={items} flatten additional_prop />
- * // // render all nested arrays into first level array (like array.flat(Infinity))
- * // <React.Fragment>
- * //   <ProxyItem title='title' text='text' />
- * //   <ProxyItem text='text' />
- * //   <React.Fragment>
- * //     <ProxyItem title='title' />
- * //     <React.Fragment>
- * //       <ProxyItem text='text' />
- * //       <ProxyItem text='text' />
- * //     </React.Fragment>
- * //   </React.Fragment>
- * // </React.Fragment>
+ *
+ * // Setup default component type for items
+ * <Repeat as={itemMap} items={items} v='DEFAULT TYPE' />
  */
-// FIXME: remove root fragment wrapper return array
-export default function Repeat<
-  Item extends React.ComponentType<any>,
-  BlockItem extends React.ComponentType<any> = Item,
->(props: RepeatProps<Item, BlockItem>): JSX.Element | null {
-  const {
-    item,
-    block = item,
-    for: forItems = [],
-    nested,
-    flatten,
-    selectKey = wk,
-    selectProps = (...args) => args[0],
-    ...sharedProps
-  } = props
+export function Repeat<
+  Item extends RepeatComponent,
+>(props: RepeatProps<Item>): JSX.Element | null {
+  const { v: defaultItemType, as, items = [], selectKey, selectProps, ...sharedProps } = props
 
-  if (!item || !forItems.length) {
+  if (!as || !items.length) {
     return null
   }
 
-  const list = forItems.map(({ items, ...otherItemProps }) => {
-    const Component = (items?.length ? block : item) as React.ComponentType<RepeatItem<Record<string, unknown>>>
-    const combinedProps = { ...sharedProps, ...otherItemProps } as ComponentProps<Item>
-    const itemChildren = (nested || flatten) && items?.length && <Repeat {...props} for={items} />
-    const itemProps = selectProps(combinedProps, !!items?.length)
-    const itemKey = selectKey(itemProps, !!items?.length)
+  const list = items.map(({ v = defaultItemType, ...otherItemProps }, idx) => {
+    const Tag = typeof as === 'object' ? as[v] : as as React.ComponentType
+    const combinedProps = { ...sharedProps, ...otherItemProps } as ComponentProps<any>
+    const itemProps = selectProps?.(combinedProps) ?? combinedProps
+    const itemKey = selectKey?.(itemProps) ?? idx
 
-    if (flatten) {
-      return (
-        <React.Fragment key={itemKey}>
-          <Component {...itemProps} />
-          {itemChildren}
-        </React.Fragment>
-      )
-    }
-
-    return <Component key={itemKey} children={itemChildren || undefined } {...itemProps} />
+    return <Tag key={itemKey} {...itemProps} />
   })
 
   return <React.Fragment>{list}</React.Fragment>
 }
+
+Repeat.displayName = 'Repeat'
+
+export default Repeat
