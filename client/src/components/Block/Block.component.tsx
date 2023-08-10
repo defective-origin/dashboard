@@ -17,7 +17,6 @@ import css from './Block.module.scss'
 export const BLOCK_ITEM_MAP = {
   divider: Divider,
   spacer: Spacer,
-  custom: (props: Record<string, any>) => null,
 }
 
 export type BlockGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'

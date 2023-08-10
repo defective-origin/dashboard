@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconButton, Avatar } from '@mui/material'
+import { Avatar } from '@mui/material'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
@@ -9,6 +9,7 @@ import { useLauncher } from 'Launcher'
 // ---| components |---
 import Block from 'components/Block'
 import Text from 'components/lib/Text'
+import Button from 'components/lib/Button'
 import Tooltip from 'components/lib/Tooltip'
 import Actions, { Action } from 'components/Actions'
 
@@ -48,11 +49,19 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
       {app.isAuthorized() && (
         <Tooltip title={app.t('LINKS.ACCOUNT')}>
-          <IconButton sx={{ padding: 0 }} onClick={app.logout}>
+          <Button sx={{ padding: 0 }} round onClick={app.logout}>
             <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
-          </IconButton>
+          </Button>
         </Tooltip>
       )}
+      <Button sx={{ padding: 0 }} round size='xs' start='account_circle' onClick={app.logout} />
+      <Button sx={{ padding: 0 }} round size='sm' start='account_circle' onClick={app.logout} />
+      <Button sx={{ padding: 0 }} round size='md' start='account_circle' onClick={app.logout} />
+      <Button sx={{ padding: 0 }} round size='lg' start='account_circle' onClick={app.logout} />
+      <Button sx={{ padding: 0 }} round size='xl' start='account_circle' onClick={app.logout} />
+      <Button sx={{ padding: 0 }} round size='xs' onClick={app.logout}>
+        <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
+      </Button>
     </Block>
   )
 }

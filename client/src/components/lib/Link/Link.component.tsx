@@ -3,6 +3,7 @@ import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
 
 // ---| components |---
 import Text, { TextProps } from 'components/lib/Text'
+import Icon from '../Icon'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -41,7 +42,7 @@ export function Link(props: LinkProps): JSX.Element {
           width='inherit'
           start={start}
           content={content}
-          end={end ?? (isOpenInNewTab && 'open_in_new')}
+          end={end ?? (isOpenInNewTab && <Icon size='xs' v='open_in_new' />)}
           size={size}
           iconSize={iconSize}
           align={align}

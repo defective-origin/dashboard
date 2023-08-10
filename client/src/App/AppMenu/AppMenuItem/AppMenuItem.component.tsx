@@ -34,7 +34,7 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
   const match = useMatch(href ?? 'not-valid')
   const navigate = useNavigate()
   const _className = cn(css.AppMenuItem, match && css.Active, className)
-  const redirect = useCallback(() => href && navigate(href, { replace: true }), [navigate, href])
+  const redirect = useCallback(() => href && navigate(href), [navigate, href])
   const item = (
     <Button
       className={_className}
