@@ -1,9 +1,8 @@
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 
 // ---| common |---
-import { cn, _, placement, canvas } from 'common/tools'
-import { GridConf, GridItem, useGrid, useCanvas2D, Canvas2DPainterOptions } from 'common/hooks'
-import { react } from 'common/tools'
+import { cn, _, placement, canvas, react } from 'common/tools'
+import { GridConf, GridItem, useGrid, useCanvas2D, Canvas2DPainterOptions, useMemoProperty } from 'common/hooks'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
@@ -109,8 +108,9 @@ export function SelectionBoard(props: SelectionBoardProps): JSX.Element {
   const [startCell, setStartCell] = useState<placement.Square | null>(null)
   const [hoveredCell, setHoveredCell] = useState<placement.Square | null>(null)
   const [isIntersected, setIsIntersected] = useState(false)
+  const defaultBoardStyles = useMemoProperty(initBoardStyles, { ref: boardRef })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const boardStyles = useMemo(() => _.merge(initBoardStyles(boardRef.current), styles), [boardRef, styles, boardRef.current])
+  const boardStyles = useMemo(() => _.merge(defaultBoardStyles, styles), [styles, defaultBoardStyles])
 
   const isPlacementForbidden = useCallback((item: placement.Square | null) => items.some((i) => {
     // don't check item which should be reselected

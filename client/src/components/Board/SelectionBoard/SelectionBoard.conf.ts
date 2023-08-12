@@ -1,21 +1,6 @@
 // ---| common |---
-import { GridCell } from 'common/hooks'
+import { GridCell, UsePropertyReturnOptions } from 'common/hooks'
 import { canvas, placement } from 'common/tools'
-
-/**
- * Allow create property getter
- * Approach allows to get css variables and other props [ex: for drawing in canvas]
- * https://stackoverflow.com/questions/71368314/can-i-set-a-canvas-fillstyle-with-a-variable-from-css
- */
-export function uProperty<T extends string = string>(element: Element, defaultProperty?: T) {
-  return function (property = defaultProperty) {
-    if (!property || !element) {
-      return undefined
-    }
-
-    return getComputedStyle(element).getPropertyValue(property)
-  }
-}
 
 export const BOARD_PROPERTY_NAMES = {
   INVALID_AREA_COLOR: '--invalid-area-color',
@@ -45,20 +30,15 @@ export const area = (color?: string, line = 2) => ({
   lineWidth: line,
 })
 
-export function initBoardStyles(element: Element) {
-  const property = uProperty(element)
-  const styles: Required<SelectionBoardStyles> = {
-    area: {
-      radius: 2,
-      invalid: area(property(BOARD_PROPERTY_NAMES.INVALID_AREA_COLOR)),
-      selected: area(property(BOARD_PROPERTY_NAMES.SELECTED_AREA_COLOR)),
-      replace: area(property(BOARD_PROPERTY_NAMES.REPLACE_AREA_COLOR)),
-    },
-    grid: grid(property(BOARD_PROPERTY_NAMES.DIVIDER_COLOR)),
-  }
-
-  return styles
-}
+export const initBoardStyles = (property: UsePropertyReturnOptions): Required<SelectionBoardStyles> => ({
+  area: {
+    radius: 2,
+    invalid: area(property(BOARD_PROPERTY_NAMES.INVALID_AREA_COLOR)),
+    selected: area(property(BOARD_PROPERTY_NAMES.SELECTED_AREA_COLOR)),
+    replace: area(property(BOARD_PROPERTY_NAMES.REPLACE_AREA_COLOR)),
+  },
+  grid: grid(property(BOARD_PROPERTY_NAMES.DIVIDER_COLOR)),
+})
 
 export type AreaOptions = {
   place: placement.Square
