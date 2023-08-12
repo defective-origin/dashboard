@@ -35,7 +35,6 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   return (
     <Actions className={_className} direction='y' align='stretch' {...otherProps}>
       <Logo className={css.Logo} v='logo' href={ROUTE_LINKS.ROOT} />
-      <Actions.Divider className={css.Divider} textAlign='left' />
 
       <Actions grow={1} direction='y' align='stretch'>
         <AppMenuItem start='dashboard' content={app.t('LINKS.DASHBOARDS')} href={ROUTE_LINKS.DASHBOARDS} />
@@ -43,13 +42,11 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
 
         <Actions.Spacer />
 
-        <Actions.Divider className={css.Divider} textAlign='left' />
         <AppMenuItem start='auto_stories' content={app.t('LINKS.GUIDE')} href={ROUTE_LINKS.GUIDE} />
         <AppMenuItem start='paid' content={app.t('LINKS.DONATION')} href={ROUTE_LINKS.DONATION} />
         <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
       </Actions>
 
-      <Actions.Divider className={css.Divider} textAlign='left' />
       <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
       <AppMenuItem start='language' content={app.language.toUpperCase()} />
       <AppMenuItem start={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />

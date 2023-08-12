@@ -19,6 +19,12 @@
     color: black;
   }
 
+  &:focus,
+  &:hover {
+    background: gray;
+    color: black;
+  }
+
   > * {
     width: fit-content;
   }

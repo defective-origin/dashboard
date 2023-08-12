@@ -5,6 +5,7 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Image, { ImageTypes } from 'components/Image'
+import Link, { LinkProps } from 'components/lib/Link'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -12,7 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Logo.module.scss'
 
-export type LogoProps = Omit<React.HTMLProps<HTMLAnchorElement>, 'content'> & {
+export type LogoProps = LinkProps & {
   className?: string
   v: ImageTypes
 }
@@ -29,9 +30,9 @@ export function Logo(props: LogoProps): JSX.Element {
   const _className = cn(css.Logo, className)
 
   return (
-    <a className={_className} {...otherProps}>
+    <Link className={_className} {...otherProps}>
       <Image className={css.Image} v={v} />
-    </a>
+    </Link>
   )
 }
 
