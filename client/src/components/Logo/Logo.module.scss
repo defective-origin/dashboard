@@ -17,16 +17,7 @@
   justify-content: center;
 }
 
-.Full {
-  justify-content: start;
-}
-
 .Image {
-  width: 0;
-  height: 0;
-}
-
-.Active {
-  height: 36px;
-  width: fit-content;
+  width: inherit;
+  height: inherit;
 }

@@ -22,12 +22,14 @@ export type UIState = {
   theme: UITheme
   mode: UIMode
   menu: UIMenu
+  pageName: React.ReactNode
 }
 
 export const DEFAULT_UI_STATE: UIState = {
   theme: 'light',
   mode: 'view',
   menu: 'closed',
+  pageName: '',
 }
 
 export type UIActions = {
@@ -40,12 +42,13 @@ export type UIActions = {
   // attach: (options: Partial<UIItemMap>) => () => void,
   // detach: (...args: UIPlace[]) => void,
   message: (...args: ToastOptions[]) => void,
+
+  setPageName: (name?: React.ReactNode) => void,
 }
 
 export type UISelectors = {
   isTheme: (theme: UITheme) => boolean,
   isMode: (mode: UIMode) => boolean,
-  isMenu: (mode: UIMenu) => boolean,
 }
 
 export type UseUIReturnOptions = UIState & UIActions & UISelectors
@@ -67,13 +70,14 @@ export const useUI = (): UseUIReturnOptions | null => {
     toggleMenu: () => state.merge({ menu: toggle(state.current.menu, 'opened', 'closed') }),
 
     message: (...args) => args.forEach((item) => toast(item.content, item)),
+
+    setPageName: (pageName) => state.merge({ pageName }),
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [])
 
   const selectors = useMemo<UISelectors>(() => ({
     isTheme: (value) => is(state.current.theme, value),
     isMode: (value) => is(state.current.mode, value),
-    isMenu: (value) => is(state.current.menu, value),
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [])
 

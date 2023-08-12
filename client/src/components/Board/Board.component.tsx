@@ -25,21 +25,21 @@ export type BoardProps = SelectionBoardProps & ViewBoardProps & {
  * Board which allow to select new position for widgets and also view them.
  * @example
  * const cards: BoardItem[] = [
- *   { x: 0, y: 0, x2: 3, y2: 3 },
- *   { x: 3, y: 3, x2: 6, y2: 6 },
- *   { x: 6, y: 6, x2: 9, y2: 9 },
+ *   { placement: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
+ *   { placement: { v1: { x: 3, y: 3 }, v2: { x: 6, y: 6 } } },
+ *   { placement: { v1: { x: 6, y: 6 }, v2: { x: 9, y: 9 } } },
  * ]
  *
  * export default function App(): JSX.Element {
- *   const [items, setItems] = useState(cards)
- *   const handleError = (error: Error) => { console.log('handleError', error) }
- *   const handleSelect = (item: BoardItem) => { setItems([...items, item]) }
- *   const handleReselect = (item: BoardItem, oldItem: BoardItem) => {
- *     setItems(items.map((i) => (i === oldItem ? item : i)))
- *   }
- *   const TestComponent = (props = {}) => <div {...props}>TEST ITEM</div>
+ *  const [items, setItems] = useState(cards)
+ *  const handleError = (error: any) => { console.log('handleError', error) }
+ *  const handleSelect = (placement: any) => { setItems([...items, { placement }]) }
+ *  const handleReselect = (item: BoardItem, oldItem: BoardItem) => {
+ *    setItems(items.map((i) => (i === oldItem ? item : i)))
+ *  }
+ *  const TestComponent = (props = {}) => <div {...props}>TEST ITEM</div>
  *
- *   return (
+ *  return (
  *     <Board
  *       rows={9}
  *       columns={9}

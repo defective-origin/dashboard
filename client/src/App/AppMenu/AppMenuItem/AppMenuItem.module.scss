@@ -9,15 +9,17 @@
 }
 
 .AppMenuItem {
-  display: flex;
-  justify-content: start;
-  border-radius: 9px;
+  border-radius: 0;
   text-transform: none;
+  color: gray;
+  width: 48px;
+  height: 48px;
 
   &.Active {
+    color: black;
   }
 
-  &:focus,
-  &:hover {
+  > * {
+    width: fit-content;
   }
 }

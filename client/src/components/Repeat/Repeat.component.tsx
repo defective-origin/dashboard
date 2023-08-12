@@ -92,7 +92,7 @@ export function Repeat<
   }
 
   const list = items.map(({ v = defaultItemType, ...otherItemProps }, idx) => {
-    const Tag = typeof cmp === 'object' ? cmp[v] : cmp as React.ComponentType
+    const Tag = typeof cmp === 'function' ? cmp as React.ComponentType : cmp[v]
     const combinedProps = { ...sharedProps, ...otherItemProps } as ComponentProps<any>
     const itemProps = selectProps?.(combinedProps) ?? combinedProps
     const itemKey = selectKey?.(itemProps) ?? idx

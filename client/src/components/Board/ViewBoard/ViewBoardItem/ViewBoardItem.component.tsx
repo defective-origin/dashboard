@@ -38,4 +38,6 @@ function ViewBoardItem(props: ViewBoardItemProps): JSX.Element | null {
   return <Widget {...otherWidgetProps} style={widgetStyle} />
 }
 
-export default React.memo(ViewBoardItem) as typeof ViewBoardItem
+ViewBoardItem.displayName = 'ViewBoardItem'
+
+export default ViewBoardItem

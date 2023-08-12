@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
+
+// ---| core |---
+import { useLauncher } from 'Launcher'
+import { TranslateKeys } from 'locale'
 
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
@@ -14,7 +18,7 @@ import './Page.module.scss'
 export type PageProps = LayoutProps & {
   className?: string
   children?: React.ReactNode
-  name?: string
+  name?: TranslateKeys | string
 }
 
 const NAME = 'page'
@@ -29,12 +33,17 @@ const NAME = 'page'
 export function Page(props: PageProps): JSX.Element {
   const { name, children, className, ...otherProps } = props
   const _className = cn(NAME, className)
+  const app = useLauncher()
+  const pageName = app.t(name as TranslateKeys)
+  const tabName = app.t('SYSTEM.TAB_NAME', { title: pageName })
+
+  useLayoutEffect(() => { app.setPageName(pageName) }, [pageName])
 
   return (
     <Layout className={_className} {...otherProps}>
       {/* Add page metadata */}
       <Helmet>
-        { name && <title>{name}</title> }
+        { tabName && <title>{tabName}</title> }
       </Helmet>
 
       {children}

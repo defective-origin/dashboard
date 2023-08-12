@@ -27,11 +27,10 @@ export default function (plop) {
   // - Receive data from props or API
   // - Can use only other Screens and Components inside
   // - Can have any business logic inside
-  // - Should have Screen postfix in component name
+  // - Can have Screen postfix in component name
   // - Spread data between inner Screens and Components
   plop.setGenerator('Screen', Item.Component({
     description: 'Create a screen component',
-    postfixName: 'Screen',
     defaultSubpath: 'screens',
   }))
 

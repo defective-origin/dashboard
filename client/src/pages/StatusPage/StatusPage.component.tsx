@@ -6,10 +6,10 @@ import { RouteProps } from 'router'
 
 // ---| pages |---
 // ---| screens |---
+import Page, { PageProps } from 'screens/Page'
 
 // ---| components |---
 import Banner from 'components/Banner'
-import Page, { PageProps } from 'components/Page'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -18,7 +18,7 @@ import { cn } from 'common/tools'
 import css from './StatusPage.module.scss'
 import { STATUS_MAP, StatusType } from './StatusPage.conf'
 
-export type StatusPageProps = RouteProps & Omit<PageProps, 'type'> & {
+export type StatusPageProps = RouteProps & PageProps & {
   className?: string
   children?: React.ReactNode
   v?: StatusType
@@ -38,11 +38,7 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
   const status = STATUS_MAP[v]
 
   return (
-    <Page
-      className={_className}
-      name={app.t('SYSTEM.TAB_NAME', { title: app.t('PAGES.STATUS') })}
-      {...otherProps}
-    >
+    <Page className={_className} {...otherProps}>
       <Banner
         className={css.Banner}
         imageType={status.image}

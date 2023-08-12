@@ -37,7 +37,12 @@
   "PAGES": {
     "APP": "App",
     "STATUS": "Status",
-    "HOTKEYS": "Hotkeys"
+    "DASHBOARDS": "Dashboards",
+    "WIDGETS": "Widgets",
+    "SUPPORT": "Support",
+    "GUIDE": "Guide",
+    "DONATION": "Donation",
+    "ACCOUNT": "Account"
   },
   "SYSTEM": {
     "TAB_NAME": "{{title}} Page"
@@ -54,8 +59,8 @@
     "SYSTEM": "System"
   },
   "LINKS": {
-    "DASHBOARD": "Dashboard",
-    "WIDGET": "Widget",
+    "DASHBOARDS": "Dashboards",
+    "WIDGETS": "Widgets",
     "GUIDE": "Guide",
     "DONATION": "Donation",
     "SUPPORT": "Support",

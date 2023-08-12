@@ -7,7 +7,7 @@ import { react } from 'common/tools'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
-import { DEFAULT_STYLES, SelectionBoardStyles } from './SelectionBoard.conf'
+import { initAreaOptions, initBoardStyles, SelectionBoardStyles } from './SelectionBoard.conf'
 import css from './SelectionBoard.module.scss'
 
 export type SelectionBoardItem = GridItem
@@ -24,7 +24,7 @@ export type SelectionBoardProps = react.GeneralProps & GridConf & {
   // styles for grid lines, items, selected area
   styles?: SelectionBoardStyles
   // triggers on select new area
-  onSelect?: (position: placement.Square) => void
+  onSelect?: (placement: placement.Square) => void
   // triggers on reselect area for reselect item
   onReselect?: (newItem: SelectionBoardItem, oldItem: SelectionBoardItem) => void
   // triggers when there is a problem with selected area
@@ -90,7 +90,7 @@ export type SelectionBoardProps = react.GeneralProps & GridConf & {
  *   )
  * }
  */
-export default function SelectionBoard(props: SelectionBoardProps): JSX.Element {
+export function SelectionBoard(props: SelectionBoardProps): JSX.Element {
   const {
     className,
     columns,
@@ -98,7 +98,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     gap = 0,
     items = [],
     reselect,
-    styles = DEFAULT_STYLES,
+    styles,
     overlap,
     style,
     onSelect,
@@ -109,7 +109,8 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
   const [startCell, setStartCell] = useState<placement.Square | null>(null)
   const [hoveredCell, setHoveredCell] = useState<placement.Square | null>(null)
   const [isIntersected, setIsIntersected] = useState(false)
-  const boardStyles = useMemo(() => _.merge(DEFAULT_STYLES, styles), [styles])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const boardStyles = useMemo(() => _.merge(initBoardStyles(boardRef.current), styles), [boardRef, styles, boardRef.current])
 
   const isPlacementForbidden = useCallback((item: placement.Square | null) => items.some((i) => {
     // don't check item which should be reselected
@@ -183,45 +184,35 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     const isInvalid = isPlacementForbidden(getSelectedArea() || hoveredCell)
 
     if (boardRef.current) {
-      boardRef.current.style.cursor = isInvalid ? css.invalidCursor : css.validCursor
+      boardRef.current.style.cursor = isInvalid ? 'not-allowed' : 'pointer'
     }
 
     setIsIntersected(isInvalid)
   }, [hoveredCell, isPlacementForbidden, getSelectedArea, boardRef])
 
   // --- painting ---
-  const buildAreaOptions = useCallback((item: placement.Square): canvas.SquareShapeOptions => {
-    const cardMargin = gap / 2
-
-    return {
-      ...placement.square(
-        item.v1.x * cell.width + cardMargin,
-        item.v1.y * cell.height + cardMargin,
-        item.v2.x * cell.width - cardMargin,
-        item.v2.y * cell.height - cardMargin,
-      ),
-      radius: boardStyles.card.radius
-    }
-  }, [cell, gap, boardStyles.card.radius])
-
   const paintGrid = useCallback((options: Canvas2DPainterOptions) => {
     const area = placement.square(0, 0, options.context.canvas.width, options.context.canvas.height)
 
     options.paintGrid({ rows, columns, ...area }, boardStyles.grid)
   }, [columns, rows, boardStyles])
 
-  const paintCard = useCallback((options: Canvas2DPainterOptions, item: placement.Square | null, styles?: canvas.ShapeStyleOptions) => {
-    if (item) {
-      options.paintCard(buildAreaOptions(item), styles)
+  const paintCard = useCallback((options: Canvas2DPainterOptions, place: placement.Square | null, styles?: canvas.ShapeStyleOptions) => {
+    if (place) {
+      const radius = boardStyles.area.radius
+      const margin = gap / 2
+      const areaOptions = initAreaOptions({ place, cell, margin, radius })
+
+      options.paintCard(areaOptions, styles)
     }
-  }, [buildAreaOptions])
+  }, [cell, gap, boardStyles.area.radius])
 
   const paintCards = useCallback((options: Canvas2DPainterOptions) => {
     items.forEach((item) => {
       paintCard(
         options,
         item.placement,
-        reselect === item ? boardStyles.card.outdated : boardStyles.card.invalid,
+        reselect === item ? boardStyles.area.replace : boardStyles.area.invalid,
       )
     })
   }, [items, reselect, boardStyles, paintCard])
@@ -230,7 +221,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     paintCard(
       options,
       getSelectedArea(),
-      isIntersected ? boardStyles.card.invalid : boardStyles.card.valid
+      isIntersected ? boardStyles.area.invalid : boardStyles.area.selected,
     )
   }, [isIntersected, boardStyles, paintCard, getSelectedArea])
 
@@ -258,3 +249,7 @@ export default function SelectionBoard(props: SelectionBoardProps): JSX.Element 
     />
   )
 }
+
+SelectionBoard.displayName = 'SelectionBoard'
+
+export default SelectionBoard

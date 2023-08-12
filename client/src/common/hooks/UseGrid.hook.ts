@@ -28,7 +28,7 @@ export type GridOptions<TRef> = {
   // divide board into rows
   rows?: number
   // ref for board in order to get width, height, cell
-  ref: React.MutableRefObject<TRef | null>
+  ref: React.MutableRefObject<TRef>
   // width of board
   width?: number
   // height of board

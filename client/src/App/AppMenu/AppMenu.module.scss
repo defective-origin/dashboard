@@ -11,20 +11,13 @@
 }
 
 .AppMenu {
-  padding: 15px;
-  box-sizing: border-box;
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid var(--divider-color);
   height: 100%;
+  width: 48px;
 }
 
-.Nav {
-  height: 100%;
-}
-
-.Divider {
-  margin-bottom: 0;
-}
-
-hr.Divider {
-  margin: 8.5px 0;
+.Logo {
+  width: 30px;
+  height: 30px;
+  padding: 9px;
 }

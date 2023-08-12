@@ -50,6 +50,14 @@ export function AppGuard(props: AppGuardProps): JSX.Element {
 
       <Actions items={testActions} gap='xs' direction='xy' />
 
+      <Actions gap='xs' direction='xy'>
+        <Actions.Button sx={{ padding: 0 }} round size='xs' start='account_circle' />
+        <Actions.Button sx={{ padding: 0 }} round size='sm' start='account_circle' />
+        <Actions.Button sx={{ padding: 0 }} round size='md' start='account_circle' />
+        <Actions.Button sx={{ padding: 0 }} round size='lg' start='account_circle' />
+        <Actions.Button sx={{ padding: 0 }} round size='xl' start='account_circle' />
+      </Actions>
+
       {children}
     </Block>
   )

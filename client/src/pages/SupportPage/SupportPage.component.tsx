@@ -5,6 +5,8 @@ import { RouteProps } from 'router'
 
 // ---| pages |---
 // ---| screens |---
+import Page, { PageProps } from 'screens/Page'
+
 // ---| components |---
 
 // ---| common |---
@@ -13,7 +15,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './SupportPage.module.scss'
 
-export type SupportPageProps = RouteProps & {
+export type SupportPageProps = RouteProps & PageProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -29,7 +31,7 @@ export function SupportPage(props: SupportPageProps): JSX.Element {
   const { navigate, children, className, ...otherProps } = props
   const _className = cn(css.SupportPage, className)
 
-  return <div className={_className} {...otherProps}>{children}</div>
+  return <Page className={_className} name='PAGES.SUPPORT' {...otherProps}>{children}</Page>
 }
 
 SupportPage.displayName = 'SupportPage'

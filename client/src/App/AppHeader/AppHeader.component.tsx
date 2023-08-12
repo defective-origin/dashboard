@@ -41,7 +41,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
   return (
     <Block className={_className} {...otherProps}>
-      <Text.H1 color='primary'>Page Name</Text.H1>
+      <Text.H1 color='primary'>{app.pageName}</Text.H1>
 
       <Block.Spacer />
 
@@ -54,14 +54,6 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
           </Button>
         </Tooltip>
       )}
-      <Button sx={{ padding: 0 }} round size='xs' start='account_circle' onClick={app.logout} />
-      <Button sx={{ padding: 0 }} round size='sm' start='account_circle' onClick={app.logout} />
-      <Button sx={{ padding: 0 }} round size='md' start='account_circle' onClick={app.logout} />
-      <Button sx={{ padding: 0 }} round size='lg' start='account_circle' onClick={app.logout} />
-      <Button sx={{ padding: 0 }} round size='xl' start='account_circle' onClick={app.logout} />
-      <Button sx={{ padding: 0 }} round size='xs' onClick={app.logout}>
-        <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
-      </Button>
     </Block>
   )
 }
