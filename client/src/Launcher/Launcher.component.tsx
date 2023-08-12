@@ -35,6 +35,7 @@ export function Launcher(props: LauncherProps): JSX.Element {
       <I18nextProvider i18n={i18next}>
         <LocationProvider history={history}>
           <React.Suspense fallback={<h1>Loading...</h1>}>
+            {/* https://bareynol.github.io/mui-theme-creator/ */}
             {/* injectFirst allows override Material UI's styles. */}
             <StyledEngineProvider injectFirst>
               <LauncherContext.Provider value={options}>

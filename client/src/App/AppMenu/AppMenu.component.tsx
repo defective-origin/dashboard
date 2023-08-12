@@ -34,7 +34,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
 
   return (
     <Actions className={_className} direction='y' align='stretch' {...otherProps}>
-      <Logo className={css.Logo} v='short logo' href={ROUTE_LINKS.ROOT} />
+      <Logo className={css.Logo} v='logo' href={ROUTE_LINKS.ROOT} />
       <Actions.Divider className={css.Divider} textAlign='left' />
 
       <Actions grow={1} direction='y' align='stretch'>
