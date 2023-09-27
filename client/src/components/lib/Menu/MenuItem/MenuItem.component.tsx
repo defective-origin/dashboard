@@ -13,7 +13,7 @@ import Link, { LinkProps } from 'components/lib/Link'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './Item.module.scss'
+import css from './MenuItem.module.scss'
 
 export type MenuItemProps = MuiMenuItemProps &
   Pick<LinkProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'>
