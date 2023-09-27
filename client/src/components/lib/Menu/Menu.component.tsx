@@ -10,7 +10,6 @@ import {
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import MenuItem from './MenuItem'
 import Repeat from 'components/Repeat'
 
 // ---| common |---
@@ -18,6 +17,7 @@ import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Menu.module.scss'
+import MenuItem from './MenuItem'
 
 export type MenuProps = MuiMenuProps & {
   className?: string

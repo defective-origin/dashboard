@@ -41,7 +41,7 @@ export function MenuItem(props: MenuItemProps): JSX.Element {
   return (
     <MuiMenuItem className={_className} {...otherProps}>
       <Link
-        width="inherit"
+        width='inherit'
         start={start}
         content={content}
         end={end}
