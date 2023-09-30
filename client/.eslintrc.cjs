@@ -65,7 +65,7 @@ module.exports = {
         message: 'Use import from "locale", "router", "store" or "api" instead as ---| core |--- import.',
         group: [
           'i18next',
-          '@reach/router',
+          'react-router-dom',
           'react-i18next',
         ],
       }, {

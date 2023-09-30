@@ -1,4 +1,4 @@
-// ---| root |---
+// ---| core |---
 import Launcher from 'Launcher'
 
 // ---| self |---

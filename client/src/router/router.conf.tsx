@@ -1,0 +1,44 @@
+import { createBrowserRouter } from 'react-router-dom'
+
+// ---| core |---
+import App from 'App'
+
+// ---| pages |---
+import AccountPage from 'pages/AccountPage'
+import DashboardPage from 'pages/DashboardPage'
+import DonationPage from 'pages/DonationPage'
+import GuidePage from 'pages/GuidePage'
+import StatusPage from 'pages/StatusPage'
+import SupportPage from 'pages/SupportPage'
+import WidgetPage from 'pages/WidgetPage'
+
+export const ROUTE_LINKS = {
+  ROOT: '/',
+  DASHBOARDS: 'dashboards',
+  DASHBOARD: 'dashboards/:id',
+  WIDGETS: 'widgets',
+  WIDGET: 'widgets/:id',
+  ACCOUNT: 'account',
+  GUIDE: 'guide',
+  DONATION: 'donation',
+  SUPPORT: 'support',
+  ERROR: 'error/:v',
+}
+
+export const APP_ROUTES = createBrowserRouter([
+  {
+    path: ROUTE_LINKS.ROOT,
+    element: <App />,
+    children: [
+      { path: ROUTE_LINKS.ROOT, element: <StatusPage v='welcome' /> },
+      { path: ROUTE_LINKS.DASHBOARDS, element: <DashboardPage /> },
+      { path: ROUTE_LINKS.WIDGETS, element: <WidgetPage /> },
+      { path: ROUTE_LINKS.ACCOUNT, element: <AccountPage /> },
+      { path: ROUTE_LINKS.GUIDE, element: <GuidePage /> },
+      { path: ROUTE_LINKS.DONATION, element: <DonationPage /> },
+      { path: ROUTE_LINKS.SUPPORT, element: <SupportPage /> },
+      { path: ROUTE_LINKS.ERROR, element: <StatusPage /> },
+      { path: '*', element: <StatusPage v={404} /> },
+    ],
+  },
+])

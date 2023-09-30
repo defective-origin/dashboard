@@ -1,8 +1,6 @@
 import React from 'react'
 
 // ---| core |---
-import { RouteProps } from 'router'
-
 // ---| pages |---
 // ---| screens |---
 import Page, { PageProps } from 'screens/Page'
@@ -15,7 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './DonationPage.module.scss'
 
-export type DonationPageProps = RouteProps & PageProps & {
+export type DonationPageProps = PageProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -28,7 +26,7 @@ export type DonationPageProps = RouteProps & PageProps & {
  * <DonationPage />
  */
 export function DonationPage(props: DonationPageProps): JSX.Element {
-  const { navigate, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
   const _className = cn(css.DonationPage, className)
 
   return <Page className={_className} name='PAGES.DONATION' {...otherProps}>{children}</Page>

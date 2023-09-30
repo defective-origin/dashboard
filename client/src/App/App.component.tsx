@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 
 // ---| core |---
-import Router, { APP_ROUTES } from 'router'
+import { Outlet } from 'router'
 import { useLauncher } from 'Launcher'
 
 // ---| screens |---
@@ -51,7 +51,6 @@ export const APP_LAYOUT: UILayout = {
     { area: 'left-aside', content: <AppLeftPanel />, as: 'aside' },
     { area: 'right-aside', content: <AppRightPanel />, as: 'aside' },
     { area: 'guard', content: <AppGuard /> },
-    { area: 'content', content: <Router items={APP_ROUTES} />, as: 'main' },
   ],
 }
 
@@ -82,6 +81,10 @@ export function App(props: AppProps): JSX.Element {
 
   return (
     <Layout className={_className} {...APP_LAYOUT} {...otherProps}>
+      <Layout.Content as='main'>
+        <Outlet />
+      </Layout.Content>
+
       <ToastContainer className={css.ToastContainer} position='bottom-right' hideProgressBar />
       {/* <Modal keepMounted open={!!itemMap.modal} content={itemMap.modal} onClose={onModalClose} /> */}
     </Layout>

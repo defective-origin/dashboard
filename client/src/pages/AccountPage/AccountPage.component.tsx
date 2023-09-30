@@ -1,8 +1,6 @@
 import React from 'react'
 
 // ---| core |---
-import { RouteProps } from 'router'
-
 // ---| pages |---
 // ---| screens |---
 import Page, { PageProps } from 'screens/Page'
@@ -15,7 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './AccountPage.module.scss'
 
-export type AccountPageProps = RouteProps & PageProps & {
+export type AccountPageProps = PageProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -28,7 +26,7 @@ export type AccountPageProps = RouteProps & PageProps & {
  * <AccountPage />
  */
 export function AccountPage(props: AccountPageProps): JSX.Element {
-  const { navigate, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
   const _className = cn(css.AccountPage, className)
 
   return <Page className={_className} name='PAGES.ACCOUNT' {...otherProps}>{children}</Page>

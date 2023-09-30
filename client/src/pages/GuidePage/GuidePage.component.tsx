@@ -1,8 +1,6 @@
 import React from 'react'
 
 // ---| core |---
-import { RouteProps } from 'router'
-
 // ---| pages |---
 // ---| screens |---
 import Page, { PageProps } from 'screens/Page'
@@ -15,7 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './GuidePage.module.scss'
 
-export type GuidePageProps = RouteProps & PageProps & {
+export type GuidePageProps = PageProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -28,7 +26,7 @@ export type GuidePageProps = RouteProps & PageProps & {
  * <GuidePage />
  */
 export function GuidePage(props: GuidePageProps): JSX.Element {
-  const { navigate, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
   const _className = cn(css.GuidePage, className)
 
   return <Page className={_className} name='PAGES.GUIDE' {...otherProps}>{children}</Page>

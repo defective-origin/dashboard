@@ -1,8 +1,6 @@
 import React from 'react'
 
 // ---| core |---
-import { RouteProps } from 'router'
-
 // ---| pages |---
 // ---| screens |---
 import Page, { PageProps } from 'screens/Page'
@@ -15,7 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './WidgetPage.module.scss'
 
-export type WidgetPageProps = RouteProps & PageProps & {
+export type WidgetPageProps = PageProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -28,10 +26,10 @@ export type WidgetPageProps = RouteProps & PageProps & {
  * <WidgetPage />
  */
 export function WidgetPage(props: WidgetPageProps): JSX.Element {
-  const { navigate, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
   const _className = cn(css.WidgetPage, className)
 
-  return <Page className={_className} {...otherProps}>{children}</Page>
+  return <Page className={_className} name='PAGES.WIDGETS' {...otherProps}>{children}</Page>
 }
 
 WidgetPage.displayName = 'WidgetPage'

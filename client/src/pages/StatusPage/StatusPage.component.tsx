@@ -2,8 +2,6 @@ import React from 'react'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
-import { RouteProps } from 'router'
-
 // ---| pages |---
 // ---| screens |---
 import Page, { PageProps } from 'screens/Page'
@@ -18,7 +16,7 @@ import { cn } from 'common/tools'
 import css from './StatusPage.module.scss'
 import { STATUS_MAP, StatusType } from './StatusPage.conf'
 
-export type StatusPageProps = RouteProps & PageProps & {
+export type StatusPageProps = {
   className?: string
   children?: React.ReactNode
   v?: StatusType
@@ -32,7 +30,7 @@ export type StatusPageProps = RouteProps & PageProps & {
  * <StatusPage />
  */
 export function StatusPage(props: StatusPageProps): JSX.Element {
-  const { navigate, v = 'default', children, className, ...otherProps } = props
+  const { v = 'default', children, className, ...otherProps } = props
   const _className = cn(css.StatusPage, className)
   const app = useLauncher()
   const status = STATUS_MAP[v]

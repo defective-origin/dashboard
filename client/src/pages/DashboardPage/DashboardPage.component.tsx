@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 
 // ---| core |---
-import { RouteProps } from 'router'
-
 // ---| pages |---
 // ---| screens |---
 import Page, { PageProps } from 'screens/Page'
@@ -16,7 +14,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './DashboardPage.module.scss'
 
-export type DashboardPageProps = RouteProps & PageProps & {
+export type DashboardPageProps = PageProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -35,7 +33,7 @@ const cards: BoardItem[] = [
  * <DashboardPage />
  */
 export function DashboardPage(props: DashboardPageProps): JSX.Element {
-  const { navigate, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
   const _className = cn(css.DashboardPage, className)
   const [items1, setItems1] = useState([...cards])
   const [items2, setItems2] = useState([...cards])
@@ -51,11 +49,11 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const TestComponent = (props = {}) => <div {...props}>TEST ITEM</div>
 
   return (
-    <Page className={_className} {...otherProps}>
+    <Page className={_className} name='PAGES.DASHBOARDS' {...otherProps}>
       <Board
         className={_className}
-        rows={9}
-        columns={9}
+        rows={25}
+        columns={50}
         gap={10}
         widget={TestComponent}
         reselect={items1[0]}

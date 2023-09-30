@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 // ---| core |---
-import { useMatch, useNavigate } from 'router'
+import { NavLink } from 'router'
 
 // ---| pages |---
 // ---| screens |---
@@ -29,23 +29,14 @@ export type AppMenuItemProps = ButtonProps & {
  */
 export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
   const { href, content, className, ...otherProps } = props
-  const match = useMatch(href ?? 'not-valid')
-  const navigate = useNavigate()
-  const _className = cn(css.AppMenuItem, match && css.Active, className)
-  const redirect = useCallback(() => href && navigate(href), [navigate, href])
+  const _className = cn(css.AppMenuItem, className)
+  const commonProps: ButtonProps = { color: 'primary', size: 'md', iconSize: 'lg', variant: 'text', className: _className, ...otherProps }
 
   return (
     <Tooltip title={content} placement='right'>
-      <Button
-        className={_className}
-        color='primary'
-        size='md'
-        iconSize='lg'
-        variant='text'
-        onClick={redirect}
-        href={href}
-        {...otherProps}
-      />
+      {href && <Button component={NavLink} to={href} {...commonProps} />}
+
+      {!href && <Button {...commonProps} />}
     </Tooltip>
   )
 }
