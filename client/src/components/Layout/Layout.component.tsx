@@ -3,6 +3,9 @@ import React from 'react'
 // ---| common |---
 import { cn, react } from 'common/tools'
 
+// ---| components |---
+import Block from 'components/Block'
+
 // ---| self |---
 import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
@@ -72,6 +75,7 @@ Layout.RightAside = LayoutItem.RightAside
 Layout.Footer = LayoutItem.Footer
 Layout.Header = LayoutItem.Header
 Layout.Content = LayoutItem.Content
+Layout.Block = Block
 
 export const LAYOUT_ITEMS = [Layout.Item, Layout.LeftAside, Layout.RightAside, Layout.Footer, Layout.Header, Layout.Content]
 

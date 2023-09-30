@@ -13,6 +13,7 @@ import Helmet from 'components/lib/Helmet'
 import { cn } from 'common/tools'
 
 // ---| self |---
+import PageSection from './PageSection'
 import './Page.module.scss'
 
 export type PageProps = LayoutProps & {
@@ -58,4 +59,5 @@ Page.RightAside = Layout.RightAside
 Page.Footer = Layout.Footer
 Page.Header = Layout.Header
 Page.Content = Layout.Content
+Page.Section = PageSection
 Page.Block = Block
