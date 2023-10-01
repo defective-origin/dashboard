@@ -54,15 +54,14 @@ export default function (plop) {
   // - Doesn`t have any postfix in hook name
   plop.setGenerator('Hook', Item.Hook())
 
-  // Create a launcher which includes typed context.
-  // Launcher required criteria:
+  // Create a data provider which includes typed context.
+  // Provider required criteria:
   // - Receive default options from props or default config
   // - Can receive data from API
   // - Can use only other Launchers inside
   // - Should have Launcher postfix in component name
   // - Spread data between inner components via contexts
-  plop.setGenerator('Launcher', Item.Context({ postfixName: 'Launcher' }))
-  plop.setGenerator('Context', Item.Context())
+  plop.setGenerator('Context Provider', Item.Context())
 
   plop.setGenerator('Store Slice', Item.StoreSlice())
   plop.setGenerator('Api Slice', Item.ApiSlice())

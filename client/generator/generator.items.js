@@ -68,7 +68,7 @@ export const Component = ({
 
 export const Context = ({
   description = 'Create a Context',
-  postfixName = 'Context',
+  postfixName = 'Provider',
   defaultName = 'Name',
   defaultSubpath = 'Launcher',
   files = ['component', 'conf', 'context', 'stub', 'test'],
@@ -279,12 +279,11 @@ export const Locale = ({
 
 export const Launcher = ({
   description = 'Create Launcher Component',
-  files = ['component', 'conf', 'stub'],
-  data = {
-    subpath: './',
-    name: 'Launcher',
-  },
-} = {}) => Component({ description, files, data })
+  defaultSubpath = './',
+  postfixName = '',
+  defaultName = 'Launcher',
+  isSubmodule = false,
+} = {}) => Context({ description, defaultSubpath, postfixName, defaultName, isSubmodule })
 
 
 export default {
