@@ -283,7 +283,15 @@ export const Launcher = ({
   postfixName = '',
   defaultName = 'Launcher',
   isSubmodule = false,
-} = {}) => Context({ description, defaultSubpath, postfixName, defaultName, isSubmodule })
+  files = ['component', 'conf', 'context', 'test'],
+} = {}) => Context({
+  description,
+  defaultSubpath,
+  postfixName,
+  defaultName,
+  isSubmodule,
+  files,
+})
 
 
 export default {
