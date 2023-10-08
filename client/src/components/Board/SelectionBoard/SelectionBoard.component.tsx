@@ -1,7 +1,7 @@
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 
 // ---| common |---
-import { cn, _, placement, canvas, react } from 'common/tools'
+import { cn, _, xy, cs, react } from 'common/tools'
 import { GridConf, GridItem, useGrid, useCanvas2D, Canvas2DPainterOptions, useMemoProperty } from 'common/hooks'
 
 // ---| self |---
@@ -23,7 +23,7 @@ export type SelectionBoardProps = react.GeneralProps & GridConf & {
   // styles for grid lines, items, selected area
   styles?: SelectionBoardStyles
   // triggers on select new area
-  onSelect?: (placement: placement.Square) => void
+  onSelect?: (placement: xy.Square) => void
   // triggers on reselect area for reselect item
   onReselect?: (newItem: SelectionBoardItem, oldItem: SelectionBoardItem) => void
   // triggers when there is a problem with selected area
@@ -105,14 +105,14 @@ export function SelectionBoard(props: SelectionBoardProps): JSX.Element {
     onError,
   } = props
   const { ref: boardRef, cell, width, height } = useGrid<HTMLCanvasElement>({ columns, rows })
-  const [startCell, setStartCell] = useState<placement.Square | null>(null)
-  const [hoveredCell, setHoveredCell] = useState<placement.Square | null>(null)
+  const [startCell, setStartCell] = useState<xy.Square | null>(null)
+  const [hoveredCell, setHoveredCell] = useState<xy.Square | null>(null)
   const [isIntersected, setIsIntersected] = useState(false)
   const defaultBoardStyles = useMemoProperty(initBoardStyles, { ref: boardRef })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const boardStyles = useMemo(() => _.merge(defaultBoardStyles, styles), [styles, defaultBoardStyles])
 
-  const isPlacementForbidden = useCallback((item: placement.Square | null) => items.some((i) => {
+  const isPlacementForbidden = useCallback((item: xy.Square | null) => items.some((i) => {
     // don't check item which should be reselected
     // or we can overlap other items
     if (overlap || !item || i === reselect) {
@@ -120,20 +120,20 @@ export function SelectionBoard(props: SelectionBoardProps): JSX.Element {
     }
 
     // check intersections
-    return placement.crossSquare(i.placement, item)
+    return xy.crossSquare(i.placement, item)
   }), [items, reselect, overlap])
 
-  const getHoveredCell = useCallback((e: React.MouseEvent): placement.Square => {
+  const getHoveredCell = useCallback((e: React.MouseEvent): xy.Square => {
     const rect = (e.target as HTMLCanvasElement).getBoundingClientRect()
     const cellSize = 1
     const x = Math.trunc((e.clientX - rect.left) / cell.width)
     const y = Math.trunc((e.clientY - rect.top) / cell.height)
 
-    return placement.square(x, y, x + cellSize, y + cellSize)
+    return xy.square(x, y, x + cellSize, y + cellSize)
   }, [cell])
 
-  const getSelectedArea = useCallback((): placement.Square | null =>
-    startCell && hoveredCell && placement.outerBox([startCell, hoveredCell])
+  const getSelectedArea = useCallback((): xy.Square | null =>
+    startCell && hoveredCell && xy.outerBox([startCell, hoveredCell])
   , [startCell, hoveredCell])
 
   const hideContextMenu = useCallback((e: React.MouseEvent) => e.preventDefault(), [])
@@ -149,7 +149,7 @@ export function SelectionBoard(props: SelectionBoardProps): JSX.Element {
 
   const updateSelection = useCallback((e: React.MouseEvent) => {
     const currentCell = getHoveredCell(e)
-    const isCellChanged = !hoveredCell || !placement.equalSquare(currentCell, hoveredCell)
+    const isCellChanged = !hoveredCell || !xy.equalSquare(currentCell, hoveredCell)
 
     // update only if cell was changed
     if (isCellChanged) {
@@ -192,12 +192,12 @@ export function SelectionBoard(props: SelectionBoardProps): JSX.Element {
 
   // --- painting ---
   const paintGrid = useCallback((options: Canvas2DPainterOptions) => {
-    const area = placement.square(0, 0, options.context.canvas.width, options.context.canvas.height)
+    const area = xy.square(0, 0, options.context.canvas.width, options.context.canvas.height)
 
     options.paintGrid({ rows, columns, ...area }, boardStyles.grid)
   }, [columns, rows, boardStyles])
 
-  const paintCard = useCallback((options: Canvas2DPainterOptions, place: placement.Square | null, styles?: canvas.ShapeStyleOptions) => {
+  const paintCard = useCallback((options: Canvas2DPainterOptions, place: xy.Square | null, styles?: cs.ShapeStyleOptions) => {
     if (place) {
       const radius = boardStyles.area.radius
       const margin = gap / 2

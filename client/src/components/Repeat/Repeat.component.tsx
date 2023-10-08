@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ComponentProps } from 'react'
+import React from 'react'
 
 export type TypedProps<
     O extends object,
@@ -12,7 +12,7 @@ export type RepeatComponent = React.ComponentType<any> | Record<any, React.Compo
 
 export type RepeatItem<
   C extends RepeatComponent,
-  TResult = C extends ((args: any) => any) ? ComponentProps<C> : TypedProps<C>
+  TResult = C extends ((args: any) => any) ? React.ComponentProps<C> : TypedProps<C>
 > = TResult
 
 export type RepeatPropKeys = 'cmp' | 'items' | 'selectKey' | 'selectProps' | 'v'
@@ -93,7 +93,7 @@ export function Repeat<
 
   const list = items.map(({ v = defaultItemType, ...otherItemProps }, idx) => {
     const Tag = typeof cmp === 'function' ? cmp as React.ComponentType : cmp[v]
-    const combinedProps = { ...sharedProps, ...otherItemProps } as ComponentProps<any>
+    const combinedProps = { ...sharedProps, ...otherItemProps } as React.ComponentProps<any>
     const itemProps = selectProps?.(combinedProps) ?? combinedProps
     const itemKey = selectKey?.(itemProps) ?? idx
 

@@ -20,9 +20,10 @@ export const getAsideContent = (content: React.ReactNode, iconSize?: IconSize) =
   return <Icon className={css.Icon} v={content as IconTypes} size={iconSize} />
 }
 
+export type TextStatus = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
 export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-export type TextProps = Omit<MuiTypographyProps, 'content'> & {
+export type TextProps = Omit<MuiTypographyProps, 'content' | 'color'> & {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
@@ -30,6 +31,7 @@ export type TextProps = Omit<MuiTypographyProps, 'content'> & {
   iconSize?: IconSize
   start?: IconTypes | Exclude<React.ReactNode, string>
   end?: IconTypes | Exclude<React.ReactNode, string>
+  status?: TextStatus
 }
 
 /**

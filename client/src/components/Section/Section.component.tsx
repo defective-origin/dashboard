@@ -12,9 +12,9 @@ import Actions, { ActionsProps } from 'components/Actions'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './PageSection.module.scss'
+import css from './Section.module.scss'
 
-export type PageSectionProps = {
+export type SectionProps = {
   className?: string
   children?: React.ReactNode
   actions?: ActionsProps['items']
@@ -25,11 +25,11 @@ export type PageSectionProps = {
  *
  * How to use
  * @example
- * <PageSection />
+ * <Section />
  */
-export function PageSection(props: PageSectionProps): JSX.Element {
+export function Section(props: SectionProps): JSX.Element {
   const { actions, children, className, ...otherProps } = props
-  const _className = cn(css.PageSection, className)
+  const _className = cn(css.Section, className)
 
   return (
     <Layout className={_className} {...otherProps}>
@@ -41,13 +41,11 @@ export function PageSection(props: PageSectionProps): JSX.Element {
         <Actions className={ css.Actions } items={actions} />
       </Layout.Header>
 
-      <Layout.Content className={ css.Content }>
-        {children}
-      </Layout.Content>
+      <Layout.Content className={ css.Content } content={children} />
     </Layout>
   )
 }
 
-PageSection.displayName = 'PageSection'
+Section.displayName = 'Section'
 
-export default PageSection
+export default Section

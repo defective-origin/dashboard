@@ -14,6 +14,7 @@ export type StatefulReturnOptions<S> = MutableRefObject<S> & {
   change: (val: SetStateAction<S>) => void
   changeSilent: (val: SetStateAction<S>) => void
   reset: () => void
+  resetSilent: () => void
   sync: () => void
 }
 
@@ -66,6 +67,8 @@ export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturn
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ref.reset = useCallback(() => ref.change(initial), [ref, ...deps])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ref.resetSilent = useCallback(() => ref.changeSilent(initial), [ref, ...deps])
 
   // In a real implementation, this would run before layout effects
   // eslint-disable-next-line react-hooks/exhaustive-deps

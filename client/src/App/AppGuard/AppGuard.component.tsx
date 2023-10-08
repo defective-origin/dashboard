@@ -46,7 +46,7 @@ export function AppGuard(props: AppGuardProps): JSX.Element {
 
   return (
     <Block className={_className} justify='center' gap='xs' {...otherProps}>
-      <Text size='xs' color='primary' start='error' content='You have unsaved changes. Are you sure you want to leave without save?' />
+      <Text size='xs' status='primary' start='error' content='You have unsaved changes. Are you sure you want to leave without save?' />
 
       <Actions items={testActions} gap='xs' direction='xy' />
 

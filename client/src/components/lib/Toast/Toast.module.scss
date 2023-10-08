@@ -1,0 +1,39 @@
+@import 'src/App/App.module';
+
+:root {
+  --toastify-font-family: sans-serif;
+
+  // background
+  --toastify-color-info: var(--mui-palette-Alert-infoStandardBg);
+  --toastify-color-success: var(--mui-palette-Alert-successStandardBg);
+  --toastify-color-warning: var(--mui-palette-Alert-warningStandardBg);
+  --toastify-color-error: var(--mui-palette-Alert-errorStandardBg);
+
+  // text
+  --toastify-text-color-info: var(--mui-palette-Alert-infoColor);
+  --toastify-text-color-success: var(--mui-palette-Alert-successColor);
+  --toastify-text-color-warning: var(--mui-palette-Alert-warningColor);
+  --toastify-text-color-error: var(--mui-palette-Alert-errorColor);
+
+  // icon
+  --toastify-icon-color-info: var(--mui-palette-Alert-infoIconColor);
+  --toastify-icon-color-success: var(--mui-palette-Alert-successIconColor);
+  --toastify-icon-color-warning: var(--mui-palette-Alert-warningIconColor);
+  --toastify-icon-color-error: var(--mui-palette-Alert-errorIconColor);
+}
+
+:global {
+  .dark {
+    --toastify-color-dark: #121212;
+    --toastify-text-color-dark: #FFFFFF;
+  }
+
+  .light {
+    --toastify-color-light: #FFFFFF;
+    --toastify-text-color-light: #757575;
+  }
+}
+
+:global(.Toastify__close-button) {
+  color: var(--mui-palette-text-primary);
+}

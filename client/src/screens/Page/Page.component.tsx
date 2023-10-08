@@ -7,13 +7,13 @@ import { TranslateKeys } from 'locale'
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
 import Block from 'components/Block'
+import Section from 'components/Section'
 import Helmet from 'components/lib/Helmet'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
-import PageSection from './PageSection'
 import './Page.module.scss'
 
 export type PageProps = LayoutProps & {
@@ -59,5 +59,5 @@ Page.RightAside = Layout.RightAside
 Page.Footer = Layout.Footer
 Page.Header = Layout.Header
 Page.Content = Layout.Content
-Page.Section = PageSection
+Page.Section = Section
 Page.Block = Block

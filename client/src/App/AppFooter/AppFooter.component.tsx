@@ -33,7 +33,7 @@ export function AppFooter(props: AppFooterProps): JSX.Element {
 
   return (
     <div className={_className} {...otherProps}>
-      <Text.H5 size='xs' color='secondary' content={app.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })} />
+      <Text.H5 size='xs' status='secondary' content={app.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })} />
 
       {children}
     </div>

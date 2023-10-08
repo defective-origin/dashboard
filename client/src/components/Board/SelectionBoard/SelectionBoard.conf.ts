@@ -1,6 +1,6 @@
 // ---| common |---
 import { GridCell, UsePropertyReturnOptions } from 'common/hooks'
-import { canvas, placement } from 'common/tools'
+import { cs, xy } from 'common/tools'
 
 export const BOARD_PROPERTY_NAMES = {
   INVALID_AREA_COLOR: '--invalid-area-color',
@@ -12,11 +12,11 @@ export const BOARD_PROPERTY_NAMES = {
 export type SelectionBoardStyles = {
   area?: {
     radius?: number
-    invalid?: canvas.ShapeStyleOptions
-    selected?: canvas.ShapeStyleOptions
-    replace?: canvas.ShapeStyleOptions
+    invalid?: cs.ShapeStyleOptions
+    selected?: cs.ShapeStyleOptions
+    replace?: cs.ShapeStyleOptions
   }
-  grid?: canvas.ShapeStyleOptions
+  grid?: cs.ShapeStyleOptions
 }
 
 export const grid = (color?: string, line = 1) => ({
@@ -41,14 +41,14 @@ export const initBoardStyles = (property: UsePropertyReturnOptions): Required<Se
 })
 
 export type AreaOptions = {
-  place: placement.Square
+  place: xy.Square
   cell: GridCell
   margin: number
   radius?: number
 }
 
-export const initAreaOptions = ({ place, cell, margin, radius }: AreaOptions): canvas.SquareShapeOptions => ({
-  ...placement.square(
+export const initAreaOptions = ({ place, cell, margin, radius }: AreaOptions): cs.SquareShapeOptions => ({
+  ...xy.square(
     place.v1.x * cell.width + margin,
     place.v1.y * cell.height + margin,
     place.v2.x * cell.width - margin,

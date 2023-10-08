@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useObject } from 'common/hooks'
 
 // ---| components |---
-import { ToastOptions, toast } from 'components/lib/Toast'
+import { ToastOptions, showAlert, showMessage } from 'components/lib/Toast'
 
 export function is<T>(a: T, b: T): a is T {
   return a === b
@@ -42,6 +42,7 @@ export type UIActions = {
   // attach: (options: Partial<UIItemMap>) => () => void,
   // detach: (...args: UIPlace[]) => void,
   message: (...args: ToastOptions[]) => void,
+  alert: (...args: ToastOptions[]) => void,
 
   setPageName: (name?: React.ReactNode) => void,
 }
@@ -59,7 +60,7 @@ export type UseUIReturnOptions = UIState & UIActions & UISelectors
  * @example
  * const options = useUI(conf)
  */
-export const useUI = (): UseUIReturnOptions | null => {
+export const useUI = (): UseUIReturnOptions => {
   const state = useObject(DEFAULT_UI_STATE)
 
   const actions = useMemo<UIActions>(() => ({
@@ -69,7 +70,8 @@ export const useUI = (): UseUIReturnOptions | null => {
     toggleMode: () => state.merge({ mode: toggle(state.current.mode, 'edit', 'view')}),
     toggleMenu: () => state.merge({ menu: toggle(state.current.menu, 'opened', 'closed') }),
 
-    message: (...args) => args.forEach((item) => toast(item.content, item)),
+    message: (...args) => args.forEach(showMessage),
+    alert: (...args) => args.forEach(showAlert),
 
     setPageName: (pageName) => state.merge({ pageName }),
   // eslint-disable-next-line react-hooks/exhaustive-deps

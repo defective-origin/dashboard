@@ -41,7 +41,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
   return (
     <Block className={_className} {...otherProps}>
-      <Text.H1 color='primary'>{app.pageName}</Text.H1>
+      <Text.H1 status='primary'>{app.pageName}</Text.H1>
 
       <Block.Spacer />
 

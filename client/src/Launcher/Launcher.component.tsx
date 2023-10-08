@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { StyledEngineProvider } from '@mui/material'
+import { StyledEngineProvider, Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material'
 
 // ---| core |---
 import i18next, { I18nextProvider } from 'locale'
@@ -37,10 +37,12 @@ export function Launcher(props: LauncherProps): JSX.Element {
           {/* https://bareynol.github.io/mui-theme-creator/ */}
           {/* injectFirst allows override Material UI's styles. */}
           <StyledEngineProvider injectFirst>
-            <LauncherContext.Provider value={options}>
-              <RouterProvider router={APP_ROUTES} />
-              { children }
-            </LauncherContext.Provider>
+            <CssVarsProvider>
+              <LauncherContext.Provider value={options}>
+                <RouterProvider router={APP_ROUTES} />
+                { children }
+              </LauncherContext.Provider>
+            </CssVarsProvider>
           </StyledEngineProvider>
         </React.Suspense>
       </I18nextProvider>

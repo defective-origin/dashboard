@@ -17,7 +17,7 @@ export type IconTypes = 'light_mode' | 'dark_mode'
 | 'auto_stories' | 'logo_dev'
 | 'settings'
 | 'close' | 'left_panel_open' | 'left_panel_close' | 'open_in_new'
-| 'warning' | 'error'
+| 'info' | 'warning' | 'error' | 'check_circle'
 
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 

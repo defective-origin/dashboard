@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import PageSection from './PageSection.component'
+import Section from './Section.component'
 
-describe('[PageSection] component', () => {
+describe('[Section] component', () => {
   it('should render component', () => {
-    const container = render(<PageSection />)
+    const container = render(<Section />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

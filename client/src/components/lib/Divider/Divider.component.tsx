@@ -39,7 +39,7 @@ export function Divider(props: DividerProps): JSX.Element {
   const _content = children ?? (
     <Text
       className={css.Text}
-      color='secondary'
+      status='secondary'
       size={size}
       iconSize={iconSize}
       start={start}

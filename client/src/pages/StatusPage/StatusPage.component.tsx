@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
@@ -34,6 +34,19 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
   const _className = cn(css.StatusPage, className)
   const app = useLauncher()
   const status = STATUS_MAP[v]
+
+  // FIXME: REMOVE THIS TEST EFFECT
+  useEffect(() => {
+    app.message(
+      {content: 'TEST MESSAGE'},
+    )
+    app.alert(
+      {content: 'Test Text', status: 'error'},
+      {content: 'Test Text', status: 'warning'},
+      {content: 'Test Text', status: 'info'},
+      {content: 'Test Text', status: 'success'},
+    )
+  }, [])
 
   return (
     <Page className={_className} {...otherProps}>
