@@ -1,7 +1,7 @@
 import React, { useImperativeHandle } from 'react'
 
 // ---| components |---
-import Button from 'components/lib/Button'
+import Button from 'components/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'

@@ -5,7 +5,7 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Layout from 'components/Layout'
-import Text from 'components/lib/Text'
+import Text from 'components/Text'
 import Actions, { ActionsProps } from 'components/Actions'
 
 // ---| common |---

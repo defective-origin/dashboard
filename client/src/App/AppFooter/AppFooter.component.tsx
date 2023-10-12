@@ -6,7 +6,7 @@ import { useLauncher } from 'Launcher'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/lib/Text'
+import Text from 'components/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'

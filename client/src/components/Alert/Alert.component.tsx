@@ -6,7 +6,7 @@ import MuiAlertTitle from '@mui/material/AlertTitle'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/lib/Text'
+import Text from 'components/Text'
 
 // ---| common |---
 import { cn, react } from 'common/tools'

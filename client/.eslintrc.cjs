@@ -83,7 +83,7 @@ module.exports = {
     // cancel the ban on imports for their initialization files
     {
       files: [
-        '**/components/lib/**/*component.ts*',
+        '**/components/**/*component.ts*',
         '**/common/tools/index.ts',
         '**/Launcher/**/*.ts*',
         '**/locale/**/*.ts*',

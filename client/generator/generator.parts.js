@@ -20,7 +20,6 @@ export default function (plop) {
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in component name
   plop.setGenerator('Component', Item.Component())
-  plop.setGenerator('Library Component Override', Item.Component({ defaultSubpath: 'components/lib' }))
 
   // Create a Screen component.
   // Screen required criteria:
@@ -53,15 +52,6 @@ export default function (plop) {
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in hook name
   plop.setGenerator('Hook', Item.Hook())
-
-  // Create a data provider which includes typed context.
-  // Provider required criteria:
-  // - Receive default options from props or default config
-  // - Can receive data from API
-  // - Can use only other Launchers inside
-  // - Should have Launcher postfix in component name
-  // - Spread data between inner components via contexts
-  plop.setGenerator('Context Provider', Item.Context())
 
   plop.setGenerator('Store Slice', Item.StoreSlice())
   plop.setGenerator('Api Slice', Item.ApiSlice())

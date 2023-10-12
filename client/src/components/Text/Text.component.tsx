@@ -7,7 +7,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 import { cn, react } from 'common/tools'
 
 // ---| components |---
-import Icon, { IconSize, IconTypes } from 'components/lib/Icon'
+import Icon, { IconSize, IconTypes } from 'components/Icon'
 
 // ---| self |---
 import css from './Text.module.scss'

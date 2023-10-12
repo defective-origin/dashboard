@@ -4,7 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/lib/Text'
+import Text from 'components/Text'
 import Block from 'components/Block'
 import Actions, { Action } from 'components/Actions'
 

@@ -5,7 +5,7 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Image, { ImageTypes } from 'components/Image'
-import Link, { LinkProps } from 'components/lib/Link'
+import Link, { LinkProps } from 'components/Link'
 
 // ---| common |---
 import { cn } from 'common/tools'

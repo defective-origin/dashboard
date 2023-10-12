@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useObject } from 'common/hooks'
 
 // ---| components |---
-import { ToastOptions, showAlert, showMessage } from 'components/lib/Toast'
+import { ToastOptions, showAlert, showMessage } from 'components/Toast'
 
 export function is<T>(a: T, b: T): a is T {
   return a === b

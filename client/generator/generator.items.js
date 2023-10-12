@@ -66,37 +66,6 @@ export const Component = ({
   data,
 })
 
-export const Context = ({
-  description = 'Create a Context',
-  postfixName = 'Provider',
-  defaultName = 'Name',
-  defaultSubpath = 'Launcher',
-  files = ['component', 'conf', 'context', 'stub', 'test'],
-  module = {
-    notExports: ['test'],
-    defaultExport: 'component',
-  },
-  data,
-  isSubmodule = true,
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: defaultName, postfix: postfixName },
-    subpath: { default: defaultSubpath },
-  },
-  actions: [
-    Action.Folder({
-      target: '{{subpath}}/{{pascalCase name}}',
-      template: 'templates/Context',
-      files,
-      module,
-      data,
-      isSubmodule,
-    }),
-    data,
-  ],
-})
-
 export const Hook = ({
   description = 'Create a reusable, pure, unified react hook',
   postfixName,
@@ -276,7 +245,6 @@ export const Locale = ({
   ],
 })
 
-
 export const Launcher = ({
   description = 'Create Launcher Component',
   defaultSubpath = './',
@@ -284,7 +252,7 @@ export const Launcher = ({
   defaultName = 'Launcher',
   isSubmodule = false,
   files = ['component', 'conf', 'context', 'test'],
-} = {}) => Context({
+} = {}) => Component({
   description,
   defaultSubpath,
   postfixName,
@@ -296,7 +264,6 @@ export const Launcher = ({
 
 export default {
   Component,
-  Context,
   Hook,
   Store,
   StoreSlice,

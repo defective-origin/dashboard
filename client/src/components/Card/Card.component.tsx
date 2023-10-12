@@ -7,8 +7,8 @@ import MuiCardHeader from '@mui/material/CardHeader'
 import MuiCardMedia from '@mui/material/CardMedia'
 
 // ---| components |---
-import Divider from 'components/lib/Divider'
-import Button, { ButtonProps } from 'components/lib/Button'
+import Divider from 'components/Divider'
+import Button, { ButtonProps } from 'components/Button'
 
 // ---| common |---
 import { cn } from 'common/tools'

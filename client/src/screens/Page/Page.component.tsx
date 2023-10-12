@@ -8,21 +8,19 @@ import { TranslateKeys } from 'locale'
 import Layout, { LayoutProps } from 'components/Layout'
 import Block from 'components/Block'
 import Section from 'components/Section'
-import Helmet from 'components/lib/Helmet'
+import Helmet from 'components/Helmet'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
-import './Page.module.scss'
+import css from './Page.module.scss'
 
 export type PageProps = LayoutProps & {
   className?: string
   children?: React.ReactNode
   name?: TranslateKeys | string
 }
-
-const NAME = 'page'
 
 /**
  * Component description.
@@ -33,7 +31,7 @@ const NAME = 'page'
  */
 export function Page(props: PageProps): JSX.Element {
   const { name, children, className, ...otherProps } = props
-  const _className = cn(NAME, className)
+  const _className = cn(css.Page, className)
   const app = useLauncher()
   const pageName = app.t(name as TranslateKeys)
   const tabName = app.t('SYSTEM.TAB_NAME', { title: pageName })

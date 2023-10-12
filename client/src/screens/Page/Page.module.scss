@@ -9,23 +9,7 @@
     // --text-color: black;
   }
 
-  .page {
+  .Page {
     @include stretch;
-
-    &__header {
-      padding: 1rem;
-
-      &-title {
-
-      }
-
-      &-info {
-
-      }
-
-      &-extra {
-
-      }
-    }
   }
 }

@@ -8,9 +8,9 @@ import { useLauncher } from 'Launcher'
 // ---| screens |---
 // ---| components |---
 import Block from 'components/Block'
-import Text from 'components/lib/Text'
-import Button from 'components/lib/Button'
-import Tooltip from 'components/lib/Tooltip'
+import Text from 'components/Text'
+import Button from 'components/Button'
+import Tooltip from 'components/Tooltip'
 import Actions, { Action } from 'components/Actions'
 
 // ---| common |---

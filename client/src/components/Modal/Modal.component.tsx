@@ -5,7 +5,7 @@ import MuiModal, { ModalProps as MuiModalProps } from '@mui/material/Modal'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Card, { CardProps } from 'components/lib/Card'
+import Card, { CardProps } from 'components/Card'
 
 // ---| common |---
 import { cn } from 'common/tools'

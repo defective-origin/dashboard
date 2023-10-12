@@ -7,8 +7,8 @@ import { useLauncher } from 'Launcher'
 // ---| screens |---
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
-import Modal, { ModalProps } from 'components/lib/Modal'
-import ToastContainer from 'components/lib/Toast'
+import Modal, { ModalProps } from 'components/Modal'
+import ToastContainer from 'components/Toast'
 
 // ---| common |---
 import { cn } from 'common/tools'

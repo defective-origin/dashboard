@@ -5,7 +5,7 @@ import MuiDivider, { DividerProps as MuiDividerProps } from '@mui/material/Divid
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text, { TextProps } from 'components/lib/Text'
+import Text, { TextProps } from 'components/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'

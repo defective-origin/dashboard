@@ -1,0 +1,73 @@
+import React, { useContext, useMemo } from 'react'
+
+// ---| common |---
+import { useObject } from 'common/hooks'
+
+export type {{pascalCase name}}State = Record<string, unknown>
+
+export const DEFAULT_{{constantCase name}}_STATE: {{pascalCase name}}State = {}
+
+export type {{pascalCase name}}Actions = {
+  change: (patch: Partial<{{pascalCase name}}State>) => void,
+}
+
+export const DEFAULT_{{constantCase name}}_ACTIONS: {{pascalCase name}}Actions = {
+  change: () => {},
+}
+
+export type {{pascalCase name}}Selectors = {
+  get: (name: string) => keyof {{pascalCase name}}State,
+}
+
+export const DEFAULT_{{constantCase name}}_SELECTORS: {{pascalCase name}}Selectors = {
+  get: () => {},
+}
+
+export type {{pascalCase name}}Options = {{pascalCase name}}State & {{pascalCase name}}Actions & {{pascalCase name}}Selectors
+
+export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options = {
+  ...DEFAULT_{{constantCase name}}_STATE,
+  ...DEFAULT_{{constantCase name}}_ACTIONS,
+  ...DEFAULT_{{constantCase name}}_SELECTORS,
+}
+
+export const {{pascalCase name}}Context = React.createContext(DEFAULT_{{constantCase name}}_OPTIONS)
+{{pascalCase name}}Context.displayName = '{{pascalCase name}}Context'
+
+export type {{pascalCase name}}ProviderProps = React.PropsWithChildren
+
+/**
+ * Setup {{pascalCase name}}Provider context.
+ *
+ * How to use
+ * @example
+ * <{{pascalCase name}}Provider defaultProp={1} />
+ */
+export function {{pascalCase name}}Provider(props: {{pascalCase name}}ProviderProps): JSX.Element {
+  const state = useObject(DEFAULT_{{constantCase name}}_STATE)
+
+  // actions are separated to prevent side effects
+  // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
+  const actions = useMemo<{{pascalCase name}}Actions>(() => ({
+    change: state.merge,
+  }), [state])
+
+  // selectors are separated to prevent side effects
+  // if we subscribe to change dependencies. Example: useHook(val, [dep1, dep2])
+  const selectors = useMemo<{{pascalCase name}}Selectors>(() => ({
+    get: state.get,
+  }), [state])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const options = useMemo<{{pascalCase name}}Options>(() => ({ ...state.current, ...actions, ...selectors }), [state.current, actions, selectors])
+
+  return <{{pascalCase name}}Context.Provider value={options} {...props} />
+}
+
+{{pascalCase name}}Provider.displayName = '{{pascalCase name}}Provider'
+
+export default {{pascalCase name}}Provider
+
+export function use{{pascalCase name}}(): {{pascalCase name}}Options {
+  return useContext({{pascalCase name}}Context)
+}

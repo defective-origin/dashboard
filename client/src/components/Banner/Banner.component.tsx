@@ -1,9 +1,9 @@
 import React from 'react'
 
 // ---| components |---
-import Text from 'components/lib/Text'
+import Text from 'components/Text'
 import Image, { ImageTypes } from 'components/Image'
-import Progress from 'components/lib/Progress'
+import Progress from 'components/Progress'
 import Block from 'components/Block'
 
 // ---| common |---

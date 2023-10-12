@@ -5,7 +5,7 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Repeat, { OnlyRepeatProps, RepeatComponent, RepeatItem } from 'components/Repeat'
-import Divider from 'components/lib/Divider'
+import Divider from 'components/Divider'
 import Spacer from 'components/Spacer'
 
 // ---| common |---
@@ -26,6 +26,7 @@ export type BlockItem<C extends RepeatComponent> = RepeatItem<C>
 export type BlockProps<O extends RepeatComponent> = OnlyRepeatProps<O> & {
   className?: string
   children?: React.ReactNode
+  content?: React.ReactNode
   gap?: BlockGap
   direction?: BlockDirectionType
   grow?: React.CSSProperties['flexGrow']
@@ -43,7 +44,7 @@ export type BlockProps<O extends RepeatComponent> = OnlyRepeatProps<O> & {
  * <Block />
  */
 export function Block<C extends RepeatComponent = typeof BLOCK_ITEM_MAP>(props: BlockProps<C>): JSX.Element | null {
-  const { v='custom', grow, align, justify, gap, direction = 'x', children, className, ...otherProps } = props
+  const { v='custom', grow, align, justify, gap, direction = 'x', content, children = content, className, ...otherProps } = props
   const _className = cn(css.Block, css[direction], gap && `gap--${gap}`, className)
   const style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow }
 

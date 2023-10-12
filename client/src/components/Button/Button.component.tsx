@@ -2,7 +2,7 @@ import React from 'react'
 import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button'
 
 // ---| components |---
-import Text, { TextProps } from 'components/lib/Text'
+import Text, { TextProps } from 'components/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'

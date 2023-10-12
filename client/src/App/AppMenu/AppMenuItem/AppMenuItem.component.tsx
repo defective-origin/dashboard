@@ -6,8 +6,8 @@ import { NavLink } from 'router'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Button, { ButtonProps } from 'components/lib/Button'
-import Tooltip from 'components/lib/Tooltip'
+import Button, { ButtonProps } from 'components/Button'
+import Tooltip from 'components/Tooltip'
 
 // ---| common |---
 import { cn } from 'common/tools'

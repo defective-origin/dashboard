@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon, { IconTypes } from 'components/lib/Icon'
-import { AlertStatus } from 'components/lib/Alert'
+import Icon, { IconTypes } from 'components/Icon'
+import { AlertStatus } from 'components/Alert'
 
 // ---| common |---
 // ---| self |---

@@ -2,7 +2,7 @@ import React from 'react'
 import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
 
 // ---| components |---
-import Text, { TextProps } from 'components/lib/Text'
+import Text, { TextProps } from 'components/Text'
 import Icon from '../Icon'
 
 // ---| common |---
