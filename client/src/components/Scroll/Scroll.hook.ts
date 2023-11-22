@@ -28,7 +28,7 @@ export const DEFAULT_SCROLL_OPTIONS: ScrollOptions = {
   offsetHeight: 0,
 }
 
-export type ScrollManager<TElement extends HTMLElement> = {
+export type Scroll<TElement extends HTMLElement> = {
   ref: React.MutableRefObject<TElement>
   elem: TElement
   options: ScrollOptions
@@ -45,10 +45,10 @@ export type ScrollManager<TElement extends HTMLElement> = {
   moveEndY: () => void
 }
 
-export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
+export function useScrollWithoutRef<TElement extends HTMLElement>(
   ref: React.MutableRefObject<TElement>,
   defaultParams = DEFAULT_SCROLL_PARAMS,
-): ScrollManager<TElement> {
+): Scroll<TElement> {
   const params: ScrollToOptions = { ...DEFAULT_SCROLL_PARAMS, ...defaultParams }
   const [options, setOptions] = useState<ScrollOptions>(DEFAULT_SCROLL_OPTIONS)
 
@@ -117,7 +117,7 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     }
   }, [buildOptions, onScroll, ref])
 
-  const manager: ScrollManager<TElement> = useMemo(() => ({
+  return useMemo(() => ({
     ref,
     elem: ref.current,
     options,
@@ -133,14 +133,12 @@ export function useScrollManagerWithoutRef<TElement extends HTMLElement>(
     moveStartY,
     moveEndY,
   }), [ref, options, move, moveTop, moveLeft, moveIntoView, moveBy, moveTopBy, moveLeftBy, moveStartX, moveEndX, moveStartY, moveEndY])
-
-  return manager
 }
 
-export function useScrollManager<TElement extends HTMLElement>(
+export function useScroll<TElement extends HTMLElement>(
   defaultParams = DEFAULT_SCROLL_PARAMS,
-): ScrollManager<TElement> {
+): Scroll<TElement> {
   const newRef = useRef<TElement>(null)
 
-  return useScrollManagerWithoutRef(newRef as any, defaultParams)
+  return useScrollWithoutRef(newRef as any, defaultParams)
 }

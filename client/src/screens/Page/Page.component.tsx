@@ -52,10 +52,10 @@ export function Page(props: PageProps): JSX.Element {
 
 export default Page
 
-Page.LeftAside = Layout.LeftAside
-Page.RightAside = Layout.RightAside
-Page.Footer = Layout.Footer
-Page.Header = Layout.Header
+Page.LeftAside = Layout.Left
+Page.RightAside = Layout.Right
+Page.Footer = Layout.Bottom
+Page.Header = Layout.Top
 Page.Content = Layout.Content
 Page.Section = Section
 Page.Block = Block

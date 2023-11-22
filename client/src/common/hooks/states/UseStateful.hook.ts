@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useRef, useState, SetStateAction, MutableRefObject, useMemo, useLayoutEffect } from 'react'
+import { useRef, useState, SetStateAction, MutableRefObject, useMemo, useLayoutEffect } from 'react'
 
 export const getValue = <S>(arg: SetStateAction<S>, prevState: S) => {
   if (typeof arg === 'function') {
@@ -11,6 +11,7 @@ export const getValue = <S>(arg: SetStateAction<S>, prevState: S) => {
 
 export type StatefulReturnOptions<S> = MutableRefObject<S> & {
   unstable: S
+  init: S
   change: (val: SetStateAction<S>) => void
   changeSilent: (val: SetStateAction<S>) => void
   reset: () => void
@@ -46,29 +47,35 @@ export type StatefulReturnOptions<S> = MutableRefObject<S> & {
  * state.current
  *
  * // get registered state
- * state.value
+ * state.unstable
+ *
+ * // get init state
+ * state.init
  */
 export const useStateful = <S>(initial: S, deps: unknown[] = []): StatefulReturnOptions<S> => {
   // it exists for component rerendering and can have old value
   const [unstableValue, setUnstableValue] = useState<S>(initial)
   const ref = useRef<S>(initial) as StatefulReturnOptions<S>
+  const initRef = useRef<S>(initial) as StatefulReturnOptions<S>
 
   ref.unstable = unstableValue
+  ref.init = initRef.current
 
   useMemo(() => {
     ref.sync = () => ref.change(ref.current)
+
+    ref.reset = () => ref.change(initRef.current)
+    ref.resetSilent = () => ref.changeSilent(initRef.current)
+
     ref.changeSilent = (val) => { ref.current = getValue(val, ref.current) }
     ref.change = (val) => {
       ref.changeSilent(val)
 
       setUnstableValue(getValue(val, ref.current))
     }
+
   }, [ref, setUnstableValue])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  ref.reset = useCallback(() => ref.change(initial), [ref, ...deps])
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  ref.resetSilent = useCallback(() => ref.changeSilent(initial), [ref, ...deps])
 
   // In a real implementation, this would run before layout effects
   // eslint-disable-next-line react-hooks/exhaustive-deps

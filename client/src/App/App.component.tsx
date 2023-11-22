@@ -24,7 +24,7 @@ import AppLeftPanel from './AppLeftPanel'
 import AppRightPanel from './AppRightPanel'
 import AppGuard from './AppGuard'
 
-export type CustomPlace = 'menu' | 'left-aside' | 'right-aside' | 'content' | 'header' | 'footer' | 'guard' | 'drawer' | 'modal'
+export type CustomPlace = 'menu' | 'left' | 'right' | 'content' | 'top' | 'bottom' | 'guard' | 'drawer' | 'modal'
 export type UIItem<P extends string, V> = Record<P, V>
 export type UIItemMap = UIItem<CustomPlace, React.ReactNode>
 
@@ -33,21 +33,21 @@ export type UILayout = LayoutProps
 
 export const APP_LAYOUT: UILayout = {
   areas: `
-    'menu header header header drawer'
-    'menu left-aside content right-aside drawer'
-    'menu left-aside guard right-aside drawer'
-    'menu footer footer footer drawer'
+    'menu top top top drawer'
+    'menu left content right drawer'
+    'menu left guard right drawer'
+    'menu bottom bottom bottom drawer'
   `,
   columns: 'auto auto 1fr auto auto',
   rows: 'auto 1fr auto auto',
   items: [
     { area: 'menu', content: <AppMenu />, as: 'nav' },
-    { area: 'header', content: <AppHeader />, as: 'header' },
-    { area: 'footer', content: <AppFooter />, as: 'footer' },
+    { area: 'top', content: <AppHeader />, as: 'header' },
+    { area: 'bottom', content: <AppFooter />, as: 'footer' },
     // { area: 'modal', content: <div>MODAL</div> },
     { area: 'drawer', content: <AppDrawer />, as: 'aside' },
-    { area: 'left-aside', content: <AppLeftPanel />, as: 'aside' },
-    { area: 'right-aside', content: <AppRightPanel />, as: 'aside' },
+    { area: 'left', content: <AppLeftPanel />, as: 'aside' },
+    { area: 'right', content: <AppRightPanel />, as: 'aside' },
     { area: 'guard', content: <AppGuard /> },
   ],
 }

@@ -2,9 +2,9 @@
 import React from 'react'
 
 export type TypedProps<
-    O extends object,
+    O extends Record<string, any>,
     TResult = {
-        [key in keyof O]: { v?: key } & React.ComponentProps<O[key]>
+      [key in keyof O]: { v?: key } & React.ComponentProps<O[key]>
     }[keyof O],
 > = TResult
 
@@ -14,9 +14,6 @@ export type RepeatItem<
   C extends RepeatComponent,
   TResult = C extends ((args: any) => any) ? React.ComponentProps<C> : TypedProps<C>
 > = TResult
-
-export type RepeatPropKeys = 'cmp' | 'items' | 'selectKey' | 'selectProps' | 'v'
-export type OnlyRepeatProps<C extends RepeatComponent> = Pick<RepeatProps<C>, RepeatPropKeys>
 
 export type RepeatProps<
   C extends RepeatComponent,
@@ -81,6 +78,13 @@ export type RepeatProps<
  *
  * // Setup default component type for items
  * <Repeat cmp={itemMap} items={items} v='DEFAULT TYPE' />
+ *
+ * // Note: You need to cast your items to RepeatItem otherwise typescript can create not appropriate type
+ * // if you need to repeat component
+ * const items: RepeatItem<typeof Item>[] = []
+ *
+ * // if you need to repeat components from Map
+ * const items: RepeatItem<typeof ITEM_MAP>[] = []
  */
 export function Repeat<
   Item extends RepeatComponent,

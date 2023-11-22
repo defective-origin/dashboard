@@ -34,6 +34,10 @@ export const DEFAULT_{{constantCase name}}_OPTIONS: {{pascalCase name}}Options =
 export const {{pascalCase name}}Context = React.createContext(DEFAULT_{{constantCase name}}_OPTIONS)
 {{pascalCase name}}Context.displayName = '{{pascalCase name}}Context'
 
+export function use{{pascalCase name}}(): {{pascalCase name}}Options {
+  return useContext({{pascalCase name}}Context)
+}
+
 export type {{pascalCase name}}ProviderProps = React.PropsWithChildren
 
 /**
@@ -67,7 +71,3 @@ export function {{pascalCase name}}Provider(props: {{pascalCase name}}ProviderPr
 {{pascalCase name}}Provider.displayName = '{{pascalCase name}}Provider'
 
 export default {{pascalCase name}}Provider
-
-export function use{{pascalCase name}}(): {{pascalCase name}}Options {
-  return useContext({{pascalCase name}}Context)
-}

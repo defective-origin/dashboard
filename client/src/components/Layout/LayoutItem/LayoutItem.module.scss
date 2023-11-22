@@ -13,10 +13,10 @@
     justify-self: stretch;
     align-self: stretch;
 
-    &--left-aside { grid-area: left-aside; }
-    &--right-aside { grid-area: right-aside; }
-    &--footer { grid-area: footer; }
-    &--header { grid-area: header; }
+    &--left { grid-area: left; }
+    &--right { grid-area: right; }
+    &--top { grid-area: top; }
+    &--bottom { grid-area: bottom; }
     &--content { grid-area: content; }
   }
 }

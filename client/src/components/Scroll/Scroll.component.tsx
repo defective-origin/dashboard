@@ -8,7 +8,7 @@ import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Scroll.module.scss'
-import { ScrollManager, useScrollManager } from './Scroll.hook'
+import { Scroll, useScroll } from './Scroll.hook'
 
 export type ScrollSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type ScrollDirectionType = 'x' | 'y' | 'xy'
@@ -22,7 +22,7 @@ export type ScrollProps = {
   // show navigation buttons after scrolling
   buttons?: boolean
   // subscription on manager
-  manager?: React.MutableRefObject<ScrollManager<HTMLDivElement> | null>
+  manager?: React.MutableRefObject<Scroll<HTMLDivElement> | null>
   // extra components which is injected into container
   extra?: React.ReactNode
   showButtonsOn?: number
@@ -67,7 +67,7 @@ export default function Scroll(props: ScrollProps): JSX.Element {
   } = props
   const _className = cn(css.Scroll, className)
   const _contentClassName = cn(css.Content, `scroll-${direction}`, `scroll--${size}`, contentClassName)
-  const scrollManager = useScrollManager<HTMLDivElement>()
+  const scrollManager = useScroll<HTMLDivElement>()
   const showLeftButton = showButtonsOn < scrollManager.options.left
   const showUpButton = showButtonsOn < scrollManager.options.top
 

@@ -6,7 +6,7 @@ import { cn, react } from 'common/tools'
 // ---| self |---
 import './LayoutItem.module.scss'
 
-export type LayoutItemType = 'left-aside' | 'right-aside' | 'footer' | 'header' | 'content'
+export type LayoutItemType = 'left' | 'right' | 'top' | 'bottom' | 'content'
 
 export type LayoutItemProps = {
   className?: string
@@ -40,9 +40,9 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
 LayoutItem.displayName = 'LayoutItem'
 
 export default react.attachOverrides(LayoutItem, {
-  LeftAside: { v: 'left-aside' },
-  RightAside: { v: 'right-aside' },
-  Footer: { v: 'footer' },
-  Header: { v: 'header' },
+  Left: { v: 'left' },
+  Right: { v: 'right' },
+  Bottom: { v: 'bottom' },
+  Top: { v: 'top' },
   Content: { v: 'content' },
 })

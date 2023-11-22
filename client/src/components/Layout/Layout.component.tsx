@@ -11,7 +11,7 @@ import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
 
 export type LayoutGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type LayoutType = 'row' | 'column' | 'header' | 'left-aside' | 'right-aside'
+export type LayoutType = 'row' | 'column' | 'top' | 'bottom' | 'left' | 'right'
 export type LayoutItem = LayoutItemProps
 
 
@@ -70,13 +70,13 @@ export function Layout(props: LayoutProps): JSX.Element | null {
 Layout.displayName = 'Layout'
 
 Layout.Item = LayoutItem
-Layout.LeftAside = LayoutItem.LeftAside
-Layout.RightAside = LayoutItem.RightAside
-Layout.Footer = LayoutItem.Footer
-Layout.Header = LayoutItem.Header
+Layout.Left = LayoutItem.Left
+Layout.Right = LayoutItem.Right
+Layout.Bottom = LayoutItem.Bottom
+Layout.Top = LayoutItem.Top
 Layout.Content = LayoutItem.Content
 Layout.Block = Block
 
-export const LAYOUT_ITEMS = [Layout.Item, Layout.LeftAside, Layout.RightAside, Layout.Footer, Layout.Header, Layout.Content]
+export const LAYOUT_ITEMS = [Layout.Item, Layout.Left, Layout.Right, Layout.Bottom, Layout.Top, Layout.Content]
 
 export default Layout

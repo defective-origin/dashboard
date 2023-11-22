@@ -19,37 +19,44 @@
     // template
     &--row {
       grid-template-areas:
-        'header header header'
-        'left-aside content right-aside'
-        'footer footer footer';
+        'top top top'
+        'left content right'
+        'bottom bottom bottom';
     }
 
     &--column {
       grid-template-areas:
-        'left-aside header right-aside'
-        'left-aside content right-aside'
-        'left-aside footer right-aside';
+        'left top right'
+        'left content right'
+        'left bottom right';
     }
 
-    &--header {
+    &--top {
       grid-template-areas:
-        'header header header'
-        'left-aside content right-aside'
-        'left-aside footer right-aside';
+        'top top top'
+        'left content right'
+        'left bottom right';
     }
 
-    &--left-aside {
+    &--bottom {
       grid-template-areas:
-        'left-aside header header'
-        'left-aside content right-aside'
-        'left-aside footer footer';
+        'left top right'
+        'left content right'
+        'bottom bottom bottom';
     }
 
-    &--right-aside {
+    &--left {
       grid-template-areas:
-        'header header right-aside'
-        'left-aside content right-aside'
-        'footer footer right-aside';
+        'left top top'
+        'left content right'
+        'left bottom bottom';
+    }
+
+    &--right {
+      grid-template-areas:
+        'top top right'
+        'left content right'
+        'bottom bottom right';
     }
   }
 }
