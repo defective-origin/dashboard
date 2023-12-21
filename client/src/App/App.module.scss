@@ -69,13 +69,22 @@ $xxl-width: 1600px;
 :root {
   // scroll
   --scroll-track-color: transparent;
-  --scroll-track-color--hover: #D9D9D9;
+  --scroll-track-color--hover: #00000021;
   --scroll-thumb-color: #BFBFBF;
   --scroll-thumb-color--hover: #8C8C8C;
   --scroll-size: 12px;
 
   // common
   --divider-color: #CACDD1;
+
+  // space
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
 }
 
 :global {
@@ -90,11 +99,13 @@ $xxl-width: 1600px;
 
   .gap {
     // size
-    &--xs {  gap: 4px; }
-    &--sm {  gap: 8px; }
-    &--md {  gap: 12px; }
-    &--lg {  gap: 16px; }
-    &--xl {  gap: 20px; }
+    &--xxs {  gap: var(--space-xxs); }
+    &--xs {  gap: var(--space-xs); }
+    &--sm {  gap: var(--space-sm); }
+    &--md {  gap: var(--space-md); }
+    &--lg {  gap: var(--space-lg); }
+    &--xl {  gap: var(--space-xl); }
+    &--xxl {  gap: var(--space-xxl); }
   }
 
   .scroll {
@@ -131,8 +142,13 @@ $xxl-width: 1600px;
       }
 
       &::-webkit-scrollbar {
+        opacity: 0;
         width: var(--scroll-size);
         height: var(--scroll-size);
+
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }

@@ -6,13 +6,13 @@ import { cn, react } from 'common/tools'
 // ---| self |---
 import './LayoutItem.module.scss'
 
-export type LayoutItemType = 'left' | 'right' | 'top' | 'bottom' | 'content'
+export type LayoutItemVariant = 'left' | 'right' | 'top' | 'bottom' | 'content'
 
 export type LayoutItemProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  v?: LayoutItemType | string
+  v?: LayoutItemVariant | string
   area?: React.CSSProperties['gridArea']
   scroll?: 'x' | 'y' | 'xy'
   as?: keyof JSX.IntrinsicElements | React.ComponentType

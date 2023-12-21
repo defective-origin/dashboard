@@ -6,14 +6,14 @@ import 'react-toastify/dist/ReactToastify.css'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon, { IconTypes } from 'components/Icon'
+import Icon, { IconVariant } from 'components/Icon'
 import { AlertStatus } from 'components/Alert'
 
 // ---| common |---
 // ---| self |---
 import './Toast.module.scss'
 
-const ALERT_ICON_MAP: Record<AlertStatus, IconTypes> = {
+const ALERT_ICON_MAP: Record<AlertStatus, IconVariant> = {
   success: 'check_circle',
   info: 'info',
   warning: 'warning',

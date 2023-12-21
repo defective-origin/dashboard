@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| components |---
 import Text from 'components/Text'
-import Image, { ImageTypes } from 'components/Image'
+import Image, { ImageVariant } from 'components/Image'
 import Progress from 'components/Progress'
 import Block from 'components/Block'
 
@@ -16,7 +16,7 @@ export type BannerProps = {
   className?: string
   children?: React.ReactNode
   imageSrc?: string
-  imageType?: ImageTypes
+  imageType?: ImageVariant
   title?: React.ReactNode
   subtitle?: React.ReactNode
   text?: React.ReactNode

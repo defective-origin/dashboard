@@ -12,6 +12,10 @@
 
 .Block {
   display: flex;
+
+  &--stretch {
+    @include stretch;
+  }
 }
 
 .x {

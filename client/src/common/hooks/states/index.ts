@@ -1,3 +1,8 @@
+/* INJECT_IMPORT_PLACE */
+
+/* INJECT_EXPORT_PLACE */
+export * from './UseNestedState'
+
 export * from './UseEventCallback.hook'
 export * from './UseCounter.hook'
 export * from './UseToggler.hook'

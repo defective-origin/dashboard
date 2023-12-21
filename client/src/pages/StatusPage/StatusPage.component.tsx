@@ -14,12 +14,12 @@ import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './StatusPage.module.scss'
-import { STATUS_MAP, StatusType } from './StatusPage.conf'
+import { STATUS_MAP, StatusVariant } from './StatusPage.conf'
 
 export type StatusPageProps = {
   className?: string
   children?: React.ReactNode
-  v?: StatusType
+  v?: StatusVariant
 }
 
 /**
@@ -36,17 +36,17 @@ export function StatusPage(props: StatusPageProps): JSX.Element {
   const status = STATUS_MAP[v]
 
   // FIXME: REMOVE THIS TEST EFFECT
-  useEffect(() => {
-    app.message(
-      {content: 'TEST MESSAGE'},
-    )
-    app.alert(
-      {content: 'Test Text', status: 'error'},
-      {content: 'Test Text', status: 'warning'},
-      {content: 'Test Text', status: 'info'},
-      {content: 'Test Text', status: 'success'},
-    )
-  }, [])
+  // useEffect(() => {
+  //   app.message(
+  //     {content: 'TEST MESSAGE'},
+  //   )
+  //   app.alert(
+  //     {content: 'Test Text', status: 'error'},
+  //     {content: 'Test Text', status: 'warning'},
+  //     {content: 'Test Text', status: 'info'},
+  //     {content: 'Test Text', status: 'success'},
+  //   )
+  // }, [])
 
   return (
     <Page className={_className} {...otherProps}>

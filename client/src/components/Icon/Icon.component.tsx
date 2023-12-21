@@ -7,7 +7,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Icon.module.scss'
 
-export type IconTypes = 'light_mode' | 'dark_mode'
+export type IconVariant = 'light_mode' | 'dark_mode'
 | 'paid' | 'language'
 | 'login' | 'logout'
 | 'developer_mode_tv' | 'tv'
@@ -23,7 +23,7 @@ export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export type IconProps = Omit<MuiIconProps, 'size'> & {
   className?: string
-  v: IconTypes
+  v: IconVariant
   size?: IconSize
 }
 

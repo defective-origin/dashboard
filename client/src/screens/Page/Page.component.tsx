@@ -8,7 +8,7 @@ import { TranslateKeys } from 'locale'
 import Layout, { LayoutProps } from 'components/Layout'
 import Block from 'components/Block'
 import Section from 'components/Section'
-import Helmet from 'components/Helmet'
+import Head, { HeadItem } from 'components/Head'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -20,8 +20,9 @@ export type PageProps = LayoutProps & {
   className?: string
   children?: React.ReactNode
   name?: TranslateKeys | string
+  meta?: HeadItem[]
 }
-
+// FIXME: add scroll to page content by default
 /**
  * Component description.
  *
@@ -30,7 +31,7 @@ export type PageProps = LayoutProps & {
  * <Page />
  */
 export function Page(props: PageProps): JSX.Element {
-  const { name, children, className, ...otherProps } = props
+  const { name, meta, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
   const app = useLauncher()
   const pageName = app.t(name as TranslateKeys)
@@ -39,11 +40,8 @@ export function Page(props: PageProps): JSX.Element {
   useLayoutEffect(() => { app.setPageName(pageName) }, [pageName])
 
   return (
-    <Layout className={_className} {...otherProps}>
-      {/* Add page metadata */}
-      <Helmet>
-        { tabName && <title>{tabName}</title> }
-      </Helmet>
+    <Layout className={_className} stretch {...otherProps}>
+      <Head title={tabName} items={meta} />
 
       {children}
     </Layout>

@@ -7,7 +7,6 @@ import React from 'react'
 import Block, { BLOCK_ITEM_MAP, BlockItem, BlockProps } from 'components/Block'
 import Button from 'components/Button'
 import Link from 'components/Link'
-import Text from 'components/Text'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -33,18 +32,10 @@ export type ActionsProps = BlockProps<typeof ACTION_MAP>
  * <Actions />
  */
 export function Actions(props: ActionsProps): JSX.Element {
-  const { v = 'button', items, content, children, className, ...otherProps } = props
+  const { v = 'button', items, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
 
-  return (
-    <Block className={_className} align='center' {...otherProps}>
-      <Text.Body1 className={ css.Title } content={content} children={children} />
-
-      <Block.Spacer />
-
-      <Block className={ css.Items } cmp={ACTION_MAP} v={v} items={items} />
-    </Block>
-  )
+  return <Block className={_className} align='center' cmp={ACTION_MAP} v={v} items={items} {...otherProps} />
 }
 
 Actions.displayName = 'Actions'

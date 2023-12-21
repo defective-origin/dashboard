@@ -32,6 +32,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const app = useLauncher()
   const _className = cn(css.AppMenu, className)
 
+  // FIXME: implement via Menu instead of Actions
   return (
     <Actions className={_className} direction='y' align='stretch' {...otherProps}>
       <Logo className={css.Logo} v='logo' href={ROUTE_LINKS.ROOT} />

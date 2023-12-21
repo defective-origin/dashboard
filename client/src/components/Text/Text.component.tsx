@@ -7,7 +7,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 import { cn, react } from 'common/tools'
 
 // ---| components |---
-import Icon, { IconSize, IconTypes } from 'components/Icon'
+import Icon, { IconSize, IconVariant } from 'components/Icon'
 
 // ---| self |---
 import css from './Text.module.scss'
@@ -17,7 +17,7 @@ export const getAsideContent = (content: React.ReactNode, iconSize?: IconSize) =
     return content
   }
 
-  return <Icon className={css.Icon} v={content as IconTypes} size={iconSize} />
+  return <Icon className={css.Icon} v={content as IconVariant} size={iconSize} />
 }
 
 export type TextStatus = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
@@ -29,8 +29,8 @@ export type TextProps = Omit<MuiTypographyProps, 'content' | 'color'> & {
   content?: React.ReactNode
   size?: TextSize
   iconSize?: IconSize
-  start?: IconTypes | Exclude<React.ReactNode, string>
-  end?: IconTypes | Exclude<React.ReactNode, string>
+  start?: IconVariant | Exclude<React.ReactNode, string>
+  end?: IconVariant | Exclude<React.ReactNode, string>
   status?: TextStatus
 }
 

@@ -32,14 +32,14 @@ export function Section(props: SectionProps): JSX.Element {
   const _className = cn(css.Section, className)
 
   return (
-    <Layout className={_className} {...otherProps}>
-      <Layout.Header as={Layout.Block} className={ css.Header }>
+    <Layout className={_className} stretch {...otherProps}>
+      <Layout.Top as={Layout.Block} className={ css.Header }>
         <Text className={ css.Title } />
 
         <Layout.Block.Spacer />
 
         <Actions className={ css.Actions } items={actions} />
-      </Layout.Header>
+      </Layout.Top>
 
       <Layout.Content className={ css.Content } content={children} />
     </Layout>

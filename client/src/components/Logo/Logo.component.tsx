@@ -4,7 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Image, { ImageTypes } from 'components/Image'
+import Image, { ImageVariant } from 'components/Image'
 import Link, { LinkProps } from 'components/Link'
 
 // ---| common |---
@@ -15,7 +15,7 @@ import css from './Logo.module.scss'
 
 export type LogoProps = LinkProps & {
   className?: string
-  v: ImageTypes
+  v: ImageVariant
 }
 
 /**

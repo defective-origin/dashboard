@@ -76,7 +76,7 @@ export function App(props: AppProps): JSX.Element {
   // const closeDrawer = useCallback(() => app.detach('drawer'), [])
 
   return (
-    <Layout className={_className} {...APP_LAYOUT} {...otherProps}>
+    <Layout className={_className} stretch {...APP_LAYOUT} {...otherProps}>
       <Layout.Content as='main'>
         <Outlet />
       </Layout.Content>

@@ -19,12 +19,12 @@ export const IMAGE_MAP = {
   logo: 'https://lightning.ai/static/media/logo-torchmetrics.51a712e2b231ca9211e4b19dea16bb02.svg',
 }
 
-export type ImageTypes = keyof typeof IMAGE_MAP
+export type ImageVariant = keyof typeof IMAGE_MAP
 
 export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
   className?: string
   children?: React.ReactNode
-  v?: ImageTypes
+  v?: ImageVariant
 }
 
 /**
@@ -37,7 +37,7 @@ export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLIma
 export function Image(props: ImageProps): JSX.Element {
   const { v, src, children, className, ...otherProps } = props
   const _className = cn('image', className)
-  const imgSrc = src ?? IMAGE_MAP[v as ImageTypes]
+  const imgSrc = src ?? IMAGE_MAP[v as ImageVariant]
 
   return <img className={_className} src={imgSrc} {...otherProps}>{children}</img>
 }

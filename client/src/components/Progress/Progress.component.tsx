@@ -13,12 +13,12 @@ export const PROGRESS_MAP = {
   linear: MuiLinearProgress,
 }
 
-export type ProgressType = keyof typeof PROGRESS_MAP
+export type ProgressVariant = keyof typeof PROGRESS_MAP
 // todo: fix props types
 export type ProgressProps = {
   className?: string
   show?: boolean
-  v?: ProgressType
+  v?: ProgressVariant
 }
 
 /**

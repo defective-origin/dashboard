@@ -32,6 +32,7 @@ export type BlockProps<O extends RepeatComponent> = RepeatProps<O> & {
   grow?: React.CSSProperties['flexGrow']
   align?: React.CSSProperties['alignItems']
   justify?: React.CSSProperties['justifyContent']
+  stretch?: boolean
 }
 
 /**
@@ -44,8 +45,8 @@ export type BlockProps<O extends RepeatComponent> = RepeatProps<O> & {
  * <Block />
  */
 export function Block<C extends RepeatComponent>(props: BlockProps<C>): JSX.Element | null {
-  const { v = 'custom', cmp = BLOCK_ITEM_MAP, grow, align, justify, gap, direction = 'x', content, children = content, className, ...otherProps } = props
-  const _className = cn(css.Block, css[direction], gap && `gap--${gap}`, className)
+  const { v = 'custom', cmp = BLOCK_ITEM_MAP, grow, align, justify, gap, direction = 'x', content, stretch, children = content, className, ...otherProps } = props
+  const _className = cn(css.Block, css[direction], gap && `gap--${gap}`, stretch && 'block--stretch', className)
   const style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow }
 
   return (

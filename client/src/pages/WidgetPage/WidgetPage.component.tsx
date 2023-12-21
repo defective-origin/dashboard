@@ -6,12 +6,14 @@ import React from 'react'
 import Page, { PageProps } from 'screens/Page'
 
 // ---| components |---
+import Form from 'components/Form'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './WidgetPage.module.scss'
+import { TextProps } from 'components/Text'
 
 export type WidgetPageProps = PageProps & {
   className?: string
@@ -29,7 +31,105 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.WidgetPage, className)
 
-  return <Page className={_className} name='PAGES.WIDGETS' {...otherProps}>{children}</Page>
+  const MESSAGES: TextProps[] = [
+    { status: 'error', content: 'error' },
+    { status: 'warning', content: 'warning' },
+    { status: 'info', content: 'info' },
+    { status: 'primary', content: 'primary' },
+    { status: 'secondary', content: 'secondary' },
+    { status: 'disable', content: 'disable' },
+  ]
+
+  const ALERTS = [
+    { status: 'error', content: 'error' },
+    { status: 'warning', content: 'warning' },
+    { status: 'info', content: 'info' },
+    { status: 'primary', content: 'primary' },
+    { status: 'secondary', content: 'secondary' },
+    { status: 'disable', content: 'disable' },
+  ]
+
+  const ACTIONS = [
+    { v: 'button', content: 'submit', type: 'submit' },
+    { v: 'button', content: 'reset', type: 'reset' },
+  ]
+
+  const SELECT_OPTIONS = [
+    { value: 'value0', children: 'FIRST' },
+    { value: 'value1', children: 'SECOND' },
+    { value: 'value2', children: 'THIRD' },
+  ]
+
+  return (
+    <Page className={_className} name='PAGES.WIDGETS' {...otherProps}>
+      <Form name='FORM_NAME' onSubmit={console.log} onReset={console.log}>
+        {/* <Form.Block cmp={Form.Alert} items={ALERTS} scroll='xxl'> */}
+        <Form.Block cmp={Form.Alert}>
+          <Form.Alert status='success' content='success' />
+          <Form.Alert status='info' content='info' />
+          <Form.Alert status='warning' content='warning' />
+          <Form.Alert status='error' content='error' />
+        </Form.Block>
+
+        <Form.Content direction='y'>
+          <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={console.log} />
+          <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={console.log} />
+          <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={console.log} />
+          <Form.Field.Switch name='switch' label='switch' value='switch' messages={MESSAGES} onChange={console.log} />
+          <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={console.log} />
+          <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={console.log} items={SELECT_OPTIONS} />
+          <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={console.log} />
+
+          <Form.Group name='group' label='group' messages={MESSAGES}>
+            <Form.Field.Text name='group-text' label='text' value='value' messages={MESSAGES} onChange={console.log} />
+            <Form.Field.Number name='group-number' label='number' value={0} messages={MESSAGES} onChange={console.log} />
+            <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={console.log} />
+            <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={console.log} />
+            <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={console.log} />
+            <Form.Field.Select name='group-select' label='select' value='value0' messages={MESSAGES} onChange={console.log} />
+            <Form.Field.Slider name='group-slider' label='slider' value={0} messages={MESSAGES} onChange={console.log} />
+
+            // group actions
+            <Form.Actions>
+              <Form.Actions.Button type='reset' content='Reset' />
+              <Form.Actions.Button type='submit' content='Submit' />
+            </Form.Actions>
+          </Form.Group>
+
+          <Form.List name='list' label='list' messages={MESSAGES} onChange={console.log}>
+            <Form.Field.Text name='item_0' label='text' value='value' messages={MESSAGES} onChange={console.log} />
+            <Form.Field.Number name='item_1' label='number' value={0} messages={MESSAGES} />
+            <Form.Field.Radio name='item_2' label='radio' value={true} messages={MESSAGES} />
+            <Form.Field.Switch name='item_3' label='switch' value={true} messages={MESSAGES} />
+            <Form.Field.Checkbox name='item_4' label='checkbox' value='checkbox' messages={MESSAGES} checked />
+            <Form.Field.Select name='item_5' label='select' value='value0' messages={MESSAGES} />
+            <Form.Field.Slider name='item_6' label='slider' value={0} messages={MESSAGES} />
+
+            // list actions
+            <Form.Actions>
+              <Form.Actions.Button type='reset' content='Reset' />
+              <Form.Actions.Button type='submit' content='Submit' />
+            </Form.Actions>
+          </Form.List>
+
+          // group actions
+          {/* <Form.Actions items={ACTIONS}> */}
+          <Form.Actions>
+            <Form.Reset content='Reset' />
+            <Form.Submit content='Submit' />
+          </Form.Actions>
+        </Form.Content>
+
+        // form actions
+        <Form.Actions>
+          <Form.Actions.Button type='reset' content='Reset' />
+          <Form.Actions.Button type='submit' content='Submit' />
+        </Form.Actions>
+      </Form>
+
+      {children}
+    </Page>
+  )
 }
 
 WidgetPage.displayName = 'WidgetPage'
