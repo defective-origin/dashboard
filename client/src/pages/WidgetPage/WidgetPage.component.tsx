@@ -32,12 +32,12 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const _className = cn(css.WidgetPage, className)
 
   const MESSAGES: TextProps[] = [
-    { status: 'error', content: 'error' },
-    { status: 'warning', content: 'warning' },
-    { status: 'info', content: 'info' },
-    { status: 'primary', content: 'primary' },
-    { status: 'secondary', content: 'secondary' },
-    { status: 'disable', content: 'disable' },
+    // { status: 'error', content: 'error' },
+    // { status: 'warning', content: 'warning' },
+    // { status: 'info', content: 'info' },
+    // { status: 'primary', content: 'primary' },
+    // { status: 'secondary', content: 'secondary' },
+    // { status: 'disable', content: 'disable' },
   ]
 
   const ALERTS = [
@@ -60,9 +60,12 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
     { value: 'value2', children: 'THIRD' },
   ]
 
+  // const log = ((a: any, b: any, c: any) => console.log(a, {...b}, c)) as any
+  const log = ((a: any, b: any, c: any) => {}) as any
+
   return (
-    <Page className={_className} name='PAGES.WIDGETS' {...otherProps}>
-      <Form name='FORM_NAME' onSubmit={console.log} onReset={console.log}>
+    <Page className={_className} name='PAGES.WIDGETS' scroll='y' {...otherProps}>
+      <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log}>
         {/* <Form.Block cmp={Form.Alert} items={ALERTS} scroll='xxl'> */}
         <Form.Block cmp={Form.Alert}>
           <Form.Alert status='success' content='success' />
@@ -72,56 +75,56 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
         </Form.Block>
 
         <Form.Content direction='y'>
-          <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={console.log} />
-          <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={console.log} />
-          <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={console.log} />
-          <Form.Field.Switch name='switch' label='switch' value='switch' messages={MESSAGES} onChange={console.log} />
-          <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={console.log} />
-          <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={console.log} items={SELECT_OPTIONS} />
-          <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={console.log} />
+          {/* <Form.Actions items={ACTIONS}> */}
+          <Form.Actions>
+            FORM ACTIONS
+            <Form.Reset content='Reset' />
+            <Form.Submit content='Submit' />
+          </Form.Actions>
 
-          <Form.Group name='group' label='group' messages={MESSAGES}>
-            <Form.Field.Text name='group-text' label='text' value='value' messages={MESSAGES} onChange={console.log} />
-            <Form.Field.Number name='group-number' label='number' value={0} messages={MESSAGES} onChange={console.log} />
-            <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={console.log} />
-            <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={console.log} />
-            <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={console.log} />
-            <Form.Field.Select name='group-select' label='select' value='value0' messages={MESSAGES} onChange={console.log} />
-            <Form.Field.Slider name='group-slider' label='slider' value={0} messages={MESSAGES} onChange={console.log} />
+          <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
+          <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
+          <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
+          <Form.Field.Switch name='switch' label='switch' value='switch' messages={MESSAGES} onChange={log} />
+          <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+          <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
+          <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
 
-            // group actions
+          <Form.Group name='group' label='group' messages={MESSAGES} onChange={log}>
             <Form.Actions>
-              <Form.Actions.Button type='reset' content='Reset' />
-              <Form.Actions.Button type='submit' content='Submit' />
+              GROUP ACTIONS
+              <Form.Reset content='Reset' />
+              <Form.Submit content='Submit' />
             </Form.Actions>
+
+            <Form.Field.Text name='group-text' label='text' value='value' messages={MESSAGES} onChange={log} />
+            <Form.Field.Number name='group-number' label='number' value={0} messages={MESSAGES} onChange={log} />
+            <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
+            <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
+            <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+            <Form.Field.Select name='group-select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
+            <Form.Field.Slider name='group-slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
           </Form.Group>
 
-          <Form.List name='list' label='list' messages={MESSAGES} onChange={console.log}>
-            <Form.Field.Text name='item_0' label='text' value='value' messages={MESSAGES} onChange={console.log} />
+          <Form.List name='list' label='list' messages={MESSAGES} onChange={log}>
+            <Form.Actions>
+              LIST ACTIONS
+              <Form.Reset content='Reset' />
+              <Form.Submit content='Submit' />
+            </Form.Actions>
+
+            <Form.Field.Text name='item_0' label='text' value='value' messages={MESSAGES} onChange={log} />
             <Form.Field.Number name='item_1' label='number' value={0} messages={MESSAGES} />
             <Form.Field.Radio name='item_2' label='radio' value={true} messages={MESSAGES} />
             <Form.Field.Switch name='item_3' label='switch' value={true} messages={MESSAGES} />
             <Form.Field.Checkbox name='item_4' label='checkbox' value='checkbox' messages={MESSAGES} checked />
-            <Form.Field.Select name='item_5' label='select' value='value0' messages={MESSAGES} />
+            <Form.Field.Select name='item_5' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} />
             <Form.Field.Slider name='item_6' label='slider' value={0} messages={MESSAGES} />
-
-            // list actions
-            <Form.Actions>
-              <Form.Actions.Button type='reset' content='Reset' />
-              <Form.Actions.Button type='submit' content='Submit' />
-            </Form.Actions>
           </Form.List>
-
-          // group actions
-          {/* <Form.Actions items={ACTIONS}> */}
-          <Form.Actions>
-            <Form.Reset content='Reset' />
-            <Form.Submit content='Submit' />
-          </Form.Actions>
         </Form.Content>
 
-        // form actions
         <Form.Actions>
+          GLOBAL FORM ACTIONS
           <Form.Actions.Button type='reset' content='Reset' />
           <Form.Actions.Button type='submit' content='Submit' />
         </Form.Actions>

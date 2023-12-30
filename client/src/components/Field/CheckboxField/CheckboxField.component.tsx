@@ -26,15 +26,15 @@ export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.CheckboxField, className)
 
-  const change = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const change = useCallback<NonNullable<BaseFieldProps<MuiCheckboxProps>['change']>>((event) => {
     if (props.value) {
-      return event.target.checked ? props.value : undefined
+      return event.target.checked ? props.value : undefined as unknown as boolean
     }
 
     return event.target.checked
   }, [props.value])
 
-  const selectProps = useCallback((value?: boolean): Partial<MuiCheckboxProps> => {
+  const selectProps = useCallback<NonNullable<BaseFieldProps<MuiCheckboxProps>['selectProps']>>((value) => {
     if (props.value) {
       return { checked: !!value, value: props.value }
     }
@@ -42,7 +42,7 @@ export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
     return { checked: !!value}
   }, [props.value])
 
-  return <BaseField className={_className} as={MuiCheckboxField} change={change} selectProps={selectProps} {...otherProps} />
+  return <BaseField className={_className} as={MuiCheckboxField} change={change} selectProps={selectProps} size='small' {...otherProps} />
 }
 
 CheckboxField.displayName = 'CheckboxField'

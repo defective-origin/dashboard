@@ -11,7 +11,7 @@ import { cn } from 'common/tools'
 import css from './Button.module.scss'
 
 export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'content' | 'size'>
-                        & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'> & {
+                        & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon'> & {
                           round?: boolean
                         }
 
@@ -23,7 +23,7 @@ export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'conten
  * <Button />
  */
 export function Button(props: ButtonProps): JSX.Element {
-  const { round, align, start, end, size = 'md', iconSize, content, children, className, ...otherProps } = props
+  const { round, align, start, end, size = 'md', fillIcon, iconSize, content, children, className, ...otherProps } = props
   const _className = cn(css.Button, css[size], round && css.Round, className)
 
   return (
@@ -37,6 +37,7 @@ export function Button(props: ButtonProps): JSX.Element {
           size={size}
           iconSize={iconSize}
           align={align}
+          fillIcon={fillIcon}
         />
       )}
     </MuiButton>

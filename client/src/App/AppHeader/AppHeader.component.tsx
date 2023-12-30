@@ -40,7 +40,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   ].filter(Boolean) as Action[]
 
   return (
-    <Block className={_className} {...otherProps}>
+    <Block className={_className} direction='x' align='center' {...otherProps}>
       <Text.H1 status='primary'>{app.pageName}</Text.H1>
 
       <Block.Spacer />

@@ -25,6 +25,7 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
   className?: string
   v: IconVariant
   size?: IconSize
+  fill?: boolean
 }
 
 /**
@@ -35,8 +36,13 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
  * <Icon />
  */
 export function Icon(props: IconProps): JSX.Element {
-  const { size = 'md', v, className, ...otherProps } = props
-  const _className = cn(css.Icon, css[size], 'material-symbols-outlined', className)
+  const { size = 'md', v, fill, className, ...otherProps } = props
+  const _className = cn(
+    css.Icon, css[size],
+    'material-symbols-outlined',
+    fill && css.filled,
+    className,
+  )
 
   return <MuiIcon className={_className} {...otherProps}>{v}</MuiIcon>
 }

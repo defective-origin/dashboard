@@ -11,21 +11,21 @@
 .AppMenuItem {
   border-radius: 0;
   text-transform: none;
-  color: gray;
+  color: var(--mui-palette-text-secondary);
   width: 48px;
   height: 48px;
 
-  &:focus,
-  &:hover {
-    background: gray;
-    color: black;
+  &:hover,
+  &:focus {
+    background: transparent;
+    color: var(--mui-palette-text-primary);
+  }
+
+  &:global(.active) {
+    color: var(--mui-palette-text-primary);
   }
 
   > * {
     width: fit-content;
-  }
-
-  &:global(.active) {
-    background: red;
   }
 }

@@ -33,22 +33,21 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const _className = cn(css.AppMenu, className)
 
   // FIXME: implement via Menu instead of Actions
+  // FIXME: tooltip instead of content
   return (
     <Actions className={_className} direction='y' align='stretch' {...otherProps}>
       <Logo className={css.Logo} v='logo' href={ROUTE_LINKS.ROOT} />
 
-      <Actions grow={1} direction='y' align='stretch'>
-        <AppMenuItem start='dashboard' content={app.t('LINKS.DASHBOARDS')} href={ROUTE_LINKS.DASHBOARDS} />
-        <AppMenuItem start='insert_chart' content={app.t('LINKS.WIDGETS')} href={ROUTE_LINKS.WIDGETS} />
+      <AppMenuItem start='dashboard' content={app.t('LINKS.DASHBOARDS')} href={ROUTE_LINKS.DASHBOARDS} />
+      <AppMenuItem start='insert_chart' content={app.t('LINKS.WIDGETS')} href={ROUTE_LINKS.WIDGETS} />
 
-        <Actions.Spacer />
+      <Actions.Spacer />
 
-        <AppMenuItem start='auto_stories' content={app.t('LINKS.GUIDE')} href={ROUTE_LINKS.GUIDE} />
-        <AppMenuItem start='paid' content={app.t('LINKS.DONATION')} href={ROUTE_LINKS.DONATION} />
-        <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
-      </Actions>
+      <AppMenuItem start='auto_stories' content={app.t('LINKS.GUIDE')} href={ROUTE_LINKS.GUIDE} />
+      <AppMenuItem start='paid' content={app.t('LINKS.DONATION')} href={ROUTE_LINKS.DONATION} />
+      <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
 
-      <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} />
+      <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} fillIcon />
       <AppMenuItem start='language' content={app.language.toUpperCase()} />
       <AppMenuItem start={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />
 

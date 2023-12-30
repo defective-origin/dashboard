@@ -1,5 +1,5 @@
 /**
- * Placement, Vectors, Lines, Positioning for 2D boards
+ * Placement, Vectors, Lines, Squares, Positioning for 2D boards
  */
 
 export * from './common'

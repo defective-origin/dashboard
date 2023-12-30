@@ -46,7 +46,7 @@ export function FormGroup(props: FormGroupProps): JSX.Element {
         </Layout.Content>
 
         <Layout.Bottom className={css.Messages}>
-          <Repeat className={css.Message} as={Text.Caption} items={messages} />
+          <Repeat className={css.Message} cmp={Text.Caption} items={messages} />
         </Layout.Bottom>
       </Layout>
     </FormContext.Provider>

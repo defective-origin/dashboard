@@ -1,4 +1,5 @@
 import React from 'react'
+import Block, { BlockProps } from 'components/Block'
 
 // ---| common |---
 import { cn, react } from 'common/tools'
@@ -8,14 +9,9 @@ import './LayoutItem.module.scss'
 
 export type LayoutItemVariant = 'left' | 'right' | 'top' | 'bottom' | 'content'
 
-export type LayoutItemProps = {
-  className?: string
-  children?: React.ReactNode
-  content?: React.ReactNode
+export type LayoutItemProps = BlockProps & {
   v?: LayoutItemVariant | string
   area?: React.CSSProperties['gridArea']
-  scroll?: 'x' | 'y' | 'xy'
-  as?: keyof JSX.IntrinsicElements | React.ComponentType
 }
 
 /**
@@ -26,15 +22,11 @@ export type LayoutItemProps = {
  * <LayoutItem />
  */
 export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
-  const { as: Tag = 'div', scroll, area, v = 'content', content, children = content, className, ...otherProps } = props
-  const _className = cn('layout-item', !area && `layout-item--${v}`, scroll && `scroll-${scroll}`, className)
+  const { area, v = 'content', className, ...otherProps } = props
+  const _className = cn('layout-item', !area && `layout-item--${v}`, className)
   const style = { gridArea: area }
 
-  if (!children && !content && typeof Tag !== 'function') {
-    return null
-  }
-
-  return <Tag className={_className} {...otherProps} style={style}>{children}</Tag>
+  return <Block className={_className} style={style} {...otherProps} />
 }
 
 LayoutItem.displayName = 'LayoutItem'

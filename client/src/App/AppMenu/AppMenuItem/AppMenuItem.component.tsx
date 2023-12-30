@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { NavLink } from 'router'
+import { NavLink, useMatch } from 'router'
 
 // ---| pages |---
 // ---| screens |---
@@ -28,9 +28,20 @@ export type AppMenuItemProps = ButtonProps & {
  * <AppMenuItem />
  */
 export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
-  const { href, content, className, ...otherProps } = props
+  const { href, content, fillIcon, className, ...otherProps } = props
+  const isActive = !!useMatch(href ?? 'HAS_NO_MATCH')
   const _className = cn(css.AppMenuItem, className)
-  const commonProps: ButtonProps = { color: 'primary', size: 'md', iconSize: 'lg', variant: 'text', className: _className, ...otherProps }
+  const commonProps: ButtonProps = {
+    color: 'primary',
+    size: 'md',
+    iconSize: 'lg',
+    variant: 'text',
+    className: _className,
+    fillIcon: fillIcon ?? isActive,
+    ...otherProps,
+  }
+
+  // FIXME: если активный или открыто подменю, то заполнять иконки
 
   return (
     <Tooltip title={content} placement='right'>

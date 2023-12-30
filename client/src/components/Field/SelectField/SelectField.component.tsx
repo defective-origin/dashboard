@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import MuiSelectField, { SelectProps as MuiSelectProps } from '@mui/material/Select'
 import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
 
@@ -15,6 +15,13 @@ import { cn } from 'common/tools'
 import css from './SelectField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
+const SELECT_FIELD_OPTIONS = {
+  // // disable scroll lock
+  // disableScrollLock: true,
+  // // allow the menu to go outside the window
+  // marginThreshold: 0,
+}
+
 export type SelectFieldProps = BaseFieldProps<MuiSelectProps> & {
   items?: MuiMenuItemProps[] // FIXME: replace by MenuItem component from components
 }
@@ -29,12 +36,17 @@ export type SelectFieldProps = BaseFieldProps<MuiSelectProps> & {
 export function SelectField(props: SelectFieldProps): JSX.Element {
   const { items = [], children, className, ...otherProps } = props
   const _className = cn(css.SelectField, className)
-
-  console.log(items, otherProps.value)
+  const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })
 
   return (
-    <BaseField className={_className} as={MuiSelectField} {...otherProps}>
-      <Repeat className={css.Option} as={MuiMenuItem} items={items} />
+    <BaseField
+      className={_className}
+      as={MuiSelectField}
+      MenuProps={SELECT_FIELD_OPTIONS}
+      size='small'
+      {...otherProps}
+    >
+      {menuItems}
       {children}
     </BaseField>
   )

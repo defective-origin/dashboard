@@ -18,8 +18,16 @@
   }
 }
 
-.Icon {
+@mixin style-icon($fill: 0, $weight: 200, $gradient: 0, $opacity: 24) {
+  font-variation-settings:
+    'FILL' $fill,
+    'wght' $weight,
+    'GRAD' $gradient,
+    'opsz' $opacity;
 }
+
+.Icon { @include style-icon; }
+.filled { @include style-icon(1); }
 
 .xs { font-size: var(--icon-size-xs); }
 .sm { font-size: var(--icon-size-sm); }

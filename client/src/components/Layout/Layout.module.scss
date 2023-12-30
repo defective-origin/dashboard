@@ -56,9 +56,5 @@
         'left content right'
         'bottom bottom right';
     }
-
-    &--stretch {
-      @include stretch;
-    }
   }
 }

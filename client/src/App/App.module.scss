@@ -69,9 +69,9 @@ $xxl-width: 1600px;
 :root {
   // scroll
   --scroll-track-color: transparent;
-  --scroll-track-color--hover: #00000021;
-  --scroll-thumb-color: #BFBFBF;
-  --scroll-thumb-color--hover: #8C8C8C;
+  --scroll-track-color--hover: #0000000A;
+  --scroll-thumb-color: #33333331;
+  --scroll-thumb-color--hover: #33333354;
   --scroll-size: 12px;
 
   // common
@@ -94,6 +94,10 @@ $xxl-width: 1600px;
     margin: 0;
     padding: 0;
 
+    @include stretch;
+  }
+
+  .stretch {
     @include stretch;
   }
 
@@ -125,19 +129,27 @@ $xxl-width: 1600px;
     &-x,
     &-y,
     &-xy {
-      &::-webkit-scrollbar-thumb {
-        background: var(--scroll-thumb-color);
-
-        &:hover {
-          background: var(--scroll-thumb-color--hover);
-        }
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-track {
+        visibility: 0;
       }
 
-      &::-webkit-scrollbar-track {
-        background: var(--scroll-track-color);
+      &:hover {
+        &::-webkit-scrollbar-thumb {
+          background: var(--scroll-thumb-color);
 
-        &:hover {
-          background: var(--scroll-track-color--hover);
+          &:hover {
+            background: var(--scroll-thumb-color--hover);
+          }
+        }
+
+        &::-webkit-scrollbar-track {
+          background: var(--scroll-track-color);
+
+          &:hover {
+            background: var(--scroll-track-color--hover);
+          }
         }
       }
 

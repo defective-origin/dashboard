@@ -35,7 +35,7 @@ export function Actions(props: ActionsProps): JSX.Element {
   const { v = 'button', items, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
 
-  return <Block className={_className} align='center' cmp={ACTION_MAP} v={v} items={items} {...otherProps} />
+  return <Block direction='x' className={_className} align='center' cmp={ACTION_MAP} v={v} items={items} {...otherProps} />
 }
 
 Actions.displayName = 'Actions'

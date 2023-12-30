@@ -42,7 +42,7 @@ export function Menu(props: MenuProps): JSX.Element {
 
   return (
     <Tag className={_className} {...(otherProps as any)}>
-      <Repeat as={Menu.Item} items={items} />
+      <Repeat cmp={Menu.Item} items={items} />
       {children}
     </Tag>
   )

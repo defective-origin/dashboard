@@ -11,8 +11,9 @@
 }
 
 .AppMenu {
+  @include stretch;
+
   border-right: 1px solid var(--divider-color);
-  height: 100%;
   width: 48px;
 }
 

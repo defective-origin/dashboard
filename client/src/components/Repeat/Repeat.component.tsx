@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+import { react } from 'common/tools'
+
 
 export type TypedProps<
     O extends Record<string, any>,
@@ -88,7 +90,7 @@ export type RepeatProps<
  */
 export function Repeat<
   Item extends RepeatComponent,
->(props: RepeatProps<Item>): JSX.Element | null {
+>(props: RepeatProps<Item>): JSX.Element[] | null {
   const { v: defaultItemType, cmp, items = [], selectKey, selectProps, ...sharedProps } = props
 
   if (!cmp || !items.length) {
@@ -96,7 +98,7 @@ export function Repeat<
   }
 
   const list = items.map(({ v = defaultItemType, ...otherItemProps }, idx) => {
-    const Tag = typeof cmp === 'function' ? cmp as React.ComponentType : cmp[v]
+    const Tag = react.isComponent(cmp) ? cmp : cmp[v]
     const combinedProps = { ...sharedProps, ...otherItemProps } as React.ComponentProps<any>
     const itemProps = selectProps?.(combinedProps) ?? combinedProps
     const itemKey = selectKey?.(itemProps) ?? idx
@@ -104,7 +106,7 @@ export function Repeat<
     return <Tag key={itemKey} {...itemProps} />
   })
 
-  return <React.Fragment>{list}</React.Fragment>
+  return list
 }
 
 Repeat.displayName = 'Repeat'

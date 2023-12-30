@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
 
 // ---| core |---
@@ -26,8 +26,9 @@ export function NumberField(props: NumberFieldProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.NumberField, className)
 
-  return <BaseField className={_className} as={MuiTextField} {...otherProps} />
-  // return <BaseField className={_className} as={MuiTextField} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} {...otherProps} />
+  const change = useCallback<NonNullable<BaseFieldProps<MuiTextFieldProps>['change']>>((event) => Number(event.target.value), [])
+
+  return <BaseField className={_className} as={MuiTextField} type='number' change={change} size='small' {...otherProps} />
 }
 
 NumberField.displayName = 'NumberField'

@@ -4,27 +4,24 @@ import React from 'react'
 import { cn, react } from 'common/tools'
 
 // ---| components |---
-import Block from 'components/Block'
+import Block, { BlockProps } from 'components/Block'
 
 // ---| self |---
 import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
 
-export type LayoutGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type LayoutVariant = 'row' | 'column' | 'top' | 'bottom' | 'left' | 'right'
 export type LayoutItem = LayoutItemProps
 
 
-export type LayoutProps = {
+export type LayoutProps = BlockProps & {
   className?: string
   children?: React.ReactNode
   v?: LayoutVariant
-  gap?: LayoutGap
   areas?: React.CSSProperties['gridTemplateAreas']
   columns?: React.CSSProperties['gridTemplateColumns']
   rows?: React.CSSProperties['gridTemplateRows']
   items?: LayoutItem[]
-  stretch?: boolean
 }
 
 /**
@@ -35,8 +32,8 @@ export type LayoutProps = {
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
-  const { gap, v = 'row', areas, columns, rows, items = [], stretch, children, className, ...otherProps } = props
-  const _className = cn('layout', !areas && `layout--${v}`, stretch && 'layout--stretch', gap && `gap--${gap}`, className)
+  const { v = 'row', areas, columns, rows, direction, items = [], scroll, children, className, ...otherProps } = props
+  const _className = cn('layout', !areas && `layout--${v}`, className)
   const style = {
     gridTemplateAreas: areas,
     gridTemplateColumns: columns,
@@ -47,41 +44,30 @@ export function Layout(props: LayoutProps): JSX.Element | null {
     return null
   }
 
-  const generatedItems = items.map((item) => <Layout.Item key={item.area} {...item} />)
+  const generatedItems = items.map((item) => <LayoutWithItems.Item key={item.area} {...item} />)
   const allItems = [...React.Children.toArray(children), ...generatedItems]
   const layoutItems = allItems.filter((child) => react.hasExemplar(LAYOUT_ITEMS, child))
   const otherItems = allItems.filter((child) => !react.hasExemplar(LAYOUT_ITEMS, child))
-  const hasContentItem = allItems.some((child) => react.isExemplar(Layout.Content, child))
+  const hasContentItem = allItems.some((child) => react.isExemplar(LayoutWithItems.Content, child))
 
   return (
-    <div className={_className} {...otherProps} style={style}>
+    <Block className={_className} {...otherProps} style={style}>
       {hasContentItem && otherItems}
 
       {!hasContentItem && (
-        <Layout.Content>
+        <LayoutWithItems.Content scroll={scroll} direction={direction}>
           {otherItems}
-        </Layout.Content>
+        </LayoutWithItems.Content>
       )}
 
       {layoutItems}
-    </div>
+    </Block>
   )
 }
 
 Layout.displayName = 'Layout'
 
-// FIXME: remove
-Layout.Item = LayoutItem
-Layout.Left = LayoutItem.Left
-Layout.Right = LayoutItem.Right
-Layout.Bottom = LayoutItem.Bottom
-Layout.Top = LayoutItem.Top
-Layout.Content = LayoutItem.Content
-Layout.Block = Block
-
-export const LAYOUT_ITEMS = [Layout.Item, Layout.Left, Layout.Right, Layout.Bottom, Layout.Top, Layout.Content]
-
-export default react.attachComponents(Layout, {
+const LayoutWithItems = react.attachComponents(Layout, {
   Item: LayoutItem,
   Left: LayoutItem.Left,
   Right: LayoutItem.Right,
@@ -90,3 +76,14 @@ export default react.attachComponents(Layout, {
   Content: LayoutItem.Content,
   Block: Block,
 })
+
+export const LAYOUT_ITEMS = [
+  LayoutWithItems.Item,
+  LayoutWithItems.Left,
+  LayoutWithItems.Right,
+  LayoutWithItems.Bottom,
+  LayoutWithItems.Top,
+  LayoutWithItems.Content,
+]
+
+export default LayoutWithItems

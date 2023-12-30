@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './UseMemoProperty.hook'
+export { default } from './Widget.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './UseMemoProperty.hook'
+export * from './Widget.component'

@@ -9,7 +9,7 @@ import Divider from 'components/Divider'
 import Spacer from 'components/Spacer'
 
 // ---| common |---
-import { cn } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './Block.module.scss'
@@ -23,7 +23,7 @@ export type BlockGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type BlockDirectionType = 'x' | 'y' | 'xy'
 export type BlockItem<C extends RepeatComponent> = RepeatItem<C>
 
-export type BlockProps<O extends RepeatComponent> = RepeatProps<O> & {
+export type BlockProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
@@ -33,7 +33,12 @@ export type BlockProps<O extends RepeatComponent> = RepeatProps<O> & {
   align?: React.CSSProperties['alignItems']
   justify?: React.CSSProperties['justifyContent']
   stretch?: boolean
+  scroll?: BlockDirectionType
+  as?: keyof JSX.IntrinsicElements | React.ComponentType
+  style?: React.CSSProperties
 }
+
+export type BlockWithItemsProps<O extends RepeatComponent> = RepeatProps<O> & BlockProps
 
 /**
  * Component description.
@@ -44,16 +49,43 @@ export type BlockProps<O extends RepeatComponent> = RepeatProps<O> & {
  * @example
  * <Block />
  */
-export function Block<C extends RepeatComponent>(props: BlockProps<C>): JSX.Element | null {
-  const { v = 'custom', cmp = BLOCK_ITEM_MAP, grow, align, justify, gap, direction = 'x', content, stretch, children = content, className, ...otherProps } = props
-  const _className = cn(css.Block, css[direction], gap && `gap--${gap}`, stretch && 'block--stretch', className)
-  const style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow }
+export function Block<C extends RepeatComponent>(props: BlockWithItemsProps<C>): JSX.Element | null {
+  const {
+    as: Tag = 'div',
+    v = 'custom',
+    cmp = BLOCK_ITEM_MAP,
+    grow,
+    align,
+    justify,
+    gap,
+    direction = 'y',
+    content,
+    stretch,
+    style = {},
+    children = content,
+    className,
+    scroll,
+    ...otherProps
+  } = props
+  const _className = cn(
+    css.Block,
+    css[direction],
+    gap && `gap--${gap}`,
+    scroll && `scroll-${scroll}`,
+    stretch && 'stretch',
+    className,
+  )
+  const _style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow, ...style }
+
+  if (!children && !content && !react.isComponent(Tag)) {
+    return null
+  }
 
   return (
-    <div className={_className} style={style}>
+    <Tag className={_className} style={_style}>
       <Repeat cmp={cmp} v={v} {...otherProps as RepeatProps<C>} />
       {children}
-    </div>
+    </Tag>
   )
 }
 

@@ -77,9 +77,11 @@ export type FormProps = FormGroupOptions & {
  *
  * How to use
  * @example
- * const handleAction = (state, e) => {
- *   console.log(state)
- *   // value = {
+ * const log = (field, store, e) => {
+ *   console.log(field, store, e)
+ *   // field = some nested state value
+ *   //
+ *   // store = {
  *   //   text: 'text',
  *   //   number: 0,
  *   //   radio: false,
@@ -98,25 +100,8 @@ export type FormProps = FormGroupOptions & {
  *   //     slider: 0,
  *   //   }
  *   // }
- *   // errors = {
- *   //   text: ['ERROR MESSAGE'],
- *   //   number: ['ERROR MESSAGE'],
- *   //   radio: ['ERROR MESSAGE'],
- *   //   switch: ['ERROR MESSAGE'],
- *   //   checkbox: ['ERROR MESSAGE'],
- *   //   select: ['ERROR MESSAGE'],
- *   //   slider: ['ERROR MESSAGE'],
  *   //
- *   //   group: {
- *   //     text: ['ERROR MESSAGE'],
- *   //     number: ['ERROR MESSAGE'],
- *   //     radio: ['ERROR MESSAGE'],
- *   //     switch: ['ERROR MESSAGE'],
- *   //     checkbox: ['ERROR MESSAGE'],
- *   //     select: ['ERROR MESSAGE'],
- *   //     slider: ['ERROR MESSAGE'],
- *   //   }
- *   // }
+ *   // e = event
  * }
  *
  * const MESSAGES = [
@@ -206,7 +191,7 @@ export type FormProps = FormGroupOptions & {
  * ]
  *
  * // Manual approach
- * <Form onSubmit={handleAction} onReset={handleAction}>
+ * <Form onSubmit={log} onReset={log}>
  *   <Form.Block>
  *     <Form.Alert status='success' content='success' />
  *     <Form.Alert status='info' content='info' />
@@ -275,12 +260,12 @@ export type FormProps = FormGroupOptions & {
  *   items={ITEMS}
  *   alerts={ALERTS}
  *   actions={ACTIONS}
- *   onSubmit={handleAction}
- *   onReset={handleAction}
+ *   onSubmit={log}
+ *   onReset={log}
  * />
  *
  * // Mixed approach
- * <Form value={VALUE} items={ITEMS} alerts={ALERTS} actions={ACTIONS} onSubmit={handleAction} onReset={handleAction}>
+ * <Form value={VALUE} items={ITEMS} alerts={ALERTS} actions={ACTIONS} onSubmit={log} onReset={log}>
  *   <Form.Block cmp={Form.Alert} items={ALERTS}>
  *     <Form.Alert status='success' content='success' />
  *     <Form.Alert status='info' content='info' />
@@ -353,6 +338,8 @@ export function Form(props: FormProps): JSX.Element {
       const onEvent = event.type === 'submit' ? onSubmit : onReset
 
       onEvent?.(form.state().value, form.store().value, event)
+
+      form.reset(event)
     }
   }, [form, onSubmit, onReset])
 

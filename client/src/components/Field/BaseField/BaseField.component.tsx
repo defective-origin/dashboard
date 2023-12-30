@@ -15,22 +15,6 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './BaseField.module.scss'
 
-// FIXME: doesn't work
-function throttle<T>(callee: (...args: T[]) => void, timeout = 0) {
-  let id: NodeJS.Timeout | null = null
-
-  return function perform(...args: T[]) {
-    if (id) return
-
-    id = setTimeout(() => {
-      callee(...args)
-
-      clearTimeout(id as NodeJS.Timeout)
-      id = null
-    }, timeout)
-  }
-}
-
 const MESSAGE_ORDER: Record<TextStatus, number> = {
   error: 0,
   warning: 1,
@@ -43,14 +27,11 @@ const MESSAGE_ORDER: Record<TextStatus, number> = {
 
 export type BaseFieldProps<P extends object> = P & FormValueOptions & {
   label?: string
-  throttle?: number
+  throttle?: number // FIXME: implement
   validateOnBlur?: boolean
   hide?: boolean | ((field: FormFieldValue, form: FormFieldValue) => boolean)
   messages?: TextProps[]
   className?: string
-}
-
-export type InternalBaseFieldProps<P extends object> = BaseFieldProps<P> & {
   checked?: boolean
   as?: React.FunctionComponent<P> | keyof JSX.IntrinsicElements
   change?: (event: React.ChangeEvent<HTMLInputElement>) => FormFieldValue
@@ -64,7 +45,7 @@ export type InternalBaseFieldProps<P extends object> = BaseFieldProps<P> & {
  * @example
  * <BaseField />
  */
-export function BaseField<P extends object>(props: InternalBaseFieldProps<P>): JSX.Element | null {
+export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Element | null {
   const { hide = false, name, label, as, throttle: tms, validateOnBlur, value, messages = [], schema, onChange, change, selectProps, className, ...otherProps } = props
   const _className = cn(css.BaseField, className)
   const form = useForm({ name, value, schema, onChange })
@@ -77,20 +58,13 @@ export function BaseField<P extends object>(props: InternalBaseFieldProps<P>): J
       .sort((a, b) => MESSAGE_ORDER[a.status ?? 'primary'] - MESSAGE_ORDER[b.status ?? 'primary'])
   , [form, messages])
 
-  // FIXME: value doesn't changes with throttle
-  // const handleChange = useCallback(throttle((event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = change ? change(event) : event.target.value
-
-  //   console.log(value, event.target.value)
-
-  //   form.set(value, event)
-  // }, tms), [form, tms, change])
-
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const value = change ? change(event) : event.target.value
 
-    form.set(value, event)
-  }, [form, tms, change])
+    if (form.state().value !== value) {
+      form.set(value, event)
+    }
+  }, [form, change])
 
   const onBlur = useCallback(() => validateOnBlur && form.validate(), [form, validateOnBlur])
 
@@ -112,7 +86,7 @@ export function BaseField<P extends object>(props: InternalBaseFieldProps<P>): J
       </Layout.Content>
 
       <Layout.Bottom className={css.Messages}>
-        <Repeat className={css.Message} as={Text.Caption} items={allMessages} />
+        <Repeat className={css.Message} cmp={Text.Caption} items={allMessages} />
       </Layout.Bottom>
     </Layout>
   )

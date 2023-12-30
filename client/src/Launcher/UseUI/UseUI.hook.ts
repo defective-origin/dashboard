@@ -57,6 +57,9 @@ export type UseUIReturnOptions = UIState & UIActions & UISelectors
 /**
  * Hook descriptions
  *
+ * Map for style overrides
+ * https://mui.com/material-ui/customization/default-theme/
+ *
  * @example
  * const options = useUI(conf)
  */

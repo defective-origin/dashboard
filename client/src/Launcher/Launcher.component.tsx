@@ -12,7 +12,7 @@ import useAccount from './UseAccount'
 import useMonitor from './UseMonitor'
 import useUI from './UseUI'
 
-export type LauncherProps = React.PropsWithChildren & LauncherOptions
+export type LauncherProps = Partial<React.PropsWithChildren & LauncherOptions>
 
 /**
  * Run all launchers with main app page.

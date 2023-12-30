@@ -10,18 +10,5 @@
   }
 }
 
-.Block {
-  display: flex;
-}
-
-.x {
-  flex-direction: row;
-}
-
-.y {
-  flex-direction: column;
-}
-
-.xy {
-  flex-flow: row wrap;
+.Widget {
 }

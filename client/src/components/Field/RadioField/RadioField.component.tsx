@@ -28,7 +28,7 @@ export function RadioField(props: RadioFieldProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.RadioField, className)
 
-  return <BaseField className={_className} as={MuiRadioField} {...otherProps} />
+  return <BaseField className={_className} as={MuiRadioField} size='small' {...otherProps} />
 }
 
 RadioField.displayName = 'RadioField'

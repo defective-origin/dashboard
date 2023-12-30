@@ -8,7 +8,7 @@ export type UsePropertyOptions = {
   ref?: React.MutableRefObject<Element>
 }
 
-export type UsePropertyReturnOptions = (property?: string) => string | undefined
+export type UsePropertyReturnOptions = (property?: string, defaultValue?: string) => string | undefined
 
 /**
  * Allow create property getter
@@ -18,17 +18,17 @@ export type UsePropertyReturnOptions = (property?: string) => string | undefined
  * @example
  * const options = useProperty(conf)
  */
-export const useProperty = (options: UsePropertyOptions = {}): UsePropertyReturnOptions => {
+export const useProperty = (options: UsePropertyOptions = {}, deps: unknown[] = []): UsePropertyReturnOptions => {
   const element = options.ref?.current ?? document.body
 
-  return useCallback((property = options.defaultProperty) => {
+  return useCallback((property = options.defaultProperty, defaultValue = options.defaultValue) => {
     if (!property || !element) {
-      return options.defaultValue
+      return defaultValue
     }
 
-    return getComputedStyle(element).getPropertyValue(property) || options.defaultValue
+    return getComputedStyle(element).getPropertyValue(property) || defaultValue
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [element, options.defaultValue, options.defaultProperty])
+  }, [element, options.defaultValue, options.defaultProperty, ...deps])
 }
 
 export default useProperty

@@ -10,8 +10,12 @@
   }
 
   .layout-item {
-    justify-self: stretch;
-    align-self: stretch;
+    // fix scroll https://stackoverflow.com/questions/61959291/how-to-get-scrolling-in-a-css-grid
+    // variant 1
+    // overflow: hidden;
+    // variant 2 [preferable]
+    min-height: 0;
+    min-width: 0;
 
     &--left { grid-area: left; }
     &--right { grid-area: right; }

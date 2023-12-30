@@ -1,32 +1,29 @@
 import React from 'react'
 
 // ---| components |---
-import { GridCell, GridItem } from 'common/hooks'
-import { react } from 'common/tools'
+import { xy } from 'common/tools'
 
-export type ViewBoardItemPrototype = React.ComponentType<react.GeneralProps>
+import css from './ViewBoardItem.module.scss'
 
-export type ViewBoardItemProps = GridItem & {
+export type ViewBoardItemProps<I extends Record<string, unknown>> = {
+  options: I
   // margin around widget
   margin?: number,
-  // size of one block on board
-  cell: GridCell,
-  // item which should be displayed
-  as?: ViewBoardItemPrototype
+  /** Size of cell */
+  cell?: xy.Vector
+  /** Place selector */
+  placeKey?: string,
 }
 
-function ViewBoardItem(props: ViewBoardItemProps): JSX.Element | null {
-  const { placement, as: Widget, cell, margin = 0, ...otherWidgetProps } = props
+function ViewBoardItem<I extends Record<string, unknown>>(props: ViewBoardItemProps<I>): JSX.Element | null {
+  const { options, placeKey = '', cell = xy.vector(1, 1), margin = 0, ...otherProps } = props
+  const place = (options[placeKey] ?? options) as xy.Square
 
-  if (!Widget) {
-    return null
-  }
-
-  const left = (placement.v1.x * cell.width) + margin
-  const top = (placement.v1.y * cell.height) + margin
-  const left2 = (placement.v2.x * cell.width) - margin
-  const top2 = (placement.v2.y * cell.height) - margin
-  const widgetStyle: React.CSSProperties = {
+  const left = (place.v1.x * cell.x) + margin
+  const top = (place.v1.y * cell.y) + margin
+  const left2 = (place.v2.x * cell.x) - margin
+  const top2 = (place.v2.y * cell.y) - margin
+  const style: React.CSSProperties = {
     left,
     top,
     width: left2 - left,
@@ -35,7 +32,7 @@ function ViewBoardItem(props: ViewBoardItemProps): JSX.Element | null {
     overflow: 'hidden',
   }
 
-  return <Widget {...otherWidgetProps} style={widgetStyle} />
+  return <div className={css.ViewBoardItem} style={style} {...otherProps} />
 }
 
 ViewBoardItem.displayName = 'ViewBoardItem'

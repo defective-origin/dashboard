@@ -61,4 +61,27 @@ describe('[Repeat] component', () => {
     expect(container.getAll('itemA')).toHaveLength(1)
     expect(container.getAll('itemB')).toHaveLength(1)
   })
+
+  it('should works with different types of components', () => {
+    class Cmp { render() { return 'CLASS COMPONENT' } }
+    const itemMap = {
+      instinct: 'span',
+      function: function() { return 'function'},
+      arrowFunction: () => 'arrow function',
+      class: Cmp,
+      // FIXME: with React.memo, React.forwardRef
+    }
+    const items: RepeatItem<typeof itemMap>[] = [
+      { v: 'instinct' },
+      { v: 'function' },
+      { v: 'arrowFunction' },
+      { v: 'class' },
+    ]
+    const container = render(<Repeat cmp={itemMap} items={items} />)
+
+    expect(container.getAll('instinct')).toHaveLength(1)
+    expect(container.getAll('function')).toHaveLength(1)
+    expect(container.getAll('arrowFunction')).toHaveLength(1)
+    expect(container.getAll('class')).toHaveLength(1)
+  })
 })

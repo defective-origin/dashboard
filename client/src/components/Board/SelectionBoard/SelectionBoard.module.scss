@@ -2,20 +2,31 @@
 
 :global {
   .dark {
-    // colors
-    --invalid-area-color: #FF000067;
-    --selected-area-color: #00800067;
-    --replace-area-color: #80808067;
-  }
+    --canvas-primary-color: #00000067;
+    --canvas-secondary-color: #83838367;
+    --canvas-success-color: #00FF0067;
+    --canvas-info-color: #002FFF67;
+    --canvas-warning-color: #FFAE0067;
+    --canvas-error-color: #FF000067;
+    --canvas-disable-color: #B8B8B867
+  ;}
 
   .light {
-    // colors
-    --invalid-area-color: #FF000067;
-    --selected-area-color: #00800067;
-    --replace-area-color: #80808067;
-  }
+    --canvas-primary-color: #00000067;
+    --canvas-secondary-color: #83838367;
+    --canvas-success-color: #00FF0067;
+    --canvas-info-color: #002FFF67;
+    --canvas-warning-color: #FFAE0067;
+    --canvas-error-color: #FF000067;
+    --canvas-disable-color: #B8B8B867
+  ;}
 }
 
 .SelectionBoard {
-  @include stretch;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ForbiddenSelect {
+  cursor: not-allowed;
 }

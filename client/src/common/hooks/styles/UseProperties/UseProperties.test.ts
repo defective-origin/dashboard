@@ -2,7 +2,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import useMemoProperty from './UseMemoProperty.hook'
+import useProperties from './UseProperties.hook'
 
 
 
@@ -18,9 +18,9 @@ import useMemoProperty from './UseMemoProperty.hook'
  *
  * expect(result.current.count).toBe(1)
  */
-describe('[useMemoProperty] hook', () => {
+describe('[useProperties] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => useMemoProperty())
+    const { result } = renderHook(() => useProperties())
 
     expect(result.current).toBe(null)
   })

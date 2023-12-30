@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react'
 
-export type RectOptions = {
+export type RectOptions<TElement extends Element> = {
+  ref: React.MutableRefObject<TElement | null>,
   width: number,
   height: number,
   left: number,
@@ -9,10 +10,12 @@ export type RectOptions = {
   bottom: number,
 }
 
-export function useResize<TElement extends Element = HTMLDivElement>(
-  ref: React.MutableRefObject<TElement | null>,
-): RectOptions {
-  const [options, setOptions] = useState<RectOptions>({
+export function useResize<TElement extends Element>(
+  elRef?: React.MutableRefObject<TElement | null>,
+): RectOptions<TElement> {
+  const ref = useRef<TElement | null>(elRef?.current ?? null)
+  const [options, setOptions] = useState<RectOptions<TElement>>({
+    ref,
     width: 0,
     height: 0,
     left: 0,
@@ -24,16 +27,16 @@ export function useResize<TElement extends Element = HTMLDivElement>(
   const onResize = useCallback(() => {
     if (ref.current) {
       const clientRect = ref.current.getBoundingClientRect()
-      const newOptions: RectOptions = {
+
+      setOptions({
+        ref,
         width: clientRect.width,
         height: clientRect.height,
         left: clientRect.left,
         right: clientRect.right,
         top: clientRect.top,
         bottom: clientRect.bottom,
-      }
-
-      setOptions(newOptions)
+      })
     }
   }, [ref])
 
@@ -48,12 +51,4 @@ export function useResize<TElement extends Element = HTMLDivElement>(
   return options
 }
 
-export function useResizeWithRef<TElement extends Element = HTMLDivElement>()
-: RectOptions & { ref: React.MutableRefObject<TElement | null> } {
-  const ref = useRef(null)
-  const options = useResize<TElement>(ref)
-
-  return useMemo(() => ({ ref, ...options }), [ref, options])
-}
-
-export default useResizeWithRef
+export default useResize

@@ -192,3 +192,8 @@ export const isExemplar = (component: React.ComponentType, exemplar: React.React
 export const hasExemplar = (items: React.ComponentType[], exemplar: React.ReactNode) => {
   return items.some((item) => isExemplar(item, exemplar))
 }
+
+
+export const isComponent = (value: any): value is React.ComponentType =>
+  ['string', 'function'].includes(typeof value)
+  || typeof value === 'object' && value?.$$typeof

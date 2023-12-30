@@ -26,15 +26,15 @@ export function SwitchField(props: SwitchFieldProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.SwitchField, className)
 
-  const change = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const change = useCallback<NonNullable<BaseFieldProps<MuiSwitchProps>['change']>>((event) => {
     if (props.value) {
-      return event.target.checked ? props.value : undefined
+      return event.target.checked ? props.value : undefined as unknown as boolean
     }
 
     return event.target.checked
   }, [props.value])
 
-  const selectProps = useCallback((value?: boolean): Partial<MuiSwitchProps> => {
+  const selectProps = useCallback<NonNullable<BaseFieldProps<MuiSwitchProps>['selectProps']>>((value) => {
     if (props.value) {
       return { checked: !!value, value: props.value }
     }
@@ -42,7 +42,7 @@ export function SwitchField(props: SwitchFieldProps): JSX.Element {
     return { checked: !!value}
   }, [props.value])
 
-  return <BaseField className={_className} as={MuiSwitchField} change={change} selectProps={selectProps} {...otherProps} />
+  return <BaseField className={_className} as={MuiSwitchField} change={change} selectProps={selectProps} size='small' {...otherProps} />
 }
 
 SwitchField.displayName = 'SwitchField'

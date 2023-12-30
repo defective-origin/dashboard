@@ -1,24 +1,27 @@
+import { useMemo, useRef } from 'react'
+
 // ---| components |---
 import Repeat from 'components/Repeat'
 
 // ---| common |---
-import { cn } from 'common/tools'
-import { GridConf, GridItem, useGrid } from 'common/hooks'
-import { react } from 'common/tools'
+import { cn, xy } from 'common/tools'
 
 // ---| self |---
-import ViewBoardItemComponent, { ViewBoardItemProps, ViewBoardItemPrototype } from './ViewBoardItem'
 import css from './ViewBoard.module.scss'
+import ViewBoardItem, { ViewBoardItemProps } from './ViewBoardItem'
 
-export type ViewBoardItem = GridItem
+export type ViewBoardItem = { place: xy.Square }
 
-export type ViewBoardProps = react.GeneralProps & GridConf & {
-  // item which should be displayed as widget builder
-  widget?: ViewBoardItemPrototype
+export type ViewBoardProps<I extends Record<string, unknown>> = Omit<ViewBoardItemProps<I>, 'options'> & {
+  className?: string
   // set margin around each widget
   gap?: number
-  // items which displays on board
-  items?: ViewBoardItem[]
+  /** Items to show */
+  items?: I[]
+  /** Size of cell */
+  cell?: xy.Vector
+  /** Place selector */
+  placeKey?: string,
 }
 
 /**
@@ -40,24 +43,16 @@ export type ViewBoardProps = react.GeneralProps & GridConf & {
  *   items={items}
  * />
  */
-export default function ViewBoard(props: ViewBoardProps): JSX.Element {
-  const { columns, rows, widget, gap = 0, items = [], className, style } = props
-  const grid = useGrid<HTMLDivElement>({ columns, rows })
-  const widgetMargin = gap / 2
+export default function ViewBoard<I extends Record<string, unknown>>(props: ViewBoardProps<I>): JSX.Element {
+  const { cell, gap = 0, items = [], placeKey, className } = props
+  const margin = gap / 2
+  const viewItems = useMemo(() => items.map((item, idx) =>
+    <ViewBoardItem key={idx} options={item} margin={margin} cell={cell} placeKey={placeKey} />,
+  ), [cell, items, margin, placeKey])
 
   return (
-    <div
-      ref={grid.ref}
-      className={cn(css.ViewBoard, className)}
-      style={style}
-    >
-      <Repeat
-        as={widget}
-        cmp={ViewBoardItemComponent}
-        items={items as ViewBoardItemProps[]}
-        margin={widgetMargin}
-        cell={grid.cell}
-      />
+    <div className={cn(css.ViewBoard, className)}>
+      {viewItems}
     </div>
   )
 }
