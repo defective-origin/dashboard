@@ -42,7 +42,7 @@ export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
     return { checked: !!value}
   }, [props.value])
 
-  return <BaseField className={_className} as={MuiCheckboxField} change={change} selectProps={selectProps} size='small' {...otherProps} />
+  return <BaseField className={_className} as={MuiCheckboxField} change={change} selectProps={selectProps} size='small' align='start' {...otherProps} />
 }
 
 CheckboxField.displayName = 'CheckboxField'

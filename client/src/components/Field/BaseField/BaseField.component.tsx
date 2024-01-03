@@ -6,7 +6,7 @@ import React, { useCallback, useMemo } from 'react'
 // ---| components |---
 import Repeat from 'components/Repeat'
 import Text, { TextProps, TextStatus } from 'components/Text'
-import Layout from 'components/Layout'
+import Layout, { LayoutProps } from 'components/Layout'
 import { FormFieldValue, FormValueOptions, useForm } from 'components/Form'
 
 // ---| common |---
@@ -25,9 +25,9 @@ const MESSAGE_ORDER: Record<TextStatus, number> = {
   disable: 6,
 }
 
-export type BaseFieldProps<P extends object> = P & FormValueOptions & {
+export type BaseFieldProps<P extends object> = P & FormValueOptions & Pick<LayoutProps, 'grow' | 'align'> & {
   label?: string
-  throttle?: number // FIXME: implement
+  throttle?: number // TODO: implement
   validateOnBlur?: boolean
   hide?: boolean | ((field: FormFieldValue, form: FormFieldValue) => boolean)
   messages?: TextProps[]
@@ -46,7 +46,24 @@ export type BaseFieldProps<P extends object> = P & FormValueOptions & {
  * <BaseField />
  */
 export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Element | null {
-  const { hide = false, name, label, as, throttle: tms, validateOnBlur, value, messages = [], schema, onChange, change, selectProps, className, ...otherProps } = props
+  const {
+    hide = false,
+    name,
+    label,
+    as,
+    throttle: tms,
+    align,
+    grow,
+    validateOnBlur,
+    value,
+    messages = [],
+    schema,
+    onChange,
+    change,
+    selectProps,
+    className,
+    ...otherProps
+  } = props
   const _className = cn(css.BaseField, className)
   const form = useForm({ name, value, schema, onChange })
   const Tag = as as React.FunctionComponent<P>
@@ -78,14 +95,14 @@ export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Eleme
   const inputProps = selectProps?.(form.state().value) ?? { value: form.state().value }
 
   return (
-    <Layout className={_className}>
+    <Layout className={_className} grow={grow} align={align}>
       <Layout.Top className={css.Title} content={label} />
 
-      <Layout.Content className={css.Content}>
+      <Layout.Content className={css.Content} align={align} justify='center'>
         <Tag name={fullName} onBlur={onBlur} onChange={handleChange} {...otherProps as P} {...inputProps} />
       </Layout.Content>
 
-      <Layout.Bottom className={css.Messages}>
+      <Layout.Bottom className={css.Messages} align={align}>
         <Repeat className={css.Message} cmp={Text.Caption} items={allMessages} />
       </Layout.Bottom>
     </Layout>

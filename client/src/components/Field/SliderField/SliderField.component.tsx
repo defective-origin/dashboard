@@ -26,7 +26,7 @@ export function SliderField(props: SliderFieldProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.SliderField, className)
 
-  return <BaseField className={_className} as={MuiSliderField} size='small' {...otherProps} />
+  return <BaseField className={_className} as={MuiSliderField} size='small' grow={2} {...otherProps} />
 }
 
 SliderField.displayName = 'SliderField'

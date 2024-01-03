@@ -37,7 +37,6 @@ const cards: BoardItem[] = [
 export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DashboardPage, className)
-  const app = useLauncher()
   const [items, setItems] = useState([...cards])
   const handleSelect = (place: any) => { setItems([...items, { place }]) }
   const handleReselect = (item: BoardItem, oldItem: BoardItem) => {
@@ -49,6 +48,16 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   return (
     <Page className={_className} name='PAGES.DASHBOARDS' {...otherProps}>
       <Board
+        className={_className}
+        rows={25}
+        columns={50}
+        items={items}
+        select={items[0]}
+        onSelect={handleSelect}
+        onReselect={handleReselect}
+        onError={handleError}
+      />
+      {/* <Board
         className={_className}
         rows={25}
         columns={50}
@@ -69,7 +78,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
         onReselect={handleReselect}
         onError={handleError}
         style={{ height: '50%' }}
-      />
+      /> */}
     </Page>
   )
 }

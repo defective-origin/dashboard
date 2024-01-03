@@ -46,6 +46,7 @@ export function Text(props: TextProps): JSX.Element {
   const { size = 'md', iconSize = size, start, end, status, fillIcon, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Text, css[size], className)
 
+  // TODO: multiline - split each \n
   return (
     <MuiTypography className={_className} variant='body1' align='left' color={status} {...otherProps}>
       {getAsideContent(start, iconSize, fillIcon)}

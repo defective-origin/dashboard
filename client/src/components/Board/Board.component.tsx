@@ -17,9 +17,13 @@ export type BoardItem = ViewBoardItem
 
 export type BoardProps<I extends Record<string, unknown>> = SelectionBoardProps<I> & ViewBoardProps<I> & {
   // show selection board if true otherwise show view board
-  select?: true // FIXME: back reselect
-  // FIXME: move logic of update reselect value to here?
-} // FIXME: grid: 'infinity' | 'xs' | 'md' ... columns: infinity  rows: infinity grid: [columns, rows]
+  select?: true // TODO: back reselect
+  // TODO: move logic of update reselect value to here?
+} // TODO: grid: 'infinity' | 'xs' | 'md' ... columns: infinity  rows: infinity grid: [columns, rows]
+// TODO: add MiniBoard
+// TODO: add full screen
+// TODO: rename viewBoard to WidgetBoard?
+// TODO: add padding to each board
 
 /**
  * Board which allow to select new position for widgets and also view them.

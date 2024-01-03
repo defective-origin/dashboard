@@ -12,7 +12,7 @@ export type UseSelectionOptions<I extends Record<string, unknown>> = {
   /** Size of cell */
   cell?: xy.Vector
   /** Quantity of rows */
-  rows?: number // FIXME: grid: 'infinity' | 'xs' | 'md' ...
+  rows?: number // TODO: grid: 'infinity' | 'xs' | 'md' ... | mobile | board | tv ...
   /** Quantity of columns */
   columns?: number
   /** allow to select area which has intersection with other cards */
@@ -88,7 +88,11 @@ export function useSelection<I extends Record<string, unknown>>(props: UseSelect
   }, [hoveredCell])
 
   // --- selection ---
-  const resetSelection = useCallback(() => setStartCell(null), [])
+  const resetSelection = useCallback(() => {
+    setStartCell(null)
+    setSelectedArea(null)
+    checkPlace(hoveredCell)
+  }, [checkPlace, hoveredCell])
 
   const startSelection = useCallback(() => {
     if (!isIntersected) {
@@ -131,10 +135,8 @@ export function useSelection<I extends Record<string, unknown>>(props: UseSelect
       onError(new PositionBoardError())
     }
 
-    setStartCell(null)
-    setSelectedArea(null)
-    checkPlace(hoveredCell)
-  }, [selectedArea, isIntersected, hoveredCell, select, placeKey, onError, checkPlace, onReselect, onSelect])
+    resetSelection()
+  }, [selectedArea, isIntersected, select, placeKey, onError, resetSelection, onReselect, onSelect])
 
 
   // subscribe on changes

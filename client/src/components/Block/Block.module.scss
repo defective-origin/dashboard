@@ -15,13 +15,17 @@
 }
 
 .x {
-  flex-direction: row;
+  flex-flow: row nowrap;
 }
 
 .y {
-  flex-direction: column;
+  flex-flow: column nowrap;
 }
 
 .xy {
   flex-flow: row wrap;
+}
+
+.stretch {
+  @include stretch;
 }

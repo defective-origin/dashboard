@@ -1,5 +1,12 @@
 import React from 'react'
 
+// types
+export type Dictionary<T> = Record<string, T>;
+
+export type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? (...args: P) => R : never
+export type FirstParameters<F> = F extends (x: infer P, ...args: any[]) => any ? P : never
+export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P : never
+
 // work with props
 export type GeneralProps<T extends HTMLElement = HTMLElement> = React.DOMAttributes<T> & React.HTMLAttributes<T>
 
@@ -108,7 +115,7 @@ export function attachOverride<C extends React.FunctionComponent>(
  * <Text.Bold /> // displayName = 'Text.Bold'
  */
 export function attachOverrides<
-  C extends React.FunctionComponent, // FIXME: it works only with component with not required property ?:
+  C extends React.FunctionComponent, // TODO: it works only with component with not required property ?:
   K extends string,
 >(
   component: C,
@@ -179,7 +186,7 @@ export function attachComponents<
       { name, ...options },
     ),
   )
-  // FIXME: attach() + className if need
+  // TODO: attach() + className if need
 
   return component as C & M
 }

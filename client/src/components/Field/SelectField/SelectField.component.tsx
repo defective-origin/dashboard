@@ -23,7 +23,7 @@ const SELECT_FIELD_OPTIONS = {
 }
 
 export type SelectFieldProps = BaseFieldProps<MuiSelectProps> & {
-  items?: MuiMenuItemProps[] // FIXME: replace by MenuItem component from components
+  items?: MuiMenuItemProps[] // TODO: replace by MenuItem component from components
 }
 
 /**
@@ -44,6 +44,7 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
       as={MuiSelectField}
       MenuProps={SELECT_FIELD_OPTIONS}
       size='small'
+      grow={2}
       {...otherProps}
     >
       {menuItems}

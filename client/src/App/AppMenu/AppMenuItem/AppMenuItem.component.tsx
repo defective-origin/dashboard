@@ -41,7 +41,7 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
     ...otherProps,
   }
 
-  // FIXME: если активный или открыто подменю, то заполнять иконки
+  // TODO: если активный или открыто подменю, то заполнять иконки (language)
 
   return (
     <Tooltip title={content} placement='right'>

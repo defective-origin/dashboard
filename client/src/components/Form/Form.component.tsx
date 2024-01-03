@@ -71,7 +71,7 @@ export type FormProps = FormGroupOptions & {
   alerts?: AlertProps[]
   actions?: Action[]
 }
-// FIXME: https://developer.mozilla.org/en-US/docs/Web/API/FormData
+// TODO: https://developer.mozilla.org/en-US/docs/Web/API/FormData
 /**
  * Component description.
  *

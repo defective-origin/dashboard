@@ -11,7 +11,7 @@ export class PositionBoardError extends BoardError {
     this.name = 'PositionBoardError'
   }
 }
-// FIXME: ERROR
+// TODO: ERROR
 // export class SizeBoardError extends BoardError {
 //   constructor(message = 'Selected area does not match the size') {
 //     super(message)

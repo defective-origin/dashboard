@@ -69,7 +69,7 @@ describe('[Repeat] component', () => {
       function: function() { return 'function'},
       arrowFunction: () => 'arrow function',
       class: Cmp,
-      // FIXME: with React.memo, React.forwardRef
+      // TODO: with React.memo, React.forwardRef
     }
     const items: RepeatItem<typeof itemMap>[] = [
       { v: 'instinct' },

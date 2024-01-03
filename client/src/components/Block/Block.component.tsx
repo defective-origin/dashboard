@@ -19,21 +19,22 @@ export const BLOCK_ITEM_MAP = {
   spacer: Spacer,
 }
 
-export type BlockGap = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type BlockDirectionType = 'x' | 'y' | 'xy'
+export type BlockSpace = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type BlockDirection = 'x' | 'y' | 'xy'
 export type BlockItem<C extends RepeatComponent> = RepeatItem<C>
 
 export type BlockProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  gap?: BlockGap
-  direction?: BlockDirectionType
+  gap?: BlockSpace
+  padding?: BlockSpace
+  direction?: BlockDirection
   grow?: React.CSSProperties['flexGrow']
   align?: React.CSSProperties['alignItems']
   justify?: React.CSSProperties['justifyContent']
   stretch?: boolean
-  scroll?: BlockDirectionType
+  scroll?: BlockDirection
   as?: keyof JSX.IntrinsicElements | React.ComponentType
   style?: React.CSSProperties
 }
@@ -58,6 +59,7 @@ export function Block<C extends RepeatComponent>(props: BlockWithItemsProps<C>):
     align,
     justify,
     gap,
+    padding,
     direction = 'y',
     content,
     stretch,
@@ -71,8 +73,9 @@ export function Block<C extends RepeatComponent>(props: BlockWithItemsProps<C>):
     css.Block,
     css[direction],
     gap && `gap--${gap}`,
+    padding && `padding--${padding}`,
     scroll && `scroll-${scroll}`,
-    stretch && 'stretch',
+    stretch && css.stretch,
     className,
   )
   const _style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow, ...style }

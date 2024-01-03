@@ -28,7 +28,7 @@ export function NumberField(props: NumberFieldProps): JSX.Element {
 
   const change = useCallback<NonNullable<BaseFieldProps<MuiTextFieldProps>['change']>>((event) => Number(event.target.value), [])
 
-  return <BaseField className={_className} as={MuiTextField} type='number' change={change} size='small' {...otherProps} />
+  return <BaseField className={_className} as={MuiTextField} type='number' change={change} size='small' grow={1} {...otherProps} />
 }
 
 NumberField.displayName = 'NumberField'

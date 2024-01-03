@@ -4,6 +4,9 @@ import React, { useLayoutEffect } from 'react'
 import { useLauncher } from 'Launcher'
 import { TranslateKeys } from 'locale'
 
+// ---| screens |---
+import Copyright from 'screens/Copyright'
+
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
 import Block from 'components/Block'
@@ -22,7 +25,7 @@ export type PageProps = LayoutProps & {
   name?: TranslateKeys | string
   meta?: HeadItem[]
 }
-// FIXME: add scroll to page content by default
+// TODO: add scroll to page content by default
 /**
  * Component description.
  *
@@ -44,6 +47,10 @@ export function Page(props: PageProps): JSX.Element {
       <Head title={tabName} items={meta} />
 
       {children}
+
+      <Layout.Bottom direction='x' justify='center'>
+        <Copyright />
+      </Layout.Bottom>
     </Layout>
   )
 }

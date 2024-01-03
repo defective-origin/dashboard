@@ -51,16 +51,14 @@ export const point: Painter<PointShape> = (context, item, colors) => {
 }
 
 export const grid: Painter<GridShape> = (context, item, colors) => {
-  const { columns = 0, rows = 0, cell = xy.vector(1, 1), color, fill, stroke } = item
+  const { columns = 0, rows = 0, cell = xy.vector(1, 1), ...styles } = item
 
   for (let column = 0; column <= columns; column += 1) {
     for (let row = 0; row <= rows; row += 1) {
       point(context, {
         x: column * cell.x,
         y: row * cell.y,
-        color,
-        fill,
-        stroke,
+        ...styles,
       }, colors)
     }
   }

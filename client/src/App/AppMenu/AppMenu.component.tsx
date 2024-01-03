@@ -32,8 +32,8 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const app = useLauncher()
   const _className = cn(css.AppMenu, className)
 
-  // FIXME: implement via Menu instead of Actions
-  // FIXME: tooltip instead of content
+  // TODO: implement via Menu instead of Actions
+  // TODO: tooltip instead of content
   return (
     <Actions className={_className} direction='y' align='stretch' {...otherProps}>
       <Logo className={css.Logo} v='logo' href={ROUTE_LINKS.ROOT} />
@@ -47,8 +47,8 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <AppMenuItem start='paid' content={app.t('LINKS.DONATION')} href={ROUTE_LINKS.DONATION} />
       <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
 
-      <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} fillIcon />
       <AppMenuItem start='language' content={app.language.toUpperCase()} />
+      <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} fillIcon />
       <AppMenuItem start={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />
 
       {children}

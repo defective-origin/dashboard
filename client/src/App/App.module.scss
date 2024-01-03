@@ -97,10 +97,7 @@ $xxl-width: 1600px;
     @include stretch;
   }
 
-  .stretch {
-    @include stretch;
-  }
-
+  // TODO: move to block/text
   .gap {
     // size
     &--xxs {  gap: var(--space-xxs); }
@@ -110,6 +107,18 @@ $xxl-width: 1600px;
     &--lg {  gap: var(--space-lg); }
     &--xl {  gap: var(--space-xl); }
     &--xxl {  gap: var(--space-xxl); }
+  }
+
+  // TODO: move to block/text
+  .padding {
+    // size
+    &--xxs {  padding: var(--space-xxs); }
+    &--xs {  padding: var(--space-xs); }
+    &--sm {  padding: var(--space-sm); }
+    &--md {  padding: var(--space-md); }
+    &--lg {  padding: var(--space-lg); }
+    &--xl {  padding: var(--space-xl); }
+    &--xxl {  padding: var(--space-xxl); }
   }
 
   .scroll {
@@ -164,4 +173,8 @@ $xxl-width: 1600px;
       }
     }
   }
+}
+
+.GuardContainer {
+  width: 700px;
 }

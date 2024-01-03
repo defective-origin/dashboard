@@ -36,12 +36,14 @@ export function FormGroup(props: FormGroupProps): JSX.Element {
   const value = list ? [] : {}
   const form = useForm({ value, name, schema, onChange, onReset, onSubmit })
 
+  // TODO: filter actions and content and add gap='xs'
+  // TODO: add messages component
   return (
     <FormContext.Provider value={form} >
       <Layout className={_className} {...otherProps}>
         <Layout.Top className={css.Title} content={label} />
 
-        <Layout.Content className={css.Content}>
+        <Layout.Content className={css.Content} gap='xs'>
           {children}
         </Layout.Content>
 

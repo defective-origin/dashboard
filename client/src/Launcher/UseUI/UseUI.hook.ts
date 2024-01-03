@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useObject } from 'common/hooks'
 
 // ---| components |---
-import { ToastOptions, showAlert, showMessage } from 'components/Toast'
+import { ToastOptions, showAlert, showGuard, showMessage } from 'components/Toast'
 
 export function is<T>(a: T, b: T): a is T {
   return a === b
@@ -43,6 +43,7 @@ export type UIActions = {
   // detach: (...args: UIPlace[]) => void,
   message: (...args: ToastOptions[]) => void,
   alert: (...args: ToastOptions[]) => void,
+  guard: (...args: ToastOptions[]) => void,
 
   setPageName: (name?: React.ReactNode) => void,
 }
@@ -75,6 +76,7 @@ export const useUI = (): UseUIReturnOptions => {
 
     message: (...args) => args.forEach(showMessage),
     alert: (...args) => args.forEach(showAlert),
+    guard: (...args) => args.forEach(showGuard),
 
     setPageName: (pageName) => state.merge({ pageName }),
   // eslint-disable-next-line react-hooks/exhaustive-deps

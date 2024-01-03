@@ -18,10 +18,10 @@ export type LayoutProps = BlockProps & {
   className?: string
   children?: React.ReactNode
   v?: LayoutVariant
-  areas?: React.CSSProperties['gridTemplateAreas']
-  columns?: React.CSSProperties['gridTemplateColumns']
-  rows?: React.CSSProperties['gridTemplateRows']
-  items?: LayoutItem[]
+  areas?: React.CSSProperties['gridTemplateAreas'] // remove dynamic layout?
+  columns?: React.CSSProperties['gridTemplateColumns'] // remove dynamic layout?
+  rows?: React.CSSProperties['gridTemplateRows'] // remove dynamic layout?
+  items?: LayoutItem[] // remove dynamic layout?
 }
 
 /**

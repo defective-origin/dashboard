@@ -74,7 +74,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
           <Form.Alert status='error' content='error' />
         </Form.Block>
 
-        <Form.Content direction='y'>
+        <Form.Content direction='y' gap='xs'>
           {/* <Form.Actions items={ACTIONS}> */}
           <Form.Actions>
             FORM ACTIONS
@@ -82,13 +82,13 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
             <Form.Submit content='Submit' />
           </Form.Actions>
 
+          <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
+          <Form.Field.Switch name='switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
+          <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+          <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
+          <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
           <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
           <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
-          <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
-          <Form.Field.Switch name='switch' label='switch' value='switch' messages={MESSAGES} onChange={log} />
-          <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
-          <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
-          <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
 
           <Form.Group name='group' label='group' messages={MESSAGES} onChange={log}>
             <Form.Actions>
@@ -97,13 +97,15 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
               <Form.Submit content='Submit' />
             </Form.Actions>
 
-            <Form.Field.Text name='group-text' label='text' value='value' messages={MESSAGES} onChange={log} />
-            <Form.Field.Number name='group-number' label='number' value={0} messages={MESSAGES} onChange={log} />
-            <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
-            <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
-            <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
-            <Form.Field.Select name='group-select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
-            <Form.Field.Slider name='group-slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
+            <Form.Content direction='x' gap='xs'>
+              <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
+              <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
+              <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+              <Form.Field.Slider name='group-slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
+              <Form.Field.Select name='group-select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
+              <Form.Field.Text name='group-text' label='text' value='value' messages={MESSAGES} onChange={log} />
+              <Form.Field.Number name='group-number' label='number' value={0} messages={MESSAGES} onChange={log} />
+            </Form.Content>
           </Form.Group>
 
           <Form.List name='list' label='list' messages={MESSAGES} onChange={log}>
@@ -113,13 +115,15 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
               <Form.Submit content='Submit' />
             </Form.Actions>
 
-            <Form.Field.Text name='item_0' label='text' value='value' messages={MESSAGES} onChange={log} />
-            <Form.Field.Number name='item_1' label='number' value={0} messages={MESSAGES} />
-            <Form.Field.Radio name='item_2' label='radio' value={true} messages={MESSAGES} />
-            <Form.Field.Switch name='item_3' label='switch' value={true} messages={MESSAGES} />
-            <Form.Field.Checkbox name='item_4' label='checkbox' value='checkbox' messages={MESSAGES} checked />
-            <Form.Field.Select name='item_5' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} />
-            <Form.Field.Slider name='item_6' label='slider' value={0} messages={MESSAGES} />
+            <Form.Content direction='x' gap='xs'>
+              <Form.Field.Radio name='item_2' label='radio' value={true} messages={MESSAGES} />
+              <Form.Field.Switch name='item_3' label='switch' value={true} messages={MESSAGES} />
+              <Form.Field.Checkbox name='item_4' label='checkbox' value='checkbox' messages={MESSAGES} checked />
+              <Form.Field.Slider name='item_6' label='slider' value={0} messages={MESSAGES} />
+              <Form.Field.Select name='item_5' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} />
+              <Form.Field.Text name='item_0' label='text' value='value' messages={MESSAGES} onChange={log} />
+              <Form.Field.Number name='item_1' label='number' value={0} messages={MESSAGES} />
+            </Form.Content>
           </Form.List>
         </Form.Content>
 
