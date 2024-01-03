@@ -7,7 +7,8 @@ import React, { useCallback } from 'react'
 import Block from 'components/Block'
 import Section from 'components/Section'
 import Actions, { Action } from 'components/Actions'
-import Alert, { AlertProps } from 'components/Alert'
+import Alert from 'components/Alert'
+import Alerts, { AlertItem } from 'components/Alerts'
 import Field from 'components/Field'
 
 // ---| common |---
@@ -68,9 +69,11 @@ export type FormProps = FormGroupOptions & {
   className?: string
   children?: React.ReactNode
   items?: []
-  alerts?: AlertProps[]
+  alerts?: AlertItem[]
   actions?: Action[]
 }
+
+// TODO: update documentation
 // TODO: https://developer.mozilla.org/en-US/docs/Web/API/FormData
 /**
  * Component description.
@@ -346,12 +349,12 @@ export function Form(props: FormProps): JSX.Element {
   return (
     <FormContext.Provider value={form} >
       <form className={_className} onSubmit={onFormEvent} onReset={onFormEvent} {...otherProps}>
-        {alerts && <Block className='alerts' cmp={Alert} items={alerts} />}
+        {alerts && <Alerts items={alerts} />}
         {/* {items && <Block className='content' cmp={{}} items={items} />} */}
 
         {children}
 
-        {actions && <Actions className='actions' items={actions} />}
+        {actions && <Actions items={actions} />}
       </form>
     </FormContext.Provider>
   )
@@ -370,6 +373,7 @@ export default react.attachComponents(Form, {
   Group: FormGroup,
   List: FormGroup.List,
   Alert: Alert,
+  Alerts: Alerts,
   Field: Field,
   // Action: FormButton,
   Reset: FormButton.Reset,

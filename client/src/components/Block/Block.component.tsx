@@ -87,6 +87,7 @@ export function Block<C extends RepeatComponent>(props: BlockWithItemsProps<C>):
   return (
     <Tag className={_className} style={_style}>
       <Repeat cmp={cmp} v={v} {...otherProps as RepeatProps<C>} />
+
       {children}
     </Tag>
   )

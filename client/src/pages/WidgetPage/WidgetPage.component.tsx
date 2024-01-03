@@ -32,18 +32,19 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const _className = cn(css.WidgetPage, className)
 
   const MESSAGES: TextProps[] = [
-    // { status: 'error', content: 'error' },
-    // { status: 'warning', content: 'warning' },
-    // { status: 'info', content: 'info' },
-    // { status: 'primary', content: 'primary' },
-    // { status: 'secondary', content: 'secondary' },
-    // { status: 'disable', content: 'disable' },
-  ]
-
-  const ALERTS = [
     { status: 'error', content: 'error' },
     { status: 'warning', content: 'warning' },
     { status: 'info', content: 'info' },
+    { status: 'primary', content: 'primary' },
+    { status: 'secondary', content: 'secondary' },
+    { status: 'disable', content: 'disable' },
+  ]
+
+  const ALERTS = [
+    { status: 'success', content: 'success' },
+    { status: 'info', content: 'info' },
+    { status: 'warning', content: 'warning' },
+    { status: 'error', content: 'error' },
     { status: 'primary', content: 'primary' },
     { status: 'secondary', content: 'secondary' },
     { status: 'disable', content: 'disable' },
@@ -67,12 +68,12 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
     <Page className={_className} name='PAGES.WIDGETS' scroll='y' {...otherProps}>
       <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log}>
         {/* <Form.Block cmp={Form.Alert} items={ALERTS} scroll='xxl'> */}
-        <Form.Block cmp={Form.Alert}>
+        <Form.Alerts items={ALERTS}>
           <Form.Alert status='success' content='success' />
           <Form.Alert status='info' content='info' />
           <Form.Alert status='warning' content='warning' />
           <Form.Alert status='error' content='error' />
-        </Form.Block>
+        </Form.Alerts>
 
         <Form.Content direction='y' gap='xs'>
           {/* <Form.Actions items={ACTIONS}> */}

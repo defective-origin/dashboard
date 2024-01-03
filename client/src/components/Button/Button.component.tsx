@@ -10,9 +10,13 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Button.module.scss'
 
-export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'content' | 'size'>
+
+export type ButtonVariant = MuiButtonProps['variant']
+
+export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'content' | 'size' | 'variant'>
                         & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon'> & {
                           round?: boolean
+                          v?: ButtonVariant
                         }
 
 /**
@@ -23,11 +27,11 @@ export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'conten
  * <Button />
  */
 export function Button(props: ButtonProps): JSX.Element {
-  const { round, align, start, end, size = 'md', fillIcon, iconSize, content, children, className, ...otherProps } = props
+  const { v, round, align, start, end, size = 'md', fillIcon, iconSize, content, children, className, ...otherProps } = props
   const _className = cn(css.Button, css[size], round && css.Round, className)
 
   return (
-    <MuiButton className={_className} {...otherProps}>
+    <MuiButton className={_className} variant={v} {...otherProps}>
       {children ?? (
         <Text
           width='inherit'

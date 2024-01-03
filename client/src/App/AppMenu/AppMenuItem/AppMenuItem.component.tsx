@@ -35,7 +35,7 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
     color: 'primary',
     size: 'md',
     iconSize: 'lg',
-    variant: 'text',
+    v: 'text',
     className: _className,
     fillIcon: fillIcon ?? isActive,
     ...otherProps,

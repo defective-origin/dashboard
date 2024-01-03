@@ -53,7 +53,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
       {content: 'Test Text', status: 'success'},
     )
   }, [app])
-  const testActions: Action[] = [
+  const testActions: Action[] = [ // TODO: change variant to v
     { key: '3', start: 'close', size: 'xs', variant: 'outlined', content: 'TEST GUARD', color: 'error', onClick: checkGuard },
     { key: '2', start: 'close', size: 'xs', variant: 'outlined', content: 'TEST MESSAGE', color: 'warning', onClick: checkMessage },
     { key: '1', start: 'close', size: 'xs', variant: 'outlined', content: 'TEST ALERT', color: 'info', onClick: checkAlert },

@@ -22,7 +22,10 @@ export const ACTION_MAP = {
 
 export type Action = BlockItem<typeof ACTION_MAP>
 
-export type ActionsProps = BlockProps<typeof ACTION_MAP>
+// TODO: change to BlockWithItemsProps<typeof ACTION_MAP>?
+export type ActionsProps = BlockProps & {
+  items?: any[]
+}
 
 /**
  * Component description.

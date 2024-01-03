@@ -29,7 +29,7 @@ export type GuidePageProps = PageProps & {
 export function GuidePage(props: GuidePageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.GuidePage, className)
-  const testActions: Action[] = [
+  const testActions: Action[] = [// TODO: change variant to v
     { v: 'link', start: 'developer_mode_tv', size: 'xs', content: 'https://google.com', color: 'warning', href: 'https://google.com' },
     { v: 'link', start: 'developer_mode_tv', size: 'xs', content: 'google.com', color: 'warning', href: 'google.com' },
     { v: 'link', start: 'developer_mode_tv', size: 'xs', content: '/google.com', color: 'warning', href: '/google.com' },

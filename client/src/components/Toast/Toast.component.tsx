@@ -59,8 +59,8 @@ export function Toast(props: ToastProps): JSX.Element {
       <Text.H4 status='primary' content={data.content} />
 
       <Actions gap='xs' justify='end'>
-        {data.onSuccess && <Actions.Button size='xs' color='success' start='check_circle' content='Save' end='check_circle' variant='outlined' onClick={handleSuccess} />}
-        {data.onClose && <Actions.Button size='xs' color='error' start='close' content='Cancel' end='close' variant='outlined' onClick={handleClose} />}
+        {data.onSuccess && <Actions.Button size='xs' color='success' start='check_circle' content='Save' end='check_circle' v='outlined' onClick={handleSuccess} />}
+        {data.onClose && <Actions.Button size='xs' color='error' start='close' content='Cancel' end='close' v='outlined' onClick={handleClose} />}
       </Actions>
     </Block>
   )

@@ -5,8 +5,7 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Layout from 'components/Layout'
-import Repeat from 'components/Repeat'
-import Text, { TextProps } from 'components/Text'
+import Messages, { MessageItem } from 'components/Messages'
 
 // ---| common |---
 import { cn, react } from 'common/tools'
@@ -18,7 +17,7 @@ import { useForm, FormContext, FormGroupOptions } from '../Form.context'
 export type FormGroupProps = FormGroupOptions & {
   list?: boolean
   label?: string
-  messages?: TextProps[]
+  messages?: MessageItem[]
   className?: string
   children?: React.ReactNode
 }
@@ -47,8 +46,8 @@ export function FormGroup(props: FormGroupProps): JSX.Element {
           {children}
         </Layout.Content>
 
-        <Layout.Bottom className={css.Messages}>
-          <Repeat className={css.Message} cmp={Text.Caption} items={messages} />
+        <Layout.Bottom className={css.Footer}>
+          <Messages items={messages} />
         </Layout.Bottom>
       </Layout>
     </FormContext.Provider>

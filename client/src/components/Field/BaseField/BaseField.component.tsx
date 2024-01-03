@@ -4,8 +4,7 @@ import React, { useCallback, useMemo } from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat from 'components/Repeat'
-import Text, { TextProps, TextStatus } from 'components/Text'
+import Messages, { MessageItem, MessageStatus } from 'components/Messages'
 import Layout, { LayoutProps } from 'components/Layout'
 import { FormFieldValue, FormValueOptions, useForm } from 'components/Form'
 
@@ -15,7 +14,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './BaseField.module.scss'
 
-const MESSAGE_ORDER: Record<TextStatus, number> = {
+const MESSAGE_ORDER: Record<MessageStatus, number> = {
   error: 0,
   warning: 1,
   info: 2,
@@ -30,7 +29,7 @@ export type BaseFieldProps<P extends object> = P & FormValueOptions & Pick<Layou
   throttle?: number // TODO: implement
   validateOnBlur?: boolean
   hide?: boolean | ((field: FormFieldValue, form: FormFieldValue) => boolean)
-  messages?: TextProps[]
+  messages?: MessageItem[]
   className?: string
   checked?: boolean
   as?: React.FunctionComponent<P> | keyof JSX.IntrinsicElements
@@ -70,7 +69,7 @@ export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Eleme
   const fullName = useMemo(() => `${form.state().path[0]}${form.state().path.slice(1).map((n) => `[${n}]`).join('')}`, [form])
   const allMessages = useMemo(() =>
     form.state().errors
-      .map<TextProps>((content: string) => ({ status: 'error', content }))
+      .map<MessageItem>((content: string) => ({ status: 'error', content }))
       .concat(...messages)
       .sort((a, b) => MESSAGE_ORDER[a.status ?? 'primary'] - MESSAGE_ORDER[b.status ?? 'primary'])
   , [form, messages])
@@ -102,8 +101,8 @@ export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Eleme
         <Tag name={fullName} onBlur={onBlur} onChange={handleChange} {...otherProps as P} {...inputProps} />
       </Layout.Content>
 
-      <Layout.Bottom className={css.Messages} align={align}>
-        <Repeat className={css.Message} cmp={Text.Caption} items={allMessages} />
+      <Layout.Bottom className={css.Footer} align={align}>
+        <Messages items={allMessages} />
       </Layout.Bottom>
     </Layout>
   )
