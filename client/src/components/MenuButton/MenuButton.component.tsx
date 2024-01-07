@@ -4,7 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Button, { ButtonProps } from 'components/lib/Button'
+import Button, { ButtonProps } from 'components/Button'
 import Menu, { MenuProps } from '../Menu'
 
 // ---| common |---

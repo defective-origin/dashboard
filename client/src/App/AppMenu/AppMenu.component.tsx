@@ -38,7 +38,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
     <Actions className={_className} direction='y' align='stretch' {...otherProps}>
       <Logo className={css.Logo} v='logo' href={ROUTE_LINKS.ROOT} />
 
-      <AppMenuItem start='dashboard' content={app.t('LINKS.DASHBOARDS')} href={ROUTE_LINKS.DASHBOARDS} />
+      <AppMenuItem start='dashboard' content={app.t('LINKS.BOARDS')} href={ROUTE_LINKS.BOARDS} />
       <AppMenuItem start='insert_chart' content={app.t('LINKS.WIDGETS')} href={ROUTE_LINKS.WIDGETS} />
 
       <Actions.Spacer />

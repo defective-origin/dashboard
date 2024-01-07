@@ -4,7 +4,7 @@ import React from 'react'
 import { useLauncher } from 'Launcher'
 // ---| pages |---
 // ---| screens |---
-import Page, { PageProps } from 'screens/Page'
+import Page from 'screens/Page'
 
 // ---| components |---
 import Banner from 'components/Banner'
@@ -16,7 +16,7 @@ import { cn } from 'common/tools'
 import css from './StatusPage.module.scss'
 import { STATUS_MAP, StatusVariant } from './StatusPage.conf'
 
-export type StatusPageProps = PageProps & {
+export type StatusPageProps = {
   className?: string
   children?: React.ReactNode
   v?: StatusVariant

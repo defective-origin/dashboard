@@ -14,8 +14,8 @@ import WidgetPage from 'pages/WidgetPage'
 
 export const ROUTE_LINKS = {
   ROOT: '/',
-  DASHBOARDS: 'dashboards',
-  DASHBOARD: 'dashboards/:id',
+  BOARDS: 'boards',
+  BOARD: 'boards/:id',
   WIDGETS: 'widgets',
   WIDGET: 'widgets/:id',
   ACCOUNT: 'account',
@@ -31,7 +31,7 @@ export const APP_ROUTES = createBrowserRouter([
     element: <App />,
     children: [
       { path: ROUTE_LINKS.ROOT, element: <StatusPage v='welcome' /> },
-      { path: ROUTE_LINKS.DASHBOARDS, element: <DashboardPage /> },
+      { path: ROUTE_LINKS.BOARDS, element: <DashboardPage /> },
       { path: ROUTE_LINKS.WIDGETS, element: <WidgetPage /> },
       { path: ROUTE_LINKS.ACCOUNT, element: <AccountPage /> },
       { path: ROUTE_LINKS.GUIDE, element: <GuidePage /> },

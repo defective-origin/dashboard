@@ -7,7 +7,7 @@ import MuiMenuItem, {
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Link, { LinkProps } from 'components/lib/Link'
+import Link, { LinkProps } from 'components/Link'
 
 // ---| common |---
 import { cn } from 'common/tools'
