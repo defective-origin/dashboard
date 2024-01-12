@@ -1,4 +1,4 @@
-import i18next, { Callback } from 'i18next'
+import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
@@ -10,6 +10,22 @@ import { ENV } from 'Launcher/Launcher.conf'
 import i18n from './i18n'
 import l10n from './l10n'
 
+
+export type FlattenObjectKeys<
+  T extends Record<string, unknown>,
+  Sep extends string = '.',
+  Key = keyof T
+> = Key extends string
+  ? T[Key] extends Record<string, unknown>
+    ? `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
+    : `${Key}`
+  : never
+
+
+export type Languages = keyof typeof i18n
+export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
+
+// TODO: (kseniya_boldak) add provider export
 
 /**
  * // the translations
@@ -61,22 +77,4 @@ i18next
     },
   })
 
-
-export type FlattenObjectKeys<
-  T extends Record<string, unknown>,
-  Sep extends string = '.',
-  Key = keyof T
-> = Key extends string
-  ? T[Key] extends Record<string, unknown>
-    ? `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
-    : `${Key}`
-  : never
-
-
-export type Languages = keyof typeof i18n
-export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
-
 export default i18next
-export { I18nextProvider } from 'react-i18next'
-export const t = (key?: TranslateKeys, options?: object) => key && i18next.t(key, options)
-export const changeLanguage = (key?: Languages, callback?: Callback) => i18next.changeLanguage(key, callback)

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { StyledEngineProvider, Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material'
 
 // ---| core |---
-import i18next, { I18nextProvider } from 'locale'
+import i18next, { LocaleProvider, useLocale } from 'locale'
 import { RouterProvider, APP_ROUTES } from 'router'
 
 // ---| self |---
@@ -27,12 +27,16 @@ export function Launcher(props: LauncherProps): JSX.Element {
   const system = useSystem()
   const monitor = useMonitor()
   const account = useAccount()
+  const locale = useLocale()
 
-  const options = useMemo<LauncherOptions>(() => Object.assign({}, system, monitor, ui, account, defaultOptions), [system, monitor, ui, account])
+  const options = useMemo(
+    () => Object.assign({}, system, monitor, ui, account, locale, defaultOptions),
+    [system, monitor, ui, account, locale, defaultOptions],
+  )
 
   return (
     <React.StrictMode>
-      <I18nextProvider i18n={i18next}>
+      <LocaleProvider i18n={i18next}>
         <React.Suspense fallback={<h1>Loading...</h1>}>
           {/* https://bareynol.github.io/mui-theme-creator/ */}
           {/* injectFirst allows override Material UI's styles. */}
@@ -45,7 +49,7 @@ export function Launcher(props: LauncherProps): JSX.Element {
             </CssVarsProvider>
           </StyledEngineProvider>
         </React.Suspense>
-      </I18nextProvider>
+      </LocaleProvider>
     </React.StrictMode>
   )
 }

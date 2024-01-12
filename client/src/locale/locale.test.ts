@@ -1,4 +1,9 @@
+import { renderHook } from '@testing-library/react-hooks'
+
+// ---| self |---
 import * as tools from './locale.tool'
+import useLocale from './locale.hook'
+
 
 describe('[Locale] tool', () => {
   describe('[getLocaleCode] action', () => {
@@ -28,5 +33,13 @@ describe('[Locale] tool', () => {
         region: 'B',
       })
     })
+  })
+})
+
+describe('[Locale] hook', () => {
+  it('should return options', () => {
+    const { result } = renderHook(() => useLocale())
+
+    expect(result.current).toBe(null)
   })
 })

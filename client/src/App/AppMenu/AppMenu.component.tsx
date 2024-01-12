@@ -48,8 +48,8 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
 
       <AppMenuItem start='language' content={app.language.toUpperCase()} />
-      <AppMenuItem start={`${app.theme}_mode`} content={app.theme.toUpperCase()} onClick={app.toggleTheme} fillIcon />
-      <AppMenuItem start={app.isMode('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.toUpperCase()} onClick={app.toggleMode} />
+      <AppMenuItem start={`${app.theme.theme}_mode`} content={app.theme.theme.toUpperCase()} onClick={app.theme.toggle} fillIcon />
+      <AppMenuItem start={app.mode.is('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.mode.toUpperCase()} onClick={app.mode.toggle} />
 
       {children}
     </Actions>

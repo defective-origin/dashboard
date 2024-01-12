@@ -50,7 +50,7 @@ export function App(props: AppProps): JSX.Element {
 
   // TODO: занести в UI лончер
   // move to ui launcher
-  useMode(app.theme)
+  useMode(app.theme.theme)
   useMode(breakpoints.names)
 
   // const closeModal = useCallback(() => app.detach('modal'), [])

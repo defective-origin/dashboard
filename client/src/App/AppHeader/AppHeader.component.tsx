@@ -35,18 +35,18 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
   const app = useLauncher()
-  const checkMessage = useCallback(() => app.message({
+  const checkMessage = useCallback(() => app.toast.message({
     content: 'TEST MESSAGE',
     onClose: () => console.log('CLOSE MESSAGE'),
     onSuccess: () => console.log('SUCCESS MESSAGE'),
   }), [app])
-  const checkGuard = useCallback(() => app.guard({
+  const checkGuard = useCallback(() => app.toast.guard({
     content: 'You have unsaved changes. \n Are you sure you want to leave without save?',
     onClose: () => console.log('CLOSE GUARD'),
     onSuccess: () => console.log('SUCCESS GUARD'),
   }), [app])
   const checkAlert = useCallback(() => {
-    app.alert(
+    app.toast.alert(
       {content: 'Test Text', status: 'error'},
       {content: 'Test Text', status: 'warning'},
       {content: 'Test Text', status: 'info'},
@@ -64,7 +64,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
 
   return (
     <Block className={_className} direction='x' align='center' padding='sm' {...otherProps}>
-      <Text.H1 status='primary'>{app.pageName}</Text.H1>
+      <Text.H1 status='primary'>{app.toast.page}</Text.H1>
 
       <Block.Spacer />
 
