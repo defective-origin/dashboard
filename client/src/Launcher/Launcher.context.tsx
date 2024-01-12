@@ -6,6 +6,9 @@ import { UseMonitorReturnOptions } from './UseMonitor'
 import { UseSystemReturnOptions } from './UseSystem'
 import { UseUIReturnOptions } from './UseUI'
 
+
+// TODO: (kseniya_boldak) think about refactoring
+
 export type LauncherOptions = UseSystemReturnOptions
                             & UseMonitorReturnOptions
                             & UseUIReturnOptions

@@ -1,36 +1,15 @@
 import { useMemo } from 'react'
 
 // ---| core |---
-import i18next, { Languages, changeLanguage, t } from 'locale'
+import { UseLocaleReturnOptions, useLocale } from 'locale'
 
-// ---| common |---
-import { useObject } from 'common/hooks'
+// ---| self |---
+import useHotKeys, { UseHotKeysReturnOptions } from './UseHotKeys'
 
-export type SystemLanguage = Languages
 
-export type SystemState = {
-  language: SystemLanguage
-  languages: SystemLanguage[]
-  hotkeys: Record<string, () => void>
+export type UseSystemReturnOptions = UseLocaleReturnOptions & {
+  hotkeys: UseHotKeysReturnOptions
 }
-
-export const DEFAULT_SYSTEM_STATE: SystemState = {
-  language: 'en',
-  languages: i18next.languages as Languages[],
-  hotkeys: {},
-}
-
-export type SystemActions = {
-  changeLanguage: typeof changeLanguage
-  addHotkey: (key: string, handler: () => void) => void
-  removeHotkey: (key: string) => void
-}
-
-export type SystemSelectors = {
-  t: typeof t
-}
-
-export type UseSystemReturnOptions = SystemState & SystemActions & SystemSelectors
 
 /**
  * Hook descriptions
@@ -38,29 +17,11 @@ export type UseSystemReturnOptions = SystemState & SystemActions & SystemSelecto
  * @example
  * const options = useSystem(conf)
  */
-export const useSystem = (): UseSystemReturnOptions | null => {
-  const state = useObject(DEFAULT_SYSTEM_STATE)
+export const useSystem = (): UseSystemReturnOptions => {
+  const hotkeys = useHotKeys()
+  const locale = useLocale()
 
-  const actions = useMemo<SystemActions>(() => ({
-    changeLanguage,
-    addHotkey: (key, handler) => state.merge({ hotkeys: { ...state.current.hotkeys, [key]: handler } }),
-    removeHotkey: (key) => {
-      const hotkeys = { ...state.current.hotkeys }
-
-      delete hotkeys[key]
-
-      state.merge({ hotkeys })
-    },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [])
-
-  const selectors = useMemo<SystemSelectors>(() => ({
-    t,
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [])
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo<UseSystemReturnOptions>(() => ({ ...state.current, ...actions, ...selectors }), [state.current])
+  return useMemo(() => ({ hotkeys, ...locale }), [hotkeys, locale])
 }
 
 export default useSystem

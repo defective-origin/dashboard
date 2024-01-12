@@ -40,7 +40,7 @@ export function Page(props: PageProps): JSX.Element {
   const pageName = app.t(name as TranslateKeys)
   const tabName = app.t('SYSTEM.TAB_NAME', { title: pageName })
 
-  useLayoutEffect(() => { app.setPageName(pageName) }, [pageName])
+  useLayoutEffect(() => { app.toast.setPageName(pageName) }, [app.toast, pageName])
 
   return (
     <Layout className={_className} stretch {...otherProps}>
