@@ -33,13 +33,18 @@ export function clearProps<
   return props as ClearObject<P>
 }
 
+// Docs: https://www.youtube.com/watch?v=3nKMO2UNQoY
+export type ExtendProps<OwnProps extends object, ExtendProps extends object> = OwnProps & Omit<ExtendProps, keyof OwnProps>
+// for props with 'as' prop
+export type ExtendCustomProps<OwnProps extends object, E extends React.ElementType> = ExtendProps<OwnProps, React.ComponentProps<E>>
+
 // work with components
-export function getDisplayName(component: React.ComponentType, defaultName = 'Component'): string {
-  return component.displayName || component.name || defaultName
+export function getDisplayName(component: React.ElementType, defaultName = 'Component'): string {
+  return (component as any).displayName || (component as any).name || defaultName
 }
 
-export function setDisplayName(component: React.ComponentType, name = getDisplayName(component)): void {
-  component.displayName = name
+export function setDisplayName(component: React.ElementType, name = getDisplayName(component)): void {
+  (component as any).displayName = name
 }
 
 export type OverrideComponentOptions = {
@@ -55,12 +60,13 @@ export type OverrideComponentOptions = {
  *
  * <BoldText />
  */
-export function overrideComponent<C extends React.FunctionComponent>(
+export function overrideComponent<C extends React.ElementType<any>>(
   component: C,
   overrideProps: Partial<React.ComponentProps<C>>,
   options: OverrideComponentOptions = {},
 ): C {
-  let overrideComponent: React.FunctionComponent = (props) => component.apply(null, [{ ...overrideProps, ...props }])
+  // FIXME: it works only for functional components
+  let overrideComponent: React.ElementType<any> = (props) => (component as any).apply(null, [{ ...overrideProps, ...props }])
 
   if (options.memoize) {
     overrideComponent = React.memo(overrideComponent)
@@ -80,7 +86,7 @@ export function overrideComponent<C extends React.FunctionComponent>(
  * <Text />
  * <Text.Bold /> // displayName = 'Text.Bold'
  */
-export function attachOverride<C extends React.FunctionComponent>(
+export function attachOverride<C extends React.ElementType<any>>(
   component: C,
   overrideProps: Partial<React.ComponentProps<C>>,
   options: OverrideComponentOptions = {},
@@ -115,7 +121,7 @@ export function attachOverride<C extends React.FunctionComponent>(
  * <Text.Bold /> // displayName = 'Text.Bold'
  */
 export function attachOverrides<
-  C extends React.FunctionComponent, // TODO: it works only with component with not required property ?:
+  C extends React.ElementType<any>, // TODO: it works only with component with not required property ?:
   K extends string,
 >(
   component: C,
@@ -142,7 +148,7 @@ export function attachOverrides<
  * <Text />
  * <Text.Bold /> // displayName = 'Text.Bold'
  */
-export function attachComponent<C extends React.FunctionComponent, SC extends React.FunctionComponent>(
+export function attachComponent<C extends React.ElementType<any>, SC extends React.ElementType<any>>(
   component: C,
   subComponent: SC,
   options: OverrideComponentOptions = {},
@@ -172,8 +178,8 @@ export function attachComponent<C extends React.FunctionComponent, SC extends Re
  * <Field.Text /> // displayName = 'Field.Text'
  */
 export function attachComponents<
-  C extends React.FunctionComponent,
-  M extends Record<string, React.FunctionComponent>,
+  C extends React.ElementType<any>,
+  M extends Record<string, React.ElementType<any>>,
 >(
   component: C,
   overrideComponentMap: M,
@@ -192,15 +198,15 @@ export function attachComponents<
 }
 
 // work with children
-export const isExemplar = (component: React.ComponentType, exemplar: React.ReactNode) => {
+export const isExemplar = (component: React.ElementType<any>, exemplar: React.ReactNode) => {
   return React.isValidElement(exemplar) && exemplar.type === component
 }
 
-export const hasExemplar = (items: React.ComponentType[], exemplar: React.ReactNode) => {
+export const hasExemplar = (items: React.ElementType<any>[], exemplar: React.ReactNode) => {
   return items.some((item) => isExemplar(item, exemplar))
 }
 
 
-export const isComponent = (value: any): value is React.ComponentType =>
+export const isComponent = (value: any): value is React.ElementType | string =>
   ['string', 'function'].includes(typeof value)
   || typeof value === 'object' && value?.$$typeof

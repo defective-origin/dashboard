@@ -47,9 +47,8 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <AppMenuItem start='paid' content={app.t('LINKS.DONATION')} href={ROUTE_LINKS.DONATION} />
       <AppMenuItem start='support_agent' content={app.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
 
-      <AppMenuItem start='language' content={app.language.toUpperCase()} />
       <AppMenuItem start={`${app.theme.theme}_mode`} content={app.theme.theme.toUpperCase()} onClick={app.theme.toggle} fillIcon />
-      <AppMenuItem start={app.mode.is('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.mode.toUpperCase()} onClick={app.mode.toggle} />
+      <AppMenuItem start='language' content={app.language.toUpperCase()} />
 
       {children}
     </Actions>

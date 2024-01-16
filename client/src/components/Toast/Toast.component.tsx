@@ -1,13 +1,12 @@
 import React from 'react'
-import { toast, ToastContainer, Id, ToastContentProps } from 'react-toastify'
+import { ToastContainer, ToastContentProps as MuiToastContentProps } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon, { IconVariant } from 'components/Icon'
-import { AlertStatus } from 'components/Alert'
+import { AlertColor } from 'components/Alert'
 import Text from 'components/Text'
 import Block, { BlockDirection } from 'components/Block'
 import Actions from 'components/Actions'
@@ -16,22 +15,19 @@ import Actions from 'components/Actions'
 // ---| self |---
 import css from './Toast.module.scss'
 
-const ALERT_ICON_MAP: Record<AlertStatus, IconVariant> = {
-  success: 'check_circle',
-  info: 'info',
-  warning: 'warning',
-  error: 'error',
-}
+export type ToastName = 'messages' | 'guards' | 'alerts'
 
-export type ToastOptions = {
+export const initToastKey = (name: ToastName) => `portal-${name}`
+
+export type ToastMessage = {
   content?: React.ReactNode
-  status?: AlertStatus
+  color?: AlertColor
   direction?: BlockDirection
   onClose?: () => void
   onSuccess?: () => void
 }
 
-export type ToastProps = ToastContentProps<ToastOptions>
+export type ToastProps = MuiToastContentProps<ToastMessage>
 
 /**
  * Component description.
@@ -41,7 +37,7 @@ export type ToastProps = ToastContentProps<ToastOptions>
  * <Toast />
  */
 export function Toast(props: ToastProps): JSX.Element {
-  const { closeToast, data = {} as ToastOptions, ...otherProps } = props
+  const { closeToast, data = {} as ToastMessage, ...otherProps } = props
 
   // TODO: unify handlers
   const handleClose = () => {
@@ -56,7 +52,7 @@ export function Toast(props: ToastProps): JSX.Element {
 
   return (
     <Block className={css.Toast} justify='space-between' direction={data.direction ?? 'x'} gap='xs' {...otherProps}>
-      <Text.H4 status='primary' content={data.content} />
+      <Text.H4 color='primary' multiline content={data.content} />
 
       <Actions gap='xs' justify='end'>
         {data.onSuccess && <Actions.Button size='xs' color='success' start='check_circle' content='Save' end='check_circle' v='outlined' onClick={handleSuccess} />}
@@ -66,49 +62,25 @@ export function Toast(props: ToastProps): JSX.Element {
   )
 }
 
+export type ToastContainerProps = {
+  name: ToastName
+  className?: string
+  position: MuiToastContentProps['toastProps']['position']
+}
+
+Toast.Container = function Toast(props: ToastContainerProps): JSX.Element {
+  const { name } = props
+
+  return (
+    <ToastContainer
+      hideProgressBar
+      enableMultiContainer
+      containerId={initToastKey(name)}
+      {...props}
+    />
+  )
+}
+
 Toast.displayName = 'Toast'
 
-
-export const showMessage = (data?: ToastOptions): Id => {
-
-  return toast(Toast, {
-    type: data?.status,
-    containerId: 'messages',
-    data: { direction: 'y', ...data },
-  })
-}
-
-export const showAlert = (data?: ToastOptions): Id => {
-  const type = data?.status ?? 'info'
-
-  return toast(Toast, {
-    theme: 'colored',
-    containerId: 'alerts',
-    autoClose: false,
-    icon: () => <Icon v={ALERT_ICON_MAP[type]} />,
-    data,
-    type,
-  })
-}
-
-// TODO: via overrideComponents
-// TODO: via v?: guard, message, alert
-// TODO: объединить showGuard, showAlert showMessage
-// TODO: сделать через один ToastContainer?
-export const showGuard = (data?: ToastOptions): Id => {
-  const type = data?.status ?? 'info'
-
-  return toast(Toast, {
-    toastId: 'guard',
-    theme: 'light',
-    containerId: 'guards',
-    autoClose: false,
-    closeButton: false,
-    closeOnClick: false,
-    draggable: false,
-    icon: () => <Icon v={ALERT_ICON_MAP[type]} />,
-    data,
-  })
-}
-
-export default ToastContainer
+export default Toast

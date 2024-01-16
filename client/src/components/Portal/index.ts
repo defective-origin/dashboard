@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './UseToast.hook'
+export { default } from './Portal.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './UseToast.hook'
+export * from './Portal.component'

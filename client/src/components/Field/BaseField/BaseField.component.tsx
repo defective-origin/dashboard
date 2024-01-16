@@ -4,8 +4,9 @@ import React, { useCallback, useMemo } from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Messages, { MessageItem, MessageStatus } from 'components/Messages'
-import Layout, { LayoutProps } from 'components/Layout'
+import Text from 'components/Text'
+import Block, { BlockProps } from 'components/Block'
+import Messages, { MessageItem, MessageColor } from 'components/Messages'
 import { FormFieldValue, FormValueOptions, useForm } from 'components/Form'
 
 // ---| common |---
@@ -14,7 +15,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './BaseField.module.scss'
 
-const MESSAGE_ORDER: Record<MessageStatus, number> = {
+const MESSAGE_ORDER: Record<MessageColor, number> = {
   error: 0,
   warning: 1,
   info: 2,
@@ -24,7 +25,7 @@ const MESSAGE_ORDER: Record<MessageStatus, number> = {
   disable: 6,
 }
 
-export type BaseFieldProps<P extends object> = P & FormValueOptions & Pick<LayoutProps, 'grow' | 'align'> & {
+export type BaseFieldProps<P extends object> = P & FormValueOptions & Pick<BlockProps, 'align'> & {
   label?: string
   throttle?: number // TODO: implement
   validateOnBlur?: boolean
@@ -32,7 +33,7 @@ export type BaseFieldProps<P extends object> = P & FormValueOptions & Pick<Layou
   messages?: MessageItem[]
   className?: string
   checked?: boolean
-  as?: React.FunctionComponent<P> | keyof JSX.IntrinsicElements
+  as?: React.ElementType<P>
   change?: (event: React.ChangeEvent<HTMLInputElement>) => FormFieldValue
   selectProps?: (value?: FormFieldValue) => Partial<P>
 }
@@ -51,12 +52,11 @@ export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Eleme
     label,
     as,
     throttle: tms,
-    align,
-    grow,
     validateOnBlur,
     value,
     messages = [],
     schema,
+    align,
     onChange,
     change,
     selectProps,
@@ -69,9 +69,9 @@ export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Eleme
   const fullName = useMemo(() => `${form.state().path[0]}${form.state().path.slice(1).map((n) => `[${n}]`).join('')}`, [form])
   const allMessages = useMemo(() =>
     form.state().errors
-      .map<MessageItem>((content: string) => ({ status: 'error', content }))
+      .map<MessageItem>((content: string) => ({ color: 'error', content }))
       .concat(...messages)
-      .sort((a, b) => MESSAGE_ORDER[a.status ?? 'primary'] - MESSAGE_ORDER[b.status ?? 'primary'])
+      .sort((a, b) => MESSAGE_ORDER[a.color ?? 'primary'] - MESSAGE_ORDER[b.color ?? 'primary'])
   , [form, messages])
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,18 +93,15 @@ export function BaseField<P extends object>(props: BaseFieldProps<P>): JSX.Eleme
 
   const inputProps = selectProps?.(form.state().value) ?? { value: form.state().value }
 
+  // FIXME: rewrite on layout?
   return (
-    <Layout className={_className} grow={grow} align={align}>
-      <Layout.Top className={css.Title} content={label} />
+    <Block className={_className} gap='xs' align={align}>
+      <Text.Subtitle2 content={label} />
 
-      <Layout.Content className={css.Content} align={align} justify='center'>
-        <Tag name={fullName} onBlur={onBlur} onChange={handleChange} {...otherProps as P} {...inputProps} />
-      </Layout.Content>
+      <Tag name={fullName} onBlur={onBlur} onChange={handleChange} {...otherProps as P} {...inputProps} />
 
-      <Layout.Bottom className={css.Footer} align={align}>
-        <Messages items={allMessages} />
-      </Layout.Bottom>
-    </Layout>
+      <Messages items={allMessages} />
+    </Block>
   )
 }
 

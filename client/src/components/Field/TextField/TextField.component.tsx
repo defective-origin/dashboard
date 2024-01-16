@@ -26,7 +26,7 @@ export function TextField(props: TextFieldProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.TextField, className)
 
-  return <BaseField className={_className} as={MuiTextField} size='small' grow={1} {...otherProps} />
+  return <BaseField className={_className} as={MuiTextField} size='small' {...otherProps} />
 }
 
 TextField.displayName = 'TextField'

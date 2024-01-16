@@ -85,7 +85,9 @@ export type SelectionBoardProps<I extends Record<string, unknown>> = UseSelectio
 export function SelectionBoard<I extends Record<string, unknown>>(props: SelectionBoardProps<I>): JSX.Element {
   const { width, height, gap = 0, className, ...selectionOptions } = props
   const { ref, places, rows, columns, cell, isIntersected, selectedArea, select } = useSelection(selectionOptions)
-  const _className = cn(css.SelectionBoard, className, isIntersected && css.ForbiddenSelect)
+  const _className = cn(css.SelectionBoard, {
+    [css.ForbiddenSelect]: isIntersected,
+  }, className)
   const margin = gap / 2
   const colors = useProperties({
     primary: '--canvas-primary-color',

@@ -1,3 +1,5 @@
+import React from 'react'
+
 // ---| tests |---
 import { render } from 'tests'
 
@@ -8,16 +10,22 @@ type ItemProps = { content: React.ReactNode }
 
 describe('[Repeat] component', () => {
   const Item = (props: ItemProps) => <p data-testid='item'>{props.content}</p>
-  const ItemA = (props: { a?: React.ReactNode } & ItemProps) => <p data-testid='itemA'>{props.a} - {props.content}</p>
-  const ItemB = (props: { b?: React.ReactNode } & ItemProps) => <p data-testid='itemB'>{props.b} - {props.content}</p>
+  class ItemClass extends React.Component { render() { return 'CLASS COMPONENT' } }
 
   const itemMap = {
-    a: ItemA,
-    b: ItemB,
+    a: (props: { a?: React.ReactNode } & ItemProps) => <p data-testid='itemA'>{props.a} - {props.content}</p>,
+    b: (props: { b?: React.ReactNode } & ItemProps) => <p data-testid='itemB'>{props.b} - {props.content}</p>,
+
+    // should work with native items
+    instinct: 'div',
+    function: function({ name = 'function' }) { return name },
+    arrowFunction: ({ name = 'arrow function'}) => name,
+    class: ItemClass,
   }
 
   it('should render items with item component', () => {
-    const items: RepeatItem<typeof Item>[] = [
+    // type casting can be omitted if we work with component
+    const items = [
       { content: '1' },
       { content: '2' },
     ]
@@ -28,9 +36,10 @@ describe('[Repeat] component', () => {
   })
 
   it('should render items with item component from map', () => {
+    // type casting can not be omitted if we work with component map
     const items: RepeatItem<typeof itemMap>[] = [
-      { v: 'a', a: '1', content: '1' },
-      { v: 'b', b: '2', content: '2' },
+      { variant: 'a', a: '1', content: '1' },
+      { variant: 'b', b: '2', content: '2' },
     ]
     const container = render(<Repeat cmp={itemMap} items={items} />)
 
@@ -42,9 +51,9 @@ describe('[Repeat] component', () => {
   it('should render items with default component type', () => {
     const items: RepeatItem<typeof itemMap>[] = [
       { content: '1' },
-      { content: '2', v: 'b' },
+      { content: '2', variant: 'b' },
     ]
-    const container = render(<Repeat cmp={itemMap} items={items} v='a' />)
+    const container = render(<Repeat cmp={itemMap} items={items} variant='a' />)
 
     expect(container.getAll('itemA')).toHaveLength(1)
     expect(container.getAll('itemB')).toHaveLength(1)
@@ -53,8 +62,8 @@ describe('[Repeat] component', () => {
 
   it('should render with same named props', () => {
     const items: RepeatItem<typeof itemMap>[] = [
-      { content: '1', v: 'a' },
-      { content: '2', v: 'b' },
+      { content: '1', variant: 'a' },
+      { content: '2', variant: 'b' },
     ]
     const container = render(<Repeat cmp={itemMap} items={items} />)
 
@@ -63,21 +72,12 @@ describe('[Repeat] component', () => {
   })
 
   it('should works with different types of components', () => {
-    class Cmp { render() { return 'CLASS COMPONENT' } }
-    const itemMap = {
-      instinct: 'span',
-      function: function() { return 'function'},
-      arrowFunction: () => 'arrow function',
-      class: Cmp,
-      // TODO: with React.memo, React.forwardRef
-    }
-    const items: RepeatItem<typeof itemMap>[] = [
-      { v: 'instinct' },
-      { v: 'function' },
-      { v: 'arrowFunction' },
-      { v: 'class' },
-    ]
-    const container = render(<Repeat cmp={itemMap} items={items} />)
+    const container = render(<Repeat cmp={itemMap} items={[
+      { variant: 'instinct' },
+      { variant: 'function' },
+      { variant: 'arrowFunction' },
+      { variant: 'class' },
+    ]} />)
 
     expect(container.getAll('instinct')).toHaveLength(1)
     expect(container.getAll('function')).toHaveLength(1)

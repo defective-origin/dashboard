@@ -34,7 +34,7 @@ export function Copyright(props: CopyrightProps): JSX.Element {
     <Text.H5
       className={_className}
       size='xs'
-      status='secondary'
+      color='secondary'
       content={app.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}
       {...otherProps}
     />

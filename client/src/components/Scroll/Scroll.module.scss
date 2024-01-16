@@ -1,24 +1,87 @@
 @import 'src/App/App.module';
 
-.Scroll {
-  overflow: hidden;
-  position: relative;
+// TODO: change to rem [init-scroll, init-space, init-text]
+$scrolls: ('xxs': 4, 'xs': 4, 'sm': 8, 'md': 12, 'lg': 16, 'xl': 20, 'xxl': 20);
 
-  @include stretch;
+// TODO: unify [init-scroll, init-space, init-text]
+@mixin init-scroll($property) {
+  @each $size, $_ in $scrolls {
+    &--#{$size} { $property: var(--scroll--#{$size}); }
+  }
 }
 
-.Content {
-  position: absolute;
-  inset: 0;
+:root {
+  --scroll-thumb-color: #33333331;
+  --scroll-thumb-color--hover: #33333354;
+
+  @each $size, $value in $scrolls {
+    --scroll--#{$size}: #{$value}px;
+  }
 }
 
-.Actions {
-  position: absolute;
-  bottom: 50px;
-  left: 50px;
-  opacity: 0.5;
+:global {
+  .dark {
+    // --text-color: white;
+  }
 
-  &:hover {
-    opacity: 1;
+  .light {
+    // --text-color: black;
+  }
+
+  .scroll {
+    &:Hover {
+      &--x,
+      &--y {
+        visibility: visible;
+      }
+    }
+
+    // direction
+    &--x { overflow-x: auto; overflow-y: hidden; }
+    &--y { overflow-x: hidden; overflow-y: auto; }
+    &--xy { overflow-x: auto; overflow-y: auto; }
+
+    // style
+    &--x,
+    &--y,
+    &--xy {
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-track {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+      }
+    }
+
+    .scroll-bar-thumb {
+      visibility: hidden;
+
+      @include init-scroll(width);
+      @include init-scroll(height);
+
+      &--x { width: 0; }
+      &--y { height: 0; }
+
+
+      &:hover {
+        background: var(--scroll-thumb-color);
+
+        &:hover {
+          background: var(--scroll-thumb-color--hover);
+        }
+      }
+    }
+  }
+
+  .scroll-actions {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

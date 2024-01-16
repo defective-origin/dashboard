@@ -15,14 +15,14 @@ import { cn, react } from 'common/tools'
 import css from './Alert.module.scss'
 
 
-export type AlertStatus = 'success' | 'info' | 'warning' | 'error'
+export type AlertColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
 
 export type AlertProps = Omit<MuiAlertProps, 'severity' | 'content'> & {
   title?: string
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  status?: AlertStatus
+  color?: AlertColor
 }
 
 /**
@@ -33,7 +33,7 @@ export type AlertProps = Omit<MuiAlertProps, 'severity' | 'content'> & {
  * <Alert />
  */
 export function Alert(props: AlertProps): JSX.Element | null {
-  const { title, status, content, children = content, className, ...otherProps } = props
+  const { title, color, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Alert, className)
 
   if (!content && !children) {
@@ -41,7 +41,7 @@ export function Alert(props: AlertProps): JSX.Element | null {
   }
 
   return (
-    <MuiAlert className={_className} severity={status} {...otherProps}>
+    <MuiAlert className={_className} severity={color} {...otherProps}>
       {title && <MuiAlertTitle><Text.H4 size='sm' content={title} /></MuiAlertTitle>}
       <Text.Caption size='xs' content={children ?? content} />
     </MuiAlert>
@@ -51,10 +51,10 @@ export function Alert(props: AlertProps): JSX.Element | null {
 Alert.displayName = 'Alert'
 
 export default react.attachOverrides(Alert, {
-  Error: { status: 'error' },
-  Warning: { status: 'warning' },
-  Info: { status: 'info' },
-  Success: { status: 'success' },
+  Error: { color: 'error' },
+  Warning: { color: 'warning' },
+  Info: { color: 'info' },
+  Success: { color: 'success' },
 }, {
   memoize: true,
 })

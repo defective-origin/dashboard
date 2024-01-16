@@ -11,8 +11,11 @@
 }
 
 .Banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Image {
-  width: 100%;
+.Content {
+  max-width: 30%;
 }

@@ -10,11 +10,11 @@ import Block, { BlockProps } from 'components/Block'
 import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
 
-export type LayoutVariant = 'row' | 'column' | 'top' | 'bottom' | 'left' | 'right'
+export type LayoutVariant = 'row' | 'rows' | 'column' | 'columns' | 'header' | 'footer' | 'left-aside' | 'right-aside' | 'grid'
 export type LayoutItem = LayoutItemProps
 
 
-export type LayoutProps = BlockProps & {
+export type LayoutProps = BlockProps<typeof LayoutItem> & {
   className?: string
   children?: React.ReactNode
   v?: LayoutVariant
@@ -32,7 +32,7 @@ export type LayoutProps = BlockProps & {
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
-  const { v = 'row', areas, columns, rows, direction, items = [], scroll, children, className, ...otherProps } = props
+  const { v = 'rows', areas, columns, rows, direction, items = [], scroll, children, className, ...otherProps } = props
   const _className = cn('layout', !areas && `layout--${v}`, className)
   const style = {
     gridTemplateAreas: areas,
@@ -69,20 +69,20 @@ Layout.displayName = 'Layout'
 
 const LayoutWithItems = react.attachComponents(Layout, {
   Item: LayoutItem,
-  Left: LayoutItem.Left,
-  Right: LayoutItem.Right,
-  Bottom: LayoutItem.Bottom,
-  Top: LayoutItem.Top,
+  LeftAside: LayoutItem.LeftAside,
+  RightAside: LayoutItem.RightAside,
+  Footer: LayoutItem.Footer,
+  Header: LayoutItem.Header,
   Content: LayoutItem.Content,
   Block: Block,
 })
 
 export const LAYOUT_ITEMS = [
   LayoutWithItems.Item,
-  LayoutWithItems.Left,
-  LayoutWithItems.Right,
-  LayoutWithItems.Bottom,
-  LayoutWithItems.Top,
+  LayoutWithItems.LeftAside,
+  LayoutWithItems.RightAside,
+  LayoutWithItems.Footer,
+  LayoutWithItems.Header,
   LayoutWithItems.Content,
 ]
 

@@ -3,32 +3,39 @@ import React from 'react'
 import { react } from 'common/tools'
 
 
-export type TypedProps<
-    O extends Record<string, any>,
-    TResult = {
-      [key in keyof O]: { v?: key } & React.ComponentProps<O[key]>
-    }[keyof O],
-> = TResult
+export type RepeatVariantProps<
+  RC extends Record<string, any>,
+> = {
+  [key in keyof RC]: { variant?: key } & React.ComponentProps<RC[key]>
+}[keyof RC]
 
-export type RepeatComponent = React.ComponentType<any> | Record<any, React.ComponentType<any>>
+export type RepeatComponent<P extends object = any> = React.ElementType<P> | string | Record<string, React.ElementType<P> | string>
 
 export type RepeatItem<
-  C extends RepeatComponent,
-  TResult = C extends ((args: any) => any) ? React.ComponentProps<C> : TypedProps<C>
-> = TResult
+  RC extends RepeatComponent<any>,
+> = RC extends React.ElementType<any>
+  ? React.ComponentProps<RC>
+  : RC extends object ? RepeatVariantProps<RC> : never
+
+export type RepeatItemVariant<
+  RC extends RepeatComponent<any>,
+> = RC extends object ? RepeatVariantProps<RC>['variant'] : never
 
 export type RepeatProps<
-  C extends RepeatComponent,
-  P = RepeatItem<C>,
-> = Partial<P> & {
+  RC extends RepeatComponent<any> = RepeatComponent<any>,
+  RI extends RepeatItem<RC> = RepeatItem<RC>,
+  V = RepeatItemVariant<RC>,
+> = Partial<RI> & {
   // Component or Component map which should be used for item rendering
-  cmp?: C
+  cmp?: RC
+  // default variant value
+  variant?: V
   // array with item props
-  items?: P[]
+  items?: RI[]
   // select key for reconciliation [default: index]
-  selectKey?: (item: P) => React.Key
+  selectKey?: (item: RI) => React.Key
   // customize props [default: shared props + item props]
-  selectProps?: (item: P) => P
+  selectProps?: (item: RI) => RI
 }
 
 /**
@@ -89,16 +96,17 @@ export type RepeatProps<
  * const items: RepeatItem<typeof ITEM_MAP>[] = []
  */
 export function Repeat<
-  Item extends RepeatComponent,
->(props: RepeatProps<Item>): JSX.Element[] | null {
-  const { v: defaultItemType, cmp, items = [], selectKey, selectProps, ...sharedProps } = props
+  RC extends RepeatComponent<any>,
+  RI extends RepeatItem<RC>,
+>(props: RepeatProps<RC, RI>): JSX.Element[] | null {
+  const { variant: v, cmp, items = [], selectKey, selectProps, ...sharedProps } = props
 
   if (!cmp || !items.length) {
     return null
   }
 
-  const list = items.map(({ v = defaultItemType, ...otherItemProps }, idx) => {
-    const Tag = react.isComponent(cmp) ? cmp : cmp[v]
+  const list = items.map(({ variant = v, ...otherItemProps }, idx) => {
+    const Tag = react.isComponent(cmp) ? cmp : cmp[variant]
     const combinedProps = { ...sharedProps, ...otherItemProps } as React.ComponentProps<any>
     const itemProps = selectProps?.(combinedProps) ?? combinedProps
     const itemKey = selectKey?.(itemProps) ?? idx

@@ -12,7 +12,6 @@
 
 .Button {
   min-width: 0;
-  text-wrap: nowrap;
 }
 
 .xs { padding: 2px; }
@@ -21,7 +20,7 @@
 .lg { padding: 5px; }
 .xl { padding: 6px; }
 
-.Round {
+.round {
   border-radius: 50%;
   width: fit-content;
   height: fit-content;

@@ -4,7 +4,8 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Layout from 'components/Layout'
+import Text from 'components/Text'
+import Block, { BlockProps } from 'components/Block'
 import Messages, { MessageItem } from 'components/Messages'
 
 // ---| common |---
@@ -14,7 +15,7 @@ import { cn, react } from 'common/tools'
 import css from './FormGroup.module.scss'
 import { useForm, FormContext, FormGroupOptions } from '../Form.context'
 
-export type FormGroupProps = FormGroupOptions & {
+export type FormGroupProps = FormGroupOptions & BlockProps & {
   list?: boolean
   label?: string
   messages?: MessageItem[]
@@ -35,21 +36,16 @@ export function FormGroup(props: FormGroupProps): JSX.Element {
   const value = list ? [] : {}
   const form = useForm({ value, name, schema, onChange, onReset, onSubmit })
 
-  // TODO: filter actions and content and add gap='xs'
-  // TODO: add messages component
+  // FIXME: rewrite on layout?
   return (
     <FormContext.Provider value={form} >
-      <Layout className={_className} {...otherProps}>
-        <Layout.Top className={css.Title} content={label} />
+      <Block className={_className} gap='xs' {...otherProps}>
+        <Text.Caption content={label} />
 
-        <Layout.Content className={css.Content} gap='xs'>
-          {children}
-        </Layout.Content>
+        {children}
 
-        <Layout.Bottom className={css.Footer}>
-          <Messages items={messages} />
-        </Layout.Bottom>
-      </Layout>
+        <Messages items={messages} />
+      </Block>
     </FormContext.Provider>
   )
 }

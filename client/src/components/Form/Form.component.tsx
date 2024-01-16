@@ -4,9 +4,9 @@ import React, { useCallback } from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block from 'components/Block'
+import Block, { BlockProps } from 'components/Block'
 import Section from 'components/Section'
-import Actions, { Action } from 'components/Actions'
+import Actions, { ActionItem } from 'components/Actions'
 import Alert from 'components/Alert'
 import Alerts, { AlertItem } from 'components/Alerts'
 import Field from 'components/Field'
@@ -65,12 +65,12 @@ import { FormContext, FormEventContext, FormGroupOptions, useForm } from './Form
 
 
 
-export type FormProps = FormGroupOptions & {
+export type FormProps = FormGroupOptions & BlockProps & {
   className?: string
   children?: React.ReactNode
   items?: []
   alerts?: AlertItem[]
-  actions?: Action[]
+  actions?: ActionItem[]
 }
 
 // TODO: update documentation
@@ -108,12 +108,12 @@ export type FormProps = FormGroupOptions & {
  * }
  *
  * const MESSAGES = [
- *   { status: 'error', content: 'error' },
- *   { status: 'warning', content: 'warning' },
- *   { status: 'info', content: 'info' },
- *   { status: 'primary', content: 'primary' },
- *   { status: 'secondary', content: 'secondary' },
- *   { status: 'disable', content: 'disable' },
+ *   { color: 'error', content: 'error' },
+ *   { color: 'warning', content: 'warning' },
+ *   { color: 'info', content: 'info' },
+ *   { color: 'primary', content: 'primary' },
+ *   { color: 'secondary', content: 'secondary' },
+ *   { color: 'disable', content: 'disable' },
  * ]
  *
  * const VALUE = {
@@ -180,12 +180,12 @@ export type FormProps = FormGroupOptions & {
  * ]
  *
  * const ALERTS = [
- *   { status: 'error', content: 'error' },
- *   { status: 'warning', content: 'warning' },
- *   { status: 'info', content: 'info' },
- *   { status: 'primary', content: 'primary' },
- *   { status: 'secondary', content: 'secondary' },
- *   { status: 'disable', content: 'disable' },
+ *   { color: 'error', content: 'error' },
+ *   { color: 'warning', content: 'warning' },
+ *   { color: 'info', content: 'info' },
+ *   { color: 'primary', content: 'primary' },
+ *   { color: 'secondary', content: 'secondary' },
+ *   { color: 'disable', content: 'disable' },
  * ]
  *
  * const ACTIONS = [
@@ -196,10 +196,10 @@ export type FormProps = FormGroupOptions & {
  * // Manual approach
  * <Form onSubmit={log} onReset={log}>
  *   <Form.Block>
- *     <Form.Alert status='success' content='success' />
- *     <Form.Alert status='info' content='info' />
- *     <Form.Alert status='warning' content='warning' />
- *     <Form.Alert status='error' content='error' />
+ *     <Form.Alert color='success' content='success' />
+ *     <Form.Alert color='info' content='info' />
+ *     <Form.Alert color='warning' content='warning' />
+ *     <Form.Alert color='error' content='error' />
  *   </Form.Block>
  *
  *   <Form.Content>
@@ -270,10 +270,10 @@ export type FormProps = FormGroupOptions & {
  * // Mixed approach
  * <Form value={VALUE} items={ITEMS} alerts={ALERTS} actions={ACTIONS} onSubmit={log} onReset={log}>
  *   <Form.Block cmp={Form.Alert} items={ALERTS}>
- *     <Form.Alert status='success' content='success' />
- *     <Form.Alert status='info' content='info' />
- *     <Form.Alert status='warning' content='warning' />
- *     <Form.Alert status='error' content='error' />
+ *     <Form.Alert color='success' content='success' />
+ *     <Form.Alert color='info' content='info' />
+ *     <Form.Alert color='warning' content='warning' />
+ *     <Form.Alert color='error' content='error' />
  *   </Form.Block>
  *
  *   // form actions
@@ -348,14 +348,14 @@ export function Form(props: FormProps): JSX.Element {
 
   return (
     <FormContext.Provider value={form} >
-      <form className={_className} onSubmit={onFormEvent} onReset={onFormEvent} {...otherProps}>
+      <Block as='form' className={_className} onSubmit={onFormEvent} onReset={onFormEvent} gap='xs' {...otherProps}>
         {alerts && <Alerts items={alerts} />}
         {/* {items && <Block className='content' cmp={{}} items={items} />} */}
 
         {children}
 
         {actions && <Actions items={actions} />}
-      </form>
+      </Block>
     </FormContext.Provider>
   )
 }

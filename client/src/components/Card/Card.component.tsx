@@ -39,9 +39,10 @@ export function Card(props: CardProps): JSX.Element | null {
   const { scroll, actions = [], title, content, divided, horizontal, onClose, children, className, ...otherProps } = props
   const buttons = Array.isArray(actions) ? actions : [actions]
   const _className = cn(
-    css.Card,
-    horizontal && css.Horizontal,
-    divided && css.Divided,
+    css.Card, {
+      [css.horizontal]: horizontal,
+      [css.divided]: divided,
+    },
     className,
   )
 

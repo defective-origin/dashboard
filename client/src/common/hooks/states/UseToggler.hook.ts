@@ -15,6 +15,8 @@ export type TogglerOptions = TypeOptions<boolean>
 
 export const TOGGLER_DEFAULT_VALUE = false
 
+// TODO: add true/false mapping on value. ex true === 'light', false === 'dark'
+
 /**
  * Toggler for manipulating with boolean flag.
  *

@@ -20,10 +20,11 @@ export const DIVIDER_DIRECTION_MAP: Record<'x' | 'y', MuiDividerProps['orientati
 
 export type DividerDirectionType = keyof typeof DIVIDER_DIRECTION_MAP
 
-export type DividerProps = Omit<MuiDividerProps, 'content'>
-                        & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'> & {
-                          direction?: DividerDirectionType
-                        }
+export type DividerProps = Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'> & {
+  className?: string
+  children?: React.ReactNode
+  direction?: DividerDirectionType
+}
 
 /**
  * Component description.
@@ -33,19 +34,19 @@ export type DividerProps = Omit<MuiDividerProps, 'content'>
  * <Divider />
  */
 export function Divider(props: DividerProps): JSX.Element {
-  const { align, start, end, content, direction ='x', size = 'xs', iconSize, children, className, ...otherProps } = props
+  const { align, start, end, content, direction ='x', size = 'xs', iconSize, color, fillIcon, children, className, ...otherProps } = props
   const _className = cn(css.Divider, className)
   const hasContent = start || content || end || children
   const _content = children ?? (
     <Text
-      className={css.Text}
-      status='secondary'
-      size={size}
-      iconSize={iconSize}
       start={start}
       content={content}
       end={end}
+      size={size}
+      iconSize={iconSize}
       align={align}
+      fillIcon={fillIcon}
+      color={color}
     />
   )
 

@@ -1,5 +1,19 @@
 @import 'src/App/App.module';
 
+$spaces: ('xxs': 4, 'xs': 8, 'sm': 12, 'md': 16, 'lg': 24, 'xl': 32, 'xxl': 48);
+
+@mixin init-spaces($property) {
+  @each $size, $_ in $spaces {
+    &--#{$size} { #{$property}: var(--space--#{$size}); }
+  }
+}
+
+:root {
+  @each $size, $value in $spaces {
+    --space--#{$size}: #{$value}px;
+  }
+}
+
 :global {
   .dark {
     // --text-color: white;
@@ -8,24 +22,20 @@
   .light {
     // --text-color: black;
   }
-}
 
-.Block {
-  display: flex;
-}
+  .g { @include init-spaces(gap);}
+  .p { @include init-spaces(padding);}
+  .m { @include init-spaces(margin);}
 
-.x {
-  flex-flow: row nowrap;
-}
+  .d {
+    &--x { display: flex; flex-flow: row nowrap; }
+    &--y { display: flex; flex-flow: column nowrap; }
+    &--xy { display: flex; flex-flow: row wrap; }
+  }
 
-.y {
-  flex-flow: column nowrap;
-}
+  .stretch {
+    // flex-grow: 1; // TODO:
 
-.xy {
-  flex-flow: row wrap;
-}
-
-.stretch {
-  @include stretch;
+    @include stretch;
+  }
 }

@@ -1,16 +1,15 @@
 import { useMemo } from 'react'
 
 // ---| common |---
+import { useBreakpoints, useMode } from 'common/hooks'
 
 // ---| components |---
-import { UseToastReturnOptions, useToast } from 'components/Toast/UseToast'
+import { UseToastReturnOptions, useToast } from 'components/Toast'
 
 // ---| self |---
 import { UseThemeReturnOptions, useTheme } from './UseTheme'
-import { UseModeReturnOptions, useMode } from './UseUIMode'
 
 export type UseUIReturnOptions = {
-  mode: UseModeReturnOptions
   theme: UseThemeReturnOptions
   toast: UseToastReturnOptions
 }
@@ -26,11 +25,14 @@ export type UseUIReturnOptions = {
  */
 
 export const useUI = (): UseUIReturnOptions => {
-  const mode = useMode()
   const theme = useTheme()
   const toast = useToast()
+  const breakpoints = useBreakpoints()
 
-  return useMemo(() => ({ mode, theme, toast }), [mode, theme, toast])
+  useMode(theme.theme)
+  useMode(breakpoints.names)
+
+  return useMemo(() => ({ theme, toast }), [theme, toast])
 }
 
 export default useUI

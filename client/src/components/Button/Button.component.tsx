@@ -13,11 +13,17 @@ import css from './Button.module.scss'
 
 export type ButtonVariant = MuiButtonProps['variant']
 
-export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'content' | 'size' | 'variant'>
-                        & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon'> & {
-                          round?: boolean
-                          v?: ButtonVariant
-                        }
+export type ButtonProps<E extends React.ElementType = React.ElementType> = React.ComponentProps<E>
+  & Pick<MuiButtonProps, 'type' | 'onClick' | 'href'>
+  & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'>
+  & {
+  className?: string
+  children?: React.ReactNode
+  content?: React.ReactNode
+  round?: boolean
+  v?: ButtonVariant
+  as?: E
+}
 
 /**
  * Component description.
@@ -26,15 +32,16 @@ export type ButtonProps = Omit<MuiButtonProps, 'startIcon' | 'endIcon' | 'conten
  * @example
  * <Button />
  */
-export function Button(props: ButtonProps): JSX.Element {
-  const { v, round, align, start, end, size = 'md', fillIcon, iconSize, content, children, className, ...otherProps } = props
-  const _className = cn(css.Button, css[size], round && css.Round, className)
+export function Button<E extends React.ElementType>(props: ButtonProps<E>): JSX.Element {
+  const { v, round, align, start, end, size = 'md', as, color, fillIcon, iconSize, content, children, className, ...otherProps } = props
+  const _className = cn(css.Button, css[size], {
+    [css.round]: round,
+  }, className)
 
   return (
-    <MuiButton className={_className} variant={v} {...otherProps}>
+    <MuiButton className={_className} variant={v} color={color} component={as} {...otherProps}>
       {children ?? (
         <Text
-          width='inherit'
           start={start}
           content={content}
           end={end}

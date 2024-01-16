@@ -12,34 +12,16 @@ import Spacer from 'components/Spacer'
 import { cn, react } from 'common/tools'
 
 // ---| self |---
-import css from './Block.module.scss'
+import useBlock, { UseBlockOptions } from './Block.hook'
 
-export const BLOCK_ITEM_MAP = {
-  divider: Divider,
-  spacer: Spacer,
-}
+export type BlockItem<C extends RepeatComponent = RepeatComponent> = RepeatItem<C>
 
-export type BlockSpace = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type BlockDirection = 'x' | 'y' | 'xy'
-export type BlockItem<C extends RepeatComponent> = RepeatItem<C>
-
-export type BlockProps = {
+export type BlockProps<O extends RepeatComponent = RepeatComponent> = RepeatProps<O> & UseBlockOptions & {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  gap?: BlockSpace
-  padding?: BlockSpace
-  direction?: BlockDirection
-  grow?: React.CSSProperties['flexGrow']
-  align?: React.CSSProperties['alignItems']
-  justify?: React.CSSProperties['justifyContent']
-  stretch?: boolean
-  scroll?: BlockDirection
-  as?: keyof JSX.IntrinsicElements | React.ComponentType
-  style?: React.CSSProperties
+  as?: React.ElementType
 }
-
-export type BlockWithItemsProps<O extends RepeatComponent> = RepeatProps<O> & BlockProps
 
 /**
  * Component description.
@@ -50,43 +32,26 @@ export type BlockWithItemsProps<O extends RepeatComponent> = RepeatProps<O> & Bl
  * @example
  * <Block />
  */
-export function Block<C extends RepeatComponent>(props: BlockWithItemsProps<C>): JSX.Element | null {
+export function Block<C extends RepeatComponent>(props: BlockProps<C>): JSX.Element | null {
+  const block = useBlock(props)
   const {
-    as: Tag = 'div',
-    v = 'custom',
-    cmp = BLOCK_ITEM_MAP,
-    grow,
-    align,
-    justify,
-    gap,
-    padding,
-    direction = 'y',
+    as = 'div',
+    cmp,
     content,
-    stretch,
-    style = {},
     children = content,
-    className,
-    scroll,
+    className = 'block',
     ...otherProps
-  } = props
-  const _className = cn(
-    css.Block,
-    css[direction],
-    gap && `gap--${gap}`,
-    padding && `padding--${padding}`,
-    scroll && `scroll-${scroll}`,
-    stretch && css.stretch,
-    className,
-  )
-  const _style: React.CSSProperties = { alignItems: align, justifyContent: justify, flexGrow: grow, ...style }
+  } = block.otherOptions
+  // const scroll = useScroll()
+  const Tag = as as Exclude<React.ElementType, undefined>
 
   if (!children && !content && !react.isComponent(Tag)) {
     return null
   }
 
   return (
-    <Tag className={_className} style={_style}>
-      <Repeat cmp={cmp} v={v} {...otherProps as RepeatProps<C>} />
+    <Tag className={cn(block.className, className)} style={block.style}>
+      <Repeat cmp={cmp} {...otherProps} />
 
       {children}
     </Tag>

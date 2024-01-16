@@ -12,16 +12,33 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Banner.module.scss'
 
+export type BannerVariant = 'empty' | 'error' | 401 | 403 | 404 | 500 | 502 | 503
+
+export const BANNER_OPTION_MAP: Record<BannerVariant, {
+  image: ImageVariant,
+  title: React.ReactNode,
+}> = {
+  empty: { image: 'empty', title: 'NO DATA' },
+  error: { image: 'error', title: 'ERROR' },
+  401: { image: 400, title: 'ERROR' },
+  403: { image: 400, title: 'ERROR' },
+  404: { image: 400, title: 'ERROR' },
+  500: { image: 500, title: 'ERROR' },
+  502: { image: 500, title: 'ERROR' },
+  503: { image: 500, title: 'ERROR' },
+}
+
 export type BannerProps = {
   className?: string
+  contentClassName?: string
   children?: React.ReactNode
-  imageSrc?: string
-  imageType?: ImageVariant
   title?: React.ReactNode
   subtitle?: React.ReactNode
   text?: React.ReactNode
   loading?: boolean
   show?: boolean
+  v?: BannerVariant
+  // TODO: add size
 }
 
 /**
@@ -32,9 +49,7 @@ export type BannerProps = {
  * <Banner
  *  src='error.jpg'
  *  title='Something happened'
- *  titleType='h2'
  *  text='description'
- *  textType='span'
  *  loading={isDataLoading}
  *  show={!data}
  * >
@@ -43,40 +58,39 @@ export type BannerProps = {
  */
 export function Banner(props: BannerProps): JSX.Element | null {
   const {
+    v = 'empty',
     show = true,
-    imageSrc,
-    imageType,
     title,
     subtitle,
     text,
     loading,
     children,
     className,
+    contentClassName,
     ...otherProps
   } = props
   const _className = cn(css.Banner, className)
+  const options = BANNER_OPTION_MAP[v]
 
-  if (!loading && !show) {
+  if (!show) {
     return null
   }
 
-  if (loading) {
-    return (
-      <div className={_className} {...otherProps}>
-        <Progress className={css.Progress} show />
-      </div>
-    )
-  }
-
   return (
-    <Block className={_className} direction='y' {...otherProps}>
-      {imageSrc || imageType && <Image className={css.Image} src={imageSrc} v={imageType} />}
+    <Block className={_className} stretch {...otherProps}>
+      {loading && <Progress className={css.Progress} show />}
 
-      {title && <Text.H4 align='center' className={css.Title} status='primary' content={title} />}
-      {subtitle && <Text.H5 align='center' className={css.Subtitle} status='primary' content={subtitle} />}
-      {text && <Text.Body1 align='center' className={css.Text} status='primary' content={text} />}
+      {!loading && (
+        <Block className={cn(css.Content, contentClassName)} direction='y'>
+          <Image v={options.image} />
 
-      {children}
+          {title && <Text.H4 align='center' color='primary' content={title ?? options.title} />}
+          {subtitle && <Text.H5 align='center' color='primary' content={subtitle} />}
+          {text && <Text.Body1 align='center' color='primary' content={text} multiline />}
+
+          {children}
+        </Block>
+      )}
     </Block>
   )
 }

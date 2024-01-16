@@ -33,13 +33,13 @@ export function Section(props: SectionProps): JSX.Element {
 
   return (
     <Layout className={_className} stretch {...otherProps}>
-      <Layout.Top as={Layout.Block} className={ css.Header }>
+      <Layout.Header className={ css.Header }>
         <Text className={ css.Title } />
 
         <Layout.Block.Spacer />
 
         <Actions className={ css.Actions } items={actions} />
-      </Layout.Top>
+      </Layout.Header>
 
       <Layout.Content className={ css.Content } content={children} />
     </Layout>

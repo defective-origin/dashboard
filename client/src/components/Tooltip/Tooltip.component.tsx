@@ -12,9 +12,10 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Tooltip.module.scss'
 
-export type TooltipProps = Omit<MuiTooltipProps, 'children'> & {
+export type TooltipProps = Pick<MuiTooltipProps, 'placement'> & {
   className?: string
   children?: React.ReactNode
+  content?: React.ReactNode
 }
 
 /**
@@ -25,11 +26,11 @@ export type TooltipProps = Omit<MuiTooltipProps, 'children'> & {
  * <Tooltip />
  */
 export function Tooltip(props: TooltipProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { content, children, className, ...otherProps } = props
   const _className = cn(css.Tooltip, className)
 
   return (
-    <MuiTooltip className={_className} arrow {...otherProps}>
+    <MuiTooltip className={_className} title={content} arrow {...otherProps}>
       <div>
         {children}
       </div>

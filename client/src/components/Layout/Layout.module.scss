@@ -1,5 +1,10 @@
 @import 'src/App/App.module';
 
+@mixin init-markup() {
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+}
+
 :global {
   .dark {
     // --text-color: white;
@@ -11,50 +16,76 @@
 
   .layout {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto 1fr auto;
 
     // template
     &--row {
-      grid-template-areas:
-        'top top top'
-        'left content right'
-        'bottom bottom bottom';
+      // grid-template-columns: auto;
+      grid-template-columns: 1fr;
+      grid-template-areas: 'header left-aside right-aside content footer';
     }
 
     &--column {
+      grid-template-columns: auto;
       grid-template-areas:
-        'left top right'
-        'left content right'
-        'left bottom right';
+        'header'
+        'left-aside'
+        'right-aside'
+        'content'
+        'footer';
     }
 
-    &--top {
+    &--rows {
+      @include init-markup;
+
       grid-template-areas:
-        'top top top'
-        'left content right'
-        'left bottom right';
+        'header header header'
+        'left-aside content right-aside'
+        'footer footer footer';
     }
 
-    &--bottom {
+    &--columns {
+      @include init-markup;
+
       grid-template-areas:
-        'left top right'
-        'left content right'
-        'bottom bottom bottom';
+        'header header header'
+        'left-aside content right-aside'
+        'footer footer footer';
     }
 
-    &--left {
+    &--header {
+      @include init-markup;
+
       grid-template-areas:
-        'left top top'
-        'left content right'
-        'left bottom bottom';
+        'header header header'
+        'left-aside content right-aside'
+        'left-aside footer right-aside';
     }
 
-    &--right {
+    &--footer {
+      @include init-markup;
+
       grid-template-areas:
-        'top top right'
-        'left content right'
-        'bottom bottom right';
+        'left-aside header right-aside'
+        'left-aside content right-aside'
+        'footer footer footer';
+    }
+
+    &--left-aside {
+      @include init-markup;
+
+      grid-template-areas:
+        'left-aside header header'
+        'left-aside content right-aside'
+        'left-aside footer footer';
+    }
+
+    &--right-aside {
+      @include init-markup;
+
+      grid-template-areas:
+        'header header right-aside'
+        'left-aside content right-aside'
+        'footer footer right-aside';
     }
   }
 }

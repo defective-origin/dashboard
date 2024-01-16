@@ -4,7 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BLOCK_ITEM_MAP, BlockItem, BlockProps } from 'components/Block'
+import Block, { BlockItem, BlockProps } from 'components/Block'
 import Button from 'components/Button'
 import Link from 'components/Link'
 
@@ -15,17 +15,15 @@ import { cn } from 'common/tools'
 import css from './Actions.module.scss'
 
 export const ACTION_MAP = {
-  ...BLOCK_ITEM_MAP,
+  divider: Block.Divider,
+  spacer: Block.Spacer,
   button: Button,
   link: Link,
 }
 
-export type Action = BlockItem<typeof ACTION_MAP>
+export type ActionItem = BlockItem<typeof ACTION_MAP>
 
-// TODO: change to BlockWithItemsProps<typeof ACTION_MAP>?
-export type ActionsProps = BlockProps & {
-  items?: any[]
-}
+export type ActionsProps = BlockProps<typeof ACTION_MAP>
 
 /**
  * Component description.
@@ -35,10 +33,10 @@ export type ActionsProps = BlockProps & {
  * <Actions />
  */
 export function Actions(props: ActionsProps): JSX.Element {
-  const { v = 'button', items, className, ...otherProps } = props
+  const { variant = 'button', items, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
 
-  return <Block direction='x' className={_className} align='center' cmp={ACTION_MAP} v={v} items={items} {...otherProps} />
+  return <Block className={_className} align='center' cmp={ACTION_MAP} variant={variant} items={items} direction='x' {...otherProps} />
 }
 
 Actions.displayName = 'Actions'

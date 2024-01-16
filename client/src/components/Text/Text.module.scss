@@ -1,11 +1,17 @@
 @import 'src/App/App.module';
 
+$texts: ('xxs': 8, 'xs': 12, 'sm': 16, 'md': 20, 'lg': 24, 'xl': 28, 'xxl': 32);
+
+@mixin init-texts($property) {
+  @each $size, $value in $texts {
+    &--#{$size} { #{$property}: var(--text--#{$size}); gap: #{calc($value / 2)}px; }
+  }
+}
+
 :root {
-  --text-size-xs: 12px;
-  --text-size-sm: 16px;
-  --text-size-md: 20px;
-  --text-size-lg: 24px;
-  --text-size-xl: 28px;
+  @each $size, $value in $texts {
+    --text--#{$size}: #{$value}px;
+  }
 }
 
 :global {
@@ -16,22 +22,32 @@
   .light {
     // --text-color: black;
   }
-}
 
-.Text {
-  display: flex;
-  align-items: center;
-}
+  .text {
+    @include init-texts(font-size);
 
-.Icon {
-}
+    display: flex;
+    align-items: center;
+  }
 
-.Content {
-  flex-grow: 1;
-}
+  .content {
+    flex-grow: 1;
+    white-space: nowrap;
+  }
 
-.xs { font-size: var(--text-size-xs); gap: 2px; }
-.sm { font-size: var(--text-size-sm); gap: 4px; }
-.md { font-size: var(--text-size-md); gap: 6px; }
-.lg { font-size: var(--text-size-lg); gap: 8px; }
-.xl { font-size: var(--text-size-xl); gap: 10px; }
+  .multiline {
+    // white-space: pre-wrap; // wrap by dot
+    white-space: wrap; // wrap by space
+  }
+
+  .ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .ellipsis.multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}

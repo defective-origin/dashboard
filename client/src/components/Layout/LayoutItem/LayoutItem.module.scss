@@ -17,10 +17,10 @@
     min-height: 0;
     min-width: 0;
 
-    &--left { grid-area: left; }
-    &--right { grid-area: right; }
-    &--top { grid-area: top; }
-    &--bottom { grid-area: bottom; }
+    &--left-aside { grid-area: left-aside; }
+    &--right-aside { grid-area: right-aside; }
+    &--header { grid-area: header; }
+    &--footer { grid-area: footer; }
     &--content { grid-area: content; }
   }
 }

@@ -13,19 +13,19 @@
   flex-direction: column;
 }
 
-.Horizontal {
+.horizontal {
   flex-direction: row;
 }
 
-.Divided {
+.divided {
   border-bottom: 1px solid var(--divider-color);
 
-  &.Horizontal > * {
+  &.horizontal > * {
     border-right: 1px solid var(--divider-color);
   }
 
   &.Vertical > :last-child,
-  &.Horizontal > :last-child {
+  &.horizontal > :last-child {
     border-right: none;
     border-bottom: none;
   }

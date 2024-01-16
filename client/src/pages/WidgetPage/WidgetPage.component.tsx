@@ -14,6 +14,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './WidgetPage.module.scss'
 import { TextProps } from 'components/Text'
+import { AlertItem } from 'components/Alerts'
 
 export type WidgetPageProps = PageProps & {
   className?: string
@@ -32,22 +33,19 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const _className = cn(css.WidgetPage, className)
 
   const MESSAGES: TextProps[] = [
-    { status: 'error', content: 'error' },
-    { status: 'warning', content: 'warning' },
-    { status: 'info', content: 'info' },
-    { status: 'primary', content: 'primary' },
-    { status: 'secondary', content: 'secondary' },
-    { status: 'disable', content: 'disable' },
+    { color: 'error', content: 'error' },
+    { color: 'warning', content: 'warning' },
+    { color: 'info', content: 'info' },
+    { color: 'primary', content: 'primary' },
+    { color: 'secondary', content: 'secondary' },
+    { color: 'disable', content: 'disable' },
   ]
 
-  const ALERTS = [
-    { status: 'success', content: 'success' },
-    { status: 'info', content: 'info' },
-    { status: 'warning', content: 'warning' },
-    { status: 'error', content: 'error' },
-    { status: 'primary', content: 'primary' },
-    { status: 'secondary', content: 'secondary' },
-    { status: 'disable', content: 'disable' },
+  const ALERTS: AlertItem[] = [
+    { color: 'success', content: 'success' },
+    { color: 'info', content: 'info' },
+    { color: 'warning', content: 'warning' },
+    { color: 'error', content: 'error' },
   ]
 
   const ACTIONS = [
@@ -66,30 +64,32 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
 
   return (
     <Page className={_className} name='PAGES.WIDGETS' scroll='y' {...otherProps}>
-      <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log}>
-        {/* <Form.Block cmp={Form.Alert} items={ALERTS} scroll='xxl'> */}
-        <Form.Alerts items={ALERTS}>
-          <Form.Alert status='success' content='success' />
-          <Form.Alert status='info' content='info' />
-          <Form.Alert status='warning' content='warning' />
-          <Form.Alert status='error' content='error' />
+      <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log} padding='xxl'>
+        <Form.Block cmp={Form.Alert} items={ALERTS} gap='xs' />
+        <Form.Alerts items={ALERTS} gap='xs'>
+          <Form.Alert color='success' content='success' />
+          <Form.Alert color='info' content='info' />
+          <Form.Alert color='warning' content='warning' />
+          <Form.Alert color='error' content='error' />
         </Form.Alerts>
 
-        <Form.Content direction='y' gap='xs'>
-          {/* <Form.Actions items={ACTIONS}> */}
+        <Form.Content gap='xs'>
+          <Form.Actions items={ACTIONS} />
           <Form.Actions>
             FORM ACTIONS
             <Form.Reset content='Reset' />
             <Form.Submit content='Submit' />
           </Form.Actions>
 
-          <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
-          <Form.Field.Switch name='switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
-          <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
-          <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
-          <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
-          <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
-          <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
+          <Form.Block className={_className} direction='x' gap='xs'>
+            <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
+            <Form.Field.Switch name='switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
+            <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+            <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
+            <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
+            <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
+            <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
+          </Form.Block>
 
           <Form.Group name='group' label='group' messages={MESSAGES} onChange={log}>
             <Form.Actions>

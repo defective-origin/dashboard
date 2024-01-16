@@ -4,7 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockWithItemsProps } from 'components/Block'
+import Block, { BlockProps } from 'components/Block'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -13,12 +13,10 @@ import { cn } from 'common/tools'
 import css from './Alerts.module.scss'
 import Alert, { AlertProps } from 'components/Alert'
 
-export type AlertStatus = AlertProps['status']
-// TODO: move Alert component as sub component
+export type AlertColor = AlertProps['color']
 export type AlertItem = AlertProps
 
-// TODO: change to BlockProps<AlertItem>?
-export type AlertsProps = BlockWithItemsProps<typeof Alert>
+export type AlertsProps = BlockProps<typeof Alert>
 
 /**
  * Component description.

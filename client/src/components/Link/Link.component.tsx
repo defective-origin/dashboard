@@ -13,7 +13,7 @@ import css from './Link.module.scss'
 import { isNewTabLink } from './Link.tool'
 
 export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
-                      & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'>
+                      & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'>
 
 /**
  * Component description.
@@ -23,7 +23,7 @@ export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
  * <Link />
  */
 export function Link(props: LinkProps): JSX.Element {
-  const { align, href, target, start, end, size, iconSize, content, children, className, ...otherProps } = props
+  const { align, href, target, start, end, size, iconSize, fillIcon, color, content, children, className, ...otherProps } = props
   const _className = cn(css.Link, className)
   const isOpenInNewTab = isNewTabLink(href, target)
   const linkTarget = isOpenInNewTab ? '_blank' : target
@@ -39,13 +39,14 @@ export function Link(props: LinkProps): JSX.Element {
     >
       {children ?? (
         <Text
-          width='inherit'
           start={start}
           content={content}
           end={end ?? (isOpenInNewTab && <Icon size='xs' v='open_in_new' />)}
           size={size}
           iconSize={iconSize}
           align={align}
+          fillIcon={fillIcon}
+          color={color}
         />
       )}
     </MuiLink>

@@ -44,7 +44,6 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
       as={MuiSelectField}
       MenuProps={SELECT_FIELD_OPTIONS}
       size='small'
-      grow={2}
       {...otherProps}
     >
       {menuItems}

@@ -21,10 +21,10 @@ export const getAsideContent = (content: React.ReactNode, iconSize?: IconSize, f
 }
 
 export type TextVariant = MuiTypographyProps['variant']
-export type TextStatus = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
-export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type TextColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
+export type TextSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
-export type TextProps = Omit<MuiTypographyProps, 'content' | 'color' | 'variant'> & {
+export type TextProps = Pick<MuiTypographyProps, 'align' | 'onClick'> & {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
@@ -32,9 +32,11 @@ export type TextProps = Omit<MuiTypographyProps, 'content' | 'color' | 'variant'
   iconSize?: IconSize
   start?: IconVariant | Exclude<React.ReactNode, string>
   end?: IconVariant | Exclude<React.ReactNode, string>
-  status?: TextStatus
+  color?: TextColor
   fillIcon?: boolean
   v?: TextVariant
+  multiline?: boolean // TODO: multiline boolean | number - split each \n
+  ellipsis?: boolean
 }
 
 /**
@@ -45,14 +47,30 @@ export type TextProps = Omit<MuiTypographyProps, 'content' | 'color' | 'variant'
  * <Text />
  */
 export function Text(props: TextProps): JSX.Element {
-  const { v = 'body1', size = 'md', iconSize = size, start, end, status, fillIcon, content, children = content, className, ...otherProps } = props
-  const _className = cn(css.Text, css[size], className)
+  const {
+    v = 'body1',
+    size = 'md',
+    iconSize = size,
+    start,
+    end,
+    color,
+    fillIcon,
+    multiline,
+    ellipsis,
+    content,
+    children = content,
+    className,
+    ...otherProps
+  } = props
+  const _className = cn('text', {
+    [`text--${size}`]: size,
+  }, className)
+  const contentClassName = cn('content', { ellipsis, multiline })
 
-  // TODO: multiline - split each \n
   return (
-    <MuiTypography className={_className} variant={v} align='left' color={status} {...otherProps}>
+    <MuiTypography className={_className} variant={v} align='left' color={color} {...otherProps}>
       {getAsideContent(start, iconSize, fillIcon)}
-      {(children || (start && end)) && <span className={css.Content}>{children}</span>}
+      {(children || (start && end)) && <span className={contentClassName}>{children}</span>}
       {getAsideContent(end, iconSize, fillIcon)}
     </MuiTypography>
   )

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 // ---| core |---
-import { useLauncher } from 'Launcher'
 
 // ---| pages |---
 // ---| screens |---
@@ -47,6 +46,8 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
 
   return (
     <Page className={_className} name='PAGES.DASHBOARDS' {...otherProps}>
+      {/* <AppMenuItem start={app.mode.is('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.mode.toUpperCase()} onClick={app.mode.toggle} /> */}
+
       <Board
         className={_className}
         rows={25}

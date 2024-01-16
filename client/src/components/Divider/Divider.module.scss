@@ -1,5 +1,10 @@
 @import 'src/App/App.module';
 
+:root {
+  // TODO: replace by mui variable
+  --divider-color: #CACDD1;
+}
+
 :global {
   .dark {
     // --text-color: white;

@@ -19,7 +19,7 @@ export type IconVariant = 'light_mode' | 'dark_mode'
 | 'close' | 'left_panel_open' | 'left_panel_close' | 'open_in_new'
 | 'info' | 'warning' | 'error' | 'check_circle'
 
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type IconSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export type IconProps = Omit<MuiIconProps, 'size'> & {
   className?: string
@@ -38,9 +38,11 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
 export function Icon(props: IconProps): JSX.Element {
   const { size = 'md', v, fill, className, ...otherProps } = props
   const _className = cn(
-    css.Icon, css[size],
-    'material-symbols-outlined',
-    fill && css.filled,
+    css.Icon,
+    css[size],
+    'material-symbols-outlined', {
+      [css.filled]: fill,
+    },
     className,
   )
 

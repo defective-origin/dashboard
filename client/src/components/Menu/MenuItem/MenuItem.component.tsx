@@ -1,7 +1,5 @@
 import React from 'react'
-import MuiMenuItem, {
-  MenuItemProps as MuiMenuItemProps,
-} from '@mui/material/MenuItem'
+import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
 
 // ---| core |---
 // ---| pages |---
@@ -16,7 +14,7 @@ import { cn } from 'common/tools'
 import css from './MenuItem.module.scss'
 
 export type MenuItemProps = MuiMenuItemProps &
-  Pick<LinkProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align'>
+  Pick<LinkProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'>
 
 /**
  * Component description.
@@ -32,7 +30,10 @@ export function MenuItem(props: MenuItemProps): JSX.Element {
     end,
     size,
     iconSize,
+    fillIcon,
+    color,
     content,
+    children,
     className,
     ...otherProps
   } = props
@@ -40,15 +41,18 @@ export function MenuItem(props: MenuItemProps): JSX.Element {
 
   return (
     <MuiMenuItem className={_className} {...otherProps}>
-      <Link
-        width='inherit'
-        start={start}
-        content={content}
-        end={end}
-        size={size}
-        iconSize={iconSize}
-        align={align}
-      />
+      {children ?? (
+        <Link
+          start={start}
+          content={content}
+          end={end}
+          size={size}
+          iconSize={iconSize}
+          align={align}
+          fillIcon={fillIcon}
+          color={color}
+        />
+      )}
     </MuiMenuItem>
   )
 }

@@ -10,8 +10,8 @@ export type {{pascalCase name}}ReturnOptions = null
  * @example
  * const options = {{camelCase name}}(conf)
  */
-export const {{camelCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions | null => {
-  const [state] = useState<{{pascalCase name}}ReturnOptions | null>(null)
+export const {{camelCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions => {
+  const [state] = useState<{{pascalCase name}}ReturnOptions>(null)
 
   console.log(options, state)
 
