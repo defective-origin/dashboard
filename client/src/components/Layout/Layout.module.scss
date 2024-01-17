@@ -18,20 +18,21 @@
     display: grid;
 
     // template
+    &--cards {
+      grid-auto-columns: 1fr;
+      grid-auto-rows: 1fr;
+    }
+
     &--row {
-      // grid-template-columns: auto;
-      grid-template-columns: 1fr;
-      grid-template-areas: 'header left-aside right-aside content footer';
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-flow: column; /* Set the auto-placement algorithm to column */
+      grid-auto-columns: minmax(100px, 1fr);
     }
 
     &--column {
-      grid-template-columns: auto;
-      grid-template-areas:
-        'header'
-        'left-aside'
-        'right-aside'
-        'content'
-        'footer';
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-flow: row; /* Set the auto-placement algorithm to column */
+      grid-auto-rows: minmax(100px, 1fr);
     }
 
     &--rows {

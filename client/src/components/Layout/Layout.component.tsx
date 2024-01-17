@@ -10,7 +10,7 @@ import Block, { BlockProps } from 'components/Block'
 import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
 
-export type LayoutVariant = 'row' | 'rows' | 'column' | 'columns' | 'header' | 'footer' | 'left-aside' | 'right-aside' | 'grid'
+export type LayoutVariant = 'cards' | 'row' | 'rows' | 'column' | 'columns' | 'header' | 'footer' | 'left-aside' | 'right-aside' | 'grid'
 export type LayoutItem = LayoutItemProps
 
 
@@ -18,10 +18,10 @@ export type LayoutProps = BlockProps<typeof LayoutItem> & {
   className?: string
   children?: React.ReactNode
   v?: LayoutVariant
-  areas?: React.CSSProperties['gridTemplateAreas'] // remove dynamic layout?
-  columns?: React.CSSProperties['gridTemplateColumns'] // remove dynamic layout?
-  rows?: React.CSSProperties['gridTemplateRows'] // remove dynamic layout?
-  items?: LayoutItem[] // remove dynamic layout?
+  areas?: React.CSSProperties['gridTemplateAreas']
+  columns?: number,
+  rows?: number,
+  items?: LayoutItem[]
 }
 
 /**
@@ -32,18 +32,19 @@ export type LayoutProps = BlockProps<typeof LayoutItem> & {
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
-  const { v = 'rows', areas, columns, rows, direction, items = [], scroll, children, className, ...otherProps } = props
+  const { v = 'rows', areas, rows, columns, direction, items = [], scroll, children, className, ...otherProps } = props
   const _className = cn('layout', !areas && `layout--${v}`, className)
   const style = {
     gridTemplateAreas: areas,
-    gridTemplateColumns: columns,
-    gridTemplateRows: rows,
+    gridTemplateColumns: columns && `repeat(${columns}, 1fr)`,
+    gridTemplateRows: rows && `repeat(${rows}, 1fr)`,
   }
 
   if (!children) {
     return null
   }
 
+  // TODO:  remove dynamic layout? or only if not cards
   const generatedItems = items.map((item) => <LayoutWithItems.Item key={item.area} {...item} />)
   const allItems = [...React.Children.toArray(children), ...generatedItems]
   const layoutItems = allItems.filter((child) => react.hasExemplar(LAYOUT_ITEMS, child))
