@@ -2,6 +2,9 @@
 import React from 'react'
 import { react } from 'common/tools'
 
+export type ComponentWithItems<OwnProps extends object, T> = OwnProps & {
+  items?: T[]
+}
 
 export type RepeatVariantProps<
   RC extends Record<string, any>,

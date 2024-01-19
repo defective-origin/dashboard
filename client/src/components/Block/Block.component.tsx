@@ -4,24 +4,17 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat, { RepeatComponent, RepeatItem, RepeatProps } from 'components/Repeat'
 import Divider from 'components/Divider'
 import Spacer from 'components/Spacer'
 
 // ---| common |---
-import { cn, react } from 'common/tools'
+import { react } from 'common/tools'
 
 // ---| self |---
 import useBlock, { UseBlockOptions } from './Block.hook'
 
-export type BlockItem<C extends RepeatComponent = RepeatComponent> = RepeatItem<C>
-
-export type BlockProps<O extends RepeatComponent = RepeatComponent> = RepeatProps<O> & UseBlockOptions & {
-  className?: string
-  children?: React.ReactNode
-  content?: React.ReactNode
-  as?: React.ElementType
-}
+// TODO: extend all type which use Block props by <E extends React.ElementType>
+export type BlockProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<UseBlockOptions, E>
 
 /**
  * Component description.
@@ -32,27 +25,24 @@ export type BlockProps<O extends RepeatComponent = RepeatComponent> = RepeatProp
  * @example
  * <Block />
  */
-export function Block<C extends RepeatComponent>(props: BlockProps<C>): JSX.Element | null {
-  const block = useBlock(props)
+export function Block<E extends React.ElementType>(props: BlockProps<E>): JSX.Element | null {
   const {
+    options,
     as = 'div',
-    cmp,
-    content,
-    children = content,
-    className = 'block',
+    children,
+    className,
+    style,
     ...otherProps
-  } = block.otherOptions
+  } = useBlock(props)
   // const scroll = useScroll()
   const Tag = as as Exclude<React.ElementType, undefined>
 
-  if (!children && !content && !react.isComponent(Tag)) {
+  if (!react.isComponent(Tag)) {
     return null
   }
 
   return (
-    <Tag className={cn(block.className, className)} style={block.style}>
-      <Repeat cmp={cmp} {...otherProps} />
-
+    <Tag className={className} style={style} {...otherProps}>
       {children}
     </Tag>
   )

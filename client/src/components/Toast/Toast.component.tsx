@@ -37,9 +37,8 @@ export type ToastProps = MuiToastContentProps<ToastMessage>
  * <Toast />
  */
 export function Toast(props: ToastProps): JSX.Element {
-  const { closeToast, data = {} as ToastMessage, ...otherProps } = props
+  const { closeToast, data = {} as ToastMessage } = props
 
-  // TODO: unify handlers
   const handleClose = () => {
     closeToast?.()
     data.onClose?.()
@@ -51,12 +50,33 @@ export function Toast(props: ToastProps): JSX.Element {
   }
 
   return (
-    <Block className={css.Toast} justify='space-between' direction={data.direction ?? 'x'} gap='xs' {...otherProps}>
+    <Block className={css.Toast} justify='space-between' direction={data.direction ?? 'x'} gap='xs'>
       <Text.H4 color='primary' multiline content={data.content} />
 
       <Actions gap='xs' justify='end'>
-        {data.onSuccess && <Actions.Button size='xs' color='success' start='check_circle' content='Save' end='check_circle' v='outlined' onClick={handleSuccess} />}
-        {data.onClose && <Actions.Button size='xs' color='error' start='close' content='Cancel' end='close' v='outlined' onClick={handleClose} />}
+        {data.onSuccess && (
+          <Actions.Button
+            size='xs'
+            color='success'
+            start='check_circle'
+            content='Save'
+            end='check_circle'
+            v='outlined'
+            onClick={handleSuccess}
+          />
+        )}
+
+        {data.onClose && (
+          <Actions.Button
+            size='xs'
+            color='error'
+            start='close'
+            content='Cancel'
+            end='close'
+            v='outlined'
+            onClick={handleClose}
+          />
+        )}
       </Actions>
     </Block>
   )

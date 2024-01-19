@@ -6,7 +6,7 @@ import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/Me
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat from 'components/Repeat'
+import Repeat, { ComponentWithItems } from 'components/Repeat'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -22,9 +22,9 @@ const SELECT_FIELD_OPTIONS = {
   // marginThreshold: 0,
 }
 
-export type SelectFieldProps = BaseFieldProps<MuiSelectProps> & {
-  items?: MuiMenuItemProps[] // TODO: replace by MenuItem component from components
-}
+export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
+
+export type SelectFieldProps = ComponentWithItems<BaseFieldProps<MuiSelectProps>, SelectFieldItem>
 
 /**
  * Component description.

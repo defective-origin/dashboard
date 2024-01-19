@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  MenuItemProps,
   Menu as MuiMenu,
   MenuList as MuiMenuList,
   MenuProps as MuiMenuProps,
@@ -10,21 +9,22 @@ import {
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat from 'components/Repeat'
+import Repeat, { ComponentWithItems } from 'components/Repeat'
 
 // ---| common |---
 import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Menu.module.scss'
-import MenuItem from './MenuItem'
+import MenuItem, { MenuItemProps } from './MenuItem'
 
-export type MenuProps = MuiMenuProps & {
+export type MenuItem = MenuItemProps
+
+export type MenuProps = ComponentWithItems<MuiMenuProps, MenuItem> & {
   className?: string
   children?: React.ReactNode
   anchorEl?: HTMLElement | null
   popup?: boolean
-  items?: MenuItemProps[]
   onClose?: () => void
 }
 
@@ -43,6 +43,7 @@ export function Menu(props: MenuProps): JSX.Element {
   return (
     <Tag className={_className} {...(otherProps as any)}>
       <Repeat cmp={Menu.Item} items={items} />
+
       {children}
     </Tag>
   )

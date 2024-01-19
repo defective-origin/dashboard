@@ -36,14 +36,14 @@ export function Alert(props: AlertProps): JSX.Element | null {
   const { title, color, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Alert, className)
 
-  if (!content && !children) {
+  if (!children) {
     return null
   }
 
   return (
     <MuiAlert className={_className} severity={color} {...otherProps}>
       {title && <MuiAlertTitle><Text.H4 size='sm' content={title} /></MuiAlertTitle>}
-      <Text.Caption size='xs' content={children ?? content} />
+      <Text.Caption size='xs' content={children} />
     </MuiAlert>
   )
 }

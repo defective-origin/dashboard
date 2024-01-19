@@ -4,6 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Repeat, { ComponentWithItems } from 'components/Repeat'
 import Block, { BlockProps } from 'components/Block'
 import Text, { TextProps, TextColor } from 'components/Text'
 
@@ -16,7 +17,7 @@ import css from './Messages.module.scss'
 export type MessageColor = TextColor
 export type MessageItem = TextProps
 
-export type MessagesProps = BlockProps<typeof Text>
+export type MessagesProps = ComponentWithItems<BlockProps, MessageItem>
 
 /**
  * Component description.
@@ -26,11 +27,21 @@ export type MessagesProps = BlockProps<typeof Text>
  * <Messages />
  */
 export function Messages(props: MessagesProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { items, children, className, ...otherProps } = props
   const _className = cn(css.Messages, className)
 
-  return <Block className={_className} cmp={Text} {...otherProps} />
+  return (
+    <Block className={_className} {...otherProps}>
+      <Repeat cmp={Text} items={items} />
+
+      {children}
+    </Block>
+  )
 }
+
+Messages.Message = Text
+Messages.Divider = Block.Divider
+Messages.Spacer = Block.Spacer
 
 Messages.displayName = 'Messages'
 

@@ -78,7 +78,7 @@ export function Banner(props: BannerProps): JSX.Element | null {
 
   return (
     <Block className={_className} stretch {...otherProps}>
-      {loading && <Progress className={css.Progress} show />}
+      <Progress className={css.Progress} show={loading} />
 
       {!loading && (
         <Block className={cn(css.Content, contentClassName)} direction='y'>

@@ -34,7 +34,7 @@ $spaces: ('xxs': 4, 'xs': 8, 'sm': 12, 'md': 16, 'lg': 24, 'xl': 32, 'xxl': 48);
   }
 
   .stretch {
-    // flex-grow: 1; // TODO:
+    // flex-grow: 1; // TODO: check
 
     @include stretch;
   }

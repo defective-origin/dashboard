@@ -34,12 +34,12 @@ export type AppProps = {
  */
 export function App(props: AppProps): JSX.Element {
   const { className, ...otherProps } = props
-  const _className = cn(css.App, className)
+  const _className = cn(css.App, 'TEST', className)
 
   // TODO: add drawer
   // TODO: add modal
   return (
-    <Layout className={_className} stretch v='left-aside' {...otherProps}>
+    <Layout className={_className} stretch v='columns' {...otherProps}>
       <Layout.LeftAside as='nav'><AppMenu /></Layout.LeftAside>
       <Layout.Header as='header'><AppHeader /></Layout.Header>
       <Layout.Content as='main'><Outlet /></Layout.Content>

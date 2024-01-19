@@ -1,12 +1,14 @@
 import React from 'react'
+// TODO: (tikhon_puntus) remove all react imports
 
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockItem, BlockProps } from 'components/Block'
-import Button from 'components/Button'
 import Link from 'components/Link'
+import Button from 'components/Button'
+import Repeat, { ComponentWithItems, RepeatItem } from 'components/Repeat'
+import Block, { BlockProps } from 'components/Block'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -21,9 +23,9 @@ export const ACTION_MAP = {
   link: Link,
 }
 
-export type ActionItem = BlockItem<typeof ACTION_MAP>
+export type ActionItem = RepeatItem<typeof ACTION_MAP>
 
-export type ActionsProps = BlockProps<typeof ACTION_MAP>
+export type ActionsProps = ComponentWithItems<BlockProps, ActionItem>
 
 /**
  * Component description.
@@ -33,10 +35,16 @@ export type ActionsProps = BlockProps<typeof ACTION_MAP>
  * <Actions />
  */
 export function Actions(props: ActionsProps): JSX.Element {
-  const { variant = 'button', items, className, ...otherProps } = props
+  const { items, children, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
 
-  return <Block className={_className} align='center' cmp={ACTION_MAP} variant={variant} items={items} direction='x' {...otherProps} />
+  return (
+    <Block className={_className} align='center' direction='x' {...otherProps}>
+      <Repeat cmp={ACTION_MAP} items={items} variant='button' />
+
+      {children}
+    </Block>
+  )
 }
 
 Actions.displayName = 'Actions'

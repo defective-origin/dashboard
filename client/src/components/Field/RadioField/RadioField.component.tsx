@@ -13,9 +13,7 @@ import { cn } from 'common/tools'
 import css from './RadioField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type RadioFieldProps = BaseFieldProps<MuiRadioProps> & {
-  items?: []
-}
+export type RadioFieldProps = BaseFieldProps<MuiRadioProps>
 
 /**
  * Component description.

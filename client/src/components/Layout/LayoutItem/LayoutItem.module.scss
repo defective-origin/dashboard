@@ -11,7 +11,7 @@
 
   .layout-item {
     // fix scroll https://stackoverflow.com/questions/61959291/how-to-get-scrolling-in-a-css-grid
-    // variant 1
+    // variant 1 - problems: hide overlapping items
     // overflow: hidden;
     // variant 2 [preferable]
     min-height: 0;

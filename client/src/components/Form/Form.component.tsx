@@ -20,55 +20,9 @@ import FormButton from './FormButton'
 import FormGroup from './FormGroup'
 import { FormContext, FormEventContext, FormGroupOptions, useForm } from './Form.context'
 
-// export const FORM_ITEM_MAP = {
-//   content: Layout.Content,
-//   // header: Layout.Header
-//   // footer: Layout.Footer
-//   // aside: Layout.Aside
-//   actions: Layout.Actions,
-//   section: Layout.Section,
-//   block: Layout.Block,
-//   alert: Alert,
-//   // field: Field
-
-//   // text
-//   'text-field': TextField,
-
-//   // number
-//   'number-field': NumberField,
-//   'slider-field': SliderField,
-
-//   // boolean
-//   'switch-field': SwitchField,
-//   'checkbox-field': CheckboxField,
-//   'radio-field': RadioField,
-
-//   // // date and time
-//   // 'time-field': TimeField
-//   // 'date-field': DateField
-//   // 'date-time-field': DateTimeField
-//   // 'date-range-field': DateRangeField
-
-//   // object
-//   'group-field': GroupField,
-
-//   // list
-//   'select-field': SelectField,
-//   // 'list-field': ListField
-
-//   // actions
-//   button: Button,
-//   reset: FormReset,
-//   submit: FormSubmit,
-// }
-
-
-
-
 export type FormProps = FormGroupOptions & BlockProps & {
   className?: string
   children?: React.ReactNode
-  items?: []
   alerts?: AlertItem[]
   actions?: ActionItem[]
 }
@@ -195,12 +149,12 @@ export type FormProps = FormGroupOptions & BlockProps & {
  *
  * // Manual approach
  * <Form onSubmit={log} onReset={log}>
- *   <Form.Block>
+ *   <Form.Alerts>
  *     <Form.Alert color='success' content='success' />
  *     <Form.Alert color='info' content='info' />
  *     <Form.Alert color='warning' content='warning' />
  *     <Form.Alert color='error' content='error' />
- *   </Form.Block>
+ *   </Form.Alerts>
  *
  *   <Form.Content>
  *     <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} />
@@ -269,12 +223,12 @@ export type FormProps = FormGroupOptions & BlockProps & {
  *
  * // Mixed approach
  * <Form value={VALUE} items={ITEMS} alerts={ALERTS} actions={ACTIONS} onSubmit={log} onReset={log}>
- *   <Form.Block cmp={Form.Alert} items={ALERTS}>
+ *   <Form.Alerts items={ALERTS}>
  *     <Form.Alert color='success' content='success' />
  *     <Form.Alert color='info' content='info' />
  *     <Form.Alert color='warning' content='warning' />
  *     <Form.Alert color='error' content='error' />
- *   </Form.Block>
+ *   </Form.Alerts>
  *
  *   // form actions
  *   <Form.Actions items={ACTIONS}>
@@ -293,7 +247,7 @@ export type FormProps = FormGroupOptions & BlockProps & {
  *
  *     // form actions
  *     <Form.Actions items={ACTIONS} />
- *     <Form.Block cmp={Form.Alert} items={ALERTS} />
+ *     <Form.Alerts items={ALERTS} />
  *
  *     <Form.Group name='group' label='group' value={VALUE.group} items={GROUP_ITEMS} messages={MESSAGES}>
  *       <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} />
@@ -330,7 +284,7 @@ export type FormProps = FormGroupOptions & BlockProps & {
  * </Form>
  */
 export function Form(props: FormProps): JSX.Element {
-  const { name, alerts, items, actions, schema, onSubmit, onReset, onChange, children, className, ...otherProps } = props
+  const { name, alerts, actions, schema, onSubmit, onReset, onChange, children, className, ...otherProps } = props
   const _className = cn(css.Form, className)
   const form = useForm({ value: {}, name, schema, onChange, onReset, onSubmit })
 
@@ -350,7 +304,6 @@ export function Form(props: FormProps): JSX.Element {
     <FormContext.Provider value={form} >
       <Block as='form' className={_className} onSubmit={onFormEvent} onReset={onFormEvent} gap='xs' {...otherProps}>
         {alerts && <Alerts items={alerts} />}
-        {/* {items && <Block className='content' cmp={{}} items={items} />} */}
 
         {children}
 

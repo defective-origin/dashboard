@@ -24,13 +24,16 @@ export type UseBlockOptions = {
   justify?: React.CSSProperties['justifyContent']
   stretch?: boolean
   style?: React.CSSProperties
+  className?: string
+  children?: React.ReactNode
+  content?: React.ReactNode
 }
 
-export type UseBlockReturnOptions<O extends object> = {
+export type UseBlockReturnOptions<O extends object, E extends UseBlockOptions = UseBlockOptions> = O & {
   className: string
+  children?: React.ReactNode
   style: React.CSSProperties
-  options: UseBlockOptions
-  otherOptions: Omit<O, keyof UseBlockOptions>
+  options: E
 }
 
 /**
@@ -39,7 +42,7 @@ export type UseBlockReturnOptions<O extends object> = {
  * @example
  * const options = useBlock(conf)
  */
-export const useBlock = <O extends object>(options: UseBlockOptions & O): UseBlockReturnOptions<O> => {
+export const useBlock = <O extends object>(options: O & UseBlockOptions): UseBlockReturnOptions<O> => {
   const {
     gap,
     padding,
@@ -49,27 +52,33 @@ export const useBlock = <O extends object>(options: UseBlockOptions & O): UseBlo
     align,
     justify,
     stretch,
+    content,
+    children = content,
+    className,
     style = {},
     ...otherOptions
   } = options
 
   return useMemo(() => ({
+    ...otherOptions,
+    children,
     className: cn({
       [`d--${direction}`]: direction,
       [`p--${padding}`]: padding,
       [`m--${margin}`]: margin,
       [`g--${gap}`]: gap,
-      'stretch': stretch,
-    }),
+      stretch: stretch,
+    }, className),
     style: {
       alignItems: align,
       justifyContent: justify,
       flexGrow: grow,
       ...style,
     },
-    options: { gap, padding, margin, direction, grow, align, justify, stretch, style },
-    otherOptions,
-  }), [align, direction, gap, grow, justify, margin, otherOptions, padding, stretch, style])
+    options: { gap, padding, margin, direction, grow, align, justify, stretch, content, children, style },
+  }) as UseBlockReturnOptions<O>,
+  [align, children, className, content, direction, gap, grow, justify, margin, otherOptions, padding, stretch, style],
+  )
 }
 
 export default useBlock

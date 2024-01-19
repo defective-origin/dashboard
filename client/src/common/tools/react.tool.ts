@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
 // types
@@ -36,7 +37,9 @@ export function clearProps<
 // Docs: https://www.youtube.com/watch?v=3nKMO2UNQoY
 export type ExtendProps<OwnProps extends object, ExtendProps extends object> = OwnProps & Omit<ExtendProps, keyof OwnProps>
 // for props with 'as' prop
-export type ExtendCustomProps<OwnProps extends object, E extends React.ElementType> = ExtendProps<OwnProps, React.ComponentProps<E>>
+export type CustomTagProps<OwnProps extends object, E extends React.ElementType> = ExtendProps<OwnProps, React.ComponentProps<E>> & {
+  as?: E
+}
 
 // work with components
 export function getDisplayName(component: React.ElementType, defaultName = 'Component'): string {

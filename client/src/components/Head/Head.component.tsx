@@ -14,7 +14,7 @@ export type HeadItem = HeadMeta<'title', JSX.IntrinsicElements['title']>
                       | HeadMeta<'noscript', JSX.IntrinsicElements['noscript']>
 
 
-export type HeadProps = HelmetProps & {
+export type HeadProps = HelmetProps & { // TODO: use ComponentWithItems
   title?: React.ReactNode
   items?: HeadItem[]
 }

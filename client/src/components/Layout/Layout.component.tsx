@@ -1,28 +1,18 @@
 import React from 'react'
 
 // ---| common |---
-import { cn, react } from 'common/tools'
+import { react } from 'common/tools'
 
 // ---| components |---
-import Block, { BlockProps } from 'components/Block'
+import Block from 'components/Block'
 
 // ---| self |---
-import './Layout.module.scss'
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
+import useLayout, { UseLayoutOptions } from './Layout.hook'
 
-export type LayoutVariant = 'cards' | 'row' | 'rows' | 'column' | 'columns' | 'header' | 'footer' | 'left-aside' | 'right-aside' | 'grid'
 export type LayoutItem = LayoutItemProps
 
-
-export type LayoutProps = BlockProps<typeof LayoutItem> & {
-  className?: string
-  children?: React.ReactNode
-  v?: LayoutVariant
-  areas?: React.CSSProperties['gridTemplateAreas']
-  columns?: number,
-  rows?: number,
-  items?: LayoutItem[]
-}
+export type LayoutProps = UseLayoutOptions
 
 /**
  * Component description.
@@ -32,37 +22,29 @@ export type LayoutProps = BlockProps<typeof LayoutItem> & {
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
-  const { v = 'rows', areas, rows, columns, direction, items = [], scroll, children, className, ...otherProps } = props
-  const _className = cn('layout', !areas && `layout--${v}`, className)
-  const style = {
-    gridTemplateAreas: areas,
-    gridTemplateColumns: columns && `repeat(${columns}, 1fr)`,
-    gridTemplateRows: rows && `repeat(${rows}, 1fr)`,
-  }
+  const { options, children, className, style, ...otherProps } = useLayout(props)
 
   if (!children) {
     return null
   }
 
-  // TODO:  remove dynamic layout? or only if not cards
-  const generatedItems = items.map((item) => <LayoutWithItems.Item key={item.area} {...item} />)
-  const allItems = [...React.Children.toArray(children), ...generatedItems]
-  const layoutItems = allItems.filter((child) => react.hasExemplar(LAYOUT_ITEMS, child))
-  const otherItems = allItems.filter((child) => !react.hasExemplar(LAYOUT_ITEMS, child))
-  const hasContentItem = allItems.some((child) => react.isExemplar(LayoutWithItems.Content, child))
+  const items = React.Children.toArray(children)
+  const layoutItems = items.filter((child) => react.hasExemplar(LAYOUT_ITEMS, child))
+  const otherItems = items.filter((child) => !react.hasExemplar(LAYOUT_ITEMS, child))
+  const hasContentItem = items.some((child) => react.isExemplar(LayoutWithItems.Content, child))
 
   return (
-    <Block className={_className} {...otherProps} style={style}>
+    <div className={className} {...otherProps} style={style}>
       {hasContentItem && otherItems}
 
       {!hasContentItem && (
-        <LayoutWithItems.Content scroll={scroll} direction={direction}>
+        <LayoutWithItems.Content>
           {otherItems}
         </LayoutWithItems.Content>
       )}
 
       {layoutItems}
-    </Block>
+    </div>
   )
 }
 

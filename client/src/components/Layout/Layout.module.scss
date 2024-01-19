@@ -48,9 +48,9 @@
       @include init-markup;
 
       grid-template-areas:
-        'header header header'
+        'left-aside header right-aside'
         'left-aside content right-aside'
-        'footer footer footer';
+        'left-aside footer right-aside';
     }
 
     &--header {

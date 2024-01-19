@@ -65,7 +65,6 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   return (
     <Page className={_className} name='PAGES.WIDGETS' scroll='y' {...otherProps}>
       <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log} padding='xxl'>
-        <Form.Block cmp={Form.Alert} items={ALERTS} gap='xs' />
         <Form.Alerts items={ALERTS} gap='xs'>
           <Form.Alert color='success' content='success' />
           <Form.Alert color='info' content='info' />

@@ -5,7 +5,8 @@ import React from 'react'
 // ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/Button'
-import Menu, { MenuProps } from '../Menu'
+import Menu, { MenuItem } from '../Menu'
+import { ComponentWithItems } from 'components/Repeat'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -13,9 +14,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './MenuButton.module.scss'
 
-export type MenuButtonProps = ButtonProps & {
-  items?: MenuProps['items']
-}
+export type MenuButtonProps = ComponentWithItems<ButtonProps, MenuItem>
 
 /**
  * Component description.
