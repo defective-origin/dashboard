@@ -13,7 +13,7 @@ import Toast from 'components/Toast'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './App.module.scss'
+import './App.module.scss'
 import AppMenu from './AppMenu'
 import AppHeader from './AppHeader'
 // TODO: implement drawer, modal, left aside, right aside
@@ -34,7 +34,7 @@ export type AppProps = {
  */
 export function App(props: AppProps): JSX.Element {
   const { className, ...otherProps } = props
-  const _className = cn(css.App, 'TEST', className)
+  const _className = cn('app', className)
 
   // TODO: add drawer
   // TODO: add modal
@@ -46,9 +46,9 @@ export function App(props: AppProps): JSX.Element {
 
       {/* <Modal keepMounted open={!!itemMap.modal} content={itemMap.modal} onClose={onModalClose} /> */}
 
-      <Toast.Container name='alerts' className={css.AlertContainer} position='top-center' />
-      <Toast.Container name='messages' className={css.MessageContainer} position='bottom-right' />
-      <Toast.Container name='guards' className={css.GuardContainer} position='bottom-center' />
+      <Toast.Container name='alerts' className='alert-container' position='top-center' />
+      <Toast.Container name='messages' className='message-container' position='bottom-right' />
+      <Toast.Container name='guards' className='guard-container' position='bottom-center' />
     </Layout>
   )
 }

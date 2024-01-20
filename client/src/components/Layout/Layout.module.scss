@@ -1,19 +1,15 @@
-@import 'src/App/App.module';
+@import 'src/assets/styles';
 
 @mixin init-markup() {
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr auto;
 }
 
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
+
 :global {
-  .dark {
-    // --text-color: white;
-  }
-
-  .light {
-    // --text-color: black;
-  }
-
   .layout {
     display: grid;
 

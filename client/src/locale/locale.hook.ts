@@ -19,7 +19,7 @@ export type UseLocaleReturnOptions = {
 
 }
 
-// TODO: (kseniya_boldak) update generator template
+// TODO: (kseniya_boldak) update generator template and readme files
 
 /**
  * Hook descriptions

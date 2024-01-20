@@ -1,0 +1,39 @@
+$sizes: xxs, xs, sm, md, lg, xl, xxl;
+
+/// Create size.
+/// @param {number} $value Size.
+/// @param {px | rem} $unit Value unit.
+/// @return {string} Joint value
+@function init-size($value, $unit) {
+  @return #{$value}#{$unit};
+}
+
+// TODO: change to rem
+/// Create size map with keys: xxs, xs, sm, md, lg, xl, xxl.
+/// @param {number} $xxs Size.
+/// @param {number} $xs Size.
+/// @param {number} $sm Size.
+/// @param {number} $md Size.
+/// @param {number} $lg Size.
+/// @param {number} $xl Size.
+/// @param {number} $xxl Size.
+/// @param {px | rem} $unit Value unit.
+/// @return {map} Size map
+@function init-size-map($xxs, $xs, $sm, $md, $lg, $xl, $xxl, $unit: px) {
+  @return (
+    'xxs': init-size($xxs, $unit),
+    'xs': init-size($xs, $unit),
+    'sm': init-size($sm, $unit),
+    'md': init-size($md, $unit),
+    'lg': init-size($lg, $unit),
+    'xl': init-size($xl, $unit),
+    'xxl': init-size($xxl, $unit),
+  );
+}
+
+/// Attach css size variables to element as modifier.
+/// @param {string} $name Element name.
+/// @param {any} $property Property name.
+@mixin attach-size-variables($name, $property) {
+  @include attach-variables($name, $sizes, $property);
+}

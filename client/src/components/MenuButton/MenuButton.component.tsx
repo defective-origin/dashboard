@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 // ---| core |---
 // ---| pages |---
@@ -29,11 +29,11 @@ export function MenuButton(props: MenuButtonProps): JSX.Element {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
-  const onMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const onMenuOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
-  }
+  }, [])
 
-  const onMenuClose = () => setAnchorEl(null)
+  const onMenuClose = useCallback(() => setAnchorEl(null), [])
 
   return (
     <>

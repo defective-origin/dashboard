@@ -1,0 +1,35 @@
+@import '../tools';
+
+$space-name: space;
+
+// size
+$space-size-name: $space-name;
+$space-size-map: init-size-map(4, 8, 12, 16, 24, 32, 48);
+
+// padding, margin, gap
+$space-gap-name: #{$space-name}-gap;
+$space-margin-name: #{$space-name}-margin;
+$space-padding-name: #{$space-name}-padding;
+
+@mixin init-space-variables() {
+  @include init-variables($space-name, $space-size-map);
+  @include init-variables($space-gap-name, $space-size-map);
+  @include init-variables($space-margin-name, $space-size-map);
+  @include init-variables($space-padding-name, $space-size-map);
+}
+
+@mixin attach-space-size-variables($property) {
+  @include attach-size-variables($space-size-name, $property);
+}
+
+@mixin attach-space-gap-variables($property: gap) {
+  @include attach-size-variables($space-gap-name, $property);
+}
+
+@mixin attach-space-margin-variables($property: margin) {
+  @include attach-size-variables($space-margin-name, $property);
+}
+
+@mixin attach-space-padding-variables($property: padding) {
+  @include attach-size-variables($space-padding-name, $property);
+}

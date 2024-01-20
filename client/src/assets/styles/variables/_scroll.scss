@@ -1,0 +1,15 @@
+@import '../tools';
+
+$scroll-name: scroll;
+
+// size
+$scroll-size-name: #{$scroll-name}-size;
+$scroll-size-map: init-size-map(4, 4, 8, 12, 16, 20, 20);
+
+@mixin init-scroll-variables() {
+  @include init-variables($scroll-size-name, $scroll-size-map);
+}
+
+@mixin attach-scroll-size-variables($property) {
+  @include attach-size-variables($scroll-size-name, $property);
+}

@@ -112,11 +112,11 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- placeholders/
 				- placeholder-name.svg
 				- index.ts
-		- styles/
-			- mixins.scss
-			- theme.scss - colors 
-			- variables.scss - paddings, margins, ...
-			- index.scss
+		- styles/ - folder for global styles and style handlers
+  		- tool/ - mixins, functions
+  		- theme/ - theme variables, tools, settings
+  		- variables/ - element styles, tools, settings
+			- _index.scss
 	
 	
 	- App/ - component which contains app settings for launcher

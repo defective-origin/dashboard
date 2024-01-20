@@ -1,0 +1,26 @@
+/// Create value name.
+/// @param {string} $name Element name.
+/// @param {string} $modifier Modifier name.
+/// @return {string} Joint value
+@function init-variable($name, $modifier) {
+  @return --#{$name}--#{$modifier};
+}
+
+/// Create css variables.
+/// @param {string} $name Element name.
+/// @param {map} $map Variable map.
+@mixin init-variables($name, $map) {
+  @each $modifier, $value in $map {
+    #{init-variable($name, $modifier)}: #{$value};
+  }
+}
+
+/// Attach css variables to element as modifier.
+/// @param {string} $name Element name.
+/// @param {list} $list modifier list.
+/// @param {any} $property Property name.
+@mixin attach-variables($name, $list, $property) {
+  @each $modifier in $list {
+    &--#{$modifier} { #{$property}: var(init-variable($name, $modifier)); }
+  }
+}

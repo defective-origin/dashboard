@@ -34,7 +34,6 @@ export function Block<E extends React.ElementType>(props: BlockProps<E>): JSX.El
     style,
     ...otherProps
   } = useBlock(props)
-  // const scroll = useScroll()
   const Tag = as as Exclude<React.ElementType, undefined>
 
   if (!react.isComponent(Tag)) {

@@ -1,54 +1,4 @@
-/// Set height and width for tag.
-///
-/// @param {number} $width Tag width.
-/// @param {number} $height Tag height.
-@mixin stretch($width: 100%, $height: 100%) {
-  width: $width;
-  height: $height;
-}
-
-
-/// Set absolute positioning in special point.
-/// ---------------------------------------------
-/// | start-start     center-start    end-start |
-/// |                                           |
-/// | start-center   center-center   end-center |
-/// |                                           |
-/// | start-end       center-end        end-end |
-/// ---------------------------------------------
-///
-/// @param {start | center | end} $x The position by x.
-/// @param {start | center | end} $y The position by y.
-/// @param {number} $indent Inner Indent from block.
-@mixin absolute-position($x: center, $y: center, $indent: 2rem) {
-  // horizontal
-  @if $x == start {
-    left: $indent;
-  } @else if $x == center {
-    left: 50%;
-  } @else {
-    right: $indent;
-  }
-
-  // vertical
-  @if $y == start {
-    top: $indent;
-  } @else if $y == center {
-    top: 50%;
-  } @else {
-    bottom: $indent;
-  }
-
-  @if $x == center and $y == center {
-    transform: translate(-50%, -50%);
-  } @else if $x == center {
-    transform: translateX(-50%);
-  } @else if $y == center {
-    transform: translateY(-50%);
-  }
-}
-
-// $sizes: xxs, xs, sm, md, lg, xl, xxl;
+@import 'src/assets/styles';
 
 :global {
   html,
@@ -59,8 +9,12 @@
 
     @include stretch;
   }
-}
 
-.GuardContainer {
-  width: 700px;
+  // use light, dark class on element to prevent changing theme on it
+  .light { @include init-theme(light); }
+  .dark { @include init-theme(dark); }
+
+  .guard-container {
+    width: 700px;
+  }
 }

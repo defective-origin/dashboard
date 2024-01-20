@@ -1,0 +1,39 @@
+/// Set absolute positioning in special point.
+/// ---------------------------------------------
+/// | start-start     center-start    end-start |
+/// |                                           |
+/// | start-center   center-center   end-center |
+/// |                                           |
+/// | start-end       center-end        end-end |
+/// ---------------------------------------------
+///
+/// @param {start | center | end} $x The position by x.
+/// @param {start | center | end} $y The position by y.
+/// @param {number} $indent Inner Indent from block.
+@mixin absolute-position($x: center, $y: center, $indent: 2rem) {
+  // horizontal
+  @if $x == start {
+    left: $indent;
+  } @else if $x == center {
+    left: 50%;
+  } @else {
+    right: $indent;
+  }
+
+  // vertical
+  @if $y == start {
+    top: $indent;
+  } @else if $y == center {
+    top: 50%;
+  } @else {
+    bottom: $indent;
+  }
+
+  @if $x == center and $y == center {
+    transform: translate(-50%, -50%);
+  } @else if $x == center {
+    transform: translateX(-50%);
+  } @else if $y == center {
+    transform: translateY(-50%);
+  }
+}

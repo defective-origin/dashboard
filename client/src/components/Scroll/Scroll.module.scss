@@ -1,33 +1,14 @@
-@import 'src/App/App.module';
+@import 'src/assets/styles';
 
-// TODO: change to rem [init-scroll, init-space, init-text]
-$scrolls: ('xxs': 4, 'xs': 4, 'sm': 8, 'md': 12, 'lg': 16, 'xl': 20, 'xxl': 20);
-
-// TODO: unify [init-scroll, init-space, init-text]
-@mixin init-scroll($property) {
-  @each $size, $_ in $scrolls {
-    &--#{$size} { $property: var(--scroll--#{$size}); }
-  }
-}
 
 :root {
   --scroll-thumb-color: #33333331;
   --scroll-thumb-color--hover: #33333354;
 
-  @each $size, $value in $scrolls {
-    --scroll--#{$size}: #{$value}px;
-  }
+  // --ui-framework-color: var(--account-framework-color);
 }
 
 :global {
-  .dark {
-    // --text-color: white;
-  }
-
-  .light {
-    // --text-color: black;
-  }
-
   .scroll {
     &:Hover {
       &--x,
@@ -55,10 +36,10 @@ $scrolls: ('xxs': 4, 'xs': 4, 'sm': 8, 'md': 12, 'lg': 16, 'xl': 20, 'xxl': 20);
     }
 
     .scroll-bar-thumb {
-      visibility: hidden;
+      @include attach-scroll-size-variables(width);
+      @include attach-scroll-size-variables(height);
 
-      @include init-scroll(width);
-      @include init-scroll(height);
+      visibility: hidden;
 
       &--x { width: 0; }
       &--y { height: 0; }

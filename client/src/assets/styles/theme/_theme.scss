@@ -1,0 +1,18 @@
+@use 'light';
+@use 'dark';
+@use '../variables';
+
+// set theme via css variables instead of React theme provider
+// to prevent lack of theme on first load.
+@mixin init-theme($palette) {
+  @if $palette == light {
+    @include light.init-theme;
+  } @else if $palette == dark {
+    @include dark.init-theme;
+  }
+
+  @include init-text-variables;
+  @include init-icon-variables;
+  @include init-space-variables;
+  @include init-scroll-variables;
+}

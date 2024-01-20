@@ -1,14 +1,14 @@
 import React from 'react'
 
-// ---| components |---
 // ---| common |---
+
+// ---| components |---
+import Block, { BlockProps } from 'components/Block'
+
 // ---| self |---
 import { UseScrollOptions, useScroll } from './Scroll.hook'
 
-export type ScrollProps<TElement extends HTMLElement> = UseScrollOptions<TElement> & {
-  className?: string
-  children?: React.ReactNode
-}
+export type ScrollProps<TElement extends HTMLElement> = BlockProps & UseScrollOptions<TElement>
 
 /**
  * Scroll which allow to scroll by buttons.
@@ -16,7 +16,7 @@ export type ScrollProps<TElement extends HTMLElement> = UseScrollOptions<TElemen
 export default function Scroll<T extends HTMLDivElement>(props: ScrollProps<T>): JSX.Element {
   const {
     size = 'md',
-    direction = 'xy',
+    direction = 'y',
     buttons,
     manager,
     children,
@@ -26,9 +26,9 @@ export default function Scroll<T extends HTMLDivElement>(props: ScrollProps<T>):
   const scroll = useScroll<T>({ manager, buttons, size, direction })
 
   return (
-    <div ref={scroll.ref} className={className} {...otherProps}>
+    <Block ref={scroll.ref} className={className} {...otherProps}>
       {children}
       {scroll.elements}
-    </div>
+    </Block>
   )
 }

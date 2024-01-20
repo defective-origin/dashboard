@@ -1,0 +1,24 @@
+@import '../tools';
+
+$text-name: text;
+
+// size
+$text-size-name: #{$text-name}-size;
+$text-size-map: init-size-map(8, 12, 16, 20, 24, 28, 32);
+
+// gap
+$text-gap-name: #{$text-name}-gap;
+$text-gap-size-map: init-size-map(4, 6, 8, 10, 12, 14, 16);
+
+@mixin init-text-variables() {
+  @include init-variables($text-size-name, $text-size-map);
+  @include init-variables($text-gap-name, $text-gap-size-map);
+}
+
+@mixin attach-text-size-variables($property: font-size) {
+  @include attach-size-variables($text-size-name, $property);
+}
+
+@mixin attach-text-gap-variables($property: gap) {
+  @include attach-size-variables($text-gap-name, $property);
+}

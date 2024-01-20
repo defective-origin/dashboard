@@ -1,0 +1,15 @@
+@import '../tools';
+
+$icon-name: icon;
+
+// size
+$icon-size-name: #{$icon-name}-size;
+$icon-size-map: init-size-map(8, 12, 16, 20, 24, 28, 32);
+
+@mixin init-icon-variables() {
+  @include init-variables($icon-size-name, $icon-size-map);
+}
+
+@mixin attach-icon-size-variables($property: font-size) {
+  @include attach-size-variables($icon-size-name, $property);
+}

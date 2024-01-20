@@ -1,0 +1,40 @@
+@use 'sass:color';
+
+$colors: primary, secondary, success, info, warning, error, disable;
+
+/// Create size.
+/// @param {number} $value Color.
+/// @param {number} $alpha Alpha shift unit.
+/// @return {string} Joint value
+@function init-color($value, $alpha) {
+  @return color.adjust($value, $alpha: $alpha);
+}
+
+/// Create color map with keys: primary, secondary, success, info, warning, error, disable.
+/// @param {color} $primary Color in hex format.
+/// @param {color} $secondary Color in hex format.
+/// @param {color} $success Color in hex format.
+/// @param {color} $info Color in hex format.
+/// @param {color} $warning Color in hex format.
+/// @param {color} $error Color in hex format.
+/// @param {color} $disable Color in hex format.
+/// @param {number} $alpha Alpha shift unit.
+/// @return {map} Color map
+@function init-color-map($primary, $secondary, $success, $info, $warning, $error, $disable, $alpha: 0) {
+  @return (
+    'primary': init-color($primary, $alpha),
+    'secondary': init-color($secondary, $alpha),
+    'success': init-color($success, $alpha),
+    'info': init-color($info, $alpha),
+    'warning': init-color($warning, $alpha),
+    'error': init-color($error, $alpha),
+    'disable': init-color($disable, $alpha),
+  );
+}
+
+/// Attach css color variables to element as modifier.
+/// @param {string} $name Element name.
+/// @param {any} $property Property name.
+@mixin attach-color-variables($name, $property) {
+  @include attach-variables($name, $colors, $property);
+}

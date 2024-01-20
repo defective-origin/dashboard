@@ -1,22 +1,4 @@
-@import 'src/App/App.module';
-
-:root {
-  --icon-size-xs: 16px;
-  --icon-size-sm: 20px;
-  --icon-size-md: 24px;
-  --icon-size-lg: 28px;
-  --icon-size-xl: 32px;
-}
-
-:global {
-  .dark {
-    // --text-color: white;
-  }
-
-  .light {
-    // --text-color: black;
-  }
-}
+@import 'src/assets/styles'; // TODO: check. Is it add style duplication in dev tools? // change to common folder style import
 
 @mixin style-icon($fill: 0, $weight: 200, $gradient: 0, $opacity: 24) {
   font-variation-settings:
@@ -26,11 +8,15 @@
     'opsz' $opacity;
 }
 
-.Icon { @include style-icon; }
-.filled { @include style-icon(1); }
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
 
-.xs { font-size: var(--icon-size-xs); }
-.sm { font-size: var(--icon-size-sm); }
-.md { font-size: var(--icon-size-md); }
-.lg { font-size: var(--icon-size-lg); }
-.xl { font-size: var(--icon-size-xl); }
+:global {
+  .icon {
+    @include attach-icon-size-variables(font-size);
+
+    &--outline { @include style-icon; }
+    &--fill { @include style-icon(1); }
+  }
+}

@@ -1,14 +1,8 @@
-@import 'src/App/App.module';
+@import 'src/assets/styles';
 
-:global {
-  .dark {
-    // --text-color: white;
-  }
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
 
-  .light {
-    // --text-color: black;
-  }
-
-  .Page {
-  }
+.Page {
 }

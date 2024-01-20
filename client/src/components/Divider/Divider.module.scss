@@ -1,18 +1,10 @@
-@import 'src/App/App.module';
+@import 'src/assets/styles';
 
 :root {
   // TODO: replace by mui variable
   --divider-color: #CACDD1;
-}
 
-:global {
-  .dark {
-    // --text-color: white;
-  }
-
-  .light {
-    // --text-color: black;
-  }
+  // --ui-framework-color: var(--account-framework-color);
 }
 
 .Divider {

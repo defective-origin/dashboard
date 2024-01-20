@@ -5,7 +5,7 @@ import MuiIcon, { IconProps as MuiIconProps } from '@mui/material/Icon'
 import { cn } from 'common/tools'
 
 // ---| self |---
-import css from './Icon.module.scss'
+import './Icon.module.scss'
 
 export type IconVariant = 'light_mode' | 'dark_mode'
 | 'paid' | 'language'
@@ -38,10 +38,11 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
 export function Icon(props: IconProps): JSX.Element {
   const { size = 'md', v, fill, className, ...otherProps } = props
   const _className = cn(
-    css.Icon,
-    css[size],
+    'icon',
     'material-symbols-outlined', {
-      [css.filled]: fill,
+      [`icon--${size}`]: size,
+      ['icon--fill']: fill,
+      ['icon--outline']: !fill,
     },
     className,
   )

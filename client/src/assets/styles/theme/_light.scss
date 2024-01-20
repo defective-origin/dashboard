@@ -1,0 +1,11 @@
+@import '../tools';
+
+@mixin init-theme() {
+  // colors
+  $color-name: color;
+  $color-map: init-color-map(#000000, #000000, #000000, #000000, #000000, #000000, #000000);
+
+  @include init-variables($color-name, $color-map);
+
+  // text
+}

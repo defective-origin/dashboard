@@ -1,31 +1,13 @@
-@import 'src/App/App.module';
-
-$spaces: ('xxs': 4, 'xs': 8, 'sm': 12, 'md': 16, 'lg': 24, 'xl': 32, 'xxl': 48);
-
-@mixin init-spaces($property) {
-  @each $size, $_ in $spaces {
-    &--#{$size} { #{$property}: var(--space--#{$size}); }
-  }
-}
+@import 'src/assets/styles'; // TODO: check. Is it add style duplication in dev tools? // change to common folder style import
 
 :root {
-  @each $size, $value in $spaces {
-    --space--#{$size}: #{$value}px;
-  }
+  // --ui-framework-color: var(--account-framework-color);
 }
 
 :global {
-  .dark {
-    // --text-color: white;
-  }
-
-  .light {
-    // --text-color: black;
-  }
-
-  .g { @include init-spaces(gap);}
-  .p { @include init-spaces(padding);}
-  .m { @include init-spaces(margin);}
+  .g { @include attach-space-gap-variables(gap);}
+  .p { @include attach-space-padding-variables(padding);}
+  .m { @include attach-space-margin-variables(margin);}
 
   .d {
     &--x { display: flex; flex-flow: row nowrap; }
@@ -34,8 +16,6 @@ $spaces: ('xxs': 4, 'xs': 8, 'sm': 12, 'md': 16, 'lg': 24, 'xl': 32, 'xxl': 48);
   }
 
   .stretch {
-    // flex-grow: 1; // TODO: check
-
     @include stretch;
   }
 }
