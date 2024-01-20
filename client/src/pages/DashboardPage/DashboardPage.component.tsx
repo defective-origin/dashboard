@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 // ---| pages |---
 // ---| screens |---
-import Page, { PageProps } from 'screens/Page'
+import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 import Board, { BoardItem } from 'components/Board'
@@ -15,10 +15,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './DashboardPage.module.scss'
 
-export type DashboardPageProps = PageProps & {
-  className?: string
-  children?: React.ReactNode
-}
+export type DashboardPageProps = BasePageProps
 
 const cards: BoardItem[] = [
   { place: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
@@ -45,7 +42,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const TestComponent = (props = {}) => <div {...props}>TEST ITEM</div>
 
   return (
-    <Page className={_className} name='PAGES.DASHBOARDS' {...otherProps}>
+    <BasePage className={_className} name='PAGES.DASHBOARDS' {...otherProps}>
       {/* <AppMenuItem start={app.mode.is('edit') ? 'developer_mode_tv' : 'tv'} content={app.mode.mode.toUpperCase()} onClick={app.mode.toggle} /> */}
 
       <Board
@@ -80,7 +77,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
         onError={handleError}
         style={{ height: '50%' }}
       /> */}
-    </Page>
+    </BasePage>
   )
 }
 

@@ -9,24 +9,18 @@ import Copyright from 'screens/Copyright'
 
 // ---| components |---
 import Text from 'components/Text'
-import Block from 'components/Block'
-import Section from 'components/Section'
-import Head, { HeadItem } from 'components/Head'
-import Layout, { LayoutProps } from 'components/Layout'
+import Page, { PageProps } from 'components/Page'
 import Actions, { ActionItem } from 'components/Actions'
 
 // ---| common |---
-import { cn } from 'common/tools'
+import { cn, react } from 'common/tools'
 
 // ---| self |---
-import css from './Page.module.scss'
+import css from './BasePage.module.scss'
 import Portal from 'components/Portal'
 
-export type PageProps = LayoutProps & {
-  className?: string
-  children?: React.ReactNode
-  name?: TranslateKeys | string
-  meta?: HeadItem[]
+export type BasePageProps = PageProps & {
+  name?: TranslateKeys
 }
 // TODO: add scroll to page content by default
 /**
@@ -34,13 +28,13 @@ export type PageProps = LayoutProps & {
  *
  * How to use
  * @example
- * <Page />
+ * <BasePage />
  */
-export function Page(props: PageProps): JSX.Element {
+export function BasePage(props: BasePageProps): JSX.Element {
   const { name, meta, children, className, ...otherProps } = props
-  const _className = cn(css.Page, className)
+  const _className = cn(css.BasePage, className)
   const app = useLauncher()
-  const pageName = app.t(name as TranslateKeys)
+  const pageName = app.t(name)
   const tabName = app.t('SYSTEM.TAB_NAME', { title: pageName })
   const checkMessage = useCallback(() => app.toast.message({
     content: 'TEST MESSAGE',
@@ -66,28 +60,28 @@ export function Page(props: PageProps): JSX.Element {
   ].filter(Boolean) as ActionItem[]
 
   return (
-    <Layout className={_className} v='columns' stretch {...otherProps}>
-      <Head title={tabName} items={meta} />
-
+    <Page className={_className} name={tabName} meta={meta} v='columns' stretch {...otherProps}>
       {/* portal name and actions to AppHeader component */}
       <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
       <Portal name='page-actions' content={<Actions items={testActions} gap='xs' />} />
 
-      {children}
+      <Page.Content>
+        {children}
+      </Page.Content>
 
-      <Layout.Footer direction='x' justify='center'>
+      <Page.Footer direction='x' justify='center'>
         <Copyright />
-      </Layout.Footer>
-    </Layout>
+      </Page.Footer>
+    </Page>
   )
 }
 
-export default Page
-
-Page.LeftAside = Layout.LeftAside
-Page.RightAside = Layout.RightAside
-Page.Footer = Layout.Footer
-Page.Header = Layout.Header
-Page.Content = Layout.Content
-Page.Section = Section
-Page.Block = Block
+export default react.attachComponents(BasePage, {
+  LeftAside: Page.LeftAside, // TODO: remove?
+  RightAside: Page.RightAside,
+  Footer: Page.Footer,
+  Header: Page.Header,
+  Content: Page.Content,
+  Section: Page.Section,
+  Block: Page.Block,
+})

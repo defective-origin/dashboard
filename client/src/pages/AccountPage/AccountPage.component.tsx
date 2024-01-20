@@ -3,7 +3,7 @@ import React from 'react'
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
-import Page, { PageProps } from 'screens/Page'
+import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 
@@ -13,10 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './AccountPage.module.scss'
 
-export type AccountPageProps = PageProps & {
-  className?: string
-  children?: React.ReactNode
-}
+export type AccountPageProps = BasePageProps
 
 /**
  * Component description.
@@ -29,7 +26,7 @@ export function AccountPage(props: AccountPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AccountPage, className)
 
-  return <Page className={_className} name='PAGES.ACCOUNT' {...otherProps}>{children}</Page>
+  return <BasePage className={_className} name='PAGES.ACCOUNT' {...otherProps}>{children}</BasePage>
 }
 
 AccountPage.displayName = 'AccountPage'

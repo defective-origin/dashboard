@@ -16,7 +16,6 @@ export type UseLocaleReturnOptions = {
   language: Languages
   languages: Languages[]
   changeLanguage: typeof changeLanguage
-
 }
 
 // TODO: (kseniya_boldak) update generator template and readme files

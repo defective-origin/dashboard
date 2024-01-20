@@ -3,7 +3,7 @@ import React from 'react'
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
-import Page, { PageProps } from 'screens/Page'
+import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 import Actions, { ActionItem } from 'components/Actions'
@@ -15,10 +15,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './GuidePage.module.scss'
 
-export type GuidePageProps = PageProps & {
-  className?: string
-  children?: React.ReactNode
-}
+export type GuidePageProps = BasePageProps
 
 /**
  * Component description.
@@ -46,7 +43,7 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
   ]
 
   return (
-    <Page className={_className} name='PAGES.GUIDE' {...otherProps}>
+    <BasePage className={_className} name='PAGES.GUIDE' {...otherProps}>
       <Text start='close' ellipsis content='short short short' end='close' />
       <Text start='close' ellipsis content='long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long' end='close' />
       <Text start='close' ellipsis multiline content='long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long' end='close' />
@@ -60,7 +57,7 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Actions.Button round size='xl' start='account_circle' />
       </Actions>
       {children}
-    </Page>
+    </BasePage>
   )
 }
 

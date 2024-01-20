@@ -3,7 +3,7 @@ import React from 'react'
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
-import Page, { PageProps } from 'screens/Page'
+import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 
@@ -13,10 +13,7 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './DonationPage.module.scss'
 
-export type DonationPageProps = PageProps & {
-  className?: string
-  children?: React.ReactNode
-}
+export type DonationPageProps = BasePageProps
 
 /**
  * Component description.
@@ -29,7 +26,7 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DonationPage, className)
 
-  return <Page className={_className} name='PAGES.DONATION' {...otherProps}>{children}</Page>
+  return <BasePage className={_className} name='PAGES.DONATION' {...otherProps}>{children}</BasePage>
 }
 
 DonationPage.displayName = 'DonationPage'

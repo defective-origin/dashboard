@@ -3,7 +3,7 @@ import React from 'react'
 // ---| core |---
 // ---| pages |---
 // ---| screens |---
-import Page, { PageProps } from 'screens/Page'
+import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 import Form from 'components/Form'
@@ -16,10 +16,7 @@ import css from './WidgetPage.module.scss'
 import { TextProps } from 'components/Text'
 import { AlertItem } from 'components/Alerts'
 
-export type WidgetPageProps = PageProps & {
-  className?: string
-  children?: React.ReactNode
-}
+export type WidgetPageProps = BasePageProps
 
 /**
  * Component description.
@@ -63,7 +60,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const log = ((a: any, b: any, c: any) => {}) as any
 
   return (
-    <Page className={_className} name='PAGES.WIDGETS' scroll='y' {...otherProps}>
+    <BasePage className={_className} name='PAGES.WIDGETS' {...otherProps}>
       <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log} padding='xxl'>
         <Form.Alerts items={ALERTS} gap='xs'>
           <Form.Alert color='success' content='success' />
@@ -135,7 +132,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
       </Form>
 
       {children}
-    </Page>
+    </BasePage>
   )
 }
 

@@ -6,7 +6,7 @@ import { TranslateKeys } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
-import Page from 'screens/Page'
+import BasePage from 'screens/BasePage'
 
 // ---| components |---
 import Banner, { BannerVariant } from 'components/Banner'
@@ -52,7 +52,7 @@ export function BannerPage(props: BannerPageProps): JSX.Element {
   const status = BANNER_PAGE_MAP[v]
 
   return (
-    <Page className={_className} {...otherProps}>
+    <BasePage className={_className} {...otherProps}>
       <Banner
         className={css.Banner}
         title={app.t(status.title)}
@@ -62,7 +62,7 @@ export function BannerPage(props: BannerPageProps): JSX.Element {
       >
         {children}
       </Banner>
-    </Page>
+    </BasePage>
   )
 }
 
