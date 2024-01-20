@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useLauncher } from 'Launcher'
+import { useLocale } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
@@ -28,14 +28,14 @@ export type CopyrightProps = {
 export function Copyright(props: CopyrightProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.Copyright, className)
-  const app = useLauncher()
+  const locale = useLocale()
 
   return (
     <Text.H5
       className={_className}
       size='xs'
       color='secondary'
-      content={app.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}
+      content={locale.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}
       {...otherProps}
     />
   )

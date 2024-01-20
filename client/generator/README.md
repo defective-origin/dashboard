@@ -179,6 +179,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 		- index.ts - configurations and settings
 		- locale.tool.ts
 		- locale.conf.tsx
+		- locale.context.tsx
 		- locale.error.ts
 		- locale.test.ts
 		- i18n/
@@ -212,6 +213,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 		- router.hook.ts
 		- router.model.ts
 		- router.error.ts
+		- router.context.tsx
 		- index.ts - configurations and settings
 
 	- store/ - contains project store (use redux-toolkit)

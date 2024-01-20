@@ -1,8 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useLauncher } from 'Launcher'
-import { TranslateKeys } from 'locale'
+import { TranslateKeys, useLocale } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
@@ -48,16 +47,16 @@ export type BannerPageProps = {
 export function BannerPage(props: BannerPageProps): JSX.Element {
   const { v = 'empty', children, className, ...otherProps } = props
   const _className = cn(css.BannerPage, className)
-  const app = useLauncher()
+  const locale = useLocale()
   const status = BANNER_PAGE_MAP[v]
 
   return (
     <BasePage className={_className} {...otherProps}>
       <Banner
         className={css.Banner}
-        title={app.t(status.title)}
-        subtitle={app.t(status.subtitle)}
-        text={app.t(status.text)}
+        title={locale.t(status.title)}
+        subtitle={locale.t(status.subtitle)}
+        text={locale.t(status.text)}
         v={v}
       >
         {children}

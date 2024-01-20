@@ -1,0 +1,14 @@
+@import '../tools';
+
+$color-name: color;
+
+// size
+$color-name: init-name($icon-name, size);
+
+// @mixin init-color-variables() {
+//   @include init-variables($icon-size-name, $icon-size-map);
+// }
+
+// @mixin attach-color-variables($property: font-size) {
+//   @include attach-size-variables($icon-size-name, $property);
+// }

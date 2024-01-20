@@ -38,3 +38,21 @@ $colors: primary, secondary, success, info, warning, error, disable;
 @mixin attach-color-variables($name, $property) {
   @include attach-variables($name, $colors, $property);
 }
+
+// /// Create color palette map.
+// /// @param {color} $black Color in hex format.
+// /// @param {color} $green Color in hex format.
+// /// @param {color} $blue Color in hex format.
+// /// @param {color} $orange Color in hex format.
+// /// @param {color} $red Color in hex format.
+// /// @param {number} $shift Shift to next color.
+// /// @return {map} Color map
+// @function init-color-palette-map($black, $green, $blue, $orange, $red, $shift: 0) {
+//   @return (
+//     'black': init-color($black, $alpha),
+//     'green': init-color($green, $alpha),
+//     'blue': init-color($blue, $alpha),
+//     'orange': init-color($orange, $alpha),
+//     'red': init-color($red, $alpha),
+//   );
+// }

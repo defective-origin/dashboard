@@ -1,5 +1,13 @@
 /// Create value name.
 /// @param {string} $name Element name.
+/// @param {string} $type Type name.
+/// @return {string} Joint value
+@function init-name($name, $type) {
+  @return #{$name}-#{$type};
+}
+
+/// Create variable name.
+/// @param {string} $name Element name.
 /// @param {string} $modifier Modifier name.
 /// @return {string} Joint value
 @function init-variable($name, $modifier) {

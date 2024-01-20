@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
-import { TranslateKeys } from 'locale'
+import { TranslateKeys, useLocale } from 'locale'
 
 // ---| screens |---
 import Copyright from 'screens/Copyright'
@@ -34,8 +34,9 @@ export function BasePage(props: BasePageProps): JSX.Element {
   const { name, meta, children, className, ...otherProps } = props
   const _className = cn(css.BasePage, className)
   const app = useLauncher()
-  const pageName = app.t(name)
-  const tabName = app.t('SYSTEM.TAB_NAME', { title: pageName })
+  const locale = useLocale()
+  const pageName = locale.t(name)
+  const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
   const checkMessage = useCallback(() => app.toast.message({
     content: 'TEST MESSAGE',
     onClose: () => console.log('CLOSE MESSAGE'),
@@ -56,7 +57,7 @@ export function BasePage(props: BasePageProps): JSX.Element {
     { key: '3', start: 'close', size: 'xs', v: 'outlined', content: 'TEST GUARD', color: 'error', onClick: checkGuard },
     { key: '2', start: 'close', size: 'xs', v: 'outlined', content: 'TEST MESSAGE', color: 'warning', onClick: checkMessage },
     { key: '1', start: 'close', size: 'xs', v: 'outlined', content: 'TEST ALERT', color: 'info', onClick: checkAlert },
-    !app.isAuthorized() && { key: '0', start: 'login', size: 'xs', v: 'outlined', content: app.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login },
+    !app.isAuthorized() && { key: '0', start: 'login', size: 'xs', v: 'outlined', content: locale.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login },
   ].filter(Boolean) as ActionItem[]
 
   return (

@@ -3,7 +3,7 @@
 $icon-name: icon;
 
 // size
-$icon-size-name: #{$icon-name}-size;
+$icon-size-name: init-name($icon-name, size);
 $icon-size-map: init-size-map(8, 12, 16, 20, 24, 28, 32);
 
 @mixin init-icon-variables() {

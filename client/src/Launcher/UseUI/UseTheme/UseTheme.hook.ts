@@ -8,13 +8,14 @@ export type UseThemeReturnOptions = {
   toggle: () => void,
 }
 
+
+// TODO: move to 'theme' root folder?
 /**
  * Hook descriptions
  *
  * @example
  * const options = useUiTheme(conf)
  */
-
 export const useTheme = (): UseThemeReturnOptions => {
   const [theme, setTheme] = useState<UITheme>('light')
 

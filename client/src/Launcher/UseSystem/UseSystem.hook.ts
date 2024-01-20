@@ -1,13 +1,10 @@
 import { useMemo } from 'react'
 
-// ---| core |---
-import { UseLocaleReturnOptions, useLocale } from 'locale'
-
 // ---| self |---
 import useHotKeys, { UseHotKeysReturnOptions } from './UseHotKeys'
 
 
-export type UseSystemReturnOptions = UseLocaleReturnOptions & {
+export type UseSystemReturnOptions = {
   hotkeys: UseHotKeysReturnOptions
 }
 
@@ -19,9 +16,8 @@ export type UseSystemReturnOptions = UseLocaleReturnOptions & {
  */
 export const useSystem = (): UseSystemReturnOptions => {
   const hotkeys = useHotKeys()
-  const locale = useLocale()
 
-  return useMemo(() => ({ hotkeys, ...locale }), [hotkeys, locale])
+  return useMemo(() => ({ hotkeys }), [hotkeys])
 }
 
 export default useSystem

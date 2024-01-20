@@ -3,7 +3,7 @@
 $scroll-name: scroll;
 
 // size
-$scroll-size-name: #{$scroll-name}-size;
+$scroll-size-name: init-name($scroll-name, size);
 $scroll-size-map: init-size-map(4, 4, 8, 12, 16, 20, 20);
 
 @mixin init-scroll-variables() {

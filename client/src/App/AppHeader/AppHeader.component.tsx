@@ -2,6 +2,7 @@ import React from 'react'
 import { Avatar } from '@mui/material'
 
 // ---| core |---
+import { useLocale } from 'locale'
 import { useLauncher } from 'Launcher'
 
 // ---| pages |---
@@ -34,6 +35,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
   const app = useLauncher()
+  const locale = useLocale()
 
   return (
     <Block className={_className} direction='x' align='center' padding='sm' {...otherProps}>
@@ -46,7 +48,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
       {children}
 
       {app.isAuthorized() && (
-        <Tooltip content={app.t('LINKS.ACCOUNT')}>
+        <Tooltip content={locale.t('LINKS.ACCOUNT')}>
           <Button round onClick={app.logout}>
             <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
           </Button>

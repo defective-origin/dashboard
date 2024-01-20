@@ -1,16 +1,15 @@
 import React, { useMemo } from 'react'
-import { StyledEngineProvider, Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material'
 
 // ---| core |---
-import i18next, { LocaleProvider, useLocale } from 'locale'
-import { RouterProvider, APP_ROUTES } from 'router'
+import RouterProvider from 'router'
+import LocaleProvider from 'locale'
 
 // ---| self |---
 import { LauncherContext, LauncherOptions } from './Launcher.context'
 import useSystem from './UseSystem'
 import useAccount from './UseAccount'
 import useMonitor from './UseMonitor'
-import useUI from './UseUI'
+import useUI, { ThemeProvider } from './UseUI'
 
 export type LauncherProps = Partial<React.PropsWithChildren & LauncherOptions>
 
@@ -27,28 +26,24 @@ export function Launcher(props: LauncherProps): JSX.Element {
   const system = useSystem()
   const monitor = useMonitor()
   const account = useAccount()
-  const locale = useLocale()
 
   const options = useMemo(
-    () => Object.assign({}, system, monitor, ui, account, locale, defaultOptions),
-    [system, monitor, ui, account, locale, defaultOptions],
+    () => Object.assign({}, system, monitor, ui, account, defaultOptions),
+    [system, monitor, ui, account, defaultOptions],
   )
 
   return (
     <React.StrictMode>
-      <LocaleProvider i18n={i18next}>
-        <React.Suspense fallback={<h1>Loading...</h1>}>
-          {/* https://bareynol.github.io/mui-theme-creator/ */}
-          {/* injectFirst allows override Material UI's styles. */}
-          <StyledEngineProvider injectFirst>
-            <CssVarsProvider>
-              <LauncherContext.Provider value={options}>
-                <RouterProvider router={APP_ROUTES} />
+      <LocaleProvider>
+        <ThemeProvider>
+          <React.Suspense fallback={<h1>Loading...</h1>}>
+            <LauncherContext.Provider value={options}>
+              <RouterProvider>
                 { children }
-              </LauncherContext.Provider>
-            </CssVarsProvider>
-          </StyledEngineProvider>
-        </React.Suspense>
+              </RouterProvider>
+            </LauncherContext.Provider>
+          </React.Suspense>
+        </ThemeProvider>
       </LocaleProvider>
     </React.StrictMode>
   )

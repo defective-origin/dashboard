@@ -1,33 +1,27 @@
-import { useMemo } from 'react'
-
-// ---| common |---
-import { useObject } from 'common/hooks'
+import { useState, useMemo, useCallback } from 'react'
 
 export type AccountUser = object
 export type AccountSettings = {
   theme: 'light' | 'dark'
 }
 
-export type AccountState = {
+export type Account = {
   user: null | AccountUser
   settings: null | AccountSettings
 }
 
-export const DEFAULT_ACCOUNT_STATE: AccountState = {
+export const DEFAULT_ACCOUNT_STATE = {
   user: null,
   settings: null,
 }
 
-export type AccountActions = {
+export type UseAccountReturnOptions = Account & {
+  //actions
   login: () => void,
   logout: () => void,
-}
-
-export type AccountSelectors = {
+  // selectors
   isAuthorized: () => boolean
 }
-
-export type UseAccountReturnOptions = AccountState & AccountActions & AccountSelectors
 
 /**
  * Hook descriptions
@@ -36,21 +30,16 @@ export type UseAccountReturnOptions = AccountState & AccountActions & AccountSel
  * const options = useAccount(conf)
  */
 export const useAccount = (): UseAccountReturnOptions | null => {
-  const state = useObject(DEFAULT_ACCOUNT_STATE)
+  const [account, setAccount] = useState<Account>(DEFAULT_ACCOUNT_STATE)
 
-  const actions = useMemo<AccountActions>(() => ({
-    login: () => state.merge({ user: {} }),
-    logout: () => state.merge({ user: null }),
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [])
+  const login = useCallback(() => setAccount({ user: {}, settings: null }), [])
+  const logout = useCallback(() => setAccount(DEFAULT_ACCOUNT_STATE), [])
+  const isAuthorized = useCallback(() => !!account.user, [account.user])
 
-  const selectors = useMemo<AccountSelectors>(() => ({
-    isAuthorized: () => !!state.current.user,
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [])
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo<UseAccountReturnOptions>(() => ({ ...state.current, ...actions, ...selectors }), [state.current])
+  return useMemo<UseAccountReturnOptions>(
+    () => ({ ...account, login, logout, isAuthorized }),
+    [account, isAuthorized, login, logout],
+  )
 }
 
 export default useAccount

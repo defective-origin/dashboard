@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 
 export type UseFeaturesReturnOptions = {
-  flag: (type: string) => boolean
+  feature: (type: string) => boolean
 }
 
 /**
@@ -11,10 +11,9 @@ export type UseFeaturesReturnOptions = {
  * const options = useFeaturesFlag(conf)
  */
 export const useFeatures = (): UseFeaturesReturnOptions => {
+  const feature = useCallback((type: string) => !!new URLSearchParams(window.location.search).get(type), [])
 
-  const flag = useCallback((type: string) => !!new URLSearchParams(window.location.search).get(type), [])
-
-  return useMemo(() => ({ flag }), [flag])
+  return useMemo(() => ({ feature }), [feature])
 }
 
 export default useFeatures

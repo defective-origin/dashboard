@@ -3,11 +3,11 @@
 $text-name: text;
 
 // size
-$text-size-name: #{$text-name}-size;
+$text-size-name: init-name($text-name, size);
 $text-size-map: init-size-map(8, 12, 16, 20, 24, 28, 32);
 
 // gap
-$text-gap-name: #{$text-name}-gap;
+$text-gap-name: init-name($text-name, gap);
 $text-gap-size-map: init-size-map(4, 6, 8, 10, 12, 14, 16);
 
 @mixin init-text-variables() {

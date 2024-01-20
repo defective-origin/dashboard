@@ -3,16 +3,16 @@
 $space-name: space;
 
 // size
-$space-size-name: $space-name;
+$space-size-name: init-name($space-name, size);
 $space-size-map: init-size-map(4, 8, 12, 16, 24, 32, 48);
 
 // padding, margin, gap
-$space-gap-name: #{$space-name}-gap;
-$space-margin-name: #{$space-name}-margin;
-$space-padding-name: #{$space-name}-padding;
+$space-gap-name: init-name($space-name, gap);
+$space-margin-name: init-name($space-name, margin);
+$space-padding-name: init-name($space-name, padding);
 
 @mixin init-space-variables() {
-  @include init-variables($space-name, $space-size-map);
+  @include init-variables($space-size-name, $space-size-map);
   @include init-variables($space-gap-name, $space-size-map);
   @include init-variables($space-margin-name, $space-size-map);
   @include init-variables($space-padding-name, $space-size-map);
