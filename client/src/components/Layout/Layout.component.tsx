@@ -9,11 +9,11 @@ import Section from 'components/Section'
 
 // ---| self |---
 import LayoutItem, { LayoutItemProps } from './LayoutItem'
-import useLayout, { UseLayoutOptions } from './Layout.hook'
+import useLayout, { LayoutOptions } from './Layout.hook'
 
 export type LayoutItem = LayoutItemProps
 
-export type LayoutProps = UseLayoutOptions
+export type LayoutProps = LayoutOptions
 
 /**
  * Component description.

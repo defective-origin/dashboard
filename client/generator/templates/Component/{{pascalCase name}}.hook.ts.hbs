@@ -1,17 +1,17 @@
 import { useState } from 'react'
 
-export type Use{{pascalCase name}}Options = null
+export type {{pascalCase name}}Options = null
 
-export type Use{{pascalCase name}}ReturnOptions = null
+export type {{pascalCase name}}ReturnOptions = null
 
 /**
  * Hook descriptions
  *
  * @example
- * const options = {{pascalCase name}}(conf)
+ * const options = use{{pascalCase name}}(conf)
  */
-export const use{{pascalCase name}} = (options?: Use{{pascalCase name}}Options): Use{{pascalCase name}}ReturnOptions => {
-  const [state] = useState<Use{{pascalCase name}}ReturnOptions>(null)
+export const use{{pascalCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions => {
+  const [state] = useState<{{pascalCase name}}ReturnOptions>(null)
 
   console.log(options, state)
 

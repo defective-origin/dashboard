@@ -14,7 +14,7 @@ import './Block.module.scss'
 export type BlockSpace = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export type BlockDirection = 'x' | 'y' | 'xy'
 
-export type UseBlockOptions = {
+export type BlockOptions = {
   gap?: BlockSpace
   padding?: BlockSpace
   margin?: BlockSpace
@@ -29,7 +29,7 @@ export type UseBlockOptions = {
   content?: React.ReactNode
 }
 
-export type UseBlockReturnOptions<O extends object, E extends UseBlockOptions = UseBlockOptions> = O & {
+export type BlockReturnOptions<O extends object, E extends BlockOptions = BlockOptions> = O & {
   className: string
   children?: React.ReactNode
   style: React.CSSProperties
@@ -42,7 +42,7 @@ export type UseBlockReturnOptions<O extends object, E extends UseBlockOptions = 
  * @example
  * const options = useBlock(conf)
  */
-export const useBlock = <O extends object>(options: O & UseBlockOptions): UseBlockReturnOptions<O> => {
+export const useBlock = <O extends object>(options: O & BlockOptions): BlockReturnOptions<O> => {
   const {
     gap,
     padding,
@@ -76,7 +76,7 @@ export const useBlock = <O extends object>(options: O & UseBlockOptions): UseBlo
       ...style,
     },
     options: { gap, padding, margin, direction, grow, align, justify, stretch, content, children, style },
-  }) as UseBlockReturnOptions<O>,
+  }) as BlockReturnOptions<O>,
   [align, children, className, content, direction, gap, grow, justify, margin, otherOptions, padding, stretch, style],
   )
 }

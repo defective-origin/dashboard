@@ -6,7 +6,7 @@ import React, { useCallback } from 'react'
 // ---| components |---
 
 // ---| common |---
-import { NestedStateEventHandler, UseNestedStateOptions, UseNestedStateReturnOptions, useNestedState } from 'common/hooks'
+import { NestedStateEventHandler, NestedStateOptions, NestedStateReturnOptions, useNestedState } from 'common/hooks'
 
 // ---| self |---
 
@@ -21,10 +21,10 @@ export type FormEvent = FormFieldEvent | FormGroupEvent | React.FormEvent<HTMLFo
 export type FormEventContext = React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement> | React.FormEvent<HTMLFormElement>
 export type FormEventHandler<V extends FormValue, E extends FormEventContext = FormEventContext> = NestedStateEventHandler<V, E>
 
-export type FormOptions<V extends FormValue, E extends FormEventContext = FormEventContext> = UseNestedStateOptions<V, E> & {
+export type FormOptions<V extends FormValue, E extends FormEventContext = FormEventContext> = NestedStateOptions<V, E> & {
   onSubmit?: FormEventHandler<V>
 }
-export type FormReturnOptions<V extends FormValue, E extends FormEventContext = FormEventContext> = UseNestedStateReturnOptions<V, E>
+export type FormReturnOptions<V extends FormValue, E extends FormEventContext = FormEventContext> = NestedStateReturnOptions<V, E>
 
 export type FormValueOptions = Omit<FormOptions<FormFieldValue>, 'init' | 'refreshIfExist' | 'context' | 'serialize' | 'onReset'>
 export type FormGroupOptions = Omit<FormOptions<FormGroupValue>, 'value' | 'init' | 'refreshIfExist' | 'context' | 'serialize'>

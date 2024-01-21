@@ -11,10 +11,10 @@ import Spacer from 'components/Spacer'
 import { react } from 'common/tools'
 
 // ---| self |---
-import useBlock, { UseBlockOptions } from './Block.hook'
+import useBlock, { BlockOptions } from './Block.hook'
 
 // TODO: extend all type which use Block props by <E extends React.ElementType>
-export type BlockProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<UseBlockOptions, E>
+export type BlockProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<BlockOptions, E>
 
 /**
  * Component description.

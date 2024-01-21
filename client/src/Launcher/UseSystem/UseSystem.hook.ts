@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 
 // ---| self |---
-import useHotKeys, { UseHotKeysReturnOptions } from './UseHotKeys'
+import useHotKeys, { HotKeysReturnOptions } from './UseHotKeys'
 
 
-export type UseSystemReturnOptions = {
-  hotkeys: UseHotKeysReturnOptions
+export type SystemReturnOptions = {
+  hotkeys: HotKeysReturnOptions
 }
 
 /**
@@ -14,7 +14,7 @@ export type UseSystemReturnOptions = {
  * @example
  * const options = useSystem(conf)
  */
-export const useSystem = (): UseSystemReturnOptions => {
+export const useSystem = (): SystemReturnOptions => {
   const hotkeys = useHotKeys()
 
   return useMemo(() => ({ hotkeys }), [hotkeys])

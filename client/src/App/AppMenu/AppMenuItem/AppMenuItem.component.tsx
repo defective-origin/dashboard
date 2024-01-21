@@ -44,7 +44,7 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
   // TODO: если активный или открыто подменю, то заполнять иконки (language)
 
   return (
-    <Tooltip content={content} placement='right'>
+    <Tooltip content={content.toUpperCase()} placement='right'>
       {href && <Button as={NavLink} to={href} {...commonProps} />}
 
       {!href && <Button {...commonProps} />}

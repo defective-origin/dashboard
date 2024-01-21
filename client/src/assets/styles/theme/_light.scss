@@ -1,6 +1,6 @@
 @import '../tools';
 
-@mixin init-theme() {
+@mixin init-color-theme() {
   // colors
   $color-name: color;
   $color-map: init-color-map(#000000, #000000, #000000, #000000, #000000, #000000, #000000);

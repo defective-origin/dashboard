@@ -48,7 +48,7 @@ export type ScrollManager<TElement extends HTMLElement> = {
   moveEndY: () => void
 }
 
-export type UseScrollOptions<TElement extends HTMLElement> = ScrollToOptions & {
+export type ScrollOptions<TElement extends HTMLElement> = ScrollToOptions & {
   enable?: boolean
   ref?: React.MutableRefObject<TElement>
   size?: ScrollSizeType
@@ -61,7 +61,7 @@ export type UseScrollOptions<TElement extends HTMLElement> = ScrollToOptions & {
   manager?: React.MutableRefObject<ScrollManager<TElement>>
 }
 
-export type UseScrollReturnOptions<TElement extends HTMLElement> = {
+export type ScrollReturnOptions<TElement extends HTMLElement> = {
   ref: React.MutableRefObject<TElement>
   elements: React.ReactNode
   manager: ScrollManager<TElement>
@@ -74,7 +74,7 @@ export type UseScrollReturnOptions<TElement extends HTMLElement> = {
  * @example
  * const options = useScroll(conf)
  */
-export function useScroll<TElement extends HTMLElement>(_options?: UseScrollOptions<TElement>): UseScrollReturnOptions<TElement> {
+export function useScroll<TElement extends HTMLElement>(_options?: ScrollOptions<TElement>): ScrollReturnOptions<TElement> {
   const options = { ...DEFAULT_SCROLL_PARAMS, ..._options }
   const ref = useRef<TElement>(options.ref?.current as TElement)
 

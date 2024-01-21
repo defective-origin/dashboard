@@ -6,9 +6,9 @@ import React from 'react'
 import Block, { BlockProps } from 'components/Block'
 
 // ---| self |---
-import { UseScrollOptions, useScroll } from './Scroll.hook'
+import { ScrollOptions, useScroll } from './Scroll.hook'
 
-export type ScrollProps<TElement extends HTMLElement> = BlockProps & UseScrollOptions<TElement>
+export type ScrollProps<TElement extends HTMLElement> = BlockProps & ScrollOptions<TElement>
 
 /**
  * Scroll which allow to scroll by buttons.

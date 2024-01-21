@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react'
 
-export type UseModeOptions = (string | string[])[]
+export type ModeOption = undefined | string
+export type ModeOptions = (ModeOption | ModeOption[])[]
 
-export type UseModeReturnOptions = void
+export type ModeReturnOptions = void
 
 /**
  * Add class names to body
@@ -10,9 +11,9 @@ export type UseModeReturnOptions = void
  * @example
  * const options = useMode(conf)
  */
-export const useMode = (...args: UseModeOptions): UseModeReturnOptions => {
+export const useMode = (...args: ModeOptions): ModeReturnOptions => {
   const prevRef = useRef<string[]>([])
-  const value = args.flat().filter(Boolean)
+  const value = args.flat().filter(Boolean) as string[]
 
   useEffect(() => {
     const prevValue = prevRef.current

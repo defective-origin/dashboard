@@ -49,7 +49,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <AppMenuItem start='paid' content={locale.t('LINKS.DONATION')} href={ROUTE_LINKS.DONATION} />
       <AppMenuItem start='support_agent' content={locale.t('LINKS.SUPPORT')} href={ROUTE_LINKS.SUPPORT} />
 
-      <AppMenuItem start={`${app.theme.theme}_mode`} content={app.theme.theme.toUpperCase()} onClick={app.theme.toggle} fillIcon />
+      <AppMenuItem start={`${app.theme()}_mode`} content={app.theme()} onClick={app.toggleTheme} fillIcon />
       <AppMenuItem start='language' content={locale.language.toUpperCase()} />
 
       {children}

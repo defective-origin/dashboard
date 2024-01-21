@@ -23,7 +23,7 @@ const ALERT_ICON_MAP: Record<AlertColor, IconVariant> = {
 }
 
 
-export type UseToastReturnOptions = {
+export type ToastReturnOptions = {
   message: (data: ToastMessage) => Id
   alert: (data: ToastMessage) => Id
   guard: (data: ToastMessage) => Id
@@ -36,7 +36,7 @@ export type UseToastReturnOptions = {
  * const options = useToast(conf)
  */
 
-export const useToast = (): UseToastReturnOptions => {
+export const useToast = (): ToastReturnOptions => {
   const initToast = useCallback((data: ToastMessage, options: MuiToastOptions<ToastMessage>) =>
     toast(Toast, {
       ...options,

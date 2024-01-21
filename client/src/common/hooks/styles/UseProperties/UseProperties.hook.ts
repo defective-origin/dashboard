@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import useProperty from '../UseProperty'
 
-export type UsePropertiesOptions<T extends Record<string, string>> = T & {
+export type PropertiesOptions<T extends Record<string, string>> = T & {
   ref?: React.MutableRefObject<Element>
 }
 
-export type UsePropertiesReturnOptions<T extends Record<string, string>> = T
+export type PropertiesReturnOptions<T extends Record<string, string>> = T
 
 /**
  * Hook descriptions
@@ -14,9 +14,9 @@ export type UsePropertiesReturnOptions<T extends Record<string, string>> = T
  * const options = useProperties(conf)
  */
 export const useProperties = <T extends Record<string, string>>(
-  options: UsePropertiesOptions<T>,
+  options: PropertiesOptions<T>,
   deps: unknown[] = [],
-): UsePropertiesReturnOptions<T> => {
+): PropertiesReturnOptions<T> => {
   const { ref, ...properties } = options
   const property = useProperty({ ref }, deps)
 

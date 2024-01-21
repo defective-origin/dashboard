@@ -12,9 +12,9 @@ import { useProperties } from 'common/hooks'
 // ---| self |---
 import css from './SelectionBoard.module.scss'
 import { GridShape, ShapeColor, SquareShape, grid, square } from './SelectionBoard.tool'
-import useSelection, { UseSelectionOptions } from './SelectionBoard.hook'
+import useSelection, { SelectionOptions } from './SelectionBoard.hook'
 
-export type SelectionBoardProps<I extends Record<string, unknown>> = UseSelectionOptions<I> & {
+export type SelectionBoardProps<I extends Record<string, unknown>> = SelectionOptions<I> & {
   className?: string
   /** set margin around each widget */
   gap?: number

@@ -3,12 +3,12 @@ import { useMemo } from 'react'
 // ---| common |---
 
 // ---| self |---
-import { UseLoggerReturnOptions, useLogger } from './UseLogger'
-import { UseFeaturesReturnOptions, useFeatures } from './UseFeatures'
+import { LoggerReturnOptions, useLogger } from './UseLogger'
+import { FeaturesReturnOptions, useFeatures } from './UseFeatures'
 
-export type UseMonitorReturnOptions = {
-  logger: UseLoggerReturnOptions
-  features: UseFeaturesReturnOptions
+export type MonitorReturnOptions = {
+  logger: LoggerReturnOptions
+  features: FeaturesReturnOptions
 }
 
 /**
@@ -17,7 +17,7 @@ export type UseMonitorReturnOptions = {
  * @example
  * const options = useMonitor(conf)
  */
-export const useMonitor = (): UseMonitorReturnOptions => {
+export const useMonitor = (): MonitorReturnOptions => {
   const logger = useLogger()
   const features = useFeatures()
 

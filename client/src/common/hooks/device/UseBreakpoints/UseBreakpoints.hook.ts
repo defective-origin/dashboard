@@ -45,9 +45,9 @@ const initOptions = (width: number, breakpoints: Breakpoints) => ({
   isMobileVertical: isInSizeRange(width, breakpoints['mobile-vertical']),
 })
 
-export type UseBreakpointsOptions = Breakpoints
+export type BreakpointsOptions = Breakpoints
 
-export type UseBreakpointsReturnOptions = ReturnType<typeof initOptions>
+export type BreakpointsReturnOptions = ReturnType<typeof initOptions>
 
 /**
  * Detect media breakpoints.
@@ -55,7 +55,7 @@ export type UseBreakpointsReturnOptions = ReturnType<typeof initOptions>
  * @example
  * const options = useBreakpoints()
  */
-export const useBreakpoints = (options: UseBreakpointsOptions = BREAKPOINTS): UseBreakpointsReturnOptions => {
+export const useBreakpoints = (options: BreakpointsOptions = BREAKPOINTS): BreakpointsReturnOptions => {
   const [state, setState] = useState(initOptions(window.innerWidth, options))
 
   useEffect(() => {

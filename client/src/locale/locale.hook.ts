@@ -11,7 +11,7 @@ export const t = (key?: TranslateKeys, options?: object) => key && i18next.t(key
 export const changeLanguage = (key?: Languages, callback?: Callback) => i18next.changeLanguage(key, callback)
 
 
-export type UseLocaleReturnOptions = {
+export type LocaleReturnOptions = {
   t: typeof t
   language: Languages
   languages: Languages[]
@@ -26,7 +26,7 @@ export type UseLocaleReturnOptions = {
  * @example
  * const options = useLocale(conf)
  */
-export const useLocale = (): UseLocaleReturnOptions => {
+export const useLocale = (): LocaleReturnOptions => {
   return useMemo(() => ({
     language: 'en',
     languages: i18next.languages as Languages[],

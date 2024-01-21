@@ -31,7 +31,7 @@ export type State<V> = {
 
 export type States<V> = Record<string, State<V>>
 
-export type NestedStateOptions<V, C> = {
+export type NestedState<V, C> = {
   /** State map by path. */
   _states: React.MutableRefObject<States<V>>
 
@@ -57,7 +57,7 @@ export type NestedStateOptions<V, C> = {
   refresh: (context?: C) => void
 }
 
-export type UseNestedStateOptions<V, C> = Pick<Partial<State<V>>, 'name' | 'init' | 'value'> & {
+export type NestedStateOptions<V, C> = Pick<Partial<State<V>>, 'name' | 'init' | 'value'> & {
   /** If true state will be reinitialized if it's exist. */
   refreshIfExist?: boolean
 
@@ -70,7 +70,7 @@ export type UseNestedStateOptions<V, C> = Pick<Partial<State<V>>, 'name' | 'init
   // initWhen?: () => boolean // FIXME: need this?
 
   /** Custom context for getting parent states. NestedStateContext is used by default.  */
-  context?: React.Context<UseNestedStateReturnOptions<V, C> | null>
+  context?: React.Context<NestedStateReturnOptions<V, C> | null>
 
   /** Strick structure mode. It allows create only known sub states and types.  */
   schema?: any
@@ -86,9 +86,9 @@ export type UseNestedStateOptions<V, C> = Pick<Partial<State<V>>, 'name' | 'init
   // FIXME: add event handler on store change line onStoreChange?
 }
 
-export type UseNestedStateReturnOptions<V, C> = NestedStateOptions<V, C>
+export type NestedStateReturnOptions<V, C> = NestedState<V, C>
 
-export const NestedStateContext = React.createContext<UseNestedStateReturnOptions<unknown, unknown> | null>(null)
+export const NestedStateContext = React.createContext<NestedStateReturnOptions<unknown, unknown> | null>(null)
 NestedStateContext.displayName = 'NestedStateContext'
 
 
@@ -99,7 +99,7 @@ NestedStateContext.displayName = 'NestedStateContext'
  * @example
  * const state = useNestedState(conf)
  */
-export const useNestedState = <V = unknown, C = unknown>(options: UseNestedStateOptions<V, C> = {}): UseNestedStateReturnOptions<V, C> => {
+export const useNestedState = <V = unknown, C = unknown>(options: NestedStateOptions<V, C> = {}): NestedStateReturnOptions<V, C> => {
   const {
     name = '',
     value,
@@ -108,7 +108,7 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
     refreshIfExist, // FIXME: pass this props to nested states
     validateOnInit, // FIXME: pass this props to nested states
     validateOnChange, // FIXME: pass this props to nested states
-    context = NestedStateContext as React.Context<UseNestedStateReturnOptions<V, C> | null>,
+    context = NestedStateContext as React.Context<NestedStateReturnOptions<V, C> | null>,
     onChange,
     onReset,
     serialize = (states, current): V => {
@@ -130,7 +130,7 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
   const stateKey = useMemo(() => toKey(container?.state().key ?? '', name) ?? 'root', [container, name])
   const statePath = useMemo(() => toPath(stateKey), [stateKey])
 
-  const store = useCallback<NestedStateOptions<V, C>['store']>((name = statePath[0], newState) => {
+  const store = useCallback<NestedState<V, C>['store']>((name = statePath[0], newState) => {
     if (newState) {
       return _states.current[name] = { ...newState }
     }
@@ -139,7 +139,7 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
     return _states.current[name]
   }, [_states, statePath])
 
-  const state = useCallback<NestedStateOptions<V, C>['state']>(() => store(stateKey), [stateKey, store])
+  const state = useCallback<NestedState<V, C>['state']>(() => store(stateKey), [stateKey, store])
 
   const getNestedStates = useCallback(({ deep = false } = {}) => {
     return Object.keys(_states.current)
@@ -151,7 +151,7 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
       .map((key) => store(key))
   }, [_states, state, store])
 
-  const validate = useCallback<NestedStateOptions<V, C>['validate']>(() => {
+  const validate = useCallback<NestedState<V, C>['validate']>(() => {
     // // 'undefined' 'boolean' 'number' 'bigint' 'string' 'symbol' 'function' 'object' // fix null
     // // FIXME: save type in state?
     // // FIXME: allow create custom type like: type: 'my-custom-type'.
@@ -165,7 +165,7 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
     return !schema
   }, [schema])
 
-  const refresh = useCallback<NestedStateOptions<V, C>['refresh']>((context) => {
+  const refresh = useCallback<NestedState<V, C>['refresh']>((context) => {
     const nestedStates = getNestedStates()
     const valueState = nestedStates.reduce((acc, state) => Object.assign(acc, { [state.name]: state.value }), {})
     const initState = nestedStates.reduce((acc, state) => Object.assign(acc, { [state.name]: state.init }), {})
@@ -192,13 +192,13 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
     }
   }, [validateOnChange, isInitialized, container, validate, getNestedStates, onChange, serialize, state, store])
 
-  const set = useCallback<NestedStateOptions<V, C>['set']>((value, context) => {
+  const set = useCallback<NestedState<V, C>['set']>((value, context) => {
     state().value = value
 
     refresh(context)
   }, [refresh, state])
 
-  const reset = useCallback<NestedStateOptions<V, C>['reset']>((context) => {
+  const reset = useCallback<NestedState<V, C>['reset']>((context) => {
     onReset?.(state().value, store().value, context)
 
     // reset all nested states
@@ -260,7 +260,7 @@ export const useNestedState = <V = unknown, C = unknown>(options: UseNestedState
 
   // FIXME: FIX RENDER ERRORS
 
-  return useMemo<NestedStateOptions<V, C>>(() => ({ _states, state, store, set, validate, reset, refresh }), [state, store, set, validate, reset, refresh])
+  return useMemo<NestedState<V, C>>(() => ({ _states, state, store, set, validate, reset, refresh }), [state, store, set, validate, reset, refresh])
 }
 
 export default useNestedState

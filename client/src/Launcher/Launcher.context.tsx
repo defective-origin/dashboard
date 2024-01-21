@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
 
 // ---| self |---
-import { UseAccountReturnOptions } from './UseAccount'
-import { UseMonitorReturnOptions } from './UseMonitor'
-import { UseSystemReturnOptions } from './UseSystem'
-import { UseUIReturnOptions } from './UseUI'
+import { AccountReturnOptions } from './UseAccount'
+import { MonitorReturnOptions } from './UseMonitor'
+import { SystemReturnOptions } from './UseSystem'
+import { UIReturnOptions } from './UseUI'
 
 
 // TODO: (kseniya_boldak) think about refactoring
 
-export type LauncherOptions = UseSystemReturnOptions
-                            & UseMonitorReturnOptions
-                            & UseUIReturnOptions
-                            & UseAccountReturnOptions
+export type LauncherOptions = SystemReturnOptions
+                            & MonitorReturnOptions
+                            & UIReturnOptions
+                            & AccountReturnOptions
 
 export const DEFAULT_LAUNCHER_OPTIONS = {} as LauncherOptions
 

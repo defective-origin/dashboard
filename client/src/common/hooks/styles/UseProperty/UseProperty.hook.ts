@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-export type UsePropertyOptions = {
+export type PropertyOptions = {
   defaultValue?: string
   defaultProperty?: string
 
@@ -8,7 +8,7 @@ export type UsePropertyOptions = {
   ref?: React.MutableRefObject<Element>
 }
 
-export type UsePropertyReturnOptions = (property?: string, defaultValue?: string) => string | undefined
+export type PropertyReturnOptions = (property?: string, defaultValue?: string) => string | undefined
 
 /**
  * Allow create property getter
@@ -18,7 +18,7 @@ export type UsePropertyReturnOptions = (property?: string, defaultValue?: string
  * @example
  * const options = useProperty(conf)
  */
-export const useProperty = (options: UsePropertyOptions = {}, deps: unknown[] = []): UsePropertyReturnOptions => {
+export const useProperty = (options: PropertyOptions = {}, deps: unknown[] = []): PropertyReturnOptions => {
   const element = options.ref?.current ?? document.body
 
   return useCallback((property = options.defaultProperty, defaultValue = options.defaultValue) => {

@@ -6,7 +6,7 @@ import { xy } from 'common/tools'
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
 
-export type UseSelectionOptions<I extends Record<string, unknown>> = {
+export type SelectionOptions<I extends Record<string, unknown>> = {
   /** Items to show */
   items?: I[]
   /** Size of cell */
@@ -29,7 +29,7 @@ export type UseSelectionOptions<I extends Record<string, unknown>> = {
   onError?: (error: BoardError) => void
 }
 
-export type UseSelectionReturnOptions = {
+export type SelectionReturnOptions = {
   ref: React.MutableRefObject<HTMLCanvasElement | null>
   cell: xy.Vector
   places: xy.Square[]
@@ -41,7 +41,7 @@ export type UseSelectionReturnOptions = {
 }
 
 
-export function useSelection<I extends Record<string, unknown>>(props: UseSelectionOptions<I>): UseSelectionReturnOptions {
+export function useSelection<I extends Record<string, unknown>>(props: SelectionOptions<I>): SelectionReturnOptions {
   const {
     cell = xy.vector(1, 1),
     items = [],

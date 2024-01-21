@@ -1,26 +1,26 @@
 import { useState, useMemo, useCallback } from 'react'
 
+// ---| common |---
+import { useMode } from 'common/hooks'
+
+export type Theme = 'light' | 'dark'
+
 export type AccountUser = object
 export type AccountSettings = {
-  theme: 'light' | 'dark'
+  theme: Theme
 }
 
-export type Account = {
+export type AccountReturnOptions = {
   user: null | AccountUser
   settings: null | AccountSettings
-}
-
-export const DEFAULT_ACCOUNT_STATE = {
-  user: null,
-  settings: null,
-}
-
-export type UseAccountReturnOptions = Account & {
   //actions
   login: () => void,
   logout: () => void,
   // selectors
   isAuthorized: () => boolean
+  theme: () => Theme
+  isTheme: (value: Theme) => boolean
+  toggleTheme: () => void
 }
 
 /**
@@ -29,16 +29,26 @@ export type UseAccountReturnOptions = Account & {
  * @example
  * const options = useAccount(conf)
  */
-export const useAccount = (): UseAccountReturnOptions | null => {
-  const [account, setAccount] = useState<Account>(DEFAULT_ACCOUNT_STATE)
+export const useAccount = (): AccountReturnOptions => {
+  const [user, setUser] = useState<AccountUser | null>(null)
+  const [settings, setSettings] = useState<AccountSettings | null>(null)
 
-  const login = useCallback(() => setAccount({ user: {}, settings: null }), [])
-  const logout = useCallback(() => setAccount(DEFAULT_ACCOUNT_STATE), [])
-  const isAuthorized = useCallback(() => !!account.user, [account.user])
+  const login = useCallback(() => setUser({}), [])
+  const logout = useCallback(() => setUser(null), [])
+  const isAuthorized = useCallback(() => !!user, [user])
+  const isTheme = useCallback((value: Theme) => settings?.theme === value, [settings?.theme])
+  const theme = useCallback(() => settings?.theme ?? 'light', [settings?.theme])
+  const toggleTheme = useCallback(() => {
+    const theme = isTheme('dark') ? 'light': 'dark'
 
-  return useMemo<UseAccountReturnOptions>(
-    () => ({ ...account, login, logout, isAuthorized }),
-    [account, isAuthorized, login, logout],
+    setSettings((current) => ({ ...current, theme }))
+  }, [isTheme])
+
+  useMode(theme())
+
+  return useMemo<AccountReturnOptions>(
+    () => ({ user, settings, toggleTheme, theme, isTheme, login, logout, isAuthorized }),
+    [user, settings, toggleTheme, theme, isTheme, login, logout, isAuthorized],
   )
 }
 
