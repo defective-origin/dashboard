@@ -1,15 +1,14 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 import Form from 'components/Form'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './WidgetPage.module.scss'

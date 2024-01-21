@@ -1,12 +1,12 @@
 import React from 'react'
 import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
 
+// ---| core |---
+import { cn } from 'tools'
+
 // ---| components |---
 import Text, { TextProps } from 'components/Text'
 import Icon from '../Icon'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Link.module.scss'

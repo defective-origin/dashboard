@@ -2,12 +2,11 @@ import React from 'react'
 import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Tooltip.module.scss'

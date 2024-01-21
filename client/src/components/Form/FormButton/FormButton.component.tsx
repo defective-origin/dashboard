@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react'
 
 // ---| core |---
+import { cn, react } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/Button'
-
-// ---| common |---
-import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './FormButton.module.scss'

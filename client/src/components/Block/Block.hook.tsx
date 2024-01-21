@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import './Block.module.scss'

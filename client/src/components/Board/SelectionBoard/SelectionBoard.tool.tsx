@@ -1,10 +1,9 @@
 // ---| core |---
+import { xy } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { xy } from 'common/tools'
 
 // ---| self |---
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-// ---| common |---
-import { cn } from 'common/tools'
+// ---| core |---
+import { cn } from 'tools'
 
 // ---| self |---
 import css from './Spacer.module.scss'

@@ -1,14 +1,13 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Block, { BlockProps } from 'components/Block'
 import Repeat, { ComponentWithItems } from 'components/Repeat'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Alerts.module.scss'

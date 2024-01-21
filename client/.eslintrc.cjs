@@ -54,7 +54,8 @@ module.exports = {
         message: 'Use direct import, example "components".',
         group: [
           '**/../*',
-          '**/../common/*',
+          '**/../tools/*',
+          '**/../hooks/*',
           '**/../Launcher/*',
           '**/../components/*',
           '**/../pages/*',
@@ -84,7 +85,8 @@ module.exports = {
     {
       files: [
         '**/components/**/*component.ts*',
-        '**/common/tools/index.ts',
+        '**/tools/index.ts',
+        '**/hooks/index.ts',
         '**/Launcher/**/*.ts*',
         '**/locale/**/*.ts*',
         '**/router/**/*.ts*',

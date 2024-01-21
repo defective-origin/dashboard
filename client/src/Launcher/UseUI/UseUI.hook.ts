@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
-// ---| common |---
-import { BreakpointsReturnOptions, useBreakpoints, useMode } from 'common/hooks'
+// ---| core |---
+import { BreakpointsReturnOptions, useBreakpoints, useMode } from 'hooks'
 
 // ---| components |---
 import { ToastReturnOptions, useToast } from 'components/Toast'

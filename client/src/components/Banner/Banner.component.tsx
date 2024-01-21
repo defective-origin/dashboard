@@ -1,13 +1,13 @@
 import React from 'react'
 
+// ---| core |---
+import { cn } from 'tools'
+
 // ---| components |---
 import Text from 'components/Text'
 import Image, { ImageVariant } from 'components/Image'
 import Progress from 'components/Progress'
 import Block from 'components/Block'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Banner.module.scss'

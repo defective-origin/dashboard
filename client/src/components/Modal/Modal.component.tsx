@@ -2,13 +2,12 @@ import React from 'react'
 import MuiModal, { ModalProps as MuiModalProps } from '@mui/material/Modal'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Card, { CardProps } from 'components/Card'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Modal.module.scss'

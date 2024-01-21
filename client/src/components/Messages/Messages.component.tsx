@@ -1,15 +1,14 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Repeat, { ComponentWithItems } from 'components/Repeat'
 import Block, { BlockProps } from 'components/Block'
 import Text, { TextProps, TextColor } from 'components/Text'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Messages.module.scss'

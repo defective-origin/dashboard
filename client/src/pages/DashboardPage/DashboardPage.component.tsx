@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
@@ -8,9 +9,6 @@ import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 import Board, { BoardItem } from 'components/Board'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './DashboardPage.module.scss'

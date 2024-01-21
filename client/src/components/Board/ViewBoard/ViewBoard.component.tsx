@@ -1,10 +1,10 @@
-import { useMemo, useRef } from 'react'
+import { useMemo } from 'react'
+
+// ---| core |---
+import { cn, xy } from 'tools'
 
 // ---| components |---
 import Repeat from 'components/Repeat'
-
-// ---| common |---
-import { cn, xy } from 'common/tools'
 
 // ---| self |---
 import css from './ViewBoard.module.scss'

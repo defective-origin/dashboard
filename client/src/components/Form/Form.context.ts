@@ -1,12 +1,11 @@
 import React, { useCallback } from 'react'
 
 // ---| core |---
+import { NestedStateEventHandler, NestedStateOptions, NestedStateReturnOptions, useNestedState } from 'hooks'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { NestedStateEventHandler, NestedStateOptions, NestedStateReturnOptions, useNestedState } from 'common/hooks'
 
 // ---| self |---
 

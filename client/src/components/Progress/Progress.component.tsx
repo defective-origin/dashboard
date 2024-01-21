@@ -1,9 +1,9 @@
 import React from 'react'
-import MuiCircularProgress, { CircularProgressProps as MuiCircularProgressProps } from '@mui/material/CircularProgress'
-import MuiLinearProgress, { LinearProgressProps as MuiLinearProgressProps } from '@mui/material/LinearProgress'
+import MuiCircularProgress from '@mui/material/CircularProgress'
+import MuiLinearProgress from '@mui/material/LinearProgress'
 
-// ---| common |---
-import { cn, react } from 'common/tools'
+// ---| core |---
+import { cn, react } from 'tools'
 
 // ---| self |---
 import css from './Progress.module.scss'
@@ -14,11 +14,12 @@ export const PROGRESS_MAP = {
 }
 
 export type ProgressVariant = keyof typeof PROGRESS_MAP
-// todo: fix props types
+// todo: add color
 export type ProgressProps = {
   className?: string
   show?: boolean
   v?: ProgressVariant
+  value?: number
 }
 
 /**
@@ -29,7 +30,7 @@ export type ProgressProps = {
  * <Progress />
  */
 export function Progress(props: ProgressProps): JSX.Element | null {
-  const { show, v = 'circular', className, ...otherProps } = props
+  const { show, v = 'circular', value, className, ...otherProps } = props
   const _className = cn(css.Progress, className)
   const Tag = PROGRESS_MAP[v]
 
@@ -37,7 +38,7 @@ export function Progress(props: ProgressProps): JSX.Element | null {
     return null
   }
 
-  return <Tag className={_className} {...otherProps} />
+  return <Tag className={_className} value={value} {...otherProps} />
 }
 
 Progress.displayName = 'Progress'

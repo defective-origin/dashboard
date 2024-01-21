@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
 
-// ---| common |---
-
 // ---| self |---
 import { LoggerReturnOptions, useLogger } from './UseLogger'
 import { FeaturesReturnOptions, useFeatures } from './UseFeatures'

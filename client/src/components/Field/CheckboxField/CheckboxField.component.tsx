@@ -2,13 +2,12 @@ import React, { useCallback } from 'react'
 import MuiCheckboxField, { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import BaseField, { BaseFieldProps } from '../BaseField'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './CheckboxField.module.scss'

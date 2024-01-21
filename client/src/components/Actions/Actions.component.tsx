@@ -2,6 +2,8 @@ import React from 'react'
 // TODO: (tikhon_puntus) remove all react imports
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
@@ -9,9 +11,6 @@ import Link from 'components/Link'
 import Button from 'components/Button'
 import Repeat, { ComponentWithItems, RepeatItem } from 'components/Repeat'
 import Block, { BlockProps } from 'components/Block'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Actions.module.scss'

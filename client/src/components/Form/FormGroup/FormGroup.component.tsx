@@ -1,15 +1,14 @@
 import React from 'react'
 
 // ---| core |---
+import { cn, react } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text from 'components/Text'
 import Block, { BlockProps } from 'components/Block'
 import Messages, { MessageItem } from 'components/Messages'
-
-// ---| common |---
-import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './FormGroup.module.scss'

@@ -2,14 +2,12 @@ import React from 'react'
 
 // ---| core |---
 import { useLocale } from 'locale'
+import { cn } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text from 'components/Text'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Copyright.module.scss'

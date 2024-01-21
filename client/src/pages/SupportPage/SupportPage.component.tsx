@@ -1,14 +1,13 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './SupportPage.module.scss'

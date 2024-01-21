@@ -2,12 +2,11 @@ import React from 'react'
 import MuiRadioField, { RadioProps as MuiRadioProps } from '@mui/material/Radio'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './RadioField.module.scss'

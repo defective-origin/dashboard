@@ -1,8 +1,10 @@
 import React from 'react'
-import Block, { BlockProps } from 'components/Block'
 
-// ---| common |---
-import { cn, react } from 'common/tools'
+// ---| core |---
+import { cn, react } from 'tools'
+
+// ---| components |---
+import Block, { BlockProps } from 'components/Block'
 
 // ---| self |---
 import './LayoutItem.module.scss'

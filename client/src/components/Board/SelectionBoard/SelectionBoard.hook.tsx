@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react'
 
-// ---| common |---
-import { xy } from 'common/tools'
+// ---| core |---
+import { xy } from 'tools'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'

@@ -6,13 +6,12 @@ import {
 } from '@mui/material'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Repeat, { ComponentWithItems } from 'components/Repeat'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Menu.module.scss'

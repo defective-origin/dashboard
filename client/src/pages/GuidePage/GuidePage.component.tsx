@@ -1,6 +1,8 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 import BasePage, { BasePageProps } from 'screens/BasePage'
@@ -8,9 +10,6 @@ import BasePage, { BasePageProps } from 'screens/BasePage'
 // ---| components |---
 import Actions, { ActionItem } from 'components/Actions'
 import Text from 'components/Text'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './GuidePage.module.scss'

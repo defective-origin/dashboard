@@ -2,13 +2,12 @@ import React from 'react'
 import MuiDivider, { DividerProps as MuiDividerProps } from '@mui/material/Divider'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text, { TextProps } from 'components/Text'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Divider.module.scss'

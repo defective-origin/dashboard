@@ -6,12 +6,12 @@ import MuiCardContent from '@mui/material/CardContent'
 import MuiCardHeader from '@mui/material/CardHeader'
 import MuiCardMedia from '@mui/material/CardMedia'
 
+// ---| core |---
+import { cn } from 'tools'
+
 // ---| components |---
 import Divider from 'components/Divider'
 import Button, { ButtonProps } from 'components/Button'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Card.module.scss'

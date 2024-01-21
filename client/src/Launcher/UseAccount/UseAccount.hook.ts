@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 
-// ---| common |---
-import { useMode } from 'common/hooks'
+// ---| core |---
+import { useMode } from 'hooks'
 
 export type Theme = 'light' | 'dark'
 

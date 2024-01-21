@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-// ---| common |---
+// ---| self |---
 import useStateful from './UseStateful.hook'
 
 /**

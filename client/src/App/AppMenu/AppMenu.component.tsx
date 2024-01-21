@@ -4,13 +4,11 @@ import React from 'react'
 import { useLocale } from 'locale'
 import { ROUTE_LINKS } from 'router'
 import { useLauncher } from 'Launcher'
+import { cn } from 'tools'
 
 // ---| components |---
 import Actions from 'components/Actions'
 import Logo from 'components/Logo'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './AppMenu.module.scss'

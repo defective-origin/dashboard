@@ -3,6 +3,7 @@ import React, { useCallback } from 'react'
 // ---| core |---
 import { useLauncher } from 'Launcher'
 import { TranslateKeys, useLocale } from 'locale'
+import { cn, react } from 'tools'
 
 // ---| screens |---
 import Copyright from 'screens/Copyright'
@@ -11,9 +12,6 @@ import Copyright from 'screens/Copyright'
 import Text from 'components/Text'
 import Page, { PageProps } from 'components/Page'
 import Actions, { ActionItem } from 'components/Actions'
-
-// ---| common |---
-import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './BasePage.module.scss'

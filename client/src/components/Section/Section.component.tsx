@@ -1,15 +1,14 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Layout from 'components/Layout'
 import Text from 'components/Text'
 import Actions, { ActionsProps } from 'components/Actions'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Section.module.scss'

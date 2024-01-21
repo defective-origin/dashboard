@@ -1,12 +1,11 @@
 import React from 'react'
 
 // ---| core |---
+import { cn, react } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './Field.module.scss'

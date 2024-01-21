@@ -2,12 +2,11 @@ import React, { useCallback } from 'react'
 import MuiPortal from '@mui/base/Portal'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Portal.module.scss'

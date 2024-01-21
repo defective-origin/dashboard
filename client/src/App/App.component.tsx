@@ -2,14 +2,12 @@ import React from 'react'
 
 // ---| core |---
 import { Outlet } from 'router'
+import { cn } from 'tools'
 
 // ---| screens |---
 // ---| components |---
 import Layout from 'components/Layout'
 import Toast from 'components/Toast'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import './App.module.scss'

@@ -2,12 +2,11 @@ import React from 'react'
 import MuiSliderField, { SliderProps as MuiSliderProps } from '@mui/material/Slider'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './SliderField.module.scss'

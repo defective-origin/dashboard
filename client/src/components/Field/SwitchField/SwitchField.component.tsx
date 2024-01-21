@@ -2,12 +2,11 @@ import React, { useCallback } from 'react'
 import MuiSwitchField, { SwitchProps as MuiSwitchProps } from '@mui/material/Switch'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './SwitchField.module.scss'

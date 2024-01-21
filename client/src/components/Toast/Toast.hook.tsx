@@ -8,7 +8,6 @@ import { toast, Id, ToastOptions as MuiToastOptions } from 'react-toastify'
 import Icon, { IconVariant } from 'components/Icon'
 import { AlertColor } from 'components/Alert'
 
-// ---| common |---
 // ---| self |---
 import { Toast, ToastMessage, initToastKey } from './Toast.component'
 

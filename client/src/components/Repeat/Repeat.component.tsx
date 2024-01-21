@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import { react } from 'common/tools'
+
+// ---| core |---
+import { react } from 'tools'
 
 export type ComponentWithItems<OwnProps extends object, T> = OwnProps & {
   items?: T[]

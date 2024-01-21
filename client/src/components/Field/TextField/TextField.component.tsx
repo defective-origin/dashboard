@@ -2,12 +2,11 @@ import React from 'react'
 import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './TextField.module.scss'

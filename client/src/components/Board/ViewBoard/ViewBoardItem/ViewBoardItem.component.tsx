@@ -1,8 +1,9 @@
 import React from 'react'
 
-// ---| components |---
-import { xy } from 'common/tools'
+// ---| core |---
+import { xy } from 'tools'
 
+// ---| self |---
 import css from './ViewBoardItem.module.scss'
 
 export type ViewBoardItemProps<I extends Record<string, unknown>> = {

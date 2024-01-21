@@ -1,14 +1,13 @@
 import React from 'react'
 
 // ---| core |---
+import { react } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Divider from 'components/Divider'
 import Spacer from 'components/Spacer'
-
-// ---| common |---
-import { react } from 'common/tools'
 
 // ---| self |---
 import useBlock, { BlockOptions } from './Block.hook'

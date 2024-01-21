@@ -2,13 +2,12 @@ import React from 'react'
 import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Link, { LinkProps } from 'components/Link'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './MenuItem.module.scss'

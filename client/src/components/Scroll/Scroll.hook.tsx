@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react'
 
+// ---| core |---
+import { cn } from 'tools'
+
 // ---| components |---
 import Button from 'components/Button'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import './UseScroll.module.scss'

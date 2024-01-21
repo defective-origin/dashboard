@@ -11,7 +11,6 @@ import Text from 'components/Text'
 import Block, { BlockDirection } from 'components/Block'
 import Actions from 'components/Actions'
 
-// ---| common |---
 // ---| self |---
 import css from './Toast.module.scss'
 

@@ -91,11 +91,17 @@ Adapter pattern
 - generator/ - generator of application parts
 - src/
 
-  - common/ - contains general code/features (this features can be moved into packages), overriding packages.
+  - common/ - shared code in monorepo projects. For example shared types and so on between server and client (graphql). in most cases this code appears via generators
+
+  - tools/ - contains general independent code/features which can be moved into packages, overriding packages.
+
+  - hooks/ - contains general independent hooks which can be moved into packages, overriding hooks.
 
   - api/ - contains tools and handlers for work with network
 
-  - assets/ - contains all asset files which should be loaded with application
+  - assets/ - contains all asset files which should be loaded with application (images, fonts, icons, videos...)
+
+  - theme/ - folder for global styles, handlers, providers, configs, types
 
   - Launcher/ - All Launchers - contains tools and settings without which the application cannot or should not work
 

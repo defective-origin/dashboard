@@ -1,7 +1,5 @@
 import React from 'react'
 
-// ---| common |---
-
 // ---| components |---
 import Block, { BlockProps } from 'components/Block'
 

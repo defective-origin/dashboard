@@ -3,13 +3,12 @@ import MuiAlert, { AlertProps as MuiAlertProps } from '@mui/material/Alert'
 import MuiAlertTitle from '@mui/material/AlertTitle'
 
 // ---| core |---
+import { cn, react } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text from 'components/Text'
-
-// ---| common |---
-import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './Alert.module.scss'

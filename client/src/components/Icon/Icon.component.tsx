@@ -1,8 +1,8 @@
 import React from 'react'
 import MuiIcon, { IconProps as MuiIconProps } from '@mui/material/Icon'
 
-// ---| common |---
-import { cn } from 'common/tools'
+// ---| core |---
+import { cn } from 'tools'
 
 // ---| self |---
 import './Icon.module.scss'

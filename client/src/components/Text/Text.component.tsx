@@ -2,9 +2,7 @@ import React from 'react'
 import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/material/Typography'
 
 // ---| core |---
-
-// ---| common |---
-import { cn, react } from 'common/tools'
+import { cn, react } from 'tools'
 
 // ---| components |---
 import Icon, { IconSize, IconVariant } from 'components/Icon'

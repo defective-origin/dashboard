@@ -57,23 +57,12 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 - src/
 	- index.tsx - bootstrap file
 
-	- common/ - contains general code/features (this features can be moved into packages), overriding packages.
+	- common/ - shared code in monorepo projects. For example shared types and so on between server and client (graphql). in most cases this code appears via generators
 		- constants/
 			- ConstantUsageTypeName.constant.ts
 			- index.ts
-		- tools/ - Each file does default export but types should be exported via common export
-			- ToolUsageTypeName.tool.ts - each helper is cl
-			- index.ts
 		- managers/ - Each file does default export but types should be exported via common export. Each file does one type functionality (CacheManager, CMSManager, FileManager, PDFManager, APIManager ...)
 			- ManagerUsageTypeName.manager.ts
-			- index.ts
-		- hooks/ - Each file contains two hooks. First hook is with ref. Second is without ref, he creates ref and call first hook  
-			- UseHookName
-				- index.ts
-				- UseHookName.hook.ts
-				- UseHookName.test.ts
-				- UseHookName.tool.ts
-				- UseHookName.conf.ts
 			- index.ts
 		- errors/ - containes errors
 			- ErrorUsageTypeName.error.ts
@@ -81,6 +70,18 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 		- models/
 			- ModelUsageTypeName.model.ts
 			- index.ts
+
+  - tools/ - contains general independent code/features which can be moved into packages, overriding packages.
+  	- ToolUsageTypeName.tool.ts
+  	- ToolUsageTypeName.other-extensions.ts
+  	- index.ts
+
+  - hooks/ - contains general independent hooks which can be moved into packages, overriding hooks.  
+  	- UseHookName
+  		- index.ts
+  		- UseHookName.hook.ts
+    	- UseHookName.other-extensions.ts
+  	- index.ts
 
 	- api/ - contains tools and handlers for work with network interaction
 		- ApiSliceName - Each api  endpoint does default export. Methods receive data from server API or browser API
@@ -105,18 +106,23 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 
 	- assets/ - contains all assets which should be loaded with application
 		- fonts/
+  	- icons/ - only svg files
+  		- index.ts - module file which gather all icon imports and export map of icons as default
 		- images/
-			- icons/svg/
-				- icon-name.svg
-				- index.ts - module file which gather all icon imports and export map of icons as default
-			- placeholders/
-				- placeholder-name.svg
-				- index.ts
-		- styles/ - folder for global styles and style handlers
-  		- tool/ - mixins, functions
-  		- theme/ - theme variables, tools, settings
+  		- index.ts - module file which gather all icon imports and export map of icons as default
+		- videos
+		- gifs
+  
+  - theme/ - folder for global styles, handlers, providers, configs, types
+    - styles/
+  		- tool/ - mixins, functions ....
+  		- theme/ - color, size theme configurations
   		- variables/ - element styles, tools, settings
-			- _index.scss
+    	- _index.scss
+  	- _index.scss
+  	- index.ts
+  	- theme.context.tsx - theme provider
+  	- theme.conf.tsx - common types and variables
 	
 	
 	- App/ - component which contains app settings for launcher
@@ -124,17 +130,11 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 
 	- Launcher/ - All Launchers  - contains tools and settings without which the application cannot or should not work  + env settings in constants
 		- Component structure
-  	- SystemLauncher - [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
-  	- MonitorLauncher - [Log | Analytics | ABTest + FeatureFlag]
-  	- UILauncher - [UISettings | SnackBar | ModalWindow | Suspense]
-  	- AccountLauncher - [AccountSettings | AccountUser]
-    	- Context structure
-  		- LauncherNameLauncher.component.ts
-  		- LauncherNameLauncher.context.ts
-  		- LauncherNameLauncher.conf.ts
-  		- LauncherNameLauncher.test.ts
-  		- LauncherNameLauncher.stub.ts
-  		- index.ts
+  	- system - [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
+  	- monitor - [Log | Analytics | ABTest + FeatureFlag]
+  	- ui - [UISettings | SnackBar | ModalWindow | Suspense]
+  	- account - [AccountSettings | AccountUser]
+    	- Hook structure
 
 	- web-workers/
 		- WebWorkerNameWW/
@@ -168,10 +168,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 			- index.tsx
 		- index.ts
 
-
-	- shared/ - contains code that can be moved to package(npm) [outdated]
-
-	- visual|widgets/ - contains components for CMS (in most cases It must be adapter component. You should create CMSAdapter and CMSContainer)
+	- widgets/ - contains components for CMS (in most cases It must be adapter component. You should create CMSAdapter and CMSContainer)
 
 	- features/ - the same structure as in app but is used for feature flag. After feature flag implementation All feature code should be merged/should be sorted files into app files 
 

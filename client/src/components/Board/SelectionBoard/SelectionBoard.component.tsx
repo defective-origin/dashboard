@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect } from 'react'
 
 // ---| core |---
+import { cn, xy } from 'tools'
+import { useProperties } from 'hooks'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn, xy } from 'common/tools'
-import { useProperties } from 'common/hooks'
 
 // ---| self |---
 import css from './SelectionBoard.module.scss'

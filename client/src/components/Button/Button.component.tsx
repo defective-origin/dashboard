@@ -1,11 +1,11 @@
 import React from 'react'
 import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button'
 
+// ---| core |---
+import { cn } from 'tools'
+
 // ---| components |---
 import Text, { TextProps } from 'components/Text'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Button.module.scss'

@@ -1,7 +1,7 @@
 import React from 'react'
 
-// ---| common |---
-import { react } from 'common/tools'
+// ---| core |---
+import { react } from 'tools'
 
 // ---| components |---
 import Block from 'components/Block'

@@ -4,6 +4,7 @@ import { Avatar } from '@mui/material'
 // ---| core |---
 import { useLocale } from 'locale'
 import { useLauncher } from 'Launcher'
+import { cn } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
@@ -12,9 +13,6 @@ import Block from 'components/Block'
 import Portal from 'components/Portal'
 import Button from 'components/Button'
 import Tooltip from 'components/Tooltip'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './AppHeader.module.scss'

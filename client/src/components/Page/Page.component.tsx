@@ -1,13 +1,12 @@
 import React from 'react'
 
 // ---| core |---
+import { cn, react } from 'tools'
+
 // ---| screens |---
 // ---| components |---
 import Head, { HeadItem } from 'components/Head'
 import Layout, { LayoutProps } from 'components/Layout'
-
-// ---| common |---
-import { cn, react } from 'common/tools'
 
 // ---| self |---
 import css from './Page.module.scss'

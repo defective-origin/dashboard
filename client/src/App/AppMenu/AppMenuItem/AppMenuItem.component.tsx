@@ -2,15 +2,13 @@ import React from 'react'
 
 // ---| core |---
 import { NavLink, useMatch } from 'router'
+import { cn } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/Button'
 import Tooltip from 'components/Tooltip'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './AppMenuItem.module.scss'

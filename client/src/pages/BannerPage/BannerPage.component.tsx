@@ -2,6 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { TranslateKeys, useLocale } from 'locale'
+import { cn } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
@@ -9,9 +10,6 @@ import BasePage from 'screens/BasePage'
 
 // ---| components |---
 import Banner, { BannerVariant } from 'components/Banner'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './BannerPage.module.scss'

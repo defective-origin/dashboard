@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react'
 
-// ---| component |---
-
-// ---| common |---
-import { cn, xy } from 'common/tools'
-import { useResize } from 'common/hooks'
+// ---| core |---
+import { cn, xy } from 'tools'
+import { useResize } from 'hooks'
 
 // ---| self |---
 import css from './Board.module.scss'

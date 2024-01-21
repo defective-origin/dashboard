@@ -1,14 +1,13 @@
 import React from 'react'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Image, { ImageVariant } from 'components/Image'
 import Link, { LinkProps } from 'components/Link'
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Logo.module.scss'
