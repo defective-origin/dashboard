@@ -85,8 +85,9 @@ module.exports = {
     {
       files: [
         '**/components/**/*component.ts*',
-        '**/tools/index.ts',
-        '**/hooks/index.ts',
+        '**/tools/**/*.ts',
+        '**/hooks/**/*.ts',
+        '**/theme/**/*.ts*',
         '**/Launcher/**/*.ts*',
         '**/locale/**/*.ts*',
         '**/router/**/*.ts*',

@@ -70,7 +70,7 @@ export const Hook = ({
   description = 'Create a reusable, pure, unified react hook',
   postfixName,
   defaultName = 'Hook',
-  defaultSubpath = 'common/hooks',
+  defaultSubpath = 'hooks',
   files = ['hook', 'test'],
   module = {
     notExports: ['test'],

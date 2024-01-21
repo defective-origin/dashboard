@@ -3,13 +3,14 @@ import React, { useMemo } from 'react'
 // ---| core |---
 import RouterProvider from 'router'
 import LocaleProvider from 'locale'
+import ThemeProvider from 'theme'
 
 // ---| self |---
 import { LauncherContext, LauncherOptions } from './Launcher.context'
 import useSystem from './UseSystem'
 import useAccount from './UseAccount'
 import useMonitor from './UseMonitor'
-import useUI, { ThemeProvider } from './UseUI'
+import useUI from './UseUI'
 
 export type LauncherProps = Partial<React.PropsWithChildren & LauncherOptions>
 
