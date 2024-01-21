@@ -224,10 +224,10 @@ export const Language = ({
 
 export const Locale = ({
   description = 'Init Locale config folder with default translate and format maps',
-  files = ['conf', 'test', 'tool'],
+  files = ['conf', 'test', 'context', 'hook', 'tool'],
   module = {
     notExports: ['test'],
-    defaultExport: ['conf'],
+    defaultExport: ['context'],
   },
 } = {}) => Item({
   description,

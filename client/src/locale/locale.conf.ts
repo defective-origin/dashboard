@@ -25,8 +25,6 @@ export type FlattenObjectKeys<
 export type Languages = keyof typeof i18n
 export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
 
-// TODO: (kseniya_boldak) add provider export
-
 /**
  * // the translations
  * // (tip move them in a JSON file and import them,

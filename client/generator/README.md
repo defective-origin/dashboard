@@ -180,7 +180,7 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 		- locale.tool.ts
 		- locale.conf.tsx
 		- locale.context.tsx
-		- locale.error.ts
+		- locale.hook.ts
 		- locale.test.ts
 		- i18n/
 			- en.json
