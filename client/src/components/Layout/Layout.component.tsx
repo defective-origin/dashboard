@@ -8,10 +8,8 @@ import Block from 'components/Block'
 import Section from 'components/Section'
 
 // ---| self |---
-import LayoutItem, { LayoutItemProps } from './LayoutItem'
+import LayoutItem from './LayoutItem'
 import useLayout, { LayoutOptions } from './Layout.hook'
-
-export type LayoutItem = LayoutItemProps
 
 export type LayoutProps = LayoutOptions
 
