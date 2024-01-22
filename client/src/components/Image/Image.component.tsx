@@ -4,6 +4,7 @@ import React from 'react'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Skeleton from 'components/Skeleton'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -22,10 +23,11 @@ export const IMAGE_MAP = {
 
 export type ImageVariant = keyof typeof IMAGE_MAP
 
-export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
+export type ImageProps = Pick<JSX.IntrinsicElements['img'], 'src'> & {
   className?: string
   children?: React.ReactNode
   v?: ImageVariant
+  loading?: boolean
 }
 
 /**
@@ -36,11 +38,18 @@ export type ImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLIma
  * <Image />
  */
 export function Image(props: ImageProps): JSX.Element {
-  const { v, src, children, className, ...otherProps } = props
+  const { v, src, loading, children, className, ...otherProps } = props
   const _className = cn('image', className)
   const imgSrc = src ?? IMAGE_MAP[v as ImageVariant]
 
-  return <img className={_className} src={imgSrc} {...otherProps}>{children}</img>
+  const item = <img className={_className} src={imgSrc} {...otherProps}>{children}</img>
+
+  if (loading) {
+    //TODO: [kseniya_boldak] fix classname
+    return <Skeleton className={_className} v='rounded' content={item} />
+  }
+
+  return item
 }
 
 Image.displayName = 'Image'

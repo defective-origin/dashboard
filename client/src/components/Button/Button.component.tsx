@@ -3,6 +3,7 @@ import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button'
 
 // ---| components |---
 import Text, { TextProps } from 'components/Text'
+import Tooltip, { TooltipProps } from 'components/Tooltip'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -10,12 +11,11 @@ import { cn } from 'common/tools'
 // ---| self |---
 import css from './Button.module.scss'
 
-
 export type ButtonVariant = MuiButtonProps['variant']
 
 export type ButtonProps<E extends React.ElementType = React.ElementType> = React.ComponentProps<E>
   & Pick<MuiButtonProps, 'type' | 'onClick' | 'href'>
-  & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'>
+  & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color' | 'loading'>
   & {
   className?: string
   children?: React.ReactNode
@@ -23,6 +23,7 @@ export type ButtonProps<E extends React.ElementType = React.ElementType> = React
   round?: boolean
   v?: ButtonVariant
   as?: E
+  tooltip?: TooltipProps | TooltipProps['content']
 }
 
 /**
@@ -33,12 +34,29 @@ export type ButtonProps<E extends React.ElementType = React.ElementType> = React
  * <Button />
  */
 export function Button<E extends React.ElementType>(props: ButtonProps<E>): JSX.Element {
-  const { v, round, align, start, end, size = 'md', as, color, fillIcon, iconSize, content, children, className, ...otherProps } = props
+  const {
+    tooltip,
+    v,
+    round,
+    align,
+    start,
+    end,
+    size = 'md',
+    as,
+    color,
+    fillIcon,
+    iconSize,
+    loading,
+    content,
+    children,
+    className,
+    ...otherProps
+  } = props
   const _className = cn(css.Button, css[size], {
     [css.round]: round,
   }, className)
 
-  return (
+  const item = (
     <MuiButton className={_className} variant={v} color={color} component={as} {...otherProps}>
       {children ?? (
         <Text
@@ -49,10 +67,19 @@ export function Button<E extends React.ElementType>(props: ButtonProps<E>): JSX.
           iconSize={iconSize}
           align={align}
           fillIcon={fillIcon}
+          loading={loading}
         />
       )}
     </MuiButton>
   )
+
+  if (tooltip) {
+    const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
+
+    return <Tooltip {...tooltipProps}>{item}</Tooltip>
+  }
+
+  return item
 }
 
 Button.displayName = 'Button'

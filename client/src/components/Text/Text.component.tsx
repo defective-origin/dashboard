@@ -8,16 +8,17 @@ import { cn, react } from 'common/tools'
 
 // ---| components |---
 import Icon, { IconSize, IconVariant } from 'components/Icon'
+import Skeleton from 'components/Skeleton'
 
 // ---| self |---
 import css from './Text.module.scss'
 
-export const getAsideContent = (content: React.ReactNode, iconSize?: IconSize, fill?: boolean) => {
+export const initAsideContent = (content: React.ReactNode, iconSize?: IconSize, fill?: boolean, loading?: boolean) => {
   if (typeof content !== 'string') {
     return content
   }
 
-  return <Icon className={css.Icon} v={content as IconVariant} fill={fill} size={iconSize} />
+  return <Icon className={css.Icon} v={content as IconVariant} fill={fill} size={iconSize} loading={loading}/>
 }
 
 export type TextVariant = MuiTypographyProps['variant']
@@ -37,6 +38,7 @@ export type TextProps = Pick<MuiTypographyProps, 'align' | 'onClick'> & {
   v?: TextVariant
   multiline?: boolean // TODO: multiline boolean | number - split each \n
   ellipsis?: boolean
+  loading?: boolean
 }
 
 /**
@@ -57,6 +59,7 @@ export function Text(props: TextProps): JSX.Element {
     fillIcon,
     multiline,
     ellipsis,
+    loading,
     content,
     children = content,
     className,
@@ -69,9 +72,12 @@ export function Text(props: TextProps): JSX.Element {
 
   return (
     <MuiTypography className={_className} variant={v} align='left' color={color} {...otherProps}>
-      {getAsideContent(start, iconSize, fillIcon)}
-      {(children || (start && end)) && <span className={contentClassName}>{children}</span>}
-      {getAsideContent(end, iconSize, fillIcon)}
+      {initAsideContent(start, iconSize, fillIcon, loading)}
+
+      {!loading && (children || (start && end)) && <span className={contentClassName}>{children}</span>}
+      {loading && <Skeleton className={contentClassName} v='text'>{children}</Skeleton>}
+
+      {initAsideContent(end, iconSize, fillIcon, loading)}
     </MuiTypography>
   )
 }

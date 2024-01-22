@@ -8,6 +8,13 @@ import BasePage, { BasePageProps } from 'screens/BasePage'
 // ---| components |---
 import Actions, { ActionItem } from 'components/Actions'
 import Text from 'components/Text'
+import MenuItem from 'components/Menu/MenuItem'
+import MenuButton from 'components/MenuButton'
+import Link from 'components/Link'
+import Button from 'components/Button'
+import Block from 'components/Block'
+import Icon from 'components/Icon'
+import Image from 'components/Image'
 
 // ---| common |---
 import { cn } from 'common/tools'
@@ -56,6 +63,25 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Actions.Button round size='lg' start='account_circle' />
         <Actions.Button round size='xl' start='account_circle' />
       </Actions>
+
+      <Block gap='xs' direction='xy'>
+        <MenuButton content='MenuButton' tooltip={'MenuButton'} />
+        <MenuItem content='MenuItem1' tooltip={'Menuitem1'} />
+        <MenuItem content='MenuItem2' tooltip={'Menuitem2'} />
+        <Link content='Link' tooltip={'Link'} />
+        <Button content='Button' tooltip={'Button'} />
+      </Block>
+
+      <Block gap='xs' direction='xy' align='center' justify='center'>
+        <Icon v='close' size='xl' loading />
+        <Image v='logo' loading />
+        <Text start='close' content='text' end='check_circle' size='xl' loading />
+        <Link start='close' content='text' end='check_circle' size='xl' loading />
+        <Button start='close' content='text' end='check_circle' size='xl' loading />
+        <MenuItem start='close' content='text' end='check_circle' size='xl' loading />
+        <MenuButton start='close' content='text' end='check_circle' size='xl' loading/>
+      </Block>
+
       {children}
     </BasePage>
   )
