@@ -3,6 +3,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 
 // ---| core |---
 import { cn, react } from 'tools'
+import { Color, Size } from 'theme'
 
 // ---| components |---
 import Icon, { IconSize, IconVariant } from 'components/Icon'
@@ -19,8 +20,8 @@ export const getAsideContent = (content: React.ReactNode, iconSize?: IconSize, f
 }
 
 export type TextVariant = MuiTypographyProps['variant']
-export type TextColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
-export type TextSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type TextColor = Color
+export type TextSize = Size
 
 export type TextProps = Pick<MuiTypographyProps, 'align' | 'onClick'> & {
   className?: string

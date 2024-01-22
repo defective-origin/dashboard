@@ -3,6 +3,7 @@ import MuiIcon, { IconProps as MuiIconProps } from '@mui/material/Icon'
 
 // ---| core |---
 import { cn } from 'tools'
+import { Size } from 'theme'
 
 // ---| self |---
 import './Icon.module.scss'
@@ -19,7 +20,7 @@ export type IconVariant = 'light_mode' | 'dark_mode'
 | 'close' | 'left_panel_open' | 'left_panel_close' | 'open_in_new'
 | 'info' | 'warning' | 'error' | 'check_circle'
 
-export type IconSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type IconSize = Size
 
 export type IconProps = Omit<MuiIconProps, 'size'> & {
   className?: string

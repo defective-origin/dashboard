@@ -58,18 +58,10 @@ CLIENT STRUCTURE - all parts should be modular and should keep Facade/Adapter pa
 	- index.tsx - bootstrap file
 
 	- common/ - shared code in monorepo projects. For example shared types and so on between server and client (graphql). in most cases this code appears via generators
+		- other app structure parts
 		- constants/
-			- ConstantUsageTypeName.constant.ts
-			- index.ts
-		- managers/ - Each file does default export but types should be exported via common export. Each file does one type functionality (CacheManager, CMSManager, FileManager, PDFManager, APIManager ...)
-			- ManagerUsageTypeName.manager.ts
-			- index.ts
-		- errors/ - containes errors
-			- ErrorUsageTypeName.error.ts
-			- index.ts
+		- errors/
 		- models/
-			- ModelUsageTypeName.model.ts
-			- index.ts
 
   - tools/ - contains general independent code/features which can be moved into packages, overriding packages.
   	- ToolUsageTypeName.tool.ts

@@ -4,6 +4,7 @@ import MuiAlertTitle from '@mui/material/AlertTitle'
 
 // ---| core |---
 import { cn, react } from 'tools'
+import { Color } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -14,7 +15,7 @@ import Text from 'components/Text'
 import css from './Alert.module.scss'
 
 
-export type AlertColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
+export type AlertColor = Color
 
 export type AlertProps = Omit<MuiAlertProps, 'severity' | 'content'> & {
   title?: string

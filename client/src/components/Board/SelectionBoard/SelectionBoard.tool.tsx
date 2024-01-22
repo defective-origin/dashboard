@@ -1,5 +1,6 @@
 // ---| core |---
 import { xy } from 'tools'
+import { Color } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -8,7 +9,7 @@ import { xy } from 'tools'
 // ---| self |---
 
 
-export type ShapeColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'disable'
+export type ShapeColor = Color
 export type ShapeStyle = {
   fill?: ShapeColor
   stroke?: ShapeColor

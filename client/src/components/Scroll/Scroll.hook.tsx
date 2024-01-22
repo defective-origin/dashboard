@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef } f
 
 // ---| core |---
 import { cn } from 'tools'
+import { Size } from 'theme'
 
 // ---| components |---
 import Button from 'components/Button'
@@ -24,7 +25,7 @@ export const DEFAULT_SCROLL_ACTION_OPTIONS: Required<ScrollActionOptions> = {
   shift: { x: 50, y: 50 },
 }
 
-export type ScrollSizeType = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type ScrollSizeType = Size
 export type ScrollDirectionType = 'x' | 'y' | 'xy'
 
 export const DEFAULT_SCROLL_PARAMS: ScrollToOptions = { top: 0, left: 0, behavior: 'smooth' }

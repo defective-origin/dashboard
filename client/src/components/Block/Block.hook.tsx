@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { Size } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -10,7 +11,7 @@ import { cn } from 'tools'
 // ---| self |---
 import './Block.module.scss'
 
-export type BlockSpace = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type BlockSpace = Size
 export type BlockDirection = 'x' | 'y' | 'xy'
 
 export type BlockOptions = {
