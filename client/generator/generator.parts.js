@@ -1,10 +1,4 @@
-// TODO: tools, feature, web-workers, init gens, assets/icons/images
-// TODO: add description
-// TODO: add  init  structure  script
-// TODO: add перевести  на  typescript
-// TODO:  add  ERROR templates
-// TODO:  add  subdir prefix
-import Item from './generator.items.js'
+import items from './generator.items.js'
 
 
 export default function (plop) {
@@ -19,7 +13,7 @@ export default function (plop) {
   // - Can use only other Components inside
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in component name
-  plop.setGenerator('Component', Item.Component())
+  plop.setGenerator('Component', items.Component())
 
   // Create a Screen component.
   // Screen required criteria:
@@ -28,7 +22,7 @@ export default function (plop) {
   // - Can have any business logic inside
   // - Can have Screen postfix in component name
   // - Spread data between inner Screens and Components
-  plop.setGenerator('Screen', Item.Component({
+  plop.setGenerator('Screen', items.Component({
     description: 'Create a screen component',
     defaultSubpath: 'screens',
   }))
@@ -40,7 +34,7 @@ export default function (plop) {
   // - Can have any business logic inside
   // - Should have Page postfix in component name
   // - Spread data between inner Pages, Screens and Components
-  plop.setGenerator('Page', Item.Component({
+  plop.setGenerator('Page', items.Component({
     description: 'Create a page component',
     postfixName: 'Page',
     defaultSubpath: 'pages',
@@ -51,9 +45,16 @@ export default function (plop) {
   // - Receive all data only from options
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in hook name
-  plop.setGenerator('Hook', Item.Hook())
+  plop.setGenerator('Hook', items.Hook())
 
-  plop.setGenerator('Store Slice', Item.StoreSlice())
-  plop.setGenerator('Api Slice', Item.ApiSlice())
-  plop.setGenerator('Language', Item.Language())
+  // Create a reusable, pure, unified tool.
+  // tool required criteria:
+  // - Receive all data only from arguments
+  // - Must not have any business logic inside
+  // - Doesn`t have any prefix, postfix in tool name
+  plop.setGenerator('Tool', items.Tool())
+
+  plop.setGenerator('Store Slice', items.StoreSlice())
+  plop.setGenerator('Api Slice', items.ApiSlice())
+  plop.setGenerator('Language', items.Language())
 }

@@ -1,0 +1,18 @@
+// ---| self |---
+import * as tools from './{{pascalCase name}}.tool'
+
+
+describe('[{{pascalCase name}}] tool', () => {
+  describe('[init{{pascalCase name}}] action', () => {
+    it('should return null', () => {
+      expect(tools.init{{pascalCase name}}()).toEqual(null)
+    })
+  })
+
+  describe('[to{{pascalCase name}}] action', () => {
+    it('should return passed value', () => {
+      expect(tools.to{{pascalCase name}}(0)).toEqual(0)
+      expect(tools.to{{pascalCase name}}(true)).toEqual(true)
+    })
+  })
+})

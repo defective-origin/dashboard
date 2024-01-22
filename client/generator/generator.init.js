@@ -1,4 +1,4 @@
-import Item from './generator.items.js'
+import items from './generator.items.js'
 
 export default function (plop) {
   plop.setWelcomeMessage([
@@ -6,8 +6,8 @@ export default function (plop) {
     'Allows to initialize the application infrastructure or create parts of it.',
   ].join(' '))
 
-  plop.setGenerator('Launcher', Item.Launcher())
-  plop.setGenerator('Locale', Item.Locale())
-  plop.setGenerator('Store', Item.Store())
-  plop.setGenerator('Api', Item.Api())
+  plop.setGenerator('Launcher', items.Launcher())
+  plop.setGenerator('Locale', items.Locale())
+  plop.setGenerator('Store', items.Store())
+  plop.setGenerator('Api', items.Api())
 }

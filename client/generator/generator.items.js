@@ -1,10 +1,10 @@
-import Prompt from './generator.prompts.js'
-import Action from './generator.actions.js'
-import Tool from './generator.tool.js'
+import prompts from './generator.prompts.js'
+import actions from './generator.actions.js'
+import tools from './generator.tool.js'
 
 const ITEM_PROMPT_MAP = {
-  name: Prompt.NameInput,
-  subpath: Prompt.SubpathInput,
+  name: prompts.NameInput,
+  subpath: prompts.SubpathInput,
 }
 
 export const Item = ({
@@ -30,8 +30,8 @@ export const Item = ({
 
   return {
     description,
-    prompts: Tool.list(filteredPrompts),
-    actions: Tool.list(filteredActions),
+    prompts: tools.list(filteredPrompts),
+    actions: tools.list(filteredActions),
   }
 }
 
@@ -54,7 +54,7 @@ export const Component = ({
     subpath: { default: defaultSubpath },
   },
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Component',
       files,
@@ -85,9 +85,39 @@ export const Hook = ({
     subpath: { default: defaultSubpath },
   },
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Hook',
+      files,
+      module,
+      data,
+      isSubmodule,
+    }),
+  ],
+})
+
+export const Tool = ({
+  description = 'Create a reusable, pure, unified react tool',
+  postfixName,
+  defaultName = 'Tool',
+  defaultSubpath = 'tools',
+  files = ['tool', 'test'],
+  module = {
+    notExports: ['test'],
+    defaultExport: 'tool',
+  },
+  data,
+  isSubmodule = true,
+} = {}) => Item({
+  description,
+  prompts: {
+    name: { default: defaultName, postfix: postfixName },
+    subpath: { default: defaultSubpath },
+  },
+  actions: [
+    actions.Folder({
+      target: '{{subpath}}/{{pascalCase name}}',
+      template: 'templates/Tool',
       files,
       module,
       data,
@@ -105,7 +135,7 @@ export const Store = ({
 } = {}) => Item({
   description: 'Init Store config folder',
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: 'store',
       template: 'templates/Store',
       files,
@@ -133,7 +163,7 @@ export const StoreSlice = ({
     subpath: { default: defaultSubpath },
   },
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Store/StoreSlice',
       files,
@@ -154,7 +184,7 @@ export const Api = ({
 } = {}) => Item({
   description: 'Init Api config folder',
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: 'api',
       template: 'templates/Api',
       files,
@@ -182,7 +212,7 @@ export const ApiSlice = ({
     subpath: { default: defaultSubpath },
   },
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: '{{subpath}}/{{pascalCase name}}',
       template: 'templates/Api/ApiSlice',
       files,
@@ -204,11 +234,11 @@ export const Language = ({
   },
   actions: [
     [ 'i18n', 'l10n' ].map((submodule) => [
-      Action.ModuleFile({
+      actions.ModuleFile({
         type: 'partial',
         target: `locale/${submodule}`,
       }),
-      Action.File({
+      actions.File({
         target: `locale/${submodule}/{{snakeCase name}}.json`,
         template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
         module: {
@@ -235,7 +265,7 @@ export const Locale = ({
     name: { default: 'en' },
   },
   actions: [
-    Action.Folder({
+    actions.Folder({
       target: 'locale',
       template: 'templates/Locale',
       files,
@@ -265,6 +295,7 @@ export const Launcher = ({
 export default {
   Component,
   Hook,
+  Tool,
   Store,
   StoreSlice,
   Api,
