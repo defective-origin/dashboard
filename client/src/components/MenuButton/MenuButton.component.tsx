@@ -7,8 +7,9 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/Button'
-import Menu, { MenuItem } from '../Menu'
+import Menu, { MenuItem } from 'components/Menu'
 import { ComponentWithItems } from 'components/Repeat'
+import Tooltip from 'components/Tooltip'
 
 // ---| self |---
 import css from './MenuButton.module.scss'
@@ -23,7 +24,7 @@ export type MenuButtonProps = ComponentWithItems<ButtonProps, MenuItem>
  * <Menu />
  */
 export function MenuButton(props: MenuButtonProps): JSX.Element {
-  const { items, children, className, ...otherProps } = props
+  const { tooltip, items, children, className, ...otherProps } = props
   const _className = cn(css.MenuButton, className)
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -34,7 +35,8 @@ export function MenuButton(props: MenuButtonProps): JSX.Element {
 
   const onMenuClose = useCallback(() => setAnchorEl(null), [])
 
-  return (
+  // FIXME: [kseniya_boldak] fix bug with anchorEl on HTMLElement
+  const item = (
     <>
       <Button className={_className} onClick={onMenuOpen} {...otherProps} />
       <Menu
@@ -47,6 +49,14 @@ export function MenuButton(props: MenuButtonProps): JSX.Element {
       </Menu>
     </>
   )
+
+  if (tooltip) {
+    const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
+
+    return <Tooltip {...tooltipProps}>{item}</Tooltip>
+  }
+
+  return item
 }
 
 MenuButton.displayName = 'MenuButton'

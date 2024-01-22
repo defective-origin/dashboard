@@ -8,7 +8,6 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/Button'
-import Tooltip from 'components/Tooltip'
 
 // ---| self |---
 import css from './AppMenuItem.module.scss'
@@ -26,27 +25,25 @@ export type AppMenuItemProps = ButtonProps & {
  * <AppMenuItem />
  */
 export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
-  const { href, content, fillIcon, className, ...otherProps } = props
+  const { tooltip, href, content, fillIcon, className, ...otherProps } = props
   const isActive = !!useMatch(href ?? 'HAS_NO_MATCH')
   const _className = cn(css.AppMenuItem, className)
-  const commonProps: ButtonProps = {
-    color: 'primary',
-    size: 'md',
-    iconSize: 'lg',
-    v: 'text',
-    className: _className,
-    fillIcon: fillIcon ?? isActive,
-    ...otherProps,
-  }
 
   // TODO: если активный или открыто подменю, то заполнять иконки (language)
+  // TODO: [kseniya_boldak] Add text converters to text component
 
   return (
-    <Tooltip content={content.toUpperCase()} placement='right'>
-      {href && <Button as={NavLink} to={href} {...commonProps} />}
-
-      {!href && <Button {...commonProps} />}
-    </Tooltip>
+    <Button
+      className={_className}
+      color='primary'
+      size='md'
+      iconSize='lg'
+      v='text'
+      fillIcon={fillIcon ?? isActive}
+      tooltip={{content: tooltip.toUpperCase(), placement: 'right'}}
+      as={NavLink}
+      to={href}
+      {...otherProps} />
   )
 }
 

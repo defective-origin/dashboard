@@ -16,6 +16,10 @@
   .icon {
     @include attach-icon-size-variables(font-size);
 
+    // these sizes for skeleton
+    @include attach-icon-size-variables(height);
+    @include attach-icon-size-variables(width);
+
     &--outline { @include style-icon; }
     &--fill { @include style-icon(1); }
   }

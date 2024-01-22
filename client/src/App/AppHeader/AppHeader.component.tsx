@@ -12,7 +12,6 @@ import { cn } from 'tools'
 import Block from 'components/Block'
 import Portal from 'components/Portal'
 import Button from 'components/Button'
-import Tooltip from 'components/Tooltip'
 
 // ---| self |---
 import css from './AppHeader.module.scss'
@@ -46,11 +45,9 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
       {children}
 
       {app.isAuthorized() && (
-        <Tooltip content={locale.t('LINKS.ACCOUNT')}>
-          <Button round onClick={app.logout}>
-            <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
-          </Button>
-        </Tooltip>
+        <Button round onClick={app.logout} tooltip={locale.t('LINKS.ACCOUNT')}>
+          <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
+        </Button>
       )}
     </Block>
   )

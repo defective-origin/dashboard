@@ -5,8 +5,12 @@ import MuiIcon, { IconProps as MuiIconProps } from '@mui/material/Icon'
 import { cn } from 'tools'
 import { Size } from 'theme'
 
+// ---| components |---
+import Skeleton from 'components/Skeleton'
+
 // ---| self |---
 import './Icon.module.scss'
+
 
 export type IconVariant = 'light_mode' | 'dark_mode'
 | 'paid' | 'language'
@@ -27,6 +31,7 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
   v: IconVariant
   size?: IconSize
   fill?: boolean
+  loading?: boolean
 }
 
 /**
@@ -37,7 +42,7 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
  * <Icon />
  */
 export function Icon(props: IconProps): JSX.Element {
-  const { size = 'md', v, fill, className, ...otherProps } = props
+  const { size = 'md', v, loading, fill, className, ...otherProps } = props
   const _className = cn(
     'icon',
     'material-symbols-outlined', {
@@ -47,6 +52,10 @@ export function Icon(props: IconProps): JSX.Element {
     },
     className,
   )
+
+  if (loading) {
+    return <Skeleton className={_className} v='circular' />
+  }
 
   return <MuiIcon className={_className} {...otherProps}>{v}</MuiIcon>
 }

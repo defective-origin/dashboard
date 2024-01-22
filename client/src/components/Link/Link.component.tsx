@@ -6,14 +6,18 @@ import { cn } from 'tools'
 
 // ---| components |---
 import Text, { TextProps } from 'components/Text'
-import Icon from '../Icon'
+import Icon from 'components/Icon'
+import Tooltip, { TooltipProps } from 'components/Tooltip'
 
 // ---| self |---
 import css from './Link.module.scss'
 import { isNewTabLink } from './Link.tool'
 
 export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
-                      & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'>
+                      & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color' | 'loading'>
+                      & {
+                        tooltip?: TooltipProps | TooltipProps['content']
+                      }
 
 /**
  * Component description.
@@ -23,12 +27,28 @@ export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
  * <Link />
  */
 export function Link(props: LinkProps): JSX.Element {
-  const { align, href, target, start, end, size, iconSize, fillIcon, color, content, children, className, ...otherProps } = props
+  const {
+    tooltip,
+    align,
+    href,
+    target,
+    start,
+    end,
+    size,
+    iconSize,
+    fillIcon,
+    color,
+    loading,
+    content,
+    children,
+    className,
+    ...otherProps
+  } = props
   const _className = cn(css.Link, className)
   const isOpenInNewTab = isNewTabLink(href, target)
   const linkTarget = isOpenInNewTab ? '_blank' : target
 
-  return (
+  const item = (
     <MuiLink
       className={_className}
       target={linkTarget}
@@ -47,10 +67,19 @@ export function Link(props: LinkProps): JSX.Element {
           align={align}
           fillIcon={fillIcon}
           color={color}
+          loading={loading}
         />
       )}
     </MuiLink>
   )
+
+  if (tooltip) {
+    const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
+
+    return <Tooltip {...tooltipProps}>{item}</Tooltip>
+  }
+
+  return item
 }
 
 Link.displayName = 'Link'
