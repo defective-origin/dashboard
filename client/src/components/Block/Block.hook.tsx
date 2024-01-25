@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Size } from 'theme'
+import { Direction, Size } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -12,7 +12,7 @@ import { Size } from 'theme'
 import './Block.module.scss'
 
 export type BlockSpace = Size
-export type BlockDirection = 'x' | 'y' | 'xy'
+export type BlockDirection = Direction
 
 export type BlockOptions = {
   gap?: BlockSpace

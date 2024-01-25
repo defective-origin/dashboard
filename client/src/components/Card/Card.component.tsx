@@ -21,7 +21,6 @@ export type CardProps = Omit<MuiCardProps, 'title' | 'content'> & {
   children?: React.ReactNode
   horizontal?: boolean
   divided?: boolean
-  scroll?: 'x' | 'y' | 'xy'
   content?: React.ReactNode
   title?: React.ReactNode | null
   actions?: ButtonProps | ButtonProps[]
@@ -36,7 +35,7 @@ export type CardProps = Omit<MuiCardProps, 'title' | 'content'> & {
  * <Card />
  */
 export function Card(props: CardProps): JSX.Element | null {
-  const { scroll, actions = [], title, content, divided, horizontal, onClose, children, className, ...otherProps } = props
+  const { actions = [], title, content, divided, horizontal, onClose, children, className, ...otherProps } = props
   const buttons = Array.isArray(actions) ? actions : [actions]
   const _className = cn(
     css.Card, {
@@ -62,7 +61,7 @@ export function Card(props: CardProps): JSX.Element | null {
         />
       )}
 
-      {content && <Card.Content className={scroll && `scroll-${scroll}`}>{content}</Card.Content>}
+      {content && <Card.Content>{content}</Card.Content>}
 
       {!!buttons.length && (
         <Card.Actions>
