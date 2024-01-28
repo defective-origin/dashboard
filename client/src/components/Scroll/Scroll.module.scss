@@ -2,67 +2,74 @@
 
 
 :root {
-  --scroll-thumb-color: #33333331;
-  --scroll-thumb-color--hover: #33333354;
+  // cerner
+  --scroll-cerner-radius: 2px;
+  --scroll-cerner-color: transparent;
+  --scroll-cerner-color--hover: transparent;
+  --scroll-cerner-color--active: transparent;
 
   // --ui-framework-color: var(--account-framework-color);
 }
 
 :global {
   .scroll {
-    &:Hover {
-      &--x,
-      &--y {
-        visibility: visible;
-      }
-    }
+    overflow: hidden;
+    position: relative;
+
+    // fix scroll https://stackoverflow.com/questions/61959291/how-to-get-scrolling-in-a-css-grid
+    // variant 1 - problems: hide overlapping items
+    // overflow: hidden;
+    // variant 2 [preferable]
+    min-height: 0;
+    min-width: 0;
 
     // direction
-    &--x { overflow-x: auto; overflow-y: hidden; }
-    &--y { overflow-x: hidden; overflow-y: auto; }
-    &--xy { overflow-x: auto; overflow-y: auto; }
+    &--x { overflow-x: auto; }
+    &--y { overflow-y: auto; }
+    &--xy { overflow: auto; }
 
-    // style
-    &--x,
-    &--y,
-    &--xy {
-      &::-webkit-scrollbar,
-      &::-webkit-scrollbar-thumb,
-      &::-webkit-scrollbar-track {
-        visibility: hidden;
-        width: 0;
-        height: 0;
-      }
+    // hide browser scroll elements
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-button,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-track-piece,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-corner,
+    &::-webkit-resizer  {
+      display: none;
     }
+  }
 
-    .scroll-bar-thumb {
-      @include attach-scroll-size-variables(width);
-      @include attach-scroll-size-variables(height);
+  .scroll-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-areas:
+      'scroll-content scroll-y'
+      'scroll-x scroll-cerner';
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr auto;
+  }
 
-      visibility: hidden;
+  .scroll-content {
+    position: relative;
+    grid-area: scroll-content;
+  }
 
-      &--x { width: 0; }
-      &--y { height: 0; }
+  .scroll-cerner {
+    position: relative;
+    grid-area: scroll-cerner;
+    background: var(--scroll-cerner-color);
+    border-bottom-right-radius: var(--scroll-cerner-radius);
 
-
-      &:hover {
-        background: var(--scroll-thumb-color);
-
-        &:hover {
-          background: var(--scroll-thumb-color--hover);
-        }
-      }
-    }
+    &:hover { background: var(--scroll-cerner-color--hover); }
+    &:active { background: var(--scroll-cerner-color--active); }
   }
 
   .scroll-actions {
     position: absolute;
-    bottom: 50px;
-    left: 50px;
-    opacity: 0.5;
-
-    &:hover {
-      opacity: 1;
-    }
+    display: grid;
+    gap: 4px;
   }
 }

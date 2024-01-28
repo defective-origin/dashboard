@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+// ---| core |---
+
 export type {{pascalCase name}}Options = null
 
 export type {{pascalCase name}}ReturnOptions = null
@@ -8,9 +10,9 @@ export type {{pascalCase name}}ReturnOptions = null
  * Hook descriptions
  *
  * @example
- * const options = {{camelCase name}}(conf)
+ * const options = use{{pascalCase name}}(conf)
  */
-export const {{camelCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions => {
+export const use{{pascalCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions => {
   const [state] = useState<{{pascalCase name}}ReturnOptions>(null)
 
   console.log(options, state)
@@ -18,4 +20,4 @@ export const {{camelCase name}} = (options?: {{pascalCase name}}Options): {{pasc
   return state
 }
 
-export default {{camelCase name}}
+export default use{{pascalCase name}}

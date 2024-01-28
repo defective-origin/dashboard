@@ -33,7 +33,7 @@ export type ButtonProps<E extends React.ElementType = React.ElementType> = React
  * @example
  * <Button />
  */
-export function Button<E extends React.ElementType>(props: ButtonProps<E>): JSX.Element {
+export const Button = <E extends React.ElementType>(props: ButtonProps<E>): JSX.Element => {
   const {
     tooltip,
     v,

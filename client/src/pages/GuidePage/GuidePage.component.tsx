@@ -46,10 +46,11 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
     { start: 'developer_mode_tv', size: 'md', v: 'outlined', content: 'info - md', color: 'info', end: 'developer_mode_tv' },
     { start: 'developer_mode_tv', size: 'lg', v: 'outlined', content: 'primary - lg', color: 'primary', end: 'developer_mode_tv' },
     { start: 'developer_mode_tv', size: 'xl', v: 'outlined', content: 'secondary - xl', color: 'secondary', end: 'developer_mode_tv' },
+    { variant: 'link', size: 'xl', color: 'warning', href: '/localhost:5173/', withIcon: true },
   ]
 
   return (
-    <BasePage className={_className} name='PAGES.GUIDE' {...otherProps}>
+    <BasePage className={_className} name='PAGES.GUIDE' scroll='x' {...otherProps}>
       <Text start='close' ellipsis content='short short short' end='close' />
       <Text start='close' ellipsis content='long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long' end='close' />
       <Text start='close' ellipsis multiline content='long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long' end='close' />
@@ -63,11 +64,11 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Actions.Button round size='xl' start='account_circle' />
       </Actions>
 
-      <Block gap='xs' direction='xy'>
+      <Block gap='xs' direction='xy' align='center' justify='center'>
         <MenuButton content='MenuButton' tooltip={'MenuButton'} />
         <MenuItem content='MenuItem1' tooltip={'Menuitem1'} />
-        <MenuItem content='MenuItem2' tooltip={'Menuitem2'} />
-        <Link content='Link' tooltip={'Link'} />
+        <Link href='#' content='Link' tooltip={'Link'} />
+        <Link href='#' tooltip={'Link'} />
         <Button content='Button' tooltip={'Button'} />
       </Block>
 

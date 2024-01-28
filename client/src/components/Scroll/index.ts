@@ -4,5 +4,5 @@
 export { default } from './Scroll.component'
 
 /* INJECT_EXPORT_PLACE */
+export * from './UseScrollBar'
 export * from './Scroll.component'
-export * from './Scroll.hook'

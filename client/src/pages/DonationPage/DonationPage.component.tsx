@@ -25,7 +25,13 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DonationPage, className)
 
-  return <BasePage className={_className} name='PAGES.DONATION' {...otherProps}>{children}</BasePage>
+  return (
+    <BasePage className={_className} name='PAGES.DONATION' scroll='xy' {...otherProps}>
+      <div style={{minWidth: 5000, minHeight: 5000}}>
+        {children}
+      </div>
+    </BasePage>
+  )
 }
 
 DonationPage.displayName = 'DonationPage'

@@ -59,7 +59,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const log = ((a: any, b: any, c: any) => {}) as any
 
   return (
-    <BasePage className={_className} name='PAGES.WIDGETS' {...otherProps}>
+    <BasePage className={_className} scroll='y' name='PAGES.WIDGETS' {...otherProps}>
       <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log} padding='xxl'>
         <Form.Alerts items={ALERTS} gap='xs'>
           <Form.Alert color='success' content='success' />

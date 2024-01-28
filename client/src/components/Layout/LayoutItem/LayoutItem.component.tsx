@@ -12,7 +12,7 @@ import './LayoutItem.module.scss'
 export type LayoutItemVariant = 'left-aside' | 'right-aside' | 'header' | 'footer' | 'content'
 
 export type LayoutItemProps = BlockProps & {
-  v?: LayoutItemVariant | string
+  v?: LayoutItemVariant
   area?: React.CSSProperties['gridArea']
   row?: number | string
   column?: number | string
@@ -38,7 +38,9 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
     className,
     ...otherProps
   } = props
-  const _className = cn('layout-item', v && `layout-item--${v}`, className)
+  const _className = cn('layout-item',{
+    [`layout-item--${v}`]: v,
+  }, className)
   const style = !v ? { gridArea: area ?? [row, column, rows, columns].join('/') } : {}
 
   return <Block className={_className} style={style} {...otherProps} />
