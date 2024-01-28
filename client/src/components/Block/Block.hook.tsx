@@ -44,10 +44,10 @@ export type BlockReturnOptions<O extends object, E extends BlockOptions = BlockO
  */
 export const useBlock = <O extends object>(options: O & BlockOptions): BlockReturnOptions<O> => {
   const {
+    direction = 'y',
     gap,
     padding,
     margin,
-    direction = 'y',
     grow,
     align,
     justify,

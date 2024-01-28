@@ -12,15 +12,17 @@ import Copyright from 'screens/Copyright'
 import Text from 'components/Text'
 import Page, { PageProps } from 'components/Page'
 import Actions, { ActionItem } from 'components/Actions'
+import Portal from 'components/Portal'
+import Scroll, { ScrollVariant } from 'components/Scroll'
 
 // ---| self |---
 import css from './BasePage.module.scss'
-import Portal from 'components/Portal'
 
 export type BasePageProps = PageProps & {
   name?: TranslateKeys
+  scroll?: ScrollVariant
 }
-// TODO: add scroll to page content by default
+
 /**
  * Component description.
  *
@@ -29,7 +31,7 @@ export type BasePageProps = PageProps & {
  * <BasePage />
  */
 export function BasePage(props: BasePageProps): JSX.Element {
-  const { name, meta, children, className, ...otherProps } = props
+  const { scroll, name, meta, children, className, ...otherProps } = props
   const _className = cn(css.BasePage, className)
   const app = useLauncher()
   const locale = useLocale()
@@ -65,6 +67,8 @@ export function BasePage(props: BasePageProps): JSX.Element {
       <Portal name='page-actions' content={<Actions items={testActions} gap='xs' />} />
 
       <Page.Content>
+        <Scroll v={scroll} actions margin={5} />
+
         {children}
       </Page.Content>
 

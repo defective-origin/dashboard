@@ -17,6 +17,7 @@ export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
                       & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color' | 'loading'>
                       & {
                         tooltip?: TooltipProps | TooltipProps['content']
+                        withIcon?: boolean
                       }
 
 /**
@@ -42,6 +43,7 @@ export function Link(props: LinkProps): JSX.Element {
     content,
     children,
     className,
+    withIcon,
     ...otherProps
   } = props
   const _className = cn(css.Link, className)
@@ -61,7 +63,7 @@ export function Link(props: LinkProps): JSX.Element {
         <Text
           start={start}
           content={content}
-          end={end ?? (isOpenInNewTab && <Icon size='xs' v='open_in_new' />)}
+          end={end ?? ((withIcon || isOpenInNewTab) && <Icon size={size} v='open_in_new' />)}
           size={size}
           iconSize={iconSize}
           align={align}

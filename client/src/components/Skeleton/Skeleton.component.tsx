@@ -2,12 +2,11 @@ import React from 'react'
 import MuiSkeleton from '@mui/material/Skeleton'
 
 // ---| core |---
+import { cn } from 'tools'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-
-// ---| common |---
-import { cn } from 'common/tools'
 
 // ---| self |---
 import css from './Skeleton.module.scss'

@@ -81,12 +81,12 @@ export const Hook = ({
 } = {}) => Item({
   description,
   prompts: {
-    name: { prefix: 'use', default: defaultName, postfix: postfixName },
+    name: { default: defaultName, postfix: postfixName },
     subpath: { default: defaultSubpath },
   },
   actions: [
     actions.Folder({
-      target: '{{subpath}}/{{pascalCase name}}',
+      target: '{{subpath}}/Use{{pascalCase name}}',
       template: 'templates/Hook',
       files,
       module,
