@@ -50,7 +50,7 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
   ]
 
   return (
-    <BasePage className={_className} name='PAGES.GUIDE' scroll='x' {...otherProps}>
+    <BasePage className={_className} name='PAGES.GUIDE' scroll='y' {...otherProps}>
       <Text start='close' ellipsis content='short short short' end='close' />
       <Text start='close' ellipsis content='long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long' end='close' />
       <Text start='close' ellipsis multiline content='long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long' end='close' />

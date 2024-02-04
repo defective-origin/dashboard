@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiModal, { ModalProps as MuiModalProps } from '@mui/material/Modal'
+import MuiModal from '@mui/material/Modal'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,16 +7,19 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Card, { CardProps } from 'components/Card'
+import Card from 'components/Card'
+import { ButtonProps } from 'components/Button'
 
 // ---| self |---
 import css from './Modal.module.scss'
 
-export type ModalProps = Omit<MuiModalProps, 'title' | 'content' | 'children' | 'onClose'>
-                        & Pick<CardProps, 'title' | 'content' | 'actions'>
-                        & {
+export type ModalProps ={
                           className?: string
                           children?: React.ReactNode
+                          open: boolean
+                          title?: React.ReactNode
+                          content?: React.ReactNode
+                          actions?: ButtonProps | ButtonProps[]
                           onClose?: () => void
                         }
 
