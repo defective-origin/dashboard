@@ -17,6 +17,8 @@ import Button from 'components/Button'
 import Block from 'components/Block'
 import Icon from 'components/Icon'
 import Image from 'components/Image'
+import Drawer from 'components/Drawer'
+import Dialog from 'components/Dialog'
 
 // ---| self |---
 import css from './GuidePage.module.scss'
@@ -80,6 +82,42 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Button start='close' content='text' end='check_circle' size='xl' loading />
         <MenuItem start='close' content='text' end='check_circle' size='xl' loading />
         <MenuButton start='close' content='text' end='check_circle' size='xl' loading/>
+      </Block>
+
+      <Block gap='xs' direction='xy' align='center' justify='center' padding='xl'>
+        <Drawer anchor='left' name='left'>
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+        </Drawer>
+        <Drawer anchor='right' name='right'>
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+        </Drawer>
+        <Drawer anchor='bottom' name='bottom'>
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+        </Drawer>
+        <Drawer anchor='top' name='top'>
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+          <MenuItem start='check_circle' content='text' end='close' size='md' />
+        </Drawer>
+
+        <Dialog name='Open dialog'>
+          <Dialog.Title title='Use Googles location service?' />
+          <Dialog.Content>
+          Let Google help apps determine location. This means sending anonymous
+          location data to Google, even when no apps are running.
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button content='Disagree' onClick={() => console.log('Disagree')}/>
+            <Button content='Agree' onClick={() => console.log('Agree')}/>
+          </Dialog.Actions>
+        </Dialog>
+
       </Block>
 
       {children}
