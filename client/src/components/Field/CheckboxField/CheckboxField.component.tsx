@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import MuiCheckboxField, { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox'
+import MuiCheckboxField from '@mui/material/Checkbox'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,12 +7,25 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import BaseField, { BaseFieldProps } from '../BaseField'
+import { FormOptions, useForm } from 'components/Form'
 
 // ---| self |---
 import css from './CheckboxField.module.scss'
+import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type CheckboxFieldProps = BaseFieldProps<MuiCheckboxProps>
+const toValue = (checked?: boolean, value?: any) => {
+  // if value passed
+  if (value) {
+    return checked ? value : undefined
+  }
+
+  // if value is not passed
+  return checked
+}
+
+export type CheckboxFieldProps = FormOptions & BaseFieldProps & {
+  checked?: boolean
+}
 
 /**
  * Component description.
@@ -22,35 +35,18 @@ export type CheckboxFieldProps = BaseFieldProps<MuiCheckboxProps>
  * <CheckboxField />
  */
 export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { name, value, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.CheckboxField, className)
+  const form = useForm({ name, value: toValue(checked, value), onChange })
 
-  const change = useCallback<NonNullable<BaseFieldProps<MuiCheckboxProps>['change']>>((event) => {
-    if (props.value) {
-      return event.target.checked ? props.value : undefined as unknown as boolean
-    }
-
-    return event.target.checked
-  }, [props.value])
-
-  const selectProps = useCallback<NonNullable<BaseFieldProps<MuiCheckboxProps>['selectProps']>>((value) => {
-    if (props.value) {
-      return { checked: !!value, value: props.value }
-    }
-
-    return { checked: !!value}
-  }, [props.value])
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    form.set(toValue(event.target.checked, value), event)
+  }, [form, value])
 
   return (
-    <BaseField
-      className={_className}
-      as={MuiCheckboxField}
-      change={change}
-      selectProps={selectProps}
-      size='small'
-      align='start'
-      {...otherProps}
-    />
+    <BaseField className={_className} errors={form.errors()} align='start' {...otherProps}>
+      <MuiCheckboxField name={form.name} size='small' value={form.get()} checked={!!form.get()} onChange={handleChange} />
+    </BaseField>
   )
 }
 

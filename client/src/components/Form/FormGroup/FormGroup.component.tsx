@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 // ---| core |---
 import { cn, react } from 'tools'
@@ -6,18 +6,16 @@ import { cn, react } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
-import Block, { BlockProps } from 'components/Block'
-import Messages, { MessageItem } from 'components/Messages'
+import { BaseField, BaseFieldProps } from 'components/Field'
 
 // ---| self |---
 import css from './FormGroup.module.scss'
-import { useForm, FormContext, FormGroupOptions } from '../Form.context'
+import { useForm, FormContext, FormOptions } from '../Form.context'
 
-export type FormGroupProps = FormGroupOptions & BlockProps & {
+// TODO: move to field and rename to GroupField
+export type FormGroupProps<V, S, E, C> = FormOptions<V, S, E, C> & BaseFieldProps & {
   list?: boolean
   label?: string
-  messages?: MessageItem[]
   className?: string
   children?: React.ReactNode
 }
@@ -29,22 +27,17 @@ export type FormGroupProps = FormGroupOptions & BlockProps & {
  * @example
  * <FormGroup />
  */
-export function FormGroup(props: FormGroupProps): JSX.Element {
-  const { label, name, list, messages = [], schema, onChange, onSubmit, onReset, children, className, ...otherProps } = props
+export function FormGroup<V, S, E, C>(props: FormGroupProps<V, S, E, C>): JSX.Element {
+  const { name, list, onChange, onSubmit, onReset, children, className, ...otherProps } = props
   const _className = cn(css.FormGroup, className)
-  const value = list ? [] : {}
-  const form = useForm({ value, name, schema, onChange, onReset, onSubmit })
+  const value = useMemo(() => (list ? [] : {}) as V, [list])
+  const form = useForm<V, S, E, C>({ value, name, onChange, onReset, onSubmit })
 
-  // FIXME: rewrite on layout?
   return (
     <FormContext.Provider value={form} >
-      <Block className={_className} gap='xs' {...otherProps}>
-        <Text.Caption content={label} />
-
+      <BaseField className={_className} {...otherProps}>
         {children}
-
-        <Messages items={messages} />
-      </Block>
+      </BaseField>
     </FormContext.Provider>
   )
 }

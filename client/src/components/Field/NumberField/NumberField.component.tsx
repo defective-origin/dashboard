@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
+import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,12 +7,13 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FormOptions, useForm } from 'components/Form'
 
 // ---| self |---
 import css from './NumberField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type NumberFieldProps = BaseFieldProps<MuiTextFieldProps>
+export type NumberFieldProps = FormOptions & BaseFieldProps
 
 /**
  * Component description.
@@ -22,12 +23,21 @@ export type NumberFieldProps = BaseFieldProps<MuiTextFieldProps>
  * <NumberField />
  */
 export function NumberField(props: NumberFieldProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.NumberField, className)
+  const form = useForm({ name, value, onChange })
 
-  const change = useCallback<NonNullable<BaseFieldProps<MuiTextFieldProps>['change']>>((event) => Number(event.target.value), [])
+  const onBlur = useCallback(() => form.validate(), [form])
 
-  return <BaseField className={_className} as={MuiTextField} type='number' change={change} size='small' {...otherProps} />
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    form.set(Number(event.target.value), event)
+  }, [form])
+
+  return (
+    <BaseField className={_className} errors={form.errors()} {...otherProps}>
+      <MuiTextField name={form.name} size='small' type='number' value={form.get()} onBlur={onBlur} onChange={handleChange} />
+    </BaseField>
+  )
 }
 
 NumberField.displayName = 'NumberField'

@@ -14,6 +14,7 @@ import Actions, { ActionsProps } from 'components/Actions'
 import css from './Section.module.scss'
 
 export type SectionProps = {
+  title?: React.ReactNode
   className?: string
   children?: React.ReactNode
   actions?: ActionsProps['items']
@@ -27,13 +28,13 @@ export type SectionProps = {
  * <Section />
  */
 export function Section(props: SectionProps): JSX.Element {
-  const { actions, children, className, ...otherProps } = props
+  const { title, actions, children, className, ...otherProps } = props
   const _className = cn(css.Section, className)
 
   return (
     <Layout className={_className} stretch {...otherProps}>
       <Layout.Header className={ css.Header }>
-        <Text className={ css.Title } />
+        <Text className={ css.Title } content={title} />
 
         <Layout.Block.Spacer />
 

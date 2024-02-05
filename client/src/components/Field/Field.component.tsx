@@ -18,7 +18,7 @@ import SelectField from './SelectField'
 import SliderField from './SliderField'
 import SwitchField from './SwitchField'
 
-export type FieldProps = BaseFieldProps<JSX.IntrinsicElements['input']>
+export type FieldProps = BaseFieldProps & JSX.IntrinsicElements['input']
 
 /**
  * Component description.
@@ -28,10 +28,14 @@ export type FieldProps = BaseFieldProps<JSX.IntrinsicElements['input']>
  * <Field />
  */
 export function Field(props: FieldProps): JSX.Element | null {
-  const { className, ...otherProps } = props
+  const { value, className, onChange, ...otherProps } = props
   const _className = cn(css.Field, className)
 
-  return <BaseField className={_className} as='input' {...otherProps} />
+  return (
+    <BaseField className={_className} {...otherProps}>
+      <input value={value} onChange={onChange} />
+    </BaseField>
+  )
 }
 
 Field.displayName = 'Field'

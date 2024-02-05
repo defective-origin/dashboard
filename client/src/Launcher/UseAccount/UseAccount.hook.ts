@@ -23,6 +23,7 @@ export type AccountReturnOptions = {
   toggleTheme: () => void
 }
 
+// TODO: move to API
 /**
  * Hook descriptions
  *

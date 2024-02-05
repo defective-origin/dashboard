@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn, react } from 'tools'
@@ -17,9 +17,9 @@ import Field from 'components/Field'
 import css from './Form.module.scss'
 import FormButton from './FormButton'
 import FormGroup from './FormGroup'
-import { FormContext, FormEventContext, FormGroupOptions, useForm } from './Form.context'
+import { FormContext, FormOptions, useForm } from './Form.context'
 
-export type FormProps = FormGroupOptions & BlockProps & {
+export type FormProps<V, S, E, C> = FormOptions<V, S, E, C> & BlockProps & {
   className?: string
   children?: React.ReactNode
   alerts?: AlertItem[]
@@ -282,26 +282,14 @@ export type FormProps = FormGroupOptions & BlockProps & {
  *   </Form.Content>
  * </Form>
  */
-export function Form(props: FormProps): JSX.Element {
-  const { name, alerts, actions, schema, onSubmit, onReset, onChange, children, className, ...otherProps } = props
+export function Form<V, S, E, C>(props: FormProps<V, S, E, C>): JSX.Element {
+  const { name, alerts, actions, onSubmit, onReset, onChange, children, className, ...otherProps } = props
   const _className = cn(css.Form, className)
-  const form = useForm({ value: {}, name, schema, onChange, onReset, onSubmit })
-
-  const onFormEvent = useCallback((event: FormEventContext) => {
-    if (event.type === 'reset' || form.validate()) {
-      event.preventDefault()
-
-      const onEvent = event.type === 'submit' ? onSubmit : onReset
-
-      onEvent?.(form.state().value, form.store().value, event)
-
-      form.reset(event)
-    }
-  }, [form, onSubmit, onReset])
+  const form = useForm({ value: {} as V, name, onChange, onReset, onSubmit })
 
   return (
     <FormContext.Provider value={form} >
-      <Block as='form' className={_className} onSubmit={onFormEvent} onReset={onFormEvent} gap='xs' {...otherProps}>
+      <Block as='form' className={_className} onSubmit={form.submit} onReset={form.reset} gap='xs' {...otherProps}>
         {alerts && <Alerts items={alerts} />}
 
         {children}

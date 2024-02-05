@@ -29,6 +29,8 @@
     background: var(--scroll-track-color);
     border-radius: var(--scroll-track-radius);
 
+    // transition: visibility 1s linear 300ms, opacity 300ms; // TODO: via class https://css-tricks.com/snippets/css/toggle-visibility-when-hiding-elements/
+
     &:hover { background: var(--scroll-track-color--hover); }
     &:active { background: var(--scroll-track-color--active); }
 

@@ -56,7 +56,9 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   ]
 
   // const log = ((a: any, b: any, c: any) => console.log(a, {...b}, c)) as any
-  const log = ((a: any, b: any, c: any) => {}) as any
+  // const log = ((a: any, b: any, c: any) => console.log({...b})) as any
+  const log = ((a: any, b: any, c: any) => console.log(a)) as any
+  // const log = ((a: any, b: any, c: any) => {}) as any
 
   return (
     <BasePage className={_className} scroll='y' name='PAGES.WIDGETS' {...otherProps}>
@@ -77,13 +79,28 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
           </Form.Actions>
 
           <Form.Block className={_className} direction='x' gap='xs'>
-            <Form.Field.Radio name='radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
-            <Form.Field.Switch name='switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
-            <Form.Field.Checkbox name='checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+            <Form.Field.Checkbox name='with' label='with' value='checkbox' messages={MESSAGES} checked onChange={log} />
+            <Form.Field.Checkbox name='without' label='without' messages={MESSAGES} checked onChange={log} />
+          </Form.Block>
+
+          {/* <Form.Block className={_className} direction='x' gap='xs'>
+            <Form.Field.Radio name='radio' label='radio 1' value={1} checked messages={MESSAGES} onChange={log} />
+            <Form.Field.Radio name='radio' label='radio 2' value={2} messages={MESSAGES} onChange={log} />
+          </Form.Block> */}
+
+          <Form.Block className={_className} direction='x' gap='xs'>
+            <Form.Field.Switch name='switch1' label='switch1' messages={MESSAGES} onChange={log} />
+            <Form.Field.Switch name='switch2' label='switch2' messages={MESSAGES} onChange={log} />
+          </Form.Block>
+
+          <Form.Block className={_className} direction='x' gap='xs'>
             <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
+            <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
+          </Form.Block>
+
+          <Form.Block className={_className} direction='x' gap='xs'>
             <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
             <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
-            <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
           </Form.Block>
 
           <Form.Group name='group' label='group' messages={MESSAGES} onChange={log}>
@@ -112,13 +129,13 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
             </Form.Actions>
 
             <Form.Content direction='x' gap='xs'>
-              <Form.Field.Radio name='item_2' label='radio' value={true} messages={MESSAGES} />
-              <Form.Field.Switch name='item_3' label='switch' value={true} messages={MESSAGES} />
-              <Form.Field.Checkbox name='item_4' label='checkbox' value='checkbox' messages={MESSAGES} checked />
-              <Form.Field.Slider name='item_6' label='slider' value={0} messages={MESSAGES} />
-              <Form.Field.Select name='item_5' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} />
-              <Form.Field.Text name='item_0' label='text' value='value' messages={MESSAGES} onChange={log} />
-              <Form.Field.Number name='item_1' label='number' value={0} messages={MESSAGES} />
+              <Form.Field.Radio name='item_0' label='radio' value={true} messages={MESSAGES} />
+              <Form.Field.Switch name='item_1' label='switch' value={true} messages={MESSAGES} />
+              <Form.Field.Checkbox name='item_2' label='checkbox' value='checkbox' messages={MESSAGES} checked />
+              <Form.Field.Slider name='item_3' label='slider' value={0} messages={MESSAGES} />
+              <Form.Field.Select name='item_4' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} />
+              <Form.Field.Text name='item_5' label='text' value='value' messages={MESSAGES} onChange={log} />
+              <Form.Field.Number name='item_6' label='number' value={0} messages={MESSAGES} />
             </Form.Content>
           </Form.List>
         </Form.Content>

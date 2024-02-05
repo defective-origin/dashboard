@@ -11,3 +11,4 @@ export default defineConfig({
     setupFiles: 'src/tests/setup.ts',
   },
 })
+// alias config vite https://www.youtube.com/watch?v=ic-P67jinhw

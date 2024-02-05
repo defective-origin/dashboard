@@ -28,14 +28,13 @@ export function FormButton(props: FormButtonProps): JSX.Element {
   const { type, onClick, children, className, ...otherProps } = props
   const _className = cn(css.FormButton, className)
   const form = useForm()
+
   const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    if (type === 'reset' || type === 'submit' && form.validate()) {
-      event.preventDefault()
+    const formHandler = type === 'reset' ? form.reset : form.submit
 
-      form.reset(event)
-    }
-
+    formHandler(event)
     onClick?.(event)
+    event.preventDefault()
   }, [form, type, onClick])
 
 

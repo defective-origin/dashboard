@@ -1,5 +1,5 @@
-import React from 'react'
-import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
+import React, { useCallback } from 'react'
+import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,12 +7,15 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FormOptions, useForm } from 'components/Form'
 
 // ---| self |---
 import css from './TextField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type TextFieldProps = BaseFieldProps<MuiTextFieldProps>
+export type TextFieldProps = FormOptions & BaseFieldProps
+
+// TODO: implement throttle for input onChange event?
 
 /**
  * Component description.
@@ -22,10 +25,21 @@ export type TextFieldProps = BaseFieldProps<MuiTextFieldProps>
  * <TextField />
  */
 export function TextField(props: TextFieldProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.TextField, className)
+  const form = useForm({ name, value, onChange })
 
-  return <BaseField className={_className} as={MuiTextField} size='small' {...otherProps} />
+  const onBlur = useCallback(() => form.validate(), [form])
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    form.set(event.target.value, event)
+  }, [form])
+
+  return (
+    <BaseField className={_className} errors={form.errors()} {...otherProps}>
+      <MuiTextField name={form.name} size='small' value={form.get()} onBlur={onBlur} onChange={handleChange} />
+    </BaseField>
+  )
 }
 
 TextField.displayName = 'TextField'

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -14,9 +14,11 @@ import css from './Alerts.module.scss'
 import Alert, { AlertProps } from 'components/Alert'
 
 export type AlertColor = AlertProps['color']
-export type AlertItem = AlertProps
+export type AlertItem = AlertProps | string
 
-export type AlertsProps = ComponentWithItems<BlockProps, AlertItem>
+export type AlertsProps = ComponentWithItems<BlockProps, AlertItem> & {
+  color?: AlertColor
+}
 
 /**
  * Component description.
@@ -26,12 +28,18 @@ export type AlertsProps = ComponentWithItems<BlockProps, AlertItem>
  * <Alerts />
  */
 export function Alerts(props: AlertsProps): JSX.Element {
-  const { items, children, className, ...otherProps } = props
+  const { items = [], color = 'primary', children, className, ...otherProps } = props
   const _className = cn(css.Alerts, className)
+  const alerts = useMemo(() =>
+    items.map((content) =>
+      typeof content === 'string'
+        ? ({ color, content })
+        : content,
+    ), [color, items]) as AlertProps[]
 
   return (
     <Block className={_className} {...otherProps}>
-      <Repeat cmp={Alert} items={items} />
+      <Repeat cmp={Alert} items={alerts} />
 
       {children}
     </Block>

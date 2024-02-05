@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import MuiSwitchField, { SwitchProps as MuiSwitchProps } from '@mui/material/Switch'
+import MuiSwitchField from '@mui/material/Switch'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,12 +7,15 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FormOptions, useForm } from 'components/Form'
 
 // ---| self |---
 import css from './SwitchField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type SwitchFieldProps = BaseFieldProps<MuiSwitchProps>
+export type SwitchFieldProps = FormOptions & BaseFieldProps & {
+  checked?: boolean
+}
 
 /**
  * Component description.
@@ -22,26 +25,19 @@ export type SwitchFieldProps = BaseFieldProps<MuiSwitchProps>
  * <SwitchField />
  */
 export function SwitchField(props: SwitchFieldProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { name, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.SwitchField, className)
+  const form = useForm({ name, value: !!checked, onChange })
 
-  const change = useCallback<NonNullable<BaseFieldProps<MuiSwitchProps>['change']>>((event) => {
-    if (props.value) {
-      return event.target.checked ? props.value : undefined as unknown as boolean
-    }
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    form.set(event.target.checked, event)
+  }, [form])
 
-    return event.target.checked
-  }, [props.value])
-
-  const selectProps = useCallback<NonNullable<BaseFieldProps<MuiSwitchProps>['selectProps']>>((value) => {
-    if (props.value) {
-      return { checked: !!value, value: props.value }
-    }
-
-    return { checked: !!value}
-  }, [props.value])
-
-  return <BaseField className={_className} as={MuiSwitchField} change={change} selectProps={selectProps} size='small' {...otherProps} />
+  return (
+    <BaseField className={_className} errors={form.errors()} align='flex-start' {...otherProps}>
+      <MuiSwitchField name={form.name} size='small' checked={!!form.get()} onChange={handleChange} />
+    </BaseField>
+  )
 }
 
 SwitchField.displayName = 'SwitchField'
