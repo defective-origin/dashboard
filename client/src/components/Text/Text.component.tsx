@@ -6,36 +6,26 @@ import { cn, react } from 'tools'
 import { Color, Size } from 'theme'
 
 // ---| components |---
-import Icon, { IconSize, IconVariant } from 'components/Icon'
 import Skeleton from 'components/Skeleton'
 
 // ---| self |---
-import css from './Text.module.scss'
+import './Text.module.scss'
 
-export const initAsideContent = (content: React.ReactNode, iconSize?: IconSize, fill?: boolean, loading?: boolean) => {
-  if (typeof content !== 'string') {
-    return content
-  }
-
-  return <Icon className={css.Icon} v={content as IconVariant} fill={fill} size={iconSize} loading={loading}/>
-}
 
 export type TextVariant = MuiTypographyProps['variant']
+export type TextAlign = MuiTypographyProps['align']
 export type TextColor = Color
 export type TextSize = Size
 
-export type TextProps = Pick<MuiTypographyProps, 'align' | 'onClick'> & {
+export type TextProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
   size?: TextSize
-  iconSize?: IconSize
-  start?: IconVariant | Exclude<React.ReactNode, string>
-  end?: IconVariant | Exclude<React.ReactNode, string>
   color?: TextColor
-  fillIcon?: boolean
   v?: TextVariant
-  multiline?: boolean // TODO: multiline boolean | number - split each \n
+  align?: TextAlign
+  multiline?: boolean
   ellipsis?: boolean
   loading?: boolean
 }
@@ -51,11 +41,7 @@ export function Text(props: TextProps): JSX.Element {
   const {
     v = 'body1',
     size = 'md',
-    iconSize = size,
-    start,
-    end,
     color,
-    fillIcon,
     multiline,
     ellipsis,
     loading,
@@ -66,17 +52,17 @@ export function Text(props: TextProps): JSX.Element {
   } = props
   const _className = cn('text', {
     [`text--${size}`]: size,
+    ellipsis,
+    multiline,
   }, className)
-  const contentClassName = cn('content', { ellipsis, multiline })
+
+  if (loading) {
+    return <Skeleton className={_className} v='text' content={children} />
+  }
 
   return (
-    <MuiTypography className={_className} variant={v} align='left' color={color} {...otherProps}>
-      {initAsideContent(start, iconSize, fillIcon, loading)}
-
-      {!loading && (children || (start && end)) && <span className={contentClassName}>{children}</span>}
-      {loading && <Skeleton className={contentClassName} v='text'>{children}</Skeleton>}
-
-      {initAsideContent(end, iconSize, fillIcon, loading)}
+    <MuiTypography className={_className} variant={loading ? 'body1' : v} align='left' color={color} {...otherProps}>
+      {children}
     </MuiTypography>
   )
 }

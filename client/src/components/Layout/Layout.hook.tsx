@@ -20,7 +20,7 @@ export type LayoutOptions = BlockOptions & {
   rows?: number,
 }
 
-export type LayoutReturnOptions<O extends object> = BlockReturnOptions<O, LayoutOptions>
+export type LayoutReturnOptions<O extends object> = BlockReturnOptions<O>
 
 /**
  * Hook descriptions
@@ -42,7 +42,6 @@ export const useLayout = <O extends object>(options: LayoutOptions & O): LayoutR
       gridTemplateRows: rows && `repeat(${rows}, 1fr)`,
       ...style,
     },
-    options: { v, areas, columns, rows },
   }) as LayoutReturnOptions<O>,
   [otherOptions, v, areas, className, columns, rows, style],
   )

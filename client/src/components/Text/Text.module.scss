@@ -8,14 +8,6 @@
   .text {
     @include attach-text-size-variables(font-size);
     @include attach-text-gap-variables(gap);
-
-    display: flex;
-    align-items: center;
-  }
-
-  .content {
-    flex-grow: 1;
-    white-space: nowrap;
   }
 
   .multiline {
@@ -26,11 +18,13 @@
   .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
 
   .ellipsis.multiline {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    white-space: wrap;
   }
 }

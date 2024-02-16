@@ -18,14 +18,17 @@ export type NestedState<V, S, E, C> = {
   // /** Value before formatting. */
   // rowValue: unknown
 
+  /** Refresh all store values on change */
+  dependency?: boolean // TODO: implement
+
   // TODO: unformatted value before formatting
 
   /** Path to state. */
   path: string[]
 
-  // TODO: может сразу ошибки считать?(
-  /** Should return validation errors. */
-  isValidated: boolean
+  // TODO: Сохранять ошибки?(
+  /** Validation errors. */
+  errors?: E
 
   /** State subscriptions. */
   subscriptions: number
@@ -57,9 +60,9 @@ const initNode = <V, S, E, C>(
     value: structuredClone(options.value) as V,
     nested: {},
     subscriptions: 0,
-    isValidated: false,
     path: [...parent?.path ?? [], name],
-    // TODO: add default validator
+    // TODO: add default validator as formatter on refresh?
+    // TODO: validate on: change, blur, submit
     formatter: options.formatter ?? ((value, _, node) => {
       // update node values if current node is array container
       const nodes = Object.values(node.nested)
@@ -88,10 +91,10 @@ export type NestedStateHandlers<V, S, E, C> = {
   set: (value: V, context?: C) => void
 
   /** Validate state and it's nested states. */
-  validate: (isOn?: boolean, context?: C) => void
+  validate: (context?: C) => void
 
   /** Return errors if state validated. */
-  errors: () => E | any
+  errors: () => E | undefined
 
   /** Reset state value and it's nested states. */
   reset: (context?: C) => void
@@ -107,6 +110,7 @@ export type NestedStateHandlers<V, S, E, C> = {
 }
 
 // TODO: refresh only states which have prop deps? example deps: [()=> store.field1]
+// TODO: refreshOnStoreChange
 // TODO: add custom event to update state if need on store update and check only if field updated then reupdate field?
 
 export type NestedStateOptions<V, S, E, C> = Partial<Omit<NestedState<V, S, E, C>, 'init' | 'errors' | 'path' | 'nested' | 'subscriptions' | 'parent'>> & {
@@ -169,9 +173,10 @@ export const useNestedState = <V, S, E, C>(options: NestedStateOptions<V, S, E, 
     [get, parent],
   )
 
-  const errors = useCallback<NestedStateHandlers<V, S, E, C>['errors']>(() =>
-    node.isValidated ? node.validator?.(node.value, root(), node) : undefined
-  , [node, root])
+  const errors = useCallback<NestedStateHandlers<V, S, E, C>['errors']>(
+    () => node.errors,
+    [node],
+  )
 
   const refresh = useCallback<NestedStateHandlers<V, S, E, C>['refresh']>((withChangeEvent, context) => {
     node.value = node.formatter(node.value, root(), node)
@@ -197,18 +202,19 @@ export const useNestedState = <V, S, E, C>(options: NestedStateOptions<V, S, E, 
     refresh(true, context)
   }, [node, refresh])
 
-  const validate = useCallback<NestedStateHandlers<V, S, E, C>['validate']>((isOn = true, context) => {
-    mutateTree(node, (item) => item.isValidated = isOn)
+  const validate = useCallback<NestedStateHandlers<V, S, E, C>['validate']>((context) => {
+    // mutateTree(node, (item) => item.isValidated = isOn)
+    mutateTree(node, (item) => item.errors = item.validator?.(item.value, root(), item)) // todo: check validation errors
 
     refresh(true, context)
-  }, [mutateTree, node, refresh])
+  }, [node, mutateTree, refresh, root])
 
   const reset = useCallback<NestedStateHandlers<V, S, E, C>['reset']>((context) => {
     node.onReset?.(get(), root(), context)
 
     mutateTree(node,(item) => {
       item.value = structuredClone(item.init)
-      item.isValidated = false
+      item.errors = undefined
     })
 
     refresh(true, context)

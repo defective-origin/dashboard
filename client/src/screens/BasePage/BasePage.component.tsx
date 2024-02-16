@@ -66,7 +66,7 @@ export function BasePage(props: BasePageProps): JSX.Element {
       <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
       <Portal name='page-actions' content={<Actions items={testActions} gap='xs' />} />
 
-      <Page.Content>
+      <Page.Content gap='xs'>
         <Scroll v={scroll} actions margin={5} />
 
         {children}

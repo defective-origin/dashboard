@@ -21,7 +21,7 @@ export type LayoutProps = LayoutOptions
  * <Layout />
  */
 export function Layout(props: LayoutProps): JSX.Element | null {
-  const { options, children, className, style, ...otherProps } = useLayout(props)
+  const { children, className, style, ...otherProps } = useLayout(props)
 
   return (
     <div className={className} {...otherProps} style={style}>

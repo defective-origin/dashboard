@@ -19,9 +19,7 @@ export const DIVIDER_VARIANT_MAP: Record<'x' | 'y', MuiDividerProps['orientation
 
 export type DividerVariant = keyof typeof DIVIDER_VARIANT_MAP
 
-export type DividerProps = Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color'> & {
-  className?: string
-  children?: React.ReactNode
+export type DividerProps = Omit<TextProps, 'v'> & {
   v?: DividerVariant
 }
 
@@ -33,21 +31,10 @@ export type DividerProps = Pick<TextProps, 'start' | 'content' | 'end' | 'size' 
  * <Divider />
  */
 export function Divider(props: DividerProps): JSX.Element {
-  const { align, start, end, content, v ='x', size = 'xs', iconSize, color, fillIcon, children, className, ...otherProps } = props
+  const { v ='x', content, children, className, ...otherProps } = props
   const _className = cn(css.Divider, className)
-  const hasContent = start || content || end || children
-  const _content = children ?? (
-    <Text
-      start={start}
-      content={content}
-      end={end}
-      size={size}
-      iconSize={iconSize}
-      align={align}
-      fillIcon={fillIcon}
-      color={color}
-    />
-  )
+  const hasContent = content ?? children
+  const _content = children ?? <Text content={content} {...otherProps} />
 
   return (
     <MuiDivider

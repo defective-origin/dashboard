@@ -1,24 +1,20 @@
 import React from 'react'
-import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
+import MuiLink from '@mui/material/Link'
 
 // ---| core |---
 import { cn } from 'tools'
 
 // ---| components |---
-import Text, { TextProps } from 'components/Text'
 import Icon from 'components/Icon'
-import Tooltip, { TooltipProps } from 'components/Tooltip'
+import Action, { ActionProps } from 'components/Action'
 
 // ---| self |---
 import css from './Link.module.scss'
 import { isNewTabLink } from './Link.tool'
 
-export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
-                      & Pick<TextProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color' | 'loading'>
-                      & {
-                        tooltip?: TooltipProps | TooltipProps['content']
-                        withIcon?: boolean
-                      }
+export type LinkProps = ActionProps & {
+  withIcon?: boolean
+}
 
 /**
  * Component description.
@@ -28,60 +24,24 @@ export type LinkProps = Omit<MuiLinkProps, 'content' | 'size'>
  * <Link />
  */
 export function Link(props: LinkProps): JSX.Element {
-  const {
-    tooltip,
-    align,
-    href,
-    target,
-    start,
-    end,
-    size,
-    iconSize,
-    fillIcon,
-    color,
-    loading,
-    content,
-    children,
-    className,
-    withIcon,
-    ...otherProps
-  } = props
+  const { end, href, target, withIcon, className, ...otherProps } = props
   const _className = cn(css.Link, className)
   const isOpenInNewTab = isNewTabLink(href, target)
   const linkTarget = isOpenInNewTab ? '_blank' : target
+  const showLinkIcon = withIcon || isOpenInNewTab
 
-  const item = (
-    <MuiLink
+  return (
+    <Action
+      as={MuiLink}
       className={_className}
       target={linkTarget}
       rel={isOpenInNewTab ? 'noreferrer' : undefined}
       underline='hover'
       href={href}
+      end={end || showLinkIcon && <Icon size={props.size} v='open_in_new' />}
       {...otherProps}
-    >
-      {children ?? (
-        <Text
-          start={start}
-          content={content}
-          end={end ?? ((withIcon || isOpenInNewTab) && <Icon size={size} v='open_in_new' />)}
-          size={size}
-          iconSize={iconSize}
-          align={align}
-          fillIcon={fillIcon}
-          color={color}
-          loading={loading}
-        />
-      )}
-    </MuiLink>
+    />
   )
-
-  if (tooltip) {
-    const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
-
-    return <Tooltip {...tooltipProps}>{item}</Tooltip>
-  }
-
-  return item
 }
 
 Link.displayName = 'Link'

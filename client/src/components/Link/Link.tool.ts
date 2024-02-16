@@ -31,7 +31,7 @@ export function hasSameLinkHost(href?: string, location = window.location.host) 
  * isNewTabLink('https://current.com') // false
  * isNewTabLink('https://current.com', '_blank') // true
  */
-export function isNewTabLink(href?: string, target?: string) {
+export function isNewTabLink(href?: string, target?: React.HTMLAttributeAnchorTarget) {
   const hasSameHost = hasSameLinkHost(href)
 
   return !hasSameHost || target === '_blank'

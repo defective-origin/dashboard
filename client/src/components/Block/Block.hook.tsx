@@ -29,11 +29,10 @@ export type BlockOptions = {
   content?: React.ReactNode
 }
 
-export type BlockReturnOptions<O extends object, E extends BlockOptions = BlockOptions> = O & {
+export type BlockReturnOptions<O extends object> = O & {
   className: string
   children?: React.ReactNode
   style: React.CSSProperties
-  options: E
 }
 
 /**
@@ -75,9 +74,8 @@ export const useBlock = <O extends object>(options: O & BlockOptions): BlockRetu
       flexGrow: grow,
       ...style,
     },
-    options: { gap, padding, margin, direction, grow, align, justify, stretch, content, children, style },
   }) as BlockReturnOptions<O>,
-  [align, children, className, content, direction, gap, grow, justify, margin, otherOptions, padding, stretch, style],
+  [align, children, className, direction, gap, grow, justify, margin, otherOptions, padding, stretch, style],
   )
 }
 

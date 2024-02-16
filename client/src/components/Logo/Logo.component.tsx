@@ -12,7 +12,7 @@ import Link, { LinkProps } from 'components/Link'
 // ---| self |---
 import css from './Logo.module.scss'
 
-export type LogoProps = LinkProps & {
+export type LogoProps = Omit<LinkProps, 'v'> & {
   className?: string
   v: ImageVariant
 }

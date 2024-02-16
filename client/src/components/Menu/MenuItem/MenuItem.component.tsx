@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
+import MuiMenuItem from '@mui/material/MenuItem'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,16 +7,12 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Link, { LinkProps } from 'components/Link'
-import Tooltip, { TooltipProps } from 'components/Tooltip'
+import Action, { ActionProps } from 'components/Action'
 
 // ---| self |---
 import css from './MenuItem.module.scss'
 
-export type MenuItemProps = MuiMenuItemProps &
-  Pick<LinkProps, 'start' | 'content' | 'end' | 'size' | 'iconSize' | 'align' | 'fillIcon' | 'color' | 'loading'> & {
-    tooltip?: TooltipProps | TooltipProps['content']
-  }
+export type MenuItemProps = ActionProps
 
 /**
  * Component description.
@@ -26,49 +22,10 @@ export type MenuItemProps = MuiMenuItemProps &
  * <Item />
  */
 export function MenuItem(props: MenuItemProps): JSX.Element {
-  const {
-    tooltip,
-    align,
-    start,
-    end,
-    size,
-    iconSize,
-    fillIcon,
-    color,
-    loading,
-    content,
-    children,
-    className,
-    ...otherProps
-  } = props
+  const { className, ...otherProps } = props
   const _className = cn(css.MenuItem, className)
 
-  const item = (
-    <MuiMenuItem className={_className} {...otherProps}>
-      {children ?? (
-        <Link
-          start={start}
-          content={content}
-          end={end}
-          size={size}
-          iconSize={iconSize}
-          align={align}
-          fillIcon={fillIcon}
-          color={color}
-          loading={loading}
-        />
-      )}
-    </MuiMenuItem>
-  )
-
-  // TODO: [kseniya_boldak] add open/on flag to tooltip and wrap all items by default
-  if (tooltip) {
-    const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
-
-    return <Tooltip {...tooltipProps}>{item}</Tooltip>
-  }
-
-  return item
+  return <Action as={MuiMenuItem} className={_className} {...otherProps} />
 }
 
 MenuItem.displayName = 'MenuItem'
