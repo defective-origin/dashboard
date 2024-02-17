@@ -17,6 +17,7 @@ import Button from 'components/Button'
 import Block from 'components/Block'
 import Icon from 'components/Icon'
 import Image from 'components/Image'
+import Format from 'components/Format'
 
 // ---| self |---
 import css from './GuidePage.module.scss'
@@ -100,6 +101,34 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Link href='#' tooltip={'Link'} />
         <Button content='Button' tooltip={'Button'} />
       </BasePage.Section>
+
+      <Block gap='xs' direction='y' align='center' padding='xl'>
+        <Format v='uppercase' value='uppercase'/>
+        <Format v='lowercase' value='LOWERCASE'/>
+        <Format v='capitalize' value='   capitalize    capitALize'/>
+        <Format v='title' value='title TITle'/>
+        <Format v='title' placeholder/>
+
+        <Format v='number' value={120202003.12}/>
+        <Format v='amount' value={12256333.12}/>
+        <Format v='percent' value={0.526}/>
+        <Format v='currency' value={1025}/>
+        <Format v='size' />
+        <Format v='size' value={1024.56}/>
+        <Format v='weight' value='fghj'/>
+        <Format v='weight' value='12335'/>
+        <Format v='weight' placeholder />
+
+        <Format v='day' value='2024-02-27'/>
+        <Format v='month' value='2024-02-27'/>
+        <Format v='year' value='2024-02-27'/>
+        <Format v='day/month/year' value='2024-02-27'/>
+        <Format v='day-of-month-year' value='2024-02-27'/>
+        <Format v='day-name' value='2024-02-27'/>
+        <Format v='month-name' value='2024-02-27'/>
+        <Format v='month-name' placeholder/>
+
+      </Block>
 
       {children}
     </BasePage>
