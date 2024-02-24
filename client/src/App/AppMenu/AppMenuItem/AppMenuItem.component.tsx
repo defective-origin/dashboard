@@ -33,13 +33,14 @@ export function AppMenuItem(props: AppMenuItemProps): JSX.Element {
     color: 'primary',
     size: 'lg',
     tooltip: {content: tooltip?.toUpperCase(), placement: 'right'},
+    fillIcon: fillIcon ?? isActive,
     ...otherProps,
   } as ActionProps
   // TODO: если активный или открыто подменю, то заполнять иконки (language)
   // TODO: [kseniya_boldak] Add text converters to text component
 
   if (href) {
-    return <Action as={NavLink} fillIcon={fillIcon ?? isActive} to={href} {...actionProps} />
+    return <Action as={NavLink} to={href} {...actionProps} />
   }
 
   return <Button v='text' {...actionProps} />

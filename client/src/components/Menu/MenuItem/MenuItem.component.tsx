@@ -25,6 +25,7 @@ export function MenuItem(props: MenuItemProps): JSX.Element {
   const { className, ...otherProps } = props
   const _className = cn(css.MenuItem, className)
 
+  // FIXME: implement via variant link | button
   return <Action as={MuiMenuItem} className={_className} {...otherProps} />
 }
 

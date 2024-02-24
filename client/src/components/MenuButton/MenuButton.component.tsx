@@ -26,23 +26,23 @@ export type MenuButtonProps = ComponentWithItems<ButtonProps, MenuItem>
 export function MenuButton(props: MenuButtonProps): JSX.Element {
   const { tooltip, items, children, className, ...otherProps } = props
   const _className = cn(css.MenuButton, className)
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
-  const onMenuOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
+  const onClose = useCallback(() => setAnchorEl(null), [])
+
+  const onOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }, [])
 
-  const onMenuClose = useCallback(() => setAnchorEl(null), [])
 
   // FIXME: [kseniya_boldak] fix bug with anchorEl on HTMLElement
   const item = (
     <>
-      <Button className={_className} onClick={onMenuOpen} {...otherProps} />
+      <Button className={_className} onClick={onOpen} {...otherProps} />
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}
-        onClose={onMenuClose}
+        onClose={onClose}
         items={items}
       >
         {children}

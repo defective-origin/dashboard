@@ -35,6 +35,7 @@ export type FormReturnOptions<V = FormValue, S = FormValue, E = FormError, C = F
 export const FormContext = React.createContext<FormReturnOptions<any, any, any, any> | null>(null)
 FormContext.displayName = 'FormContext'
 
+// TODO: validate on: change, blur, submit
 /**
  * Hook descriptions
  *
