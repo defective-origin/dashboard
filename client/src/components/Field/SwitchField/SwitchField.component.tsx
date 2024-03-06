@@ -13,7 +13,7 @@ import { FormOptions, useForm } from 'components/Form'
 import css from './SwitchField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type SwitchFieldProps = FormOptions & BaseFieldProps & {
+export type SwitchFieldProps = FormOptions<boolean> & BaseFieldProps & {
   checked?: boolean
 }
 
@@ -27,15 +27,15 @@ export type SwitchFieldProps = FormOptions & BaseFieldProps & {
 export function SwitchField(props: SwitchFieldProps): JSX.Element {
   const { name, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.SwitchField, className)
-  const form = useForm({ name, value: !!checked, onChange })
+  const field = useForm({ name, value: !!checked, onChange })
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    form.set(event.target.checked, event)
-  }, [form])
+    field.set(event.target.checked)
+  }, [field])
 
   return (
-    <BaseField className={_className} errors={form.errors()} align='flex-start' {...otherProps}>
-      <MuiSwitchField name={form.name} size='small' checked={!!form.get()} onChange={handleChange} />
+    <BaseField className={_className} errors={field.errors()} align='flex-start' {...otherProps}>
+      <MuiSwitchField name={field.name} size='small' checked={!!field.value()} onChange={handleChange} />
     </BaseField>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -58,7 +58,7 @@ export const useBlock = <O extends object>(options: O & BlockOptions): BlockRetu
     ...otherOptions
   } = options
 
-  return useMemo(() => ({
+  return {
     ...otherOptions,
     children,
     className: cn({
@@ -74,9 +74,7 @@ export const useBlock = <O extends object>(options: O & BlockOptions): BlockRetu
       flexGrow: grow,
       ...style,
     },
-  }) as BlockReturnOptions<O>,
-  [align, children, className, direction, gap, grow, justify, margin, otherOptions, padding, stretch, style],
-  )
+  } as BlockReturnOptions<O>
 }
 
 export default useBlock

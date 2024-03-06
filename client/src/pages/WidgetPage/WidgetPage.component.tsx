@@ -14,6 +14,7 @@ import Form from 'components/Form'
 import css from './WidgetPage.module.scss'
 import { TextProps } from 'components/Text'
 import { AlertItem } from 'components/Alerts'
+import GroupField from 'components/Field/GroupField'
 
 export type WidgetPageProps = BasePageProps
 
@@ -55,14 +56,13 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
     { value: 'value2', children: 'THIRD' },
   ]
 
-  // const log = ((a: any, b: any, c: any) => console.log(a, {...b}, c)) as any
-  // const log = ((a: any, b: any, c: any) => console.log({...b})) as any
-  const log = ((a: any, b: any, c: any) => console.log(a)) as any
-  // const log = ((a: any, b: any, c: any) => {}) as any
+  const formLog = ((...a: any) => console.log('Form', ...a)) as any
+  // const log = ((...a: any) => console.log(...a)) as any
+  const log = (() => {}) as any
 
   return (
     <BasePage className={_className} scroll='y' name='PAGES.WIDGETS' {...otherProps}>
-      <Form name='FORM_NAME' onSubmit={log} onReset={log} onChange={log} padding='xxl'>
+      <Form name='FORM_NAME' onSubmit={formLog} onChange={formLog} onReset={log} padding='xxl'>
         <Form.Alerts items={ALERTS} gap='xs'>
           <Form.Alert color='success' content='success' />
           <Form.Alert color='info' content='info' />
@@ -83,10 +83,10 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
             <Form.Field.Checkbox name='without' label='without' messages={MESSAGES} checked onChange={log} />
           </Form.Block>
 
-          {/* <Form.Block className={_className} direction='x' gap='xs'>
-            <Form.Field.Radio name='radio' label='radio 1' value={1} checked messages={MESSAGES} onChange={log} />
+          <Form.Block className={_className} direction='x' gap='xs'>
+            <Form.Field.Radio name='radio' label='radio 1' value={1} messages={MESSAGES} onChange={log} checked />
             <Form.Field.Radio name='radio' label='radio 2' value={2} messages={MESSAGES} onChange={log} />
-          </Form.Block> */}
+          </Form.Block>
 
           <Form.Block className={_className} direction='x' gap='xs'>
             <Form.Field.Switch name='switch1' label='switch1' messages={MESSAGES} onChange={log} />
@@ -94,8 +94,8 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
           </Form.Block>
 
           <Form.Block className={_className} direction='x' gap='xs'>
-            <Form.Field.Slider name='slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
-            <Form.Field.Number name='number' label='number' value={0} messages={MESSAGES} onChange={log} />
+            <Form.Field.Slider name='slider' label='slider' value={75} messages={MESSAGES} onChange={log} />
+            <Form.Field.Number name='number' label='number' value={75} messages={MESSAGES} onChange={log} />
           </Form.Block>
 
           <Form.Block className={_className} direction='x' gap='xs'>
@@ -103,7 +103,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
             <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
           </Form.Block>
 
-          <Form.Group name='group' label='group' messages={MESSAGES} onChange={log}>
+          <Form.Field.Group name='group' label='group' messages={MESSAGES} onChange={log}>
             <Form.Actions>
               GROUP ACTIONS
               <Form.Reset content='Reset' />
@@ -114,14 +114,14 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
               <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
               <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
               <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
-              <Form.Field.Slider name='group-slider' label='slider' value={0} messages={MESSAGES} onChange={log} />
+              <Form.Field.Slider name='group-slider' label='slider' value={50} messages={MESSAGES} onChange={log} />
               <Form.Field.Select name='group-select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
               <Form.Field.Text name='group-text' label='text' value='value' messages={MESSAGES} onChange={log} />
-              <Form.Field.Number name='group-number' label='number' value={0} messages={MESSAGES} onChange={log} />
+              <Form.Field.Number name='group-number' label='number' value={50} messages={MESSAGES} onChange={log} />
             </Form.Content>
-          </Form.Group>
+          </Form.Field.Group>
 
-          <Form.List name='list' label='list' messages={MESSAGES} onChange={log}>
+          <Form.Field.Group name='list' label='list' messages={MESSAGES} onChange={log} list>
             <Form.Actions>
               LIST ACTIONS
               <Form.Reset content='Reset' />
@@ -129,15 +129,15 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
             </Form.Actions>
 
             <Form.Content direction='x' gap='xs'>
-              <Form.Field.Radio name='item_0' label='radio' value={true} messages={MESSAGES} />
-              <Form.Field.Switch name='item_1' label='switch' value={true} messages={MESSAGES} />
-              <Form.Field.Checkbox name='item_2' label='checkbox' value='checkbox' messages={MESSAGES} checked />
-              <Form.Field.Slider name='item_3' label='slider' value={0} messages={MESSAGES} />
-              <Form.Field.Select name='item_4' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} />
+              <Form.Field.Radio name='item_0' label='radio' value={true} messages={MESSAGES} onChange={log} />
+              <Form.Field.Switch name='item_1' label='switch' value={true} messages={MESSAGES} onChange={log} />
+              <Form.Field.Checkbox name='item_2' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
+              <Form.Field.Slider name='item_3' label='slider' value={25} messages={MESSAGES} onChange={log} />
+              <Form.Field.Select name='item_4' label='select' value='value0' messages={MESSAGES} items={SELECT_OPTIONS} onChange={log} />
               <Form.Field.Text name='item_5' label='text' value='value' messages={MESSAGES} onChange={log} />
-              <Form.Field.Number name='item_6' label='number' value={0} messages={MESSAGES} />
+              <Form.Field.Number name='item_6' label='number' value={25} messages={MESSAGES} onChange={log} />
             </Form.Content>
-          </Form.List>
+          </Form.Field.Group>
         </Form.Content>
 
         <Form.Actions>

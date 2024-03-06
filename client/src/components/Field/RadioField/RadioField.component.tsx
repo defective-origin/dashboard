@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import MuiRadioField from '@mui/material/Radio'
 
 // ---| core |---
@@ -13,11 +13,7 @@ import { FormOptions, useForm } from 'components/Form'
 import css from './RadioField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-const toValue = (checked?: boolean, value?: unknown, storedValue?: unknown) => {
-  return checked ? value : storedValue
-}
-
-export type RadioFieldProps = FormOptions & BaseFieldProps & {
+export type RadioFieldProps = FormOptions<string | number | boolean> & BaseFieldProps & {
   checked?: boolean
 }
 
@@ -31,15 +27,22 @@ export type RadioFieldProps = FormOptions & BaseFieldProps & {
 export function RadioField(props: RadioFieldProps): JSX.Element {
   const { name, value, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.RadioField, className)
-  const form = useForm({ name, value: toValue(checked, value), onChange })
+  const field = useForm({ name, value, dependency: true, onChange })
+
+  useEffect(() => {
+    if (checked && value !== field.value()) {
+      field.set(value as string)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    form.set(toValue(event.target.checked, value, form.get()), event)
-  }, [form, value])
+    field.set((event.target.checked ? value : field.value()) as string)
+  }, [field, value])
 
   return (
-    <BaseField className={_className} errors={form.errors()} align='flex-start' {...otherProps}>
-      <MuiRadioField name={form.name} size='small' value={value} checked={value === form.get()} onChange={handleChange} />
+    <BaseField className={_className} errors={field.errors()} align='flex-start' {...otherProps}>
+      <MuiRadioField name={field.name} size='small' value={value} checked={value === field.value()} onChange={handleChange} />
     </BaseField>
   )
 }

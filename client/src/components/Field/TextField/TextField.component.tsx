@@ -13,9 +13,10 @@ import { FormOptions, useForm } from 'components/Form'
 import css from './TextField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type TextFieldProps = FormOptions & BaseFieldProps
+export type TextFieldProps = FormOptions<string> & BaseFieldProps
 
-// TODO: implement throttle for input onChange event?
+// TODO: add throttle for input onChange event?
+// TODO: add validate onBlur event?
 
 /**
  * Component description.
@@ -27,17 +28,17 @@ export type TextFieldProps = FormOptions & BaseFieldProps
 export function TextField(props: TextFieldProps): JSX.Element {
   const { name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.TextField, className)
-  const form = useForm({ name, value, onChange })
+  const field = useForm({ name, value, onChange })
 
-  const onBlur = useCallback(() => form.validate(), [form])
+  const onBlur = useCallback(() => field.validate(), [field])
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    form.set(event.target.value, event)
-  }, [form])
+    field.set(event.target.value)
+  }, [field])
 
   return (
-    <BaseField className={_className} errors={form.errors()} {...otherProps}>
-      <MuiTextField name={form.name} size='small' value={form.get()} onBlur={onBlur} onChange={handleChange} />
+    <BaseField className={_className} errors={field.errors()} {...otherProps}>
+      <MuiTextField name={field.name} size='small' value={field.value()} onBlur={onBlur} onChange={handleChange} />
     </BaseField>
   )
 }

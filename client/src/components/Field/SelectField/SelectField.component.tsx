@@ -24,7 +24,7 @@ const SELECT_FIELD_OPTIONS = {
 
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
-export type SelectFieldProps = FormOptions & ComponentWithItems<BaseFieldProps, SelectFieldItem>
+export type SelectFieldProps = FormOptions<string | number> & ComponentWithItems<BaseFieldProps, SelectFieldItem>
 
 /**
  * Component description.
@@ -37,21 +37,21 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
   const { name, value, onChange, items = [], children, className, ...otherProps } = props
   const _className = cn(css.SelectField, className)
   const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })
-  const form = useForm({ name, value, onChange })
+  const field = useForm({ name, value, onChange })
 
-  const onBlur = useCallback(() => form.validate(), [form])
+  const onBlur = useCallback(() => field.validate(), [field])
 
   const handleChange = useCallback((event: SelectChangeEvent<unknown>) => {
-    form.set(event.target.value, event)
-  }, [form])
+    field.set(event.target.value as string)
+  }, [field])
 
   return (
-    <BaseField className={_className} errors={form.errors()} {...otherProps}>
+    <BaseField className={_className} errors={field.errors()} {...otherProps}>
       <MuiSelectField
-        name={form.name}
+        name={field.name}
         size='small'
         MenuProps={SELECT_FIELD_OPTIONS}
-        value={form.get()}
+        value={field.value()}
         onBlur={onBlur}
         onChange={handleChange}
       >

@@ -17,6 +17,7 @@ import RadioField from './RadioField'
 import SelectField from './SelectField'
 import SliderField from './SliderField'
 import SwitchField from './SwitchField'
+import { GroupField } from './GroupField'
 
 export type FieldProps = BaseFieldProps & JSX.IntrinsicElements['input']
 
@@ -52,4 +53,5 @@ export default react.attachComponents(Field, {
   // DateTime: DateTimeField,
   // DateRange: DateRangeField,
   Select: SelectField,
+  Group: GroupField,
 })
