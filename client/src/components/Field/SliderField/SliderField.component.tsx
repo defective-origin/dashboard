@@ -13,7 +13,7 @@ import { FormOptions, useForm } from 'components/Form'
 import css from './SliderField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type SliderFieldProps = FormOptions & BaseFieldProps
+export type SliderFieldProps = FormOptions<number> & BaseFieldProps
 
 /**
  * Component description.
@@ -25,15 +25,15 @@ export type SliderFieldProps = FormOptions & BaseFieldProps
 export function SliderField(props: SliderFieldProps): JSX.Element {
   const { name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.SliderField, className)
-  const form = useForm({ name, value, onChange })
+  const field = useForm({ name, value, onChange })
 
   const handleChange = useCallback((event: Event) => {
-    form.set(Number((event.target as HTMLInputElement).value), event)
-  }, [form])
+    field.set(Number((event.target as HTMLInputElement).value))
+  }, [field])
 
   return (
-    <BaseField className={_className} errors={form.errors()} {...otherProps}>
-      <MuiSliderField name={form.name} size='small' value={form.get()} onChange={handleChange} />
+    <BaseField className={_className} errors={field.errors()} {...otherProps}>
+      <MuiSliderField name={field.name} size='small' value={field.value()} onChange={handleChange} />
     </BaseField>
   )
 }

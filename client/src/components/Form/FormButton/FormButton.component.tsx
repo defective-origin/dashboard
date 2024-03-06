@@ -25,18 +25,21 @@ export type FormButtonProps = ButtonProps & {
  * <FormButton />
  */
 export function FormButton(props: FormButtonProps): JSX.Element {
-  const { type, onClick, children, className, ...otherProps } = props
+  const { type, children, onClick, className, ...otherProps } = props
   const _className = cn(css.FormButton, className)
-  const form = useForm()
+  const field = useForm()
 
-  const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    const formHandler = type === 'reset' ? form.reset : form.submit
-
-    formHandler(event)
-    onClick?.(event)
+  const handleClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
-  }, [form, type, onClick])
 
+    if (type === 'submit') {
+      field.submit(event)
+    } else if (type === 'reset') {
+      field.reset()
+    }
+
+    onClick?.(event)
+  }, [field, type, onClick])
 
   return <Button className={_className} type={type} onClick={handleClick} {...otherProps}>{children}</Button>
 }

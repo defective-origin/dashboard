@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -31,7 +31,7 @@ export type LayoutReturnOptions<O extends object> = BlockReturnOptions<O>
 export const useLayout = <O extends object>(options: LayoutOptions & O): LayoutReturnOptions<O> => {
   const { className, v = 'rows', areas, columns, rows, style, ...otherOptions } = useBlock(options)
 
-  return useMemo(() => ({
+  return {
     ...otherOptions,
     className: cn('layout', {
       [`layout--${v}`]: !areas,
@@ -42,9 +42,7 @@ export const useLayout = <O extends object>(options: LayoutOptions & O): LayoutR
       gridTemplateRows: rows && `repeat(${rows}, 1fr)`,
       ...style,
     },
-  }) as LayoutReturnOptions<O>,
-  [otherOptions, v, areas, className, columns, rows, style],
-  )
+  } as LayoutReturnOptions<O>
 }
 
 export default useLayout

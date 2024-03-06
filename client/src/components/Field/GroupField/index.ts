@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './FormGroup.component'
+export { default } from './GroupField.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './FormGroup.component'
+export * from './GroupField.component'

@@ -73,6 +73,8 @@ export const toUnit = (v: NumberValue, optionVariant: UnitOptions, options?: Int
   return option.postfix ? `${intlValue} ${option.postfix}` : intlValue
 }
 
+export const amount = (v: NumberValue) => toNumber(v, { isInt: true })
+
 const NUMBER_FORMAT_MAP = {
   number: (v: NumberValue) => toNumber(v), // 123,456,789.98
   amount: (v: NumberValue) => toNumber(v, { isInt: true }), // 123,456,789

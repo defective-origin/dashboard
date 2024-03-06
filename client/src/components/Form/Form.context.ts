@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 
 // ---| core |---
-import { NestedStateEvent, NestedStateOptions, NestedStateReturnOptions, useNestedState } from 'hooks'
+import { NestedStateNodeErrors, NestedStateNodeEvent, NestedStateOptions, NestedStateReturnOptions, useNestedState } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -10,61 +10,86 @@ import { NestedStateEvent, NestedStateOptions, NestedStateReturnOptions, useNest
 // ---| self |---
 
 export type FormFieldValue = number | string | boolean | null
-export type FormGroupValue = { [key: string]: FormGroupValue | FormFieldValue } | FormGroupValue[]
+export type FormGroupValue = { [key: string | number]: FormGroupValue | FormFieldValue }
 export type FormValue = FormGroupValue | FormFieldValue
 
-export type FormFieldError = string[]
-export type FormGroupError = { [key: string]: FormGroupError | FormFieldError } | FormGroupError[]
-export type FormError = FormGroupError | FormFieldError
-
-export type FormFieldEvent = React.ChangeEvent<HTMLInputElement>
-export type FormGroupEvent = React.MouseEvent<HTMLElement>
-export type FormEvent = FormFieldEvent | FormGroupEvent | React.FormEvent<HTMLFormElement>
-
-export type FormEventHandler = (event: FormEvent) => void
-
-export type FormOptions<V = any, S = any, E = any, C = any> = NestedStateOptions<V, S, E, C> & {
-  onSubmit?: NestedStateEvent<V, S, FormEvent>
+export type FormOptions<V = FormValue> = NestedStateOptions<V> & {
+  validateOnChange?: boolean
+  validateOnSubmit?: boolean
+  onReset?: NestedStateNodeEvent<V>
+  onSubmit?: NestedStateNodeEvent<V>
 }
 
-export type FormReturnOptions<V = FormValue, S = FormValue, E = FormError, C = FormEvent> = NestedStateReturnOptions<V, S, E, C> & {
+export type FormReturnOptions<V = FormValue> = NestedStateReturnOptions<V> & {
   name: string
-  submit: FormEventHandler
+
+  submit: (event: React.MouseEvent) => void
+
+  /** Get root value. */
+  form: () => V | undefined
+
+  /** Get value. Return parent value if name is not provided. */
+  value: () => V | undefined
+
+  /** Return errors if state validated. */
+  errors: () => NestedStateNodeErrors<V> | undefined
 }
 
-export const FormContext = React.createContext<FormReturnOptions<any, any, any, any> | null>(null)
+export const FormContext = React.createContext<FormReturnOptions<FormGroupValue> | null>(null)
 FormContext.displayName = 'FormContext'
-
-// TODO: validate on: change, blur, submit
 /**
  * Hook descriptions
  *
  * @example
- * const options = useForm(conf)
+ * const field = useForm(conf)
  */
-export const useForm = <V, S, E, C>(options: FormOptions<V, S, E, C> = {}) => {
-  const { onSubmit, ...otherOptions } = options
-  const state = useNestedState<V, S, E, C>({ context: FormContext as FormOptions<V, S, E, C>['context'], ...otherOptions })
+export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturnOptions<V> => {
+  const { validateOnChange, validateOnSubmit, onSubmit, onReset, ...otherOptions } = options
+  const field = useNestedState<V>({ context: FormContext as FormOptions<V>['context'], ...otherOptions })
   const name = useMemo(() => {
-    const root = state.node.path[0]
-    if (state.node.path.length === 1) {
-      return root
+    if (field.node.path.length === 1) {
+      return field.node.path.toString()
     }
 
-    const subpath = state.node.path.slice(1, -1).map((n) => `[${n}]`)
-    const field = state.node.path[-1]
+    const root = field.node.path[0]
+    const subpath = field.node.path.slice(1).map((n) => `[${n}]`)
 
-    return [root, ...subpath, field].join('')
-  }, [state])
+    return [root, ...subpath].join('')
+  }, [field])
 
-  const submit = useCallback<FormReturnOptions<V, S, E, C>['submit']>((event) => {
-    state.validate()
+  const value = useCallback(() => field.node.value, [field])
+  const errors = useCallback(() => field.node.errors, [field])
+  const form = useCallback(() => field.root?.node.value, [field])
 
-    if (!state.errors()) {
-      onSubmit?.(state.get(), state.root(), event)
-      state.reset()
+  const submit = useCallback((event: React.MouseEvent) => {
+    event.preventDefault()
+
+    if (validateOnSubmit) {
+      field.validate()
     }
-  }, [onSubmit, state])
 
-  return useMemo(() => ({ ...state, name, submit }), [name, state, submit])
+    if (!errors()) {
+      onSubmit?.(value())
+      field.reset()
+    }
+  }, [errors, onSubmit, field, validateOnSubmit, value])
+
+  const reset = useCallback(() => {
+    onReset?.(field.node.value)
+
+    field.reset()
+  }, [onReset, field])
+
+  const set = useCallback((value?: V) => {
+    if (validateOnChange) {
+      field.validate()
+    }
+
+    field.set(value)
+  }, [field, validateOnChange])
+
+  return useMemo(
+    () => ({ ...field, name, reset, submit, set, form, value, errors }),
+    [field, name, reset, submit, set, form, value, errors],
+  )
 }

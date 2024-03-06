@@ -5,3 +5,4 @@ export { default } from './UseNestedState.hook'
 
 /* INJECT_EXPORT_PLACE */
 export * from './UseNestedState.hook'
+export * from './UseNestedState.tool'
