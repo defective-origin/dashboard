@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './Head.component'
+export { default } from './Meta.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './Head.component'
+export * from './Meta.component'

@@ -5,7 +5,7 @@ import { cn, react } from 'tools'
 
 // ---| screens |---
 // ---| components |---
-import Head, { HeadItem } from 'components/Head'
+import Meta, { MetaItem } from 'components/Meta'
 import Layout, { LayoutProps } from 'components/Layout'
 
 // ---| self |---
@@ -13,7 +13,7 @@ import css from './Page.module.scss'
 
 export type PageProps = LayoutProps & {
   name?: string
-  meta?: HeadItem[]
+  meta?: MetaItem[]
 }
 
 /**
@@ -29,7 +29,7 @@ export function Page(props: PageProps): JSX.Element {
 
   return (
     <Layout className={_className} v='columns' stretch {...otherProps}>
-      <Head title={name} items={meta} />
+      <Meta title={name} items={meta} />
 
       {children}
     </Layout>
