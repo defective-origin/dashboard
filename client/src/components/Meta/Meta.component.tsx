@@ -49,7 +49,7 @@ export function Meta(props: MetaProps): JSX.Element {
       ].filter((item) => item.content) as MetaItem[]
 
       return [...autoItems, ...items]
-        .map(({ v: Tag, ...metaProps }) => <Tag {...metaProps as JSX.IntrinsicAttributes} />)
+        .map(({ v: Tag, ...metaProps }, idx) => <Tag key={idx} {...metaProps as JSX.IntrinsicAttributes} />)
 
     }, [description, items, keywords, locale, title, type, viewport])
 

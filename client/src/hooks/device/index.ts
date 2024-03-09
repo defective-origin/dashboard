@@ -1,7 +1,9 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_EXPORT_PLACE */
-export * from './UseBreakpoints'
+export * from './UsePaginationBreakpoint'
+export * from './UseMoreBreakpoint'
+export * from './UseBreakpoint'
 export * from './UseMode'
 
 export * from './UseDeviceOptions.hook'
