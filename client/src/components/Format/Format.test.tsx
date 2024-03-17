@@ -9,7 +9,13 @@ import * as tools from './Format.tool'
 
 describe('[Format] component', () => {
   it('should render component', () => {
-    const container = render(<Format />)
+    const container = render(<Format v='uppercase' value='uppercase'/>)
+
+    expect(container.snapshot()).toMatchSnapshot()
+  })
+
+  it('should render default N/A placeholder if value is undefined or null', () => {
+    const container = render(<Format placeholder/>)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

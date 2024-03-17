@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Format] component > should render component 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft text text--md _Format_f17bbc css-zpphrz-MuiTypography-root"
+  >
+    UPPERCASE
+  </p>
+</DocumentFragment>
+`;
+
+exports[`[Format] component > should render default N/A placeholder if value is undefined or null 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft text text--md _Format_f17bbc css-zpphrz-MuiTypography-root"
+  >
+    N/A
+  </p>
+</DocumentFragment>
+`;
+
+exports[`[Format] component > should render placeholder if value is not set 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft text text--md _Format_f17bbc css-zpphrz-MuiTypography-root"
+  >
+    N/A
+  </p>
+</DocumentFragment>
+`;

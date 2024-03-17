@@ -3,6 +3,10 @@
 /* INJECT_DEFAULT_EXPORT_PLACE */
 
 /* INJECT_EXPORT_PLACE */
+export * from './Nil'
+export * from './Date'
+export * from './String'
+export * from './Number'
 
 export { default as _ } from 'lodash-es'
 export { default as cn } from 'classnames'

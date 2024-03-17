@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, isNil } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
@@ -10,7 +10,7 @@ import { Text, TextProps } from 'components/Text'
 
 // ---| self |---
 import css from './Format.module.scss'
-import { FORMAT_MAP, FormatValue, isNil } from './Format.tool'
+import { FORMAT_MAP, FormatValue } from './Format.tool'
 
 export type FormatVariant = keyof typeof FORMAT_MAP
 
