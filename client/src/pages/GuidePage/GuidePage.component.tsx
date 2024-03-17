@@ -109,8 +109,9 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Format v='title' value='title TITle'/>
         <Format v='title' placeholder/>
 
-        <Format v='number' value={120202003.12}/>
-        <Format v='amount' value={12256333.12}/>
+        <Format v='number' value={120202003.1262}/>
+        <Format v='number' value={0.5555}/>
+        <Format v='amount' value={1}/>
         <Format v='percent' value={0.526}/>
         <Format v='currency' value={1025}/>
         <Format v='size' />
@@ -127,7 +128,6 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
         <Format v='day-name' value='2024-02-27'/>
         <Format v='month-name' value='2024-02-27'/>
         <Format v='month-name' placeholder/>
-
       </Block>
 
       {children}
