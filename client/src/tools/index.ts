@@ -4,7 +4,7 @@
 
 /* INJECT_EXPORT_PLACE */
 
-export { default as _ } from 'lodash-es'
+// export { default as _ } from 'lodash-es'
 export { default as cn } from 'classnames'
 export { default as wk } from 'weak-key'
 
