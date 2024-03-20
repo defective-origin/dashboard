@@ -2,7 +2,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import breakpoint from './UseBreakpoint.hook'
+import useBreakpoint from './UseBreakpoint.hook'
 
 
 
@@ -18,9 +18,9 @@ import breakpoint from './UseBreakpoint.hook'
  *
  * expect(result.current.count).toBe(1)
  */
-describe('[breakpoint] hook', () => {
+describe('[useBreakpoint] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => breakpoint())
+    const { result } = renderHook(() => useBreakpoint())
 
     expect(result.current).toBe(null)
   })

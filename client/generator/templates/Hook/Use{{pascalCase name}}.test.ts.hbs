@@ -2,7 +2,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import {{camelCase name}} from './Use{{pascalCase name}}.hook'
+import use{{pascalCase name}} from './Use{{pascalCase name}}.hook'
 
 
 
@@ -18,9 +18,9 @@ import {{camelCase name}} from './Use{{pascalCase name}}.hook'
  *
  * expect(result.current.count).toBe(1)
  */
-describe('[{{camelCase name}}] hook', () => {
+describe('[use{{pascalCase name}}] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => {{camelCase name}}())
+    const { result } = renderHook(() => use{{pascalCase name}}())
 
     expect(result.current).toBe(null)
   })

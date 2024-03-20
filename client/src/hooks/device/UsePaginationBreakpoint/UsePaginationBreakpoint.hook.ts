@@ -12,10 +12,10 @@ export type PaginationBreakpointReturnOptions<T, E extends HTMLElement, B extend
   items: T[]
   page: number
   pages: number,
-  hasPrevPage: boolean
-  hasNextPage: boolean
-  toPrev: () => void
-  toNext: () => void
+  hasPrev: boolean
+  hasNext: boolean
+  prev: () => void
+  next: () => void
 }
 
 /**
@@ -43,8 +43,8 @@ export type PaginationBreakpointReturnOptions<T, E extends HTMLElement, B extend
  *
  * const options = usePaginationBreakpoint(GRID_BREAKPOINTS)
  * <div ref={options.ref}>{some render of options.items}</div>
- * {options.hasPrevPage && <button onClick={options.toPrev}>Prev</button>}
- * {options.hasNextPage && <button onClick={options.toNext}>Next</button>}
+ * {options.hasPrev && <button onClick={options.prev}>Prev</button>}
+ * {options.hasNext && <button onClick={options.next}>Next</button>}
  *
  * // Observe vertical size with known element ref
  * const options = usePaginationBreakpoint(GRID_BREAKPOINTS, { direction: 'y', ref: elementRef })
@@ -57,8 +57,8 @@ export const usePaginationBreakpoint = <T, E extends HTMLElement, B extends Pagi
   const breakpoint = useBreakpoint(breakpoints, options)
   const [page, setPage] = useState(1)
   const pages = Math.ceil(allItems.length / breakpoint.count)
-  const hasPrevPage = page !== 1
-  const hasNextPage = page !== pages
+  const hasPrev = page !== 1
+  const hasNext = page !== pages
   const items = useMemo(() => {
     const start = page * breakpoint.count
     const end = start + breakpoint.count
@@ -66,12 +66,12 @@ export const usePaginationBreakpoint = <T, E extends HTMLElement, B extends Pagi
     return allItems.slice(start, end)
   }, [allItems, breakpoint.count, page])
 
-  const toPrev = useCallback(() => { hasPrevPage && setPage(page - 1) }, [hasPrevPage, page])
-  const toNext = useCallback(() => { hasNextPage && setPage(page + 1) }, [hasNextPage, page])
+  const prev = useCallback(() => { hasPrev && setPage(page - 1) }, [hasPrev, page])
+  const next = useCallback(() => { hasNext && setPage(page + 1) }, [hasNext, page])
 
   return useMemo(
-    () => ({ ...breakpoint, items, page, pages, hasPrevPage, hasNextPage, toPrev, toNext }),
-    [breakpoint, items, page, pages, hasPrevPage, hasNextPage, toPrev, toNext],
+    () => ({ ...breakpoint, items, page, pages, hasPrev, hasNext, prev, next }),
+    [breakpoint, items, page, pages, hasPrev, hasNext, prev, next],
   )
 }
 

@@ -2,7 +2,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import paginationBreakpoint from './UsePaginationBreakpoint.hook'
+import usePaginationBreakpoint from './UsePaginationBreakpoint.hook'
 
 
 
@@ -18,9 +18,9 @@ import paginationBreakpoint from './UsePaginationBreakpoint.hook'
  *
  * expect(result.current.count).toBe(1)
  */
-describe('[paginationBreakpoint] hook', () => {
+describe('[usePaginationBreakpoint] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => paginationBreakpoint())
+    const { result } = renderHook(() => usePaginationBreakpoint())
 
     expect(result.current).toBe(null)
   })
