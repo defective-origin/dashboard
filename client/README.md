@@ -1,46 +1,55 @@
-# Dashboard Web Application
+# [↤](../README.md) Frontend
 
-Allows users to create boards which show different widgets.
+### Links
+- UI Framework: https://mui.com/material-ui/all-components/
+- Icons: https://fonts.google.com/icons?icon.query=dark+mode
 
-# Code part
+### Menu
+- [Structure](./docs/STRUCTURE.md)
+- [Rules](./docs/RULES.md)
+- [Roadmap](./docs/ROADMAP.md)
+- [Environment](./docs/ENV.md)
+
+### Code part
 
 - The first time you open a project, you will be prompted to install all required __VS Code extensions__. You can also install them __manually__ by opening the extensions tab and start searching for __@recommended__.
 - We don't use **Prettier** because of [issue with printWidth](https://github.com/prettier/prettier/issues/3468)
 
-## Before start
+## Launch app
+### Before start
 
 Install extensions which described in **.vscode/.settings** file
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### Installs all neccesary packages.
+#### Installs all necessary packages.
 
 ```
 yarn
 ```
 
-### Launches application on [url](http://localhost:5173/).
+#### Launches application on [url](http://localhost:5173/).
 
 ```
 yarn dev
 ```
 
-### Production Preview
+#### Production Preview
 
 ```
 yarn build // Build application for production.
 yarn preview // Launch built application.
 ```
 
-### Launches the test runner in the interactive watch mode.
+#### Launches the test runner in the interactive watch mode.
 
 ```
 yarn test
 ```
 
-### Code checkers
+#### Code checkers
 
 Commands with **:fix** prefix - fix linter errors.
 
@@ -77,65 +86,5 @@ To generate small parts of code.
 yarn gen
 ```
 
-For more information check file **generator/README.md**
+For more information check file **/STRUCTURE.md**
 
-## Short Structure description
-
-For more information check file **generator/README.md**
-Adapter pattern
-
-- build/ - built application
-
-- public/ - assets which will be loaded after page loading
-
-- generator/ - generator of application parts
-- src/
-
-  - common/ - shared code in monorepo projects. For example shared types and so on between server and client (graphql). in most cases this code appears via generators
-
-  - tools/ - contains general independent code/features which can be moved into packages, overriding packages.
-
-  - hooks/ - contains general independent hooks which can be moved into packages, overriding hooks.
-
-  - api/ - contains tools and handlers for work with network
-
-  - assets/ - contains all asset files which should be loaded with application (images, fonts, icons, videos...)
-
-  - theme/ - folder for global styles, handlers, providers, configs, types
-
-  - Launcher/ - All Launchers - contains tools and settings without which the application cannot or should not work
-
-  - pages/ - contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
-  - screens/ - contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component has postfix: Screen]
-  - components(UI)/ - contains pure, unified components without logic which gets data out, all data must be get from props (can work only with components) [don't have postfix]
-
-  - features/ - the same structure as in app but is used for feature flag. After feature flag implementation All feature code should be merged/should be sorted files into app files
-
-  - locale/ - contains localization configs and localized labels, texts, digits, signs, ...
-
-  - router/ - contains router configs, handlers and so on
-
-  - store/ - contains store configs, handlers and so on
-
-  - types/ - contains all type definition
-
-  - tests/ - contains configs and settings for tests
-
-  - web-workers/ - contains configs and settings for web-workers
-
-## [Environment settings](https://vitejs.dev/guide/env-and-mode.html)
-
-All config variables are in one of the file
-
-```
-.env                # loaded in all cases
-.env.local          # loaded in all cases, ignored by git
-.env.[mode]         # only loaded in specified mode
-.env.[mode].local   # only loaded in specified mode, ignored by git
-```
-
-Only variables prefixed with VITE\_ are exposed to your Vite-processed code. e.g. for the following env variables:
-
-```
-VITE_SOME_KEY=123
-```

@@ -1,24 +1,31 @@
-## Install app dependencies
+# [↤](../README.md) Backend
+
+### Menu
+- [Endpoints](./docs/ENDPOINTS.md)
+- [Structure](./docs/STRUCTURE.md)
+
+## Launch app
+### Install app dependencies
 ```sh
 yarn deps:ci
 ```
 
-## Start app
+### Start app
 ```sh
 yarn start
 ```
 
-## Test app
+### Test app
 ```sh
 yarn test
 ```
 
-## Build app
+### Build app
 ```sh
 yarn build
 ```
 
-## Lint app
+### Lint app
 ```sh
 yarn lint
 ```

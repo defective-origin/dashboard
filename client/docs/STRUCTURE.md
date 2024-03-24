@@ -1,0 +1,264 @@
+# [↤](../README.md) Structure
+
+## Project parts generator
+React app infrastructure creator.
+Allows to initialize the application infrastructure or create parts of it.'
+
+### Install dependencies
+```sh
+  yarn add plop
+```
+
+### Place generator to right place
+Project
+  - generator/
+  - src/
+  - package.json
+
+### Add scripts to package json
+```sh
+  "scripts": {
+    "gen": "plop --plopfile ./generator/generator.parts.js --dest ./src"
+    "gen:init": "plop --plopfile ./generator/generator.init.js --dest ./src"
+  },
+```
+
+### Generate base infrastructure
+```sh
+	yarn gen:init
+```
+
+### Generate part of infrastructure
+```sh
+	yarn gen
+```
+
+## Allowed infrastructure
+
+Always use managers and data models
+- __Managers__
+	- contain logic for a specific model
+	- pass data through themselves
+	- change model data
+- __Model__
+	- does not contain logic
+	- only describes the properties of an object
+
+
+CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter pattern
+- __build/__ -- built application
+- __public/__ -- assets which will be loaded after page loading
+- __generator/__ -- generator of application parts
+	- templates/
+	- generator.init.ts
+	- generator.parts.ts
+	- generator.tool.ts
+	- generator.prompt.ts
+	- generator.action.ts
+	
+- __src/__
+	- index.tsx -- bootstrap file
+
+	- __common/__ -- shared code in monorepo projects. For example shared types and so on between server and client (graphql). in most cases this code appears via generators
+		- other app structure parts
+		- constants/
+		- errors/
+		- models/
+
+  - __tools/__ -- contains general independent code/features which can be moved into packages, overriding packages.
+  	- ToolUsageTypeName.tool.ts
+  	- ToolUsageTypeName.other-extensions.ts
+  	- index.ts
+
+  - __hooks/__ -- contains general independent hooks which can be moved into packages, overriding hooks.  
+  	- __UseHookName__
+  		- index.ts
+  		- UseHookName.hook.ts
+    	- UseHookName.other-extensions.ts
+    - index.ts
+
+  - __api/__ -- contains tools and handlers for work with network interaction
+    - __ApiSliceName__ -- Each api  endpoint does default export. Methods receive data from server API or browser API
+      - ApiSliceName.conf.ts
+      - ApiSliceName.hook.ts -- containes unified api useApiNameApiManager hook to handle equals server reponse, caching, cancellation of requests
+      - ApiSliceName.mock.ts -- has mock object hook for jest.spy and mock data
+      - ApiSliceName.schema.ts -- contains data validations and models for METADATA, RESPONSE, ERROR RESPONSE
+      - ApiSliceName.model.ts -- containes only models for data received from api and Errors
+      - ApiSliceName.error.ts -- containes errors
+      - ApiSliceName.test.ts
+      - ApiSliceName.tool.ts
+      - index.ts
+
+    - api.conf.ts
+    - api.context.ts
+    - api.tool.ts
+    - api.hook.ts
+    - api.model.ts
+    - api.interceptor.ts -- contains request interceptors
+    - api.error.ts -- Base | Response | Request errors
+    - index.ts -- configurations and settings - export useApiManager hook
+
+  - __assets/__ -- contains all assets which should be loaded with application
+		- __fonts/__
+  	- __icons/__ -- only svg files
+  		- index.ts -- module file which gather all icon imports and export map of icons as default
+    - __images/__
+  		- index.ts -- module file which gather all icon imports and export map of icons as default
+    - __videos/__
+    - __gifs/__
+  
+  - __theme/__ -- folder for global styles, handlers, providers, configs, types
+    - __styles/__
+  		- tool/ -- mixins, functions ....
+  		- theme/ -- color, size theme configurations
+  		- variables/ -- element styles, tools, settings
+    	- _index.scss
+  	- _index.scss
+  	- index.ts
+  	- theme.context.tsx -- theme provider
+  	- theme.conf.tsx -- common types and variables
+
+  - __App/__ -- component which contains app settings for launcher
+		- Component structure
+
+  - __Launcher/__ -- Contains tools and settings without which the application cannot or should not work  + env settings in constants
+		- Component structure
+  	- system -- [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
+  	- monitor -- [Log | Analytics | ABTest + FeatureFlag]
+  	- ui -- [UISettings | SnackBar | ModalWindow | Suspense]
+  	- account -- [AccountSettings | AccountUser]
+    	- Hook structure
+
+  - __web-workers/__
+    - __WebWorkerNameWW/__
+      - WebWorkerTypeNameWW.ww.ts
+      - WebWorkerTypeNameWW.tool.ts
+      - WebWorkerTypeNameWW.error.ts
+      - index.ts
+    - index.ts
+
+  - __pages/__ -- contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
+  - __screens/__ -- contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component can have postfix: Screen]
+  - __components(UI)/__ -- contains pure, unified components without logic which gets data out, all data must be get from props (can work only with components) [don't have postfix]
+    - __ComponentName__
+      - SubComponentName1/ (Private Case Of Component) -- sub component which belong to component and styled for him and can be used only in him
+
+			//- separated component approach [outdated] -//
+      - ComponentName.container.tsx -- contains container which contains only logic and render view component [outdated]
+      - ComponentName.view.tsx -- contains view which render data getting from props [outdated]
+      - ComponentName.model.tsx -- contains models which is used in view and container [outdated]
+			//- simple component approach -//
+      - ComponentName.component.tsx
+      - ComponentName.style.scss
+      - ComponentName.hook.ts
+      - ComponentName.context.ts
+      - ComponentName.conf.ts
+      - ComponentName.tool.ts
+      - ComponentName.error.ts
+      - ComponentName.test.ts
+      - ComponentName.conf.ts -- default conf for component. Also can includes types
+			- ComponentName.story.json -- config for storybook
+      - index.tsx
+
+	- __apps/__ -- microfrontends
+
+	- __legacy/__ -- legacy code base. Should be cleared and moved to appropriate folder before usage
+
+	- __widgets/__ -- contains components for CMS (in most cases It must be adapter component. You should create CMSAdapter and CMSContainer)
+
+	- __features/__ -- the same structure as in app but is used for feature flag. After feature flag implementation All feature code should be merged/should be sorted files into app files 
+
+	- __locale/__ -- contains localized labels, texts, digits, signs, ...
+		- index.ts -- configurations and settings
+		- locale.tool.ts
+		- locale.conf.tsx
+		- locale.context.tsx
+		- locale.hook.ts
+		- locale.test.ts
+		- __i18n/__
+			- en.json
+			- ru.json
+			- index.ts
+		- __l10n/__
+			- en.json
+			- ru.json
+			- index.ts
+			
+		---| or |---
+
+		- __en/__
+			- i18n.json
+			- l10n.json
+			- index.ts
+
+	- __router/__ -- contains project routes, hooks, guards... [IN PROGRESS]
+		- __routes/__
+			- __tests\__/
+			- RouterName.route.ts
+			- index.ts
+		- __guards/__
+			- __tests\__/
+			- GuardName.guard.ts
+			- index.ts
+		- router.component.ts
+		- router.conf.ts
+		- router.tool.ts
+		- router.hook.ts
+		- router.model.ts
+		- router.error.ts
+		- router.context.tsx
+		- index.ts -- configurations and settings
+
+  - __store/__ -- contains project store (use redux-toolkit)
+    - index.ts -- store configurations and settings
+    - store.conf.ts
+    - store.tool.ts
+    - store.hook.ts
+    - store.model.ts
+    - store.error.ts
+    - store.mock.ts -- has mock object hook for jest.spy and mock data
+    - __StoreSlice/__
+      - StoreSlice.slice.ts
+      - StoreSlice.thunk.ts -- outdated - use hooks instead (managers)
+      - StoreSlice.selector.ts
+      - StoreSlice.hook.ts -- contains useManagerNameStoreManager hook - which call dispatch and select data and also MOCK for it
+      - StoreSlice.mock.ts -- has mock object hook for jest.spy and mock data
+      - StoreSlice.test.ts
+      - index.ts
+	
+  - __types/__ -- contains all type definition
+		- index.d.ts
+		- name.d.ts
+
+  - __tests/__ -- configurations and settings
+		- setupTests.ts
+		- index.ts
+
+  - __web-workers/__ -- contains configs and settings for web-workers
+
+- __docs/__ -- contains .md files with project documentations
+	- __STRUCTURE/__
+		- Client.doc.md
+		- Component.doc.md
+		- index.md
+	- __GIT/__
+		- Branching.doc.md
+		- PullRequest.doc.md
+		- index.md
+	- FeBeInteraction.doc.md
+	- RoadMap.doc.md
+	- Target.doc.md
+	- Naming.doc.md
+	- Git.doc.md
+	- index.md
+
+- __conf/__
+	- .eslintrc.json -- program language style config
+	- .stylelintrc.json -- styles style config
+	- .gitignore
+	- .package.json -- project config
+	- .storybook/ -- config of tool for UI development
+	- README.md -- project description
+	- tsconfig.json -- program language config
+	- yarn.lock -- package manager cache
+
