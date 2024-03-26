@@ -17,17 +17,17 @@ describe('[Popup] component', () => {
 // describe('[Popup] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => usePopup())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Popup] context', () => {
 //   const wrapper = (props: PopupProps) => <PopupProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => usePopup(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

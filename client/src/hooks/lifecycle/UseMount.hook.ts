@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 export type MountReturnOptions = React.MutableRefObject<boolean>
 
@@ -11,17 +11,18 @@ export type MountReturnOptions = React.MutableRefObject<boolean>
  * // get mount status
  * const isMountedRef = useMount()
  */
-export const useMount = (handler?: () => void): MountReturnOptions => {
+export const useMount = (handler?: (isMountedRef: MountReturnOptions) => void): MountReturnOptions => {
   const isMountedRef = useRef(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     isMountedRef.current = true
 
-    handler?.()
+    handler?.(isMountedRef)
 
     return () => {
       isMountedRef.current = false
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return isMountedRef

@@ -5,23 +5,13 @@ import { renderHook } from '@testing-library/react-hooks'
 import useProperty from './UseProperty.hook'
 
 
-
-/**
- * Hook descriptions
- *
- * @example
- * const { result } = renderHook(() => useCounter())
- *
- * act(() => {
- *   result.current.increment()
- * })
- *
- * expect(result.current.count).toBe(1)
- */
 describe('[useProperty] hook', () => {
-  it('should return options', () => {
-    const { result } = renderHook(() => useProperty())
+  it('should return variable value', () => {
+    const { result } = renderHook(() => useProperty({
+      defaultValue: 'default value',
+      defaultProperty: '--primary-color',
+    }))
 
-    expect(result.current).toBe(null)
+    expect(result.current()).toEqual('default value')
   })
 })

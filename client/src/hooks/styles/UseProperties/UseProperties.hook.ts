@@ -8,10 +8,19 @@ export type PropertiesOptions<T extends Record<string, string>> = T & {
 export type PropertiesReturnOptions<T extends Record<string, string>> = T
 
 /**
- * Hook descriptions
+ * Allows to get css variable values
  *
  * @example
- * const options = useProperties(conf)
+ * const colors = useProperties({
+ *  ref: elementRef.current, // body by default
+ *  primary: '--primary-color',
+ *  secondary: '--secondary-color',
+ *  success: '--success-color',
+ *  info: '--info-color',
+ *  warning: '--warning-color',
+ *  error: '--error-color',
+ *  disable: '--disable-color',
+ * }, deps)
  */
 export const useProperties = <T extends Record<string, string>>(
   options: PropertiesOptions<T>,

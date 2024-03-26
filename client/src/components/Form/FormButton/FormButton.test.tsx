@@ -17,17 +17,17 @@ describe('[FormButton] component', () => {
 // describe('[FormButton] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useFormButton())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[FormButton] context', () => {
 //   const wrapper = (props: FormButtonProps) => <FormButtonProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useFormButton(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

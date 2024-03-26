@@ -17,17 +17,17 @@ describe('[Dialog] component', () => {
 // describe('[Dialog] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useDialog())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Dialog] context', () => {
 //   const wrapper = (props: DialogProps) => <DialogProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useDialog(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

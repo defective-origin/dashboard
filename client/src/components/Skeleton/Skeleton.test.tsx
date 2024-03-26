@@ -17,17 +17,17 @@ describe('[Skeleton] component', () => {
 // describe('[Skeleton] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useSkeleton())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Skeleton] context', () => {
 //   const wrapper = (props: SkeletonProps) => <SkeletonProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useSkeleton(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

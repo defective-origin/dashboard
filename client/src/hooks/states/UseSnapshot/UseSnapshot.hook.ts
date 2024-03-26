@@ -13,10 +13,12 @@ export type SnapshotReturnOptions<T> = {
 }
 
 /**
- * Hook descriptions
+ * Allows to save value change history.
  *
  * @example
- * const snapshot = useSnapshot(1)
+ * // if value is not set then undefined will be first value
+ * const snapshot = useSnapshot()
+ * console.log(snapshot.value) // undefined
  *
  * snapshot.set(2)
  * snapshot.set(3)
@@ -30,20 +32,22 @@ export type SnapshotReturnOptions<T> = {
  *
  * // reset snapshot history
  * snapshot.reset()
- * console.log(snapshot.value) // 1
+ * console.log(snapshot.value) // undefined
  * snapshot.reset(5)
  * console.log(snapshot.value) // 5
  *
  * <button disabled={!snapshot.hasPrev} onClick={snapshot.prev}>Undo</button>
  * <button disabled={!snapshot.hasNext} onClick={snapshot.next}>Redo</button>
  */
-export const useSnapshot = <T>(value: T): SnapshotReturnOptions<T> => {
+export function useSnapshot<T = undefined>(): SnapshotReturnOptions<T | undefined>;
+export function useSnapshot<T>(value: T): SnapshotReturnOptions<T>;
+export function useSnapshot(value?: unknown) {
   const snapshotsRef = useRef([value])
   const [position, setPosition] = useState(0)
   const hasPrev = position !== 0
   const hasNext = position !== snapshotsRef.current.length - 1
 
-  const update = useCallback((snapshots: T[]) => {
+  const update = useCallback((snapshots: unknown[]) => {
     snapshotsRef.current = snapshots
     setPosition(snapshotsRef.current.length - 1)
   }, [])
@@ -55,8 +59,8 @@ export const useSnapshot = <T>(value: T): SnapshotReturnOptions<T> => {
       hasNext,
       prev: () => { hasPrev && setPosition(position - 1) },
       next: () => { hasNext && setPosition(position + 1) },
-      set: (value: T) => update(snapshotsRef.current.splice(0, position + 1).concat(value)),
-      reset: (newValue: T = value) => update([newValue]),
+      set: (value: unknown) => update(snapshotsRef.current.splice(0, position + 1).concat(value)),
+      reset: (newValue = value) => update([newValue]),
     }),
     [position, hasPrev, hasNext, update, value],
   )

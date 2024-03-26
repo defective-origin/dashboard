@@ -18,7 +18,7 @@ describe('[SelectionBoard] component', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useSelectionBoard())
 //
-//     expect(result.current).toBe(null)
+//     expect(result.current).toEqual(null)
 //   })
 // })
 

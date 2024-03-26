@@ -7,6 +7,7 @@ import { useEffect } from 'react'
  * useUnmount(() => console.log('unmounted'))
  */
 export const useUnmount = (handler: () => void): void => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => () => handler(), [])
 }
 

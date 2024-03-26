@@ -17,17 +17,17 @@ describe('[BannerPage] component', () => {
 // describe('[BannerPage] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useBannerPage())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[BannerPage] context', () => {
 //   const wrapper = (props: BannerPageProps) => <BannerPageProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useBannerPage(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

@@ -17,17 +17,17 @@ describe('[Drawer] component', () => {
 // describe('[Drawer] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useDrawer())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Drawer] context', () => {
 //   const wrapper = (props: DrawerProps) => <DrawerProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useDrawer(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

@@ -5,23 +5,26 @@ import { renderHook } from '@testing-library/react-hooks'
 import useProperties from './UseProperties.hook'
 
 
-
-/**
- * Hook descriptions
- *
- * @example
- * const { result } = renderHook(() => useCounter())
- *
- * act(() => {
- *   result.current.increment()
- * })
- *
- * expect(result.current.count).toBe(1)
- */
 describe('[useProperties] hook', () => {
-  it('should return options', () => {
-    const { result } = renderHook(() => useProperties())
+  it('should return variable map', () => {
+    const { result } = renderHook(() => useProperties({
+      primary: '--primary-color',
+      secondary: '--secondary-color',
+      success: '--success-color',
+      info: '--info-color',
+      warning: '--warning-color',
+      error: '--error-color',
+      disable: '--disable-color',
+    }))
 
-    expect(result.current).toBe(null)
+    expect(result.current).toEqual({
+      disable: undefined,
+      error: undefined,
+      info: undefined,
+      primary: undefined,
+      secondary: undefined,
+      success: undefined,
+      warning: undefined,
+    })
   })
 })

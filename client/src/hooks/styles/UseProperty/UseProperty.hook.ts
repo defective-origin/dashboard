@@ -16,7 +16,18 @@ export type PropertyReturnOptions = (property?: string, defaultValue?: string) =
  * https://stackoverflow.com/questions/71368314/can-i-set-a-canvas-fillstyle-with-a-variable-from-css
  *
  * @example
- * const options = useProperty(conf)
+ * const property = useProperty()
+ *
+ * property('--primary-color', 'default value')
+ *
+ * // default can be configured
+ * const property = useProperty({
+ *    ref: elementRef.current, // body by default
+ *    defaultValue: 'default value',
+ *    defaultProperty: '--primary-color',
+ * })
+ *
+ * property()
  */
 export const useProperty = (options: PropertyOptions = {}, deps: unknown[] = []): PropertyReturnOptions => {
   const element = options.ref?.current ?? document.body

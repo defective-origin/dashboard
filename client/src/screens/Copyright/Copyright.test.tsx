@@ -17,17 +17,17 @@ describe('[Copyright] component', () => {
 // describe('[Copyright] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useCopyright())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Copyright] context', () => {
 //   const wrapper = (props: CopyrightProps) => <CopyrightProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useCopyright(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

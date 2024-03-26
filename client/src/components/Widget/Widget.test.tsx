@@ -17,17 +17,17 @@ describe('[Widget] component', () => {
 // describe('[Widget] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useWidget())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Widget] context', () => {
 //   const wrapper = (props: WidgetProps) => <WidgetProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useWidget(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

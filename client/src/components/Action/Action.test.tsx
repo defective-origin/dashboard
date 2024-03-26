@@ -17,17 +17,17 @@ describe('[Action] component', () => {
 // describe('[Action] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAction())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Action] context', () => {
 //   const wrapper = (props: ActionProps) => <ActionProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAction(), { wrapper })
-// 
-//     expect(result.current).toBeTruthy()
+//
+//     expect(result.current).toEqualTruthy()
 //   })
 // })

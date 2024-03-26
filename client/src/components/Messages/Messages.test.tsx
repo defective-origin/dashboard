@@ -17,17 +17,17 @@ describe('[Messages] component', () => {
 // describe('[Messages] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useMessages())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Messages] context', () => {
 //   const wrapper = (props: MessagesProps) => <MessagesProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useMessages(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

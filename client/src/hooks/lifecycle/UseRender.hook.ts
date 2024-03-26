@@ -40,6 +40,7 @@ export const useRender = (options: RenderOptions, deps?: unknown[]): MountReturn
     return () => {
       handlers.clear?.(value)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 
   return isMountedRef

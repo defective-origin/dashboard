@@ -17,17 +17,17 @@ describe('[Page] component', () => {
 // describe('[Page] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => usePage())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Page] context', () => {
 //   const wrapper = (props: PageProps) => <PageProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => usePage(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

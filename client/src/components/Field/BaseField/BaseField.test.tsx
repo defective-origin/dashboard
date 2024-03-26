@@ -17,17 +17,17 @@ describe('[BaseField] component', () => {
 // describe('[BaseField] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useBaseField())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[BaseField] context', () => {
 //   const wrapper = (props: BaseFieldProps) => <BaseFieldProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useBaseField(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

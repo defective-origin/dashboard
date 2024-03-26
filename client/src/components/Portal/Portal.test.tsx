@@ -17,17 +17,17 @@ describe('[Portal] component', () => {
 // describe('[Portal] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => usePortal())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Portal] context', () => {
 //   const wrapper = (props: PortalProps) => <PortalProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => usePortal(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

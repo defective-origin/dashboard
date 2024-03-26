@@ -17,17 +17,17 @@ describe('[Alerts] component', () => {
 // describe('[Alerts] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAlerts())
-// 
-//     expect(result.current).toBe(null)
+//
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Alerts] context', () => {
 //   const wrapper = (props: AlertsProps) => <AlertsProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAlerts(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

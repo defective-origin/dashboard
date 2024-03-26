@@ -40,6 +40,6 @@ describe('[Locale] hook', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useLocale())
 
-    expect(result.current).toBe(null)
+    expect(result.current).toEqual(null)
   })
 })

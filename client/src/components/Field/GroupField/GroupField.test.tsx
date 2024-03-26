@@ -18,7 +18,7 @@ describe('[GroupField] component', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useGroupField())
 //
-//     expect(result.current).toBe(null)
+//     expect(result.current).toEqual(null)
 //   })
 // })
 
