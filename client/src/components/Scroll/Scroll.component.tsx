@@ -40,6 +40,7 @@ export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled'> & {
 
 /**
  * Scroll which allow to scroll parent block and also by back buttons.
+ * Adds position relative to parent component if parent component has position static.
  *
  * How to use
  * @example
@@ -166,8 +167,8 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
       <div
         className={cn('scroll-cerner', cernerClassName)}
         style={{
-          marginRight: hasBarY ? otherOptions.margin : undefined,
-          marginBottom: hasBarX ? otherOptions.margin : undefined,
+          marginRight: hasBarY ? otherOptions.indent : undefined,
+          marginBottom: hasBarX ? otherOptions.indent : undefined,
         }}
       />
     </div>

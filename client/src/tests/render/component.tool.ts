@@ -5,11 +5,11 @@ import { render, fireEvent, RenderResult, waitForElementToBeRemoved, waitFor, Ma
 
 // TESTING LIBRARY IMPLEMENTATION
 export default class ComponentTestUtil {
-  private render: RenderResult
+  private container: RenderResult
 
   // LIFECYCLE
   private constructor(...args: Parameters<typeof render>) {
-    this.render = render(...args)
+    this.container = render(...args)
   }
 
   // public static render(...args: Parameters<typeof render>): ComponentTestUtil {
@@ -18,13 +18,13 @@ export default class ComponentTestUtil {
   }
 
   public rerender(...args: Parameters<RenderResult['rerender']>): this {
-    this.render.rerender(...args)
+    this.container.rerender(...args)
 
     return this
   }
 
   public unmount(): this {
-    this.render.unmount()
+    this.container.unmount()
 
     return this
   }
@@ -64,15 +64,15 @@ export default class ComponentTestUtil {
 
   // SELECTORS
   public get<T extends HTMLElement>(id: Matcher): T {
-    return this.render.getByTestId(id) as T
+    return this.container.getByTestId(id) as T
   }
 
   public getByText<T extends HTMLElement>(id: Matcher): T {
-    return this.render.getByText(id) as T
+    return this.container.getByText(id) as T
   }
 
   public getAll(id: Matcher): HTMLElement[] {
-    return this.render.getAllByTestId(id)
+    return this.container.getAllByTestId(id)
   }
 
   // findBy = getBy + waitFor
@@ -94,15 +94,15 @@ export default class ComponentTestUtil {
 
   // CHECKS
   public snapshot(base = false): Element | DocumentFragment {
-    return base ? this.render.baseElement : this.render.asFragment()
+    return base ? this.container.baseElement : this.container.asFragment()
   }
 
   public isEmpty(): boolean {
-    return this.render.container.firstChild === null
+    return this.container.container.firstChild === null
   }
 
   public debug(...args: Parameters<RenderResult['debug']>): this {
-    this.render.debug(...args)
+    this.container.debug(...args)
 
     return this
   }

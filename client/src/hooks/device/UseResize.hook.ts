@@ -1,6 +1,11 @@
-import { useRef, useState, useCallback, useEffect, useMemo } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 
-export type RectOptions<TElement extends Element> = {
+export type ResizeOptions<E extends Element> = {
+  ref?: React.MutableRefObject<E | null>,
+  onResize?: (options: ResizeReturnOptions<E>) => void;
+}
+
+export type ResizeReturnOptions<TElement extends Element> = {
   ref: React.MutableRefObject<TElement | null>,
   width: number,
   height: number,
@@ -10,11 +15,10 @@ export type RectOptions<TElement extends Element> = {
   bottom: number,
 }
 
-export function useResize<TElement extends Element>(
-  elRef?: React.MutableRefObject<TElement | null>,
-): RectOptions<TElement> {
-  const ref = useRef<TElement | null>(elRef?.current ?? null)
-  const [options, setOptions] = useState<RectOptions<TElement>>({
+export function useResize<E extends Element>(options: ResizeOptions<E> = {}): ResizeReturnOptions<E> {
+  const { onResize, ref: elementRef } = options
+  const ref = useRef<E | null>(elementRef?.current ?? null)
+  const [result, setResult] = useState<ResizeReturnOptions<E>>({
     ref,
     width: 0,
     height: 0,
@@ -24,11 +28,10 @@ export function useResize<TElement extends Element>(
     bottom: 0,
   })
 
-  const onResize = useCallback(() => {
+  const resize = useCallback(() => {
     if (ref.current) {
       const clientRect = ref.current.getBoundingClientRect()
-
-      setOptions({
+      const opt = {
         ref,
         width: clientRect.width,
         height: clientRect.height,
@@ -36,19 +39,22 @@ export function useResize<TElement extends Element>(
         right: clientRect.right,
         top: clientRect.top,
         bottom: clientRect.bottom,
-      })
+      }
+
+      onResize?.(opt)
+      setResult(opt)
     }
-  }, [ref])
+  }, [onResize])
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(onResize)
+    const resizeObserver = new ResizeObserver(resize)
 
     resizeObserver.observe(ref.current as Element)
 
     return () => resizeObserver.disconnect()
-  }, [onResize, ref])
+  }, [resize, ref])
 
-  return options
+  return result
 }
 
 export default useResize

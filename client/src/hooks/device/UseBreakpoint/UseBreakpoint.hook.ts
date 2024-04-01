@@ -11,7 +11,7 @@ export type BreakpointOptions<E extends HTMLElement> = {
 }
 
 export type BreakpointReturnOptions<E extends HTMLElement, B extends Breakpoint> = B & {
-  ref?: React.MutableRefObject<E>
+  ref: React.MutableRefObject<E>
 }
 
 /**
@@ -45,10 +45,12 @@ export type BreakpointReturnOptions<E extends HTMLElement, B extends Breakpoint>
  * ]
  *
  * const options = useBreakpoint(MEDIA_BREAKPOINTS)
- * <div ref={options.ref}>{some render of options.items}</div>
+ * <div ref={options.ref}>{some render of options.names}</div>
  *
  * // Observe vertical size with known element ref
  * const options = useBreakpoint(MEDIA_BREAKPOINTS, { direction: 'y', ref: elementRef })
+ *
+ * useMode(options.names)
  */
 export const useBreakpoint = <E extends HTMLElement, B extends Breakpoint>(
   breakpoints: B[],
@@ -62,16 +64,16 @@ export const useBreakpoint = <E extends HTMLElement, B extends Breakpoint>(
     return breakpoints.find((breakpoint) => size <= breakpoint.size) as B
   }, [breakpoints, options.direction])
 
-  const [current, setCurrent] = useState(() => getBreakpoint())
+  const [current, setCurrent] = useState(getBreakpoint)
 
   useEffect(() => {
-    const updateBreakpoint = () => setCurrent(getBreakpoint())
+    const updateBreakpoint = () => setCurrent(getBreakpoint)
 
     const observer = new ResizeObserver(updateBreakpoint)
 
     observer.observe(ref.current)
 
-    return () => observer.unobserve(ref.current)
+    return () => observer.disconnect()
   }, [getBreakpoint])
 
   return useMemo(() => ({ ref, ...current as B }), [ref, current])

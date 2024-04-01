@@ -1,5 +1,5 @@
 import React from 'react'
-import { ToastContainer, ToastContentProps as MuiToastContentProps } from 'react-toastify'
+import { ToastContainer as RTToastContainer, ToastContentProps as RTToastContentProps } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 // ---| core |---
@@ -26,7 +26,7 @@ export type ToastMessage = {
   onSuccess?: () => void
 }
 
-export type ToastProps = MuiToastContentProps<ToastMessage>
+export type ToastProps = RTToastContentProps<ToastMessage>
 
 /**
  * Component description.
@@ -81,17 +81,19 @@ export function Toast(props: ToastProps): JSX.Element {
   )
 }
 
+Toast.displayName = 'Toast'
+
 export type ToastContainerProps = {
   name: ToastName
   className?: string
-  position: MuiToastContentProps['toastProps']['position']
+  position: RTToastContentProps['toastProps']['position']
 }
 
-Toast.Container = function Toast(props: ToastContainerProps): JSX.Element {
+export function ToastContainer(props: ToastContainerProps): JSX.Element {
   const { name } = props
 
   return (
-    <ToastContainer
+    <RTToastContainer
       hideProgressBar
       enableMultiContainer
       containerId={initToastKey(name)}
@@ -100,6 +102,8 @@ Toast.Container = function Toast(props: ToastContainerProps): JSX.Element {
   )
 }
 
-Toast.displayName = 'Toast'
+ToastContainer.displayName = 'ToastContainer'
+
+Toast.Container = ToastContainer
 
 export default Toast

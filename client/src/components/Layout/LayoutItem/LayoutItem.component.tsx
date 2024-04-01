@@ -41,7 +41,7 @@ export function LayoutItem(props: LayoutItemProps): JSX.Element | null {
   const _className = cn('layout-item',{
     [`layout-item--${v}`]: v,
   }, className)
-  const style = !v ? { gridArea: area ?? [row, column, rows, columns].join('/') } : {}
+  const style = !v ? { gridArea: area ?? [row, column, rows, columns].join('/') } : {} // FIXME: area to separated styles
 
   return <Block className={_className} style={style} {...otherProps} />
 }

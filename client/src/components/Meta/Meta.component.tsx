@@ -4,14 +4,14 @@ import Helmet, { HelmetProps } from 'react-helmet'
 // ---| self |---
 import './Meta.module.scss'
 
-export type MetaMeta<V extends string, P extends object> = { v: V } & P
-export type MetaItem = MetaMeta<'title', JSX.IntrinsicElements['title']>
-                      | MetaMeta<'style', JSX.IntrinsicElements['style']>
-                      | MetaMeta<'base', JSX.IntrinsicElements['base']>
-                      | MetaMeta<'link', JSX.IntrinsicElements['link']>
-                      | MetaMeta<'meta', JSX.IntrinsicElements['meta']>
-                      | MetaMeta<'script', JSX.IntrinsicElements['script']>
-                      | MetaMeta<'noscript', JSX.IntrinsicElements['noscript']>
+export type HeadMeta<V extends string, P extends object> = { v: V } & P
+export type MetaItem = HeadMeta<'title', JSX.IntrinsicElements['title']>
+                      | HeadMeta<'style', JSX.IntrinsicElements['style']>
+                      | HeadMeta<'base', JSX.IntrinsicElements['base']>
+                      | HeadMeta<'link', JSX.IntrinsicElements['link']>
+                      | HeadMeta<'meta', JSX.IntrinsicElements['meta']>
+                      | HeadMeta<'script', JSX.IntrinsicElements['script']>
+                      | HeadMeta<'noscript', JSX.IntrinsicElements['noscript']>
 
 
 export type MetaProps = HelmetProps & {

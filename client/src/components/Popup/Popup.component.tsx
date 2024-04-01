@@ -1,5 +1,4 @@
-import React from 'react'
-import { Popover, PopoverOrigin } from '@mui/material'
+import React, { forwardRef, useEffect } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,65 +6,103 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { ButtonProps } from 'components/Button'
-import Card from 'components/Card'
 
 // ---| self |---
 import css from './Popup.module.scss'
 
-export type PopupVariant = 'left' | 'right' | 'top' | 'bottom' | 'center'
-
-export const POPUP_VARIANT_MAP: Record<PopupVariant, PopoverOrigin> = {
-  left: { vertical: 'top', horizontal: 'left' },
-  right: { vertical: 'top', horizontal: 'right' },
-  bottom: { vertical: 'bottom', horizontal: 'center' },
-  top: { vertical: 'top', horizontal: 'center' },
-  center: { vertical: 'center', horizontal: 'center' },
-}
+export type PopupSideVariant = 'left' | 'right' | 'top' | 'bottom'
+export type PopupCernerVariant = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+export type PopupCenterVariant = 'center' | 'full'
+export type PopupVariant = PopupSideVariant | PopupCernerVariant | PopupCenterVariant
 
 export type PopupProps = {
-  className?: string
-  children?: React.ReactNode
+  v?: PopupVariant
   open?: boolean
-  title?: React.ReactNode
+  width?: number
+  indent?: number
+  window?: boolean
+  backdrop?: boolean
+  className?: string
+  containerClassName?: string
+  children?: React.ReactNode
   content?: React.ReactNode
-  actions?: ButtonProps | ButtonProps[]
-  side?: PopupVariant
   onClose?: () => void
 }
 
 /**
- * Component description.
+ * Allows to create popup's components like: Modal, Drawer, DIalog and so on.
+ * Adds position relative to parent component if parent component has position static.
  *
  * How to use
  * @example
- * <Popup />
+ * export class ModalBreakpoint implements Breakpoint {
+ *   constructor(
+ *     public name?: string,
+ *     public size = Number.MAX_SAFE_INTEGER,
+ *   ) {}
+ * }
+ *
+ * export const Modal = (props: PopupProps) => {
+ *    const { v, ...otherProps } = props
+ *    const breakpoints = useMemo(() => [
+ *      new ModalBreakpoint('full', 768),
+ *      new ModalBreakpoint(v),
+ *    ], [v])
+ *
+ *    const options = useBreakpoint(breakpoints)
+ *
+ *    return <Popup ref={options.ref} v={options.name} {...otherProps} />
+ * }
  */
-export function Popup(props: PopupProps): JSX.Element {
-  const { title, content, actions, side = 'top', open = false, onClose, children, className, ...otherProps } = props
-  const _className = cn(css.Popup, className)
+export const Popup = forwardRef<HTMLDivElement, PopupProps>((props, ref): JSX.Element | null => {
+  const {
+    v = 'center',
+    width,
+    open,
+    indent,
+    backdrop,
+    window,
+    onClose,
+    content,
+    children = content,
+    className,
+    containerClassName,
+    ...otherProps
+  } = props
+  const _className = cn(css.Popup, {
+    [css.Backdrop]: backdrop,
+    [css.Window]: window,
+  }, className)
+
+  useEffect(() => {
+    const parent = (ref as React.MutableRefObject<HTMLDivElement | null>).current?.parentElement
+    const position = parent && getComputedStyle(parent).getPropertyValue('position')
+    if (position && position === 'static' && !window) {
+      parent?.classList.add(css.PopupWrapper)
+
+      return function cleanup() {
+        parent?.classList.remove(css.PopupWrapper)
+      }
+    }
+  }, [ref, window])
+
+  if (!open) {
+    return null
+  }
+
+  const containerStyles = {
+    margin: indent,
+    width: v === 'full' ? undefined : width,
+  }
 
   return (
-    <Popover
-      className={_className}
-      open={open}
-      anchorOrigin={POPUP_VARIANT_MAP[side]}
-      onClose={onClose}
-      {...otherProps}>
-      {/* fragment prevent error of click listener */}
-      <>
-        <Card
-          title={title}
-          content={content}
-          actions={actions}
-          onClose={onClose}
-        >
-          {children}
-        </Card>
-      </>
-    </Popover>
+    <div ref={ref} className={_className} onClick={onClose} {...otherProps}>
+      <div className={cn(css.Container, css[v], containerClassName)} style={containerStyles}>
+        {children}
+      </div>
+    </div>
   )
-}
+})
 
 Popup.displayName = 'Popup'
 

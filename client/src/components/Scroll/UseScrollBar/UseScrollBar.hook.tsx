@@ -46,7 +46,7 @@ export type ScrollBarOptions = ScrollOptions & {
   /** Show scrollbars all time. Not only on container hover. */
   visible?: boolean
   /** Space between scroll and border. */
-  margin?: number
+  indent?: number
   /**  Selector of scrollable container. If not passed then takes first parent node. */
   container?: () => HTMLElement | null | undefined
 }
@@ -69,7 +69,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   const {
     v = 'y',
     back,
-    margin = 0,
+    indent = 2,
     size = 'md',
     visible,
     enabled = true,
@@ -175,7 +175,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     show,
     resize,
     element: (
-      <div ref={trackRef} className={scrollTrackClassName} style={{ [property.margin]: px(margin) }}>
+      <div ref={trackRef} className={scrollTrackClassName} style={{ [property.margin]: px(indent) }}>
         <div ref={thumbRef} className={scrollThumbClassName} />
       </div>
     ),
@@ -189,7 +189,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
         />
       </div>
     ),
-  }), [enabled, hide, show, resize, scrollTrackClassName, property.margin, margin, scrollThumbClassName, backClassName, size, v, scrollBack])
+  }), [enabled, hide, show, resize, scrollTrackClassName, property.margin, indent, scrollThumbClassName, backClassName, size, v, scrollBack])
 }
 
 export default useScrollBar

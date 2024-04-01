@@ -118,9 +118,6 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
   	- theme.context.tsx -- theme provider
   	- theme.conf.tsx -- common types and variables
 
-  - __App/__ -- component which contains app settings for launcher
-		- Component structure
-
   - __Launcher/__ -- Contains tools and settings without which the application cannot or should not work  + env settings in constants
 		- Component structure
   	- system -- [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
@@ -129,16 +126,12 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
   	- account -- [AccountSettings | AccountUser]
     	- Hook structure
 
-  - __web-workers/__
-    - __WebWorkerNameWW/__
-      - WebWorkerTypeNameWW.ww.ts
-      - WebWorkerTypeNameWW.tool.ts
-      - WebWorkerTypeNameWW.error.ts
-      - index.ts
-    - index.ts
+  - __App/__ -- component which contains app settings for launcher. Can be placed in apps if there is other apps
+		- Component structure
 
-  - __pages/__ -- contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
-  - __screens/__ -- contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component can have postfix: Screen]
+  - __apps/__[micro] -- contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: App]
+  - __pages/__[micro] -- contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]
+  - __screens/__[micro] -- contains components which [not] gets data from a api and spread them between components (can work only with components, screens) [component can have postfix: Screen]
   - __components(UI)/__ -- contains pure, unified components without logic which gets data out, all data must be get from props (can work only with components) [don't have postfix]
     - __ComponentName__
       - SubComponentName1/ (Private Case Of Component) -- sub component which belong to component and styled for him and can be used only in him
@@ -149,7 +142,7 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
       - ComponentName.model.tsx -- contains models which is used in view and container [outdated]
 			//- simple component approach -//
       - ComponentName.component.tsx
-      - ComponentName.style.scss
+      - ComponentName.module.scss
       - ComponentName.hook.ts
       - ComponentName.context.ts
       - ComponentName.conf.ts
@@ -157,12 +150,10 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
       - ComponentName.error.ts
       - ComponentName.test.ts
       - ComponentName.conf.ts -- default conf for component. Also can includes types
-			- ComponentName.story.json -- config for storybook
+			- ComponentName.stories.json -- config for storybook
       - index.tsx
 
-	- __apps/__ -- microfrontends
-
-	- __legacy/__ -- legacy code base. Should be cleared and moved to appropriate folder before usage
+	- __legacy/__ -- legacy code base. Should be __cleared__ and moved to appropriate folder __before usage__
 
 	- __widgets/__ -- contains components for CMS (in most cases It must be adapter component. You should create CMSAdapter and CMSContainer)
 
@@ -235,6 +226,12 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 		- index.ts
 
   - __web-workers/__ -- contains configs and settings for web-workers
+    - __WebWorkerNameWW/__
+      - WebWorkerTypeNameWW.ww.ts
+      - WebWorkerTypeNameWW.tool.ts
+      - WebWorkerTypeNameWW.error.ts
+      - index.ts
+    - index.ts
 
 - __docs/__ -- contains .md files with project documentations
 	- __STRUCTURE/__

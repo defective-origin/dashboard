@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Meta] component > should add items to head tag 1`] = `
+<head>
+  <title>
+    TITLE
+  </title>
+  <meta
+    content="DESCRIPTION"
+    data-react-helmet="true"
+    name="description"
+  />
+  <meta
+    content="KEY1, KEY2"
+    data-react-helmet="true"
+    name="keywords"
+  />
+  <meta
+    content="width=device-width, initial-scale=0.5}"
+    data-react-helmet="true"
+    name="viewport"
+  />
+  <meta
+    content="TITLE"
+    data-react-helmet="true"
+    property="og:title"
+  />
+  <meta
+    content="DESCRIPTION"
+    data-react-helmet="true"
+    property="og:description"
+  />
+  <meta
+    content="EN"
+    data-react-helmet="true"
+    property="og:locale"
+  />
+  <meta
+    content="http://localhost:3000/"
+    data-react-helmet="true"
+    property="og:url"
+  />
+  <meta
+    content="localhost:3000"
+    data-react-helmet="true"
+    property="og:site_name"
+  />
+  <meta
+    content="ARTICLE"
+    data-react-helmet="true"
+    property="og:type"
+  />
+  <meta
+    content="name1"
+    data-react-helmet="true"
+    name="name1"
+  />
+  <meta
+    content="name2"
+    data-react-helmet="true"
+    name="name2"
+  />
+  <meta
+    content="name3"
+    data-react-helmet="true"
+    name="name3"
+  />
+</head>
+`;
+
+exports[`[Meta] component > should render component 1`] = `<DocumentFragment />`;

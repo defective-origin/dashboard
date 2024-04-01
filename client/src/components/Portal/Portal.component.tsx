@@ -35,19 +35,23 @@ export function Portal(props: PortalProps): JSX.Element {
   return <MuiPortal container={initContainer}>{children}</MuiPortal>
 }
 
+Portal.displayName = 'Portal'
+
 export type PortalContainerProps = {
   name: PortalName
   className?: string
   children?: React.ReactNode
 }
 
-Portal.Container = function Portal(props: PortalContainerProps): JSX.Element {
+export function PortalContainer(props: PortalContainerProps): JSX.Element {
   const { name, children, className, ...otherProps } = props
   const _className = cn(css.PortalContainer, className)
 
   return <div id={initPortalKey(name)} className={_className} {...otherProps}>{children}</div>
 }
 
-Portal.displayName = 'Portal'
+PortalContainer.displayName = 'PortalContainer'
+
+Portal.Container = PortalContainer
 
 export default Portal
