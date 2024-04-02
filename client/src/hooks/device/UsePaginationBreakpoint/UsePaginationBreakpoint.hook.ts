@@ -60,7 +60,7 @@ export const usePaginationBreakpoint = <T, E extends HTMLElement, B extends Pagi
   const hasPrev = page !== 1
   const hasNext = page !== pages
   const items = useMemo(() => {
-    const start = page * breakpoint.count
+    const start = (page - 1) * breakpoint.count
     const end = start + breakpoint.count
 
     return allItems.slice(start, end)
