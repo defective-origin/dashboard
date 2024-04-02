@@ -41,8 +41,6 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <AppMenuItem start='dashboard' href={ROUTE_LINKS.BOARDS} tooltip={locale.t('LINKS.BOARDS')} />
       <AppMenuItem start='insert_chart' href={ROUTE_LINKS.WIDGETS} tooltip={locale.t('LINKS.WIDGETS')} />
 
-      <Actions.Spacer />
-
       <AppMenuItem start='auto_stories' href={ROUTE_LINKS.GUIDE} tooltip={locale.t('LINKS.GUIDE')} />
       <AppMenuItem start='paid' href={ROUTE_LINKS.DONATION} tooltip={locale.t('LINKS.DONATION')} />
       <AppMenuItem start='support_agent' href={ROUTE_LINKS.SUPPORT} tooltip={locale.t('LINKS.SUPPORT')} />

@@ -36,8 +36,6 @@ export function Section(props: SectionProps): JSX.Element {
       <Layout.Header className={ css.Header }>
         <Text className={ css.Title } content={title} v='h3' />
 
-        <Layout.Block.Spacer />
-
         <Actions className={ css.Actions } items={actions} />
       </Layout.Header>
 

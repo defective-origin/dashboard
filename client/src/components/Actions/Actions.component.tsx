@@ -16,8 +16,6 @@ import Block, { BlockProps } from 'components/Block'
 import css from './Actions.module.scss'
 
 export const ACTION_MAP = {
-  divider: Block.Divider,
-  spacer: Block.Spacer,
   button: Button,
   link: Link,
 }
@@ -48,8 +46,6 @@ export function Actions(props: ActionsProps): JSX.Element {
 
 Actions.displayName = 'Actions'
 
-Actions.Divider = Block.Divider
-Actions.Spacer = Block.Spacer
 Actions.Link = Link
 Actions.Button = Button
 

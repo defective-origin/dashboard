@@ -38,8 +38,6 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
     <Block className={_className} direction='x' align='center' padding='sm' {...otherProps}>
       <Portal.Container name='page-name' />
 
-      <Block.Spacer />
-
       <Portal.Container name='page-actions' />
 
       {children}

@@ -6,9 +6,6 @@ import { react } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Divider from 'components/Divider'
-import Spacer from 'components/Spacer'
-
 // ---| self |---
 import useBlock, { BlockOptions } from './Block.hook'
 
@@ -40,8 +37,5 @@ export function Block<E extends React.ElementType>(props: BlockProps<E>): JSX.El
 }
 
 Block.displayName = 'Block'
-
-Block.Divider = Divider
-Block.Spacer = Spacer
 
 export default Block

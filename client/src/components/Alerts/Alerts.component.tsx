@@ -47,8 +47,6 @@ export function Alerts(props: AlertsProps): JSX.Element {
 }
 
 Alerts.Alert = Alert
-Alerts.Divider = Block.Divider
-Alerts.Spacer = Block.Spacer
 
 Alerts.displayName = 'Alerts'
 

@@ -65,8 +65,6 @@ export function Messages(props: MessagesProps): JSX.Element {
 }
 
 Messages.Message = Text
-Messages.Divider = Block.Divider
-Messages.Spacer = Block.Spacer
 
 Messages.displayName = 'Messages'
 
