@@ -1,7 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 
-// ---| core |---
-
 export type SnapshotReturnOptions<T> = {
   value: T
   hasPrev: boolean

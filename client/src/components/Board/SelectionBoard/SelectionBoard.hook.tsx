@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react'
+import React, { useCallback, useMemo, useState, useRef } from 'react'
 
 // ---| core |---
 import { xy } from 'tools'
+import { useEvent } from 'hooks'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
@@ -140,21 +141,10 @@ export function useSelection<I extends Record<string, unknown>>(props: Selection
 
 
   // subscribe on changes
-  useEffect(() => {
-    const element = ref.current
-
-    element?.addEventListener('mouseup', endSelection)
-    element?.addEventListener('mousedown', startSelection)
-    element?.addEventListener('mousemove', updateSelection)
-    element?.addEventListener('mouseleave', resetSelection)
-
-    return () => {
-      element?.removeEventListener('mouseup', endSelection)
-      element?.removeEventListener('mousedown', startSelection)
-      element?.removeEventListener('mousemove', updateSelection)
-      element?.removeEventListener('mouseleave', resetSelection)
-    }
-  }, [endSelection, resetSelection, startSelection, updateSelection])
+  useEvent('mouseup', endSelection, { ref })
+  useEvent('mousedown', startSelection, { ref })
+  useEvent('mousemove', updateSelection, { ref })
+  useEvent('mouseleave', resetSelection, { ref })
 
 
   return useMemo(() => ({

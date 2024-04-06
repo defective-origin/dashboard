@@ -35,18 +35,22 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const locale = useLocale()
 
   return (
-    <Block className={_className} direction='x' align='center' padding='sm' {...otherProps}>
-      <Portal.Container name='page-name' />
+    <Block className={_className} direction='x' align='center' padding='sm' justify='space-between' {...otherProps}>
+      <Block className={css.Content} direction='x' align='center' padding='sm'>
+        <Portal.Container name='page-name' />
 
-      <Portal.Container name='page-actions' />
+        {children}
+      </Block>
 
-      {children}
+      <Block className={css.Extra} direction='x' align='center' padding='sm'>
+        <Portal.Container name='page-actions' />
 
-      {app.isAuthorized() && (
-        <Button round onClick={app.logout} tooltip={locale.t('LINKS.ACCOUNT')}>
-          <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
-        </Button>
-      )}
+        {app.isAuthorized() && (
+          <Button round onClick={app.logout} tooltip={locale.t('LINKS.ACCOUNT')}>
+            <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
+          </Button>
+        )}
+      </Block>
     </Block>
   )
 }

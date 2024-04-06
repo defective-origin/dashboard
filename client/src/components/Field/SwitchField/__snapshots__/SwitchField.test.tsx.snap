@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[SwitchField] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="d--y g--xs _BaseField_dd3532 _SwitchField_19189c"
+    style="align-items: flex-start;"
+  >
+    <h6
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+    />
+    <span
+      class="MuiSwitch-root MuiSwitch-sizeSmall css-1ycxvqq-MuiSwitch-root"
+    >
+      <span
+        class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase"
+      >
+        <input
+          class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+          name=""
+          type="checkbox"
+        />
+        <span
+          class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+        />
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </span>
+      <span
+        class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
+      />
+    </span>
+    <div
+      class="d--y _Messages_e4e642"
+    />
+  </div>
+</DocumentFragment>
+`;

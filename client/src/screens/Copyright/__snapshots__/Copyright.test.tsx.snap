@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Copyright] component > should render component 1`] = `
+<DocumentFragment>
+  <h5
+    class="MuiTypography-root MuiTypography-h5 MuiTypography-alignLeft text text--xs _Copyright_a9bfa3 css-1qyxzxt-MuiTypography-root"
+  >
+    © 2024 now Systems. All Rights Reserved.
+  </h5>
+</DocumentFragment>
+`;

@@ -70,7 +70,6 @@ export function Board<I extends Record<string, unknown>>(props: BoardProps<I>): 
     ...selectionBoardProps
   } = props
   const _className = cn(css.Board, className)
-
   const { width, height, ref } = useResize<HTMLDivElement>()
   const cell = useMemo<xy.Vector>(() => {
     if (!columns || !rows) {

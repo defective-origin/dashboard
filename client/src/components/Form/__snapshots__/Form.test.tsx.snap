@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Form] component > should render component 1`] = `
+<DocumentFragment>
+  <form
+    class="d--y g--xs _Form_1c1c63"
+  />
+</DocumentFragment>
+`;

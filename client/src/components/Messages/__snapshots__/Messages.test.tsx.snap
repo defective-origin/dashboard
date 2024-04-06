@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Messages] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="d--y _Messages_e4e642"
+  />
+</DocumentFragment>
+`;

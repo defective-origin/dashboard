@@ -1,0 +1,15 @@
+@import 'src/theme';
+
+:root {
+  --popup-backdrop-color: #00000080;
+}
+
+.OverlayContainer { position: relative; }
+
+.Overlay { position: absolute; pointer-events: none; }
+.Window { position: fixed; }
+
+.Backdrop {
+  background-color: var(--popup-backdrop-color);
+  pointer-events: all;
+}

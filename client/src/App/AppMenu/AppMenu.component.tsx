@@ -7,7 +7,7 @@ import { useLauncher } from 'Launcher'
 import { cn } from 'tools'
 
 // ---| components |---
-import Actions from 'components/Actions'
+import Block from 'components/Block'
 import Logo from 'components/Logo'
 
 // ---| self |---
@@ -32,24 +32,27 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const locale = useLocale()
   const _className = cn(css.AppMenu, className)
 
-  // TODO: implement via Menu instead of Actions
+  // TODO: implement via Menu instead of Block?
 
   return (
-    <Actions className={_className} direction='y' align='stretch' {...otherProps}>
+    <Block className={_className} {...otherProps}>
       <Logo v='logo' href={ROUTE_LINKS.ROOT} />
 
-      <AppMenuItem start='dashboard' href={ROUTE_LINKS.BOARDS} tooltip={locale.t('LINKS.BOARDS')} />
-      <AppMenuItem start='insert_chart' href={ROUTE_LINKS.WIDGETS} tooltip={locale.t('LINKS.WIDGETS')} />
+      <Block className={css.Main} stretch>
+        <AppMenuItem start='dashboard' href={ROUTE_LINKS.BOARDS} tooltip={locale.t('LINKS.BOARDS')} />
+        <AppMenuItem start='insert_chart' href={ROUTE_LINKS.WIDGETS} tooltip={locale.t('LINKS.WIDGETS')} />
 
-      <AppMenuItem start='auto_stories' href={ROUTE_LINKS.GUIDE} tooltip={locale.t('LINKS.GUIDE')} />
-      <AppMenuItem start='paid' href={ROUTE_LINKS.DONATION} tooltip={locale.t('LINKS.DONATION')} />
-      <AppMenuItem start='support_agent' href={ROUTE_LINKS.SUPPORT} tooltip={locale.t('LINKS.SUPPORT')} />
+        {children}
+      </Block>
 
-      <AppMenuItem start={`${app.theme()}_mode`} onClick={app.toggleTheme} tooltip={app.theme()} fillIcon />
-      <AppMenuItem start='language' tooltip={locale.language} />
-
-      {children}
-    </Actions>
+      <Block className={css.Extra}>
+        <AppMenuItem start='auto_stories' href={ROUTE_LINKS.GUIDE} tooltip={locale.t('LINKS.GUIDE')} />
+        <AppMenuItem start='paid' href={ROUTE_LINKS.DONATION} tooltip={locale.t('LINKS.DONATION')} />
+        <AppMenuItem start='support_agent' href={ROUTE_LINKS.SUPPORT} tooltip={locale.t('LINKS.SUPPORT')} />
+        <AppMenuItem start={`${app.theme()}_mode`} onClick={app.toggleTheme} tooltip={app.theme()} fillIcon />
+        <AppMenuItem start='language' tooltip={locale.language} />
+      </Block>
+    </Block>
   )
 }
 

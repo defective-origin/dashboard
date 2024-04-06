@@ -1,0 +1,66 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[SelectField] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="d--y g--xs _BaseField_dd3532 _SelectField_33cf46"
+  >
+    <h6
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+    />
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        role="button"
+        tabindex="0"
+      >
+        <span
+          class="notranslate"
+        >
+          ​
+        </span>
+      </div>
+      <input
+        aria-hidden="true"
+        aria-invalid="false"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        name=""
+        tabindex="-1"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-ihdtdm"
+        >
+          <span
+            class="notranslate"
+          >
+            ​
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+    <div
+      class="d--y _Messages_e4e642"
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 
 // ---| core |---
+import { useElement, useEvent, useMode, useResizeObserver } from 'hooks'
 import { Direction } from 'theme'
 import { cn } from 'tools'
 
@@ -63,6 +64,7 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
     ...otherOptions
   } = props
   const overlayRef = useRef<HTMLDivElement>(null)
+  const containerRef = useElement(container)
   const backOffset = offset(back, 50)
   const actionOffset = offset(actions, 50)
   const hasBarX = ['x', 'xy'].includes(v)
@@ -70,8 +72,22 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
   const barX = useScrollBar({ enabled: hasBarX, v: 'x', back: backOffset?.x, className: trackClassName, visible, container, ...otherOptions })
   const barY = useScrollBar({ enabled: hasBarY, v: 'y', back: backOffset?.y, className: trackClassName, visible, container, ...otherOptions })
 
+  const hideScrollbars = useCallback(() => {
+    if (!visible) {
+      barY?.hide()
+      barX?.hide()
+    }
+  }, [visible, barY, barX])
+
+  const showScrollbars = useCallback(() => {
+    if (!visible) {
+      barY?.show()
+      barX?.show()
+    }
+  }, [visible, barY, barX])
+
   const resize = useCallback(() => {
-    const parent = container()
+    const parent = containerRef.current
     if (!parent) {
       return
     }
@@ -87,65 +103,19 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
       overlayRef.current.style.height = px(parent.offsetHeight)
       overlayRef.current.style.width = px(parent.offsetWidth)
     }
-  }, [container, barX, barY])
+  }, [containerRef, barY, barX])
 
   // set class names with styles on parent element
-  useEffect(() => {
-    container()?.classList.add('scroll', `scroll--${v}`)
+  useMode(container, 'scroll', `scroll--${v}`)
 
-    return function cleanup() {
-      container()?.classList.remove('scroll', `scroll--${v}`)
-    }
-  }, [container, v])
-
-  // observe container resize
-  useEffect(() => {
-    const parent = container()
-    if (parent) {
-      resize()
-
-      const observer = new ResizeObserver(resize)
-
-      observer.observe(parent)
-
-      return function cleanup() {
-        observer.unobserve(parent)
-      }
-    }
-  }, [container, resize])
-
-  // observe container scroll
-  useEffect(() => {
-    container()?.addEventListener('scroll', resize)
-
-    return function cleanup() {
-      container()?.removeEventListener('scroll', resize)
-    }
-  }, [container, resize])
+  // resize scroll on container resize and scroll
+  useResizeObserver(resize, { ref: container })
+  useEvent('scroll', resize, { ref: container })
 
   // show/hide scrollbars on container hover
-  useEffect(() => {
-    if (!visible) {
-      const hide = () => {
-        barY?.hide()
-        barX?.hide()
-      }
-      const show = () => {
-        barY?.show()
-        barX?.show()
-      }
-
-      hide()
-
-      container()?.addEventListener('mouseover', show)
-      container()?.addEventListener('mouseout', hide)
-
-      return function cleanup() {
-        container()?.removeEventListener('mouseover', show)
-        container()?.removeEventListener('mouseout', hide)
-      }
-    }
-  }, [container, barX, barY, visible])
+  useEvent('mouseover', showScrollbars, { ref: container })
+  useEvent('mouseout', hideScrollbars, { ref: container })
+  useEffect(hideScrollbars, [hideScrollbars])
 
   // attach overlay anchor ref for getting parent if container selector is not provided
   return (

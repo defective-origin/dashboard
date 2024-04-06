@@ -26,30 +26,6 @@ export type SelectionBoardProps<I extends Record<string, unknown>> = SelectionOp
 /**
  * Board which allow to select new position for widgets and also view them.
  * @example
- * export const styles: Required<SelectionBoardStyles> = {
- *   card: {
- *     radius: 2
- *     invalid: {
- *       strokeStyle: 'red',
- *       fillStyle: 'red',
- *       lineWidth: 2,
- *     },
- *     valid: {
- *       strokeStyle: 'blue',
- *       fillStyle: 'blue',
- *       lineWidth: 2,
- *     },
- *     outdated: {
- *       strokeStyle: 'orange',
- *       fillStyle: 'orange',
- *       lineWidth: 2,
- *     },
- *   },
- *   grid: {
- *     strokeStyle: styles.gridLineColor,
- *     lineWidth: 1,
- *   },
- * }
  * const cards: BoardItem[] = [
  *   { text: 'text', placement: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
  *   { text: 'text', placement: { v1: { x: 3, y: 3 }, v2: { x: 6, y: 6 } } },
@@ -72,7 +48,6 @@ export type SelectionBoardProps<I extends Record<string, unknown>> = SelectionOp
  *       gap={10}
  *       select={items[0]}
  *       items={items}
- *       styles={styles}
  *       overlap
  *       onSelect={handleSelect}
  *       onReselect={handleReselect}

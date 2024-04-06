@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
 import { Direction, Size } from 'theme'
+import { useElement, ElementOptions, useEvent } from 'hooks'
 
 // ---| components |---
 import Button from 'components/Button'
@@ -48,7 +49,7 @@ export type ScrollBarOptions = ScrollOptions & {
   /** Space between scroll and border. */
   indent?: number
   /**  Selector of scrollable container. If not passed then takes first parent node. */
-  container?: () => HTMLElement | null | undefined
+  container?: ElementOptions<HTMLElement>
 }
 
 export type ScrollBarReturnOptions = null | {
@@ -77,8 +78,15 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     className,
     backClassName,
     thumbClassName,
-    container = () => null,
+    container,
   } = options
+  const containerRef = useElement(container)
+  const optionsRef = useRef<SizeOptions>()
+  const startMovePos = useRef<ScrollShift | null>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const thumbRef = useRef<HTMLDivElement>(null)
+  const backButtonRef = useRef<HTMLDivElement>(null)
+  const property = SCROLLBAR_PROPERTY_MAP[v]
   const scrollTrackClassName = cn('scroll-track', {
     [`scroll-track--${v}`]: v,
   }, className)
@@ -86,12 +94,6 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     [`scroll-thumb--${v}`]: v,
     [`scroll-thumb--${size}`]: size,
   }, thumbClassName)
-  const optionsRef = useRef<SizeOptions>()
-  const startMovePos = useRef<ScrollShift | null>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const thumbRef = useRef<HTMLDivElement>(null)
-  const backButtonRef = useRef<HTMLDivElement>(null)
-  const property = SCROLLBAR_PROPERTY_MAP[v]
 
   const isEnabled = useCallback(() => optionsRef.current?.scrollable && enabled, [enabled])
 
@@ -134,41 +136,37 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     set(thumbRef.current?.style, property.pos, px(optionsRef.current?.thumbPosition))
   }, [back, hide, initOptions, isEnabled, property.pos, property.size, property.visibility, show, visible])
 
-  const endMove = useCallback(() => startMovePos.current = null, [])
+  const endMove = useCallback(() => {
+    if (isEnabled()) {
+      startMovePos.current = null
+    }
+  }, [isEnabled])
 
   const startMove = useCallback((event: MouseEvent) => {
-    startMovePos.current = get(event, property.mouse)
-    event.preventDefault()
-  }, [property.mouse])
+    if (isEnabled()) {
+      startMovePos.current = get(event, property.mouse)
+      event.preventDefault()
+    }
+  }, [isEnabled, property.mouse])
 
   const move = useCallback((event: MouseEvent) => {
-    if (startMovePos.current && optionsRef.current) {
+    if (isEnabled() && startMovePos.current && optionsRef.current) {
       const delta = get(event, property.mouse) - startMovePos.current
       const position = delta * optionsRef.current.pages
 
       startMove(event)
-      container()?.scrollBy({ [property.pos]: position })
+      containerRef.current?.scrollBy({ [property.pos]: position })
     }
-  }, [container, property.mouse, property.pos, startMove])
+  }, [containerRef, isEnabled, property.mouse, property.pos, startMove])
 
   // scroll page
-  useEffect(() => {
-    if (isEnabled()) {
-      thumbRef.current?.addEventListener('mousedown', startMove)
-      document.addEventListener('mousemove', move)
-      document.addEventListener('mouseup', endMove)
-
-      return function cleanup() {
-        thumbRef.current?.removeEventListener('mousedown', startMove)
-        document.removeEventListener('mousemove', move)
-        document.removeEventListener('mouseup', endMove)
-      }
-    }
-  }, [endMove, isEnabled, move, startMove])
+  useEvent('mousedown', startMove, { ref: thumbRef })
+  useEvent('mousemove', move)
+  useEvent('mouseup', endMove)
 
   const scrollBack = useCallback(() => {
-    container()?.scrollTo({ [property.pos]: 0, behavior })
-  }, [behavior, container, property.pos])
+    containerRef.current?.scrollTo({ [property.pos]: 0, behavior })
+  }, [behavior, containerRef, property.pos])
 
   return useMemo(() => !enabled ? null : ({
     hide,

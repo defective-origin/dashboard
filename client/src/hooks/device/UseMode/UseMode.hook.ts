@@ -1,9 +1,12 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { ElementOptions, ElementReturnOptions, useElement } from 'hooks'
+
+const isModes = (args: unknown[]) => args.every((arg) => Array.isArray(arg) || typeof arg === 'string')
 
 export type ModeOption = undefined | string
 export type ModeOptions = (ModeOption | ModeOption[])[]
 
-export type ModeReturnOptions = void
+export type ModeReturnOptions<E extends Element> = ElementReturnOptions<E>
 
 /**
  * Add class names to body tag.
@@ -12,22 +15,30 @@ export type ModeReturnOptions = void
  * const theme = useTheme()
  * const media = useBreakpoint(MEDIA_BREAKPOINTS)
  *
- * useMode(theme, media)
+ * useMode(theme, media, 'a', 'b')
+ * useMode(ref, theme, media, 'a', 'b')
  */
-export const useMode = (...args: ModeOptions): ModeReturnOptions => {
+export function useMode<E extends Element>(...args: ModeOptions): ModeReturnOptions<E>;
+export function useMode<E extends Element>(ref: ElementOptions<E>, ...args: ModeOptions): ModeReturnOptions<E>;
+export function useMode(...args: unknown[]) {
+  const isOnlyModes = isModes(args)
+  const modes = isOnlyModes ? args : args.slice(1)
+  const ref = useElement(isOnlyModes ? document.body : args[0] as Element, document.body)
   const prevRef = useRef<string[]>([])
-  const value = useMemo(() => args.flat().filter(Boolean) as string[], args)
 
   useEffect(() => {
+    const element = ref.current
     const prevValue = prevRef.current
-    prevRef.current = value
+    prevRef.current = modes.flat().filter(Boolean) as string[]
 
-    document.body.classList.remove(...prevValue)
-    document.body.classList.add(...value)
+    element?.classList.remove(...prevValue)
+    element?.classList.add(...prevRef.current)
 
-    return () => document.body.classList.remove(...prevValue)
+    return () => element?.classList.remove(...prevValue)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [args.toString()])
+  }, [modes.toString()])
+
+  return ref
 }
 
 export default useMode

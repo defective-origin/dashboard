@@ -1,0 +1,35 @@
+@import 'src/theme';
+
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
+
+.OverlayItem {
+  display: grid;
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  pointer-events: all;
+}
+
+// side variants
+.left { top: 0; bottom: 0; left: 0; }
+.right { top: 0; bottom: 0; right: 0; }
+.top { right: 0; left: 0; top: 0; }
+.bottom { right: 0; left: 0; bottom: 0; }
+
+// side-center variants
+.left-center { top: 0; bottom: 0; left: 0; }
+.right-center { top: 0; bottom: 0; right: 0; }
+.top-center { right: 0; left: 0; top: 0; }
+.bottom-center { right: 0; left: 0; bottom: 0; }
+
+// cerner variants
+.top-left { top: 0; left: 0; }
+.top-right { top: 0; right: 0; }
+.bottom-left { bottom: 0; left: 0; }
+.bottom-right { bottom: 0; right: 0; }
+
+// center variants
+.full { inset: 0; }
+.center { inset: 0; margin: auto; }

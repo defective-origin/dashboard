@@ -1,4 +1,14 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import { useState, useMemo } from 'react'
+import useResizeObserver from '../UseResizeObserver'
+import { useElement } from 'hooks'
+
+export const getBreakpoint = <B extends Breakpoint>(breakpoints: B[], direction?: BreakpointDirection, element?: Element | null) => {
+  const size = direction === 'y' ? element?.clientHeight : element?.clientWidth
+
+  return breakpoints.find((breakpoint) => !size || size <= breakpoint.size) as B
+}
+
+export type BreakpointDirection = 'x' | 'y'
 
 export type Breakpoint = {
   /** End size of breakpoint. */
@@ -7,11 +17,11 @@ export type Breakpoint = {
 
 export type BreakpointOptions<E extends HTMLElement> = {
   ref?: React.MutableRefObject<E>
-  direction?: 'x' | 'y'
+  direction?: BreakpointDirection
 }
 
 export type BreakpointReturnOptions<E extends HTMLElement, B extends Breakpoint> = B & {
-  ref: React.MutableRefObject<E>
+  ref: React.MutableRefObject<E | null>
 }
 
 /**
@@ -54,27 +64,12 @@ export type BreakpointReturnOptions<E extends HTMLElement, B extends Breakpoint>
  */
 export const useBreakpoint = <E extends HTMLElement, B extends Breakpoint>(
   breakpoints: B[],
-  options: BreakpointOptions<E> = {},
+  options?: BreakpointOptions<E>,
 ): BreakpointReturnOptions<E, B> => {
-  const ref = useRef<E>(options.ref?.current as E ?? document.body)
+  const ref = useElement<E>(options?.ref, document.body)
+  const [current, setCurrent] = useState(() => getBreakpoint(breakpoints, options?.direction, ref.current))
 
-  const getBreakpoint = useCallback(() => {
-    const size = options.direction === 'y' ? ref.current.clientHeight : ref.current.clientWidth
-
-    return breakpoints.find((breakpoint) => size <= breakpoint.size) as B
-  }, [breakpoints, options.direction])
-
-  const [current, setCurrent] = useState(getBreakpoint)
-
-  useEffect(() => {
-    const updateBreakpoint = () => setCurrent(getBreakpoint)
-
-    const observer = new ResizeObserver(updateBreakpoint)
-
-    observer.observe(ref.current)
-
-    return () => observer.disconnect()
-  }, [getBreakpoint])
+  useResizeObserver(() => setCurrent(getBreakpoint(breakpoints, options?.direction, ref.current)), { ref })
 
   return useMemo(() => ({ ref, ...current as B }), [ref, current])
 }

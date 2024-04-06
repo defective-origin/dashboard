@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[GroupField] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="d--y g--xs _BaseField_dd3532 _GroupField_47be16"
+  >
+    <h6
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+    />
+    <div
+      class="d--y _Messages_e4e642"
+    />
+  </div>
+</DocumentFragment>
+`;

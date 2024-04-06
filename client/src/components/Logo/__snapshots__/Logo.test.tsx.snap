@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Logo] component > should render component 1`] = `
+<DocumentFragment>
+  <a
+    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover action md _Link_a14c64 _Logo_f7d212 css-17sj1r4-MuiTypography-root-MuiLink-root"
+    rel="noreferrer"
+    target="_blank"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 text text--md css-ahj2mt-MuiTypography-root"
+    >
+      <img
+        class="image _Image_f7d212"
+      />
+    </p>
+    <span
+      aria-hidden="true"
+      class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium icon material-symbols-outlined icon--md icon--outline css-kp9ftd-MuiIcon-root"
+    >
+      open_in_new
+    </span>
+  </a>
+</DocumentFragment>
+`;

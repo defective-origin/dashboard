@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Section] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--rows d--y stretch _Section_44cb7f"
+  >
+    <div
+      class="d--y layout-item layout-item--header _Header_44cb7f"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 MuiTypography-alignLeft text text--md _Title_44cb7f css-k93gap-MuiTypography-root"
+      />
+      <div
+        class="d--x _Actions_dd10e3 _Actions_44cb7f"
+        style="align-items: center;"
+      />
+    </div>
+    <div
+      class="d--y layout-item layout-item--content _Content_44cb7f"
+    />
+  </div>
+</DocumentFragment>
+`;

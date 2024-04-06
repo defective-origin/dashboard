@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[SliderField] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="d--y g--xs _BaseField_dd3532 _SliderField_b59d2a"
+  >
+    <h6
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+    />
+    <span
+      class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeSmall css-53tbrc-MuiSlider-root"
+    >
+      <span
+        class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+      />
+      <span
+        class="MuiSlider-track css-1n40zqk-MuiSlider-track"
+        style="left: 0%; width: 0%;"
+      />
+      <span
+        class="MuiSlider-thumb MuiSlider-thumbSizeSmall MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeSmall MuiSlider-thumbColorPrimary css-14gf62f-MuiSlider-thumb"
+        data-index="0"
+        style="left: 0%;"
+      >
+        <input
+          aria-orientation="horizontal"
+          aria-valuemax="100"
+          aria-valuemin="0"
+          aria-valuenow="0"
+          data-index="0"
+          max="100"
+          min="0"
+          name=""
+          step="1"
+          style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+          type="range"
+          value="0"
+        />
+      </span>
+    </span>
+    <div
+      class="d--y _Messages_e4e642"
+    />
+  </div>
+</DocumentFragment>
+`;
