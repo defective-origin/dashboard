@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from 'react'
-import { Breakpoint, BreakpointOptions, BreakpointReturnOptions, useBreakpoint } from '../UseBreakpoint'
+import useBreakpoint, { Breakpoint, BreakpointOptions, BreakpointReturnOptions } from '../UseBreakpoint'
 
 export type MoreBreakpoint = Breakpoint & {
   /** Count of elements for current breakpoints. */
   count: number
 }
 
-export type MoreBreakpointOptions<E extends HTMLElement> = BreakpointOptions<E> & {
+export type MoreBreakpointOptions<E extends Element> = BreakpointOptions<E> & {
   /**
    * Exclude last item if 'allItems.length > breakpoint.count'.
    * It can be helpful when you need to add 'More' dropdown button to list.
@@ -14,7 +14,7 @@ export type MoreBreakpointOptions<E extends HTMLElement> = BreakpointOptions<E> 
   excludeLast?: boolean
 }
 
-export type MoreBreakpointReturnOptions<T, E extends HTMLElement, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
+export type MoreBreakpointReturnOptions<T, E extends Element, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
   items: T[]
   remainingItems: T[]
   more: () => void
@@ -52,7 +52,7 @@ export type MoreBreakpointReturnOptions<T, E extends HTMLElement, B extends Brea
  * // Observe vertical size with known element ref
  * const options = useMoreBreakpoint(MENU_MORE_BREAKPOINTS, { direction: 'y', ref: elementRef })
  */
-export const useMoreBreakpoint = <T, E extends HTMLElement, B extends MoreBreakpoint>(
+export const useMoreBreakpoint = <T, E extends Element, B extends MoreBreakpoint>(
   allItems: T[],
   breakpoints: B[],
   options?: MoreBreakpointOptions<E>,

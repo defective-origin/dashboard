@@ -81,7 +81,7 @@ export function Board<I extends Record<string, unknown>>(props: BoardProps<I>): 
 
   return (
     <div ref={ref} className={_className} style={style}>
-      { width && height && (
+      { !!width && !!height && (
         <>
           <ViewBoard
             className={css.ViewBoard}

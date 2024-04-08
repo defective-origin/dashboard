@@ -4,8 +4,20 @@ import { renderHook } from '@testing-library/react-hooks'
 // ---| self |---
 import useBreakpoint, { Breakpoint } from './UseBreakpoint.hook'
 
+
+let updater: (...args: unknown[]) => void
+const element = { clientHeight: 10000, clientWidth: 10000 } as Element
+
+vi.mock('../../dom/UseResizeObserver', () => ({
+  default: vi.fn((cb) => { updater = cb }),
+}))
+
 describe('[useBreakpoint] hook', () => {
-  const element = { clientHeight: 10000, clientWidth: 10000 }
+  const resize = (size: number) => {
+    Object.assign(element, { clientHeight: size, clientWidth: size })
+
+    updater()
+  }
 
   class TestBreakpoint implements Breakpoint {
     constructor(
@@ -19,41 +31,8 @@ describe('[useBreakpoint] hook', () => {
     new TestBreakpoint('second'),
   ]
 
-  let observer: any
-  let updater: (...args: unknown[]) => void
-  const resize = (size: number) => {
-    element.clientHeight = size
-    element.clientWidth = size
-    updater()
-  }
-
-  beforeEach(() => {
-    Object.defineProperty(global, 'ResizeObserver', {
-      writable: true,
-      value: vi.fn().mockImplementation((cb) => {
-        updater = cb
-        observer = {
-          observe: vi.fn(),
-          unobserve: vi.fn(),
-          disconnect: vi.fn(),
-        }
-
-        return observer
-      }),
-    })
-  })
-
-  afterEach(() => {
-    vi.clearAllMocks()
-
-    Object.defineProperty(global, 'ResizeObserver', {
-      writable: true,
-      value: undefined,
-    })
-  })
-
-  it('should observe width change', () => {
-    const { result } = renderHook(() => useBreakpoint(BREAKPOINTS, { ref: { current: element as HTMLElement } }))
+  it('should observe width change', async () => {
+    const { result } = renderHook(() => useBreakpoint(BREAKPOINTS, { ref: element }))
 
     expect(result.current.name).toEqual('second')
 
@@ -67,7 +46,7 @@ describe('[useBreakpoint] hook', () => {
   })
 
   it('should observe height change', () => {
-    const { result } = renderHook(() => useBreakpoint(BREAKPOINTS, { direction: 'y', ref: { current: element as HTMLElement } }))
+    const { result } = renderHook(() => useBreakpoint(BREAKPOINTS, { direction: 'y', ref: element }))
 
     expect(result.current.name).toEqual('second')
 
@@ -78,16 +57,5 @@ describe('[useBreakpoint] hook', () => {
     resize(1001)
 
     expect(result.current.name).toEqual('second')
-  })
-
-
-  it('should subscribe and unsubscribe on changes on mount/unmount', () => {
-    const { unmount } = renderHook(() => useBreakpoint(BREAKPOINTS, { ref: { current: element as HTMLElement } }))
-
-    expect(observer.observe).toHaveBeenCalledWith(element)
-
-    unmount()
-
-    expect(observer.disconnect).toHaveBeenCalledTimes(1)
   })
 })

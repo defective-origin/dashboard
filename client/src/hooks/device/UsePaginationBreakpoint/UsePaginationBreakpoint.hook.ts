@@ -1,14 +1,14 @@
 import { useCallback, useMemo, useState } from 'react'
-import { Breakpoint, BreakpointOptions, BreakpointReturnOptions, useBreakpoint } from '../UseBreakpoint'
+import useBreakpoint, { Breakpoint, BreakpointOptions, BreakpointReturnOptions } from '../UseBreakpoint'
 
 export type PaginationBreakpoint = Breakpoint & {
   /** Count of elements for current breakpoints. */
   count: number
 }
 
-export type PaginationBreakpointOptions<E extends HTMLElement> = BreakpointOptions<E>
+export type PaginationBreakpointOptions<E extends Element> = BreakpointOptions<E>
 
-export type PaginationBreakpointReturnOptions<T, E extends HTMLElement, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
+export type PaginationBreakpointReturnOptions<T, E extends Element, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
   items: T[]
   page: number
   pages: number,
@@ -49,7 +49,7 @@ export type PaginationBreakpointReturnOptions<T, E extends HTMLElement, B extend
  * // Observe vertical size with known element ref
  * const options = usePaginationBreakpoint(GRID_BREAKPOINTS, { direction: 'y', ref: elementRef })
  */
-export const usePaginationBreakpoint = <T, E extends HTMLElement, B extends PaginationBreakpoint>(
+export const usePaginationBreakpoint = <T, E extends Element, B extends PaginationBreakpoint>(
   allItems: T[],
   breakpoints: B[],
   options?: PaginationBreakpointOptions<E>,

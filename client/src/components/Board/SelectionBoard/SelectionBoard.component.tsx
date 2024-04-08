@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 // ---| core |---
 import { cn, xy } from 'tools'
-import { useProperties } from 'hooks'
+import { useFunc, useProperties } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -73,10 +73,10 @@ export function SelectionBoard<I extends Record<string, unknown>>(props: Selecti
     disable: '--canvas-disable-color',
   })
 
-  const hideContextMenu = useCallback((e: React.MouseEvent) => e.preventDefault(), [])
+  const hideContextMenu = useFunc((e: React.MouseEvent) => e.preventDefault())
 
   // --- painting ---
-  const card = useCallback((area: xy.Square, color: ShapeColor): SquareShape => ({
+  const card = useFunc((area: xy.Square, color: ShapeColor): SquareShape => ({
     color,
     ...xy.square(
       area.v1.x * cell.x + margin,
@@ -84,7 +84,7 @@ export function SelectionBoard<I extends Record<string, unknown>>(props: Selecti
       area.v2.x * cell.x - margin,
       area.v2.y * cell.y - margin,
     ),
-  }), [margin, cell.y, cell.x])
+  }))
 
   // paint markup and cards
   useEffect(() => {

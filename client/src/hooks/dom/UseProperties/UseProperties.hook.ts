@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react'
-import { ElementOptions, useElement } from '..'
+import { useLayoutEffect, useState } from 'react'
+import useElement, { ElementOptions, ElementRef } from '../UseElement'
 
-export const getProperties = <T extends Record<string, string>>(element: Element | null, map: T) => {
-  const styles = element && getComputedStyle(element)
-
-  return Object.keys(map).reduce((acc, key) => {
-    acc[key as keyof T] = styles?.getPropertyValue(map[key]) ?? ''
+export const getProperties = <T extends Record<string, unknown>>(ref: React.MutableRefObject<Element | null>, map: T) => {
+  const styles = ref.current && getComputedStyle(ref.current)
+  const props = Object.keys(map).reduce((acc, key) => {
+    acc[key] = styles?.getPropertyValue(map[key] as string)
 
     return acc
-  }, {} as PropertiesReturnOptions<T>)
+  }, {} as Record<string, string | undefined>)
+
+  return { ref, ...props }
 }
 
-export type PropertiesOptions<T extends Record<string, string>> = T & {
+export type PropertiesOptions<T extends Record<string, unknown>> = T & {
   ref?: ElementOptions<Element>
 }
 
-export type PropertiesReturnOptions<T extends Record<string, string>> = Record<keyof T, string>
+export type PropertiesReturnOptions<T extends Record<string, unknown>> = Record<Exclude<keyof T, 'ref'>, string | undefined> & {
+  ref: ElementRef<Element>
+}
 
 /**
  * Allows to get css variables and other props [ex: for drawing in canvas]
@@ -26,21 +29,15 @@ export type PropertiesReturnOptions<T extends Record<string, string>> = Record<k
  *  ref: elementRef.current,
  *  primary: '--primary-color',
  *  secondary: '--secondary-color',
- *  success: '--success-color',
- *  info: '--info-color',
- *  warning: '--warning-color',
- *  error: '--error-color',
- *  disable: '--disable-color',
  * })
  */
-export const useProperties = <T extends Record<string, string>>(options: PropertiesOptions<T>): PropertiesReturnOptions<T> => {
+export const useProperties = <T extends Record<string, unknown>>(options: PropertiesOptions<T>, deps: unknown[] = []): PropertiesReturnOptions<T> => {
   const { ref, ...map } = options
   const elementRef = useElement(ref, document.body)
-  const [result, setResult] = useState(() => getProperties(elementRef.current, map))
+  const [result, setResult] = useState(() => getProperties(elementRef, map))
 
-  // FIXME: auto update
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setResult(getProperties(elementRef.current, map)), [])
+  useLayoutEffect(() => setResult(getProperties(elementRef, map)), deps)
 
   return result as PropertiesReturnOptions<T>
 }

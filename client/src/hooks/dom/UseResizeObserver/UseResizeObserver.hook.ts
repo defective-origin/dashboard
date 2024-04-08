@@ -1,29 +1,31 @@
-import { useEffect, useRef } from 'react'
-import { ElementOptions, ElementReturnOptions, useElement } from 'hooks'
+import { useEffect } from 'react'
+import useElement, { ElementOptions, ElementRef } from '../UseElement'
+import useFunc from '../../states/UseFunc'
+
 
 export type ResizeObserverOptions<E extends Element> = globalThis.ResizeObserverOptions & {
   ref?: ElementOptions<E>
 }
 
-export type ResizeObserverReturnOptions<E extends Element> = ElementReturnOptions<E>
+export type ResizeObserverReturnOptions<E extends Element> = ElementRef<E>
 
 /**
  * Allows to observe element changes.
  * By default observe body change.
  *
  * @example
- * const state = useResizeObserver(() => console.log('RESIZED'), options)
+ * const ref = useResizeObserver(() => console.log('RESIZED'), options)
  */
 export const useResizeObserver = <E extends Element>(
-  cb: ResizeObserverCallback,
+  listener: ResizeObserverCallback,
   options?: ResizeObserverOptions<E>,
 ): ResizeObserverReturnOptions<E> => {
   const ref = useElement<E>(options?.ref, document.body)
-  const cbRef = useRef(cb)
+  const func = useFunc(listener)
 
   useEffect(() => {
     if (ref.current) {
-      const observer = new ResizeObserver(cbRef.current)
+      const observer = new ResizeObserver(func)
 
       observer.observe(ref.current, options)
 

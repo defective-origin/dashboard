@@ -10,7 +10,7 @@ const BREAKPOINT = { count: 5, size: 1000 }
 const BREAKPOINTS = [BREAKPOINT]
 
 vi.mock('../UseBreakpoint', () => ({
-  useBreakpoint: vi.fn(() => BREAKPOINT),
+  default: vi.fn(() => BREAKPOINT),
 }))
 
 describe('[useMoreBreakpoint] hook', () => {

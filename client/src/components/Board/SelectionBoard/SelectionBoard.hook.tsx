@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo, useState, useRef } from 'react'
+import React, { useMemo, useState, useRef } from 'react'
 
 // ---| core |---
 import { xy } from 'tools'
-import { useEvent } from 'hooks'
+import { useEvent, useFunc } from 'hooks'
 
 // ---| self |---
 import { BoardError, PositionBoardError } from './SelectionBoard.error'
@@ -63,46 +63,46 @@ export function useSelection<I extends Record<string, unknown>>(props: Selection
   const places = useMemo(() => items.map((item) => item[placeKey] ?? item), [items, placeKey]) as xy.Square[]
   const reselectPlace = (select && select[placeKey]) as xy.Square
 
-  const checkPlace = useCallback((item: xy.Square | null) => places.some((i) => {
+  const checkPlace = useFunc((item: xy.Square | null) => places.some((i) => {
     // don't check item which should be reselected
     // or we can overlap other items
     const isOperationAllowed = !item || overlap || i === reselectPlace
 
     setIsIntersected(!isOperationAllowed && xy.crossSquare(i, item))
-  }), [places, reselectPlace, overlap])
+  }))
 
-  const getHoveredCell = useCallback((e: MouseEvent): xy.Square => {
+  const getHoveredCell = useFunc((e: MouseEvent): xy.Square => {
     const rect = (e.target as HTMLCanvasElement).getBoundingClientRect()
     const cellSize = 1
     const x = Math.trunc((e.clientX - rect.left) / cell.x)
     const y = Math.trunc((e.clientY - rect.top) / cell.y)
 
     return xy.square(x, y, x + cellSize, y + cellSize)
-  }, [cell])
+  })
 
-  const getSelectedArea = useCallback((endCell: xy.Square): xy.Square | null => {
+  const getSelectedArea = useFunc((endCell: xy.Square): xy.Square | null => {
     return startCell && xy.outerBox([startCell, endCell])
-  }, [startCell])
+  })
 
-  const isCellChanged = useCallback((newCell: xy.Square): boolean => {
+  const isCellChanged = useFunc((newCell: xy.Square): boolean => {
     return !hoveredCell || !xy.equalSquare(hoveredCell, newCell)
-  }, [hoveredCell])
+  })
 
   // --- selection ---
-  const resetSelection = useCallback(() => {
+  const resetSelection = useFunc(() => {
     setStartCell(null)
     setSelectedArea(null)
     checkPlace(hoveredCell)
-  }, [checkPlace, hoveredCell])
+  })
 
-  const startSelection = useCallback(() => {
+  const startSelection = useFunc(() => {
     if (!isIntersected) {
       setStartCell(hoveredCell)
       setSelectedArea(hoveredCell)
     }
-  }, [isIntersected, hoveredCell])
+  })
 
-  const updateSelection = useCallback((e: MouseEvent) => {
+  const updateSelection = useFunc((e: MouseEvent) => {
     const currentCell = getHoveredCell(e)
     const isChanged = isCellChanged(currentCell)
     const selected = getSelectedArea(currentCell)
@@ -113,9 +113,9 @@ export function useSelection<I extends Record<string, unknown>>(props: Selection
       setSelectedArea(selected)
       checkPlace(selected || currentCell)
     }
-  }, [getHoveredCell, isCellChanged, getSelectedArea, checkPlace])
+  })
 
-  const endSelection = useCallback(() => {
+  const endSelection = useFunc(() => {
     // if cursor is over free area and area is valid
     if (selectedArea && !isIntersected) {
       // complete reselection
@@ -137,7 +137,7 @@ export function useSelection<I extends Record<string, unknown>>(props: Selection
     }
 
     resetSelection()
-  }, [selectedArea, isIntersected, select, placeKey, onError, resetSelection, onReselect, onSelect])
+  })
 
 
   // subscribe on changes

@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
+import useFunc from '../UseFunc'
 
 export type SnapshotReturnOptions<T> = {
   value: T
@@ -45,10 +46,10 @@ export function useSnapshot(value?: unknown) {
   const hasPrev = position !== 0
   const hasNext = position !== snapshotsRef.current.length - 1
 
-  const update = useCallback((snapshots: unknown[]) => {
+  const update = useFunc((snapshots: unknown[]) => {
     snapshotsRef.current = snapshots
     setPosition(snapshotsRef.current.length - 1)
-  }, [])
+  })
 
   return useMemo(
     () => ({
