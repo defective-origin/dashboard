@@ -4,8 +4,6 @@ import { useMemo } from 'react'
 import { cn, xy } from 'tools'
 
 // ---| components |---
-import Repeat from 'components/Repeat'
-
 // ---| self |---
 import css from './ViewBoard.module.scss'
 import ViewBoardItem, { ViewBoardItemProps } from './ViewBoardItem'

@@ -3,7 +3,6 @@ import { render } from 'tests'
 
 // ---| self |---
 import Format from './Format.component'
-import * as tools from './Format.tool'
 // import useFormat from './Format.hook'
 // import FormatProvider, Format from './Format.context'
 

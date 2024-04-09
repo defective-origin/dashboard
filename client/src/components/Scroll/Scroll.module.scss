@@ -49,6 +49,7 @@
       'scroll-content scroll-y'
       'scroll-x scroll-cerner';
     grid-template-rows: 1fr auto;
+    /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-columns: 1fr auto;
   }
 

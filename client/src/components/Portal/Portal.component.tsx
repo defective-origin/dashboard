@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiPortal from '@mui/base/Portal'
+import { Portal as MuiPortal } from '@mui/base'
 
 // ---| core |---
 import { cn } from 'tools'

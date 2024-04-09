@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiAlert, { AlertProps as MuiAlertProps } from '@mui/material/Alert'
+import MuiAlert from '@mui/material/Alert'
 import MuiAlertTitle from '@mui/material/AlertTitle'
 
 // ---| core |---
@@ -15,10 +15,10 @@ import Text from 'components/Text'
 import css from './Alert.module.scss'
 
 
-export type AlertColor = Color
+export type AlertColor = Exclude<Color, 'primary' | 'secondary' | 'disable'>
 
-export type AlertProps = Omit<MuiAlertProps, 'severity' | 'content'> & {
-  title?: string
+export type AlertProps = {
+  title?: React.ReactNode
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
@@ -26,7 +26,7 @@ export type AlertProps = Omit<MuiAlertProps, 'severity' | 'content'> & {
 }
 
 /**
- * Component description.
+ * A notification in order to show some message.
  *
  * How to use
  * @example

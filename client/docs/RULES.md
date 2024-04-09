@@ -16,6 +16,14 @@ __Static content__ is rendered via props `label`, `title`, `content`, `children`
 
 __Dynamic content__ from back-end via props `value`. In extreme cases through static props.
 
+### Types
+__Never use Enums__. Enum created for pseudo typesation and string minification. Now we have Typescript and good minification.
+
+Use type instead: 
+```typescript
+type TextVariant = 'primary' | 'secondary'
+```
+
 ### Variables
 - Names: describes __structure__ and __not__ be bound to __realization__ and __business__
 - Size Unit: __rem__
@@ -40,6 +48,14 @@ __Dynamic content__ from back-end via props `value`. In extreme cases through st
 - pages[Micro] - Can be lazy loadable by usage priority
 - screens/widgets[Micro] - Request Api data and spread it into components
 - components - Small unified ui view item
+
+### Components
+- Use base structure components for layout: __Layout, Block, Scroll, Overlay, Repeat, Item, Portal__
+- Create app layout components:
+  - Base: __Header__[Text, Actions, Block], __Footer__[Text, Actions, Block], __Aside__[Layout], __Content__[Item + scroll]
+  - Layout: __Page__, __Section__, __Card__, __Slider__, __Board__
+- Create Format components for data formatting with useFormat: Text, Number, Date
+- Create pair components for list of items: __Alert__ -> __Alerts__, __Text__ -> __Messages__
 
 ### Styles
 #### When you override ui framework variables

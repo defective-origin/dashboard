@@ -10,12 +10,12 @@ import { react } from 'tools'
 import useBlock, { BlockOptions } from './Block.hook'
 
 // TODO: extend all type which use Block props by <E extends React.ElementType>
+// TODO: add width, height
 export type BlockProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<BlockOptions, E>
 
 /**
- * Flex oriented block.
- *
- * https://mui.com/material-ui/react-stack/
+ * Flex orientation component.
+ * Allows to work with flex items.
  *
  * How to use
  * @example

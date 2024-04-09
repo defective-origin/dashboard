@@ -35,7 +35,7 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
 }
 
 /**
- * Component description.
+ * Displaying font icons.
  *
  * How to use
  * @example

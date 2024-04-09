@@ -8,6 +8,7 @@ export type Line = {
 
 export function line(line_or_vectors: Line | Vector[]): Line
 export function line(v1: number | Vector, v2: number | Vector): Line
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function line(arg1: any, arg2?: any): Line {
   // by another line - line
   if (arg1.v1, arg1.v2) {

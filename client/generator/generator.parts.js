@@ -13,7 +13,9 @@ export default function (plop) {
   // - Can use only other Components inside
   // - Must not have any business logic inside
   // - Doesn`t have any postfix in component name
-  plop.setGenerator('Component', items.Component())
+  plop.setGenerator('Component', items.Component({
+    withStories: true,
+  }))
 
   // Create a Screen component.
   // Screen required criteria:

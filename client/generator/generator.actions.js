@@ -8,18 +8,18 @@ export const InjectAction = ({ place, target, template, abortOnFail = false, dat
   pattern: `/* INJECT_${place}_PLACE */`,
   template,
   abortOnFail,
-  data
+  data,
 })
 
 export const MODULE_INJECT_TEMPLATES = {
   common: {
-    IMPORT: `import * from '{FILE_PATH}'`,
-    EXPORT: `export * from '{FILE_PATH}'`,
-    DEFAULT_EXPORT: `export { default } from '{FILE_PATH}'`,
+    IMPORT: 'import * from \'{FILE_PATH}\'',
+    EXPORT: 'export * from \'{FILE_PATH}\'',
+    DEFAULT_EXPORT: 'export { default } from \'{FILE_PATH}\'',
   },
   partial: {
-    IMPORT: `import {{snakeCase name}} from '{FILE_PATH}'`,
-    EXPORT: `  {{snakeCase name}},`,
+    IMPORT: 'import {{snakeCase name}} from \'{FILE_PATH}\'',
+    EXPORT: '  {{snakeCase name}},',
   },
 }
 
@@ -102,7 +102,7 @@ export const FileAction = ({
 export const FolderAction = ({
   target,
   template,
-  files = [],
+  files = [], // ['file_postfix_1', 'file_postfix_2', undefined, false, null, 0]
   ext = '.hbs',
   skipIfExists,
   isSubmodule = false,
@@ -111,9 +111,10 @@ export const FolderAction = ({
   indexName,
   data,
 }) => {
+  const clearFiles = files.filter(Boolean)
   const folderFiles = fs.readdirSync(`generator/${template}`)
     // take only necessary files
-    .filter((fileName) => Tool.hasMatch(files, fileName))
+    .filter((fileName) => Tool.hasMatch(clearFiles, fileName))
     // remove template extension
     .map((fileName) => fileName.replace(ext, ''))
     // add path relative to folder
@@ -121,7 +122,7 @@ export const FolderAction = ({
   const imports = module?.imports && folderFiles.filter((fileName) => Tool.hasMatch(module?.imports, fileName))
   const exports = module?.notExports && folderFiles.filter((fileName) => !Tool.hasMatch(module?.notExports, fileName))
   const defaultExport = module?.defaultExport && folderFiles.find((fileName) => Tool.isMatch(module?.defaultExport, fileName))
-  const filePatterns = files.length ? `*{${files.join(',')}}*` : '*'
+  const filePatterns = clearFiles.length ? `*{${clearFiles.join(',')}}*` : '*'
 
   return [
     {

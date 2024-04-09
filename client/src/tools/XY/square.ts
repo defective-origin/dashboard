@@ -10,6 +10,7 @@ export function square(square_or_vectors: Square | Vector[]): Square
 export function square(v1: number | Vector, v2: number | Vector): Square
 export function square(v1: number | Vector, width: number, height: number): Square
 export function square(x1: number, y1: number, x2: number, y2: number): Square
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function square(arg1: any, v2_or_width?: any, height?: number, y2?: number): Square {
   const vectors: Vector[] = []
 
@@ -86,7 +87,7 @@ const LineVectorHandler: Record<LineVector, (pos: number, length: number) => num
  * |s-c   c-c   e-c |
  * |s-e   c-e   e-e |
  * ------------------
- * 
+ *
  * @param { Square } item Square object
  * @param { LineVector } x Orientation type
  * @param { LineVector } y Orientation type

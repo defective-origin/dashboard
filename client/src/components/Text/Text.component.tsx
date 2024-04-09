@@ -12,7 +12,7 @@ import Skeleton from 'components/Skeleton'
 import './Text.module.scss'
 
 
-export type TextVariant = MuiTypographyProps['variant']
+export type TextVariant = 'button' | 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'overline'
 export type TextAlign = MuiTypographyProps['align']
 export type TextColor = Color
 export type TextSize = Size
@@ -31,11 +31,18 @@ export type TextProps = {
 }
 
 /**
- * Component description.
+ * Displaying text.
  *
  * How to use
+ *
  * @example
- * <Text />
+ * <Text
+ *    v='overline'
+ *    size='xs'
+ *    multiline
+ *    loading
+ *    content='text'
+ * />
  */
 export function Text(props: TextProps): JSX.Element {
   const {
