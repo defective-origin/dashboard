@@ -1,5 +1,6 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { NestedStateNode, NestedStateNodeOptions } from './UseNestedState.tool'
+import { useFunc } from '../UseFunc'
 
 export type NestedStateOptions<V> = Partial<NestedStateNodeOptions<V>> & {
   /** Custom context for getting parent states. NestedStateContext is used by default.  */
@@ -60,7 +61,7 @@ export const useNestedState = <V>(options: NestedStateOptions<V> = {}): NestedSt
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const mutateTree = useCallback((
+  const mutateTree = useFunc((
     node: NestedStateNode<V>,
     mutator: (node: NestedStateNode<V>) => void,
   ) => {
@@ -69,40 +70,40 @@ export const useNestedState = <V>(options: NestedStateOptions<V> = {}): NestedSt
     }
 
     mutator(node)
-  }, [])
+  })
 
-  const refresh = useCallback(() => {
+  const refresh = useFunc(() => {
     if (root && (node.dependency || Object.keys(node.nested).length)) {
       root?.refresh()
     } else {
       setRefreshTime(new Date().getTime())
     }
-  }, [node, root])
+  })
 
-  const format = useCallback(() => {
+  const format = useFunc(() => {
     node.format()
     node.onChange?.(node.value)
     parent?.format()
-  }, [node, parent])
+  })
 
-  const set = useCallback((value?: V) => {
+  const set = useFunc((value?: V) => {
     node.set(value)
     node.onChange?.(value)
     parent?.format()
     refresh()
-  }, [node, parent, refresh])
+  })
 
-  const reset = useCallback(() => {
+  const reset = useFunc(() => {
     mutateTree(node, (item) => item.reset())
     node.onChange?.(node.value)
     parent?.format()
     refresh()
-  }, [mutateTree, node, parent, refresh])
+  })
 
-  const validate = useCallback(() => {
+  const validate = useFunc(() => {
     mutateTree(node, (item) => item.validate())
     refresh()
-  }, [mutateTree, node, refresh])
+  })
 
   return useMemo<NestedStateReturnOptions<V>>(
     () => ({ refreshTime, node, root, format, set, validate, reset, refresh }),

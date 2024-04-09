@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import MuiRadioField from '@mui/material/Radio'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -36,9 +37,9 @@ export function RadioField(props: RadioFieldProps): JSX.Element {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => {
     field.set((event.target.checked ? value : field.value()) as string)
-  }, [field, value])
+  })
 
   return (
     <BaseField className={_className} errors={field.errors()} align='flex-start' {...otherProps}>

@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import MuiPortal from '@mui/base/Portal'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -30,7 +31,7 @@ export type PortalProps = {
  */
 export function Portal(props: PortalProps): JSX.Element {
   const { name, content, children = content } = props
-  const initContainer = useCallback(() => document.getElementById(initPortalKey(name)), [name])
+  const initContainer = useFunc(() => document.getElementById(initPortalKey(name)))
 
   return <MuiPortal container={initContainer}>{children}</MuiPortal>
 }

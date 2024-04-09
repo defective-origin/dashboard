@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import MuiSliderField from '@mui/material/Slider'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -26,10 +27,7 @@ export function SliderField(props: SliderFieldProps): JSX.Element {
   const { name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.SliderField, className)
   const field = useForm({ name, value, onChange })
-
-  const handleChange = useCallback((event: Event) => {
-    field.set(Number((event.target as HTMLInputElement).value))
-  }, [field])
+  const handleChange = useFunc((event: Event) => field.set(Number((event.target as HTMLInputElement).value)))
 
   return (
     <BaseField className={_className} errors={field.errors()} {...otherProps}>

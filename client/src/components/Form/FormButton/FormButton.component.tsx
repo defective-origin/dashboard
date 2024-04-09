@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn, react } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -29,7 +30,7 @@ export function FormButton(props: FormButtonProps): JSX.Element {
   const _className = cn(css.FormButton, className)
   const field = useForm()
 
-  const handleClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = useFunc((event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
 
     if (type === 'submit') {
@@ -39,7 +40,7 @@ export function FormButton(props: FormButtonProps): JSX.Element {
     }
 
     onClick?.(event)
-  }, [field, type, onClick])
+  })
 
   return <Button className={_className} type={type} onClick={handleClick} {...otherProps}>{children}</Button>
 }

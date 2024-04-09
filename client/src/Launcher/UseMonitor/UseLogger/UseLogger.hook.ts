@@ -1,4 +1,7 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
+
+// ---| core |---
+import { useFunc } from 'hooks'
 
 export type LoggerState = 'info' | 'warn' | 'error'
 
@@ -14,8 +17,8 @@ export type LoggerReturnOptions = {
  * const options = useLogger(conf)
  */
 export const useLogger = (): LoggerReturnOptions => {
-  const log = useCallback((type: LoggerState, options: Record<string, unknown>)=> console.log('LOG:', type, options), [])
-  const event = useCallback((type: string, options: Record<string, unknown>) => console.log('EVENT:', type, options), [])
+  const log = useFunc((type: LoggerState, options: Record<string, unknown>)=> console.log('LOG:', type, options))
+  const event = useFunc((type: string, options: Record<string, unknown>) => console.log('EVENT:', type, options))
 
   return useMemo(() => ({ log, event }), [log, event])
 }

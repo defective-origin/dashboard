@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import useBreakpoint, { Breakpoint, BreakpointOptions, BreakpointReturnOptions } from '../UseBreakpoint'
+import useFunc from '../../states/UseFunc'
 
 export type PaginationBreakpoint = Breakpoint & {
   /** Count of elements for current breakpoints. */
@@ -66,8 +67,8 @@ export const usePaginationBreakpoint = <T, E extends Element, B extends Paginati
     return allItems.slice(start, end)
   }, [allItems, breakpoint.count, page])
 
-  const prev = useCallback(() => { hasPrev && setPage(page - 1) }, [hasPrev, page])
-  const next = useCallback(() => { hasNext && setPage(page + 1) }, [hasNext, page])
+  const prev = useFunc(() => { hasPrev && setPage(page - 1) })
+  const next = useFunc(() => { hasNext && setPage(page + 1) })
 
   return useMemo(
     () => ({ ...breakpoint, items, page, pages, hasPrev, hasNext, prev, next }),

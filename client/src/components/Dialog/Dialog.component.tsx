@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { Dialog as MuiDialog } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -28,7 +29,7 @@ export function Dialog(props: DialogProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Dialog, className)
   const [open, isOpen] = useState(false)
-  const toggle = useCallback(() => isOpen((open) => !open), [])
+  const toggle = useFunc(() => isOpen((open) => !open))
 
   // TODO: [kseniya_boldak] create DialogButton
   return (

@@ -1,4 +1,5 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
+import { useFunc } from 'hooks'
 
 export type FeaturesReturnOptions = {
   feature: (type: string) => boolean
@@ -11,7 +12,7 @@ export type FeaturesReturnOptions = {
  * const options = useFeaturesFlag(conf)
  */
 export const useFeatures = (): FeaturesReturnOptions => {
-  const feature = useCallback((type: string) => !!new URLSearchParams(window.location.search).get(type), [])
+  const feature = useFunc((type: string) => !!new URLSearchParams(window.location.search).get(type))
 
   return useMemo(() => ({ feature }), [feature])
 }

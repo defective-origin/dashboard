@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -27,13 +28,8 @@ export function MenuButton(props: MenuButtonProps): JSX.Element {
   const { tooltip, items, children, className, ...otherProps } = props
   const _className = cn(css.MenuButton, className)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-
-  const onClose = useCallback(() => setAnchorEl(null), [])
-
-  const onOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }, [])
-
+  const onClose = useFunc(() => setAnchorEl(null))
+  const onOpen = useFunc((event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget))
 
   // FIXME: [kseniya_boldak] fix bug with anchorEl on HTMLElement
   const item = (

@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import MuiSelectField, { SelectChangeEvent } from '@mui/material/Select'
 import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -38,12 +39,8 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
   const _className = cn(css.SelectField, className)
   const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })
   const field = useForm({ name, value, onChange })
-
-  const onBlur = useCallback(() => field.validate(), [field])
-
-  const handleChange = useCallback((event: SelectChangeEvent<unknown>) => {
-    field.set(event.target.value as string)
-  }, [field])
+  const onBlur = useFunc(() => field.validate())
+  const handleChange = useFunc((event: SelectChangeEvent<unknown>) => field.set(event.target.value as string))
 
   return (
     <BaseField className={_className} errors={field.errors()} {...otherProps}>

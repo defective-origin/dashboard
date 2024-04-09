@@ -13,13 +13,13 @@ import useBlock, { BlockOptions } from './Block.hook'
 export type BlockProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<BlockOptions, E>
 
 /**
- * Component description.
+ * Flex oriented block.
  *
  * https://mui.com/material-ui/react-stack/
  *
  * How to use
  * @example
- * <Block />
+ * <Block gap='md' padding='md' direction="xy" />
  */
 export function Block<E extends React.ElementType>(props: BlockProps<E>): JSX.Element | null {
   const { as = 'div', children, className, style, ...otherProps } = useBlock(props)

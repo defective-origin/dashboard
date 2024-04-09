@@ -1,7 +1,9 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { toast, Id, ToastOptions as MuiToastOptions } from 'react-toastify'
 
 // ---| core |---
+import { useFunc } from 'hooks'
+
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
@@ -36,31 +38,31 @@ export type ToastReturnOptions = {
  */
 
 export const useToast = (): ToastReturnOptions => {
-  const initToast = useCallback((data: ToastMessage, options: MuiToastOptions<ToastMessage>) =>
+  const initToast = useFunc((data: ToastMessage, options: MuiToastOptions<ToastMessage>) =>
     toast(Toast, {
       ...options,
       data: { ...options.data, ...data },
       type: data?.color ?? 'info' as any,
       icon: () => <Icon v={ALERT_ICON_MAP[data?.color ?? 'info']} />,
-    })
-  , [])
+    }),
+  )
 
-  const message = useCallback((data: ToastMessage) =>
+  const message = useFunc((data: ToastMessage) =>
     initToast(data, {
       containerId: initToastKey('messages'),
       data: { direction: 'y' },
-    })
-  , [initToast])
+    }),
+  )
 
-  const alert = useCallback((data: ToastMessage) =>
+  const alert = useFunc((data: ToastMessage) =>
     initToast(data, {
       theme: 'colored',
       containerId: initToastKey('alerts'),
       autoClose: false,
-    })
-  , [initToast])
+    }),
+  )
 
-  const guard = useCallback((data: ToastMessage) =>
+  const guard = useFunc((data: ToastMessage) =>
     initToast(data, {
       toastId: 'guard',
       theme: 'light',
@@ -69,8 +71,8 @@ export const useToast = (): ToastReturnOptions => {
       closeButton: false,
       closeOnClick: false,
       draggable: false,
-    })
-  , [initToast])
+    }),
+  )
 
   return useMemo(() => ({ message, alert, guard }), [message, alert, guard])
 }

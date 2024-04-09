@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
 import { Direction, Size } from 'theme'
-import { useElement, ElementOptions, useEvent } from 'hooks'
+import { useElement, ElementOptions, useEvent, useFunc } from 'hooks'
 
 // ---| components |---
 import Button from 'components/Button'
@@ -95,12 +95,12 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     [`scroll-thumb--${size}`]: size,
   }, thumbClassName)
 
-  const isEnabled = useCallback(() => optionsRef.current?.scrollable && enabled, [enabled])
+  const isEnabled = useFunc(() => optionsRef.current?.scrollable && enabled)
 
-  const show = useCallback(() => optionsRef.current?.scrollable && set(trackRef.current?.style, property.visibility, 'visible'), [property.visibility])
-  const hide = useCallback(() => !startMovePos.current && set(trackRef.current?.style, property.visibility, 'hidden'), [property.visibility])
+  const show = useFunc(() => optionsRef.current?.scrollable && set(trackRef.current?.style, property.visibility, 'visible'))
+  const hide = useFunc(() => !startMovePos.current && set(trackRef.current?.style, property.visibility, 'hidden'))
 
-  const initOptions = useCallback((container = 0, content = 0, position = 0) => {
+  const initOptions = useFunc((container = 0, content = 0, position = 0) => {
     const track = get(trackRef.current, property.height)
     const pages = content / container
     const scrollable = container < content
@@ -114,9 +114,9 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
       thumbPosition,
       scrollable,
     }
-  }, [property.height])
+  })
 
-  const resize = useCallback((container = 0, content = 0, position = 0) => {
+  const resize = useFunc((container = 0, content = 0, position = 0) => {
     // show/hide back buttons
     if (back && position >= back) {
       set(backButtonRef.current?.style, property.visibility, 'visible')
@@ -134,22 +134,22 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
 
     set(thumbRef.current?.style, property.size, px(optionsRef.current?.thumb))
     set(thumbRef.current?.style, property.pos, px(optionsRef.current?.thumbPosition))
-  }, [back, hide, initOptions, isEnabled, property.pos, property.size, property.visibility, show, visible])
+  })
 
-  const endMove = useCallback(() => {
+  const endMove = useFunc(() => {
     if (isEnabled()) {
       startMovePos.current = null
     }
-  }, [isEnabled])
+  })
 
-  const startMove = useCallback((event: MouseEvent) => {
+  const startMove = useFunc((event: MouseEvent) => {
     if (isEnabled()) {
       startMovePos.current = get(event, property.mouse)
       event.preventDefault()
     }
-  }, [isEnabled, property.mouse])
+  })
 
-  const move = useCallback((event: MouseEvent) => {
+  const move = useFunc((event: MouseEvent) => {
     if (isEnabled() && startMovePos.current && optionsRef.current) {
       const delta = get(event, property.mouse) - startMovePos.current
       const position = delta * optionsRef.current.pages
@@ -157,16 +157,16 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
       startMove(event)
       containerRef.current?.scrollBy({ [property.pos]: position })
     }
-  }, [containerRef, isEnabled, property.mouse, property.pos, startMove])
+  })
 
   // scroll page
   useEvent('mousedown', startMove, { ref: thumbRef })
   useEvent('mousemove', move)
   useEvent('mouseup', endMove)
 
-  const scrollBack = useCallback(() => {
+  const scrollBack = useFunc(() => {
     containerRef.current?.scrollTo({ [property.pos]: 0, behavior })
-  }, [behavior, containerRef, property.pos])
+  })
 
   return useMemo(() => !enabled ? null : ({
     hide,

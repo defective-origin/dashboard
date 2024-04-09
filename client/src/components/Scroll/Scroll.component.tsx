@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 // ---| core |---
-import { useElement, useEvent, useMode, useResizeObserver } from 'hooks'
+import { useElement, useEvent, useFunc, useMode, useResizeObserver } from 'hooks'
 import { Direction } from 'theme'
 import { cn } from 'tools'
 
@@ -72,21 +72,21 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
   const barX = useScrollBar({ enabled: hasBarX, v: 'x', back: backOffset?.x, className: trackClassName, visible, container, ...otherOptions })
   const barY = useScrollBar({ enabled: hasBarY, v: 'y', back: backOffset?.y, className: trackClassName, visible, container, ...otherOptions })
 
-  const hideScrollbars = useCallback(() => {
+  const hideScrollbars = useFunc(() => {
     if (!visible) {
       barY?.hide()
       barX?.hide()
     }
-  }, [visible, barY, barX])
+  })
 
-  const showScrollbars = useCallback(() => {
+  const showScrollbars = useFunc(() => {
     if (!visible) {
       barY?.show()
       barX?.show()
     }
-  }, [visible, barY, barX])
+  })
 
-  const resize = useCallback(() => {
+  const resize = useFunc(() => {
     const parent = containerRef.current
     if (!parent) {
       return
@@ -103,7 +103,7 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
       overlayRef.current.style.height = px(parent.offsetHeight)
       overlayRef.current.style.width = px(parent.offsetWidth)
     }
-  }, [containerRef, barY, barX])
+  })
 
   // set class names with styles on parent element
   useMode(container, 'scroll', `scroll--${v}`)

@@ -1,7 +1,7 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo } from 'react'
 
 // ---| core |---
-import { useMode } from 'hooks'
+import { useFunc, useMode } from 'hooks'
 
 export type Theme = 'light' | 'dark'
 
@@ -34,16 +34,16 @@ export const useAccount = (): AccountReturnOptions => {
   const [user, setUser] = useState<AccountUser | null>(null)
   const [settings, setSettings] = useState<AccountSettings | null>(null)
 
-  const login = useCallback(() => setUser({}), [])
-  const logout = useCallback(() => setUser(null), [])
-  const isAuthorized = useCallback(() => !!user, [user])
-  const isTheme = useCallback((value: Theme) => settings?.theme === value, [settings?.theme])
-  const theme = useCallback(() => settings?.theme ?? 'light', [settings?.theme])
-  const toggleTheme = useCallback(() => {
+  const login = useFunc(() => setUser({}))
+  const logout = useFunc(() => setUser(null))
+  const isAuthorized = useFunc(() => !!user)
+  const isTheme = useFunc((value: Theme) => settings?.theme === value)
+  const theme = useFunc(() => settings?.theme ?? 'light')
+  const toggleTheme = useFunc(() => {
     const theme = isTheme('dark') ? 'light': 'dark'
 
     setSettings((current) => ({ ...current, theme }))
-  }, [isTheme])
+  })
 
   useMode(theme())
 

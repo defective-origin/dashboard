@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -29,12 +30,8 @@ export function TextField(props: TextFieldProps): JSX.Element {
   const { name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.TextField, className)
   const field = useForm({ name, value, onChange })
-
-  const onBlur = useCallback(() => field.validate(), [field])
-
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    field.set(event.target.value)
-  }, [field])
+  const onBlur = useFunc(() => field.validate())
+  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(event.target.value))
 
   return (
     <BaseField className={_className} errors={field.errors()} {...otherProps}>

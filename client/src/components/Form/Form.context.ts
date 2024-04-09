@@ -1,7 +1,7 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 // ---| core |---
-import { NestedStateNodeErrors, NestedStateNodeEvent, NestedStateOptions, NestedStateReturnOptions, useNestedState } from 'hooks'
+import { NestedStateNodeErrors, NestedStateNodeEvent, NestedStateOptions, NestedStateReturnOptions, useFunc, useNestedState } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -57,11 +57,11 @@ export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturn
     return [root, ...subpath].join('')
   }, [field])
 
-  const value = useCallback(() => field.node.value, [field])
-  const errors = useCallback(() => field.node.errors, [field])
-  const form = useCallback(() => field.root?.node.value, [field])
+  const value = useFunc(() => field.node.value)
+  const errors = useFunc(() => field.node.errors)
+  const form = useFunc(() => field.root?.node.value)
 
-  const submit = useCallback((event: React.MouseEvent) => {
+  const submit = useFunc((event: React.MouseEvent) => {
     event.preventDefault()
 
     if (validateOnSubmit) {
@@ -72,21 +72,21 @@ export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturn
       onSubmit?.(value())
       field.reset()
     }
-  }, [errors, onSubmit, field, validateOnSubmit, value])
+  })
 
-  const reset = useCallback(() => {
+  const reset = useFunc(() => {
     onReset?.(field.node.value)
 
     field.reset()
-  }, [onReset, field])
+  })
 
-  const set = useCallback((value?: V) => {
+  const set = useFunc((value?: V) => {
     if (validateOnChange) {
       field.validate()
     }
 
     field.set(value)
-  }, [field, validateOnChange])
+  })
 
   return useMemo(
     () => ({ ...field, name, reset, submit, set, form, value, errors }),

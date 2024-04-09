@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import MuiCheckboxField from '@mui/material/Checkbox'
 
 // ---| core |---
@@ -12,6 +12,7 @@ import { FormOptions, useForm } from 'components/Form'
 // ---| self |---
 import css from './CheckboxField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
+import { useFunc } from 'hooks'
 
 const toValue = (checked?: boolean, value?: string | boolean | number) => {
   // if value passed
@@ -39,9 +40,9 @@ export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
   const _className = cn(css.CheckboxField, className)
   const field = useForm({ name, value: toValue(checked, value), onChange })
 
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => {
     field.set(toValue(event.target.checked, value))
-  }, [field, value])
+  })
 
   return (
     <BaseField className={_className} errors={field.errors()} align='start' {...otherProps}>

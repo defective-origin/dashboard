@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { Drawer as MuiDrawer } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -29,7 +30,7 @@ export function Drawer(props: DrawerProps): JSX.Element {
   const { side = 'right', children, className, ...otherProps } = props
   const _className = cn(css.Drawer, className)
   const [open, isOpen] = useState(false)
-  const toggle = useCallback(() => isOpen((open) => !open), [])
+  const toggle = useFunc(() => isOpen((open) => !open))
 
   return (
     <MuiDrawer

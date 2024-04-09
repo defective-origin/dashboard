@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { useLauncher } from 'Launcher'
 import { TranslateKeys, useLocale } from 'locale'
 import { cn, react } from 'tools'
+import { useFunc } from 'hooks'
 
 // ---| screens |---
 import Copyright from 'screens/Copyright'
@@ -37,22 +38,22 @@ export function BasePage(props: BasePageProps): JSX.Element {
   const locale = useLocale()
   const pageName = locale.t(name)
   const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
-  const checkMessage = useCallback(() => app.toast.message({
+  const checkMessage = useFunc(() => app.toast.message({
     content: 'TEST MESSAGE',
     onClose: () => console.log('CLOSE MESSAGE'),
     onSuccess: () => console.log('SUCCESS MESSAGE'),
-  }), [app])
-  const checkGuard = useCallback(() => app.toast.guard({
+  }))
+  const checkGuard = useFunc(() => app.toast.guard({
     content: 'You have unsaved changes. \n Are you sure you want to leave without save?',
     onClose: () => console.log('CLOSE GUARD'),
     onSuccess: () => console.log('SUCCESS GUARD'),
-  }), [app])
-  const checkAlert = useCallback(() => {
+  }))
+  const checkAlert = useFunc(() => {
     app.toast.alert({content: 'Test Text', color: 'error'})
     app.toast.alert({content: 'Test Text', color: 'warning'})
     app.toast.alert({content: 'Test Text', color: 'info'})
     app.toast.alert({content: 'Test Text', color: 'success'})
-  }, [app])
+  })
   const testActions: ActionItem[] = [
     { key: '3', start: 'close', size: 'xs', v: 'outlined', content: 'TEST GUARD', color: 'error', onClick: checkGuard },
     { key: '2', start: 'close', size: 'xs', v: 'outlined', content: 'TEST MESSAGE', color: 'warning', onClick: checkMessage },
