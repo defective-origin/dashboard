@@ -14,7 +14,8 @@ import useLayout, { LayoutOptions } from './Layout.hook'
 export type LayoutProps = LayoutOptions
 
 /**
- * Component description.
+ * Grid orientation component.
+ * Allows to work with Grid items.
  *
  * How to use
  * @example

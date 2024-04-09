@@ -4,7 +4,7 @@
     "stylelint.vscode-stylelint",
     "mrmlnc.vscode-scss",
 
-    "zixuanchen.vitest-explorer",
+    "vitest.explorer",
     "deinsoftware.vitest-snippets",
 
     "christian-kohler.path-intellisense",
@@ -21,6 +21,8 @@
     "mikestead.dotenv",
     "streetsidesoftware.code-spell-checker",
     "aaron-bond.better-comments",
+    "simonsiefke.svg-preview",
+    "mskelton.npm-outdated",
 
     "gruntfuggly.todo-tree",
 

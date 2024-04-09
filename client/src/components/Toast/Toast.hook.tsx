@@ -18,9 +18,6 @@ const ALERT_ICON_MAP: Record<AlertColor, IconVariant> = {
   info: 'info',
   warning: 'warning',
   error: 'error',
-  primary: 'info',
-  secondary: 'info',
-  disable: 'info',
 }
 
 
@@ -42,7 +39,7 @@ export const useToast = (): ToastReturnOptions => {
     toast(Toast, {
       ...options,
       data: { ...options.data, ...data },
-      type: data?.color ?? 'info' as any,
+      type: data?.color ?? 'info',
       icon: () => <Icon v={ALERT_ICON_MAP[data?.color ?? 'info']} />,
     }),
   )

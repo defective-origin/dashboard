@@ -1,3 +1,4 @@
+// don't update stylelint version because of https://www.npmjs.com/package/stylelint-stylistic#stylelint-stylistic
 module.exports = {
   extends: [
     'stylelint-config-standard-scss',

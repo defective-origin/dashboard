@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type Selector<T> = keyof T | ((obj: T) => any)
 
 /**

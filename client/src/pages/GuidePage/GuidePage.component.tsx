@@ -14,8 +14,6 @@ import MenuItem from 'components/Menu/MenuItem'
 import MenuButton from 'components/MenuButton'
 import Link from 'components/Link'
 import Button from 'components/Button'
-import Block from 'components/Block'
-import Icon from 'components/Icon'
 import Image from 'components/Image'
 import Format from 'components/Format'
 
@@ -54,82 +52,6 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
 
   return (
     <BasePage className={_className} name='PAGES.GUIDE' scroll='y' {...otherProps}>
-      <BasePage.Section title='Text'>
-        <Text content='short short short' />
-        <Text ellipsis content='ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis ellipsis' />
-        <Text ellipsis multiline content='ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ellipsis multiline ' />
-      </BasePage.Section>
-
-      <BasePage.Section title='Links'>
-        <Actions items={testLinks} gap='xs' direction='xy' />
-      </BasePage.Section>
-
-      <BasePage.Section title='Buttons'>
-        <Actions items={testButtons} gap='xs' direction='xy' />
-      </BasePage.Section>
-
-      <BasePage.Section title='Circle Buttons' gap='xs' direction='xy'>
-        <Button round size='xs' start='account_circle' />
-        <Button round size='sm' start='account_circle' />
-        <Button round size='md' start='account_circle' />
-        <Button round size='lg' start='account_circle' />
-        <Button round size='xl' start='account_circle' />
-      </BasePage.Section>
-
-      <BasePage.Section title='Disabled' gap='xs' direction='xy' align='start'>
-        <Link start='close' content='text' end='check_circle' size='xl' disabled />
-        <Button start='close' content='text' end='check_circle' size='xl' disabled />
-        <MenuItem start='close' content='text' end='check_circle' size='xl' disabled />
-        <MenuButton start='close' content='text' end='check_circle' size='xl' disabled/>
-      </BasePage.Section>
-
-      <BasePage.Section title='Loading' gap='xs' direction='xy' align='start'>
-        <Image v='logo' loading />
-        <Icon v='close' size='xl' loading />
-        <Text content='text' size='xl' loading />
-
-        <Link start='close' content='text' end='check_circle' size='xl' loading />
-        <Button start='close' content='text' end='check_circle' size='xl' loading />
-        <MenuItem start='close' content='text' end='check_circle' size='xl' loading />
-        <MenuButton start='close' content='text' end='check_circle' size='xl' loading/>
-      </BasePage.Section>
-
-      <BasePage.Section title='Tooltip' gap='xs' direction='xy' align='start'>
-        <MenuButton content='MenuButton' tooltip={'MenuButton'} />
-        <MenuItem content='MenuItem1' tooltip={'Menuitem1'} />
-        <Link href='#' content='Link' tooltip={'Link'} />
-        <Link href='#' tooltip={'Link'} />
-        <Button content='Button' tooltip={'Button'} />
-      </BasePage.Section>
-
-      <Block gap='xs' direction='y' align='center' padding='xl'>
-        <Format v='uppercase' value='uppercase'/>
-        <Format v='lowercase' value='LOWERCASE'/>
-        <Format v='capitalize' value='   capitalize    capitALize'/>
-        <Format v='title' value='title TITle'/>
-        <Format v='title' placeholder/>
-
-        <Format v='number' value={120202003.1262}/>
-        <Format v='number' value={0.5555}/>
-        <Format v='amount' value={1}/>
-        <Format v='percent' value={0.526}/>
-        <Format v='currency' value={1025}/>
-        <Format v='size' />
-        <Format v='size' value={1024.56}/>
-        <Format v='weight' value='fghj'/>
-        <Format v='weight' value='12335'/>
-        <Format v='weight' placeholder />
-
-        <Format v='day' value='2024-02-27'/>
-        <Format v='month' value='2024-02-27'/>
-        <Format v='year' value='2024-02-27'/>
-        <Format v='day/month/year' value='2024-02-27'/>
-        <Format v='day-of-month-year' value='2024-02-27'/>
-        <Format v='day-name' value='2024-02-27'/>
-        <Format v='month-name' value='2024-02-27'/>
-        <Format v='month-name' placeholder/>
-      </Block>
-
       {children}
     </BasePage>
   )

@@ -11,6 +11,7 @@ import './LayoutItem.module.scss'
 
 export type LayoutItemVariant = 'left-aside' | 'right-aside' | 'header' | 'footer' | 'content'
 
+// FIXME: rename to item
 export type LayoutItemProps = BlockProps & {
   v?: LayoutItemVariant
   area?: React.CSSProperties['gridArea']
@@ -21,7 +22,7 @@ export type LayoutItemProps = BlockProps & {
 }
 
 /**
- * Component description.
+ * Grid item.
  *
  * How to use
  * @example

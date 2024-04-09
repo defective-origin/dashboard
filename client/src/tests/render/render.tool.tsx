@@ -66,12 +66,14 @@ export function buildCustomRender<
   TWrapper extends React.ComponentType<any>,
 >(render: TRender, wrapper?: TWrapper, defaultOptions: CustomRenderOptions = {}) {
   const wrappedModule = wrapper && withWrapper(wrapper)
+
   return function customRender(
     ui: React.ReactElement,
     wrapperProps?: React.ComponentProps<TWrapper>,
     options: CustomRenderOptions = {},
   ): ReturnType<TRender> {
     const wrappedTestComponent = wrappedModule && wrappedModule(wrapperProps)
+
     return render(ui, { wrapper: wrappedTestComponent, ...defaultOptions, ...options })
   }
 }

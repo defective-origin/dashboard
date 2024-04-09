@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip'
+import MuiTooltip from '@mui/material/Tooltip'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -11,26 +11,32 @@ import { cn } from 'tools'
 // ---| self |---
 import css from './Tooltip.module.scss'
 
-export type TooltipProps = Pick<MuiTooltipProps, 'placement'> & {
+export type TooltipVariant = 'bottom-end' | 'bottom-start' | 'bottom' | 'left-end' | 'left-start'
+| 'left' | 'right-end' | 'right-start' | 'right' | 'top-end' | 'top-start'
+| 'top'
+
+export type TooltipProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
+  v?: TooltipVariant
+  open?: boolean
 }
 
 /**
- * Component description.
+ * Informative text when users hover over, focus on, or tap an element.
  *
  * How to use
  * @example
  * <Tooltip />
  */
 export function Tooltip(props: TooltipProps): JSX.Element {
-  const { content, children, className, ...otherProps } = props
+  const { content, children, className, v, open, ...otherProps } = props
   const _className = cn(css.Tooltip, className)
 
   return (
-    <MuiTooltip className={_className} title={content} arrow {...otherProps}>
-      <div>
+    <MuiTooltip className={_className} title={content} arrow placement={v} open={open} {...otherProps}>
+      <div style={{width: 'fit-content'}}>
         {children}
       </div>
     </MuiTooltip>

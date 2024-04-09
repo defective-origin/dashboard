@@ -40,9 +40,10 @@ export const Component = ({
   postfixName,
   defaultName = 'Component',
   defaultSubpath = 'components',
-  files = ['component', 'test', 'module'],
+  withStories,
+  files = ['component', 'test', 'module', withStories && 'stories'],
   module = {
-    notExports: ['test', 'module', 'story'],
+    notExports: ['test', 'module', 'stories'],
     defaultExport: 'component',
   },
   data,
@@ -290,7 +291,6 @@ export const Launcher = ({
   isSubmodule,
   files,
 })
-
 
 export default {
   Component,

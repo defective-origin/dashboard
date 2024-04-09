@@ -17,17 +17,17 @@ describe('[OverlayItem] component', () => {
 // describe('[OverlayItem] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useOverlayItem())
-// 
+//
 //     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[OverlayItem] context', () => {
 //   const wrapper = (props: OverlayItemProps) => <OverlayItemProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useOverlayItem(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

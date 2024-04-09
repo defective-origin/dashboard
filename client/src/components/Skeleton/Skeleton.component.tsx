@@ -21,7 +21,7 @@ export type SkeletonProps = {
 }
 
 /**
- * Component description.
+ * A placeholder preview of the content.
  *
  * How to use
  * @example
