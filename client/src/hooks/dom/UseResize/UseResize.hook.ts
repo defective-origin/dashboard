@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import useResizeObserver from '../UseResizeObserver'
-import useElement, { ElementOptions, ElementRef } from '../UseElement'
+import useResizeObserver, { ResizeObserverOptions } from '../UseResizeObserver'
+import useElement, { ElementRef } from '../UseElement'
 
 const getOptions = <E extends Element>(ref: React.MutableRefObject<E | null>): ResizeReturnOptions<E> => {
   const rect = ref.current?.getBoundingClientRect()
@@ -18,8 +18,7 @@ const getOptions = <E extends Element>(ref: React.MutableRefObject<E | null>): R
   }
 }
 
-export type ResizeOptions<E extends Element> = {
-  ref?: ElementOptions<E>,
+export type ResizeOptions<E extends Element> = ResizeObserverOptions<E> & {
   onResize?: (options: ResizeReturnOptions<E>) => void;
 }
 
@@ -43,7 +42,7 @@ export const useResize = <E extends Element>(options?: ResizeOptions<E>): Resize
 
     options?.onResize?.(opt)
     setResult(opt)
-  }, { ref })
+  }, options)
 
   return result
 }

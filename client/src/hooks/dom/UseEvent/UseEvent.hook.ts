@@ -4,6 +4,7 @@ import useFunc from '../../states/UseFunc'
 
 export type EventOptions<E extends Element> = AddEventListenerOptions & {
   ref?: ElementOptions<E>
+  disable?: boolean
 }
 
 export type EventReturnOptions<E extends Element> = ElementRef<E>
@@ -24,12 +25,15 @@ export function useEvent<E extends HTMLElement, K extends keyof HTMLElementEvent
   const func = useFunc(listener)
 
   useEffect(() => {
-    const element = ref.current
+    if (!options?.disable) {
+      const element = ref.current
 
-    element?.addEventListener(name, func, options)
+      element?.addEventListener(name, func, options)
 
-    return () => element?.removeEventListener(name, func, options)
-  }, [func, name, options, ref])
+      return () => element?.removeEventListener(name, func, options)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [func, name, options?.disable, ref])
 
   return ref
 }

@@ -8,26 +8,8 @@ import Portal from './Portal.component'
 
 describe('[Portal] component', () => {
   it('should render component', () => {
-    const container = render(<Portal />)
+    const container = render(<Portal name='page-name' content={<div>Content</div>} />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Portal] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => usePortal())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Portal] context', () => {
-//   const wrapper = (props: PortalProps) => <PortalProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => usePortal(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

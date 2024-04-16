@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 
-export const getElement = (elem?: ElementOptions<Element>, defaultElem?: ElementOptions<Element>): Element | null | undefined => {
+export const getNode = (elem?: ElementOptions<Element>, defaultElem?: ElementOptions<Element>): Element | null => {
   const element = elem ?? defaultElem
 
   // if ref object
@@ -30,16 +30,18 @@ export const useElement = <E extends Element>(
   element: ElementOptions<E> = null,
   defaultElement: ElementOptions<Element> = null,
 ): ElementRef<E> => {
-  const ref = useRef<unknown>(getElement(element, defaultElement))
+  // Try to get element only from selector because
+  // if default element has set we won't be able to change ref
+  const ref = useRef<unknown>(getNode(element))
 
   // initialize value if element options was provided.
   // it wasn't provided in useRef immediate because
-  // In this case it wasn't overwrite by react in
+  // In this case it will not be able overwritten by react in
   // <div ref={ref} />
   useLayoutEffect(() => {
-    const elem = getElement(element, defaultElement)
-    if (!ref.current && elem) {
-      ref.current = elem
+    const node = getNode(element, defaultElement)
+    if (!ref.current && node) {
+      ref.current = node
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

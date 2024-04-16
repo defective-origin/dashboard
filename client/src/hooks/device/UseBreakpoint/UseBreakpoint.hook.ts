@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
-import useResizeObserver from '../../dom/UseResizeObserver'
-import useElement, { ElementOptions, ElementRef } from '../../dom/UseElement'
+import useResizeObserver, { ResizeObserverOptions } from '../../dom/UseResizeObserver'
+import useElement, { ElementRef } from '../../dom/UseElement'
 
 export const getBreakpoint = <B extends Breakpoint>(breakpoints: B[], direction?: BreakpointDirection, element?: Element | null) => {
   const size = direction === 'y' ? element?.clientHeight : element?.clientWidth
@@ -15,8 +15,7 @@ export type Breakpoint = {
   size: number
 }
 
-export type BreakpointOptions<E extends Element> = {
-  ref?: ElementOptions<E>
+export type BreakpointOptions<E extends Element> = ResizeObserverOptions<E> & {
   direction?: BreakpointDirection
 }
 

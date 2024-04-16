@@ -39,7 +39,9 @@ export function Section(props: SectionProps): JSX.Element {
         <Actions className={ css.Actions } items={actions} />
       </Layout.Header>
 
-      <Layout.Content className={ css.Content } content={children} {...otherProps} />
+      <Layout.Content className={ css.Content } {...otherProps}>
+        {children}
+      </Layout.Content>
     </Layout>
   )
 }

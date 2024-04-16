@@ -39,6 +39,13 @@ describe('[useResizeObserver] hook', () => {
     expect(observer.observe).toHaveBeenCalledWith(element, options)
   })
 
+  it('should not subscribe on changes on mount if it is disabled', () => {
+    const { result } = renderHook(() => useResizeObserver(() => {}, { disable: true, ...options }))
+
+    expect(result.current.current).toEqual(element)
+    expect(observer).toBeUndefined()
+  })
+
   it('should unsubscribe on changes on unmount', () => {
     const { unmount } = renderHook(() => useResizeObserver(() => {}, options))
 

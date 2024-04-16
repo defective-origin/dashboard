@@ -19,6 +19,12 @@ describe('[useEvent] hook', () => {
     expect(result.current.current?.addEventListener).toHaveBeenCalledTimes(1)
   })
 
+  it('should not add event listener if it is disabled', () => {
+    const { result } = renderHook(() => useEvent('click', listener, { ref: element, disable: true }))
+
+    expect(result.current.current?.addEventListener).toHaveBeenCalledTimes(0)
+  })
+
   it('should remove event listener on unmount', () => {
     const { result, unmount } = renderHook(() => useEvent('click', listener, { ref: element }))
 

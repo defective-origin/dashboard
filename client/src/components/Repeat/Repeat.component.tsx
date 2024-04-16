@@ -31,15 +31,15 @@ export type RepeatProps<
   RI extends RepeatItem<RC> = RepeatItem<RC>,
   V = RepeatItemVariant<RC>,
 > = Partial<RI> & {
-  // Component or Component map which should be used for item rendering
+  /** Component or Component map which should be used for item rendering */
   cmp?: RC
-  // default variant value
+  /** default variant value */
   variant?: V
-  // array with item props
+  /** array with item props */
   items?: RI[]
-  // select key for reconciliation [default: index]
+  /** select key for reconciliation [default: index] */
   selectKey?: (item: RI) => React.Key
-  // customize props [default: shared props + item props]
+  /** customize props [default: shared props + item props] */
   selectProps?: (item: RI) => RI
 }
 
@@ -110,7 +110,7 @@ export function Repeat<
     return null
   }
 
-  const list = items.map(({ variant = v, ...otherItemProps }, idx) => {
+  return items.map(({ variant = v, ...otherItemProps }, idx) => {
     const Tag = react.isComponent(cmp) ? cmp : cmp[variant]
     const combinedProps = { ...sharedProps, ...otherItemProps } as React.ComponentProps<any>
     const itemProps = selectProps?.(combinedProps) ?? combinedProps
@@ -118,8 +118,6 @@ export function Repeat<
 
     return <Tag key={itemKey} {...itemProps} />
   })
-
-  return list
 }
 
 Repeat.displayName = 'Repeat'

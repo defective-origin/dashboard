@@ -27,6 +27,7 @@ __Portal__ - Wrapped react Portal with Container
 	- usePaginationBreakpoint  
 
 - dom  
+	- usePortal  
 	- useElement  
 	- useEvent  
 	- useResize  

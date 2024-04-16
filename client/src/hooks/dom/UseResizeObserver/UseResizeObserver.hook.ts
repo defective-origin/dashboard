@@ -5,6 +5,7 @@ import useFunc from '../../states/UseFunc'
 
 export type ResizeObserverOptions<E extends Element> = globalThis.ResizeObserverOptions & {
   ref?: ElementOptions<E>
+  disable?: boolean
 }
 
 export type ResizeObserverReturnOptions<E extends Element> = ElementRef<E>
@@ -24,7 +25,7 @@ export const useResizeObserver = <E extends Element>(
   const func = useFunc(listener)
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && !options?.disable) {
       const observer = new ResizeObserver(func)
 
       observer.observe(ref.current, options)
@@ -32,7 +33,7 @@ export const useResizeObserver = <E extends Element>(
       return () => observer.disconnect()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref])
+  }, [options?.disable, ref])
 
   return ref
 }
