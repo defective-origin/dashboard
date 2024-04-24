@@ -7,6 +7,7 @@ export type NestedStateOptions<V> = Partial<NestedStateNodeOptions<V>> & {
   context?: React.Context<NestedStateReturnOptions<V> | null>
 }
 
+// FIXME use useSingleton and remove validation here
 export type NestedStateReturnOptions<V = unknown> = {
   /** Current node. */
   node: NestedStateNode<V>

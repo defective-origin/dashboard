@@ -14,7 +14,7 @@ export type EventReturnOptions<E extends Element> = ElementRef<E>
  * Document body is used as default element.
  *
  * @example
- * const state = useEvent('event', () => console.log('event'), options)
+ * const state = useEvent('event', () => console.log('event'), { direction: 'y', ref: elementRef, ...eventOptions })
  */
 export function useEvent<E extends HTMLElement, K extends keyof HTMLElementEventMap>(
   name: K,

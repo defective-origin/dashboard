@@ -1,17 +1,21 @@
 // eslint-disable-next-line no-restricted-imports
 import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
-import Text, { TextVariant, TextSize, TextColor, TextAlign, TextProps } from './Text.component'
+import Text, { TextProps } from './Text.component'
 import Block from 'components/Block'
 
-const variants: TextVariant[] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'button', 'caption', 'overline']
-const sizes: TextSize[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-const colors: TextColor[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'disable']
-const alignments: TextAlign[] = ['right', 'center', 'left']
-const multiline = 'multiline '.repeat(100)
+const alignments: TextProps['align'][] = ['right', 'center', 'left']
+const variants: TextProps['v'][] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'button', 'caption', 'overline']
+const sizes: TextProps['size'][] = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']
+const colors: TextProps['color'][] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'disable']
+const textFormats: TextProps['format'][] = [undefined, 'uppercase', 'lowercase', 'capitalize', 'title']
+const numberFormats: TextProps['format'][] = [undefined, 'number', 'amount', 'percent', 'decimal-percent', 'currency', 'size', 'weight']
+const dateFormats: TextProps['format'][] = [undefined, 'date', 'day', 'month', 'year', 'day/month/year', 'day-of-month-year', 'day-name', 'month-name']
+const formats: TextProps['format'][] = [...textFormats, ...numberFormats, ...dateFormats]
+const content = 'Text '.repeat(50)
 
 const meta: Meta<typeof Text> = {
-  title: 'Components/Text',
+  title: 'Components/DATA DISPLAY/Text',
   component: Text,
   tags: ['autodocs'],
   argTypes: {
@@ -22,8 +26,9 @@ const meta: Meta<typeof Text> = {
     v: field.variants(variants, 'TextVariant', 'body1'),
     color: field.variants(colors, 'TextColor', 'primary'),
     align: field.variants(alignments, 'TextAlign', 'left'),
-    multiline: field.boolean(),
-    ellipsis: field.boolean(),
+    format: field.variants(formats, 'FormatVariant', 'default'),
+    placeholder: field.reactNode(),
+    ellipsis: field.object('boolean | number'),
     loading: field.boolean(),
   },
 }
@@ -32,9 +37,8 @@ export default meta
 
 type Story = StoryObj<typeof Text>
 
-// TODO: [kseniya_boldak] Move to storybook tools
 const initVariants = <P extends keyof TextProps>(prop: P, items: TextProps[P][]) => (
-  <Block style={{ minWidth: 200 }}>
+  <Block minWidth={200}>
     {items.map((item) => <Text content={item} {...{ [prop]: item }}/>)}
   </Block>
 )
@@ -42,12 +46,11 @@ const initVariants = <P extends keyof TextProps>(prop: P, items: TextProps[P][])
 export const Demo: Story = {
   parameters: params('Text'),
   args: {
-    content: 'Text',
+    content,
     v: 'body1',
     size: 'md',
     align: 'left',
     color: 'primary',
-    multiline: false,
     ellipsis: false,
     loading: false,
   },
@@ -66,7 +69,6 @@ export const Sizes: Story = {
 export const Colors: Story = {
   parameters: params('Color', colors),
   render: () => initVariants('color', colors),
-
 }
 
 export const Alignments: Story = {
@@ -74,20 +76,19 @@ export const Alignments: Story = {
   render: () => initVariants('align', alignments),
 }
 
-export const Multiline: Story = {
-  parameters: params('By default one line text is shown. If multiline is needed - set `multiline` flag as `true`.'),
+export const Formats: Story = {
+  parameters: params('To format values according to business (format standards)[./?path=/docs/formats--docs], set the `format` prop value.'),
   args: {
-    content: multiline,
-    multiline: true,
+    content: 123_456_789.987_654,
+    format: 'currency',
   },
 }
 
 export const Ellipsis: Story = {
-  parameters: params('If `ellipsis` is `true` the text is truncated with ellipsis.'),
+  parameters: params('If `ellipsis` is `true` the text is truncated with ellipsis. Line count can be set via number value of `ellipsis` prop.'),
   args: {
-    content: multiline,
-    ellipsis: true,
-    multiline: true,
+    content: content,
+    ellipsis: 2,
   },
 }
 

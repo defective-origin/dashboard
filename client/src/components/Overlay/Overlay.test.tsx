@@ -13,21 +13,3 @@ describe('[Overlay] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Overlay] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useOverlay())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Overlay] context', () => {
-//   const wrapper = (props: OverlayProps) => <OverlayProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useOverlay(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

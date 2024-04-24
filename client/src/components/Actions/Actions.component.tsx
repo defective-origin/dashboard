@@ -36,7 +36,7 @@ export function Actions(props: ActionsProps): JSX.Element {
   const _className = cn(css.Actions, className)
 
   return (
-    <Block className={_className} align='center' direction='x' {...otherProps}>
+    <Block className={_className} aligns='center' v='x' {...otherProps}>
       <Repeat cmp={ACTION_MAP} items={items} variant='button' />
 
       {children}

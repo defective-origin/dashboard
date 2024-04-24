@@ -19,21 +19,12 @@ export type BlockProps<E extends React.ElementType = React.ElementType> = react.
  *
  * How to use
  * @example
- * <Block gap='md' padding='md' direction="xy" />
+ * <Block g='md' p='md' v="xy" />
  */
-export function Block<E extends React.ElementType>(props: BlockProps<E>): JSX.Element | null {
-  const { as = 'div', children, className, style, ...otherProps } = useBlock(props)
-  const Tag = as as Exclude<React.ElementType, undefined>
+export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>): JSX.Element | null {
+  const { as: Tag = 'div', ...blockProps } = useBlock(props)
 
-  if (!react.isComponent(Tag)) {
-    return null
-  }
-
-  return (
-    <Tag className={className} style={style} {...otherProps}>
-      {children}
-    </Tag>
-  )
+  return <Tag {...blockProps} />
 }
 
 Block.displayName = 'Block'

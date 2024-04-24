@@ -9,13 +9,6 @@ import BasePage, { BasePageProps } from 'screens/BasePage'
 
 // ---| components |---
 import Actions, { ActionItem } from 'components/Actions'
-import Text from 'components/Text'
-import MenuItem from 'components/Menu/MenuItem'
-import MenuButton from 'components/MenuButton'
-import Link from 'components/Link'
-import Button from 'components/Button'
-import Image from 'components/Image'
-import Format from 'components/Format'
 
 // ---| self |---
 import css from './GuidePage.module.scss'

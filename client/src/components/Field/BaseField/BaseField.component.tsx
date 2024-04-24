@@ -28,13 +28,13 @@ export type BaseFieldProps = BlockProps & {
  * <BaseField />
  */
 export function BaseField(props: BaseFieldProps): JSX.Element | null {
-  const { label, messages = [], errors = [], align, className, children, ...otherProps } = props
+  const { label, messages = [], errors = [], aligns, className, children, ...otherProps } = props
   const _className = cn(css.BaseField, className)
   const allMessages = useMemo(() => [...messages, ...errors], [errors, messages])
 
   // FIXME: rewrite on layout?
   return (
-    <Block className={_className} gap='xs' align={align} {...otherProps}>
+    <Block className={_className} g='xs' aligns={aligns} {...otherProps}>
       <Text.Subtitle2 content={label} />
 
       {children}

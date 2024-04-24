@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-restricted-imports
 import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
-import Alert, { AlertColor, AlertProps } from './Alert.component'
+import Alert, { AlertProps } from './Alert.component'
 import Block from 'components/Block'
 
-const colors: AlertColor[] = ['success', 'info', 'warning', 'error']
+const colors: AlertProps['color'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof Alert> = {
-  title: 'Components/Alert',
+  title: 'Components/DATA DISPLAY/Alert',
   component: Alert,
   tags: ['autodocs'],
   argTypes: {
@@ -24,7 +24,7 @@ export default meta
 type Story = StoryObj<typeof Alert>
 
 const initVariants = <P extends keyof AlertProps>(prop: P, items: AlertProps[P][]) => (
-  <Block gap='xs' style={{ minWidth: 250 }}>
+  <Block g='xs' minWidth={250}>
     {items.map((item) => <Alert content={item} {...{ [prop]: item }}/>)}
   </Block>
 )

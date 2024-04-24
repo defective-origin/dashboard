@@ -6,4 +6,3 @@ export { default } from './Layout.component'
 /* INJECT_EXPORT_PLACE */
 export * from './Layout.component'
 export * from './Layout.hook'
-export * from './LayoutItem'

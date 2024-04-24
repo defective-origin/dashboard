@@ -1,12 +1,12 @@
-export function isNull<T>(value: T) {
+export function isNull(value: unknown): value is null {
   return value === null
 }
 
-export function isUndefined<T>(value: T) {
+export function isUndefined(value: unknown): value is undefined {
   return value === undefined
 }
 
-export function isNil<T>(value: T) {
+export function isNil(value: unknown): value is null | undefined {
   return isNull(value) || isUndefined(value)
 }
 

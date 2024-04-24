@@ -14,7 +14,7 @@
     display: grid;
 
     // template
-    &--cards {
+    &--board {
       grid-auto-columns: 1fr;
       grid-auto-rows: 1fr;
     }
@@ -22,67 +22,67 @@
     &--row {
       grid-template-columns: repeat(1, 1fr);
       grid-auto-flow: column; /* Set the auto-placement algorithm to column */
-      grid-auto-columns: minmax(100px, 1fr);
+      grid-auto-columns: 1fr;
     }
 
     &--column {
       grid-template-columns: repeat(1, 1fr);
-      grid-auto-flow: row; /* Set the auto-placement algorithm to column */
-      grid-auto-rows: minmax(100px, 1fr);
+      grid-auto-flow: row; /* Set the auto-placement algorithm to row */
+      grid-auto-rows: 1fr;
     }
 
     &--rows {
       @include init-markup;
 
       grid-template-areas:
-        'header header header'
-        'left-aside content right-aside'
-        'footer footer footer';
+        'top top top'
+        'left center right'
+        'bottom bottom bottom';
     }
 
     &--columns {
       @include init-markup;
 
       grid-template-areas:
-        'left-aside header right-aside'
-        'left-aside content right-aside'
-        'left-aside footer right-aside';
+        'left top right'
+        'left center right'
+        'left bottom right';
     }
 
-    &--header {
+    &--top {
       @include init-markup;
 
       grid-template-areas:
-        'header header header'
-        'left-aside content right-aside'
-        'left-aside footer right-aside';
+        'top top top'
+        'left center right'
+        'left bottom right';
     }
 
-    &--footer {
+    &--bottom {
       @include init-markup;
 
       grid-template-areas:
-        'left-aside header right-aside'
-        'left-aside content right-aside'
-        'footer footer footer';
+        'left top right'
+        'left center right'
+        'bottom bottom bottom';
     }
 
-    &--left-aside {
+    &--left {
       @include init-markup;
 
       grid-template-areas:
-        'left-aside header header'
-        'left-aside content right-aside'
-        'left-aside footer footer';
+        'left top top'
+        'left center right'
+        'left bottom bottom';
     }
 
-    &--right-aside {
+    &--right {
       @include init-markup;
 
       grid-template-areas:
-        'header header right-aside'
-        'left-aside content right-aside'
-        'footer footer right-aside';
+        'top top right'
+        'left center right'
+        'bottom bottom right';
     }
   }
 }

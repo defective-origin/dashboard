@@ -12,6 +12,10 @@ import Actions, { ActionItem } from 'components/Actions'
 import Alert from 'components/Alert'
 import Alerts, { AlertItem } from 'components/Alerts'
 import Field from 'components/Field'
+import Aside from 'components/Aside'
+import Content from 'components/Content'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
 
 // ---| self |---
 import css from './Form.module.scss'
@@ -153,14 +157,14 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  *
  * // Manual approach
  *   <Form name='FORM_NAME' onSubmit={log} onChange={log} onReset={log} padding='xxl'>
- *     <Form.Alerts items={ALERTS} gap='xs'>
+ *     <Form.Alerts items={ALERTS} g='xs'>
  *       <Form.Alert color='success' content='success' />
  *       <Form.Alert color='info' content='info' />
  *       <Form.Alert color='warning' content='warning' />
  *       <Form.Alert color='error' content='error' />
  *     </Form.Alerts>
  *
- *     <Form.Content gap='xs'>
+ *     <Form.Content g='xs'>
  *       <Form.Actions items={ACTIONS} />
  *       <Form.Actions>
  *         FORM ACTIONS
@@ -168,27 +172,27 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  *         <Form.Submit content='Submit' />
  *       </Form.Actions>
  *
- *       <Form.Block className={_className} direction='x' gap='xs'>
+ *       <Form.Block className={_className} direction='x' g='xs'>
  *         <Form.Field.Checkbox name='with' label='with' value='checkbox' messages={MESSAGES} checked onChange={log} />
  *         <Form.Field.Checkbox name='without' label='without' messages={MESSAGES} checked onChange={log} />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' gap='xs'>
+ *       <Form.Block className={_className} direction='x' g='xs'>
  *         <Form.Field.Radio name='radio' label='radio 1' value={1} messages={MESSAGES} onChange={log} />
  *         <Form.Field.Radio name='radio' label='radio 2' value={2} messages={MESSAGES} onChange={log} checked />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' gap='xs'>
+ *       <Form.Block className={_className} direction='x' g='xs'>
  *         <Form.Field.Switch name='switch1' label='switch1' messages={MESSAGES} onChange={log} />
  *         <Form.Field.Switch name='switch2' label='switch2' messages={MESSAGES} onChange={log} />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' gap='xs'>
+ *       <Form.Block className={_className} direction='x' g='xs'>
  *         <Form.Field.Slider name='slider' label='slider' value={75} messages={MESSAGES} onChange={log} />
  *         <Form.Field.Number name='number' label='number' value={75} messages={MESSAGES} onChange={log} />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' gap='xs'>
+ *       <Form.Block className={_className} direction='x' g='xs'>
  *         <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
  *         <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
  *       </Form.Block>
@@ -200,7 +204,7 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  *           <Form.Submit content='Submit' />
  *         </Form.Actions>
  *
- *         <Form.Content direction='x' gap='xs'>
+ *         <Form.Content direction='x' g='xs'>
  *           <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
  *           <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
  *           <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
@@ -218,7 +222,7 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  *           <Form.Submit content='Submit' />
  *         </Form.Actions>
  *
- *         <Form.Content direction='x' gap='xs'>
+ *         <Form.Content direction='x' g='xs'>
  *           <Form.Field.Radio name='item_0' label='radio' value={true} messages={MESSAGES} onChange={log} />
  *           <Form.Field.Switch name='item_1' label='switch' value={true} messages={MESSAGES} onChange={log} />
  *           <Form.Field.Checkbox name='item_2' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
@@ -316,7 +320,7 @@ export function Form(props: FormProps): JSX.Element {
 
   return (
     <FormContext.Provider value={field} >
-      <Block as='form' className={_className} onSubmit={field.submit} onReset={field.reset} gap='xs' {...otherProps}>
+      <Block as='form' className={_className} onSubmit={field.submit} onReset={field.reset} g='xs' {...otherProps}>
         {alerts && <Alerts items={alerts} />}
 
         {children}
@@ -330,17 +334,16 @@ export function Form(props: FormProps): JSX.Element {
 Form.displayName = 'Form'
 
 export default react.attachComponents(Form, {
-  Section: Section, // Layout.Section
-  Actions: Actions, // Layout.Actions
-  Header: Block, // Layout.Header
-  Content: Block, // Layout.Content
-  Footer: Block, // Layout.Footer
-  Aside: Block, // Layout.Aside
-  Block: Block, // Layout.Block
-  Alert: Alert,
-  Alerts: Alerts,
-  Field: Field,
-  // Action: FormButton,
+  Section,
+  Actions,
+  Header,
+  Content,
+  Footer,
+  Aside,
+  Block,
+  Alert,
+  Alerts,
+  Field,
   Reset: FormButton.Reset,
   Submit: FormButton.Submit,
 })

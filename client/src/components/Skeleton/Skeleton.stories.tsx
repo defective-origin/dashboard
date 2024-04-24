@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-restricted-imports
 import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
-import Skeleton, { SkeletonProps, SkeletonVariant } from './Skeleton.component'
+import Skeleton, { SkeletonProps } from './Skeleton.component'
 import Block from 'components/Block'
 
-const variants: SkeletonVariant[] = ['text', 'rounded', 'circular']
+const variants: SkeletonProps['v'][] = ['text', 'rounded', 'circular']
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Components/Skeleton',
+  title: 'Components/DATA DISPLAY/Skeleton',
   component: Skeleton,
   tags: ['autodocs'],
   argTypes: {
@@ -22,10 +22,9 @@ export default meta
 
 type Story = StoryObj<typeof Skeleton>
 
-// TODO: [kseniya_boldak] Move to storybook tools
 const initVariants = <P extends keyof SkeletonProps>(prop: P, items: SkeletonProps[P][]) => (
-  <Block direction='x' gap='xxs'>
-    {items.map((item) => <Skeleton content={item} {...{ [prop]: item }}/>)}
+  <Block v='x' g='xxs'>
+    {items.map((item) => <Skeleton content={item === 'circular' ? 'cir' : item} {...{ [prop]: item }}/>)}
   </Block>
 )
 

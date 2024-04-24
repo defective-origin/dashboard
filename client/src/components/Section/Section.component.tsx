@@ -6,17 +6,17 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Layout, { LayoutItemProps } from 'components/Layout'
-import Text from 'components/Text'
+import Layout, { LayoutProps } from 'components/Layout'
 import Actions, { ActionsProps } from 'components/Actions'
+import Content from 'components/Content'
+import Header from 'components/Header'
+import Text from 'components/Text'
 
 // ---| self |---
 import css from './Section.module.scss'
 
-export type SectionProps = LayoutItemProps & {
+export type SectionProps = LayoutProps & {
   title?: React.ReactNode
-  className?: string
-  children?: React.ReactNode
   actions?: ActionsProps['items']
 }
 
@@ -32,16 +32,16 @@ export function Section(props: SectionProps): JSX.Element {
   const _className = cn(css.Section, className)
 
   return (
-    <Layout className={_className} stretch>
-      <Layout.Header className={ css.Header }>
+    <Layout className={_className} stretch {...otherProps}>
+      <Header className={ css.Header }>
         <Text className={ css.Title } content={title} v='h3' />
 
         <Actions className={ css.Actions } items={actions} />
-      </Layout.Header>
+      </Header>
 
-      <Layout.Content className={ css.Content } {...otherProps}>
+      <Content className={ css.Content }>
         {children}
-      </Layout.Content>
+      </Content>
     </Layout>
   )
 }

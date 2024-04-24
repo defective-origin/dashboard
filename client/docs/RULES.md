@@ -31,7 +31,8 @@ type TextVariant = 'primary' | 'secondary'
 - Space [gap, padding, margin]: __xxs | xs | sm | md | lg | xl | xxl__
 - Color: __primary | secondary | success | info | warning | error | disable__
 - Media: __mobile | mobile | mobile | tablet | tablet | tablet | desktop | tv | vertical | horizontal__
-- Layout: __cards | row | rows | column | columns | header | footer | left-aside | right-aside | grid__
+- Layout[Grid]: __board | row | rows | column | columns | header | footer | left-aside | right-aside | grid__
+- Block[Flex]: __x | y | xy | cards__
 - Direction: __x | y | xy__
 
 ### Architecture
@@ -52,9 +53,9 @@ type TextVariant = 'primary' | 'secondary'
 ### Components
 - Use base structure components for layout: __Layout, Block, Scroll, Overlay, Repeat, Item, Portal__
 - Create app layout components:
-  - Base: __Header__[Text, Actions, Block], __Footer__[Text, Actions, Block], __Aside__[Layout], __Content__[Item + scroll]
-  - Layout: __Page__, __Section__, __Card__, __Slider__, __Board__
-- Create Format components for data formatting with useFormat: Text, Number, Date
+  - Base: __Header__[Text, Actions, Block], __Footer__[Text, Actions, Block], __Aside__[Layout], __Content__[Block + scroll], __Modal__[Overlay + Portal]
+  - Layout: __Page__, __Section__, __Board__, __Card__, __Slider__
+- Create Format components for data formatting with useFormat: __Text__, __Number__, __Date__ or add __format__ prop to __Text__ component
 - Create pair components for list of items: __Alert__ -> __Alerts__, __Text__ -> __Messages__
 
 ### Styles

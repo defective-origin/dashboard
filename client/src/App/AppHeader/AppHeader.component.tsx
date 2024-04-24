@@ -12,14 +12,12 @@ import { cn } from 'tools'
 import Block from 'components/Block'
 import Portal from 'components/Portal'
 import Button from 'components/Button'
+import Header, { HeaderProps } from 'components/Header'
 
 // ---| self |---
 import css from './AppHeader.module.scss'
 
-export type AppHeaderProps = {
-  className?: string
-  children?: React.ReactNode
-}
+export type AppHeaderProps = HeaderProps
 
 /**
  * Component description.
@@ -35,14 +33,14 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const locale = useLocale()
 
   return (
-    <Block className={_className} direction='x' align='center' padding='sm' justify='space-between' {...otherProps}>
-      <Block className={css.Content} direction='x' align='center' padding='sm'>
+    <Header className={_className} as='header' area='top' v='x' aligns='center' p='sm' justifies='space-between' {...otherProps}>
+      <Block className={css.Content} v='x' aligns='center' p='sm'>
         <Portal.Container name='page-name' />
 
         {children}
       </Block>
 
-      <Block className={css.Extra} direction='x' align='center' padding='sm'>
+      <Block className={css.Extra} v='x' aligns='center' p='sm'>
         <Portal.Container name='page-actions' />
 
         {app.isAuthorized() && (
@@ -51,7 +49,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
           </Button>
         )}
       </Block>
-    </Block>
+    </Header>
   )
 }
 

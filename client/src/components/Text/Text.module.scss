@@ -6,25 +6,24 @@
 
 :global {
   .text {
+    font-family: Montserrat, sans-serif;
+    font-optical-sizing: auto;
+
+    // font-weight: <weight>;
+    font-style: normal;
+
     @include attach-text-size-variables(font-size);
     @include attach-text-gap-variables(gap);
   }
 
-  .multiline {
-    // white-space: pre-wrap; // wrap by dot
-    white-space: wrap; // wrap by space
-  }
-
   .ellipsis {
+    display: -webkit-box;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .ellipsis.multiline {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     white-space: wrap;
+
+    // white-space: pre-wrap; // wrap by dot
   }
 }

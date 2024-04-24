@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 // ---| components |---
 import { AlertColor } from 'components/Alert'
 import Text from 'components/Text'
-import Block, { BlockDirection } from 'components/Block'
+import Block, { BlockVariant } from 'components/Block'
 import Actions from 'components/Actions'
 
 // ---| self |---
@@ -21,7 +21,7 @@ export const initToastKey = (name: ToastName) => `portal-${name}`
 export type ToastMessage = {
   content?: React.ReactNode
   color?: AlertColor
-  direction?: BlockDirection
+  v?: BlockVariant
   onClose?: () => void
   onSuccess?: () => void
 }
@@ -49,10 +49,10 @@ export function Toast(props: ToastProps): JSX.Element {
   }
 
   return (
-    <Block className={css.Toast} justify='space-between' direction={data.direction ?? 'x'} gap='xs'>
+    <Block className={css.Toast} justifies='space-between' v={data.v ?? 'x'} g='xs'>
       <Text.H4 color='primary' multiline content={data.content} />
 
-      <Actions gap='xs' justify='end'>
+      <Actions g='xs' justifies='end'>
         {data.onSuccess && (
           <Actions.Button
             size='xs'
@@ -94,9 +94,8 @@ export function ToastContainer(props: ToastContainerProps): JSX.Element {
 
   return (
     <RTToastContainer
-      hideProgressBar
-      enableMultiContainer
       containerId={initToastKey(name)}
+      hideProgressBar
       {...props}
     />
   )

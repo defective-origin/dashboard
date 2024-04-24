@@ -2,8 +2,7 @@
 ///
 /// @param {number} $width Tag width.
 /// @param {number} $height Tag height.
-@mixin stretch($width: 100%, $height: 100%, $grow: 1) {
+@mixin stretch($width: 100%, $height: 100%) {
   width: $width;
   height: $height;
-  flex-grow: $grow;
 }

@@ -4,36 +4,30 @@ import React from 'react'
 import { cn } from 'tools'
 import { Direction, Size } from 'theme'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
+import { ItemOptions, ItemReturnOptions, useItem } from 'components/Item'
 
 // ---| self |---
 import './Block.module.scss'
 
 export type BlockSpace = Size
-export type BlockDirection = Direction
+export type BlockVariant = Direction | 'cards'
 
-export type BlockOptions = {
-  gap?: BlockSpace
-  padding?: BlockSpace
-  margin?: BlockSpace
-  direction?: BlockDirection
-  grow?: React.CSSProperties['flexGrow']
-  align?: React.CSSProperties['alignItems']
-  justify?: React.CSSProperties['justifyContent']
-  stretch?: boolean
-  style?: React.CSSProperties
-  className?: string
-  children?: React.ReactNode
-  content?: React.ReactNode
+export type BlockOptions = ItemOptions & {
+  v?: BlockVariant
+  /** align items */
+  aligns?: React.CSSProperties['alignItems']
+  /** justify content */
+  justifies?: React.CSSProperties['justifyContent']
+  /** flex direction */
+  direction?: React.CSSProperties['flexDirection']
+  /** flex wrap */
+  wrap?: React.CSSProperties['flexWrap']
+  /** flex flow */
+  flow?: React.CSSProperties['flexFlow']
 }
 
-export type BlockReturnOptions<O extends object> = O & {
-  className: string
-  children?: React.ReactNode
-  style: React.CSSProperties
-}
+export type BlockReturnOptions<O extends object> = ItemReturnOptions<O>
 
 /**
  * Hook descriptions
@@ -43,35 +37,30 @@ export type BlockReturnOptions<O extends object> = O & {
  */
 export const useBlock = <O extends object>(options: O & BlockOptions): BlockReturnOptions<O> => {
   const {
-    direction = 'y',
-    gap,
-    padding,
-    margin,
-    grow,
-    align,
-    justify,
-    stretch,
-    content,
-    children = content,
+    v = 'y',
+    aligns,
+    justifies,
+    direction,
+    wrap,
+    flow,
+    children,
     className,
-    style = {},
+    style,
     ...otherOptions
-  } = options
+  } = useItem(options)
 
   return {
     ...otherOptions,
     children,
-    className: cn({
-      [`d--${direction}`]: direction,
-      [`p--${padding}`]: padding,
-      [`m--${margin}`]: margin,
-      [`g--${gap}`]: gap,
-      stretch: stretch,
+    className: cn('block', {
+      [`block--${v}`]: v,
     }, className),
     style: {
-      alignItems: align,
-      justifyContent: justify,
-      flexGrow: grow,
+      alignItems: aligns,
+      justifyContent: justifies,
+      flexDirection: direction,
+      flexWrap: wrap,
+      flexFlow: flow,
       ...style,
     },
   } as BlockReturnOptions<O>

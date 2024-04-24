@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
+export const isBrowser = typeof window !== 'undefined'
+
+export const isNavigator = typeof navigator !== 'undefined'
+
 // types
 export type Dictionary<T> = Record<string, T>;
 
@@ -9,7 +13,7 @@ export type FirstParameters<F> = F extends (x: infer P, ...args: any[]) => any ?
 export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P : never
 
 // work with props
-export type GeneralProps<T extends HTMLElement = HTMLElement> = React.DOMAttributes<T> & React.HTMLAttributes<T>
+export type GeneralProps<T extends Element> = React.DOMAttributes<T> & React.HTMLAttributes<T>
 
 export type ClearObject<
   T extends Record<string, unknown>,
@@ -209,7 +213,15 @@ export const hasExemplar = (items: React.ElementType<any>[], exemplar: React.Rea
   return items.some((item) => isExemplar(item, exemplar))
 }
 
-
+/**
+ * Check whether value is component
+ *
+ * How to use
+ * @example
+ * if (!react.isComponent(Tag)) {
+ *   return null
+ * }
+ */
 export const isComponent = (value: any): value is React.ElementType | string =>
   ['string', 'function'].includes(typeof value)
   || typeof value === 'object' && value?.$$typeof

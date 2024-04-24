@@ -1,15 +1,45 @@
 @import 'src/theme';
 
 :root {
-  --popup-backdrop-color: #00000080;
+  --popup-backdrop-color: var(--color--primary-9);
 }
 
 .OverlayContainer { position: relative; }
 
-.Overlay { position: absolute; pointer-events: none; }
+.Overlay { position: absolute; pointer-events: none; inset: 0; }
 .Window { position: fixed; }
 
 .Backdrop {
   background-color: var(--popup-backdrop-color);
   pointer-events: all;
 }
+
+.OverlayContent {
+  display: grid;
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  pointer-events: all;
+}
+
+// side variants
+.left { top: 0; bottom: 0; left: 0; }
+.right { top: 0; bottom: 0; right: 0; }
+.top { right: 0; left: 0; top: 0; }
+.bottom { right: 0; left: 0; bottom: 0; }
+
+// cerner variants
+.top-left { top: 0; left: 0; }
+.top-right { top: 0; right: 0; }
+.bottom-left { bottom: 0; left: 0; }
+.bottom-right { bottom: 0; right: 0; }
+
+// side-center variants
+.left-center {  top: 50%; left: 0; transform: translateY(-50%); }
+.right-center { top: 50%; right: 0; transform: translateY(-50%); }
+.top-center { left: 50%; top: 0; transform: translateX(-50%); }
+.bottom-center { left: 50%; bottom: 0; transform: translateX(-50%); }
+
+// center variants
+.full { inset: 0; }
+.center { top: 50%; left: 50%; transform: translate(-50%, -50%); }

@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-restricted-imports
 import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
-import {{pascalCase name}} from './{{pascalCase name}}.component'
+import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase name}}.component'
 
-const variants: string[] = ['success', 'info', 'warning', 'error']
+const variants: {{pascalCase name}}Props['v'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof {{pascalCase name}}> = {
   component: {{pascalCase name}},
@@ -11,7 +11,7 @@ const meta: Meta<typeof {{pascalCase name}}> = {
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),
-    children: field.reactNode(true),
+    children: field.reactNode(),
   },
 }
 

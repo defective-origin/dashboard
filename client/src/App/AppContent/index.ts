@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './Format.component'
+export { default } from './AppContent.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './Format.component'
+export * from './AppContent.component'

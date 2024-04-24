@@ -2,30 +2,26 @@
 import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import Block, { BlockProps } from './Block.component'
-import { BlockSpace, BlockDirection } from './Block.hook'
+import Item from 'components/Item'
 
-const direction: BlockDirection[] = ['x', 'y', 'xy']
-const spaces: BlockSpace[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-const aligns: BlockProps['align'][] = ['flex-start', 'center', 'flex-end', 'baseline', 'stretch' ]
-const justifies: BlockProps['justify'][] = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']
+const variants: BlockProps['v'][] = [undefined, 'x', 'y', 'xy', 'cards']
+const spaces: BlockProps['g'][] = [undefined, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+const aligns: BlockProps['aligns'][] = [undefined, 'flex-start', 'center', 'flex-end', 'baseline', 'stretch' ]
+const justifies: BlockProps['justifies'][] = [undefined, 'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']
 
 const meta: Meta<typeof Block> = {
-  title: 'Components/Block',
+  title: 'Components/LAYOUT/Block',
   component: Block,
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),
     children: field.reactNode(),
-    content: field.reactNode(true),
-    gap: field.variants(spaces, 'BlockSpace'),
-    padding: field.variants(spaces, 'BlockSpace'),
-    margin: field.variants(spaces, 'BlockSpace'),
-    direction: field.variants(direction, 'BlockDirection'),
-    justify: field.variants(justifies, 'JustifyContent'),
-    align: field.variants(aligns, 'AlignItems'),
-    stretch: field.boolean(),
-    grow: field.number('FlexGrow'),
-    style: field.css(),
+    g: field.variants(spaces, 'BlockSpace'),
+    p: field.variants(spaces, 'BlockSpace'),
+    m: field.variants(spaces, 'BlockSpace'),
+    v: field.variants(variants, 'BlockVariant', 'y'),
+    justifies: field.variants(justifies, 'JustifyContent'),
+    aligns: field.variants(aligns, 'AlignItems'),
   },
 }
 
@@ -33,98 +29,77 @@ export default meta
 
 type Story = StoryObj<typeof Block>
 
-const demoVariant = (props: BlockProps) => {
-  const direction = props?.direction ?? 'y'
+const render = (props: BlockProps) => {
+  const direction = props?.v ?? 'y'
 
   return (
-    <div style={{ background: '#f9cc9d' }}>
-      {props.margin && <div style={{ height: '0.5px' }} />}
+    <Block background='var(--sb-margin-color)'>
+      {/* prevent margins from collapsing */}
+      {props.m && <div style={{ height: '0.5px' }} />}
 
-      <Block style={{ background: '#c3d08b', minWidth: 200, minHeight: 200 }} {...props}>
+      <Block minWidth={200} minHeight={200} background='var(--sb-space-color)' {...props}>
         {Array.from(Array(10).keys()).map(() =>
-          <div
-            style={{
-              background: 'gray',
-              minWidth: direction === 'xy' ? 100 : 20,
-              minHeight: direction === 'xy' ? 100 : 20,
-              flex: 1,
-            }}
+          <Item
+            minWidth={['xy', 'cards'].includes(direction) ? 100 : 20}
+            minHeight={['xy', 'cards'].includes(direction) ? 100 : 20}
+            background='var(--sb-item-color)'
           />,
         )}
       </Block>
 
-      {props.margin && <div style={{ height: '0.5px' }} />}
-    </div>
+      {/* prevent margins from collapsing */}
+      {props.m && <div style={{ height: '0.5px' }} />}
+    </Block>
   )
 }
 
 export const Demo: Story = {
   parameters: params('Block'),
-  render: demoVariant,
+  render,
   args: {
-    direction: 'xy',
-    gap: 'xxs',
-    margin: 'xxs',
-    padding: 'xxs',
-    stretch: false,
+    v: 'cards',
+    g: 'xxs',
+    m: 'xxs',
+    p: 'xxs',
   },
 }
 
-export const Direction: Story = {
-  parameters: params('Direction', direction),
-  render: demoVariant,
+export const Variants: Story = {
+  parameters: params('Variant', variants),
+  render,
   args: {
-    direction: 'xy',
-    gap: 'xs',
+    v: 'x',
+    g: 'xxs',
   },
 }
 
-export const Gap: Story = {
-  parameters: params('Gap', spaces),
-  render: demoVariant,
+export const Spaces: Story = {
+  parameters: params('Margin | Padding | Gap', spaces),
+  render,
   args: {
-    direction: 'xy',
-    gap: 'sm',
+    v: 'cards',
+    g: 'xxs',
+    m: 'xxs',
+    p: 'xxs',
   },
 }
 
-export const Padding: Story = {
-  parameters: params('Padding', spaces),
-  render: demoVariant,
-  args: {
-    direction: 'xy',
-    gap: 'sm',
-    padding: 'sm',
-  },
-}
-
-export const Margin: Story = {
-  parameters: params('Margin', spaces),
-  render: demoVariant,
-  args: {
-    direction: 'xy',
-    gap: 'sm',
-    margin: 'sm',
-    padding: 'sm',
-  },
-}
-
-export const Justify: Story = {
+export const Justifies: Story = {
   parameters: params('Justify', justifies),
-  render: demoVariant,
+  render,
   args: {
-    direction: 'x',
-    gap: 'xs',
-    justify: 'space-between',
+    v: 'xy',
+    g: 'xxs',
+    justifies: 'center',
   },
 }
 
-export const Align: Story = {
+export const Aligns: Story = {
   parameters: params('Align', aligns),
-  render: demoVariant,
+  render,
   args: {
-    direction: 'x',
-    gap: 'xs',
-    align: 'center',
+    v: 'xy',
+    g: 'xxs',
+    aligns: 'center',
   },
 }

@@ -4,7 +4,7 @@ $text-name: text;
 
 // size
 $text-size-name: init-name($text-name, size);
-$text-size-map: init-size-map(8, 12, 16, 20, 24, 28, 32);
+$text-size-map: init-size-map(12, 16, 20, 24, 32, 40, 48);
 
 // gap
 $text-gap-name: init-name($text-name, gap);

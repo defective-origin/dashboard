@@ -24,7 +24,9 @@ export type ElementRef<E extends Element> = React.MutableRefObject<E | null>
  * Return element ref.
  *
  * @example
- * const elementRef = useElement(element, defaultElement)
+ * const elementRef = useElement(ref, defaultElement)
+ * const elementRef = useElement(document.body, defaultElement)
+ * const elementRef = useElement(() => document.body, defaultElement)
  */
 export const useElement = <E extends Element>(
   element: ElementOptions<E> = null,

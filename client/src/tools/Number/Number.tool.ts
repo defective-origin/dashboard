@@ -9,8 +9,15 @@ export type UnitOption = {
 
 export type UnitOptions = UnitOption[]
 
+export const isNumberValid = (value: NumberValue) => {
+  return !isNaN(Number(value))
+}
+
 /** 123,456,789.98 */
 export function toNumber(value: NumberValue, options?: Intl.NumberFormatOptions & { isInt?: boolean }) {
+  if (!isNumberValid(value)) {
+    return value
+  }
   // TODO: [kseniya_boldak] fix rounding up and Infinity case
 
   const fractionDigits = 20

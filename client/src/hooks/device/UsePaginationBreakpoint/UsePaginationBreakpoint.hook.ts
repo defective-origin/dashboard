@@ -42,13 +42,15 @@ export type PaginationBreakpointReturnOptions<T, E extends Element, B extends Br
  *   new GridPaginationBreakpoint(),
  * ]
  *
- * const options = usePaginationBreakpoint(GRID_BREAKPOINTS)
+ * const items = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+ *
+ * const options = usePaginationBreakpoint(items, GRID_BREAKPOINTS)
  * <div ref={options.ref}>{some render of options.items}</div>
  * {options.hasPrev && <button onClick={options.prev}>Prev</button>}
  * {options.hasNext && <button onClick={options.next}>Next</button>}
  *
  * // Observe vertical size with known element ref
- * const options = usePaginationBreakpoint(GRID_BREAKPOINTS, { direction: 'y', ref: elementRef })
+ * const options = usePaginationBreakpoint(items, GRID_BREAKPOINTS, { direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
 export const usePaginationBreakpoint = <T, E extends Element, B extends PaginationBreakpoint>(
   allItems: T[],

@@ -1,22 +1,20 @@
 import React from 'react'
 
 // ---| core |---
-import { Outlet } from 'router'
 import { cn } from 'tools'
 
 // ---| screens |---
 // ---| components |---
-import Layout from 'components/Layout'
+import Layout, { LayoutProps } from 'components/Layout'
 import Toast from 'components/Toast'
 
 // ---| self |---
 import './App.module.scss'
 import AppMenu from './AppMenu'
 import AppHeader from './AppHeader'
+import AppContent from './AppContent'
 
-export type AppProps = {
-  className?: string
-}
+export type AppProps = LayoutProps
 
 /**
  * Component description.
@@ -26,7 +24,7 @@ export type AppProps = {
  * <App />
  */
 export function App(props: AppProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
   const _className = cn('app', className)
 
   // TODO: add AppDrawer
@@ -34,9 +32,11 @@ export function App(props: AppProps): JSX.Element {
   // TODO: add AppDialog
   return (
     <Layout className={_className} stretch v='columns' {...otherProps}>
-      <Layout.LeftAside as='nav'><AppMenu /></Layout.LeftAside>
-      <Layout.Header as='header'><AppHeader /></Layout.Header>
-      <Layout.Content as='main'><Outlet /></Layout.Content>
+      <AppMenu />
+      <AppHeader />
+      <AppContent />
+
+      {children}
 
       {/* <Modal keepMounted open={!!itemMap.modal} content={itemMap.modal} onClose={onModalClose} /> */}
 

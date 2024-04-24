@@ -31,7 +31,7 @@ export type ResizeReturnOptions<E extends Element> = Omit<DOMRect, 'toJSON'> & {
  * By default observe body change.
  *
  * @example
- * const state = useResize(options)
+ * const state = useResize({ direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
 export const useResize = <E extends Element>(options?: ResizeOptions<E>): ResizeReturnOptions<E> => {
   const ref = useElement<E>(options?.ref, document.body)

@@ -32,7 +32,7 @@ export function SwitchField(props: SwitchFieldProps): JSX.Element {
   const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(event.target.checked))
 
   return (
-    <BaseField className={_className} errors={field.errors()} align='flex-start' {...otherProps}>
+    <BaseField className={_className} errors={field.errors()} aligns='flex-start' {...otherProps}>
       <MuiSwitchField name={field.name} size='small' checked={!!field.value()} onChange={handleChange} />
     </BaseField>
   )

@@ -8,6 +8,14 @@ import { cn, react } from 'tools'
 import Meta, { MetaItem } from 'components/Meta'
 import Layout, { LayoutProps } from 'components/Layout'
 
+import Item from 'components/Item'
+import Aside from 'components/Aside'
+import Block from 'components/Block'
+import Content from 'components/Content'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
+import Section from 'components/Section'
+
 // ---| self |---
 import css from './Page.module.scss'
 
@@ -37,11 +45,12 @@ export function Page(props: PageProps): JSX.Element {
 }
 
 export default react.attachComponents(Page, {
-  LeftAside: Layout.LeftAside,
-  RightAside: Layout.RightAside,
-  Footer: Layout.Footer,
-  Header: Layout.Header,
-  Content: Layout.Content,
-  Section: Layout.Section,
-  Block: Layout.Block,
+  Item,
+  Footer,
+  Header,
+  Content,
+  Section,
+  Block,
+  LeftAside: Aside.Left,
+  RightAside: Aside.Right,
 })

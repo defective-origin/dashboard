@@ -5,17 +5,17 @@
 }
 
 :global {
-  .g { @include attach-space-gap-variables(gap);}
-  .p { @include attach-space-padding-variables(padding);}
-  .m { @include attach-space-margin-variables(margin);}
+  .block {
+    display: flex;
 
-  .d {
-    &--x { display: flex; flex-flow: row nowrap; }
-    &--y { display: flex; flex-flow: column nowrap; }
-    &--xy { display: flex; flex-flow: row wrap; }
-  }
+    // template
+    &--x { flex-flow: row nowrap; }
+    &--y { flex-flow: column nowrap; }
+    &--xy { flex-flow: row wrap; }
+    &--cards { flex-flow: row wrap; align-content: stretch; }
 
-  .stretch {
-    @include stretch;
+    &--cards > * {
+      flex-grow: 1;
+    }
   }
 }

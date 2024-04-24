@@ -3,7 +3,7 @@
 @mixin init-color-theme() {
   // colors
   $color-name: color;
-  $color-map: init-color-map(#000000, #000000, #000000, #000000, #000000, #000000, #000000);
+  $color-map: init-color-map(#2C2B3B, #571DC6, #0EA314, #0B3E92, #D1B111, #D11111, #9F9EAA);
 
   @include init-variables($color-name, $color-map);
 

@@ -62,15 +62,15 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
 
   return (
     <BasePage className={_className} scroll='y' name='PAGES.WIDGETS' {...otherProps}>
-      <Form name='FORM_NAME' onSubmit={formLog} onChange={formLog} onReset={log} padding='xxl'>
-        <Form.Alerts items={ALERTS} gap='xs'>
+      <Form name='FORM_NAME' onSubmit={formLog} onChange={formLog} onReset={log} p='xxl'>
+        <Form.Alerts items={ALERTS} g='xs'>
           <Form.Alert color='success' content='success' />
           <Form.Alert color='info' content='info' />
           <Form.Alert color='warning' content='warning' />
           <Form.Alert color='error' content='error' />
         </Form.Alerts>
 
-        <Form.Content gap='xs'>
+        <Form.Content g='xs'>
           <Form.Actions items={ACTIONS} />
           <Form.Actions>
             FORM ACTIONS
@@ -78,27 +78,27 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
             <Form.Submit content='Submit' />
           </Form.Actions>
 
-          <Form.Block className={_className} direction='x' gap='xs'>
+          <Form.Block className={_className} v='x' g='xs'>
             <Form.Field.Checkbox name='with' label='with' value='checkbox' messages={MESSAGES} checked onChange={log} />
             <Form.Field.Checkbox name='without' label='without' messages={MESSAGES} checked onChange={log} />
           </Form.Block>
 
-          <Form.Block className={_className} direction='x' gap='xs'>
+          <Form.Block className={_className} v='x' g='xs'>
             <Form.Field.Radio name='radio' label='radio 1' value={1} messages={MESSAGES} onChange={log} checked />
             <Form.Field.Radio name='radio' label='radio 2' value={2} messages={MESSAGES} onChange={log} />
           </Form.Block>
 
-          <Form.Block className={_className} direction='x' gap='xs'>
+          <Form.Block className={_className} v='x' g='xs'>
             <Form.Field.Switch name='switch1' label='switch1' messages={MESSAGES} onChange={log} />
             <Form.Field.Switch name='switch2' label='switch2' messages={MESSAGES} onChange={log} />
           </Form.Block>
 
-          <Form.Block className={_className} direction='x' gap='xs'>
+          <Form.Block className={_className} v='x' g='xs'>
             <Form.Field.Slider name='slider' label='slider' value={75} messages={MESSAGES} onChange={log} />
             <Form.Field.Number name='number' label='number' value={75} messages={MESSAGES} onChange={log} />
           </Form.Block>
 
-          <Form.Block className={_className} direction='x' gap='xs'>
+          <Form.Block className={_className} v='x' g='xs'>
             <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
             <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
           </Form.Block>
@@ -110,7 +110,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
               <Form.Submit content='Submit' />
             </Form.Actions>
 
-            <Form.Content direction='x' gap='xs'>
+            <Form.Content v='x' g='xs'>
               <Form.Field.Radio name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
               <Form.Field.Switch name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
               <Form.Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
@@ -128,7 +128,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
               <Form.Submit content='Submit' />
             </Form.Actions>
 
-            <Form.Content direction='x' gap='xs'>
+            <Form.Content v='x' g='xs'>
               <Form.Field.Radio name='item_0' label='radio' value={true} messages={MESSAGES} onChange={log} />
               <Form.Field.Switch name='item_1' label='switch' value={true} messages={MESSAGES} onChange={log} />
               <Form.Field.Checkbox name='item_2' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />

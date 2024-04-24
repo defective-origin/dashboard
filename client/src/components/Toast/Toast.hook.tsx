@@ -35,7 +35,7 @@ export type ToastReturnOptions = {
  */
 
 export const useToast = (): ToastReturnOptions => {
-  const initToast = useFunc((data: ToastMessage, options: MuiToastOptions<ToastMessage>) =>
+  const showToast = useFunc((data: ToastMessage, options: MuiToastOptions<ToastMessage>) =>
     toast(Toast, {
       ...options,
       data: { ...options.data, ...data },
@@ -45,14 +45,14 @@ export const useToast = (): ToastReturnOptions => {
   )
 
   const message = useFunc((data: ToastMessage) =>
-    initToast(data, {
+    showToast(data, {
       containerId: initToastKey('messages'),
-      data: { direction: 'y' },
+      data: { v: 'y' },
     }),
   )
 
   const alert = useFunc((data: ToastMessage) =>
-    initToast(data, {
+    showToast(data, {
       theme: 'colored',
       containerId: initToastKey('alerts'),
       autoClose: false,
@@ -60,7 +60,7 @@ export const useToast = (): ToastReturnOptions => {
   )
 
   const guard = useFunc((data: ToastMessage) =>
-    initToast(data, {
+    showToast(data, {
       toastId: 'guard',
       theme: 'light',
       containerId: initToastKey('guards'),

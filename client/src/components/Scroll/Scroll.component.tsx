@@ -26,7 +26,7 @@ const offset = (value: Offset, defaultValue = 0) => {
 
 export type ScrollVariant = Direction
 
-export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled'> & {
+export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
   v?: ScrollVariant
   /** Actions offset. */
   actions?: Offset
@@ -49,7 +49,7 @@ export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled'> & {
  *   <Scroll v={scroll} actions visible />
  * </div>
  */
-export default function Scroll(props: ScrollProps): JSX.Element | null {
+export function Scroll(props: ScrollProps): JSX.Element | null {
   const {
     v = 'y',
     back,
@@ -144,3 +144,7 @@ export default function Scroll(props: ScrollProps): JSX.Element | null {
     </div>
   )
 }
+
+Scroll.displayName = 'Scroll'
+
+export default Scroll

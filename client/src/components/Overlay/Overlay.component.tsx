@@ -1,7 +1,8 @@
-import React, { forwardRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { ElementOptions, useMode } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -9,11 +10,25 @@ import { cn } from 'tools'
 
 // ---| self |---
 import css from './Overlay.module.scss'
-import OverlayItem from './OverlayItem'
+
+export type OverlaySideVariant = 'left' | 'right' | 'top' | 'bottom'
+export type OverlaySideCernerVariant = 'left-center' | 'right-center' | 'top-center' | 'bottom-center'
+export type OverlayCernerVariant = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+export type OverlayCenterVariant = 'center' | 'full'
+export type OverlayVariant = OverlaySideVariant | OverlaySideCernerVariant | OverlayCernerVariant | OverlayCenterVariant
 
 export type OverlayProps = React.HTMLAttributes<HTMLDivElement> & {
+  v?: OverlayVariant
+  width?: React.CSSProperties['width']
+  height?: React.CSSProperties['height']
+  indent?: React.CSSProperties['margin']
   window?: boolean
   backdrop?: boolean
+  contentClassName?: string
+  /** Set class name on overlay container when overlay mounted. */
+  containerClassName?: string
+  /** Container selector. If not passed then takes first parent node. */
+  container?: ElementOptions<HTMLElement>
 }
 
 /**
@@ -39,41 +54,56 @@ export type OverlayProps = React.HTMLAttributes<HTMLDivElement> & {
  *    const breakpoint = useBreakpoint(breakpoints)
  *
  *    return (
- *      <Overlay ref={breakpoint.ref} {...otherProps}>
- *        <Overlay.Item v={breakpoint.name}>
- *          {children}
- *        </Overlay.Item>
+ *      <Overlay ref={breakpoint.ref} v={breakpoint.name} indent={10} {...otherProps}>
+ *        {children}
  *      </Overlay>
  *    )
  * }
  */
-export const Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, ref): JSX.Element => {
+export function Overlay(props: OverlayProps): JSX.Element {
   const {
+    v = 'center',
+    width,
+    height,
+    indent,
     backdrop,
     window,
+    container = () => overlayRef.current?.parentElement,
     className,
+    contentClassName,
+    containerClassName,
+    children,
     ...otherProps
   } = props
+  const overlayRef = useRef<HTMLDivElement>(null)
   const _className = cn(css.Overlay, {
     [css.Backdrop]: backdrop,
     [css.Window]: window,
   }, className)
 
-  useEffect(() => {
-    const parent = (ref as React.MutableRefObject<HTMLDivElement | null>).current?.parentElement
-    const position = parent && getComputedStyle(parent).getPropertyValue('position')
+  const _contentClassName = cn(css.OverlayContent, css[v], contentClassName)
+  const styles = {
+    margin: indent,
+    width: v === 'full' ? undefined : width,
+    height: v === 'full' ? undefined : height,
+  }
+
+  useMode(container, containerClassName, (element) => {
+    const position = element && getComputedStyle(element).getPropertyValue('position')
     if (position && position === 'static' && !window) {
-      parent?.classList.add(css.OverlayWrapper)
-
-      return () => parent?.classList.remove(css.OverlayWrapper)
+      return css.OverlayContainer
     }
-  }, [ref, window])
+  })
 
-  return <div ref={ref} className={_className} {...otherProps} />
-})
+  return (
+    <div className={_className} ref={overlayRef}>
+      <div className={_contentClassName} style={styles} {...otherProps}>
+        {children}
+      </div>
+    </div>
+  )
+}
 
 Overlay.displayName = 'Overlay'
-
-Overlay.Item = OverlayItem
 
 export default Overlay

@@ -39,7 +39,7 @@ export function Alert(props: AlertProps): JSX.Element | null {
   return (
     <MuiAlert className={_className} severity={color} {...otherProps}>
       {title && <MuiAlertTitle><Text.H4 size='sm' content={title} /></MuiAlertTitle>}
-      <Text.Caption size='xs' content={children} />
+      <Text.Caption content={children} />
     </MuiAlert>
   )
 }

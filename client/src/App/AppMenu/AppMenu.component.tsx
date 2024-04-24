@@ -7,6 +7,7 @@ import { useLauncher } from 'Launcher'
 import { cn } from 'tools'
 
 // ---| components |---
+import Aside, { AsideProps } from 'components/Aside'
 import Block from 'components/Block'
 import Logo from 'components/Logo'
 
@@ -14,10 +15,7 @@ import Logo from 'components/Logo'
 import css from './AppMenu.module.scss'
 import AppMenuItem from './AppMenuItem'
 
-export type AppMenuProps = {
-  className?: string
-  children?: React.ReactNode
-}
+export type AppMenuProps = AsideProps
 
 /**
  * Component description.
@@ -35,10 +33,10 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   // TODO: implement via Menu instead of Block?
 
   return (
-    <Block className={_className} {...otherProps}>
+    <Aside className={_className} as='nav' {...otherProps}>
       <Logo v='logo' href={ROUTE_LINKS.ROOT} />
 
-      <Block className={css.Main} stretch>
+      <Block className={css.Main} grow={1}>
         <AppMenuItem start='dashboard' href={ROUTE_LINKS.BOARDS} tooltip={locale.t('LINKS.BOARDS')} />
         <AppMenuItem start='insert_chart' href={ROUTE_LINKS.WIDGETS} tooltip={locale.t('LINKS.WIDGETS')} />
 
@@ -52,7 +50,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
         <AppMenuItem start={`${app.theme()}_mode`} onClick={app.toggleTheme} tooltip={app.theme()} fillIcon />
         <AppMenuItem start='language' tooltip={locale.language} />
       </Block>
-    </Block>
+    </Aside>
   )
 }
 

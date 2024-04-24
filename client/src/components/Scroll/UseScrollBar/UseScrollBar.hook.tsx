@@ -48,7 +48,7 @@ export type ScrollBarOptions = ScrollOptions & {
   visible?: boolean
   /** Space between scroll and border. */
   indent?: number
-  /**  Selector of scrollable container. If not passed then takes first parent node. */
+  /** Container selector. If not passed then takes first parent node. */
   container?: ElementOptions<HTMLElement>
 }
 

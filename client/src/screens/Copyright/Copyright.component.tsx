@@ -29,9 +29,8 @@ export function Copyright(props: CopyrightProps): JSX.Element {
   const locale = useLocale()
 
   return (
-    <Text.H5
+    <Text.Body2
       className={_className}
-      size='xs'
       color='secondary'
       content={locale.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}
       {...otherProps}

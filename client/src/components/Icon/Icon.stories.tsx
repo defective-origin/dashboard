@@ -11,7 +11,7 @@ const variants: IconVariant[] = ['light_mode', 'dark_mode', 'paid', 'language', 
   'info', 'warning', 'error', 'check_circle']
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/Icon',
+  title: 'Components/DATA DISPLAY/Icon',
   component: Icon,
   tags: ['autodocs'],
   argTypes: {
@@ -27,15 +27,14 @@ export default meta
 
 type Story = StoryObj<typeof Icon>
 
-// TODO: [kseniya_boldak] Move to storybook tools
-const initVariants = <P extends keyof IconProps>(prop: P, items: IconProps[P][], fill?: boolean) => (
-  <Block direction='xy' gap='sm' style={{ minWidth: 200 }}>
-    {items.map((item) => <Icon v='light_mode' fill={fill} size='xl' {...{ [prop]: item }} />)}
+const initVariants = <P extends keyof IconProps>(prop: P, items: IconProps[P][]) => (
+  <Block v='xy' g='sm'>
+    {items.map((item) => <Icon v='settings' size='xl' {...{ [prop]: item }} />)}
   </Block>
 )
 
 export const Demo: Story = {
-  parameters: params('Text'),
+  parameters: params('Icon'),
   args: {
     v: 'settings',
     size: 'md',
@@ -45,18 +44,13 @@ export const Demo: Story = {
   },
 }
 
-export const OutlinedVariants: Story = {
-  parameters: params('The `outlined` variants of the Icon component.'),
-  render: () => initVariants('v', variants),
-}
-
-export const FilledVariants: Story = {
-  parameters: params('The `filled` variants of the Icon component.'),
-  render: () => initVariants('v', variants, true),
+export const Fill: Story = {
+  parameters: params('By default Icon is `outlined`. To make it `filled` pass `fill` prop as `true`.'),
+  render: () => initVariants('fill', [false, true]),
 }
 
 export const Sizes: Story = {
-  parameters: params('Size', sizes),
+  parameters: params('Size', sizes, 'md'),
   render: () => initVariants('size', sizes),
 }
 
@@ -66,5 +60,4 @@ export const Loading: Story = {
     v: 'light_mode',
     loading: true,
   },
-  render: (args) => <Icon {...args} />,
 }

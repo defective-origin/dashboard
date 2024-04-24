@@ -42,7 +42,7 @@ export function RadioField(props: RadioFieldProps): JSX.Element {
   })
 
   return (
-    <BaseField className={_className} errors={field.errors()} align='flex-start' {...otherProps}>
+    <BaseField className={_className} errors={field.errors()} aligns='flex-start' {...otherProps}>
       <MuiRadioField name={field.name} size='small' value={value} checked={value === field.value()} onChange={handleChange} />
     </BaseField>
   )

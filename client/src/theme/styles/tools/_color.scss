@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use 'sass:map';
 
 $colors: primary, secondary, success, info, warning, error, disable;
 
@@ -21,7 +22,8 @@ $colors: primary, secondary, success, info, warning, error, disable;
 /// @param {number} $alpha Alpha shift unit.
 /// @return {map} Color map
 @function init-color-map($primary, $secondary, $success, $info, $warning, $error, $disable, $alpha: 0) {
-  @return (
+  $palette: ();
+  $colors: (
     'primary': init-color($primary, $alpha),
     'secondary': init-color($secondary, $alpha),
     'success': init-color($success, $alpha),
@@ -30,6 +32,18 @@ $colors: primary, secondary, success, info, warning, error, disable;
     'error': init-color($error, $alpha),
     'disable': init-color($disable, $alpha),
   );
+
+  @each $name, $color in $colors {
+    $palette: map.set($palette, $name, $color);
+
+    @for $i from 1 through 9 {
+      $new-name: '#{$name}-#{$i}';
+      $new-color: color.adjust($color, $lightness: $i * 5%);
+      $palette: map.set($palette, $new-name, $new-color);
+    }
+  }
+
+  @return $palette;
 }
 
 /// Attach css color variables to element as modifier.
@@ -38,21 +52,3 @@ $colors: primary, secondary, success, info, warning, error, disable;
 @mixin attach-color-variables($name, $property) {
   @include attach-variables($name, $colors, $property);
 }
-
-// /// Create color palette map.
-// /// @param {color} $black Color in hex format.
-// /// @param {color} $green Color in hex format.
-// /// @param {color} $blue Color in hex format.
-// /// @param {color} $orange Color in hex format.
-// /// @param {color} $red Color in hex format.
-// /// @param {number} $shift Shift to next color.
-// /// @return {map} Color map
-// @function init-color-palette-map($black, $green, $blue, $orange, $red, $shift: 0) {
-//   @return (
-//     'black': init-color($black, $alpha),
-//     'green': init-color($green, $alpha),
-//     'blue': init-color($blue, $alpha),
-//     'orange': init-color($orange, $alpha),
-//     'red': init-color($red, $alpha),
-//   );
-// }

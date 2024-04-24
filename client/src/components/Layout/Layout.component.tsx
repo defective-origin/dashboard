@@ -2,16 +2,14 @@ import React from 'react'
 
 // ---| core |---
 import { react } from 'tools'
+import { Size } from 'theme'
 
 // ---| components |---
-import Block from 'components/Block'
-import Section from 'components/Section'
-
 // ---| self |---
-import LayoutItem from './LayoutItem'
 import useLayout, { LayoutOptions } from './Layout.hook'
 
-export type LayoutProps = LayoutOptions
+export type LayoutSpace = Size
+export type LayoutProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<LayoutOptions, E>
 
 /**
  * Grid orientation component.
@@ -21,25 +19,12 @@ export type LayoutProps = LayoutOptions
  * @example
  * <Layout />
  */
-export function Layout(props: LayoutProps): JSX.Element | null {
-  const { children, className, style, ...otherProps } = useLayout(props)
+export function Layout<E extends React.ElementType = 'div'>(props: LayoutProps<E>): JSX.Element | null {
+  const { as: Tag = 'div', ...layoutProps } = useLayout(props)
 
-  return (
-    <div className={className} {...otherProps} style={style}>
-      {children}
-    </div>
-  )
+  return <Tag {...layoutProps} />
 }
 
 Layout.displayName = 'Layout'
 
-export default react.attachComponents(Layout, {
-  Item: LayoutItem,
-  LeftAside: LayoutItem.LeftAside,
-  RightAside: LayoutItem.RightAside,
-  Footer: LayoutItem.Footer,
-  Header: LayoutItem.Header,
-  Content: LayoutItem.Content,
-  Section: Section,
-  Block: Block,
-})
+export default Layout

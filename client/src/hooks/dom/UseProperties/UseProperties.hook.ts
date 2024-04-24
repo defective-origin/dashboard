@@ -29,7 +29,7 @@ export type PropertiesReturnOptions<T extends Record<string, unknown>> = Record<
  *  ref: elementRef.current,
  *  primary: '--primary-color',
  *  secondary: '--secondary-color',
- * })
+ * }, [theme])
  */
 export const useProperties = <T extends Record<string, unknown>>(options: PropertiesOptions<T>, deps: unknown[] = []): PropertiesReturnOptions<T> => {
   const { ref, ...map } = options

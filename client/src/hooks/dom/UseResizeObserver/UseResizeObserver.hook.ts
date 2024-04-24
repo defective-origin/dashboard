@@ -15,7 +15,7 @@ export type ResizeObserverReturnOptions<E extends Element> = ElementRef<E>
  * By default observe body change.
  *
  * @example
- * const ref = useResizeObserver(() => console.log('RESIZED'), options)
+ * const ref = useResizeObserver(() => console.log('RESIZED'), { direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
 export const useResizeObserver = <E extends Element>(
   listener: ResizeObserverCallback,

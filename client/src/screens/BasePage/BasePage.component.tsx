@@ -65,15 +65,15 @@ export function BasePage(props: BasePageProps): JSX.Element {
     <Page className={_className} name={tabName} meta={meta} v='columns' stretch {...otherProps}>
       {/* portal name and actions to AppHeader component */}
       <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
-      <Portal name='page-actions' content={<Actions items={testActions} gap='xs' />} />
+      <Portal name='page-actions' content={<Actions items={testActions} g='xs' />} />
 
-      <Page.Content gap='xs'>
+      <Page.Content g='xs'>
         <Scroll v={scroll} actions />
 
         {children}
       </Page.Content>
 
-      <Page.Footer direction='x' justify='center'>
+      <Page.Footer v='x' justifies='center'>
         <Copyright />
       </Page.Footer>
     </Page>

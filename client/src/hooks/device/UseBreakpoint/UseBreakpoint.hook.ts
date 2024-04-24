@@ -57,7 +57,7 @@ export type BreakpointReturnOptions<E extends Element, B extends Breakpoint> = B
  * <div ref={options.ref}>{some render of options.names}</div>
  *
  * // Observe vertical size with known element ref
- * const options = useBreakpoint(MEDIA_BREAKPOINTS, { direction: 'y', ref: element })
+ * const options = useBreakpoint(MEDIA_BREAKPOINTS, { direction: 'y', ref: elementRef, ...resizeObserverOptions })
  *
  * useMode(options.names)
  */
@@ -68,7 +68,7 @@ export const useBreakpoint = <E extends Element, B extends Breakpoint>(
   const ref = useElement<E>(options?.ref, document.body)
   const [current, setCurrent] = useState(() => getBreakpoint(breakpoints, options?.direction, ref.current))
 
-  useResizeObserver(() => setCurrent(getBreakpoint(breakpoints, options?.direction, ref.current)), { ref })
+  useResizeObserver(() => setCurrent(getBreakpoint(breakpoints, options?.direction, ref.current)), options)
 
   return useMemo(() => ({ ref, ...current as B }), [ref, current])
 }

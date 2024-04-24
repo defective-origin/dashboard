@@ -42,7 +42,9 @@ export type MoreBreakpointReturnOptions<T, E extends Element, B extends Breakpoi
  *   new MenuMoreBreakpoint(),
  * ]
  *
- * const options = useMoreBreakpoint(MENU_MORE_BREAKPOINTS)
+ * const items = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+ *
+ * const options = useMoreBreakpoint(items, MENU_MORE_BREAKPOINTS)
  *
  * <div ref={options.ref}>{some render of options.items}</div>
  * <DropdownMenu content='More' items={options.remainingItems} />
@@ -50,7 +52,7 @@ export type MoreBreakpointReturnOptions<T, E extends Element, B extends Breakpoi
  * {!!options.remainingItems.length && <button onClick={options.less}>Show Less</button>}
  *
  * // Observe vertical size with known element ref
- * const options = useMoreBreakpoint(MENU_MORE_BREAKPOINTS, { direction: 'y', ref: elementRef })
+ * const options = useMoreBreakpoint(items, MENU_MORE_BREAKPOINTS, { direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
 export const useMoreBreakpoint = <T, E extends Element, B extends MoreBreakpoint>(
   allItems: T[],
