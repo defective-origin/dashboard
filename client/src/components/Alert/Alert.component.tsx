@@ -15,7 +15,7 @@ import Text from 'components/Text'
 import css from './Alert.module.scss'
 
 
-export type AlertColor = Exclude<Color, 'primary' | 'secondary' | 'disable'>
+export type AlertColor = Exclude<Color, 'primary' | 'secondary' | 'bg' | 'contrast'>
 
 export type AlertProps = {
   title?: React.ReactNode

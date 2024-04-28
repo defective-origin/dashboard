@@ -84,9 +84,9 @@ export function Banner(props: BannerProps): JSX.Element | null {
         <Block className={cn(css.Content, contentClassName)}>
           <Image v={options.image} />
 
-          {title && <Text.H4 align='center' color='primary' content={title ?? options.title} />}
-          {subtitle && <Text.H5 align='center' color='primary' content={subtitle} />}
-          {text && <Text.Body1 align='center' color='primary' content={text} multiline />}
+          {title && <Text.H4 align='center' color='primary' ellipsis content={title ?? options.title} />}
+          {subtitle && <Text.H5 align='center' color='primary' ellipsis content={subtitle} />}
+          {text && <Text.Body1 align='center' color='primary' content={text} />}
 
           {children}
         </Block>

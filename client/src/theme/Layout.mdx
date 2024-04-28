@@ -1,0 +1,39 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as ItemStories from '../components/Item/Item.stories';
+import * as BlockStories from '../components/Block/Block.stories';
+import * as LayoutStories from '../components/Layout/Layout.stories';
+
+<Meta title='Requirements/Layout' />
+
+# Layout
+
+### Names
+All variables should have size __mark__.  
+
+**Breakpoints:** `mobile[vertical horizontal]` `tablet[vertical horizontal]` `desktop` `tv`  
+**Sizes:** `xxs` `xs` `sm` `md` `lg` `xl` `xxl`  
+
+### Spaces
+__Adjacent elements__ must be separated by __gap__ spaces.  
+__Internal elements__ can be separated from the edge by __paddings__.  
+As a last resort, __margin__ can be used.  
+
+**Size[px]:** `xxs[4]` `xs[8]` `sm[12]` `md[16]` `lg[24]` `xl[32]` `xxl[48]`  
+**Area:** `size` `margin` `padding` `gap`  
+**Variable template:** `--space-{area}--{size}`
+
+<Canvas of={ItemStories.Spaces} />
+
+### Layouts [[Grid](?path=/docs/components-layout-Layout--docs), [Flex](?path=/docs/components-layout-block--docs)]
+Layout can be __Grid__-oriented or __Flex__-oriented  
+
+#### Flex [[Playground](?path=/docs/components-layout-block--docs)]
+__Flex__ layout can be used only for __iterable elements__, like: __actions, cards, sections, messages__ and so on.
+
+<Canvas of={BlockStories.Variants} />
+
+#### Grid [[Playground](?path=/docs/components-layout-Layout--docs)]
+__Grid__ is used for application __layouts, structure__ and in other cases.  
+__Grid__ allows to use __magnet__ approach for building app layout.
+
+<Canvas of={LayoutStories.Variants} />

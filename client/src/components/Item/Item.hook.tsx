@@ -2,12 +2,13 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Size } from 'theme'
+import { Color, Size } from 'theme'
 
 // ---| self |---
 import './Item.module.scss'
 
 export type ItemSpace = Size
+export type ItemColor = Color
 export type ItemArea = 'left' | 'right' | 'top' | 'bottom' | 'center'
 
 export type ItemOptions = {
@@ -35,6 +36,8 @@ export type ItemOptions = {
   place?: React.CSSProperties['placeSelf']
   background?: React.CSSProperties['background']
   border?: React.CSSProperties['border']
+  position?: React.CSSProperties['position']
+  color?: React.CSSProperties['color']
 
 
   column?: string
@@ -65,6 +68,8 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
     column,
     row,
     span,
+    color,
+    position,
     display,
     area,
     align,
@@ -109,6 +114,8 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
       background,
       border,
       display,
+      position,
+      color,
 
       // grid-column-start
       // grid-column-end

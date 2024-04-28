@@ -64,7 +64,7 @@ export function Messages(props: MessagesProps): JSX.Element {
   )
 }
 
-Messages.Message = Text
+Messages.Item = Text
 
 Messages.displayName = 'Messages'
 

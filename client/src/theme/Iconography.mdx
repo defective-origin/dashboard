@@ -1,0 +1,35 @@
+import { Canvas, Meta, IconGallery, IconItem } from '@storybook/blocks';
+import * as IconStories from '../components/Icon/Icon.stories';
+import Icon, { ICONS } from '../components/Icon';
+
+<Meta title='Requirements/Iconography' />
+
+# Iconography [[Playground](?path=/docs/components-data-display-icon--docs)]
+
+**Font:** [Google Symbols](https://fonts.google.com/icons)  
+**Size[px]:** `xxs[12]` `xs[16]` `sm[20]` `md[24]` `lg[32]` `xl[40]` `xxl[48]`   
+**Variable template:** `--icon-size--{size}` `--icon-color--{color}`
+
+#### Sizes
+**Variable template:** `--icon-size--{size}`
+
+<Canvas of={IconStories.Sizes} />
+
+#### Colors [[Requirements](?path=/docs/requirements-colors--docs)]
+**Variable template:** `--icon-color--{color}`
+
+<Canvas of={IconStories.Colors} />
+
+#### Highlight
+
+<Canvas of={IconStories.Highlight} />
+
+#### Icons
+
+<IconGallery>
+  {ICONS.map((icon) => (
+    <IconItem key={icon} name={icon}>
+      <Icon v={icon} size='md' />
+    </IconItem>
+  ))}
+</IconGallery>

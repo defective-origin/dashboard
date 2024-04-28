@@ -1,18 +1,13 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
-import { themes } from '@storybook/theming';
 import { withThemeByClassName } from "@storybook/addon-styling";
 import ThemeProvider from '../src/theme'
+import { DocsContainer } from '@storybook/addon-docs/blocks';
 
 import "./index.scss";
 
 
 export const decorators = [
-  (Story) => (
-    <ThemeProvider>
-      <Story />
-    </ThemeProvider>
-  ),
   withThemeByClassName({
     themes: {
       light: "light",
@@ -22,11 +17,17 @@ export const decorators = [
   }),
 ];
 
-// TODO: hide addons panel for all stories
 const preview: Preview = {
   parameters: {
     docs: {
-      theme: themes.light,
+      container: ({ context, ...other }) => {
+        // It's hack. Decorators doesn't work with mdx files without any stories
+        return (
+          <ThemeProvider current={context.store.globals.globals.theme}>
+            <DocsContainer context={context} {...other} />
+          </ThemeProvider>
+        )
+      },
     },
     controls: {
       matchers: {

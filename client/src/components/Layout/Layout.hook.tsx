@@ -12,6 +12,8 @@ import './Layout.module.scss'
 
 export type LayoutSpace = Size
 export type LayoutVariant = 'board' | 'row' | 'rows' | 'column' | 'columns' | 'top' | 'bottom' | 'left' | 'right'
+// TODO: add grid-template-columns: repeat(/* auto-fill или auto-fit */, /* размер колонки */); https://doka.guide/css/grid-guide/
+// TODO: add dense
 
 export type LayoutOptions = ItemOptions & {
   v?: LayoutVariant
@@ -38,7 +40,10 @@ export type LayoutOptions = ItemOptions & {
 export type LayoutReturnOptions<O extends object> = ItemReturnOptions<O>
 
 /**
- * Hook descriptions
+ * Grid orientation component.
+ * Allows to work with Grid items.
+ *
+ * https://doka.guide/css/grid-guide/
  *
  * @example
  * const options = useLayout(conf)

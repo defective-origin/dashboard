@@ -10,7 +10,8 @@
 .Window { position: fixed; }
 
 .Backdrop {
-  background-color: var(--popup-backdrop-color);
+  backdrop-filter: blur(3px);
+  background-color: rgba(#000000, 0.1); // background-color: rgba(var(--popup-backdrop-color), 0.1);
   pointer-events: all;
 }
 

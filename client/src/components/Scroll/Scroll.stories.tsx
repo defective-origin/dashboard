@@ -1,11 +1,9 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import Block from 'components/Block'
 import Scroll, { ScrollProps } from './Scroll.component'
-
-const variants: ScrollProps['v'][] = ['x', 'y', 'xy']
-const sizes: ScrollProps['size'][] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+import { DIRECTION, SIZES } from 'theme'
 
 const meta: Meta<typeof Scroll> = {
   title: 'Components/LAYOUT/Scroll',
@@ -21,8 +19,8 @@ const meta: Meta<typeof Scroll> = {
     children: field.reactNode(),
     visible: field.boolean(),
     indent: field.number('Margin', 2),
-    v: field.variants(variants, 'ScrollVariant', 'y'),
-    size: field.variants(sizes, 'ScrollBarSize', 'md'),
+    v: field.variants(DIRECTION, 'ScrollVariant', 'y'),
+    size: field.variants(SIZES, 'ScrollBarSize', 'md'),
     container: field.element(),
     actions: field.object('Offset'),
     back: field.object('Offset'),
@@ -34,7 +32,7 @@ export default meta
 type Story = StoryObj<typeof Scroll>
 
 const render = (props: ScrollProps) => (
-  <Block v='x' width={300} height={300} border='1px solid var(--sb-border-color)'>
+  <Block v='x' width={300} height={300} border={SB_CSS.border}>
     <Scroll children='Scroll overlay content' {...props}/>
     <Block minWidth={1000} minHeight={1000} />
   </Block>
@@ -55,7 +53,7 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('View', variants),
+  parameters: params('View', DIRECTION),
   render,
   args: {
     v: 'xy',
@@ -64,7 +62,7 @@ export const Variants: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('View', variants),
+  parameters: params('View', SIZES),
   render,
   args: {
     v: 'xy',

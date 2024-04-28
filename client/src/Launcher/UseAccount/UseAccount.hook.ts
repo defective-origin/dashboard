@@ -45,8 +45,6 @@ export const useAccount = (): AccountReturnOptions => {
     setSettings((current) => ({ ...current, theme }))
   })
 
-  useMode(theme())
-
   return useMemo<AccountReturnOptions>(
     () => ({ user, settings, toggleTheme, theme, isTheme, login, logout, isAuthorized }),
     [user, settings, toggleTheme, theme, isTheme, login, logout, isAuthorized],

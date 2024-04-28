@@ -1,0 +1,9 @@
+@import 'src/theme';
+
+:root {
+  @include init-size-theme;
+}
+
+// use light, dark class on element to prevent changing theme on it
+.light { @include init-color-theme(light); }
+.dark { @include init-color-theme(dark); }

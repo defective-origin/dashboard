@@ -3,7 +3,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 
 // ---| core |---
 import { cn, react } from 'tools'
-import { Color, Size } from 'theme'
+import { Color, Size, THEME } from 'theme'
 import { FormatOptions, useFormat } from 'hooks'
 
 // ---| components |---
@@ -46,6 +46,8 @@ export type TextProps = FormatOptions<TextFormat> & {
   align?: TextAlign
   ellipsis?: boolean | number
   loading?: boolean
+  bold?: boolean
+  style?: React.CSSProperties
 }
 
 /**
@@ -63,31 +65,32 @@ export type TextProps = FormatOptions<TextFormat> & {
  *    ellipsis={3}
  * />
  */
-export function Text(props: TextProps): JSX.Element {
+export function Text(props: TextProps): JSX.Element { // FIXME: extend with useItem
   const {
     v = 'body1',
     size = TEXT_SIZE_MAP[v],
+    bold,
     color,
     ellipsis,
     loading,
     format,
     placeholder,
+    style,
     content,
-    children = content,
+    children,
     className,
     ...otherProps
   } = props
   const _className = cn('text', {
-    [`text--${size}`]: size,
+    [`text--${size}`]: size, // FIXME: doesn't work - fix on line 92
     ellipsis,
   }, className)
-  const _content = useFormat(children, FORMAT_MAP, { format, placeholder })
-  const styles = typeof ellipsis === 'number' ? {
-    WebkitLineClamp: ellipsis,
-  } : undefined
-
-  if (loading) {
-    return <Skeleton className={_className} v='text' content={_content} />
+  const _content = useFormat(content, FORMAT_MAP, { format, placeholder })
+  const styles = {
+    ...style,
+    fontWeight: bold ? 'bold' : undefined,
+    fontSize: THEME.components.text.size[size],
+    WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
   }
 
   return (
@@ -95,11 +98,14 @@ export function Text(props: TextProps): JSX.Element {
       className={_className}
       variant={loading ? 'body1' : v}
       align='left'
-      color={color}
+      color={color && THEME.palette[color]}
       style={styles}
+      fontFamily='Montserrat'
       {...otherProps}
     >
-      {_content}
+      {!loading && _content}
+      {!loading && children}
+      {loading && <Skeleton className={_className} v='text' content={_content} />}
     </MuiTypography>
   )
 }

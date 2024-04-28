@@ -1,24 +1,27 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import Item, { ItemProps } from './Item.component'
 import Block from 'components/Block'
+import { COLORS, SIZES, toVariable } from 'theme'
 
-const spaces: ItemProps['g'][] = [undefined, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+const AREAS: ItemProps['area'][] = ['left', 'right', 'center', 'top', 'bottom']
 
 const render = (props: ItemProps) => {
+  const { m, p, ...otherProps } = props
+
   return (
-    <Block>
+    <Item background={SB_CSS.margin}>
       {/* prevent margins from collapsing */}
-      {props.m && <div style={{ height: '0.5px' }} />}
+      <div style={{ height: '0.5px' }} />
 
-      <Block minWidth={200} minHeight={200} border='1px solid var(--sb-border-color)'>
-        <Item {...props} />
-      </Block>
+      <Item background={SB_CSS.space} m={m} p={p}>
+        <Item minWidth={100} minHeight={100} background={SB_CSS.item} {...otherProps} />
+      </Item>
 
       {/* prevent margins from collapsing */}
-      {props.m && <div style={{ height: '0.5px' }} />}
-    </Block>
+      <div style={{ height: '0.5px' }} />
+    </Item>
   )
 }
 
@@ -32,9 +35,9 @@ const meta: Meta<typeof Item> = {
     stretch: field.boolean(),
     grow: field.number('FlexGrow'),
     style: field.css(),
-    g: field.variants(spaces, 'BlockSpace'),
-    p: field.variants(spaces, 'BlockSpace'),
-    m: field.variants(spaces, 'BlockSpace'),
+    g: field.variants(SIZES, 'BlockSpace'),
+    p: field.variants(SIZES, 'BlockSpace'),
+    m: field.variants(SIZES, 'BlockSpace'),
   },
 }
 
@@ -43,7 +46,7 @@ export default meta
 type Story = StoryObj<typeof Item>
 
 export const Demo: Story = {
-  parameters: params('Item'),
+  parameters: params('Item [Requirements](?path=/docs/requirements-layout--docs)'),
   render,
   args: {
     className: '',
@@ -52,18 +55,34 @@ export const Demo: Story = {
     m: 'xxs',
     p: 'xxs',
     stretch: false,
-    background: 'var(--sb-item-color)',
+  },
+}
+
+export const Area: Story = {
+  parameters: params('**Area** is the most important property. We use **magnet places** to stick to block layout and have our app adaptive and flexible. \n\n Area', AREAS),
+  render,
+  args: {
+    className: '',
+    children: 'Demo',
+    g: 'xxs',
+    m: 'xxs',
+    p: 'xxs',
+    stretch: false,
   },
 }
 
 export const Spaces: Story = {
-  parameters: params('Margin | Padding | Gap', spaces),
-  render,
-  args: {
-    v: 'columns',
-    g: 'xxs',
-    m: 'xxs',
-    p: 'xxs',
-    background: 'var(--sb-item-color)',
-  },
+  parameters: params('Margin[m] | Padding[p] | Gap[g]', SIZES),
+  render: () => (
+    <Block g='xxs' v='x'>
+      {SIZES.filter(Boolean).map((size, i) => (
+        <Item
+          key={size}
+          width={toVariable('space-size', size)}
+          height={toVariable('space-size', size)}
+          background={toVariable('color', `${COLORS[i]}-4`)}
+        />
+      ))}
+    </Block>
+  ),
 }

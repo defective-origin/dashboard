@@ -50,7 +50,7 @@ export function Toast(props: ToastProps): JSX.Element {
 
   return (
     <Block className={css.Toast} justifies='space-between' v={data.v ?? 'x'} g='xs'>
-      <Text.H4 color='primary' multiline content={data.content} />
+      <Text.H4 color='primary' content={data.content} />
 
       <Actions g='xs' justifies='end'>
         {data.onSuccess && (

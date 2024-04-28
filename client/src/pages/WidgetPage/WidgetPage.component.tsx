@@ -30,12 +30,12 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const _className = cn(css.WidgetPage, className)
 
   const MESSAGES: TextProps[] = [
+    { color: 'success', content: 'success' },
     { color: 'error', content: 'error' },
     { color: 'warning', content: 'warning' },
     { color: 'info', content: 'info' },
     { color: 'primary', content: 'primary' },
     { color: 'secondary', content: 'secondary' },
-    { color: 'disable', content: 'disable' },
   ]
 
   const ALERTS: AlertItem[] = [

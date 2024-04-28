@@ -23,6 +23,7 @@ export type PropertiesReturnOptions<T extends Record<string, unknown>> = Record<
 /**
  * Allows to get css variables and other props [ex: for drawing in canvas]
  * https://stackoverflow.com/questions/71368314/can-i-set-a-canvas-fillstyle-with-a-variable-from-css
+ * https://byby.dev/css-vars-with-js
  *
  * @example
  * const colors = useProperties({

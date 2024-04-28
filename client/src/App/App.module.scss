@@ -11,14 +11,6 @@
     @include stretch;
   }
 
-  // use light, dark class on element to prevent changing theme on it
-  .light { @include init-color-theme(light); }
-  .dark { @include init-color-theme(dark); }
-
-  .app {
-    @include init-size-theme;
-  }
-
   .guard-container {
     width: 700px;
   }

@@ -19,4 +19,9 @@
   @include init-icon-variables;
   @include init-space-variables;
   @include init-scroll-variables;
+
+  --divider-color: #26557326;
+  --border-radius: 4px;
+  --border: 1px solid var(--divider-color);
+  --box-shadow: #0000001A 0 1px 3px 0;
 }

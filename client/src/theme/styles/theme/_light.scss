@@ -1,9 +1,9 @@
 @import '../tools';
 
 @mixin init-color-theme() {
-  // colors
+  // colors - https://main--5a375b97f4b14f0020b0cda3.chromatic.com/?path=/docs/@storybook/design-system_colors--docs&globals=theme:light
   $color-name: color;
-  $color-map: init-color-map(#2C2B3B, #571DC6, #0EA314, #0B3E92, #D1B111, #D11111, #9F9EAA);
+  $color-map: init-color-map(#2E3438, #571DC6, #66BF3C, #1EA7FD, #FFAE00, #FF4400, #E3E6E8, #E3E6E8);
 
   @include init-variables($color-name, $color-map);
 

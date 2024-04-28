@@ -13,7 +13,6 @@
     font-style: normal;
 
     @include attach-text-size-variables(font-size);
-    @include attach-text-gap-variables(gap);
   }
 
   .ellipsis {

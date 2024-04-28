@@ -1,4 +1,5 @@
 import type { InputType } from '@storybook/types'
+import { toVariable } from '../src/theme'
 
 export const tableDocs = (summary: unknown, defaultSummary?: unknown) => ({
   type: {
@@ -15,10 +16,10 @@ export const string = (summary: unknown = 'string', defaultSummary?: unknown): I
   table: tableDocs(summary, defaultSummary),
 })
 
-export const boolean = (summary: unknown = 'boolean', defaultSummary?: unknown): InputType => ({
+export const boolean = (defaultSummary?: unknown): InputType => ({
   type: 'boolean',
   control: 'boolean',
-  table: tableDocs(summary, defaultSummary),
+  table: tableDocs('boolean', defaultSummary),
 })
 
 export const number = (summary: unknown = 'number', defaultSummary?: unknown): InputType => ({
@@ -55,12 +56,18 @@ export const reactNode = (withContent?: boolean): InputType => ({
   table: tableDocs('ReactNode', withContent ? 'content' : undefined),
 })
 
+export const list = (summary: unknown): InputType => ({
+  control: 'object',
+  table: tableDocs(`${summary}[]`),
+})
+
 
 export const field = {
   variants,
   string,
   number,
   css,
+  list,
   boolean,
   reactNode,
   element,
@@ -72,7 +79,7 @@ export const field = {
 export const docsWithVariants = (name: string, variants: unknown[] = [], defaultVariant?: unknown) => ({
   description: {
     story: [
-      `__${name}__ variants: ${variants.filter(Boolean)?.map((v) => `\`${v}\``) ?? ''}.`,
+      `__${name}__ variants: ${variants.filter(Boolean)?.map((v) => `\`${v}\``).join(' ') ?? ''}.`,
       defaultVariant && `Default value: \`${defaultVariant}\`.`,
     ].join(' '),
   },
@@ -87,3 +94,11 @@ export const docs = (text: string) => ({
 export const params = (name: string, variants?: unknown[], defaultVariant?: unknown) => ({
   docs: Array.isArray(variants) ? docsWithVariants(name, variants, defaultVariant) : docs(name),
 })
+
+
+export const SB_CSS = {
+  margin: toVariable('sb-margin-color'),
+  space: toVariable('sb-space-color'),
+  border: toVariable('sb-border'),
+  item: toVariable('sb-item-color'),
+}

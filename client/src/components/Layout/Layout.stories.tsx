@@ -1,15 +1,16 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../.storybook/tool'
+/* eslint-disable no-restricted-imports */
+import { SB_CSS, field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
+import { SIZES } from 'theme'
 import Layout, { LayoutProps } from './Layout.component'
 import Item from 'components/Item'
+import Tag from 'components/Tag'
 
-const cardVariants: LayoutProps['v'][] = ['column', 'row', 'board']
-const layoutVariants: LayoutProps['v'][] = ['columns', 'rows', 'top', 'right', 'bottom', 'left']
-const variants: LayoutProps['v'][] = [undefined, ...cardVariants, ...layoutVariants]
-const spaces: LayoutProps['g'][] = [undefined, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-const aligns: LayoutProps['aligns'][] = [undefined, 'start', 'center', 'end', 'baseline', 'stretch' ]
-const justifies: LayoutProps['justifies'][] = [undefined, 'start', 'end', 'center', 'space-between', 'space-around', 'space-evenly']
+const CARD_VARIANTS: LayoutProps['v'][] = ['column', 'row', 'board']
+const LAYOUT_VARIANTS: LayoutProps['v'][] = ['columns', 'rows', 'top', 'right', 'bottom', 'left']
+const VARIANTS: LayoutProps['v'][] = [...CARD_VARIANTS, ...LAYOUT_VARIANTS]
+const ALIGNS: LayoutProps['aligns'][] = ['start', 'center', 'end', 'baseline', 'stretch' ]
+const JUSTIFIES: LayoutProps['justifies'][] = ['start', 'end', 'center', 'space-between', 'space-around', 'space-evenly']
 
 const meta: Meta<typeof Layout> = {
   title: 'Components/LAYOUT/Layout',
@@ -18,12 +19,12 @@ const meta: Meta<typeof Layout> = {
   argTypes: {
     className: field.string(),
     children: field.reactNode(),
-    g: field.variants(spaces, 'LayoutSpace'),
-    p: field.variants(spaces, 'LayoutSpace'),
-    m: field.variants(spaces, 'LayoutSpace'),
-    v: field.variants(variants, 'LayoutDirection'),
-    justifies: field.variants(justifies, 'JustifyItems'),
-    aligns: field.variants(aligns, 'AlignItems'),
+    g: field.variants(SIZES, 'LayoutSpace'),
+    p: field.variants(SIZES, 'LayoutSpace'),
+    m: field.variants(SIZES, 'LayoutSpace'),
+    v: field.variants(VARIANTS, 'LayoutDirection'),
+    justifies: field.variants(JUSTIFIES, 'JustifyItems'),
+    aligns: field.variants(ALIGNS, 'AlignItems'),
     grow: field.number('FlexGrow'),
     columns: field.number(),
     rows: field.number(),
@@ -40,15 +41,16 @@ export default meta
 type Story = StoryObj<typeof Layout>
 
 const render = (props: LayoutProps) => (
-  <Layout background='var(--sb-margin-color)'>
+  <Layout background={SB_CSS.margin}>
     {/* prevent margins from collapsing */}
     {props.m && <div style={{ height: '0.5px' }} />}
 
-    <Layout minWidth={200} minHeight={200} background='var(--sb-space-color)' {...props}>
+    <Layout minWidth={200} minHeight={200} background={SB_CSS.space} {...props}>
       {['left', 'right', 'top', 'bottom', 'center'].map((v) =>
         <Item
-          background='var(--sb-item-color)'
-          area={props.v && layoutVariants.includes(props.v) ? v : undefined}
+          key={v}
+          background={SB_CSS.item}
+          area={props.v && LAYOUT_VARIANTS.includes(props.v) ? v : undefined}
           minHeight={20}
           minWidth={20}
         />,
@@ -61,7 +63,7 @@ const render = (props: LayoutProps) => (
 )
 
 export const Demo: Story = {
-  parameters: params('Layout'),
+  parameters: params('Layout [Requirements](?path=/docs/requirements-layout--docs)'),
   render,
   args: {
     v: 'columns',
@@ -72,16 +74,39 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('Variant', variants),
-  render,
-  args: {
-    v: 'columns',
-    g: 'xxs',
-  },
+  parameters: params('View', VARIANTS),
+  render: () => (
+    <Layout g='xs' v='board' columns={3} position='relative'>
+      {VARIANTS.filter(Boolean).map((v) => (
+        <Layout key={v} background={SB_CSS.space} v={v} g='xxs' p='xxs' columns={v === 'board' ? 2 : undefined} position='relative'>
+          <Tag
+            content={v}
+            format='uppercase'
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+
+          {['left', 'right', 'top', 'bottom', 'center'].map((i) =>
+            <Item
+              key={i}
+              background={SB_CSS.item}
+              area={LAYOUT_VARIANTS.includes(v) ? i : undefined}
+              minHeight={50}
+              minWidth={50}
+            />,
+          )}
+        </Layout>
+      ))}
+    </Layout>
+  ),
 }
 
 export const Spaces: Story = {
-  parameters: params('Margin | Padding | Gap', spaces),
+  parameters: params('Margin[m] | Padding[p] | Gap[g]', SIZES),
   render,
   args: {
     v: 'columns',
@@ -92,7 +117,7 @@ export const Spaces: Story = {
 }
 
 export const Justifies: Story = {
-  parameters: params('Justify', justifies),
+  parameters: params('Justify', JUSTIFIES),
   render,
   args: {
     v: 'columns',
@@ -102,7 +127,7 @@ export const Justifies: Story = {
 }
 
 export const Aligns: Story = {
-  parameters: params('Align', aligns),
+  parameters: params('Align', ALIGNS),
   render,
   args: {
     v: 'columns',

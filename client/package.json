@@ -22,7 +22,7 @@
     "gen": "plop --plopfile ./generator/generator.parts.js --dest ./src",
     "gen:init": "plop --plopfile ./generator/generator.init.js --dest ./src",
     "stories": "storybook dev -p 6006",
-    "stories:build": "storybook build"
+    "stories:build": "storybook build --docs"
   },
   "dependencies": {
     "@emotion/react": "11.11.4",

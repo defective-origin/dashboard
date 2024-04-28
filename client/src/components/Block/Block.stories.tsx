@@ -1,13 +1,15 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../.storybook/tool'
+/* eslint-disable no-restricted-imports */
+import { SB_CSS, field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import Block, { BlockProps } from './Block.component'
 import Item from 'components/Item'
+import Layout from 'components/Layout'
+import { DIRECTION, SIZES } from 'theme'
+import Tag from 'components/Tag'
 
-const variants: BlockProps['v'][] = [undefined, 'x', 'y', 'xy', 'cards']
-const spaces: BlockProps['g'][] = [undefined, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-const aligns: BlockProps['aligns'][] = [undefined, 'flex-start', 'center', 'flex-end', 'baseline', 'stretch' ]
-const justifies: BlockProps['justifies'][] = [undefined, 'flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']
+const VARIANTS: BlockProps['v'][] = [...DIRECTION, 'cards']
+const ALIGNS: BlockProps['aligns'][] = ['flex-start', 'center', 'flex-end', 'baseline', 'stretch' ]
+const JUSTIFIES: BlockProps['justifies'][] = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']
 
 const meta: Meta<typeof Block> = {
   title: 'Components/LAYOUT/Block',
@@ -16,12 +18,12 @@ const meta: Meta<typeof Block> = {
   argTypes: {
     className: field.string(),
     children: field.reactNode(),
-    g: field.variants(spaces, 'BlockSpace'),
-    p: field.variants(spaces, 'BlockSpace'),
-    m: field.variants(spaces, 'BlockSpace'),
-    v: field.variants(variants, 'BlockVariant', 'y'),
-    justifies: field.variants(justifies, 'JustifyContent'),
-    aligns: field.variants(aligns, 'AlignItems'),
+    g: field.variants(SIZES, 'BlockSpace'),
+    p: field.variants(SIZES, 'BlockSpace'),
+    m: field.variants(SIZES, 'BlockSpace'),
+    v: field.variants(VARIANTS, 'BlockVariant', 'y'),
+    justifies: field.variants(JUSTIFIES, 'JustifyContent'),
+    aligns: field.variants(ALIGNS, 'AlignItems'),
   },
 }
 
@@ -33,16 +35,17 @@ const render = (props: BlockProps) => {
   const direction = props?.v ?? 'y'
 
   return (
-    <Block background='var(--sb-margin-color)'>
+    <Block background={SB_CSS.margin}>
       {/* prevent margins from collapsing */}
       {props.m && <div style={{ height: '0.5px' }} />}
 
-      <Block minWidth={200} minHeight={200} background='var(--sb-space-color)' {...props}>
-        {Array.from(Array(10).keys()).map(() =>
+      <Block minWidth={200} minHeight={200} background={SB_CSS.space} {...props}>
+        {Array.from(Array(10).keys()).map((idx) =>
           <Item
+            key={idx}
             minWidth={['xy', 'cards'].includes(direction) ? 100 : 20}
-            minHeight={['xy', 'cards'].includes(direction) ? 100 : 20}
-            background='var(--sb-item-color)'
+            minHeight={20}
+            background={SB_CSS.item}
           />,
         )}
       </Block>
@@ -54,7 +57,7 @@ const render = (props: BlockProps) => {
 }
 
 export const Demo: Story = {
-  parameters: params('Block'),
+  parameters: params('Block [Requirements](?path=/docs/requirements-layout--docs)'),
   render,
   args: {
     v: 'cards',
@@ -65,16 +68,38 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('Variant', variants),
-  render,
-  args: {
-    v: 'x',
-    g: 'xxs',
-  },
+  parameters: params('View', VARIANTS),
+  render: () => (
+    <Layout g='xs' v='board' columns={4}>
+      {VARIANTS.filter(Boolean).map((v) => (
+        <Block key={v} background={SB_CSS.space} v={v} g='xxs' p='xxs' position='relative'>
+          <Tag
+            content={v}
+            format='uppercase'
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+
+          {Array.from(Array(10).keys()).map((idx) =>
+            <Item
+              key={idx}
+              minWidth={['xy', 'cards'].includes(v ?? '') ? 50 : 20}
+              minHeight={20}
+              background={SB_CSS.item}
+            />,
+          )}
+        </Block>
+      ))}
+    </Layout>
+  ),
 }
 
 export const Spaces: Story = {
-  parameters: params('Margin | Padding | Gap', spaces),
+  parameters: params('Margin[m] | Padding[p] | Gap[g]', SIZES),
   render,
   args: {
     v: 'cards',
@@ -85,7 +110,7 @@ export const Spaces: Story = {
 }
 
 export const Justifies: Story = {
-  parameters: params('Justify', justifies),
+  parameters: params('Justify', JUSTIFIES),
   render,
   args: {
     v: 'xy',
@@ -95,7 +120,7 @@ export const Justifies: Story = {
 }
 
 export const Aligns: Story = {
-  parameters: params('Align', aligns),
+  parameters: params('Align', ALIGNS),
   render,
   args: {
     v: 'xy',

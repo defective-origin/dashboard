@@ -1,0 +1,21 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { COLORS, PALETTE, toName } from './theme.conf.ts';
+
+
+<Meta title="Requirements/Colors" />
+
+# Colors
+**Colors:** `primary` `secondary` `success` `info` `warning` `error` `constrast` `bacground`   
+**Sub colors:** `1` - `6`   
+**Variable template:** `--color--{color}` `--color--{color}-{sub-color}`   
+
+<ColorPalette>
+  {COLORS.map((color) => (
+    <ColorItem
+      key={color}
+      title={color}
+      subtitle={toName('color', color)}
+      colors={PALETTE[color]}
+    />
+  ))}
+</ColorPalette>

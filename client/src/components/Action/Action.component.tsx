@@ -51,7 +51,6 @@ export function Action(props: ActionProps): JSX.Element {
     iconSize = size,
     textV,
     align,
-    multiline,
     ellipsis,
     start,
     end,
@@ -60,7 +59,7 @@ export function Action(props: ActionProps): JSX.Element {
     loading,
     tooltip,
     content,
-    children = content,
+    children,
     className,
     ...otherProps
   } = props
@@ -71,14 +70,13 @@ export function Action(props: ActionProps): JSX.Element {
     <Tag className={_className} disabled={loading} {...otherProps}>
       {start && initAsideContent(start, iconSize, fillIcon, loading)}
 
-      {children && (
+      {content || children && (
         <Text
           v={textV}
           size={size}
           align={align}
           loading={loading}
           ellipsis={ellipsis}
-          multiline={multiline}
           content={content}
           children={children}
         />

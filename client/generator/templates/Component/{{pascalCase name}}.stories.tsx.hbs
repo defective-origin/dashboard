@@ -1,9 +1,10 @@
-// eslint-disable-next-line no-restricted-imports
+/* eslint-disable no-restricted-imports */
 import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
+import { COLORS, SIZES } from 'theme'
 import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase name}}.component'
 
-const variants: {{pascalCase name}}Props['v'][] = ['success', 'info', 'warning', 'error']
+const VARIANTS: {{pascalCase name}}Props['v'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof {{pascalCase name}}> = {
   component: {{pascalCase name}},
@@ -28,7 +29,7 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('View', variants),
+  parameters: params('View', VARIANTS),
   args: {
     className: '',
     children: 'Demo',

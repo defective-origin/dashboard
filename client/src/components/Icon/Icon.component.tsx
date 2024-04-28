@@ -1,9 +1,9 @@
 import React from 'react'
-import MuiIcon, { IconProps as MuiIconProps } from '@mui/material/Icon'
+import MuiIcon from '@mui/material/Icon'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Size } from 'theme'
+import { Color, THEME, Size } from 'theme'
 
 // ---| components |---
 import Skeleton from 'components/Skeleton'
@@ -22,16 +22,18 @@ export type IconVariant = 'light_mode' | 'dark_mode'
 | 'auto_stories' | 'logo_dev'
 | 'settings'
 | 'close' | 'left_panel_open' | 'left_panel_close' | 'open_in_new'
-| 'info' | 'warning' | 'error' | 'check_circle'
+| 'info' | 'warning' | 'error' | 'check_circle' | 'help'
 
 export type IconSize = Size
 
-export type IconProps = Omit<MuiIconProps, 'size'> & {
+export type IconProps = {
   className?: string
   v: IconVariant
   size?: IconSize
   fill?: boolean
   loading?: boolean
+  color?: Color
+  style?: React.CSSProperties
 }
 
 /**
@@ -42,7 +44,7 @@ export type IconProps = Omit<MuiIconProps, 'size'> & {
  * <Icon />
  */
 export function Icon(props: IconProps): JSX.Element {
-  const { size = 'md', v, loading, fill, className, ...otherProps } = props
+  const { size = 'md', v, loading, fill, color, style, className, ...otherProps } = props
   const _className = cn(
     'icon',
     'material-symbols-outlined', {
@@ -52,12 +54,18 @@ export function Icon(props: IconProps): JSX.Element {
     },
     className,
   )
+  const styles = {
+    ...style,
+    color: color && THEME.palette[color],
+    fontSize: THEME.components.text.size[size],
+  }
+  const item = <MuiIcon className={_className} style={styles} {...otherProps}>{v}</MuiIcon>
 
   if (loading) {
-    return <Skeleton className={_className} v='circular' />
+    return <Skeleton className={_className} v='circular' content={item} />
   }
 
-  return <MuiIcon className={_className} {...otherProps}>{v}</MuiIcon>
+  return item
 }
 
 Icon.displayName = 'Icon'

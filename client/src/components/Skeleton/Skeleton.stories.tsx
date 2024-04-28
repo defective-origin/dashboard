@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import Skeleton, { SkeletonProps } from './Skeleton.component'
 import Block from 'components/Block'
 
-const variants: SkeletonProps['v'][] = ['text', 'rounded', 'circular']
+const VARIANTS: SkeletonProps['v'][] = ['text', 'rounded', 'circular']
 
 const meta: Meta<typeof Skeleton> = {
   title: 'Components/DATA DISPLAY/Skeleton',
@@ -14,7 +14,7 @@ const meta: Meta<typeof Skeleton> = {
     className: field.string(),
     children: field.reactNode(),
     content: field.reactNode(true),
-    v: field.variants(variants, 'SkeletonVariant', 'text'),
+    v: field.variants(VARIANTS, 'SkeletonVariant', 'text'),
   },
 }
 
@@ -37,7 +37,7 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('View', variants),
-  render: () => initVariants('v', variants),
+  parameters: params('View', VARIANTS),
+  render: () => initVariants('v', VARIANTS),
 }
 

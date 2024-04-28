@@ -1,2 +1,9 @@
+@import '../tools';
+
 @mixin init-color-theme() {
+  // colors
+  $color-name: color;
+  $color-map: init-color-map(#2C2B3B, #2C2B3B, #2C2B3B, #2C2B3B, #2C2B3B, #2C2B3B, #1B1C1D, #E3E6E8);
+
+  @include init-variables($color-name, $color-map);
 }

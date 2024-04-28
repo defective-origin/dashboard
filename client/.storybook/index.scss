@@ -1,11 +1,8 @@
 @import 'src/theme';
 
-.light {
-  @include init-color-theme(light);
-  @include init-size-theme;
-}
-
-.dark {
-  @include init-color-theme(dark);
-  @include init-size-theme;
+:root {
+  --sb-margin-color: #F9CC9D;
+  --sb-space-color: #C3D08B;
+  --sb-item-color: #808080CF;
+  --sb-border: 1px solid #8080803A;
 }

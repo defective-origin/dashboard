@@ -1,6 +1,12 @@
 # [↤](../README.md) Rules
 
 
+### Legacy
+- Mark legacy functionality as __@deprecated__ to highlight it and not use it
+- Legacy code should be saved in __legacy__ folder
+- Legacy must be cleaned before use. After that, moved it to the general structure.
+
+
 ### All function for data creators should start with 'init'
 ```
 'build...' | 'create...' => 'init...'

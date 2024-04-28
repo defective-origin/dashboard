@@ -1,0 +1,26 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as TextStories from '../components/Text/Text.stories';
+import Text from '../components/Text';
+import Block from '../components/Block';
+import Specs from '../components/Specs';
+
+
+<Meta title='Requirements/Formats' />
+
+# Formats [[Playground](?path=/docs/components-data-display-text--docs)]
+
+
+### Numbers
+Numbers must have __two digits after comma__.  
+Numbers must __not be rounded__ to maintain precision.  
+If numbers are used as metric then it should be __align by right side__. For example: specs, table.  
+
+### Dates
+In most cases date pattern `day-th of month-name year` must be used.  
+
+### Strings
+__Page name, Sections__ must have `UPPERCASE`.  
+__Titles__ must have `Capitalize Case`.  
+__Names__ must have `Title case`.  
+
+<Canvas of={TextStories.Formats} />

@@ -64,12 +64,13 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  * }
  *
  * const MESSAGES = [
+ *   { color: 'success', content: 'success' },
  *   { color: 'error', content: 'error' },
  *   { color: 'warning', content: 'warning' },
  *   { color: 'info', content: 'info' },
  *   { color: 'primary', content: 'primary' },
  *   { color: 'secondary', content: 'secondary' },
- *   { color: 'disable', content: 'disable' },
+ *   { color: 'bg', content: 'bg' },
  * ]
  *
  * const VALUE = {
@@ -136,12 +137,12 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  * ]
  *
  * const ALERTS = [
+ *   { color: 'success', content: 'success' },
  *   { color: 'error', content: 'error' },
  *   { color: 'warning', content: 'warning' },
  *   { color: 'info', content: 'info' },
  *   { color: 'primary', content: 'primary' },
  *   { color: 'secondary', content: 'secondary' },
- *   { color: 'disable', content: 'disable' },
  * ]
  *
  * const ACTIONS = [

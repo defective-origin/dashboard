@@ -21,6 +21,7 @@ export type TooltipProps = {
   content?: React.ReactNode
   v?: TooltipVariant
   open?: boolean
+  wrapper?: React.ElementType
 }
 
 /**
@@ -31,14 +32,14 @@ export type TooltipProps = {
  * <Tooltip />
  */
 export function Tooltip(props: TooltipProps): JSX.Element {
-  const { content, children, className, v, open, ...otherProps } = props
+  const { wrapper: Wrapper = 'span', content, children, className, v, open, ...otherProps } = props
   const _className = cn(css.Tooltip, className)
 
   return (
     <MuiTooltip className={_className} title={content} arrow placement={v} open={open} {...otherProps}>
-      <div style={{width: 'fit-content'}}>
+      <Wrapper style={{width: 'fit-content'}}>
         {children}
-      </div>
+      </Wrapper>
     </MuiTooltip>
   )
 }

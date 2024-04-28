@@ -18,7 +18,3 @@ $text-gap-size-map: init-size-map(4, 6, 8, 10, 12, 14, 16);
 @mixin attach-text-size-variables($property: font-size) {
   @include attach-size-variables($text-size-name, $property);
 }
-
-@mixin attach-text-gap-variables($property: gap) {
-  @include attach-size-variables($text-gap-name, $property);
-}

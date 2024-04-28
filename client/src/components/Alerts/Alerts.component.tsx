@@ -46,7 +46,7 @@ export function Alerts(props: AlertsProps): JSX.Element {
   )
 }
 
-Alerts.Alert = Alert
+Alerts.Item = Alert
 
 Alerts.displayName = 'Alerts'
 

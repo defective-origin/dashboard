@@ -25,7 +25,7 @@ export const useFormat = <V, K extends string>(value: React.ReactNode, map: Reco
   const { format, placeholder } = options
 
   if (isNil(value) && placeholder) {
-    return typeof placeholder === 'boolean' ? 'N/A' : placeholder
+    return typeof placeholder === 'boolean' ? 'unknown' : placeholder
   }
 
   return isNil(value) || !format ? value : map[format](value as V)

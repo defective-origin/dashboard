@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import Alert, { AlertProps } from './Alert.component'
 import Block from 'components/Block'
 
-const colors: AlertProps['color'][] = ['success', 'info', 'warning', 'error']
+const COLORS: AlertProps['color'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof Alert> = {
   title: 'Components/DATA DISPLAY/Alert',
@@ -15,7 +15,7 @@ const meta: Meta<typeof Alert> = {
     children: field.reactNode(),
     content: field.reactNode(true),
     title: field.reactNode(),
-    color: field.variants(colors, 'AlertColor', 'success'),
+    color: field.variants(COLORS, 'AlertColor', 'success'),
   },
 }
 
@@ -39,7 +39,7 @@ export const Demo: Story = {
 }
 
 export const Colors: Story = {
-  parameters: params('Color', colors),
-  render: () => initVariants('color', colors),
+  parameters: params('Color', COLORS),
+  render: () => initVariants('color', COLORS),
 }
 

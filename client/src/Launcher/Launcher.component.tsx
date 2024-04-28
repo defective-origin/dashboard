@@ -36,7 +36,7 @@ export function Launcher(props: LauncherProps): JSX.Element {
   return (
     <React.StrictMode>
       <LocaleProvider>
-        <ThemeProvider>
+        <ThemeProvider current={account.theme()}>
           <React.Suspense fallback={<h1>Loading...</h1>}>
             <LauncherContext.Provider value={options}>
               <RouterProvider>

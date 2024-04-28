@@ -1,44 +1,46 @@
 @use 'sass:color';
 @use 'sass:map';
 
-$colors: primary, secondary, success, info, warning, error, disable;
+$colors: primary, secondary, success, info, warning, error, background, contrast;
 
 /// Create size.
 /// @param {number} $value Color.
 /// @param {number} $alpha Alpha shift unit.
 /// @return {string} Joint value
-@function init-color($value, $alpha) {
+@function init-color($value, $alpha: 1) {
   @return color.adjust($value, $alpha: $alpha);
 }
 
-/// Create color map with keys: primary, secondary, success, info, warning, error, disable.
+/// Create color map with keys: primary, secondary, success, info, warning, error, background, contrast.
 /// @param {color} $primary Color in hex format.
 /// @param {color} $secondary Color in hex format.
 /// @param {color} $success Color in hex format.
 /// @param {color} $info Color in hex format.
 /// @param {color} $warning Color in hex format.
 /// @param {color} $error Color in hex format.
-/// @param {color} $disable Color in hex format.
+/// @param {color} $background Color in hex format.
+/// @param {color} $contrast Color in hex format.
 /// @param {number} $alpha Alpha shift unit.
 /// @return {map} Color map
-@function init-color-map($primary, $secondary, $success, $info, $warning, $error, $disable, $alpha: 0) {
+@function init-color-map($primary, $secondary, $success, $info, $warning, $error, $background, $contrast, $alpha: -0.15) {
   $palette: ();
   $colors: (
-    'primary': init-color($primary, $alpha),
-    'secondary': init-color($secondary, $alpha),
-    'success': init-color($success, $alpha),
-    'info': init-color($info, $alpha),
-    'warning': init-color($warning, $alpha),
-    'error': init-color($error, $alpha),
-    'disable': init-color($disable, $alpha),
+    'primary': init-color($primary),
+    'secondary': init-color($secondary),
+    'success': init-color($success),
+    'info': init-color($info),
+    'warning': init-color($warning),
+    'error': init-color($error),
+    'contrast': init-color($contrast),
+    'bg': init-color($background),
   );
 
   @each $name, $color in $colors {
     $palette: map.set($palette, $name, $color);
 
-    @for $i from 1 through 9 {
+    @for $i from 1 through 6 {
       $new-name: '#{$name}-#{$i}';
-      $new-color: color.adjust($color, $lightness: $i * 5%);
+      $new-color: init-color($color, $i * $alpha);
       $palette: map.set($palette, $new-name, $new-color);
     }
   }

@@ -1,15 +1,15 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import Item from 'components/Item'
 import Block from 'components/Block'
 import Overlay, { OverlayProps } from './Overlay.component'
 
-const sideVariant: OverlayProps['v'][] = ['left', 'right', 'top', 'bottom']
-const sideCernerVariant: OverlayProps['v'][] = ['left-center', 'right-center', 'top-center', 'bottom-center']
-const cernerVariant: OverlayProps['v'][] = ['top-left', 'top-right', 'bottom-left', 'bottom-right']
-const centerVariant: OverlayProps['v'][] = ['center', 'full']
-const variants: OverlayProps['v'][] = [undefined, ...sideVariant, ...sideCernerVariant, ...cernerVariant, ...centerVariant]
+const SIDE_VARIANTS: OverlayProps['v'][] = ['left', 'right', 'top', 'bottom']
+const SIDE_CERNER_VARIANTS: OverlayProps['v'][] = ['left-center', 'right-center', 'top-center', 'bottom-center']
+const CERNER_VARIANTS: OverlayProps['v'][] = ['top-left', 'top-right', 'bottom-left', 'bottom-right']
+const CENTER_VARIANTS: OverlayProps['v'][] = ['center', 'full']
+const VARIANTS: OverlayProps['v'][] = [...SIDE_VARIANTS, ...SIDE_CERNER_VARIANTS, ...CERNER_VARIANTS, ...CENTER_VARIANTS]
 
 const meta: Meta<typeof Overlay> = {
   title: 'Components/LAYOUT/Overlay',
@@ -21,7 +21,7 @@ const meta: Meta<typeof Overlay> = {
     contentClassName: field.string(),
     containerClassName: field.string(),
     children: field.reactNode(),
-    v: field.variants(variants, 'OverlayVariant'),
+    v: field.variants(VARIANTS, 'OverlayVariant'),
     window: field.boolean(),
     backdrop: field.boolean(),
     width: field.number('Width'),
@@ -36,9 +36,9 @@ export default meta
 type Story = StoryObj<typeof Overlay>
 
 const render = (props: OverlayProps) => (
-  <Block width={400} height={400} border='1px solid var(--sb-border-color)'>
+  <Block width={400} height={400} border={SB_CSS.border}>
     <Overlay {...props}>
-      <Item stretch background='var(--sb-item-color)' minWidth={50} minHeight={50} />
+      <Item stretch background={SB_CSS.item} minWidth={50} minHeight={50} />
     </Overlay>
   </Block>
 )
@@ -54,7 +54,7 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('Variant', variants),
+  parameters: params('View', VARIANTS),
   render,
   args: {
     v: 'center',

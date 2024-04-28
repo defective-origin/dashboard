@@ -34,8 +34,8 @@ const prepare: Painter = (context, item, colors) => {
   context.beginPath()
 
   // set styles
-  context.strokeStyle = colors[item.stroke ?? item.color ?? 'disable']
-  context.fillStyle = colors[item.fill ?? item.color ?? 'disable']
+  context.strokeStyle = colors[item.stroke ?? item.color ?? 'bg']
+  context.fillStyle = colors[item.fill ?? item.color ?? 'bg']
   context.lineWidth = item.line ?? 1
 }
 
