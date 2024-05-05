@@ -27,7 +27,7 @@
   "dependencies": {
     "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.5",
-    "@mui/material": "5.15.15",
+    "@mui/material": "5.13.7",
     "classnames": "2.5.1",
     "i18next": "23.11.1",
     "i18next-browser-languagedetector": "7.2.1",
@@ -78,5 +78,8 @@
     "vite": "^5.2.8",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "1.5.0"
+  },
+  "resolutions": {
+    "wrap-ansi": "7.0.0"
   }
 }

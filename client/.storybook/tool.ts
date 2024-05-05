@@ -61,6 +61,13 @@ export const list = (summary: unknown): InputType => ({
   table: tableDocs(`${summary}[]`),
 })
 
+export const func = (summary: unknown = 'function'): InputType => ({
+  control: 'object',
+  table: tableDocs(summary),
+})
+
+export const event = (summary: unknown = '(e) => void'): InputType => func(summary)
+
 
 export const field = {
   variants,
@@ -72,6 +79,8 @@ export const field = {
   reactNode,
   element,
   object,
+  event,
+  func,
 }
 
 // params

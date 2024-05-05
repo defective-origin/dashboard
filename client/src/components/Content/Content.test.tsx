@@ -13,21 +13,3 @@ describe('[Content] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Content] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useContent())
-// 
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Content] context', () => {
-//   const wrapper = (props: ContentProps) => <ContentProvider { ...props } />
-// 
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useContent(), { wrapper })
-// 
-//     expect(result.current).toBeTruthy()
-//   })
-// })

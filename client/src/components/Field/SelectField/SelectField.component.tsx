@@ -9,7 +9,7 @@ import { useFunc } from 'hooks'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat, { ComponentWithItems } from 'components/Repeat'
+import Repeat, { PropsWithItems } from 'components/Repeat'
 
 // ---| self |---
 import css from './SelectField.module.scss'
@@ -25,7 +25,7 @@ const SELECT_FIELD_OPTIONS = {
 
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
-export type SelectFieldProps = FormOptions<string | number> & ComponentWithItems<BaseFieldProps, SelectFieldItem>
+export type SelectFieldProps = FormOptions<string | number> & PropsWithItems<SelectFieldItem, BaseFieldProps>
 
 /**
  * Component description.

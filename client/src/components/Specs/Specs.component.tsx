@@ -7,7 +7,7 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Block, { BlockProps } from 'components/Block'
-import Repeat, { ComponentWithItems } from 'components/Repeat'
+import Repeat, { PropsWithItems } from 'components/Repeat'
 
 // ---| self |---
 import css from './Specs.module.scss'
@@ -15,7 +15,7 @@ import Spec, { SpecProps } from './Spec'
 
 export type SpecsItem = SpecProps
 
-export type SpecsProps = ComponentWithItems<BlockProps, SpecsItem> & {
+export type SpecsProps = PropsWithItems<SpecsItem, BlockProps> & {
   vertical?: boolean
   size?: SpecProps['size']
   sep?: SpecProps['sep']

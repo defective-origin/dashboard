@@ -22,7 +22,7 @@ const meta: Meta<typeof Layout> = {
     g: field.variants(SIZES, 'LayoutSpace'),
     p: field.variants(SIZES, 'LayoutSpace'),
     m: field.variants(SIZES, 'LayoutSpace'),
-    v: field.variants(VARIANTS, 'LayoutDirection'),
+    v: field.variants(VARIANTS, 'LayoutVariant'),
     justifies: field.variants(JUSTIFIES, 'JustifyItems'),
     aligns: field.variants(ALIGNS, 'AlignItems'),
     grow: field.number('FlexGrow'),

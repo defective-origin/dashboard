@@ -13,21 +13,3 @@ describe('[Aside] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Aside] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useAside())
-// 
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Aside] context', () => {
-//   const wrapper = (props: AsideProps) => <AsideProvider { ...props } />
-// 
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useAside(), { wrapper })
-// 
-//     expect(result.current).toBeTruthy()
-//   })
-// })

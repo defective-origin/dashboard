@@ -4,14 +4,14 @@ import React from 'react'
 // ---| core |---
 import { react } from 'tools'
 
-export type ComponentWithItems<OwnProps extends object, T> = OwnProps & {
+export type PropsWithItems<T, OwnProps extends object = object> = OwnProps & {
   items?: T[]
 }
 
 export type RepeatVariantProps<
   RC extends Record<string, any>,
 > = {
-  [key in keyof RC]: { variant?: key } & React.ComponentProps<RC[key]>
+  [key in keyof RC]: { variant?: key, hide?: boolean } & React.ComponentProps<RC[key]>
 }[keyof RC]
 
 export type RepeatComponent<P extends object = any> = React.ElementType<P> | string | Record<string, React.ElementType<P> | string>
@@ -38,9 +38,9 @@ export type RepeatProps<
   /** array with item props */
   items?: RI[]
   /** select key for reconciliation [default: index] */
-  selectKey?: (item: RI) => React.Key
+  keygen?: (item: RI, index: number) => React.Key
   /** customize props [default: shared props + item props] */
-  selectProps?: (item: RI) => RI
+  selectProps?: (item: RI, index: number) => RI
 }
 
 /**
@@ -52,7 +52,7 @@ export type RepeatProps<
  * }
  *
  * const items: RepeatItem<ItemProps>[] = [
- *   { content: '1' },
+ *   { content: '1', hide: true },
  *   { content: '2' },
  *   { content: '3' },
  * ]
@@ -77,7 +77,7 @@ export type RepeatProps<
  * }
  *
  * const items: RepeatItem<ItemProps>[] = [
- *   { v: 'a', content: '1' },
+ *   { v: 'a', content: '1', hide: true },
  *   { v: 'b', content: '2' },
  *   { v: 'c', content: '3' },
  * ]
@@ -103,18 +103,22 @@ export type RepeatProps<
 export function Repeat<
   RC extends RepeatComponent<any>,
   RI extends RepeatItem<RC>,
->(props: RepeatProps<RC, RI>): JSX.Element[] | null {
-  const { variant: v, cmp, items = [], selectKey, selectProps, ...sharedProps } = props
+>(props: RepeatProps<RC, RI>): (JSX.Element | null)[] | null {
+  const { variant: v, cmp, items = [], keygen, selectProps, ...sharedProps } = props
 
   if (!cmp || !items.length) {
     return null
   }
 
-  return items.map(({ variant = v, ...otherItemProps }, idx) => {
+  return items.map(({ variant = v, hide, ...otherItemProps }, idx) => {
+    if (hide) {
+      return null
+    }
+
     const Tag = react.isComponent(cmp) ? cmp : cmp[variant]
     const combinedProps = { ...sharedProps, ...otherItemProps } as React.ComponentProps<any>
-    const itemProps = selectProps?.(combinedProps) ?? combinedProps
-    const itemKey = selectKey?.(itemProps) ?? idx
+    const itemProps = selectProps?.(combinedProps, idx) ?? combinedProps
+    const itemKey = keygen?.(itemProps, idx) ?? idx
 
     return <Tag key={itemKey} {...itemProps} />
   })

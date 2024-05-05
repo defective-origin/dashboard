@@ -6,6 +6,7 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Menu, { MenuItem } from 'components/Menu'
 
 // ---| self |---
 import css from './Widget.module.scss'
@@ -24,9 +25,28 @@ export type WidgetProps = {
  */
 export function Widget(props: WidgetProps): JSX.Element {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.Widget, className)
+  const actions: MenuItem[] = [
+    { start: 'resize', tooltip: 'Replace' },
+    { start: 'zoom_out_map', tooltip: 'Full screen' },
+    { start: 'favorite', tooltip: 'Like' },
+    { start: 'book', tooltip: 'Docs' },
+    { start: 'settings', tooltip: 'Settings' },
+    { start: 'close', tooltip: 'Remove' },
+  ]
 
-  return <div className={_className} {...otherProps}>{children}</div>
+  return (
+    <Menu
+      horizontal
+      v='top-start'
+      tooltipSide='top'
+      items={actions}
+      trigger={(o) => (
+        <div className={cn(css.Widget, o.open && css.Active, className)} {...otherProps}>
+          {children}
+        </div>
+      )}
+    />
+  )
 }
 
 Widget.displayName = 'Widget'

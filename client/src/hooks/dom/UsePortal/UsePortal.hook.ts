@@ -72,10 +72,7 @@ export const usePortal = <E extends Element>(content: React.ReactNode, options?:
     return content
   }
 
-  return ref.current && createPortal(
-    content,
-    ref.current,
-  )
+  return ref.current && createPortal(content, ref.current)
 }
 
 export default usePortal

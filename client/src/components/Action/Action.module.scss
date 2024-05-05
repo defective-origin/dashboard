@@ -14,6 +14,21 @@
     box-sizing: border-box;
   }
 
+  .action--stretch {
+    width: 100%;
+    border-radius: 0;
+    padding-left: var(--space-size--xs);
+    padding-right: var(--space-size--xs);
+
+    .action-content {
+      flex-grow: 1;
+    }
+  }
+
+  .action:hover .action-content {
+    font-weight: 500;
+  }
+
   .xs { padding: 2px; gap: 2px; }
   .sm { padding: 3px; gap: 3px; }
   .md { padding: 4px; gap: 4px; }

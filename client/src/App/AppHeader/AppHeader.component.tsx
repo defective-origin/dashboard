@@ -33,7 +33,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const locale = useLocale()
 
   return (
-    <Header className={_className} as='header' area='top' v='x' aligns='center' p='sm' justifies='space-between' {...otherProps}>
+    <Header className={_className} as='header' area='top' justifies='space-between' {...otherProps}>
       <Block className={css.Content} v='x' aligns='center' p='sm'>
         <Portal.Container name='page-name' />
 
@@ -41,7 +41,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
       </Block>
 
       <Block className={css.Extra} v='x' aligns='center' p='sm'>
-        <Portal.Container name='page-actions' />
+        <Portal.Container name='page-menu' />
 
         {app.isAuthorized() && (
           <Button round onClick={app.logout} tooltip={locale.t('LINKS.ACCOUNT')}>

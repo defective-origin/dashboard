@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { AlertColor } from 'components/Alert'
 import Text from 'components/Text'
 import Block, { BlockVariant } from 'components/Block'
-import Actions from 'components/Actions'
+import Button from 'components/Button'
 
 // ---| self |---
 import css from './Toast.module.scss'
@@ -52,31 +52,28 @@ export function Toast(props: ToastProps): JSX.Element {
     <Block className={css.Toast} justifies='space-between' v={data.v ?? 'x'} g='xs'>
       <Text.H4 color='primary' content={data.content} />
 
-      <Actions g='xs' justifies='end'>
+      {/* Don't use Actions here because it breaks storybook toasts */}
+      <Block v='x' g='xs' justifies='end'>
         {data.onSuccess && (
-          <Actions.Button
+          <Button
             size='xs'
             color='success'
-            start='check_circle'
             content='Save'
-            end='check_circle'
             v='outlined'
             onClick={handleSuccess}
           />
         )}
 
         {data.onClose && (
-          <Actions.Button
+          <Button
             size='xs'
             color='error'
-            start='close'
             content='Cancel'
-            end='close'
             v='outlined'
             onClick={handleClose}
           />
         )}
-      </Actions>
+      </Block>
     </Block>
   )
 }
@@ -85,18 +82,20 @@ Toast.displayName = 'Toast'
 
 export type ToastContainerProps = {
   name: ToastName
+  width?: number
   className?: string
   position: RTToastContentProps['toastProps']['position']
 }
 
 export function ToastContainer(props: ToastContainerProps): JSX.Element {
-  const { name } = props
+  const { name, width, ...otherProps } = props
 
   return (
     <RTToastContainer
       containerId={initToastKey(name)}
       hideProgressBar
-      {...props}
+      style={{ width }}
+      {...otherProps}
     />
   )
 }

@@ -4,6 +4,8 @@ import { useMemo } from 'react'
 import { cn, xy } from 'tools'
 
 // ---| components |---
+import Layout from 'components/Layout'
+
 // ---| self |---
 import css from './ViewBoard.module.scss'
 import ViewBoardItem, { ViewBoardItemProps } from './ViewBoardItem'
@@ -12,14 +14,16 @@ export type ViewBoardItem = { place: xy.Square }
 
 export type ViewBoardProps<I extends Record<string, unknown>> = Omit<ViewBoardItemProps<I>, 'options'> & {
   className?: string
+  /** Quantity of rows */
+  rows?: number
+  /** Quantity of columns */
+  columns?: number
   // set margin around each widget
   gap?: number
   /** Items to show */
   items?: I[]
-  /** Size of cell */
-  cell?: xy.Vector
-  /** Place selector */
-  placeKey?: string,
+  /** Space around board */
+  padding?: number
 }
 
 /**
@@ -31,26 +35,26 @@ export type ViewBoardProps<I extends Record<string, unknown>> = Omit<ViewBoardIt
  *   { x: 6, y: 6, x2: 9, y2: 9 },
  * ]
  *
- * const TestComponent = (props = {}) => <div {...props}>TEST ITEM</div>
+ * const Widget = (props = {}) => <div {...props}>Widget</div>
  *
  * <ViewBoard
  *   rows={9}
  *   columns={9}
  *   gap={10}
- *   widget={TestComponent}
  *   items={items}
+ *   placeKey='place'
+ *   widget={Widget}
  * />
  */
 export default function ViewBoard<I extends Record<string, unknown>>(props: ViewBoardProps<I>): JSX.Element {
-  const { cell, gap = 0, items = [], placeKey, className } = props
-  const margin = gap / 2
-  const viewItems = useMemo(() => items.map((item, idx) =>
-    <ViewBoardItem key={idx} options={item} margin={margin} cell={cell} placeKey={placeKey} />,
-  ), [cell, items, margin, placeKey])
+  const { gap, items, placeKey, widget, className, ...otherProps } = props
+  const viewItems = useMemo(() => items?.map((item, idx) =>
+    <ViewBoardItem key={idx} options={item} placeKey={placeKey} widget={widget} />,
+  ), [items, placeKey, widget])
 
   return (
-    <div className={cn(css.ViewBoard, className)}>
+    <Layout className={cn(css.ViewBoard, className)} v='board' gap={gap} {...otherProps}>
       {viewItems}
-    </div>
+    </Layout>
   )
 }

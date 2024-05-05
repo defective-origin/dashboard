@@ -39,7 +39,7 @@ export function BaseField(props: BaseFieldProps): JSX.Element | null {
 
       {children}
 
-      <Messages items={allMessages} color='error' />
+      <Messages items={allMessages} color='error' size='xxs' />
     </Block>
   )
 }

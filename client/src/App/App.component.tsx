@@ -13,6 +13,7 @@ import './App.module.scss'
 import AppMenu from './AppMenu'
 import AppHeader from './AppHeader'
 import AppContent from './AppContent'
+import AppActions from './AppActions'
 
 export type AppProps = LayoutProps
 
@@ -31,18 +32,19 @@ export function App(props: AppProps): JSX.Element {
   // TODO: add AppModal
   // TODO: add AppDialog
   return (
-    <Layout className={_className} stretch v='columns' {...otherProps}>
+    <Layout className={_className} stretch v='left' {...otherProps}>
       <AppMenu />
       <AppHeader />
       <AppContent />
+      <AppActions />
 
       {children}
 
       {/* <Modal keepMounted open={!!itemMap.modal} content={itemMap.modal} onClose={onModalClose} /> */}
 
-      <Toast.Container name='alerts' className='alert-container' position='top-center' />
-      <Toast.Container name='messages' className='message-container' position='bottom-right' />
-      <Toast.Container name='guards' className='guard-container' position='bottom-center' />
+      <Toast.Container name='alerts' position='top-center' />
+      <Toast.Container name='messages' position='bottom-right' />
+      <Toast.Container name='guards' position='bottom-center' width={700} />
     </Layout>
   )
 }

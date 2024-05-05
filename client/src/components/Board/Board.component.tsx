@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 // ---| core |---
-import { cn, xy } from 'tools'
-import { useResize } from 'hooks'
+import { cn } from 'tools'
 
 // ---| self |---
 import css from './Board.module.scss'
@@ -13,18 +12,20 @@ export * from './SelectionBoard/SelectionBoard.error'
 
 export type BoardItem = ViewBoardItem
 
-export type BoardProps<I extends Record<string, unknown>> = SelectionBoardProps<I> & ViewBoardProps<I> & {
+export type BoardProps<I extends Record<string, unknown>> = Omit<SelectionBoardProps<I>, 'select'> & ViewBoardProps<I> & {
   // show selection board if true otherwise show view board
-  select?: true // TODO: back reselect
+  select?: boolean | SelectionBoardProps<I>['select'] // TODO: back reselect
   // TODO: move logic of update reselect value to here?
 } // TODO: grid: 'infinity' | 'xs' | 'md' ... columns: infinity  rows: infinity grid: [columns, rows]
 // TODO: add MiniBoard
 // TODO: add full screen
-// TODO: rename viewBoard to WidgetBoard?
 // TODO: add padding to each board
+// TODO: forbid select on boarder
 
 /**
  * Board which allow to select new position for widgets and also view them.
+ * In order to presets work correct, columns and rows should be multiple of 2.
+ *
  * @example
  * const cards: BoardItem[] = [
  *   { placement: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
@@ -43,14 +44,14 @@ export type BoardProps<I extends Record<string, unknown>> = SelectionBoardProps<
  *
  *  return (
  *     <Board
+ *       overlap
+ *       gap={10}
  *       rows={9}
  *       columns={9}
- *       gap={10}
- *       widget={TestComponent}
- *       select={items[0]}
  *       items={items}
- *       select
- *       overlap
+ *       select={items[0]}
+ *       placeKey='placement'
+ *       widget={TestComponent}
  *       onSelect={handleSelect}
  *       onReselect={handleReselect}
  *       onError={handleError}
@@ -59,54 +60,34 @@ export type BoardProps<I extends Record<string, unknown>> = SelectionBoardProps<
  * }
  */
 export function Board<I extends Record<string, unknown>>(props: BoardProps<I>): JSX.Element {
-  const {
-    rows,
-    columns,
-    select,
-    gap = 8,
-    items = [],
-    style,
-    className,
-    ...selectionBoardProps
-  } = props
+  const { padding, columns, rows, select, gap = 4, items, widget, placeKey = 'place', className, ...selectionBoardProps } = props
   const _className = cn(css.Board, className)
-  const { width, height, ref } = useResize<HTMLDivElement>()
-  const cell = useMemo<xy.Vector>(() => {
-    if (!columns || !rows) {
-      return xy.vector(1, 1)
-    }
-
-    return xy.vector(width / columns, height / rows)
-  }, [width, height, columns, rows])
 
   return (
-    <div ref={ref} className={_className} style={style}>
-      { !!width && !!height && (
-        <>
-          <ViewBoard
-            className={css.ViewBoard}
-            cell={cell}
-            items={items}
-            gap={gap}
-            placeKey='place'
-          />
+    <div className={_className}>
+      <ViewBoard
+        rows={rows}
+        columns={columns}
+        gap={gap}
+        items={items}
+        widget={widget}
+        padding={padding}
+        placeKey={placeKey}
+        className={css.ViewBoard}
+      />
 
-          { select && (
-            <SelectionBoard
-              className={css.SelectionBoard}
-              columns={columns}
-              rows={rows}
-              cell={cell}
-              items={items}
-              gap={gap}
-              width={width}
-              height={height}
-              placeKey='place'
-              select={select === true ? undefined : select}
-              {...selectionBoardProps}
-            />
-          )}
-        </>
+      { select && (
+        <SelectionBoard
+          rows={rows}
+          columns={columns}
+          gap={gap}
+          items={items}
+          padding={padding}
+          placeKey={placeKey}
+          select={select === true ? undefined : select}
+          className={css.SelectionBoard}
+          {...selectionBoardProps}
+        />
       )}
     </div>
   )

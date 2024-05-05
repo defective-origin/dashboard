@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './MenuButton.component'
+export { default } from './NavLink.component'
 
 /* INJECT_EXPORT_PLACE */
-export * from './MenuButton.component'
+export * from './NavLink.component'

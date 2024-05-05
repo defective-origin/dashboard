@@ -1,32 +1,15 @@
 @import 'src/theme';
 
-:global {
-  .dark {
-    --canvas-primary-color: #00000067;
-    --canvas-secondary-color: #83838367;
-    --canvas-success-color: #00FF0067;
-    --canvas-info-color: #002FFF67;
-    --canvas-warning-color: #FFAE0067;
-    --canvas-error-color: #FF000067;
-    --canvas-disable-color: #B8B8B867
-  ;}
-
-  .light {
-    --canvas-primary-color: #00000067;
-    --canvas-secondary-color: #83838367;
-    --canvas-success-color: #00FF0067;
-    --canvas-info-color: #002FFF67;
-    --canvas-warning-color: #FFAE0067;
-    --canvas-error-color: #FF000067;
-    --canvas-disable-color: #B8B8B867
-  ;}
+:root {
+  --canvas-primary-color: var(--color--primary-6, #00000067);
+  --canvas-secondary-color: var(--color--secondary-6, #83838367);
+  --canvas-success-color: var(--color--success-6, #00FF0067);
+  --canvas-info-color: var(--color--info-6, #002FFF67);
+  --canvas-warning-color: var(--color--warning-6, #FFAE0067);
+  --canvas-error-color: var(--color--error-6, #FF000067);
 }
 
 .SelectionBoard {
   background: transparent;
   cursor: pointer;
-}
-
-.ForbiddenSelect {
-  cursor: not-allowed;
 }

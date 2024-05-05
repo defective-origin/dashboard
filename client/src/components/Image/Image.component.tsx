@@ -22,11 +22,14 @@ export const IMAGE_MAP = {
 
 export type ImageVariant = keyof typeof IMAGE_MAP
 
-export type ImageProps = Pick<JSX.IntrinsicElements['img'], 'src'> & {
+export type ImageProps = {
   className?: string
   children?: React.ReactNode
   v?: ImageVariant
   loading?: boolean
+  src?: string
+  width?: string | number
+  height?: string | number
 }
 
 /**
@@ -37,11 +40,20 @@ export type ImageProps = Pick<JSX.IntrinsicElements['img'], 'src'> & {
  * <Image />
  */
 export function Image(props: ImageProps): JSX.Element {
-  const { v, src, loading, children, className, ...otherProps } = props
+  const { width, height, v, src, loading, children, className, ...otherProps } = props
   const _className = cn('image', className)
   const imgSrc = src ?? IMAGE_MAP[v as ImageVariant]
 
-  const item = <img className={_className} src={imgSrc} {...otherProps}>{children}</img>
+  const item = (
+    <img
+      className={_className}
+      src={imgSrc}
+      style={{ width, height }}
+      {...otherProps}
+    >
+      {children}
+    </img>
+  )
 
   if (loading) {
     //TODO: [kseniya_boldak] fix classname

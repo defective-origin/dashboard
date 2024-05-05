@@ -24,7 +24,7 @@ export function Header(props: HeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Header, className)
 
-  return <Block className={_className} area='top' {...otherProps}>{children}</Block>
+  return <Block className={_className} area='top' v='x' aligns='center' p='sm' {...otherProps}>{children}</Block>
 }
 
 Header.displayName = 'Header'

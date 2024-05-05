@@ -39,7 +39,6 @@ const initVariants = <P extends keyof TooltipProps>(prop: P, items: TooltipProps
       : <div key={idx} />,
     )}
   </Layout>
-
 )
 
 export const Demo: Story = {

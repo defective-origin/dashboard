@@ -13,21 +13,3 @@ describe('[Footer] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Footer] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useFooter())
-// 
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Footer] context', () => {
-//   const wrapper = (props: FooterProps) => <FooterProvider { ...props } />
-// 
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useFooter(), { wrapper })
-// 
-//     expect(result.current).toBeTruthy()
-//   })
-// })

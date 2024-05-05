@@ -4,7 +4,6 @@ import React from 'react'
 import { useLauncher } from 'Launcher'
 import { TranslateKeys, useLocale } from 'locale'
 import { cn, react } from 'tools'
-import { useFunc } from 'hooks'
 
 // ---| screens |---
 import Copyright from 'screens/Copyright'
@@ -22,6 +21,9 @@ import css from './BasePage.module.scss'
 export type BasePageProps = PageProps & {
   name?: TranslateKeys
   scroll?: ScrollVariant
+  menu?: ActionItem[]
+  actions?: ActionItem[]
+  noFooter?: boolean
 }
 
 /**
@@ -32,40 +34,33 @@ export type BasePageProps = PageProps & {
  * <BasePage />
  */
 export function BasePage(props: BasePageProps): JSX.Element {
-  const { scroll, name, meta, children, className, ...otherProps } = props
+  const { noFooter, menu = [], actions = [], scroll, name, meta, children, className, ...otherProps } = props
   const _className = cn(css.BasePage, className)
   const app = useLauncher()
   const locale = useLocale()
   const pageName = locale.t(name)
   const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
-  const checkMessage = useFunc(() => app.toast.message({
-    content: 'TEST MESSAGE',
-    onClose: () => console.log('CLOSE MESSAGE'),
-    onSuccess: () => console.log('SUCCESS MESSAGE'),
-  }))
-  const checkGuard = useFunc(() => app.toast.guard({
-    content: 'You have unsaved changes. \n Are you sure you want to leave without save?',
-    onClose: () => console.log('CLOSE GUARD'),
-    onSuccess: () => console.log('SUCCESS GUARD'),
-  }))
-  const checkAlert = useFunc(() => {
-    app.toast.alert({content: 'Test Text', color: 'error'})
-    app.toast.alert({content: 'Test Text', color: 'warning'})
-    app.toast.alert({content: 'Test Text', color: 'info'})
-    app.toast.alert({content: 'Test Text', color: 'success'})
-  })
-  const testActions: ActionItem[] = [
-    { key: '3', start: 'close', size: 'xs', v: 'outlined', content: 'TEST GUARD', color: 'error', onClick: checkGuard },
-    { key: '2', start: 'close', size: 'xs', v: 'outlined', content: 'TEST MESSAGE', color: 'warning', onClick: checkMessage },
-    { key: '1', start: 'close', size: 'xs', v: 'outlined', content: 'TEST ALERT', color: 'info', onClick: checkAlert },
-    !app.isAuthorized() && { key: '0', start: 'login', size: 'xs', v: 'outlined', content: locale.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login },
-  ].filter(Boolean) as ActionItem[]
+
+  const menuItems: ActionItem[] = [
+    ...menu,
+    { key: '0', start: 'login', size: 'xs', v: 'outlined', content: locale.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login, hide: app.isAuthorized() },
+  ]
+
+  const actionItems: ActionItem[] = actions.map((item) =>
+    typeof item === 'object'
+      ? ({
+        ...item,
+        v: 'text',
+        color: 'primary',
+      })
+      : item,
+  ) as ActionItem[]
 
   return (
-    <Page className={_className} name={tabName} meta={meta} v='columns' stretch {...otherProps}>
-      {/* portal name and actions to AppHeader component */}
+    <Page className={_className} name={tabName} meta={meta} stretch {...otherProps}>
       <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
-      <Portal name='page-actions' content={<Actions items={testActions} g='xs' />} />
+      <Portal name='page-menu' content={<Actions items={menuItems} g='xs' />} />
+      <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' tooltipSide='left' size='lg' />} />
 
       <Page.Content g='xs'>
         <Scroll v={scroll} actions />
@@ -73,15 +68,17 @@ export function BasePage(props: BasePageProps): JSX.Element {
         {children}
       </Page.Content>
 
-      <Page.Footer v='x' justifies='center'>
-        <Copyright />
-      </Page.Footer>
+      {!noFooter && (
+        <Page.Footer justifies='center'>
+          <Copyright />
+        </Page.Footer>
+      )}
     </Page>
   )
 }
 
 export default react.attachComponents(BasePage, {
-  LeftAside: Page.LeftAside, // TODO: remove?
+  LeftAside: Page.LeftAside,
   RightAside: Page.RightAside,
   Footer: Page.Footer,
   Header: Page.Header,

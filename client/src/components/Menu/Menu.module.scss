@@ -6,3 +6,9 @@
 
 .Menu {
 }
+
+.Horizontal {
+  display: flex;
+  flex-direction: row;
+  padding: 0 8px;
+}

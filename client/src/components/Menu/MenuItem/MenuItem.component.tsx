@@ -7,12 +7,22 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Action, { ActionProps } from 'components/Action'
+import Button from 'components/Button'
+import Link from 'components/Link'
+import NavLink from 'components/NavLink'
+import { RepeatItem } from 'components/Repeat'
+import { PopupTriggerOptions } from 'components/Popup'
 
 // ---| self |---
 import css from './MenuItem.module.scss'
 
-export type MenuItemProps = ActionProps
+export const MENU_ACTION_MAP = {
+  button: Button,
+  link: Link,
+  nav: NavLink,
+}
+
+export type MenuItemProps = RepeatItem<typeof MENU_ACTION_MAP>
 
 /**
  * Component description.
@@ -21,12 +31,20 @@ export type MenuItemProps = ActionProps
  * @example
  * <Item />
  */
-export function MenuItem(props: MenuItemProps): JSX.Element {
-  const { className, ...otherProps } = props
+export function MenuItem(props: MenuItemProps & { triggerOptions?: PopupTriggerOptions }): JSX.Element {
+  const { triggerOptions: o, active, variant = 'button', className, children, ...otherProps } = props
   const _className = cn(css.MenuItem, className)
+  const Tag = MENU_ACTION_MAP[variant] as React.FC<RepeatItem<typeof MENU_ACTION_MAP>>
 
-  // FIXME: implement via variant link | button
-  return <Action as={MuiMenuItem} className={_className} {...otherProps} />
+  return (
+    <MuiMenuItem className={_className}>
+      {!children && Tag && (
+        <Tag size='sm' active={active ?? o?.open} color='primary' align='left' stretch {...otherProps} />
+      )}
+
+      {children}
+    </MuiMenuItem>
+  )
 }
 
 MenuItem.displayName = 'MenuItem'

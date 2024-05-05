@@ -26,6 +26,7 @@ describe('[Repeat] component', () => {
   it('should render items with item component', () => {
     // type casting can be omitted if we work with component
     const items = [
+      { content: 'invisible', hide: true },
       { content: '1' },
       { content: '2' },
     ]

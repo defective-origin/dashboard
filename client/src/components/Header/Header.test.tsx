@@ -13,21 +13,3 @@ describe('[Header] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Header] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useHeader())
-// 
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Header] context', () => {
-//   const wrapper = (props: HeaderProps) => <HeaderProvider { ...props } />
-// 
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useHeader(), { wrapper })
-// 
-//     expect(result.current).toBeTruthy()
-//   })
-// })

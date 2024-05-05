@@ -8,12 +8,11 @@ import { cn } from 'tools'
 
 // ---| components |---
 import Aside, { AsideProps } from 'components/Aside'
-import Block from 'components/Block'
 import Logo from 'components/Logo'
+import Actions from 'components/Actions'
 
 // ---| self |---
 import css from './AppMenu.module.scss'
-import AppMenuItem from './AppMenuItem'
 
 export type AppMenuProps = AsideProps
 
@@ -30,26 +29,36 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
   const locale = useLocale()
   const _className = cn(css.AppMenu, className)
 
-  // TODO: implement via Menu instead of Block?
-
   return (
     <Aside className={_className} as='nav' {...otherProps}>
-      <Logo v='logo' href={ROUTE_LINKS.ROOT} />
+      <Logo v='logo' href={ROUTE_LINKS.ROOT} width={42} />
 
-      <Block className={css.Main} grow={1}>
-        <AppMenuItem start='dashboard' href={ROUTE_LINKS.BOARDS} tooltip={locale.t('LINKS.BOARDS')} />
-        <AppMenuItem start='insert_chart' href={ROUTE_LINKS.WIDGETS} tooltip={locale.t('LINKS.WIDGETS')} />
+      <Actions className={css.Main} v='y' grow={1}>
+        <Actions.Nav start='dashboard' to={ROUTE_LINKS.BOARDS} tooltip={locale.t('LINKS.BOARDS')} tooltipSide='right' size='lg' />
+        <Actions.Nav start='insert_chart' to={ROUTE_LINKS.WIDGETS} tooltip={locale.t('LINKS.WIDGETS')} tooltipSide='right' size='lg' />
+        <Actions.Button start='add' to={ROUTE_LINKS.WIDGETS} tooltip='Add Board' tooltipSide='right' size='lg' />
 
         {children}
-      </Block>
+      </Actions>
 
-      <Block className={css.Extra}>
-        <AppMenuItem start='auto_stories' href={ROUTE_LINKS.GUIDE} tooltip={locale.t('LINKS.GUIDE')} />
-        <AppMenuItem start='paid' href={ROUTE_LINKS.DONATION} tooltip={locale.t('LINKS.DONATION')} />
-        <AppMenuItem start='support_agent' href={ROUTE_LINKS.SUPPORT} tooltip={locale.t('LINKS.SUPPORT')} />
-        <AppMenuItem start={`${app.theme()}_mode`} onClick={app.toggleTheme} tooltip={app.theme()} fillIcon />
-        <AppMenuItem start='language' tooltip={locale.language} />
-      </Block>
+      <Actions className={css.Extra} v='y'>
+        <Actions.Nav start='auto_stories' to={ROUTE_LINKS.GUIDE} tooltip={locale.t('LINKS.GUIDE')} tooltipSide='right' size='lg' />
+        <Actions.Nav start='local_atm' to={ROUTE_LINKS.DONATION} tooltip={locale.t('LINKS.DONATION')} tooltipSide='right' size='lg' />
+        <Actions.Nav start='support_agent' to={ROUTE_LINKS.SUPPORT} tooltip={locale.t('LINKS.SUPPORT')} tooltipSide='right' size='lg' />
+
+        <Actions.Button v='text' start={`${app.theme()}_mode`} onClick={app.toggleTheme} tooltip={app.theme()} tooltipSide='right' size='lg' active />
+        <Actions.Menu
+          trigger={(o) => (
+            <Actions.Button
+              v='text'
+              active={o.open}
+              content={locale.language}
+            />
+          )}
+        >
+          {locale.languages.map((lang) => <Actions.Button key={lang} v='text' size='xs' stretch content={lang} />)}
+        </Actions.Menu>
+      </Actions>
     </Aside>
   )
 }

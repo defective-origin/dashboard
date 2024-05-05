@@ -7,7 +7,7 @@ import { PortalReturnOptions, usePortal } from 'hooks'
 // ---| self |---
 import css from './Portal.module.scss'
 
-export type PortalName = 'page-name' | 'page-actions'
+export type PortalName = 'page-name' | 'page-menu' | 'page-actions'
 
 export const initPortalKey = (name: PortalName) => `portal-${name}`
 

@@ -1,6 +1,5 @@
 // ---| core |---
 import { xy } from 'tools'
-import { Color } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -9,7 +8,7 @@ import { Color } from 'theme'
 // ---| self |---
 
 
-export type ShapeColor = Color
+export type ShapeColor = string | undefined
 export type ShapeStyle = {
   fill?: ShapeColor
   stroke?: ShapeColor
@@ -19,14 +18,14 @@ export type ShapeStyle = {
 
 export type StyledShape<O extends object> = O & ShapeStyle
 export type PointShape = StyledShape<xy.Vector & { radius?: number }>
-export type SquareShape = StyledShape<xy.Square & { radius?: number }>
-export type GridShape = StyledShape<{ columns?: number, rows?: number, cell?: xy.Vector }>
+export type SquareShape = StyledShape<xy.Square & { radius?: number, shift?: number }>
+export type GridShape = StyledShape<{ columns?: number, rows?: number, padding?: number, cell?: xy.Vector }>
 export type Shape = SquareShape | GridShape
 
-export type Painter<S extends Shape = Shape> = (context: CanvasRenderingContext2D, item: S, colors: Record<string, string>) => void
+export type Painter<S extends Shape = Shape> = (context: CanvasRenderingContext2D, item: S) => void
 
 
-const prepare: Painter = (context, item, colors) => {
+const prepare: Painter = (context, item) => {
   // Note: Be aware that clearRect() may cause unintended
   // side effects if you're not using paths properly.
   // Make sure to call beginPath() before
@@ -34,50 +33,50 @@ const prepare: Painter = (context, item, colors) => {
   context.beginPath()
 
   // set styles
-  context.strokeStyle = colors[item.stroke ?? item.color ?? 'bg']
-  context.fillStyle = colors[item.fill ?? item.color ?? 'bg']
+  context.strokeStyle = item.stroke ?? item.color ?? 'transparent'
+  context.fillStyle = item.fill ?? item.color ?? 'transparent'
   context.lineWidth = item.line ?? 1
 }
 
 
-export const point: Painter<PointShape> = (context, item, colors) => {
-  const { x, y, radius = 0.5 } = item
+export const point: Painter<PointShape> = (context, item) => {
+  const { x, y, radius = 1 } = item
 
-  prepare(context, item, colors)
+  prepare(context, item)
 
   context.arc(x, y, radius, 0, 2 * Math.PI)
 
   context.fill()
 }
 
-export const grid: Painter<GridShape> = (context, item, colors) => {
-  const { columns = 0, rows = 0, cell = xy.vector(1, 1), ...styles } = item
+export const grid: Painter<GridShape> = (context, item) => {
+  const { columns = 0, rows = 0, cell = xy.vector(1, 1), padding = 0, ...styles } = item
 
   for (let column = 0; column <= columns; column += 1) {
     for (let row = 0; row <= rows; row += 1) {
       point(context, {
-        x: column * cell.x,
-        y: row * cell.y,
+        x: (column * cell.x) + padding,
+        y: (row * cell.y) + padding,
         ...styles,
-      }, colors)
+      })
     }
   }
 }
 
-export const square: Painter<SquareShape> = (context, item, colors) => {
-  const { v1, v2, radius = 0 } = item
+export const square: Painter<SquareShape> = (context, item) => {
+  const { v1, v2, radius = 0, shift = 0 } = item
   const width = xy.squareWidth(item)
   const height = xy.squareHeight(item)
 
-  prepare(context, item, colors)
+  prepare(context, item)
 
   if (!radius) {
-    context.rect(v1.x, v1.y, width, height)
+    context.rect(v1.x + shift, v1.y + shift, width, height)
   } else {
-    const xr = v1.x + radius
-    const yr = v1.y + radius
-    const xr2 = v2.x - radius
-    const yr2 = v2.y - radius
+    const xr = v1.x + radius + shift
+    const yr = v1.y + radius + shift
+    const xr2 = v2.x - radius + shift
+    const yr2 = v2.y - radius + shift
 
     // draw figure
     context.moveTo(xr, v1.y)

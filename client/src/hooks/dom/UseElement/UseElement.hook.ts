@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 
 export const getNode = (elem?: ElementOptions<Element>, defaultElem?: ElementOptions<Element>): Element | null => {
   const element = elem ?? defaultElem
@@ -34,6 +34,7 @@ export const useElement = <E extends Element>(
 ): ElementRef<E> => {
   // Try to get element only from selector because
   // if default element has set we won't be able to change ref
+  const [, refresh] = useState<unknown>() // TODO: how have this worked without state?
   const ref = useRef<unknown>(getNode(element))
 
   // initialize value if element options was provided.
@@ -44,6 +45,7 @@ export const useElement = <E extends Element>(
     const node = getNode(element, defaultElement)
     if (!ref.current && node) {
       ref.current = node
+      refresh(node)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

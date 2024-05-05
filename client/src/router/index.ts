@@ -8,3 +8,4 @@ export * from './router.conf'
 export * from './router.context'
 
 export { useMatch, Outlet, NavLink } from 'react-router-dom'
+export type { NavLinkProps } from 'react-router-dom'

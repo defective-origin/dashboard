@@ -6,33 +6,36 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon, { IconSize, IconVariant } from 'components/Icon'
+import Icon, { IconVariant } from 'components/Icon'
 import Text, { TextProps, TextVariant } from 'components/Text'
-import Tooltip, { TooltipProps } from 'components/Tooltip'
+import Tooltip, { TooltipVariant } from 'components/Tooltip'
+import Skeleton from 'components/Skeleton'
 
 // ---| self |---
 import './Action.module.scss'
-import Skeleton from 'components/Skeleton'
 
-export const initAsideContent = (content: React.ReactNode, size?: IconSize, fill?: boolean, loading?: boolean) => {
-  if (typeof content !== 'string') {
+export const initAsideContent = (content: React.ReactNode, options: ActionProps) => {
+  if (!content) {
+    return null
+  } else if (typeof content !== 'string') {
     return content
   }
 
-  return <Icon v={content as IconVariant} fill={fill} size={size} loading={loading}/>
+  return <Icon v={content as IconVariant} fill={options.active} color={options.color ?? 'primary'} size={options.size} loading={options.loading}/>
 }
 
 export type ActionProps = Omit<TextProps, 'v'> & {
   textV?: TextVariant
-  iconSize?: IconSize
   start?: IconVariant | Exclude<React.ReactNode, string>
   end?: IconVariant | Exclude<React.ReactNode, string>
-  tooltip?: TooltipProps | TooltipProps['content']
-  fillIcon?: boolean
+  tooltip?: React.ReactNode
+  tooltipSide?: TooltipVariant
+  active?: boolean
   as?: React.ElementType
   href?: string
   target?: React.HTMLAttributeAnchorTarget
   round?: boolean
+  stretch?: boolean
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
   [key: string]: any
 }
@@ -44,34 +47,42 @@ export type ActionProps = Omit<TextProps, 'v'> & {
  * @example
  * <Action />
  */
-export function Action(props: ActionProps): JSX.Element {
+export function Action(props: ActionProps): JSX.Element | null {
   const {
     as = 'button',
     size = 'md',
-    iconSize = size,
+    stretch,
     textV,
     align,
     ellipsis,
     start,
     end,
     round,
-    fillIcon,
+    color,
     loading,
     tooltip,
+    active,
+    tooltipSide = 'top',
     content,
     children,
     className,
     ...otherProps
   } = props
-  const _className = cn('action', size, { round }, className)
+  const _className = cn('action', size, { round, 'action--stretch': stretch }, className)
   const Tag = loading ? Skeleton : as
 
   const item = (
-    <Tag className={_className} disabled={loading} {...otherProps}>
-      {start && initAsideContent(start, iconSize, fillIcon, loading)}
+    <Tag
+      className={_className}
+      disabled={loading}
+      color={color}
+      {...otherProps}
+    >
+      {initAsideContent(start, props)}
 
-      {content || children && (
+      {(content || children) && (
         <Text
+          className='action-content'
           v={textV}
           size={size}
           align={align}
@@ -79,17 +90,17 @@ export function Action(props: ActionProps): JSX.Element {
           ellipsis={ellipsis}
           content={content}
           children={children}
+          color={color ?? 'primary'}
+          bold={active}
         />
       )}
 
-      {end && initAsideContent(end, iconSize, fillIcon, loading)}
+      {initAsideContent(end, props)}
     </Tag>
   )
 
   if (tooltip) {
-    const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
-
-    return <Tooltip {...tooltipProps}>{item}</Tooltip>
+    return <Tooltip v={tooltipSide} content={tooltip}>{item}</Tooltip>
   }
 
   return item

@@ -6,9 +6,9 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat, { ComponentWithItems } from 'components/Repeat'
+import Repeat, { PropsWithItems } from 'components/Repeat'
 import Block, { BlockProps } from 'components/Block'
-import Text, { TextProps, TextColor } from 'components/Text'
+import Text, { TextProps, TextColor, TextSize } from 'components/Text'
 
 // ---| self |---
 import css from './Messages.module.scss'
@@ -20,15 +20,17 @@ const MESSAGE_ORDER: Record<MessageColor, number> = {
   success: 3,
   primary: 4,
   secondary: 5,
-  disable: 6,
+  contrast: 6,
+  bg: 7,
 }
 
 export type MessageColor = TextColor
 export type MessageItem = TextProps | string
 
-export type MessagesProps = ComponentWithItems<BlockProps, MessageItem> & {
+export type MessagesProps = PropsWithItems<MessageItem, BlockProps> & {
   color?: MessageColor
   sort?: boolean
+  size?: TextSize
 }
 
 /**
@@ -39,7 +41,7 @@ export type MessagesProps = ComponentWithItems<BlockProps, MessageItem> & {
  * <Messages />
  */
 export function Messages(props: MessagesProps): JSX.Element {
-  const { sort = true, items = [], color = 'primary', children, className, ...otherProps } = props
+  const { size, sort = true, items = [], color = 'primary', children, className, ...otherProps } = props
   const _className = cn(css.Messages, className)
   const messages = useMemo(() =>
     items.map((content) =>
@@ -57,7 +59,7 @@ export function Messages(props: MessagesProps): JSX.Element {
 
   return (
     <Block className={_className} {...otherProps}>
-      <Repeat cmp={Text} items={messages} />
+      <Repeat cmp={Text} items={messages} size={size} />
 
       {children}
     </Block>

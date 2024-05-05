@@ -7,7 +7,7 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Block, { BlockProps } from 'components/Block'
-import Repeat, { ComponentWithItems } from 'components/Repeat'
+import Repeat, { PropsWithItems } from 'components/Repeat'
 
 // ---| self |---
 import css from './Alerts.module.scss'
@@ -16,7 +16,7 @@ import Alert, { AlertProps } from 'components/Alert'
 export type AlertColor = AlertProps['color']
 export type AlertItem = AlertProps | string
 
-export type AlertsProps = ComponentWithItems<BlockProps, AlertItem> & {
+export type AlertsProps = PropsWithItems<AlertItem, BlockProps> & {
   color?: AlertColor
 }
 

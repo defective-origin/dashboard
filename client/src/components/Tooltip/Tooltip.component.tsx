@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiTooltip from '@mui/material/Tooltip'
+import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -11,9 +11,14 @@ import { cn } from 'tools'
 // ---| self |---
 import css from './Tooltip.module.scss'
 
-export type TooltipVariant = 'bottom-end' | 'bottom-start' | 'bottom' | 'left-end' | 'left-start'
-| 'left' | 'right-end' | 'right-start' | 'right' | 'top-end' | 'top-start'
-| 'top'
+const POPUP_STYLE = { tooltip: { style: {margin: 0, padding: 0, background: '#FFF', border: 'var(--border)' } } }
+
+export type TooltipVariant =
+|'bottom-start' | 'bottom' | 'bottom-end'
+| 'left-start' | 'left' | 'left-end'
+| 'right-start' | 'right' | 'right-end'
+| 'top-start' | 'top' | 'top-end'
+
 
 export type TooltipProps = {
   className?: string
@@ -21,7 +26,10 @@ export type TooltipProps = {
   content?: React.ReactNode
   v?: TooltipVariant
   open?: boolean
+  popup?: boolean
   wrapper?: React.ElementType
+  onOpen?: MuiTooltipProps['onOpen']
+  onClose?: MuiTooltipProps['onClose']
 }
 
 /**
@@ -32,11 +40,22 @@ export type TooltipProps = {
  * <Tooltip />
  */
 export function Tooltip(props: TooltipProps): JSX.Element {
-  const { wrapper: Wrapper = 'span', content, children, className, v, open, ...otherProps } = props
+  const { onOpen, onClose, popup, wrapper: Wrapper = 'span', content, children, className, v = 'top', open, ...otherProps } = props
   const _className = cn(css.Tooltip, className)
 
+  // TODO: remove wrapper
   return (
-    <MuiTooltip className={_className} title={content} arrow placement={v} open={open} {...otherProps}>
+    <MuiTooltip
+      className={_className}
+      title={content}
+      arrow={!popup}
+      placement={v}
+      open={open}
+      componentsProps={popup ? POPUP_STYLE : undefined}
+      onOpen={onOpen}
+      onClose={onClose}
+      {...otherProps}
+    >
       <Wrapper style={{width: 'fit-content'}}>
         {children}
       </Wrapper>

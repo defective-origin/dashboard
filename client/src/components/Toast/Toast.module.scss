@@ -1,25 +1,25 @@
 @import 'src/theme';
 
 :root {
-  --toastify-font-family: sans-serif;
+  --toastify-font-family: 'Montserrat';
 
   // background
-  --toastify-color-info: var(--mui-palette-Alert-infoStandardBg);
-  --toastify-color-success: var(--mui-palette-Alert-successStandardBg);
-  --toastify-color-warning: var(--mui-palette-Alert-warningStandardBg);
-  --toastify-color-error: var(--mui-palette-Alert-errorStandardBg);
+  --toastify-color-info: var(--color--info-6);
+  --toastify-color-success: var(--color--success-6);
+  --toastify-color-warning: var(--color--warning-6);
+  --toastify-color-error: var(--color--error-6);
 
   // text
-  --toastify-text-color-info: var(--mui-palette-Alert-infoColor);
-  --toastify-text-color-success: var(--mui-palette-Alert-successColor);
-  --toastify-text-color-warning: var(--mui-palette-Alert-warningColor);
-  --toastify-text-color-error: var(--mui-palette-Alert-errorColor);
+  --toastify-text-color-info: var(--color--info);
+  --toastify-text-color-success: var(--color--success);
+  --toastify-text-color-warning: var(--color--warning);
+  --toastify-text-color-error: var(--color--error);
 
   // icon
-  --toastify-icon-color-info: var(--mui-palette-Alert-infoIconColor);
-  --toastify-icon-color-success: var(--mui-palette-Alert-successIconColor);
-  --toastify-icon-color-warning: var(--mui-palette-Alert-warningIconColor);
-  --toastify-icon-color-error: var(--mui-palette-Alert-errorIconColor);
+  --toastify-icon-color-info: var(--color--info);
+  --toastify-icon-color-success: var(--color--success);
+  --toastify-icon-color-warning: var(--color--warning);
+  --toastify-icon-color-error: var(--color--error);
 }
 
 :global {
@@ -34,6 +34,9 @@
   }
 }
 
+.Toast {
+}
+
 :global(.Toastify__close-button) {
-  color: var(--mui-palette-text-primary);
+  color: var(--color--primary);
 }

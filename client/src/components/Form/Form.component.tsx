@@ -8,7 +8,7 @@ import { cn, react } from 'tools'
 // ---| components |---
 import Block, { BlockProps } from 'components/Block'
 import Section from 'components/Section'
-import Actions, { ActionItem } from 'components/Actions'
+import Actions, { ActionItem, ActionsProps } from 'components/Actions'
 import Alert from 'components/Alert'
 import Alerts, { AlertItem } from 'components/Alerts'
 import Field from 'components/Field'
