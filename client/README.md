@@ -27,7 +27,7 @@ In the project directory, you can run:
 #### Installs all necessary packages.
 
 ```
-yarn prepare
+yarn
 ```
 
 #### Launches application on [url](http://localhost:5173/).

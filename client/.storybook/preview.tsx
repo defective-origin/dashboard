@@ -1,8 +1,8 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
-import { withThemeByClassName } from "@storybook/addon-styling";
 import ThemeProvider from '../src/theme'
 import { DocsContainer } from '@storybook/addon-docs/blocks';
+import { withThemeByClassName } from '@storybook/addon-themes';
 
 import "./index.scss";
 

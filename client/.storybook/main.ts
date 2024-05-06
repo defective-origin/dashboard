@@ -8,14 +8,8 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
-    {
-      name: "@storybook/addon-styling",
-      options: {
-        postCss: {
-          implementation: require("postcss"),
-        },
-      },
-    },
+    "@storybook/addon-themes",
+    "@storybook/addon-styling-webpack",
   ],
   framework: {
     name: "@storybook/react-vite",
