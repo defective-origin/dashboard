@@ -10,5 +10,12 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: 'src/tests/setup.ts',
   },
+  // it fix issue when build removes
+  // :global and :root styles written in component styles
+  build: {
+    rollupOptions: {
+      treeshake: false,
+    },
+  },
 })
 // alias config vite https://www.youtube.com/watch?v=ic-P67jinhw

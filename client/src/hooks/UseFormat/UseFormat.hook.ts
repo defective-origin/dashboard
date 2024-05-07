@@ -1,6 +1,5 @@
 import { isNil } from 'tools'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Formatter<V> = (value: V) => React.ReactNode
 
 export type FormatOptions<K extends string> = {

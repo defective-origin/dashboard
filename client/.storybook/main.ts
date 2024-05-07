@@ -18,5 +18,18 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  async viteFinal(config) {
+    const { mergeConfig } = await import('vite');
+
+    return mergeConfig(config, {
+      build: {
+        // it fix issue when build removes 
+        // :global and :root styles written in component styles
+        rollupOptions: {
+          treeshake: false
+        }
+      }
+    });
+  },
 };
 export default config;

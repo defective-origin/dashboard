@@ -14,7 +14,6 @@ import Form from 'components/Form'
 import css from './WidgetPage.module.scss'
 import { TextProps } from 'components/Text'
 import { AlertItem } from 'components/Alerts'
-import GroupField from 'components/Field/GroupField'
 
 export type WidgetPageProps = BasePageProps
 

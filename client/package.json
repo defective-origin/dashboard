@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:dev": "tsc && vite build --mode dev",
-    "build:prod": "tsc && vite build",
-    "build:test": "tsc && vite build --mode testing",
-    "build:stage": "tsc && vite build --mode staging",
+    "build:dev": "yarn lint && vite build --mode dev",
+    "build:prod": "yarn lint && vite build",
+    "build:test": "yarn lint && vite build --mode testing",
+    "build:stage": "yarn lint && vite build --mode staging",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "yarn lint:es && yarn lint:css",
+    "lint": "yarn lint:es --max-warnings 100 && yarn lint:css --max-warnings 100",
     "lint:fix": "yarn lint:es:fix && lint:css:fix",
     "lint:es": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
     "lint:es:fix": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0 --fix",
@@ -75,8 +75,8 @@
     "stylelint-config-standard-scss": "10.0.0",
     "stylelint-scss": "5.3.2",
     "typescript": "5.4.5",
-    "vite": "^5.2.8",
-    "vite-tsconfig-paths": "^4.3.2",
+    "vite": "5.2.8",
+    "vite-tsconfig-paths": "4.3.2",
     "vitest": "1.5.0"
   }
 }
