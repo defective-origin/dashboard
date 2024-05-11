@@ -44,7 +44,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
         <Portal.Container name='page-menu' />
 
         {app.isAuthorized() && (
-          <Button round onClick={app.logout} tooltip={locale.t('LINKS.ACCOUNT')}>
+          <Button round onClick={app.logout} tooltip={locale.t('ROUTE.ACCOUNT')}>
             <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
           </Button>
         )}

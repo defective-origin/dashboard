@@ -47,18 +47,38 @@
   "SYSTEM": {
     "TAB_NAME": "{{title}} Page"
   },
-  "BUTTONS": {
+  "ACTION": {
     "LOGIN": "Login",
     "LOGOUT": "Logout",
-    "OPEN_MENU": "Open menu",
-    "CLOSE_MENU": "Close menu"
+    "REPLACE": "Replace",
+    "FULL_SCREEN": "Full screen",
+    "FAVORITE": "Favorite",
+    "DOCS": "Docs",
+    "SETTINGS": "Settings",
+    "REMOVE": "Remove",
+    "ADD_WIDGET": "Add widget",
+    "ADD_TO_MENU": "Add to menu"
+  },
+  "ORIENTATION": {
+    "VERTICAL": "Vertical",
+    "HORIZONTAL": "Horizontal"
+  },
+  "DEVICE": {
+    "TV": "Television",
+    "COMPUTER": "Computer",
+    "TABLET": "Tablet",
+    "TABLET_VERTICAL": "$t(DEVICE.TABLET) [$t(ORIENTATION.VERTICAL)]",
+    "TABLET_HORIZONTAL": "$t(DEVICE.TABLET) [$t(ORIENTATION.HORIZONTAL)]",
+    "MOBILE": "Mobile",
+    "MOBILE_VERTICAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.VERTICAL)]",
+    "MOBILE_HORIZONTAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.HORIZONTAL)]"
   },
   "GROUPS": {
     "DISPLAY": "Display",
     "HELP": "Help",
     "SYSTEM": "System"
   },
-  "LINKS": {
+  "ROUTE": {
     "BOARDS": "Boards",
     "WIDGETS": "Widgets",
     "GUIDE": "Guide",

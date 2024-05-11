@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn, react } from 'tools'
-import { useFunc } from 'hooks'
+import { useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -11,7 +11,6 @@ import Button, { ButtonProps } from 'components/Button'
 
 // ---| self |---
 import css from './FormButton.module.scss'
-import { useForm } from '../Form.context'
 
 export type FormButtonProps = ButtonProps & {
   className?: string

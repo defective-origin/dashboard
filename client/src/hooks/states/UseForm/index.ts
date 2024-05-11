@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './Form.component'
+export { default } from './UseForm.hook'
 
 /* INJECT_EXPORT_PLACE */
-export * from './Form.component'
+export * from './UseForm.hook'

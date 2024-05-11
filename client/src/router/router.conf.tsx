@@ -42,3 +42,5 @@ export const APP_ROUTES = createBrowserRouter([
     ],
   },
 ])
+
+export type RouteLinks = keyof typeof ROUTE_LINKS

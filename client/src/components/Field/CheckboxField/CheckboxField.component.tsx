@@ -3,16 +3,14 @@ import MuiCheckboxField from '@mui/material/Checkbox'
 
 // ---| core |---
 import { cn } from 'tools'
+import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { FormOptions, useForm } from 'components/Form'
-
 // ---| self |---
 import css from './CheckboxField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
-import { useFunc } from 'hooks'
 
 const toValue = (checked?: boolean, value?: string | boolean | number) => {
   // if value passed

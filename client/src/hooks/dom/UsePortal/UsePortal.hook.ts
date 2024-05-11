@@ -2,7 +2,7 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 
 // ---| core |---
-import { ElementOptions, useElement } from 'hooks'
+import { ElementOptions, useElement } from '../UseElement'
 
 
 export type PortalOptions<E extends Element> = {

@@ -3,13 +3,11 @@ import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useFunc } from 'hooks'
+import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { FormOptions, useForm } from 'components/Form'
-
 // ---| self |---
 import css from './NumberField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { NavLink as RouterLink, useMatch } from 'router'
+import { RouteLinks, RouteLink, useMatch } from 'router'
 import { cn } from 'tools'
 
 // ---| pages |---
@@ -13,7 +13,7 @@ import Action, { ActionProps } from 'components/Action'
 import css from './NavLink.module.scss'
 
 export type NavLinkProps = ActionProps & {
-  to: string
+  to?: RouteLinks
 }
 
 /**
@@ -21,7 +21,7 @@ export type NavLinkProps = ActionProps & {
  *
  * How to use
  * @example
- * <NavLink />
+ * <NavLink to='WIDGETS' />
  */
 export function NavLink(props: NavLinkProps): JSX.Element {
   const { to, active, className, ...otherProps } = props
@@ -30,7 +30,7 @@ export function NavLink(props: NavLinkProps): JSX.Element {
 
   return (
     <Action
-      as={RouterLink}
+      as={RouteLink}
       className={_className}
       to={to}
       active={active ?? isActive}

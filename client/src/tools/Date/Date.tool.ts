@@ -1,4 +1,4 @@
-import { UnitOptions } from 'tools'
+import { UnitOptions } from '../Number'
 import { DATE_OPTIONS } from './Date.constant'
 
 export type DateValue = number | string

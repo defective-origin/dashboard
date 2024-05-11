@@ -10,9 +10,9 @@ import Copyright from 'screens/Copyright'
 
 // ---| components |---
 import Text from 'components/Text'
+import Portal from 'components/Portal'
 import Page, { PageProps } from 'components/Page'
 import Actions, { ActionItem } from 'components/Actions'
-import Portal from 'components/Portal'
 import Scroll, { ScrollVariant } from 'components/Scroll'
 
 // ---| self |---
@@ -43,7 +43,7 @@ export function BasePage(props: BasePageProps): JSX.Element {
 
   const menuItems: ActionItem[] = [
     ...menu,
-    { key: '0', start: 'login', size: 'xs', v: 'outlined', content: locale.t('BUTTONS.LOGIN'), color: 'secondary', onClick: app.login, hide: app.isAuthorized() },
+    { key: '0', start: 'login', size: 'xs', v: 'outlined', content: locale.t('ACTION.LOGIN'), color: 'secondary', onClick: app.login, hide: app.isAuthorized() },
   ]
 
   const actionItems: ActionItem[] = actions.map((item) =>

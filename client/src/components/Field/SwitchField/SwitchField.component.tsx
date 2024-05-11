@@ -3,13 +3,11 @@ import MuiSwitchField from '@mui/material/Switch'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useFunc } from 'hooks'
+import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { FormOptions, useForm } from 'components/Form'
-
 // ---| self |---
 import css from './SwitchField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'

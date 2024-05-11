@@ -7,5 +7,4 @@ export { default } from './router.context'
 export * from './router.conf'
 export * from './router.context'
 
-export { useMatch, Outlet, NavLink } from 'react-router-dom'
-export type { NavLinkProps } from 'react-router-dom'
+export { useMatch, Outlet, NavLink as RouteLink } from 'react-router-dom'

@@ -28,12 +28,13 @@ const trigger = (o: MenuTriggerOptions) => <Item width={50} height={50} backgrou
 
 const meta: Meta<typeof Menu> = {
   component: Menu,
-  title: 'Components/POPUP/Menu',
+  title: 'Components/ACTIONS/Menu',
   tags: ['autodocs'],
   argTypes: {
     trigger: field.func(),
     items: field.object('MenuItem[]'),
     horizontal: field.boolean(),
+    // open: field.boolean(),
     className: field.string(),
     children: field.reactNode(),
   },

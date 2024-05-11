@@ -6,15 +6,14 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Image, { ImageProps, ImageVariant } from 'components/Image'
-import Link, { LinkProps } from 'components/Link'
+import Image, { ImageProps } from 'components/Image'
+import NavLink, { NavLinkProps } from 'components/NavLink'
 
 // ---| self |---
 import css from './Logo.module.scss'
 
-export type LogoProps = Omit<LinkProps, 'v'> & {
+export type LogoProps = Omit<NavLinkProps, 'v'> & {
   className?: string
-  v: ImageVariant
   width?: ImageProps['width']
   height?: ImageProps['height']
 }
@@ -27,13 +26,13 @@ export type LogoProps = Omit<LinkProps, 'v'> & {
  * <Logo />
  */
 export function Logo(props: LogoProps): JSX.Element {
-  const { width, height, v, className, ...otherProps } = props
+  const { width = 42, height, className, ...otherProps } = props
   const _className = cn(css.Logo, className)
 
   return (
-    <Link className={_className} {...otherProps}>
-      <Image className={css.Image} v={v} width={width} height={height} />
-    </Link>
+    <NavLink className={_className} to='ROOT' {...otherProps}>
+      <Image className={css.Image} v='logo' width={width} height={height} />
+    </NavLink>
   )
 }
 

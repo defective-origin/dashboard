@@ -1,5 +1,8 @@
 import React from 'react'
-import { RouterProvider as RrdRouterProvider, RouterProviderProps as RrdRouterProviderProps } from 'react-router-dom'
+import {
+  RouterProvider as RrdRouterProvider,
+  RouterProviderProps as RrdRouterProviderProps,
+} from 'react-router-dom'
 
 // ---| self |---
 import { APP_ROUTES } from './router.conf'

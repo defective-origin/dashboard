@@ -2,12 +2,12 @@ import React, { useMemo } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { FormOptions, FormGroupValue, useForm, FormContext } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { BaseField, BaseFieldProps } from 'components/Field'
-import { useForm, FormContext, FormOptions, FormGroupValue } from 'components/Form'
+import { BaseField, BaseFieldProps } from '../BaseField'
 
 // ---| self |---
 import css from './GroupField.module.scss'

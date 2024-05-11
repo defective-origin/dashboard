@@ -1,13 +1,11 @@
 import React, { useMemo } from 'react'
-
-// ---| core |---
-import { NestedStateNodeErrors, NestedStateNodeEvent, NestedStateOptions, NestedStateReturnOptions, useFunc, useNestedState } from 'hooks'
-
-// ---| pages |---
-// ---| screens |---
-// ---| components |---
-
-// ---| self |---
+import useFunc from '../UseFunc'
+import useNestedState, {
+  NestedStateNodeErrors,
+  NestedStateNodeEvent,
+  NestedStateOptions,
+  NestedStateReturnOptions,
+} from '../UseNestedState'
 
 export type FormFieldValue = number | string | boolean | null
 export type FormGroupValue = { [key: string | number]: FormGroupValue | FormFieldValue }
@@ -93,3 +91,5 @@ export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturn
     [field, name, reset, submit, set, form, value, errors],
   )
 }
+
+export default useForm

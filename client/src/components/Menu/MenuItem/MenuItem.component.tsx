@@ -39,7 +39,14 @@ export function MenuItem(props: MenuItemProps & { triggerOptions?: PopupTriggerO
   return (
     <MuiMenuItem className={_className}>
       {!children && Tag && (
-        <Tag size='sm' active={active ?? o?.open} color='primary' align='left' stretch {...otherProps} />
+        <Tag
+          size='sm'
+          active={active ?? o?.open}
+          color='primary'
+          align='left'
+          stretch
+          {...otherProps}
+        />
       )}
 
       {children}

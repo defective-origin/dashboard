@@ -4,7 +4,7 @@ import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/Me
 
 // ---| core |---
 import { cn } from 'tools'
-import { useFunc } from 'hooks'
+import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -14,7 +14,6 @@ import Repeat, { PropsWithItems } from 'components/Repeat'
 // ---| self |---
 import css from './SelectField.module.scss'
 import BaseField, { BaseFieldProps } from '../BaseField'
-import { FormOptions, useForm } from 'components/Form'
 
 const SELECT_FIELD_OPTIONS = {
   // // disable scroll lock
