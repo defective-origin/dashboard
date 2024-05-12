@@ -1,5 +1,4 @@
-import { useMemo, useState } from 'react'
-import { useFunc } from 'hooks'
+import { useCallback, useMemo, useState } from 'react'
 
 export type HotKeysReturnOptions = {
   add: (key: string, handler: () => void) => void
@@ -15,15 +14,15 @@ export type HotKeysReturnOptions = {
 export const useHotKeys = (): HotKeysReturnOptions => {
   const [hotkeys, setHotkeys] = useState<Record<string, () => void>>({})
 
-  const add = useFunc((key: string, handler: () => void) => setHotkeys({ ...hotkeys, [key]: handler }))
+  const add = useCallback((key: string, handler: () => void) => setHotkeys({ ...hotkeys, [key]: handler }), [])
 
-  const remove = useFunc((key: string) => {
+  const remove = useCallback((key: string) => {
     const keys = { ...hotkeys }
 
     delete keys[key]
 
     setHotkeys(keys)
-  })
+  }, [hotkeys])
 
   return useMemo(() => ({ add, remove }), [add, remove])
 }

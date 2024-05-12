@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useLauncher } from 'Launcher'
+import { useApp } from 'App'
 import { TranslateKeys, useLocale } from 'locale'
 import { cn, react } from 'tools'
 
@@ -36,7 +36,7 @@ export type BasePageProps = PageProps & {
 export function BasePage(props: BasePageProps): JSX.Element {
   const { noFooter, menu = [], actions = [], scroll, name, meta, children, className, ...otherProps } = props
   const _className = cn(css.BasePage, className)
-  const app = useLauncher()
+  const app = useApp()
   const locale = useLocale()
   const pageName = locale.t(name)
   const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
@@ -60,7 +60,7 @@ export function BasePage(props: BasePageProps): JSX.Element {
     <Page className={_className} name={tabName} meta={meta} stretch {...otherProps}>
       <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
       <Portal name='page-menu' content={<Actions items={menuItems} g='xs' />} />
-      <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' tooltipSide='left' size='lg' />} />
+      <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' size='lg' />} />
 
       <Page.Content g='xs'>
         <Scroll v={scroll} actions />

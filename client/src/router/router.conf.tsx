@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 // ---| core |---
-import App from 'App'
+import App from 'App/App.component'
 
 // ---| pages |---
 import AccountPage from 'pages/AccountPage'
@@ -12,18 +12,9 @@ import BannerPage from 'pages/BannerPage'
 import SupportPage from 'pages/SupportPage'
 import WidgetPage from 'pages/WidgetPage'
 
-export const ROUTE_LINKS = {
-  ROOT: '/',
-  BOARDS: 'boards',
-  BOARD: 'boards/:id',
-  WIDGETS: 'widgets',
-  WIDGET: 'widgets/:id',
-  ACCOUNT: 'account',
-  GUIDE: 'guide',
-  DONATION: 'donation',
-  SUPPORT: 'support',
-  ERROR: 'error/:v',
-}
+// ---| self |---
+import { ROUTE_LINKS } from './router.constant'
+
 
 export const APP_ROUTES = createBrowserRouter([
   {
@@ -42,5 +33,3 @@ export const APP_ROUTES = createBrowserRouter([
     ],
   },
 ])
-
-export type RouteLinks = keyof typeof ROUTE_LINKS

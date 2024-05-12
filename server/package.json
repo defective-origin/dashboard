@@ -9,7 +9,7 @@
     "test": "ts-mocha -p ./tsconfig.json ./**/*.spec.ts --delay",
     "lint": "eslint .",
     "lint:fix": "eslint .",
-    "check:changes": "yarn lint && yarn test"
+    "check": "yarn lint && yarn test"
   },
   "keywords": [],
   "author": "",

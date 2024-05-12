@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { useLocale } from 'locale'
-import { useLauncher } from 'Launcher'
+import { useTheme } from 'theme'
 import { cn } from 'tools'
 
 // ---| components |---
@@ -25,7 +25,7 @@ export type AppMenuProps = AsideProps
 export function AppMenu(props: AppMenuProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppMenu, className)
-  const app = useLauncher()
+  const theme = useTheme()
   const locale = useLocale()
 
   return (
@@ -45,7 +45,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
         <Actions.Nav start='local_atm' to='DONATION' tooltip={locale.t('ROUTE.DONATION')} tooltipSide='right' size='lg' />
         <Actions.Nav start='support_agent' to='SUPPORT' tooltip={locale.t('ROUTE.SUPPORT')} tooltipSide='right' size='lg' />
 
-        <Actions.Button v='text' start={`${app.theme()}_mode`} onClick={app.toggleTheme} tooltip={app.theme()} tooltipSide='right' size='lg' active />
+        <Actions.Button v='text' start={`${theme.current}_mode`} onClick={theme.toggle} tooltip={theme.current} tooltipSide='right' size='lg' active />
         {/* <Actions.Menu
           trigger={(o) => (
             <Actions.Button

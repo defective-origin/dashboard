@@ -1,5 +1,5 @@
 // ---| core |---
-import Launcher from 'Launcher'
+import Launcher from 'App/App.launcher'
 
 // ---| self |---
 import ComponentTestUtil from './render/component.tool'

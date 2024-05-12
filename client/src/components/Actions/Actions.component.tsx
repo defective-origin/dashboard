@@ -32,7 +32,6 @@ export type ActionItem = ActionWithMenu<GenericActionItem> | CustomActionItem
 export type ActionsProps = PropsWithItems<ActionItem, BlockProps> & {
   menu?: MenuProps['v']
   size?: Size
-  tooltipSide?: MenuProps['tooltipSide']
 }
 
 /**
@@ -53,7 +52,7 @@ export type ActionsProps = PropsWithItems<ActionItem, BlockProps> & {
  * <Actions items={items} menu='left' />
  */
 export function Actions(props: ActionsProps): JSX.Element {
-  const { tooltipSide = 'top', size, menu = 'bottom', items, children, className, ...otherProps } = props
+  const { size, menu, items, children, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
   const menuItems = items?.map((item, idx) => {
     // custom element
@@ -72,9 +71,8 @@ export function Actions(props: ActionsProps): JSX.Element {
     } else if (items) {
       return (
         <Menu
-          tooltipSide={tooltipSide}
           key={idx}
-          v={menu}
+          v={menu ?? 'bottom'}
           items={items}
           trigger={(o) => (
             <Tag
@@ -87,7 +85,7 @@ export function Actions(props: ActionsProps): JSX.Element {
       )
     }
 
-    return <Tag key={idx} tooltip={tooltip} tooltipSide={tooltipSide} size={size} {...otherItemProps} />
+    return <Tag key={idx} tooltip={tooltip} tooltipSide={menu} size={size} {...otherItemProps} />
   })
 
   return (

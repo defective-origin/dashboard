@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import { StyledEngineProvider, Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material'
 
 // ---| core |---
@@ -30,8 +30,22 @@ export const MEDIA_BREAKPOINTS = [
   new MediaBreakpoint(['tv']),
 ]
 
+export type ThemeVariant = 'light' | 'dark'
+
+export type ThemeOptions = {
+  current: ThemeVariant
+  is: (value: ThemeVariant) => boolean
+  toggle: () => void
+}
+
+export const ThemeContext = React.createContext({} as ThemeOptions)
+ThemeContext.displayName = 'ThemeContext'
+
+export const useTheme = () => useContext(ThemeContext)
+
 export type ThemeProviderProps = React.PropsWithChildren & {
-  current?: 'light' | 'dark'
+  theme?: ThemeVariant
+  onChange?: (theme: ThemeVariant) => void
 }
 
 /**
@@ -42,19 +56,28 @@ export type ThemeProviderProps = React.PropsWithChildren & {
  * <ThemeProvider />
  */
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  const { current } = props
+  const { theme, onChange, children } = props
   const breakpoint = useBreakpoint(MEDIA_BREAKPOINTS)
+  const current = theme || 'light' // use || instead of ?? because storybook return '' instead of undefined
+  const is = useCallback((value: ThemeVariant) => current === value, [current])
+  const toggle = useCallback(() => onChange?.(is('dark') ? 'light': 'dark'), [is, onChange])
 
-  // use || instead of ?? because storybook return '' instead of undefined
-  useMode(current || 'light')
+  useMode(current)
   useMode(breakpoint.names)
+
+  const value = useMemo(
+    () => ({ current, is, toggle }),
+    [current, is, toggle],
+  )
 
   // injectFirst allows override Material UI's styles.
   // https://bareynol.github.io/mui-theme-creator/
   return (
     <StyledEngineProvider injectFirst>
       <CssVarsProvider>
-        { props.children }
+        <ThemeContext.Provider value={value}>
+          { children }
+        </ThemeContext.Provider>
       </CssVarsProvider>
     </StyledEngineProvider>
   )

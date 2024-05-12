@@ -4,7 +4,7 @@ import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
 // ---| core |---
-import { ENV } from 'Launcher/Launcher.conf'
+import { ENV } from 'App/App.conf'
 
 // ---| self |---
 import i18n from './i18n'

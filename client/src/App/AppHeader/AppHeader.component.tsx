@@ -3,7 +3,7 @@ import { Avatar } from '@mui/material'
 
 // ---| core |---
 import { useLocale } from 'locale'
-import { useLauncher } from 'Launcher'
+import { useApp } from 'App'
 import { cn } from 'tools'
 
 // ---| pages |---
@@ -29,7 +29,7 @@ export type AppHeaderProps = HeaderProps
 export function AppHeader(props: AppHeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
-  const app = useLauncher()
+  const app = useApp()
   const locale = useLocale()
 
   return (

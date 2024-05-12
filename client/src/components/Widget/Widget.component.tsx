@@ -40,7 +40,6 @@ export function Widget(props: WidgetProps): JSX.Element {
     <Menu
       horizontal
       v='top-start'
-      tooltipSide='top'
       items={actions}
       trigger={(o) => (
         <div className={cn(css.Widget, o.open && css.Active, className)} {...otherProps}>

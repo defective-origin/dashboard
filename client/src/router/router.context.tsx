@@ -14,7 +14,7 @@ export type RouterProviderProps = React.PropsWithChildren & Partial<RrdRouterPro
  *
  * How to use
  * @example
- * <RouterProvider defaultProp={1} />
+ * <RouterProvider />
  */
 export function RouterProvider(props: RouterProviderProps): JSX.Element {
   const { children, ...otherProps } = props

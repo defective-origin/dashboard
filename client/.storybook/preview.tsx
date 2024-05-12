@@ -8,6 +8,12 @@ import "./index.scss";
 
 
 export const decorators = [
+  (Story) => (
+    // Mui injectFirst doesn't work with this decorator
+    <ThemeProvider>
+      <Story />
+    </ThemeProvider>
+  ),
   withThemeByClassName({
     themes: {
       light: "light",
@@ -23,7 +29,7 @@ const preview: Preview = {
       container: ({ context, ...other }) => {
         // It's hack. Decorators doesn't work with mdx files without any stories
         return (
-          <ThemeProvider current={context.store.globals.globals.theme}>
+          <ThemeProvider theme={context.store.globals.globals.theme}>
             <DocsContainer context={context} {...other} />
           </ThemeProvider>
         )

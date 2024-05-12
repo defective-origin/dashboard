@@ -69,7 +69,7 @@ yarn lint:css:fix
 #### Check code after changes for production
 
 ```
-yarn check:changes
+yarn check
 ```
 
 #### Code generator

@@ -19,7 +19,6 @@ export type MenuItem = React.ReactNode | MenuItemProps & { items?: MenuItem[] }
 export type MenuProps = PopupProps & {
   items?: MenuItem[]
   horizontal?: boolean
-  tooltipSide?: PopupProps['v']
 }
 
 /**
@@ -50,8 +49,9 @@ export type MenuProps = PopupProps & {
  * />
  */
 export function Menu(props: MenuProps): JSX.Element {
-  const { horizontal, tooltipSide, v = 'right', items, children, className, ...otherProps } = props
+  const { horizontal, v = 'right', items, children, className, ...otherProps } = props
   const _className = cn(css.Menu, className)
+  const tooltipSide = horizontal ? 'top' : 'right'
   const generatedItems = items?.map((item, idx) => {
     // custom element
     if (React.isValidElement(item) || !item) {
@@ -68,10 +68,8 @@ export function Menu(props: MenuProps): JSX.Element {
     } else if (items) {
       return (
         <Menu
-          v={v}
           key={idx}
           items={items}
-          tooltipSide={tooltipSide}
           trigger={(o) =>
             <MenuItem
               triggerOptions={o}
