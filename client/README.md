@@ -1,8 +1,9 @@
 # [↤](../README.md) Frontend
 
 ### Links
-- UI Framework: https://mui.com/material-ui/all-components/
-- Icons: https://fonts.google.com/icons?icon.query=dark+mode
+- [Requirements and components](https://defective-origin.github.io/dashboard/)
+- [UI Framework](https://mui.com/material-ui/all-components/)
+- [Icons](https://fonts.google.com/icons?icon.query=dark+mode)
 
 ### Menu
 - [Structure](./docs/STRUCTURE.md)

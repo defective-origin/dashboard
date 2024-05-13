@@ -276,22 +276,6 @@ export const Locale = ({
   ],
 })
 
-export const Launcher = ({
-  description = 'Create Launcher Component',
-  defaultSubpath = './',
-  postfixName = '',
-  defaultName = 'Launcher',
-  isSubmodule = false,
-  files = ['component', 'conf', 'context', 'test'],
-} = {}) => Component({
-  description,
-  defaultSubpath,
-  postfixName,
-  defaultName,
-  isSubmodule,
-  files,
-})
-
 export default {
   Component,
   Hook,
@@ -302,5 +286,4 @@ export default {
   ApiSlice,
   Locale,
   Language,
-  Launcher,
 }
