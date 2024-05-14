@@ -33,14 +33,14 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const locale = useLocale()
 
   return (
-    <Header className={_className} as='header' area='top' justifies='space-between' {...otherProps}>
-      <Block className={css.Content} v='x' aligns='center' p='sm'>
+    <Header className={_className} as='header' area='top' justifies='space-between' p='xxs' g='xxs' {...otherProps}>
+      <Block className={css.Content} v='x' aligns='center' g='xxs'>
         <Portal.Container name='page-name' />
 
         {children}
       </Block>
 
-      <Block className={css.Extra} v='x' aligns='center' p='sm'>
+      <Block className={css.Extra} v='x' aligns='center' g='xxs'>
         <Portal.Container name='page-menu' />
 
         {app.isAuthorized() && (

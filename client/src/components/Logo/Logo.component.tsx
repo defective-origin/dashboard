@@ -7,12 +7,12 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Image, { ImageProps } from 'components/Image'
-import NavLink, { NavLinkProps } from 'components/NavLink'
+import NavLink from 'components/NavLink'
 
 // ---| self |---
 import css from './Logo.module.scss'
 
-export type LogoProps = Omit<NavLinkProps, 'v'> & {
+export type LogoProps = {
   className?: string
   width?: ImageProps['width']
   height?: ImageProps['height']

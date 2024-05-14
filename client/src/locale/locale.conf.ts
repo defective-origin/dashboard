@@ -23,7 +23,10 @@ export type FlattenObjectKeys<
 
 
 export type Languages = keyof typeof i18n
-export type TranslateKeys = FlattenObjectKeys<typeof i18n.en>
+// union or string. Be careful. It allows to use intellisense but it doesn't highlight misspelling
+// https://stackoverflow.com/questions/61047551/typescript-union-of-string-and-string-literals
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type TranslateKeys = (string & {}) | FlattenObjectKeys<typeof i18n.en>
 
 /**
  * // the translations

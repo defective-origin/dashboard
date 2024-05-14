@@ -18,7 +18,7 @@ import Scroll, { ScrollVariant } from 'components/Scroll'
 // ---| self |---
 import css from './BasePage.module.scss'
 
-export type BasePageProps = PageProps & {
+export type BasePageProps = Omit<PageProps, 'name'> & {
   name?: TranslateKeys
   scroll?: ScrollVariant
   menu?: ActionItem[]
@@ -62,7 +62,7 @@ export function BasePage(props: BasePageProps): JSX.Element {
       <Portal name='page-menu' content={<Actions items={menuItems} g='xs' />} />
       <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' size='lg' />} />
 
-      <Page.Content g='xs'>
+      <Page.Content p='xxs' g='xxs'>
         <Scroll v={scroll} actions />
 
         {children}

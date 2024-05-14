@@ -5,6 +5,7 @@ import App from 'App/App.component'
 
 // ---| pages |---
 import AccountPage from 'pages/AccountPage'
+import DashboardsPage from 'pages/DashboardsPage'
 import DashboardPage from 'pages/DashboardPage'
 import DonationPage from 'pages/DonationPage'
 import GuidePage from 'pages/GuidePage'
@@ -22,7 +23,8 @@ export const APP_ROUTES = createBrowserRouter([
     element: <App />,
     children: [
       { path: ROUTE_LINKS.ROOT, element: <BannerPage v='empty' /> },
-      { path: ROUTE_LINKS.BOARDS, element: <DashboardPage /> },
+      { path: ROUTE_LINKS.BOARDS, element: <DashboardsPage /> },
+      { path: ROUTE_LINKS.BOARD, element: <DashboardPage /> },
       { path: ROUTE_LINKS.WIDGETS, element: <WidgetPage /> },
       { path: ROUTE_LINKS.ACCOUNT, element: <AccountPage /> },
       { path: ROUTE_LINKS.GUIDE, element: <GuidePage /> },

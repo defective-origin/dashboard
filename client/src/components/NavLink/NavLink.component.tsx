@@ -1,8 +1,18 @@
 import React from 'react'
 
 // ---| core |---
-import { RouteLinks, RouteLink, useMatch } from 'router'
 import { cn } from 'tools'
+import {
+  RouteLinks,
+  RoutePath,
+  useMatch,
+  ROUTE_LINKS,
+  generatePath,
+  createSearchParams,
+  URLSearchParamsInit,
+  PathParam,
+  RouteLink,
+} from 'router'
 
 // ---| pages |---
 // ---| screens |---
@@ -12,8 +22,12 @@ import Action, { ActionProps } from 'components/Action'
 // ---| self |---
 import css from './NavLink.module.scss'
 
-export type NavLinkProps = ActionProps & {
-  to?: RouteLinks
+export type NavLinkProps<Name extends RouteLinks = 'ROOT'> = ActionProps & {
+  to?: Name
+  search?: URLSearchParamsInit
+  params?: {
+    [key in PathParam<RoutePath<Name>>]: string | null;
+  }
 }
 
 /**
@@ -23,16 +37,18 @@ export type NavLinkProps = ActionProps & {
  * @example
  * <NavLink to='WIDGETS' />
  */
-export function NavLink(props: NavLinkProps): JSX.Element {
-  const { to, active, className, ...otherProps } = props
+export function NavLink<Name extends RouteLinks>(props: NavLinkProps<Name>): JSX.Element {
+  const { to = 'ROOT', params, search, active, className, ...otherProps } = props
   const _className = cn(css.NavLink, className)
-  const isActive = !!useMatch(to ?? 'HAS_NO_MATCH')
+  const template = `${ROUTE_LINKS[to]}?${createSearchParams(search)}`
+  const url = generatePath(template, params)
+  const isActive = !!useMatch(url)
 
   return (
     <Action
       as={RouteLink}
       className={_className}
-      to={to}
+      to={url}
       active={active ?? isActive}
       {...otherProps}
     />

@@ -36,6 +36,7 @@ export type ActionProps = Omit<TextProps, 'v'> & {
   target?: React.HTMLAttributeAnchorTarget
   round?: boolean
   stretch?: boolean
+  clear?: boolean
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
   [key: string]: any
 }
@@ -62,13 +63,14 @@ export function Action(props: ActionProps): JSX.Element | null {
     loading,
     tooltip,
     active,
+    clear,
     tooltipSide = 'top',
     content,
     children,
     className,
     ...otherProps
   } = props
-  const _className = cn('action', size, { round, 'action--stretch': stretch }, className)
+  const _className = cn('action', size, { round, 'action--stretch': stretch, clear }, className)
   const Tag = loading ? Skeleton : as
 
   const item = (
@@ -80,7 +82,9 @@ export function Action(props: ActionProps): JSX.Element | null {
     >
       {initAsideContent(start, props)}
 
-      {(content || children) && (
+      {children}
+
+      {content && (
         <Text
           className='action-content'
           v={textV}
@@ -89,7 +93,6 @@ export function Action(props: ActionProps): JSX.Element | null {
           loading={loading}
           ellipsis={ellipsis}
           content={content}
-          children={children}
           color={color ?? 'primary'}
           bold={active}
         />

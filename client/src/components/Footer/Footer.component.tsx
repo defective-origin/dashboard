@@ -24,7 +24,7 @@ export function Footer(props: FooterProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Footer, className)
 
-  return <Block className={_className} area='bottom' v='x' p='sm' {...otherProps}>{children}</Block>
+  return <Block className={_className} area='bottom' v='x' {...otherProps}>{children}</Block>
 }
 
 Footer.displayName = 'Footer'
