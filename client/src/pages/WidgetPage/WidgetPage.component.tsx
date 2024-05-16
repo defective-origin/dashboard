@@ -6,14 +6,14 @@ import { useWidget } from 'api'
 import { useParams } from 'router'
 
 // ---| pages |---
-import BasePage, { BasePageProps } from 'pages/BasePage'
+import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
 // ---| self |---
 import css from './WidgetPage.module.scss'
 
-export type WidgetPageProps = BasePageProps
+export type WidgetPageProps = PageProps
 
 /**
  * Component description.
@@ -29,9 +29,9 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const widget = useWidget(id)
 
   return (
-    <BasePage className={_className} name={widget.name} {...otherProps}>
+    <Page className={_className} name={widget.name} {...otherProps}>
       {children}
-    </BasePage>
+    </Page>
   )
 }
 

@@ -7,7 +7,7 @@ import { useLocale } from 'locale'
 import { useDashboard } from 'api'
 
 // ---| pages |---
-import BasePage, { BasePageProps } from 'pages/BasePage'
+import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
@@ -17,7 +17,7 @@ import Widget from 'components/Widget'
 // ---| self |---
 import css from './DashboardPage.module.scss'
 
-export type DashboardPageProps = BasePageProps
+export type DashboardPageProps = PageProps
 
 
 /**
@@ -63,23 +63,24 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   ]
 
   return (
-    <BasePage className={_className} name={board?.name} actions={actions} noFooter {...otherProps}>
-      {/* TODO: add spinner on loading to page component */}
-      <Board
-        className={_className}
-        padding={8}
-        rows={board.rows}
-        columns={board.columns}
-        items={board.widgets}
-        select={mode as any}
-        widget={Widget}
-        onSelect={handleSelect}
-        onReselect={handleReselect}
-        onError={handleError}
-      />
+    <Page className={_className} name={board?.name} actions={actions} noFooter {...otherProps}>
+      <Page.Content>
+        {/* TODO: add spinner on loading to page component */}
+        <Board
+          padding={8}
+          rows={board.rows}
+          columns={board.columns}
+          items={board.widgets}
+          select={mode as any}
+          widget={Widget}
+          onSelect={handleSelect}
+          onReselect={handleReselect}
+          onError={handleError}
+        />
+      </Page.Content>
 
       {children}
-    </BasePage>
+    </Page>
   )
 }
 

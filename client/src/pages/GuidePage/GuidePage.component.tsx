@@ -4,18 +4,16 @@ import React from 'react'
 import { cn } from 'tools'
 
 // ---| pages |---
-import BasePage, { BasePageProps } from 'pages/BasePage'
+import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 import PlaceholderCard from 'screens/PlaceholderCard'
 
 // ---| components |---
-import Layout from 'components/Layout'
-
 // ---| self |---
 import css from './GuidePage.module.scss'
 
-export type GuidePageProps = BasePageProps
+export type GuidePageProps = PageProps
 
 /**
  * Component description.
@@ -29,15 +27,15 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
   const _className = cn(css.GuidePage, className)
 
   return (
-    <BasePage className={_className} name='PAGES.GUIDE' scroll='y' {...otherProps}>
-      <Layout g='xxs' v='board' columns={8} stretch>
+    <Page className={_className} name='PAGES.GUIDE' {...otherProps}>
+      <Page.Content v='board' columns={8}>
         <PlaceholderCard name='Page Menu' area='1 / 1 / 2 / 2' />
         <PlaceholderCard name='Content' area='1 / 2 / 2 / 8' />
         <PlaceholderCard name='Content Menu' area='1 / 8 / 2 / 9' />
 
         {children}
-      </Layout>
-    </BasePage>
+      </Page.Content>
+    </Page>
   )
 }
 

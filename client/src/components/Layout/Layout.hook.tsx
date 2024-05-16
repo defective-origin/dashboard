@@ -69,7 +69,7 @@ export const useLayout = <O extends object>(options: LayoutOptions & O): LayoutR
   return {
     ...otherOptions,
     className: cn('layout', {
-      [`layout--${v}`]: !areas,
+      [`layout--${v}`]: !areas && v,
     }, className),
     style: {
       placeItems: places,

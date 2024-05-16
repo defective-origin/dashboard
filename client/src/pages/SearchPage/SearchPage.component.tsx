@@ -4,16 +4,14 @@ import React from 'react'
 import { cn } from 'tools'
 
 // ---| pages |---
-import BasePage, { BasePageProps } from 'pages/BasePage'
+import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
-import Layout from 'components/Layout'
-
 // ---| self |---
 import css from './SearchPage.module.scss'
 
-export type SearchPageProps<T> = BasePageProps & {
+export type SearchPageProps<T> = PageProps & {
   items: T[]
   as: React.ElementType
   keygen?: (item: T, index: number) => React.Key
@@ -31,13 +29,13 @@ export function SearchPage<T>(props: SearchPageProps<T>): JSX.Element {
   const _className = cn(css.SearchPage, className)
 
   return (
-    <BasePage className={_className} scroll='y' {...otherProps}>
-      <Layout g='xxs' columns={3} stretch>
+    <Page className={_className} {...otherProps}>
+      <Page.Content columns={3} scroll='y'>
         {items.map((item, index) => <Tag key={keygen?.(item, index) ?? index} options={item} />)}
-      </Layout>
+      </Page.Content>
 
       {children}
-    </BasePage>
+    </Page>
   )
 }
 

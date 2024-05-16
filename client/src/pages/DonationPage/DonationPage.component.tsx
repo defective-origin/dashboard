@@ -4,18 +4,16 @@ import React from 'react'
 import { cn } from 'tools'
 
 // ---| pages |---
-import BasePage, { BasePageProps } from 'pages/BasePage'
+import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 import PlaceholderCard from 'screens/PlaceholderCard'
 
 // ---| components |---
-import Layout from 'components/Layout'
-
 // ---| self |---
 import css from './DonationPage.module.scss'
 
-export type DonationPageProps = BasePageProps
+export type DonationPageProps = PageProps
 
 /**
  * Component description.
@@ -29,8 +27,8 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
   const _className = cn(css.DonationPage, className)
 
   return (
-    <BasePage className={_className} name='PAGES.DONATION' {...otherProps}>
-      <Layout g='xxs' v='board' columns={3} stretch>
+    <Page className={_className} name='PAGES.DONATION' {...otherProps}>
+      <Page.Content v='board' columns={3}>
         <PlaceholderCard name='Plans' area='1 / 1 / 3 / 2' />
         <PlaceholderCard name='Needs' area='1 / 2 / 3 / 3' />
         <PlaceholderCard name='Others' area='1 / 3 / 3 / 4' />
@@ -39,8 +37,8 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
         <PlaceholderCard name='Donations' area='4 / 1 / 7 / 4' />
 
         {children}
-      </Layout>
-    </BasePage>
+      </Page.Content>
+    </Page>
   )
 }
 

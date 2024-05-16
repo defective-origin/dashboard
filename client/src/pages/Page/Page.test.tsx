@@ -2,11 +2,11 @@
 import { render } from 'tests'
 
 // ---| self |---
-import PlaceholderCard from './PlaceholderCard.component'
+import Page from './Page.component'
 
-describe('[PlaceholderCard] component', () => {
+describe('[Page] component', () => {
   it('should render component', () => {
-    const container = render(<PlaceholderCard />)
+    const container = render(<Page />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

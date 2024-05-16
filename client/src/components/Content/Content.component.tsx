@@ -6,12 +6,15 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockProps } from 'components/Block'
+import Layout, { LayoutProps } from 'components/Layout'
+import Scroll, { ScrollVariant } from 'components/Scroll'
 
 // ---| self |---
 import css from './Content.module.scss'
 
-export type ContentProps = BlockProps
+export type ContentProps = LayoutProps & {
+  scroll?: ScrollVariant
+}
 
 /**
  * Component description.
@@ -21,10 +24,16 @@ export type ContentProps = BlockProps
  * <Content />
  */
 export function Content(props: ContentProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { scroll, children, className, ...otherProps } = props
   const _className = cn(css.Content, className)
 
-  return <Block className={_className} area='center' {...otherProps}>{children}</Block>
+  return (
+    <Layout className={_className} area='center' g='xxs' {...otherProps}>
+      {scroll && <Scroll v={scroll} actions />}
+
+      {children}
+    </Layout>
+  )
 }
 
 Content.displayName = 'Content'

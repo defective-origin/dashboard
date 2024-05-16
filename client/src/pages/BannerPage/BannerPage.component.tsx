@@ -5,7 +5,7 @@ import { TranslateKeys, useLocale } from 'locale'
 import { cn } from 'tools'
 
 // ---| pages |---
-import BasePage from 'pages/BasePage'
+import Page from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
@@ -49,17 +49,19 @@ export function BannerPage(props: BannerPageProps): JSX.Element {
   const status = BANNER_PAGE_MAP[v]
 
   return (
-    <BasePage className={_className} {...otherProps}>
-      <Banner
-        className={css.Banner}
-        title={locale.t(status.title)}
-        subtitle={locale.t(status.subtitle)}
-        text={locale.t(status.text)}
-        v={v}
-      >
-        {children}
-      </Banner>
-    </BasePage>
+    <Page className={_className} {...otherProps}>
+      <Page.Content>
+        <Banner
+          className={css.Banner}
+          title={locale.t(status.title)}
+          subtitle={locale.t(status.subtitle)}
+          text={locale.t(status.text)}
+          v={v}
+        >
+          {children}
+        </Banner>
+      </Page.Content>
+    </Page>
   )
 }
 

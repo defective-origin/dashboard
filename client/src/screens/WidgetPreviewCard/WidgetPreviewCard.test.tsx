@@ -24,7 +24,7 @@ describe('[WidgetPreviewCard] component', () => {
 
 // describe('[WidgetPreviewCard] context', () => {
 //   const wrapper = (props: WidgetPreviewCardProps) => <WidgetPreviewCardProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useWidgetPreviewCard(), { wrapper })
 //

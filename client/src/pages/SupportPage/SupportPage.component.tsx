@@ -4,18 +4,16 @@ import React from 'react'
 import { cn } from 'tools'
 
 // ---| pages |---
-import BasePage, { BasePageProps } from 'pages/BasePage'
+import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 import PlaceholderCard from 'screens/PlaceholderCard'
 
 // ---| components |---
-import Layout from 'components/Layout'
-
 // ---| self |---
 import css from './SupportPage.module.scss'
 
-export type SupportPageProps = BasePageProps
+export type SupportPageProps = PageProps
 
 /**
  * Component description.
@@ -29,8 +27,8 @@ export function SupportPage(props: SupportPageProps): JSX.Element {
   const _className = cn(css.SupportPage, className)
 
   return (
-    <BasePage className={_className} name='PAGES.SUPPORT' {...otherProps}>
-      <Layout g='xxs' v='board' columns={3} stretch>
+    <Page className={_className} name='PAGES.SUPPORT' {...otherProps}>
+      <Page.Content v='board' columns={3}>
         <PlaceholderCard name='Stat Active' area='1 / 1 / 2 / 2' />
         <PlaceholderCard name='Stat Closed' area='1 / 2 / 2 / 3' />
         <PlaceholderCard name='Stat Open' area='1 / 3 / 2 / 4' />
@@ -39,8 +37,8 @@ export function SupportPage(props: SupportPageProps): JSX.Element {
         <PlaceholderCard name='Requests' area='3 / 1 / 8 / 4' />
 
         {children}
-      </Layout>
-    </BasePage>
+      </Page.Content>
+    </Page>
   )
 }
 
