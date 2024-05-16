@@ -51,7 +51,6 @@ const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][
 export const Demo: Story = {
   parameters: params('Popup'),
   args: {
-    className: '',
     children: <Text color='primary'>Content</Text>,
     trigger,
     v: 'top',

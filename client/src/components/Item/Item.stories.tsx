@@ -49,7 +49,6 @@ export const Demo: Story = {
   parameters: params('Item [Requirements](?path=/docs/requirements-layout--docs)'),
   render,
   args: {
-    className: '',
     children: 'Demo',
     g: 'xxs',
     m: 'xxs',
@@ -62,7 +61,6 @@ export const Area: Story = {
   parameters: params('**Area** is the most important property. We use **magnet places** to stick to block layout and have our app adaptive and flexible. \n\n Area', AREAS),
   render,
   args: {
-    className: '',
     children: 'Demo',
     g: 'xxs',
     m: 'xxs',

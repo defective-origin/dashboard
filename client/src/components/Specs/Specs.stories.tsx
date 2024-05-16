@@ -27,7 +27,6 @@ type Story = StoryObj<typeof Specs>
 export const Demo: Story = {
   parameters: params('Specs'),
   args: {
-    className: '',
     vertical: false,
     justifies: 'start',
     size: 'xs',

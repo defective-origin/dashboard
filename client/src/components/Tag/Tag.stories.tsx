@@ -29,7 +29,6 @@ const initVariants = <P extends keyof TagProps>(prop: P, items: TagProps[P][]) =
 export const Demo: Story = {
   parameters: params('**Tag** component support all [Text component](?path=/docs/components-data-display-text--docs) props'),
   args: {
-    className: '',
     content: 'sOmE TeXt',
     outline: false,
     loading: false,

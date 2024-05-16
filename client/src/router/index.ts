@@ -10,6 +10,7 @@ export {
   useMatch,
   Outlet,
   generatePath,
+  BrowserRouter,
   createSearchParams,
   NavLink as RouteLink,
 } from 'react-router-dom'

@@ -4,13 +4,14 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from 'App/App.component'
 
 // ---| pages |---
-import AccountPage from 'pages/AccountPage'
-import DashboardsPage from 'pages/DashboardsPage'
-import DashboardPage from 'pages/DashboardPage'
-import DonationPage from 'pages/DonationPage'
 import GuidePage from 'pages/GuidePage'
 import BannerPage from 'pages/BannerPage'
 import SupportPage from 'pages/SupportPage'
+import AccountPage from 'pages/AccountPage'
+import DonationPage from 'pages/DonationPage'
+import DashboardsPage from 'pages/DashboardsPage'
+import DashboardPage from 'pages/DashboardPage'
+import WidgetsPage from 'pages/WidgetsPage'
 import WidgetPage from 'pages/WidgetPage'
 
 // ---| self |---
@@ -25,7 +26,8 @@ export const APP_ROUTES = createBrowserRouter([
       { path: ROUTE_LINKS.ROOT, element: <BannerPage v='empty' /> },
       { path: ROUTE_LINKS.BOARDS, element: <DashboardsPage /> },
       { path: ROUTE_LINKS.BOARD, element: <DashboardPage /> },
-      { path: ROUTE_LINKS.WIDGETS, element: <WidgetPage /> },
+      { path: ROUTE_LINKS.WIDGETS, element: <WidgetsPage /> },
+      { path: ROUTE_LINKS.WIDGET, element: <WidgetPage /> },
       { path: ROUTE_LINKS.ACCOUNT, element: <AccountPage /> },
       { path: ROUTE_LINKS.GUIDE, element: <GuidePage /> },
       { path: ROUTE_LINKS.DONATION, element: <DonationPage /> },

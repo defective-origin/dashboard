@@ -4,11 +4,10 @@ import React from 'react'
 import { cn } from 'tools'
 
 // ---| pages |---
+import BasePage, { BasePageProps } from 'pages/BasePage'
+
 // ---| screens |---
-import BasePage, { BasePageProps } from 'screens/BasePage'
-
 // ---| components |---
-
 // ---| self |---
 import css from './AccountPage.module.scss'
 

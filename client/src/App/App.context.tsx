@@ -2,12 +2,12 @@ import React, { useContext, useMemo } from 'react'
 
 // ---| core |---
 import { FeaturesReturnOptions, HotKeysReturnOptions, useFeatures, useHotKeys } from 'hooks'
-import { AccountReturnOptions, MonitoringReturnOptions, useMonitoring } from 'api'
+import { AccountManager, MonitoringReturnOptions, useMonitoring } from 'api'
 
 // ---| components |---
 import { ToastReturnOptions, useToast } from 'components/Toast'
 
-export type AppOptions = AccountReturnOptions
+export type AppOptions = AccountManager
                       & MonitoringReturnOptions
                       & FeaturesReturnOptions
                       & HotKeysReturnOptions
@@ -21,7 +21,7 @@ export const useApp = () => useContext(AppContext)
 export default useApp
 
 export type AppProviderProps = React.PropsWithChildren & {
-  account: AccountReturnOptions
+  account: AccountManager
 }
 
 export function AppProvider(props: AppProviderProps): JSX.Element {

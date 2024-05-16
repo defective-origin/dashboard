@@ -38,7 +38,6 @@ export const Demo: Story = {
     color: 'primary',
     fill: false,
     loading: false,
-    className: '',
   },
 }
 

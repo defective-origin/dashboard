@@ -7,9 +7,9 @@ import { useLocale } from 'locale'
 import { useDashboard } from 'api'
 
 // ---| pages |---
-// ---| screens |---
-import BasePage, { BasePageProps } from 'screens/BasePage'
+import BasePage, { BasePageProps } from 'pages/BasePage'
 
+// ---| screens |---
 // ---| components |---
 import Board, { BoardItem } from 'components/Board'
 import Widget from 'components/Widget'
@@ -32,16 +32,16 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const _className = cn(css.DashboardPage, className)
   const locale = useLocale()
   const { id } = useParams()
-  const { board, addWidget, updateWidget } = useDashboard(id)
+  const board = useDashboard(id)
   const [mode, setMode] = useState<boolean | object>(false)
   const switchSelect = useCallback(() => setMode((flag) => !flag), [])
   const switchReselect = useCallback(() => setMode((flag) => !flag ? board?.widgets[0] : false), [])
 
   const handleSelect = (place: any) => {
-    addWidget({ name: 'NEW WIDGET', place })
+    board.addWidget({ name: 'NEW WIDGET', place })
     switchSelect()
   }
-  const handleReselect = (item: BoardItem) => updateWidget(item)
+  const handleReselect = (item: BoardItem) => board.updateWidget(item)
   const handleError = (error: any) => { console.log('handleError', error) }
 
   const actions = [
@@ -65,19 +65,18 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   return (
     <BasePage className={_className} name={board?.name} actions={actions} noFooter {...otherProps}>
       {/* TODO: add spinner on loading to page component */}
-      {board && (
-        <Board
-          className={_className}
-          rows={board.rows}
-          columns={board.columns}
-          items={board.widgets}
-          select={mode as any}
-          widget={Widget}
-          onSelect={handleSelect}
-          onReselect={handleReselect}
-          onError={handleError}
-        />
-      )}
+      <Board
+        className={_className}
+        padding={8}
+        rows={board.rows}
+        columns={board.columns}
+        items={board.widgets}
+        select={mode as any}
+        widget={Widget}
+        onSelect={handleSelect}
+        onReselect={handleReselect}
+        onError={handleError}
+      />
 
       {children}
     </BasePage>

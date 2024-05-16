@@ -7,14 +7,14 @@ export type Account = {
   theme?: ThemeVariant
 }
 
-export type AccountReturnOptions = Account & {
+export type AccountManager = Account & {
   login: () => void,
   logout: () => void,
   isAuthorized: () => boolean
   update: (settings: Partial<Account>) => void
 }
 
-export const useAccount = (): AccountReturnOptions => {
+export const useAccount = (): AccountManager => {
   const [account, update] = useState<Account | null>(null)
 
   const login = useCallback(() => update({ user: {}, theme: 'light' }), [])

@@ -5,9 +5,9 @@ import { TranslateKeys, useLocale } from 'locale'
 import { cn } from 'tools'
 
 // ---| pages |---
-// ---| screens |---
-import BasePage from 'screens/BasePage'
+import BasePage from 'pages/BasePage'
 
+// ---| screens |---
 // ---| components |---
 import Banner, { BannerVariant } from 'components/Banner'
 

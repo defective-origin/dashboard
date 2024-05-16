@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Id } from './api.type'
+import { Id, ListResponse, OptionsResponse } from './api.type'
 import { Square } from 'tools/XY'
 
 export type Place = Square
@@ -10,7 +10,7 @@ export type Widget = {
   place: Place
 }
 
-export const WIDGETS = [
+export const WIDGETS: Widget[] = [
   { id: 1, name: 'WIDGET NAME', place: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
   { id: 2, name: 'WIDGET NAME', place: { v1: { x: 0, y: 4 }, v2: { x: 1, y: 5 } } },
   { id: 3, name: 'WIDGET NAME', place: { v1: { x: 1, y: 4 }, v2: { x: 2, y: 5 } } },
@@ -31,11 +31,15 @@ export const WIDGETS = [
   { id: 18, name: 'WIDGET NAME', place: { v1: { x: 18, y: 0 }, v2: { x: 20, y: 4 } } },
 ]
 
-export const useWidgets = () => ({ loading: false, items: WIDGETS })
+export const useWidgets = (): ListResponse<Widget> => Object.assign([...WIDGETS], { loading: false })
 
-export const useWidget = (id?: Id) => {
+export type WidgetManager = OptionsResponse<Widget> & {
+  update: (patch: Partial<Widget>) => void
+}
+
+export const useWidget = (id?: Id): WidgetManager => {
   const [widget, setWidget] = useState<Widget>(WIDGETS.find((widget) => widget.id == id) as Widget)
   const update = (patch: Partial<Widget>) => setWidget((prev) => ({...prev, ...patch}))
 
-  return { loading: false, widget, update }
+  return { loading: false, ...widget, update }
 }

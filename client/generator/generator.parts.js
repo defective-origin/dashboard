@@ -27,6 +27,7 @@ export default function (plop) {
   plop.setGenerator('Screen', items.Component({
     description: 'Create a screen component',
     defaultSubpath: 'screens',
+    withStories: true,
   }))
 
   // Create a Page component.

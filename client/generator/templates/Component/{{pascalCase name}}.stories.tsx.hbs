@@ -11,6 +11,7 @@ const meta: Meta<typeof {{pascalCase name}}> = {
   title: 'Components/{{pascalCase name}}',
   tags: ['autodocs'],
   argTypes: {
+    name: field.string(),
     className: field.string(),
     children: field.reactNode(),
   },
@@ -23,16 +24,14 @@ type Story = StoryObj<typeof {{pascalCase name}}>
 export const Demo: Story = {
   parameters: params('{{pascalCase name}}'),
   args: {
-    className: '',
-    children: 'Demo',
+    name: 'Demo',
   },
 }
 
 export const Variants: Story = {
   parameters: params('View', VARIANTS),
   args: {
-    className: '',
-    children: 'Demo',
+    name: 'Demo',
     v: 'success',
   },
 }

@@ -4,10 +4,13 @@ import React from 'react'
 import { cn } from 'tools'
 
 // ---| pages |---
+import BasePage, { BasePageProps } from 'pages/BasePage'
+
 // ---| screens |---
-import BasePage, { BasePageProps } from 'screens/BasePage'
+import PlaceholderCard from 'screens/PlaceholderCard'
 
 // ---| components |---
+import Layout from 'components/Layout'
 
 // ---| self |---
 import css from './DonationPage.module.scss'
@@ -26,10 +29,17 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
   const _className = cn(css.DonationPage, className)
 
   return (
-    <BasePage className={_className} name='PAGES.DONATION' scroll='xy' {...otherProps}>
-      <div style={{minWidth: 5000, minHeight: 5000}}>
+    <BasePage className={_className} name='PAGES.DONATION' {...otherProps}>
+      <Layout g='xxs' v='board' columns={3} stretch>
+        <PlaceholderCard name='Plans' area='1 / 1 / 3 / 2' />
+        <PlaceholderCard name='Needs' area='1 / 2 / 3 / 3' />
+        <PlaceholderCard name='Others' area='1 / 3 / 3 / 4' />
+
+        <PlaceholderCard name='History' area='3 / 1 / 4 / 4' />
+        <PlaceholderCard name='Donations' area='4 / 1 / 7 / 4' />
+
         {children}
-      </div>
+      </Layout>
     </BasePage>
   )
 }

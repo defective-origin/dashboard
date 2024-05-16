@@ -87,6 +87,7 @@
     "ACCOUNT": "Account"
   },
   "MESSAGES": {
+    "UNDER_CONSTRUCTION": "{{name}} is under construction.",
     "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
   }
 }

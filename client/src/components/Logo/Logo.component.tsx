@@ -30,7 +30,7 @@ export function Logo(props: LogoProps): JSX.Element {
   const _className = cn(css.Logo, className)
 
   return (
-    <NavLink className={_className} to='ROOT' {...otherProps}>
+    <NavLink className={_className} to='ROOT' clear {...otherProps}>
       <Image className={css.Image} v='logo' width={width} height={height} />
     </NavLink>
   )

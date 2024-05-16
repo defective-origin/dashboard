@@ -13,15 +13,15 @@ import { ButtonProps } from 'components/Button'
 // ---| self |---
 import css from './Modal.module.scss'
 
-export type ModalProps ={
-                          className?: string
-                          children?: React.ReactNode
-                          open: boolean
-                          title?: React.ReactNode
-                          content?: React.ReactNode
-                          actions?: ButtonProps | ButtonProps[]
-                          onClose?: () => void
-                        }
+export type ModalProps = {
+  className?: string
+  children?: React.ReactNode
+  open: boolean
+  title?: React.ReactNode
+  content?: React.ReactNode
+  actions?: ButtonProps | ButtonProps[]
+  onClose?: () => void
+}
 
 /**
  * Component description.

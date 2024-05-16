@@ -1,18 +1,26 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
 import ThemeProvider from '../src/theme'
+import { BrowserRouter } from '../src/router'
 import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
 import "./index.scss";
 
+const StorybookLauncher = ({ children, theme = undefined }) => (
+  <BrowserRouter>
+    {/* Mui injectFirst doesn't work with this decorator */}
+    <ThemeProvider theme={theme}>
+      {children}
+    </ThemeProvider>
+  </BrowserRouter>
+)
 
 export const decorators = [
   (Story) => (
-    // Mui injectFirst doesn't work with this decorator
-    <ThemeProvider>
-      <Story />
-    </ThemeProvider>
+    <StorybookLauncher>
+        <Story />
+    </StorybookLauncher>
   ),
   withThemeByClassName({
     themes: {
@@ -29,9 +37,9 @@ const preview: Preview = {
       container: ({ context, ...other }) => {
         // It's hack. Decorators doesn't work with mdx files without any stories
         return (
-          <ThemeProvider theme={context.store.globals.globals.theme}>
+          <StorybookLauncher theme={context.store.globals.globals.theme}>
             <DocsContainer context={context} {...other} />
-          </ThemeProvider>
+          </StorybookLauncher>
         )
       },
     },
