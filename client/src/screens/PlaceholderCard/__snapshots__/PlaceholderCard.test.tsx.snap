@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[PlaceholderCard] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="item p--xl _PlaceholderCard_dbf372"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text text--sm _Message_dbf372 css-zvssqi-MuiTypography-root"
+    >
+      Component Is Under Construction.
+    </p>
+  </div>
+</DocumentFragment>
+`;

@@ -3,7 +3,7 @@
 exports[`[Alerts] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="d--y _Alerts_10e67a"
+    class="block block--y item _Alerts_10e67a"
   />
 </DocumentFragment>
 `;

@@ -3,10 +3,10 @@
 exports[`[SliderField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="d--y g--xs _BaseField_dd3532 _SliderField_b59d2a"
+    class="block block--y item g--xs _BaseField_dd3532 _SliderField_b59d2a"
   >
     <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
     />
     <span
       class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeSmall css-53tbrc-MuiSlider-root"
@@ -40,7 +40,7 @@ exports[`[SliderField] component > should render component 1`] = `
       </span>
     </span>
     <div
-      class="d--y _Messages_e4e642"
+      class="block block--y item _Messages_e4e642"
     />
   </div>
 </DocumentFragment>

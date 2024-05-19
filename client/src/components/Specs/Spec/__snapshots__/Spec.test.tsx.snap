@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Spec] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="block block--x item g--xs _Spec_c07211"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft text text--xs _Name_c07211 css-728lp0-MuiTypography-root"
+      style="font-weight: bold;"
+    >
+      Undefined:
+    </p>
+    <div
+      class="block block--xy item _Content_c07211"
+      style="flex-grow: 1;"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft text text--xs css-728lp0-MuiTypography-root"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

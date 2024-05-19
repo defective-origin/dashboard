@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`[WidgetPage] component > should render component 1`] = `
-<DocumentFragment>
-  <div
-    class="_WidgetPage_8c672c"
-  />
-</DocumentFragment>
-`;

@@ -24,7 +24,7 @@ describe('[DashboardPreviewCard] component', () => {
 
 // describe('[DashboardPreviewCard] context', () => {
 //   const wrapper = (props: DashboardPreviewCardProps) => <DashboardPreviewCardProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useDashboardPreviewCard(), { wrapper })
 //

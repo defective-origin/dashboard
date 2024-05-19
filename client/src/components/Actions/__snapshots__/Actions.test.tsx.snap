@@ -3,7 +3,7 @@
 exports[`[Actions] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="d--x _Actions_dd10e3"
+    class="block block--x item _Actions_dd10e3"
     style="align-items: center;"
   />
 </DocumentFragment>

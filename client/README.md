@@ -1,7 +1,8 @@
 # [↤](../README.md) Frontend
 
 ### Links
-- [Requirements and components](https://defective-origin.github.io/dashboard/)
+- [App](https://defective-origin.github.io/dashboard/)
+- [Requirements and components](https://defective-origin.github.io/dashboard/storybook/)
 - [UI Framework](https://mui.com/material-ui/all-components/)
 - [Icons](https://fonts.google.com/icons?icon.query=dark+mode)
 
@@ -67,10 +68,10 @@ yarn lint:css
 yarn lint:css:fix
 ```
 
-#### Check code after changes for production
+#### Check code after changes
 
 ```
-yarn check
+yarn verify
 ```
 
 #### Code generator

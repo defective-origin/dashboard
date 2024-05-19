@@ -3,7 +3,7 @@
 exports[`[Form] component > should render component 1`] = `
 <DocumentFragment>
   <form
-    class="d--y g--xs _Form_1c1c63"
+    class="block block--y item g--xs _Form_1c1c63"
   />
 </DocumentFragment>
 `;

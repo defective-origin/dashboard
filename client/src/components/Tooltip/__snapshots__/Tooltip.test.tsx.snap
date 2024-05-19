@@ -2,8 +2,9 @@
 
 exports[`[Tooltip] component > should render component 1`] = `
 <DocumentFragment>
-  <div
-    class="_Tooltip_2060c3"
+  <span
+    aria-label="TEXT"
+    class="_Tooltip_a56b6c"
     data-mui-internal-clone-element="true"
   />
 </DocumentFragment>

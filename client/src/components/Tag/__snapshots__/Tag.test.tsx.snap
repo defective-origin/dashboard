@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Tag] component > should render component 1`] = `
+<DocumentFragment>
+  <span
+    class="MuiTypography-root MuiTypography-caption MuiTypography-alignLeft text text--sm _Tag_2dd11e css-1hesuab-MuiTypography-root"
+    style="border-radius: 4px;"
+  />
+</DocumentFragment>
+`;

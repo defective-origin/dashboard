@@ -4,28 +4,19 @@
 - [Endpoints](./docs/ENDPOINTS.md)
 - [Structure](./docs/STRUCTURE.md)
 
-## Launch app
-### Install app dependencies
-```sh
-yarn deps:ci
-```
+## Commands
 
 ### Start app
 ```sh
-yarn start
+yarn dev
 ```
 
-### Test app
+### Check app
 ```sh
-yarn test
+yarn verify
 ```
 
 ### Build app
 ```sh
 yarn build
-```
-
-### Lint app
-```sh
-yarn lint
 ```

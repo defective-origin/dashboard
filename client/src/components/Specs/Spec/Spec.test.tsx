@@ -17,17 +17,17 @@ describe('[Spec] component', () => {
 // describe('[Spec] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useSpec())
-// 
+//
 //     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[Spec] context', () => {
 //   const wrapper = (props: SpecProps) => <SpecProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useSpec(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })
