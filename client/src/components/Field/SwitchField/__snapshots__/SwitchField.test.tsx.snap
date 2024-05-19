@@ -3,11 +3,11 @@
 exports[`[SwitchField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="d--y g--xs _BaseField_dd3532 _SwitchField_19189c"
+    class="block block--y item g--xs _BaseField_dd3532 _SwitchField_19189c"
     style="align-items: flex-start;"
   >
     <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
     />
     <span
       class="MuiSwitch-root MuiSwitch-sizeSmall css-1ycxvqq-MuiSwitch-root"
@@ -32,7 +32,7 @@ exports[`[SwitchField] component > should render component 1`] = `
       />
     </span>
     <div
-      class="d--y _Messages_e4e642"
+      class="block block--y item _Messages_e4e642"
     />
   </div>
 </DocumentFragment>

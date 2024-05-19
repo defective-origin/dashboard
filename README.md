@@ -15,3 +15,25 @@ All you need to display them is to use ready-made widgets, boards and APIs by co
 - [Design](./docs/DESIGN.md)
 - [Management](./docs/MANAGEMENT.md)
 - [Repository](./docs/REPOSITORY.md)
+
+## Global commands
+
+### Start app
+```sh
+yarn dev
+```
+
+### Check app
+```sh
+yarn verify
+```
+
+### Build app
+```sh
+yarn build
+```    
+
+### List of workspaces
+```sh
+yarn ws
+```    

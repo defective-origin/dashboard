@@ -3,11 +3,11 @@
 exports[`[CheckboxField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="d--y g--xs _BaseField_dd3532 _CheckboxField_9d1f64"
+    class="block block--y item g--xs _BaseField_dd3532 _CheckboxField_9d1f64"
     style="align-items: start;"
   >
     <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-14ldhpp-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
     />
     <span
       class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-root MuiCheckbox-colorPrimary css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
@@ -34,7 +34,7 @@ exports[`[CheckboxField] component > should render component 1`] = `
       />
     </span>
     <div
-      class="d--y _Messages_e4e642"
+      class="block block--y item _Messages_e4e642"
     />
   </div>
 </DocumentFragment>

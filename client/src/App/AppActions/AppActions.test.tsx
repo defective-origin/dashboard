@@ -24,7 +24,7 @@ describe('[AppActions] component', () => {
 
 // describe('[AppActions] context', () => {
 //   const wrapper = (props: AppActionsProps) => <AppActionsProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAppActions(), { wrapper })
 //

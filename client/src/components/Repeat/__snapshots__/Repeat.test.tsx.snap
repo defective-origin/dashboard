@@ -5,17 +5,12 @@ exports[`[Repeat] component > should render items with default component type 1`
   <p
     data-testid="itemA"
   >
-    1
+     - 1
   </p>
   <p
     data-testid="itemB"
   >
-    2
-  </p>
-  <p
-    data-testid="itemA"
-  >
-    3
+     - 2
   </p>
 </DocumentFragment>
 `;
@@ -32,11 +27,6 @@ exports[`[Repeat] component > should render items with item component 1`] = `
   >
     2
   </p>
-  <p
-    data-testid="item"
-  >
-    3
-  </p>
 </DocumentFragment>
 `;
 
@@ -45,17 +35,12 @@ exports[`[Repeat] component > should render items with item component from map 1
   <p
     data-testid="itemA"
   >
-    1
+    1 - 1
   </p>
   <p
     data-testid="itemB"
   >
-    2
-  </p>
-  <p
-    data-testid="itemC"
-  >
-    3
+    2 - 2
   </p>
 </DocumentFragment>
 `;

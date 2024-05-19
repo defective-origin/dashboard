@@ -24,7 +24,7 @@ describe('[SearchPage] component', () => {
 
 // describe('[SearchPage] context', () => {
 //   const wrapper = (props: SearchPageProps) => <SearchPageProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useSearchPage(), { wrapper })
 //

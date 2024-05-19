@@ -17,17 +17,17 @@ describe('[AppContent] component', () => {
 // describe('[AppContent] hook', () => {
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAppContent())
-// 
+//
 //     expect(result.current).toEqual(null)
 //   })
 // })
 
 // describe('[AppContent] context', () => {
 //   const wrapper = (props: AppContentProps) => <AppContentProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useAppContent(), { wrapper })
-// 
+//
 //     expect(result.current).toBeTruthy()
 //   })
 // })

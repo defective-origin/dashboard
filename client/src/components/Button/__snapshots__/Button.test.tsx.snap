@@ -3,13 +3,10 @@
 exports[`[Button] component > should render component 1`] = `
 <DocumentFragment>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium _Button_7cc380 _xl_7cc380 css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium action md _Button_f8f296 css-1e6y48t-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
-    <p
-      class="MuiTypography-root MuiTypography-body1 _Text_1425e6 _md_1425e6 css-ahj2mt-MuiTypography-root"
-    />
     <span
       class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />

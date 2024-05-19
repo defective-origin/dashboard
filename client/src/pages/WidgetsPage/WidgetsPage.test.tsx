@@ -24,7 +24,7 @@ describe('[WidgetsPage] component', () => {
 
 // describe('[WidgetsPage] context', () => {
 //   const wrapper = (props: WidgetsPageProps) => <WidgetsPageProvider { ...props } />
-// 
+//
 //   it('should return options', () => {
 //     const { result } = renderHook(() => useWidgetsPage(), { wrapper })
 //

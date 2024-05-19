@@ -9,6 +9,8 @@ describe('[useFeatures] hook', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useFeatures())
 
-    expect(result.current).toEqual(null)
+    expect(result.current).toEqual({
+      feature: expect.any(Function),
+    })
   })
 })

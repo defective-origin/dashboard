@@ -40,6 +40,11 @@ describe('[Locale] hook', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useLocale())
 
-    expect(result.current).toEqual(null)
+    expect(result.current).toMatchObject({
+      changeLanguage: expect.any(Function),
+      language: 'en',
+      languages: undefined,
+      t: expect.any(Function),
+    })
   })
 })

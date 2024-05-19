@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Overlay] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="_Overlay_dfe0de"
+  >
+    <div
+      class="_OverlayContent_dfe0de _center_dfe0de"
+    />
+  </div>
+</DocumentFragment>
+`;

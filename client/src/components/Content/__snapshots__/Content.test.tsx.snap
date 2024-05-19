@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Content] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout item g--xxs _Content_99ea91"
+    style="grid-area: center;"
+  />
+</DocumentFragment>
+`;

@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Footer] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="block block--x item _Footer_33bf66"
+    style="grid-area: bottom;"
+  />
+</DocumentFragment>
+`;
