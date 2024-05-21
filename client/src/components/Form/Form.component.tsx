@@ -32,7 +32,7 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
 // TODO: update documentation
 // TODO: https://developer.mozilla.org/en-US/docs/Web/API/FormData
 /**
- * Component description.
+ * Allows to build and work with form.
  *
  * How to use
  * @example
@@ -173,27 +173,27 @@ export type FormProps = FormOptions<FormGroupValue> & BlockProps & {
  *         <Form.Submit content='Submit' />
  *       </Form.Actions>
  *
- *       <Form.Block className={_className} direction='x' g='xs'>
+ *       <Form.Block direction='x' g='xs'>
  *         <Form.Field.Checkbox name='with' label='with' value='checkbox' messages={MESSAGES} checked onChange={log} />
  *         <Form.Field.Checkbox name='without' label='without' messages={MESSAGES} checked onChange={log} />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' g='xs'>
+ *       <Form.Block direction='x' g='xs'>
  *         <Form.Field.Radio name='radio' label='radio 1' value={1} messages={MESSAGES} onChange={log} />
  *         <Form.Field.Radio name='radio' label='radio 2' value={2} messages={MESSAGES} onChange={log} checked />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' g='xs'>
+ *       <Form.Block direction='x' g='xs'>
  *         <Form.Field.Switch name='switch1' label='switch1' messages={MESSAGES} onChange={log} />
  *         <Form.Field.Switch name='switch2' label='switch2' messages={MESSAGES} onChange={log} />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' g='xs'>
+ *       <Form.Block direction='x' g='xs'>
  *         <Form.Field.Slider name='slider' label='slider' value={75} messages={MESSAGES} onChange={log} />
  *         <Form.Field.Number name='number' label='number' value={75} messages={MESSAGES} onChange={log} />
  *       </Form.Block>
  *
- *       <Form.Block className={_className} direction='x' g='xs'>
+ *       <Form.Block direction='x' g='xs'>
  *         <Form.Field.Select name='select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
  *         <Form.Field.Text name='text' label='text' value='value' messages={MESSAGES} onChange={log} />
  *       </Form.Block>
