@@ -5,7 +5,7 @@ import { cn } from 'tools'
 import { Widget, useWidgets } from 'api'
 
 // ---| pages |---
-import SearchPage, { SearchPageProps } from 'pages/SearchPage'
+import SelectPage, { SelectPageProps } from 'pages/SelectPage'
 
 // ---| screens |---
 import WidgetPreviewCard from 'screens/WidgetPreviewCard'
@@ -14,7 +14,7 @@ import WidgetPreviewCard from 'screens/WidgetPreviewCard'
 // ---| self |---
 import css from './WidgetsPage.module.scss'
 
-export type WidgetsPageProps = Partial<SearchPageProps<Widget>>
+export type WidgetsPageProps = Partial<SelectPageProps<Widget>>
 
 /**
  * Component description.
@@ -29,7 +29,7 @@ export function WidgetsPage(props: WidgetsPageProps): JSX.Element {
   const widgets = useWidgets()
 
   return (
-    <SearchPage
+    <SelectPage
       className={_className}
       name='PAGES.WIDGETS'
       items={widgets}

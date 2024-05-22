@@ -17,6 +17,8 @@ All you need to display them is to use ready-made widgets, boards and APIs by co
 - [Repository](./docs/REPOSITORY.md)
 
 ## Global commands
+- packages should be fixed. Without `^`.
+- yarn in script must have `run` command, example: `yarn run a && yarn run b`
 
 ### Start app
 ```sh

@@ -9,9 +9,9 @@ import Page, { PageProps } from 'pages/Page'
 // ---| screens |---
 // ---| components |---
 // ---| self |---
-import css from './SearchPage.module.scss'
+import css from './SelectPage.module.scss'
 
-export type SearchPageProps<T> = PageProps & {
+export type SelectPageProps<T> = PageProps & {
   items: T[]
   as: React.ElementType
   keygen?: (item: T, index: number) => React.Key
@@ -22,11 +22,11 @@ export type SearchPageProps<T> = PageProps & {
  *
  * How to use
  * @example
- * <SearchPage />
+ * <SelectPage />
  */
-export function SearchPage<T>(props: SearchPageProps<T>): JSX.Element {
+export function SelectPage<T>(props: SelectPageProps<T>): JSX.Element {
   const { items, as: Tag, keygen, children, className, ...otherProps } = props
-  const _className = cn(css.SearchPage, className)
+  const _className = cn(css.SelectPage, className)
 
   return (
     <Page className={_className} {...otherProps}>
@@ -39,6 +39,6 @@ export function SearchPage<T>(props: SearchPageProps<T>): JSX.Element {
   )
 }
 
-SearchPage.displayName = 'SearchPage'
+SelectPage.displayName = 'SelectPage'
 
-export default SearchPage
+export default SelectPage

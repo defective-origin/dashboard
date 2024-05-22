@@ -8,7 +8,7 @@
 - Use imperative mood ("move cursor to ..." not "moves cursor to ...")
 - Use Rebase instead of merge to get last changes from main
 - Pull request should be merged as __squash and rebased__
-- Branching: __feature, bugs, main, hotfix, release__
+- Branching: __main, release, feat, fix, hotfix, docs, perf, test, ci, style, chore__ 
 
 ### Names
 - __Branch__: feat/ticket_number-ticket_number-title-branch

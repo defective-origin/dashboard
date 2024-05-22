@@ -36,7 +36,7 @@ type TextVariant = 'primary' | 'secondary'
 - Size [text, scroll, button, link, icon]: __xxs | xs | sm | md | lg | xl | xxl__
 - Space [gap, padding, margin]: __xxs | xs | sm | md | lg | xl | xxl__
 - Color: __primary | secondary | success | info | warning | error | disable__
-- Media: __mobile | mobile | mobile | tablet | tablet | tablet | desktop | tv | vertical | horizontal__
+- Media: __mobile | tablet | desktop | tv | vertical | horizontal__
 - Layout[Grid]: __board | row | rows | column | columns | header | footer | left-aside | right-aside | grid__
 - Block[Flex]: __x | y | xy | cards__
 - Direction: __x | y | xy__

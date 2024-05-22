@@ -36,6 +36,8 @@ export function Widget(props: WidgetProps): JSX.Element {
     { start: 'close', tooltip: locale.t('ACTION.REMOVE') },
   ]
 
+  // TODO: provide data for widget: breakpoint, theme, language, key, endpoint, version
+
   return (
     <Menu
       horizontal

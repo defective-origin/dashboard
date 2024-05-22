@@ -5,7 +5,7 @@ import { cn } from 'tools'
 import { Board, useDashboards } from 'api'
 
 // ---| pages |---
-import SearchPage, { SearchPageProps } from 'pages/SearchPage'
+import SelectPage, { SelectPageProps } from 'pages/SelectPage'
 
 // ---| screens |---
 import DashboardPreviewCard from 'screens/DashboardPreviewCard'
@@ -14,7 +14,7 @@ import DashboardPreviewCard from 'screens/DashboardPreviewCard'
 // ---| self |---
 import css from './DashboardsPage.module.scss'
 
-export type DashboardsPageProps = Partial<SearchPageProps<Board>>
+export type DashboardsPageProps = Partial<SelectPageProps<Board>>
 
 /**
  * Component description.
@@ -29,7 +29,7 @@ export function DashboardsPage(props: DashboardsPageProps): JSX.Element {
   const boards = useDashboards()
 
   return (
-    <SearchPage
+    <SelectPage
       className={_className}
       name='PAGES.DASHBOARDS'
       items={boards}
