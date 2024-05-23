@@ -17,7 +17,7 @@ export type PopupTriggerOptions = {
 
 export type PopupProps = TooltipProps & {
   children?: React.ReactNode
-  trigger: (options: PopupTriggerOptions) => React.ReactNode
+  trigger: (options: PopupTriggerOptions) => React.ReactElement
 }
 
 /**

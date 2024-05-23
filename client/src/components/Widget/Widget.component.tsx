@@ -1,21 +1,22 @@
-import React from 'react'
+import React, { LegacyRef, forwardRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useLocale } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Menu, { MenuItem } from 'components/Menu'
+import Item, { ItemProps } from 'components/Item'
 
 // ---| self |---
 import css from './Widget.module.scss'
 
-export type WidgetProps = {
-  className?: string
-  children?: React.ReactNode
+export type WidgetProps<O> = ItemProps & {
+  options?: O
+  active?: boolean
 }
+
+// TODO: remove forwardRef after migrating to react 19
 
 /**
  * Component description.
@@ -24,33 +25,19 @@ export type WidgetProps = {
  * @example
  * <Widget />
  */
-export function Widget(props: WidgetProps): JSX.Element {
-  const { children, className, ...otherProps } = props
-  const locale = useLocale()
-  const actions: MenuItem[] = [
-    { start: 'resize', tooltip: locale.t('ACTION.REPLACE') },
-    { start: 'zoom_out_map', tooltip: locale.t('ACTION.FULL_SCREEN') },
-    { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
-    { start: 'book', tooltip: locale.t('ACTION.DOCS') },
-    { start: 'settings', tooltip: locale.t('ACTION.SETTINGS') },
-    { start: 'close', tooltip: locale.t('ACTION.REMOVE') },
-  ]
+export const Widget = forwardRef(<O,>(props: WidgetProps<O>, ref: LegacyRef<unknown>): JSX.Element => {
+  const { active, options, children, className, ...otherProps } = props
+
+  console.log(options)
 
   // TODO: provide data for widget: breakpoint, theme, language, key, endpoint, version
 
   return (
-    <Menu
-      horizontal
-      v='top-start'
-      items={actions}
-      trigger={(o) => (
-        <div className={cn(css.Widget, o.open && css.Active, className)} {...otherProps}>
-          {children}
-        </div>
-      )}
-    />
+    <Item ref={ref} className={cn(css.Widget, active && css.Active, className)} {...otherProps}>
+      {children}
+    </Item>
   )
-}
+})
 
 Widget.displayName = 'Widget'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -41,6 +41,8 @@ export type ActionProps = Omit<TextProps, 'v'> & {
   [key: string]: any
 }
 
+// TODO: remove forwardRef after migrating to react 19
+
 /**
  * Component description.
  *
@@ -48,7 +50,7 @@ export type ActionProps = Omit<TextProps, 'v'> & {
  * @example
  * <Action />
  */
-export function Action(props: ActionProps): JSX.Element | null {
+export const Action = forwardRef<unknown, ActionProps>((props, ref): JSX.Element | null => {
   const {
     as = 'button',
     size = 'md',
@@ -75,6 +77,7 @@ export function Action(props: ActionProps): JSX.Element | null {
 
   const item = (
     <Tag
+      ref={ref}
       className={_className}
       disabled={loading}
       color={color}
@@ -107,7 +110,7 @@ export function Action(props: ActionProps): JSX.Element | null {
   }
 
   return item
-}
+})
 
 Action.displayName = 'Action'
 

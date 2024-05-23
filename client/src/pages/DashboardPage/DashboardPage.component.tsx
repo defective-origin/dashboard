@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react'
 import { cn } from 'tools'
 import { useParams } from 'router'
 import { useLocale } from 'locale'
-import { BoardDevice, useDashboard } from 'api'
+import { BoardDevice, BoardWidget, useDashboard } from 'api'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
@@ -13,6 +13,7 @@ import Page, { PageProps } from 'pages/Page'
 // ---| components |---
 import Board, { BoardItem } from 'components/Board'
 import Widget from 'components/Widget'
+import Menu from 'components/Menu'
 
 // ---| self |---
 import css from './DashboardPage.module.scss'
@@ -34,9 +35,8 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const { id } = useParams()
   const board = useDashboard(id)
   const [device, setDevice] = useState<BoardDevice>('computer')
-  const [mode, setMode] = useState<boolean | object>(false)
+  const [mode, setMode] = useState<boolean | BoardWidget | undefined>(false)
   const switchSelect = useCallback(() => setMode((flag) => !flag), [])
-  const switchReselect = useCallback(() => setMode((flag) => !flag ? board.devices[device]?.widgets[0] : false), [board.devices, device])
 
   const handleSelect = (place: any) => {
     board.addWidget(device, {
@@ -50,7 +50,10 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
     })
     switchSelect()
   }
-  const handleReselect = (item: BoardItem) => board.updateWidget(device, item)
+  const handleReselect = (item: BoardItem) => {
+    setMode(false)
+    board.updateWidget(device, item)
+  }
   const handleError = (error: any) => { console.log('handleError', error) }
 
   const actions = [
@@ -77,8 +80,23 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
           rows={board.markup(device)?.rows}
           columns={board.markup(device)?.columns}
           items={board.markup(device)?.widgets}
-          select={mode as any}
-          widget={Widget}
+          select={mode}
+          widget={(p) => (
+            <Menu
+              horizontal
+              v='top-start'
+              items={[
+                { start: 'resize', tooltip: locale.t('ACTION.REPLACE'), onClick: () => setMode(p.options) },
+                { start: 'zoom_out_map', tooltip: locale.t('ACTION.FULL_SCREEN') },
+                { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
+                { start: 'book', tooltip: locale.t('ACTION.DOCS') },
+                { start: 'settings', tooltip: locale.t('ACTION.SETTINGS') },
+                { start: 'close', tooltip: locale.t('ACTION.REMOVE'), onClick: () => board.removeWidget(device, p.options.id) },
+                // TODO: replace one widget to another
+              ]}
+              trigger={(o) => <Widget active={o.open} {...p} />}
+            />
+          )}
           onSelect={handleSelect}
           onReselect={handleReselect}
           onError={handleError}

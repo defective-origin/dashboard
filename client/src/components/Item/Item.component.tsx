@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { LegacyRef, forwardRef } from 'react'
 
 // ---| core |---
 import { react } from 'tools'
@@ -9,6 +9,8 @@ import useItem, { ItemOptions } from './Item.hook'
 
 export type ItemProps<E extends React.ElementType = React.ElementType> = react.CustomTagProps<ItemOptions, E>
 
+// TODO: remove forwardRef after migrating to react 19
+
 /**
  * Item for layout and block.
  *
@@ -16,11 +18,11 @@ export type ItemProps<E extends React.ElementType = React.ElementType> = react.C
  * @example
  * <Item />
  */
-export function Item<E extends React.ElementType = 'div'>(props: ItemProps<E>): JSX.Element | null {
+export const Item = forwardRef(<E extends React.ElementType = 'div',>(props: ItemProps<E>, ref: LegacyRef<unknown>): JSX.Element | null => {
   const { as: Tag = 'div', ...itemProps } = useItem(props)
 
-  return <Tag {...itemProps} />
-}
+  return <Tag ref={ref as LegacyRef<HTMLDivElement>} {...itemProps} />
+})
 
 Item.displayName = 'Item'
 

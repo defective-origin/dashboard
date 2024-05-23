@@ -47,35 +47,34 @@ export type Board = BoardProviderConf & {
   devices: Partial<Record<BoardDevice, BoardMarkup>>
 }
 
-const BOARD_WIDGET = {
-  id: 1,
+export const BOARD_WIDGETS: BoardWidget[] = [
+  { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } },
+  { v1: { x: 0, y: 4 }, v2: { x: 1, y: 5 } },
+  { v1: { x: 1, y: 4 }, v2: { x: 2, y: 5 } },
+  { v1: { x: 2, y: 4 }, v2: { x: 3, y: 5 } },
+  { v1: { x: 3, y: 4 }, v2: { x: 4, y: 5 } },
+  { v1: { x: 4, y: 4 }, v2: { x: 5, y: 5 } },
+  { v1: { x: 5, y: 4 }, v2: { x: 6, y: 5 } },
+  { v1: { x: 0, y: 5 }, v2: { x: 6, y: 6 } },
+  { v1: { x: 0, y: 6 }, v2: { x: 6, y: 10 } },
+  { v1: { x: 9, y: 0 }, v2: { x: 18, y: 4 } },
+  { v1: { x: 6, y: 4 }, v2: { x: 14, y: 7 } },
+  { v1: { x: 6, y: 7 }, v2: { x: 14, y: 10 } },
+  { v1: { x: 14, y: 4 }, v2: { x: 20, y: 5 } },
+  { v1: { x: 14, y: 5 }, v2: { x: 20, y: 6 } },
+  { v1: { x: 14, y: 6 }, v2: { x: 20, y: 7 } },
+  { v1: { x: 14, y: 7 }, v2: { x: 17, y: 10 } },
+  { v1: { x: 17, y: 7 }, v2: { x: 20, y: 10 } },
+  { v1: { x: 18, y: 0 }, v2: { x: 20, y: 4 } },
+].map((place, id) => ({
+  id,
   origin: 1,
   name: 'WIDGET NAME',
   docs: 'google.com',
   author: 'author@gmail.com',
   version: '0.0.1',
-} as const
-
-export const BOARD_WIDGETS: BoardWidget[] = [
-  { ...BOARD_WIDGET, place: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 0, y: 4 }, v2: { x: 1, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 1, y: 4 }, v2: { x: 2, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 2, y: 4 }, v2: { x: 3, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 3, y: 4 }, v2: { x: 4, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 4, y: 4 }, v2: { x: 5, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 5, y: 4 }, v2: { x: 6, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 0, y: 5 }, v2: { x: 6, y: 6 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 0, y: 6 }, v2: { x: 6, y: 10 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 9, y: 0 }, v2: { x: 18, y: 4 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 6, y: 4 }, v2: { x: 14, y: 7 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 6, y: 7 }, v2: { x: 14, y: 10 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 14, y: 4 }, v2: { x: 20, y: 5 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 14, y: 5 }, v2: { x: 20, y: 6 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 14, y: 6 }, v2: { x: 20, y: 7 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 14, y: 7 }, v2: { x: 17, y: 10 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 17, y: 7 }, v2: { x: 20, y: 10 } } },
-  { ...BOARD_WIDGET, place: { v1: { x: 18, y: 0 }, v2: { x: 20, y: 4 } } },
-]
+  place,
+}))
 
 export const BASE_BREAKPOINT_MAP: Record<BoardDevice, BoardMarkup> = {
   tv: { widgets: BOARD_WIDGETS, rows: 10, columns: 20 },
@@ -130,7 +129,7 @@ export const useDashboard = (id?: Id): DashboardManager => {
 
   const removeWidget = (device: BoardDevice, id: Id) => updateMarkupWidgets(
     device,
-    markup(device)?.widgets.filter((widget) => widget.id === id),
+    markup(device)?.widgets.filter((widget) => widget.id !== id),
   )
 
   return { loading: false, ...board, markup, update, addWidget, updateWidget, removeWidget }

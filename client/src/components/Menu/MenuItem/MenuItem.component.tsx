@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import MuiMenuItem from '@mui/material/MenuItem'
 
 // ---| core |---
@@ -31,13 +31,13 @@ export type MenuItemProps = RepeatItem<typeof MENU_ACTION_MAP>
  * @example
  * <Item />
  */
-export function MenuItem(props: MenuItemProps & { triggerOptions?: PopupTriggerOptions }): JSX.Element {
+export const MenuItem = forwardRef<unknown, MenuItemProps & { triggerOptions?: PopupTriggerOptions }>((props, ref): JSX.Element => {
   const { triggerOptions: o, active, variant = 'button', className, children, ...otherProps } = props
   const _className = cn(css.MenuItem, className)
   const Tag = MENU_ACTION_MAP[variant] as React.FC<RepeatItem<typeof MENU_ACTION_MAP>>
 
   return (
-    <MuiMenuItem className={_className}>
+    <MuiMenuItem ref={ref as React.ForwardedRef<HTMLLIElement>} className={_className}>
       {!children && Tag && (
         <Tag
           size='sm'
@@ -52,7 +52,7 @@ export function MenuItem(props: MenuItemProps & { triggerOptions?: PopupTriggerO
       {children}
     </MuiMenuItem>
   )
-}
+})
 
 MenuItem.displayName = 'MenuItem'
 

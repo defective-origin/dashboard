@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { MenuList } from '@mui/material'
 
 // ---| core |---
@@ -22,7 +22,9 @@ export type MenuProps = PopupProps & {
 }
 
 /**
- * Component description.
+ * Allows to show menu around component.
+ *
+ * Note: Component should have forwardRef.
  *
  * How to use
  * @example

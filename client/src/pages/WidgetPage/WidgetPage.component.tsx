@@ -9,6 +9,8 @@ import { useParams } from 'router'
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
+import PlaceholderCard from 'screens/PlaceholderCard'
+
 // ---| components |---
 // ---| self |---
 import css from './WidgetPage.module.scss'
@@ -30,6 +32,10 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
 
   return (
     <Page className={_className} name={widget.name} {...otherProps}>
+      <Page.Content v='board' columns={3}>
+        <PlaceholderCard name='Widget storybook' area='1 / 1 / 2 / 3' />
+        <PlaceholderCard name='Widget settings' area='1 / 3 / 2 / 4' />
+      </Page.Content>
       {children}
     </Page>
   )
