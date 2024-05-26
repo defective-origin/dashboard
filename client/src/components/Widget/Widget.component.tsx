@@ -28,8 +28,6 @@ export type WidgetProps<O> = ItemProps & {
 export const Widget = forwardRef(<O,>(props: WidgetProps<O>, ref: LegacyRef<unknown>): JSX.Element => {
   const { active, options, children, className, ...otherProps } = props
 
-  console.log(options)
-
   // TODO: provide data for widget: breakpoint, theme, language, key, endpoint, version
 
   return (

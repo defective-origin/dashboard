@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import useFunc from '../UseFunc'
 import useNestedState, {
   NestedStateNodeErrors,
@@ -12,6 +12,10 @@ export type FormGroupValue = { [key: string | number]: FormGroupValue | FormFiel
 export type FormValue = FormGroupValue | FormFieldValue
 
 export type FormOptions<V = FormValue> = NestedStateOptions<V> & {
+  /** Out of form reset action id */
+  resetId?: string
+  /** Out of form reset action id */
+  submitId?: string
   validateOnChange?: boolean
   validateOnSubmit?: boolean
   onReset?: NestedStateNodeEvent<V>
@@ -21,6 +25,7 @@ export type FormOptions<V = FormValue> = NestedStateOptions<V> & {
 export type FormReturnOptions<V = FormValue> = NestedStateReturnOptions<V> & {
   name: string
 
+  /** Submit form value. */
   submit: (event: React.MouseEvent) => void
 
   /** Get root value. */
@@ -42,7 +47,7 @@ FormContext.displayName = 'FormContext'
  * const field = useForm(conf)
  */
 export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturnOptions<V> => {
-  const { validateOnChange, validateOnSubmit, onSubmit, onReset, ...otherOptions } = options
+  const { resetId = '', submitId = '', validateOnChange, validateOnSubmit, onSubmit, onReset, ...otherOptions } = options
   const field = useNestedState<V>({ context: FormContext as FormOptions<V>['context'], ...otherOptions })
   const name = useMemo(() => {
     if (field.node.path.length === 1) {
@@ -59,7 +64,7 @@ export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturn
   const errors = useFunc(() => field.node.errors)
   const form = useFunc(() => field.root?.node.value)
 
-  const submit = useFunc((event: React.MouseEvent) => {
+  const submit = useFunc((event: React.MouseEvent | MouseEvent) => {
     event.preventDefault()
 
     if (validateOnSubmit) {
@@ -85,6 +90,14 @@ export const useForm = <V = FormValue>(options: FormOptions<V> = {}): FormReturn
 
     field.set(value)
   })
+
+  // subscribe on click action if they are out of form
+  // to prevent complex subscriptions in different components
+  // and not using imperative approach
+  useEffect(() => {
+    document.getElementById(resetId)?.addEventListener('click', reset)
+    document.getElementById(submitId)?.addEventListener('click', submit)
+  }, [reset, resetId, submit, submitId])
 
   return useMemo(
     () => ({ ...field, name, reset, submit, set, form, value, errors }),

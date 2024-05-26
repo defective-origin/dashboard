@@ -8,7 +8,7 @@ import { Widget, useWidgets } from 'api'
 import SelectPage, { SelectPageProps } from 'pages/SelectPage'
 
 // ---| screens |---
-import WidgetPreviewCard from 'screens/WidgetPreviewCard'
+import WidgetPreviewCard from 'screens/cards/WidgetPreviewCard'
 
 // ---| components |---
 // ---| self |---

@@ -6,12 +6,17 @@ import { AccountManager, MonitoringReturnOptions, useMonitoring } from 'api'
 
 // ---| components |---
 import { ToastReturnOptions, useToast } from 'components/Toast'
+import { ModalReturnOptions, useModal } from 'components/Modal'
 
-export type AppOptions = AccountManager
-                      & MonitoringReturnOptions
-                      & FeaturesReturnOptions
-                      & HotKeysReturnOptions
-                      & ToastReturnOptions
+export type AppOptions =
+  & AccountManager
+  & MonitoringReturnOptions
+  & HotKeysReturnOptions
+  & ToastReturnOptions
+  & {
+    feature: FeaturesReturnOptions
+    modal: ModalReturnOptions
+  }
 
 export const AppContext = React.createContext({} as AppOptions)
 AppContext.displayName = 'AppContext'
@@ -31,11 +36,12 @@ export function AppProvider(props: AppProviderProps): JSX.Element {
   const monitor = useMonitoring()
   // ui
   const toast = useToast()
-  const features = useFeatures()
+  const modal = useModal()
+  const feature = useFeatures()
 
   const options = useMemo(
-    () => Object.assign({}, toast, features, monitor, hotkeys, account, defaultOptions),
-    [account, defaultOptions, features, hotkeys, monitor, toast],
+    () => Object.assign({ modal, feature }, toast, monitor, hotkeys, account, defaultOptions),
+    [account, defaultOptions, hotkeys, monitor, toast, feature, modal],
   )
 
   return (

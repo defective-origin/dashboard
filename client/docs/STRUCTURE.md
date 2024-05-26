@@ -118,16 +118,10 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
   	- theme.context.tsx -- theme provider
   	- theme.conf.tsx -- common types and variables
 
-  - __Launcher/__ -- Contains tools and settings without which the application cannot or should not work  + env settings in constants
+  - __App/__ -- component which contains app settings and provide app context. Can be placed in apps if there is other apps  + env settings in constants
 		- Component structure
-  	- system -- [StrictMode | Router | Store | Api | locale + dayjs | HotKeys]
-  	- monitor -- [Log | Analytics | ABTest + FeatureFlag]
-  	- ui -- [UISettings | SnackBar | ModalWindow | Suspense]
-  	- account -- [AccountSettings | AccountUser]
-    	- Hook structure
-
-  - __App/__ -- component which contains app settings for launcher. Can be placed in apps if there is other apps
-		- Component structure
+  		- App.launcher.tsx - Contains all root app contexts without which the application cannot or should not work. Inmost cases it's system contexts [StrictMode | Router | Store | Api | locale + dayjs | Suspense | App]
+  		- App.context.tsx - Contains app managers. In most cases they don't have self contexts [Account | Monitoring | HotKeys | Toast | Modal | Feature]
 
   - __apps/__[micro] -- contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: App]
   - __pages/__[micro] -- contains components which gets data from a api and spread them between components (can work only with components, screens, pages) [component has postfix: Page]

@@ -6,7 +6,7 @@ import { Board } from 'api'
 
 // ---| pages |---
 // ---| screens |---
-import PlaceholderCard from 'screens/PlaceholderCard'
+import PlaceholderCard from 'screens/cards/PlaceholderCard'
 
 // ---| components |---
 import NavLink from 'components/NavLink'

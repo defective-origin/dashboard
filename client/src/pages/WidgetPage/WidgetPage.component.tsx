@@ -9,7 +9,7 @@ import { useParams } from 'router'
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
-import PlaceholderCard from 'screens/PlaceholderCard'
+import PlaceholderCard from 'screens/cards/PlaceholderCard'
 
 // ---| components |---
 // ---| self |---

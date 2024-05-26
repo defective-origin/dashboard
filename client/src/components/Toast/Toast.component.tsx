@@ -16,9 +16,9 @@ import css from './Toast.module.scss'
 
 export type ToastName = 'messages' | 'guards' | 'alerts'
 
-export const initToastKey = (name: ToastName) => `portal-${name}`
+export const initToastKey = (name: ToastName) => `toast-${name}`
 
-export type ToastMessage = {
+export type ToastOptions = {
   content?: React.ReactNode
   color?: AlertColor
   v?: BlockVariant
@@ -26,7 +26,7 @@ export type ToastMessage = {
   onSuccess?: () => void
 }
 
-export type ToastProps = RTToastContentProps<ToastMessage>
+export type ToastProps = RTToastContentProps<ToastOptions>
 
 /**
  * Component description.
@@ -36,7 +36,7 @@ export type ToastProps = RTToastContentProps<ToastMessage>
  * <Toast />
  */
 export function Toast(props: ToastProps): JSX.Element {
-  const { closeToast, data = {} as ToastMessage } = props
+  const { closeToast, data = {} as ToastOptions } = props
 
   const handleClose = () => {
     closeToast?.()

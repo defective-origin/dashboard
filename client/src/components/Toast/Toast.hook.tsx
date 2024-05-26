@@ -11,7 +11,7 @@ import Icon, { IconVariant } from 'components/Icon'
 import { AlertColor } from 'components/Alert'
 
 // ---| self |---
-import { Toast, ToastMessage, initToastKey } from './Toast.component'
+import { Toast, ToastOptions, initToastKey } from './Toast.component'
 
 const ALERT_ICON_MAP: Record<AlertColor, IconVariant> = {
   success: 'check_circle',
@@ -22,9 +22,9 @@ const ALERT_ICON_MAP: Record<AlertColor, IconVariant> = {
 
 
 export type ToastReturnOptions = {
-  message: (data: ToastMessage) => Id
-  alert: (data: ToastMessage) => Id
-  guard: (data: ToastMessage) => Id
+  message: (options: ToastOptions) => Id
+  alert: (options: ToastOptions) => Id
+  guard: (options: ToastOptions) => Id
 }
 
 /**
@@ -35,7 +35,7 @@ export type ToastReturnOptions = {
  */
 
 export const useToast = (): ToastReturnOptions => {
-  const showToast = useFunc((data: ToastMessage, options: MuiToastOptions<ToastMessage>) =>
+  const showToast = useFunc((data: ToastOptions, options: MuiToastOptions<ToastOptions>) =>
     toast(Toast, {
       ...options,
       data: { ...options.data, ...data },
@@ -44,23 +44,23 @@ export const useToast = (): ToastReturnOptions => {
     }),
   )
 
-  const message = useFunc((data: ToastMessage) =>
-    showToast(data, {
+  const message = useFunc((options: ToastOptions) =>
+    showToast(options, {
       containerId: initToastKey('messages'),
       data: { v: 'y' },
     }),
   )
 
-  const alert = useFunc((data: ToastMessage) =>
-    showToast(data, {
+  const alert = useFunc((options: ToastOptions) =>
+    showToast(options, {
       theme: 'colored',
       containerId: initToastKey('alerts'),
       autoClose: false,
     }),
   )
 
-  const guard = useFunc((data: ToastMessage) =>
-    showToast(data, {
+  const guard = useFunc((options: ToastOptions) =>
+    showToast(options, {
       toastId: 'guard',
       theme: 'light',
       containerId: initToastKey('guards'),

@@ -8,7 +8,7 @@ import { Board, useDashboards } from 'api'
 import SelectPage, { SelectPageProps } from 'pages/SelectPage'
 
 // ---| screens |---
-import DashboardPreviewCard from 'screens/DashboardPreviewCard'
+import DashboardPreviewCard from 'screens/cards/DashboardPreviewCard'
 
 // ---| components |---
 // ---| self |---

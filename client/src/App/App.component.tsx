@@ -6,6 +6,7 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Layout, { LayoutProps } from 'components/Layout'
+import Modal from 'components/Modal'
 import Toast from 'components/Toast'
 
 // ---| self |---
@@ -28,9 +29,6 @@ export function App(props: AppProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn('app', className)
 
-  // TODO: add AppDrawer
-  // TODO: add AppModal
-  // TODO: add AppDialog
   return (
     <Layout className={_className} stretch v='left' {...otherProps}>
       <AppMenu />
@@ -40,7 +38,7 @@ export function App(props: AppProps): JSX.Element {
 
       {children}
 
-      {/* <Modal keepMounted open={!!itemMap.modal} content={itemMap.modal} onClose={onModalClose} /> */}
+      <Modal.Container name='global' />
 
       <Toast.Container name='alerts' position='top-center' />
       <Toast.Container name='messages' position='bottom-right' />

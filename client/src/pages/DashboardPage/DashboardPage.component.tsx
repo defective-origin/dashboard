@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react'
 import { cn } from 'tools'
 import { useParams } from 'router'
 import { useLocale } from 'locale'
+import { useApp } from 'App'
 import { BoardDevice, BoardWidget, useDashboard } from 'api'
 
 // ---| pages |---
@@ -14,6 +15,7 @@ import Page, { PageProps } from 'pages/Page'
 import Board, { BoardItem } from 'components/Board'
 import Widget from 'components/Widget'
 import Menu from 'components/Menu'
+import Modal from 'components/Modal'
 
 // ---| self |---
 import css from './DashboardPage.module.scss'
@@ -32,6 +34,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DashboardPage, className)
   const locale = useLocale()
+  const app = useApp()
   const { id } = useParams()
   const board = useDashboard(id)
   const [device, setDevice] = useState<BoardDevice>('computer')
@@ -46,7 +49,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
       author: 'author@email.com',
       version: '0.0.1',
       origin: 0,
-      // TODO: destruct origin and attach origin Id
+      // TODO: destruct origin and attach origin Id. By default show data in form from origin
     })
     switchSelect()
   }
@@ -67,8 +70,8 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
       ],
     },
     { start: 'beenhere', tooltip: locale.t('ACTION.ADD_TO_MENU') },
-    { start: 'settings', tooltip: locale.t('ACTION.SETTINGS') },
-    { start: 'delete', tooltip: locale.t('ACTION.REMOVE') }, // TODO: remove board and remove markup
+    { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'board-settings' }) },
+    { start: 'delete', tooltip: locale.t('ACTION.REMOVE') }, // TODO: remove board and remove markup[forbid to remove computer markup]
   ]
 
   return (
@@ -90,7 +93,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
                 { start: 'zoom_out_map', tooltip: locale.t('ACTION.FULL_SCREEN') },
                 { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
                 { start: 'book', tooltip: locale.t('ACTION.DOCS') },
-                { start: 'settings', tooltip: locale.t('ACTION.SETTINGS') },
+                { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'widget-settings' }) },
                 { start: 'close', tooltip: locale.t('ACTION.REMOVE'), onClick: () => board.removeWidget(device, p.options.id) },
                 // TODO: replace one widget to another
               ]}
@@ -102,6 +105,9 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
           onError={handleError}
         />
       </Page.Content>
+
+      <Modal name='widget-settings' title='Widget settings' v='right' />
+      <Modal name='board-settings' title='Dashboard settings' v='right' />
 
       {children}
     </Page>

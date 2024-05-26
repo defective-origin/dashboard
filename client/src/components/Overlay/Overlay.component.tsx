@@ -11,6 +11,7 @@ import { ElementOptions, useMode } from 'hooks'
 // ---| self |---
 import css from './Overlay.module.scss'
 
+// TODO: remove or implement modal via this component
 export type OverlaySideVariant = 'left' | 'right' | 'top' | 'bottom'
 export type OverlaySideCernerVariant = 'left-center' | 'right-center' | 'top-center' | 'bottom-center'
 export type OverlayCernerVariant = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'

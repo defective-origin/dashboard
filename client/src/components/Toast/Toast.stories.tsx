@@ -3,11 +3,11 @@ import { SB_CSS, field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import Block from 'components/Block'
 import useToast from './Toast.hook'
-import Toast, { ToastMessage } from './Toast.component'
+import Toast, { ToastOptions } from './Toast.component'
 import { DIRECTION, COLORS } from 'theme'
 import Button from 'components/Button'
 
-const Notification = (props: ToastMessage) => {
+const Notification = (props: ToastOptions) => {
   const notification = useToast()
   const checkMessage = () => notification.message(props)
   const checkGuard = () => notification.guard(props)
