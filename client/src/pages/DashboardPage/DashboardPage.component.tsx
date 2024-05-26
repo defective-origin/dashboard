@@ -90,6 +90,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
               v='top-start'
               items={[
                 { start: 'resize', tooltip: locale.t('ACTION.REPLACE'), onClick: () => setMode(p.options) },
+                { start: 'move_up', tooltip: locale.t('ACTION.SUBSTITUTION') },
                 { start: 'zoom_out_map', tooltip: locale.t('ACTION.FULL_SCREEN') },
                 { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
                 { start: 'book', tooltip: locale.t('ACTION.DOCS') },

@@ -16,8 +16,6 @@ type Story = StoryObj<typeof RadioField>
 export const Demo: Story = {
   parameters: params('RadioField'),
   args: {
-    messages: [{ content: 'message', color: 'info' }],
-    errors: ['error'],
     label: 'Label',
     checked: true,
   },

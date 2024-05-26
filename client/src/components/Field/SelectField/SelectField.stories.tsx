@@ -16,10 +16,11 @@ type Story = StoryObj<typeof SelectField>
 export const Demo: Story = {
   parameters: params('SelectField'),
   args: {
-    messages: [{ content: 'message', color: 'info' }],
-    errors: ['error'],
+    disabled: false,
+    required: false,
     label: 'Label',
     value: 'value0',
+    message: 'help text',
     items: [
       { value: 'value0', children: 'FIRST' },
       { value: 'value1', children: 'SECOND' },

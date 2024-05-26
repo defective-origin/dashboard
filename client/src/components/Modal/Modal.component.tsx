@@ -115,7 +115,7 @@ export type ModalContainerProps = {
 export function ModalContainer(props: ModalContainerProps): JSX.Element {
   const { name, ...otherProps } = props
 
-  return <div id={initModalKey(name)} {...otherProps} />
+  return <div id={initModalKey(name)} style={{ zIndex: 10000 }} {...otherProps} />
 }
 
 ModalContainer.displayName = 'ModalContainer'

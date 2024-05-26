@@ -1,5 +1,6 @@
 import React from 'react'
 import MuiSwitchField from '@mui/material/Switch'
+import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -10,10 +11,12 @@ import { FormOptions, useForm, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 import css from './SwitchField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type SwitchFieldProps = FormOptions<boolean> & BaseFieldProps & {
+export type SwitchFieldProps = Pick<FormOptions<boolean>, 'value' | 'name' | 'onChange'> & {
+  v?: 'end' | 'start' | 'top' | 'bottom'
   checked?: boolean
+  label?: React.ReactNode
+  className?: string
 }
 
 /**
@@ -24,15 +27,26 @@ export type SwitchFieldProps = FormOptions<boolean> & BaseFieldProps & {
  * <SwitchField />
  */
 export function SwitchField(props: SwitchFieldProps): JSX.Element {
-  const { name, checked, onChange, className, ...otherProps } = props
+  const { v, label, name, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.SwitchField, className)
   const field = useForm({ name, value: !!checked, onChange })
   const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(event.target.checked))
 
   return (
-    <BaseField className={_className} errors={field.errors()} aligns='flex-start' {...otherProps}>
-      <MuiSwitchField name={field.name} size='small' checked={!!field.value()} onChange={handleChange} />
-    </BaseField>
+    <FormControlLabel
+      labelPlacement={v}
+      label={label}
+      control={
+        <MuiSwitchField
+          className={_className}
+          name={field.name}
+          size='small'
+          checked={!!field.value()}
+          onChange={handleChange}
+          {...otherProps}
+        />
+      }
+    />
   )
 }
 

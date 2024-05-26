@@ -16,8 +16,6 @@ type Story = StoryObj<typeof SwitchField>
 export const Demo: Story = {
   parameters: params('SwitchField'),
   args: {
-    messages: [{ content: 'message', color: 'info' }],
-    errors: ['error'],
     label: 'Label',
     checked: true,
   },

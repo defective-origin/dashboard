@@ -1,5 +1,6 @@
 import React from 'react'
-import MuiSliderField from '@mui/material/Slider'
+import MuiSliderField, { SliderProps as MuiSliderFieldProps } from '@mui/material/Slider'
+import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -11,9 +12,14 @@ import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| self |---
 import css from './SliderField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type SliderFieldProps = FormOptions<number> & BaseFieldProps
+export type SliderFieldProps = Pick<FormOptions<number>, 'value' | 'name' | 'onChange'> & {
+  v?: 'end' | 'start' | 'top' | 'bottom'
+  label?: React.ReactNode
+  className?: string
+  disabled?: boolean
+  marks?: MuiSliderFieldProps['marks']
+}
 
 /**
  * Component description.
@@ -23,15 +29,28 @@ export type SliderFieldProps = FormOptions<number> & BaseFieldProps
  * <SliderField />
  */
 export function SliderField(props: SliderFieldProps): JSX.Element {
-  const { name, value, onChange, className, ...otherProps } = props
+  const { v = 'top', marks, label, disabled, name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.SliderField, className)
   const field = useForm({ name, value, onChange })
   const handleChange = useFunc((event: Event) => field.set(Number((event.target as HTMLInputElement).value)))
 
   return (
-    <BaseField className={_className} errors={field.errors()} {...otherProps}>
-      <MuiSliderField name={field.name} size='small' value={field.value()} onChange={handleChange} />
-    </BaseField>
+    <FormControlLabel
+      labelPlacement={v}
+      label={label}
+      className={_className}
+      control={
+        <MuiSliderField
+          name={field.name}
+          size='small'
+          value={field.value()}
+          onChange={handleChange}
+          disabled={disabled}
+          marks={marks}
+          {...otherProps}
+        />
+      }
+    />
   )
 }
 

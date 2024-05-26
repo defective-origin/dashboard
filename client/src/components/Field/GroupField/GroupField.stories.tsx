@@ -20,14 +20,6 @@ const meta: Meta<typeof GroupField> = {
 export default meta
 
 type Story = StoryObj<typeof GroupField>
-const MESSAGES: TextProps[] = [
-  { color: 'success', content: 'success' },
-  { color: 'error', content: 'error' },
-  { color: 'warning', content: 'warning' },
-  { color: 'info', content: 'info' },
-  { color: 'primary', content: 'primary' },
-  { color: 'secondary', content: 'secondary' },
-]
 
 const SELECT_OPTIONS = [
   { value: 'value0', children: 'FIRST' },
@@ -40,17 +32,17 @@ export const Demo: Story = {
   parameters: params('GroupField'),
   render: (props) => (
     <>
-      <GroupField v='x' {...props}>
-        <RadioField name='group-radio' label='radio' value={true} messages={MESSAGES} onChange={log} />
-        <SwitchField name='group-switch' label='switch' value={true} messages={MESSAGES} onChange={log} />
-        <CheckboxField name='group-checkbox' label='checkbox' value='checkbox' messages={MESSAGES} checked onChange={log} />
-        <SliderField name='group-slider' label='slider' value={50} messages={MESSAGES} onChange={log} />
+      <GroupField v='row' g='xs' {...props}>
+        <RadioField name='group-radio' label='radio' value={true} onChange={log} />
+        <SwitchField name='group-switch' label='switch' value={true} onChange={log} />
+        <CheckboxField name='group-checkbox' label='checkbox' value='checkbox' checked onChange={log} />
+        <SliderField name='group-slider' label='slider' value={50} onChange={log} v='start' />
       </GroupField>
 
-      <GroupField v='x' {...props}>
-        <SelectField name='group-select' label='select' value='value0' messages={MESSAGES} onChange={log} items={SELECT_OPTIONS} />
-        <TextField name='group-text' label='text' value='value' messages={MESSAGES} onChange={log} />
-        <NumberField name='group-number' label='number' value={50} messages={MESSAGES} onChange={log} />
+      <GroupField v='row' g='xs' {...props}>
+        <SelectField name='group-select' label='select' value='value0' message='Help text' onChange={log} items={SELECT_OPTIONS} />
+        <TextField name='group-text' label='text' value='value' message='Help text' onChange={log} />
+        <NumberField name='group-number' label='number' value={50} message='Help text' onChange={log} />
       </GroupField>
     </>
   ),

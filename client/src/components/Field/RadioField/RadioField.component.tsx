@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import MuiRadioField from '@mui/material/Radio'
+import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -10,10 +11,12 @@ import { FormOptions, useForm, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 import css from './RadioField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type RadioFieldProps = FormOptions<string | number | boolean> & BaseFieldProps & {
+export type RadioFieldProps = Pick<FormOptions<string | boolean | number>, 'value' | 'name' | 'onChange'> & {
+  v?: 'end' | 'start' | 'top' | 'bottom'
   checked?: boolean
+  label?: React.ReactNode
+  className?: string
 }
 
 /**
@@ -24,7 +27,7 @@ export type RadioFieldProps = FormOptions<string | number | boolean> & BaseField
  * <RadioField />
  */
 export function RadioField(props: RadioFieldProps): JSX.Element {
-  const { name, value, checked, onChange, className, ...otherProps } = props
+  const { v, label, name, value, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.RadioField, className)
   const field = useForm({ name, value, dependency: true, onChange })
 
@@ -40,9 +43,21 @@ export function RadioField(props: RadioFieldProps): JSX.Element {
   })
 
   return (
-    <BaseField className={_className} errors={field.errors()} aligns='flex-start' {...otherProps}>
-      <MuiRadioField name={field.name} size='small' value={value} checked={value === field.value()} onChange={handleChange} />
-    </BaseField>
+    <FormControlLabel
+      labelPlacement={v}
+      label={label}
+      control={
+        <MuiRadioField
+          className={_className}
+          name={field.name}
+          size='small'
+          value={value}
+          checked={value === field.value()}
+          onChange={handleChange}
+          {...otherProps}
+        />
+      }
+    />
   )
 }
 

@@ -10,14 +10,17 @@ import { FormOptions, useForm, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 import css from './TextField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type TextFieldProps = FormOptions<string> & BaseFieldProps & {
+export type TextFieldProps = Pick<FormOptions<string>, 'value' | 'name' | 'onChange'> & {
+  message?: React.ReactNode
+  label?: React.ReactNode
   multiline?: boolean
+  className?: string
+  required?: boolean
+  disabled?: boolean
 }
 
 // TODO: add throttle for input onChange event?
-// TODO: add validate onBlur event?
 
 /**
  * Component description.
@@ -27,24 +30,26 @@ export type TextFieldProps = FormOptions<string> & BaseFieldProps & {
  * <TextField />
  */
 export function TextField(props: TextFieldProps): JSX.Element {
-  const { name, value, multiline, onChange, className, ...otherProps } = props
+  const { message, name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.TextField, className)
   const field = useForm({ name, value, onChange })
   const onBlur = useFunc(() => field.validate())
   const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(event.target.value))
 
+  // TODO: add Help icon near label which show tooltip on hover
   return (
-    <BaseField className={_className} errors={field.errors()} {...otherProps}>
-      <MuiTextField
-        name={field.name}
-        size='small'
-        value={field.value()}
-        multiline={multiline}
-        rows={multiline ? 3 : undefined}
-        onBlur={onBlur}
-        onChange={handleChange}
-      />
-    </BaseField>
+    <MuiTextField
+      className={_className}
+      name={field.name}
+      size='small'
+      value={field.value()}
+      rows={otherProps.multiline ? 5 : undefined}
+      onBlur={onBlur}
+      onChange={handleChange}
+      helperText={field.errors()?.[0] ?? message}
+      error={!!field.errors()}
+      {...otherProps}
+    />
   )
 }
 

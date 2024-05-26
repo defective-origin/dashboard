@@ -1,6 +1,7 @@
 import React from 'react'
 import MuiSelectField, { SelectChangeEvent } from '@mui/material/Select'
 import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
+import { FormControl, FormHelperText, InputLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -13,7 +14,6 @@ import Repeat, { PropsWithItems } from 'components/Repeat'
 
 // ---| self |---
 import css from './SelectField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
 const SELECT_FIELD_OPTIONS = {
   // // disable scroll lock
@@ -24,7 +24,14 @@ const SELECT_FIELD_OPTIONS = {
 
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
-export type SelectFieldProps = FormOptions<string | number> & PropsWithItems<SelectFieldItem, BaseFieldProps>
+export type SelectFieldProps = Pick<FormOptions<string | number>, 'value' | 'name' | 'onChange'> & PropsWithItems<SelectFieldItem> & {
+  message?: React.ReactNode
+  label?: React.ReactNode
+  className?: string
+  required?: boolean
+  disabled?: boolean
+  children?: React.ReactNode
+}
 
 /**
  * Component description.
@@ -34,7 +41,7 @@ export type SelectFieldProps = FormOptions<string | number> & PropsWithItems<Sel
  * <SelectField />
  */
 export function SelectField(props: SelectFieldProps): JSX.Element {
-  const { name, value, onChange, items = [], children, className, ...otherProps } = props
+  const { message, required, label, name, value, onChange, items = [], children, className, ...otherProps } = props
   const _className = cn(css.SelectField, className)
   const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })
   const field = useForm({ name, value, onChange })
@@ -42,19 +49,26 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
   const handleChange = useFunc((event: SelectChangeEvent<unknown>) => field.set(event.target.value as string))
 
   return (
-    <BaseField className={_className} errors={field.errors()} {...otherProps}>
+    <FormControl>
+      <InputLabel id={name} required={required}>{label}</InputLabel>
       <MuiSelectField
+        labelId={name}
+        className={_className}
         name={field.name}
         size='small'
         MenuProps={SELECT_FIELD_OPTIONS}
         value={field.value()}
         onBlur={onBlur}
         onChange={handleChange}
+        error={!!field.errors()}
+        label={label}
+        {...otherProps}
       >
         {menuItems}
         {children}
       </MuiSelectField>
-    </BaseField>
+      {(field.errors()?.[0] || message) && <FormHelperText>{field.errors()?.[0] ?? message}</FormHelperText>}
+    </FormControl>
   )
 }
 

@@ -7,12 +7,14 @@ import { FormOptions, FormGroupValue, useForm, FormContext } from 'hooks'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { BaseField, BaseFieldProps } from '../BaseField'
+import Layout, { LayoutProps } from 'components/Layout'
 
 // ---| self |---
 import css from './GroupField.module.scss'
 
-export type GroupFieldProps = FormOptions<FormGroupValue> & BaseFieldProps & {
+export type GroupFieldProps = Pick<FormOptions<FormGroupValue>, 'value' | 'name' | 'onChange' | 'onSubmit' | 'onReset'> & {
+  v?: LayoutProps['v']
+  g?: LayoutProps['g']
   list?: boolean
   label?: string
   className?: string
@@ -27,16 +29,16 @@ export type GroupFieldProps = FormOptions<FormGroupValue> & BaseFieldProps & {
  * <GroupField />
  */
 export function GroupField(props: GroupFieldProps): JSX.Element {
-  const { name, list, onChange, onSubmit, onReset, children, className, ...otherProps } = props
+  const { v, g = 'xs', name, list, onChange, onSubmit, onReset, children, className, ...otherProps } = props
   const _className = cn(css.GroupField, className)
   const value = useMemo(() => list ? [] : {}, [list])
   const field = useForm({ value, name, onChange, onSubmit, onReset })
 
   return (
     <FormContext.Provider value={field} >
-      <BaseField className={_className} {...otherProps}>
+      <Layout className={_className} v={v} g={g} {...otherProps}>
         {children}
-      </BaseField>
+      </Layout>
     </FormContext.Provider>
   )
 }

@@ -51,6 +51,7 @@
     "LOGIN": "Login",
     "LOGOUT": "Logout",
     "REPLACE": "Replace",
+    "SUBSTITUTION": "Substitution",
     "FULL_SCREEN": "Full screen",
     "FAVORITE": "Favorite",
     "DOCS": "Docs",

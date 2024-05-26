@@ -1,5 +1,6 @@
 import React from 'react'
 import MuiCheckboxField from '@mui/material/Checkbox'
+import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -10,7 +11,6 @@ import { FormOptions, useForm, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 import css from './CheckboxField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
 const toValue = (checked?: boolean, value?: string | boolean | number) => {
   // if value passed
@@ -22,8 +22,11 @@ const toValue = (checked?: boolean, value?: string | boolean | number) => {
   return checked
 }
 
-export type CheckboxFieldProps = FormOptions<string | boolean | number> & BaseFieldProps & {
+export type CheckboxFieldProps = Pick<FormOptions<string | boolean | number>, 'value' | 'name' | 'onChange'> & {
+  v?: 'end' | 'start' | 'top' | 'bottom'
   checked?: boolean
+  label?: React.ReactNode
+  className?: string
 }
 
 /**
@@ -34,7 +37,7 @@ export type CheckboxFieldProps = FormOptions<string | boolean | number> & BaseFi
  * <CheckboxField />
  */
 export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
-  const { name, value, checked, onChange, className, ...otherProps } = props
+  const { v, label, name, value, checked, onChange, className, ...otherProps } = props
   const _className = cn(css.CheckboxField, className)
   const field = useForm({ name, value: toValue(checked, value), onChange })
 
@@ -43,9 +46,21 @@ export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
   })
 
   return (
-    <BaseField className={_className} errors={field.errors()} aligns='start' {...otherProps}>
-      <MuiCheckboxField name={field.name} size='small' value={field.value()} checked={!!field.value()} onChange={handleChange} />
-    </BaseField>
+    <FormControlLabel
+      labelPlacement={v}
+      label={label}
+      control={
+        <MuiCheckboxField
+          className={_className}
+          name={field.name}
+          size='small'
+          value={field.value()}
+          checked={!!field.value()}
+          onChange={handleChange}
+          {...otherProps}
+        />
+      }
+    />
   )
 }
 

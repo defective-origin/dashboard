@@ -10,9 +10,14 @@ import { FormOptions, useForm, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 import css from './NumberField.module.scss'
-import BaseField, { BaseFieldProps } from '../BaseField'
 
-export type NumberFieldProps = FormOptions<number> & BaseFieldProps
+export type NumberFieldProps = Pick<FormOptions<number>, 'value' | 'name' | 'onChange'> & {
+  message?: React.ReactNode
+  label?: React.ReactNode
+  className?: string
+  required?: boolean
+  disabled?: boolean
+}
 
 /**
  * Component description.
@@ -22,16 +27,25 @@ export type NumberFieldProps = FormOptions<number> & BaseFieldProps
  * <NumberField />
  */
 export function NumberField(props: NumberFieldProps): JSX.Element {
-  const { name, value, onChange, className, ...otherProps } = props
+  const { message, name, value, onChange, className, ...otherProps } = props
   const _className = cn(css.NumberField, className)
   const field = useForm({ name, value, onChange })
   const onBlur = useFunc(() => field.validate())
   const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(Number(event.target.value)))
 
   return (
-    <BaseField className={_className} errors={field.errors()} {...otherProps}>
-      <MuiTextField name={field.name} size='small' type='number' value={field.value()} onBlur={onBlur} onChange={handleChange} />
-    </BaseField>
+    <MuiTextField
+      className={_className}
+      name={field.name}
+      type='number'
+      size='small'
+      value={field.value()}
+      onBlur={onBlur}
+      onChange={handleChange}
+      helperText={field.errors()?.[0] ?? message}
+      error={!!field.errors()}
+      {...otherProps}
+    />
   )
 }
 

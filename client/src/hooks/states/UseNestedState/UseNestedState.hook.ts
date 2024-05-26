@@ -106,6 +106,11 @@ export const useNestedState = <V>(options: NestedStateOptions<V> = {}): NestedSt
     refresh()
   })
 
+  // TODO: remove nested state reset
+  // TODO: add rules: [] for validations
+  // TODO: remove validations from nestedState?
+
+
   return useMemo<NestedStateReturnOptions<V>>(
     () => ({ refreshTime, node, root, format, set, validate, reset, refresh }),
     [refreshTime, node, root, format, set, validate, reset, refresh],

@@ -5,4 +5,6 @@
 }
 
 .SliderField {
+  /* stylelint-disable-next-line value-no-vendor-prefix */
+  width: -webkit-fill-available;
 }
