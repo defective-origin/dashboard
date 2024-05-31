@@ -5,17 +5,19 @@ import { cn } from 'tools'
 import { useParams } from 'router'
 import { useLocale } from 'locale'
 import { useApp } from 'App'
-import { BoardDevice, BoardWidget, useDashboard } from 'api'
+import { DashboardDevice, DashboardWidget, useDashboard } from 'api'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
+import DashboardModalForm from 'screens/forms/DashboardModalForm'
+import WidgetModalForm from 'screens/forms/WidgetModalForm'
+
 // ---| components |---
 import Board, { BoardItem } from 'components/Board'
 import Widget from 'components/Widget'
 import Menu from 'components/Menu'
-import Modal from 'components/Modal'
 
 // ---| self |---
 import css from './DashboardPage.module.scss'
@@ -37,19 +39,19 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const app = useApp()
   const { id } = useParams()
   const board = useDashboard(id)
-  const [device, setDevice] = useState<BoardDevice>('computer')
-  const [mode, setMode] = useState<boolean | BoardWidget | undefined>(false)
+  // TODO: move to useDashboard and setDevice after loading by active flag
+  const [device, setDevice] = useState<DashboardDevice>('computer')
+  const [mode, setMode] = useState<boolean | DashboardWidget | undefined>(false)
   const switchSelect = useCallback(() => setMode((flag) => !flag), [])
 
   const handleSelect = (place: any) => {
     board.addWidget(device, {
-      name: 'NEW WIDGET', place,
+      name: 'NEW WIDGET',
+      place,
       id: 99,
-      docs: 'link.com',
-      author: 'author@email.com',
-      version: '0.0.1',
-      origin: 0,
-      // TODO: destruct origin and attach origin Id. By default show data in form from origin
+      author: 0,
+      access: 'private',
+      version: '0.0.0',
     })
     switchSelect()
   }
@@ -60,7 +62,9 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const handleError = (error: any) => { console.log('handleError', error) }
 
   const actions = [
+    { start: 'lightbulb', tooltip: 'Active', active: board.markup(device)?.active },
     { start: 'dashboard_customize', tooltip: locale.t('ACTION.ADD_WIDGET'), onClick: switchSelect },
+    { start: 'border_clear', tooltip: locale.t('ACTION.CLEAR'), onClick: () => board.clear(device) },
     {
       start: 'computer', items: [
         { start: 'tv', content: locale.t('DEVICE.TV'), active: device === 'tv', onClick: () => setDevice('tv') },
@@ -94,9 +98,8 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
                 { start: 'zoom_out_map', tooltip: locale.t('ACTION.FULL_SCREEN') },
                 { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
                 { start: 'book', tooltip: locale.t('ACTION.DOCS') },
-                { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'widget-settings' }) },
+                { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'widget-settings', payload: p.options }) },
                 { start: 'close', tooltip: locale.t('ACTION.REMOVE'), onClick: () => board.removeWidget(device, p.options.id) },
-                // TODO: replace one widget to another
               ]}
               trigger={(o) => <Widget active={o.open} {...p} />}
             />
@@ -107,8 +110,8 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
         />
       </Page.Content>
 
-      <Modal name='widget-settings' title='Widget settings' v='right' />
-      <Modal name='board-settings' title='Dashboard settings' v='right' />
+      <DashboardModalForm payload={board} onSubmit={(patch) => patch && board.update(patch)} />
+      <WidgetModalForm onSubmit={(patch) => patch && board.updateWidget(device, patch)} />
 
       {children}
     </Page>

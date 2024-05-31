@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import MuiModal from '@mui/material/Modal'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useFunc } from 'hooks'
+import { useEvent, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,36 +15,27 @@ import Button, { ButtonProps } from 'components/Button'
 // ---| self |---
 import css from './Modal.module.scss'
 
-
-// TODO: move to useEvent
-// https://stackoverflow.com/questions/43001679/how-do-you-create-custom-event-in-typescript
-declare global {
-  // adds event listened definition to Document
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-  interface Document {
-    addEventListener(type: `modal-${ModalName}`, listener: (this: Document, ev: CustomEvent<ModalOptions>) => void): void;
-    dispatchEvent(ev: CustomEvent<ModalOptions>): void;
-  }
-}
-
 export type ModalVariant = 'center' | 'right'
 export type ModalName = 'global' | 'board-settings' | 'widget-settings'
 
-export type ModalOptions = { // TODO: use ModalProps instead?
+export type ModalOptions<T = unknown> = {
   /** position */
   v?: ModalVariant
   /** insert to named container and open this modal by name */
-  name: ModalName
+  name?: ModalName
   title?: React.ReactNode
   children?: React.ReactNode
+  payload?: T
   onClose?: () => void
 }
 
-export const initModalKey = (name: ModalName): `modal-${ModalName}` => `modal-${name}`
+export const initModalKey = (name: ModalName = 'global') => `modal-${name}` as const
 
-export type ModalProps = ModalOptions & {
+export type ModalProps<T = unknown> = ModalOptions<T> & {
+  open?: boolean
   actions?: ButtonProps[] // TODO: types to actions?
   className?: string
+  onOpen?: (payload?: T) => void
 }
 
 /**
@@ -52,11 +43,13 @@ export type ModalProps = ModalOptions & {
  *
  * How to use
  * @example
- * <Modal />
+ * <Modal name='modal-name' v='right' payload='payload'>some content</Modal>
+ *
+ * const modal = useModal({ name: 'modal-name', v: 'center' payload: 'payload override' })
  */
-export function Modal(props: ModalProps): JSX.Element {
-  const [options, setOptions] = useState<ModalOptions>()
-  const { v = 'center', name, title, actions, onClose, children, className, ...otherProps } = { ...props, ...options }
+export function Modal<T = unknown>(props: ModalProps<T>): JSX.Element {
+  const [options, setOptions] = useState<ModalOptions<T>>()
+  const { payload, open, v = 'center', name, title, actions, onClose, onOpen, children, className, ...otherProps } = { ...props, ...options }
   const _className = cn(css.Modal, className)
 
   const close = useFunc(() => {
@@ -65,13 +58,12 @@ export function Modal(props: ModalProps): JSX.Element {
     setOptions(undefined)
   })
 
-  useEffect(() => {
-    document.addEventListener(initModalKey(name), (e) => {
-      if (e.detail.name === name) {
-        setOptions(e.detail)
-      }
-    })
-  }, [name])
+  useEvent(initModalKey(name), (e: CustomEvent<ModalOptions<T>>) => {
+    if (e.detail.name === name) {
+      setOptions(e.detail)
+      onOpen?.(payload ?? e.detail.payload)
+    }
+  })
 
   return (
     <MuiModal
@@ -81,22 +73,22 @@ export function Modal(props: ModalProps): JSX.Element {
         ?? document.getElementById(initModalKey('global'))
         ?? document.body
       }
-      open={!!options}
+      open={open ?? !!options}
       onClose={close}
       {...otherProps}
     >
       <Card className={cn(css.Content, css[v])}>
         {title && <Card.Header title={title} action={<Button start='close' onClick={close} />} />}
 
-        <Card.Content>
+        <Card.Content style={{ height: '-webkit-fill-available' }}>
           <Scroll v='y' size='xxs' />
 
           {children}
         </Card.Content>
 
         {!!actions?.length && (
-          <Card.Actions>
-            {actions.map((action) => <Button {...action} />)}
+          <Card.Actions style={{ padding: 16 }}>
+            {actions.map((action, idx) => <Button key={idx} size='xxs' v='outline' {...action} />)}
           </Card.Actions>
         )}
       </Card>
@@ -115,7 +107,7 @@ export type ModalContainerProps = {
 export function ModalContainer(props: ModalContainerProps): JSX.Element {
   const { name, ...otherProps } = props
 
-  return <div id={initModalKey(name)} style={{ zIndex: 10000 }} {...otherProps} />
+  return <div id={initModalKey(name)} {...otherProps} />
 }
 
 ModalContainer.displayName = 'ModalContainer'

@@ -2,7 +2,7 @@
 
 ### Rules
 - Use restful approach
-- Route starts with __{BASE_URL}/api/{API_VERSION}/{ENDPOINT}__
+- Route starts with __{BASE_URL}/{API}/{API_VERSION}/{ENDPOINT}__
 - Should use only __POST__ requests
 
 ## Endpoint

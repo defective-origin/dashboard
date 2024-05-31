@@ -62,6 +62,7 @@ export type BoardProps<I extends Record<string, unknown>> = Omit<SelectionBoardP
 export function Board<I extends Record<string, unknown>>(props: BoardProps<I>): JSX.Element {
   const { padding, columns, rows, select, gap = 4, items, widget, placeKey = 'place', className, ...selectionBoardProps } = props
   const _className = cn(css.Board, className)
+  // TODO: if need preview screen in the edge then create CanvasBoard and refactor SelectionBoard
 
   return (
     <div className={_className}>

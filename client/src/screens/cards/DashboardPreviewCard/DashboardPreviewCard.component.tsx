@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Board } from 'api'
+import { Dashboard } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -17,7 +17,7 @@ import css from './DashboardPreviewCard.module.scss'
 export type DashboardPreviewCardProps = {
   className?: string
   children?: React.ReactNode
-  options: Board
+  options: Dashboard
 }
 
 /**

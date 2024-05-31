@@ -10,7 +10,7 @@ import Layout from 'components/Layout'
 import css from './ViewBoard.module.scss'
 import ViewBoardItem, { ViewBoardItemProps } from './ViewBoardItem'
 
-export type ViewBoardItem = { place: xy.Square }
+export type ViewBoardItem = { place?: xy.Square }
 
 export type ViewBoardProps<I extends Record<string, unknown>> = Omit<ViewBoardItemProps<I>, 'options'> & {
   className?: string

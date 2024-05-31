@@ -30,7 +30,7 @@ const render = (props: ModalProps) => {
 
   return (
     <>
-      <Modal {...props} name='global'>
+      <Modal {...props}>
         <div style={{ height: 2000 }} />
       </Modal>
 
@@ -46,5 +46,9 @@ export const Demo: Story = {
     v: 'center',
     title: 'Title',
     name: 'global',
+    actions: [
+      { content: 'Reset', color: 'info' },
+      { content: 'Save', color: 'success' },
+    ],
   },
 }

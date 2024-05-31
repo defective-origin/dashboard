@@ -127,9 +127,9 @@ export type FormProps = FormOptions<FormGroupValue> & LayoutProps & {
  *    </Form>
  */
 export function Form(props: FormProps): JSX.Element {
-  const { value = {}, name, onSubmit, onReset, onChange, children, className, ...otherProps } = props
+  const { resetId, submitId, value = {}, name, onSubmit, onReset, onChange, children, className, ...otherProps } = props
   const _className = cn(css.Form, className)
-  const field = useForm({ value, name, onChange, onReset, onSubmit })
+  const field = useForm({ value, name, onChange, onReset, onSubmit, resetId, submitId })
 
   // TODO: add rules: [] check for fields
 

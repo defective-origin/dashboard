@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Board, useDashboards } from 'api'
+import { Dashboard, useDashboards } from 'api'
 
 // ---| pages |---
 import SelectPage, { SelectPageProps } from 'pages/SelectPage'
@@ -14,7 +14,7 @@ import DashboardPreviewCard from 'screens/cards/DashboardPreviewCard'
 // ---| self |---
 import css from './DashboardsPage.module.scss'
 
-export type DashboardsPageProps = Partial<SelectPageProps<Board>>
+export type DashboardsPageProps = Partial<SelectPageProps<Dashboard>>
 
 /**
  * Component description.

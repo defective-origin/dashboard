@@ -1,53 +1,32 @@
 import { useState } from 'react'
-import { Email, Id, ListResponse, OptionsResponse, Url } from './api.type'
-import { WIDGETS, Widget } from './widget.endpoint'
-import { Square } from 'tools/XY'
+import { Id } from './api.type'
+import { useListEndpoint, useOptionsEndpoint, ApiResponse } from './api.endpoint'
+import { Meta, Widget } from './widget.endpoint'
 
-export type Place = Square
+const ENDPOINT = 'boards'
 
-export type BoardProviderConf = {
-  /** Endpoint Key for data type detection */
-  key?: string
-  /** Data provider endpoint */
-  endpoint?: Url
-}
+export type DashboardWidget = Widget
+export type DashboardDevice = 'tv' | 'computer' | 'tablet' | 'mobile' // 'infinity'
 
-export type BoardWidget = Widget & BoardProviderConf & {
-  /** Origin widget Id */
-  origin: Id
-  /** Place on dashboard */
-  place: Place
-}
+export const DASHBOARD_DEVICES: DashboardDevice[] = ['tv', 'computer', 'tablet', 'mobile']
 
-export type BoardDevice = 'tv' | 'computer' | 'tablet' | 'mobile' // 'infinity'
-
-export const BOARD_DEVICES: BoardDevice[] = ['tv', 'computer', 'tablet', 'mobile']
-
-export type BoardMarkup = {
+export type DashboardMarkup = {
+  /** Active layout. By default only computer markup is on */
+  active: boolean
   /** Quantity of rows */
   rows: number
   /** Quantity of columns */
   columns: number
-  /** Board widgets */
-  widgets: BoardWidget[]
+  /** Board widget presets */
+  widgets: DashboardWidget[]
 }
 
-export type Board = BoardProviderConf & {
-  /** Uniq id */
-  id: Id
-  /** Origin board Id */
-  origin?: Id
-  /** Abstract Name */
-  name: string
-  /** Description of what the board shows */
-  description?: string
-  /** Uniq author email */
-  author?: Email
+export type Dashboard = Meta & {
   /** Markups for devices */
-  devices: Partial<Record<BoardDevice, BoardMarkup>>
+  devices: Partial<Record<DashboardDevice, DashboardMarkup>>
 }
 
-export const BOARD_WIDGETS: BoardWidget[] = [
+export const DASHBOARD_WIDGETS: DashboardWidget[] = [
   { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } },
   { v1: { x: 0, y: 4 }, v2: { x: 1, y: 5 } },
   { v1: { x: 1, y: 4 }, v2: { x: 2, y: 5 } },
@@ -68,48 +47,55 @@ export const BOARD_WIDGETS: BoardWidget[] = [
   { v1: { x: 18, y: 0 }, v2: { x: 20, y: 4 } },
 ].map((place, id) => ({
   id,
-  origin: 1,
   name: 'WIDGET NAME',
-  docs: 'google.com',
-  author: 'author@gmail.com',
-  version: '0.0.1',
+  author: id,
+  access: 'private',
+  key: 'WIDGET.KEY',
+  endpoint: 'url.com',
+  description: 'widget description',
+  version: '0.0.0',
+  versions: ['0.0.0'],
   place,
 }))
 
-export const BASE_BREAKPOINT_MAP: Record<BoardDevice, BoardMarkup> = {
-  tv: { widgets: BOARD_WIDGETS, rows: 10, columns: 20 },
-  computer: { widgets: BOARD_WIDGETS, rows: 10, columns: 20 },
-  tablet: { widgets: BOARD_WIDGETS, rows: 10, columns: 20 },
-  mobile: { widgets: BOARD_WIDGETS, rows: 10, columns: 20 },
+export const BASE_BREAKPOINT_MAP: Record<DashboardDevice, DashboardMarkup> = {
+  tv: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
+  computer: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: true },
+  tablet: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
+  mobile: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
 }
 
-const BOARDS: Board[] = Array.from({length: 21}, (_, id) => ({
+const DASHBOARDS: Dashboard[] = Array.from({length: 21}, (_, id) => ({
   id,
-  origin: 1,
   name: `BOARD NAME ${id}`,
-  description: undefined,
-  author: 'author@email.com',
+  description: 'dashboard description',
+  author: id,
+  access: 'private',
   devices: BASE_BREAKPOINT_MAP,
 }))
 
-export const useDashboards = (): ListResponse<Board> => Object.assign([...BOARDS], { loading: false })
+export const useDashboards = () => useListEndpoint(ENDPOINT, [...DASHBOARDS])
 
 
-export type DashboardManager = OptionsResponse<Board> & {
-  markup: (device: BoardDevice) => BoardMarkup | undefined
-  update: (patch: Partial<Board>) => void
-  removeWidget: (device: BoardDevice, id: Id) => void
-  addWidget: (device: BoardDevice, patch: BoardWidget) => void
-  updateWidget: (device: BoardDevice, patch: Partial<BoardWidget>) => void
+export type DashboardManager = ApiResponse<Dashboard> & {
+  markup: (device: DashboardDevice) => DashboardMarkup | undefined
+  update: (patch: Partial<Dashboard>) => void
+  clear: (device: DashboardDevice) => void
+  removeWidget: (device: DashboardDevice, id: Id) => void
+  addWidget: (device: DashboardDevice, patch: DashboardWidget) => void
+  updateWidget: (device: DashboardDevice, patch: Partial<DashboardWidget>) => void
 }
 
 export const useDashboard = (id?: Id): DashboardManager => {
-  const [board, setBoard] = useState<Board>(BOARDS.find((board) => board.id == id) as Board)
-  const update = (patch: Partial<Board>) => setBoard((prev) => ({...prev, ...patch}))
+  const response = useOptionsEndpoint(`${ENDPOINT}/${id}`, DASHBOARDS.find((board) => board.id == id) as Dashboard)
+  const [board, setBoard] = useState<Dashboard>(DASHBOARDS.find((board) => board.id == id) as Dashboard)
+  const update = (patch: Partial<Dashboard>) => setBoard((prev) => ({...prev, ...patch}))
 
-  const markup = (device: BoardDevice) => board.devices[device]
+  const markup = (device: DashboardDevice) => board.devices[device]
 
-  const updateMarkupWidgets = (device: BoardDevice, widgets: BoardWidget[] = []) => setBoard((prev) => ({
+  const clear = (device: DashboardDevice) => updateMarkupWidgets(device, [])
+
+  const updateMarkupWidgets = (device: DashboardDevice, widgets: DashboardWidget[] = []) => setBoard((prev) => ({
     ...prev,
     devices: {
       ...prev.devices,
@@ -117,20 +103,20 @@ export const useDashboard = (id?: Id): DashboardManager => {
     },
   }))
 
-  const addWidget = (device: BoardDevice, widget: BoardWidget) => updateMarkupWidgets(
+  const addWidget = (device: DashboardDevice, widget: DashboardWidget) => updateMarkupWidgets(
     device,
-    [...markup(device)?.widgets ?? [], { ...widget, id: markup(device)?.widgets.length } as BoardWidget],
+    [...markup(device)?.widgets ?? [], { ...widget, id: markup(device)?.widgets.length } as DashboardWidget],
   )
 
-  const updateWidget = (device: BoardDevice, widget: Partial<BoardWidget>) => updateMarkupWidgets(
+  const updateWidget = (device: DashboardDevice, widget: Partial<DashboardWidget>) => updateMarkupWidgets(
     device,
     markup(device)?.widgets.map((i) => (i.id === widget.id ? {...i, ...widget} : i)),
   )
 
-  const removeWidget = (device: BoardDevice, id: Id) => updateMarkupWidgets(
+  const removeWidget = (device: DashboardDevice, id: Id) => updateMarkupWidgets(
     device,
     markup(device)?.widgets.filter((widget) => widget.id !== id),
   )
 
-  return { loading: false, ...board, markup, update, addWidget, updateWidget, removeWidget }
+  return { loading: false, ...board, markup, update, clear, addWidget, updateWidget, removeWidget }
 }

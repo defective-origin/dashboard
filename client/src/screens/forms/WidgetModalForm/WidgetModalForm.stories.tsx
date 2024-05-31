@@ -1,27 +1,28 @@
 /* eslint-disable no-restricted-imports */
 import { field, params } from '../../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
-import WidgetPreviewCard from './WidgetPreviewCard.component'
+import WidgetModalForm, { WidgetModalFormProps } from './WidgetModalForm.component'
 
-const meta: Meta<typeof WidgetPreviewCard> = {
-  component: WidgetPreviewCard,
-  title: 'Screens/CARDS/WidgetPreviewCard',
+const meta: Meta<typeof WidgetModalForm> = {
+  component: WidgetModalForm,
+  title: 'Screens/FORMS/WidgetModalForm',
   tags: ['autodocs'],
   argTypes: {
+    name: field.string(),
     className: field.string(),
     children: field.reactNode(),
-    options: field.object('Widget'),
   },
 }
 
 export default meta
 
-type Story = StoryObj<typeof WidgetPreviewCard>
+type Story = StoryObj<typeof WidgetModalForm>
 
 export const Demo: Story = {
-  parameters: params('WidgetPreviewCard'),
+  parameters: params('WidgetModalForm'),
   args: {
-    options: {
+    open: true,
+    payload: {
       id: 0,
       for: 0,
       name: 'WIDGET NAME',

@@ -22,15 +22,29 @@ export const Demo: Story = {
   parameters: params('DashboardPreviewCard'),
   args: {
     options: {
-      id: 1,
+      id: 0,
       name: 'Dashboard',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      author: 0,
+      access: 'private',
       devices: {
         computer: {
           rows: 10,
           columns: 20,
+          active: true,
           widgets: [
-            { id: 1, name: 'WIDGET NAME', author: 'author@email.com', docs: 'google.com', version: '0.0.0', origin: 1, place: { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } } },
+            {
+              id: 0,
+              for: 0,
+              name: 'WIDGET NAME',
+              description: 'WIDGET DESCRIPTION',
+              key: 'KEY.IDENTIFIER',
+              endpoint: 'endpoint.com/widget',
+              author: 0,
+              version: '0.0.0',
+              access: 'private',
+              place: { v1: { x: 0, y: 0 }, v2: { x: 0, y: 0 } },
+            },
           ],
         },
       },

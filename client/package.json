@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build:dev": "yarn run verify && vite build --mode dev",
-    "build:prod": "yarn run verify && vite build",
+    "dev": "vite --mode development",
+    "build:dev": "yarn run verify && vite build --mode development",
+    "build:prod": "yarn run verify && vite build --mode production",
     "build:test": "yarn run verify && vite build --mode testing",
     "build:stage": "yarn run verify && vite build --mode staging",
     "build": "yarn run build:prod && yarn run stories:build && cp -r ./storybook-static ./dist/storybook",

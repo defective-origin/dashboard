@@ -58,7 +58,8 @@
     "SETTINGS": "Settings",
     "REMOVE": "Remove",
     "ADD_WIDGET": "Add widget",
-    "ADD_TO_MENU": "Add to menu"
+    "ADD_TO_MENU": "Add to menu",
+    "CLEAR": "Clear"
   },
   "ORIENTATION": {
     "VERTICAL": "Vertical",
@@ -90,5 +91,24 @@
   "MESSAGES": {
     "UNDER_CONSTRUCTION": "{{name}} is under construction.",
     "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
+  },
+  "FORM": {
+    "BOARD_SETTINGS": "Dashboard settings",
+    "WIDGET_SETTINGS": "Widget settings"
+  },
+  "FIELD": {
+    "ID": "Id",
+    "KEY": "Key",
+    "NAME": "Name",
+    "ACCESS": "Access",
+    "AUTHOR": "Author",
+    "VERSION": "Version",
+    "ENDPOINT": "Endpoint",
+    "DESCRIPTION": "Description"
+  },
+  "ACCESS": {
+    "PRIVATE": "Private",
+    "PUBLIC": "Public",
+    "SUBSCRIPTION": "Subscription"
   }
 }

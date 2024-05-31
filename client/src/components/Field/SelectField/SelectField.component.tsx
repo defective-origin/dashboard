@@ -15,13 +15,6 @@ import Repeat, { PropsWithItems } from 'components/Repeat'
 // ---| self |---
 import css from './SelectField.module.scss'
 
-const SELECT_FIELD_OPTIONS = {
-  // // disable scroll lock
-  // disableScrollLock: true,
-  // // allow the menu to go outside the window
-  // marginThreshold: 0,
-}
-
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
 export type SelectFieldProps = Pick<FormOptions<string | number>, 'value' | 'name' | 'onChange'> & PropsWithItems<SelectFieldItem> & {
@@ -41,7 +34,7 @@ export type SelectFieldProps = Pick<FormOptions<string | number>, 'value' | 'nam
  * <SelectField />
  */
 export function SelectField(props: SelectFieldProps): JSX.Element {
-  const { message, required, label, name, value, onChange, items = [], children, className, ...otherProps } = props
+  const { disabled, message, required, label, name, value, onChange, items = [], children, className, ...otherProps } = props
   const _className = cn(css.SelectField, className)
   const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })
   const field = useForm({ name, value, onChange })
@@ -56,12 +49,12 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
         className={_className}
         name={field.name}
         size='small'
-        MenuProps={SELECT_FIELD_OPTIONS}
         value={field.value()}
         onBlur={onBlur}
         onChange={handleChange}
         error={!!field.errors()}
         label={label}
+        disabled={disabled || items.length < 2}
         {...otherProps}
       >
         {menuItems}
