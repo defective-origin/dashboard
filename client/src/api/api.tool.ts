@@ -10,4 +10,4 @@ export const url = (template: Url, params: Partial<UrlParams>): Url => {
   , template) as Url
 }
 
-export const img = (type: string, id: Id) => url(ENV.SYSTEM.FILE_API as Url, { type, id })
+export const img = (type: string, id: Id) => url(ENV.SYSTEM.FILE_API, { type, id })

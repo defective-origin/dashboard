@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import Form from './Form.component'
 import Text from 'components/Text'
 import Actions from 'components/Actions'
-import Field from 'components/Field'
+import Field from 'components/fields'
 import Layout from 'components/Layout'
 
 const meta: Meta<typeof Form> = {

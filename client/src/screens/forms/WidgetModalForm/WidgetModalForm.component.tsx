@@ -7,10 +7,10 @@ import { DashboardWidget, useReleases } from 'api'
 
 // ---| pages |---
 // ---| screens |---
+import Field from 'screens/fields'
 import ModalForm, { ModalFormProps } from 'screens/forms/ModalForm'
 
 // ---| components |---
-import Field from 'components/Field'
 import Layout from 'components/Layout'
 
 // ---| self |---

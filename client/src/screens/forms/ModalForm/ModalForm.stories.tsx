@@ -2,7 +2,7 @@
 import { field, params } from '../../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import ModalForm, { ModalFormProps } from './ModalForm.component'
-import Field from 'components/Field'
+import Field from 'screens/fields'
 import Layout from 'components/Layout'
 
 const meta: Meta<typeof ModalForm> = {

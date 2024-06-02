@@ -12,6 +12,40 @@ export type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? 
 export type FirstParameters<F> = F extends (x: infer P, ...args: any[]) => any ? P : never
 export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P : never
 
+// object types
+
+export type FlattenObjectKeys<
+  T extends Record<string | number, unknown>,
+  Sep extends string = '.',
+  Key = keyof T
+> = Key extends string
+  ? T[Key] extends Record<string, unknown>
+    ? `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
+    : `${Key}`
+  : never
+
+// literals
+
+/** RepeatText<'Text', 3> => 'TextTextText' */
+export type RepeatText<
+  Text extends string,
+  Count extends number,
+  Joined extends string = '',
+  Acc extends 0[] = []
+> = Acc['length'] extends Count ? Joined : RepeatText<Text, Count, `${Joined}${Text}`, [0,...Acc]>
+
+/** RepeatText<'Text', ':', 3> => 'Text' | 'Text:Text' | 'Text:Text:Text' | 'Text:Text:Text:Text' */
+export type RepeatWithSep<
+  Text extends string,
+  Sep extends string,
+  Count extends number = 3,
+  Joined extends string = Text,
+  Acc extends 0[] = [],
+  Result extends string = `${Joined}${Sep}${Text}`
+> = Acc['length'] extends Count
+  ? Text | Joined
+  : Result | RepeatWithSep<Text, Sep, Count, Result, [0,...Acc]>
+
 // work with props
 export type GeneralProps<T extends Element> = React.DOMAttributes<T> & React.HTMLAttributes<T>
 

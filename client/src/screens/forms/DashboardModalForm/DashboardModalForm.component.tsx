@@ -8,10 +8,10 @@ import { useLocale } from 'locale'
 // ---| pages |---
 // ---| screens |---
 import ModalForm, { ModalFormProps } from 'screens/forms/ModalForm'
+import Field from 'screens/fields'
 
 // ---| components |---
 import Text from 'components/Text'
-import Field from 'components/Field'
 import Layout from 'components/Layout'
 
 // ---| self |---

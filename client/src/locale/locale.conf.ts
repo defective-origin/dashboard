@@ -5,21 +5,11 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 // ---| core |---
 import { ENV } from 'App/App.conf'
+import { FlattenObjectKeys } from 'tools/react.tool'
 
 // ---| self |---
 import i18n from './i18n'
 import l10n from './l10n'
-
-
-export type FlattenObjectKeys<
-  T extends Record<string, unknown>,
-  Sep extends string = '.',
-  Key = keyof T
-> = Key extends string
-  ? T[Key] extends Record<string, unknown>
-    ? `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
-    : `${Key}`
-  : never
 
 
 export type Languages = keyof typeof i18n

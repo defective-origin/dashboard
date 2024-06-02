@@ -25,6 +25,10 @@ export type FormProps = FormOptions<FormGroupValue> & LayoutProps & {
  *
  * How to use
  * @example
+ * import Field from 'components/fields'
+ * // or
+ * import Field from 'screens/fields'
+ *
  * const log = (value) => console.log(value)
  *
  * const VALUE = {
