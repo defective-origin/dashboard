@@ -18,6 +18,7 @@ import css from './Card.module.scss'
 export type CardProps = {
   horizontal?: boolean
   divided?: boolean
+  style?: React.CSSProperties
   className?: string
   children?: React.ReactNode
 }
