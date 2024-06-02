@@ -27,6 +27,7 @@ export type TooltipProps = {
   v?: TooltipVariant
   open?: boolean
   popup?: boolean
+  arrow?: boolean
   onOpen?: MuiTooltipProps['onOpen']
   onClose?: MuiTooltipProps['onClose']
 }
