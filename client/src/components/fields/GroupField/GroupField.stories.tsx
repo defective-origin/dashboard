@@ -2,7 +2,7 @@
 import { params } from '../../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import GroupField from './GroupField.component'
-import Field from '../Field.component'
+import Field from '../index'
 
 const meta: Meta<typeof GroupField> = {
   title: 'Components/FORM/GroupField',

@@ -27,7 +27,7 @@ export const Demo: Story = {
       name: 'BOARD NAME',
       description: 'dashboard description',
       author: 0,
-      access: 'private',
+      access: 'PRIVATE',
       devices: {
         computer: { active: true, rows: 10, columns: 10, widgets: [] },
       },

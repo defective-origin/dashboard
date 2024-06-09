@@ -3,6 +3,8 @@
 /* INJECT_DEFAULT_EXPORT_PLACE */
 
 /* INJECT_EXPORT_PLACE */
+export * from './Object'
+export * from './Array'
 export * from './Nil'
 export * from './Date'
 export * from './String'

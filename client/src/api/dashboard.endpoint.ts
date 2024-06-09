@@ -6,9 +6,9 @@ import { Meta, Widget } from './widget.endpoint'
 const ENDPOINT = 'boards'
 
 export type DashboardWidget = Widget
-export type DashboardDevice = 'tv' | 'computer' | 'tablet' | 'mobile' // 'infinity'
+export type DashboardDevice = 'TV' | 'COMPUTER' | 'TABLET' | 'MOBILE' // 'infinity'
 
-export const DASHBOARD_DEVICES: DashboardDevice[] = ['tv', 'computer', 'tablet', 'mobile']
+export const DASHBOARD_DEVICES: DashboardDevice[] = ['TV', 'COMPUTER', 'TABLET', 'MOBILE']
 
 export type DashboardMarkup = {
   /** Active layout. By default only computer markup is on */
@@ -48,8 +48,9 @@ export const DASHBOARD_WIDGETS: DashboardWidget[] = [
 ].map((place, id) => ({
   id,
   name: 'WIDGET NAME',
+  type: 'PRESET',
   author: id,
-  access: 'private',
+  access: 'PRIVATE',
   key: 'WIDGET.KEY',
   endpoint: 'url.com',
   description: 'widget description',
@@ -59,10 +60,10 @@ export const DASHBOARD_WIDGETS: DashboardWidget[] = [
 }))
 
 export const BASE_BREAKPOINT_MAP: Record<DashboardDevice, DashboardMarkup> = {
-  tv: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
-  computer: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: true },
-  tablet: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
-  mobile: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
+  TV: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
+  COMPUTER: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: true },
+  TABLET: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
+  MOBILE: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
 }
 
 const DASHBOARDS: Dashboard[] = Array.from({length: 21}, (_, id) => ({
@@ -70,7 +71,7 @@ const DASHBOARDS: Dashboard[] = Array.from({length: 21}, (_, id) => ({
   name: `BOARD NAME ${id}`,
   description: 'dashboard description',
   author: id,
-  access: 'private',
+  access: 'PRIVATE',
   devices: BASE_BREAKPOINT_MAP,
 }))
 
@@ -95,6 +96,8 @@ export const useDashboard = (id?: Id): DashboardManager => {
 
   const clear = (device: DashboardDevice) => updateMarkupWidgets(device, [])
 
+  // TODO: save only id in dashboard
+  // TODO: remove widgets by id list [id1, id2, id3]
   const updateMarkupWidgets = (device: DashboardDevice, widgets: DashboardWidget[] = []) => setBoard((prev) => ({
     ...prev,
     devices: {

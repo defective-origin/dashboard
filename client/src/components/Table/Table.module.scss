@@ -1,0 +1,10 @@
+@import 'src/theme';
+
+:root {
+  --table-body-filter: drop-shadow(-4px 0 3px rgb(0 0 0 / 10%)) drop-shadow(4px 0 3px rgb(0 0 0 / 10%));
+  --table-bg-color: #FFFFFF;
+}
+
+.Table {
+  border-bottom: 1px solid var(--divider-color);
+}

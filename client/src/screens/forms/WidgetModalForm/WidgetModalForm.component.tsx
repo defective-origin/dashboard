@@ -43,6 +43,7 @@ export function WidgetModalForm(props: WidgetModalFormProps): JSX.Element {
   // Select should allows to get simple items and convert them [1,2] => [{ value: 1, children: 1 }, { value: 2, children: 2 }]
   // TODO: add presets endpoints on account settings
   // TODO: who can change field
+  // TODO: add save as preset button
 
   return (
     <ModalForm className={_className} name='widget-settings' title={locale.t('FORM.WIDGET_SETTINGS')} onOpen={setOptions} {...otherProps}>

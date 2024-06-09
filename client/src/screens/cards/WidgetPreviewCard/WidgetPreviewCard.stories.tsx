@@ -30,7 +30,7 @@ export const Demo: Story = {
       endpoint: 'endpoint.com/widget',
       author: 0,
       version: '0.0.0',
-      access: 'private',
+      access: 'PRIVATE',
       place: { v1: { x: 0, y: 0 }, v2: { x: 0, y: 0 } },
     },
   },

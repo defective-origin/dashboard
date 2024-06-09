@@ -35,6 +35,7 @@ export type BannerProps = {
   title?: React.ReactNode
   subtitle?: React.ReactNode
   text?: React.ReactNode
+  absolute?: boolean
   loading?: boolean
   show?: boolean
   v?: BannerVariant
@@ -59,20 +60,21 @@ export type BannerProps = {
 export function Banner(props: BannerProps): JSX.Element | null {
   const {
     v = 'empty',
+    loading,
     show = true,
     title,
     subtitle,
     text,
-    loading,
+    absolute,
     children,
     className,
     contentClassName,
     ...otherProps
   } = props
-  const _className = cn(css.Banner, className)
+  const _className = cn(css.Banner, { [css.Absolute]: absolute }, className)
   const options = BANNER_OPTION_MAP[v]
 
-  if (!show) {
+  if (!show && !loading) {
     return null
   }
 

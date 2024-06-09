@@ -27,6 +27,9 @@ const offset = (value: Offset, defaultValue = 0) => {
 export type ScrollVariant = Direction
 
 export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
+  /** Shift scroll from top */
+  top?: number;
+  zIndex?: number;
   v?: ScrollVariant
   /** Actions offset. */
   actions?: Offset
@@ -53,6 +56,8 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
   const {
     v = 'y',
     back,
+    top = 0,
+    zIndex,
     actions,
     visible,
     children,
@@ -99,8 +104,8 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
     // move overlay block
     if (overlayRef.current) {
       overlayRef.current.style.left = px(parent.scrollLeft)
-      overlayRef.current.style.top = px(parent.scrollTop)
-      overlayRef.current.style.height = px(parent.offsetHeight)
+      overlayRef.current.style.top = px(parent.scrollTop + top)
+      overlayRef.current.style.height = px(parent.offsetHeight - top)
       overlayRef.current.style.width = px(parent.offsetWidth)
     }
   })
@@ -119,7 +124,7 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
 
   // attach overlay anchor ref for getting parent if container selector is not provided
   return (
-    <div className={cn('scroll-overlay', className)} ref={overlayRef}>
+    <div className={cn('scroll-overlay', className)} ref={overlayRef} style={{ zIndex }}>
       <div className='scroll-content'>
         {children}
 

@@ -30,6 +30,13 @@ Use type instead:
 type TextVariant = 'primary' | 'secondary'
 ```
 
+### API union types
+All api union types should have `uppercase` notation
+```typescript
+type ACCESS = 'PRIVATE' | 'PUBLIC'
+type DEVICE = 'TV' | 'COMPUTER' | 'TABLET' | 'MOBILE'
+```
+
 ### Variables
 - Names: describes __structure__ and __not__ be bound to __realization__ and __business__
 - Size Unit: __rem__

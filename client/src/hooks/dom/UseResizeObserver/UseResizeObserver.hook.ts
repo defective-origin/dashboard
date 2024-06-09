@@ -28,6 +28,9 @@ export const useResizeObserver = <E extends Element>(
     if (ref.current && !options?.disable) {
       const observer = new ResizeObserver(func)
 
+      // resize event don't call event on init
+      func([], observer)
+
       observer.observe(ref.current, options)
 
       return () => observer.disconnect()

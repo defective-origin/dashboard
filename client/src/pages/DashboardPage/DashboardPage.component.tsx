@@ -40,7 +40,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const { id } = useParams()
   const board = useDashboard(id)
   // TODO: move to useDashboard and setDevice after loading by active flag
-  const [device, setDevice] = useState<DashboardDevice>('computer')
+  const [device, setDevice] = useState<DashboardDevice>('COMPUTER')
   const [mode, setMode] = useState<boolean | DashboardWidget | undefined>(false)
   const switchSelect = useCallback(() => setMode((flag) => !flag), [])
 
@@ -50,7 +50,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
       place,
       id: 99,
       author: 0,
-      access: 'private',
+      access: 'PRIVATE',
       version: '0.0.0',
     })
     switchSelect()
@@ -67,10 +67,10 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
     { start: 'border_clear', tooltip: locale.t('ACTION.CLEAR'), onClick: () => board.clear(device) },
     {
       start: 'computer', items: [
-        { start: 'tv', content: locale.t('DEVICE.TV'), active: device === 'tv', onClick: () => setDevice('tv') },
-        { start: 'computer', content: locale.t('DEVICE.COMPUTER'), active: device === 'computer', onClick: () => setDevice('computer') },
-        { start: 'tablet_mac', content: locale.t('DEVICE.TABLET'), active: device === 'tablet', onClick: () => setDevice('tablet') },
-        { start: 'phone_iphone', content: locale.t('DEVICE.MOBILE'), active: device === 'mobile', onClick: () => setDevice('mobile') },
+        { start: 'tv', content: locale.t('DEVICE.TV'), active: device === 'TV', onClick: () => setDevice('TV') },
+        { start: 'computer', content: locale.t('DEVICE.COMPUTER'), active: device === 'COMPUTER', onClick: () => setDevice('COMPUTER') },
+        { start: 'tablet_mac', content: locale.t('DEVICE.TABLET'), active: device === 'TABLET', onClick: () => setDevice('TABLET') },
+        { start: 'phone_iphone', content: locale.t('DEVICE.MOBILE'), active: device === 'MOBILE', onClick: () => setDevice('MOBILE') },
       ],
     },
     { start: 'beenhere', tooltip: locale.t('ACTION.ADD_TO_MENU') },

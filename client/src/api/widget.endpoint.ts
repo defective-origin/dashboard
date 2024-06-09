@@ -9,12 +9,18 @@ const ENDPOINT = 'widgets'
 /**
  * Access cannot be less than the most strict access assigned to related items.
  * Priority by access strictness: `public` -> `subscription` -> `private`
- * - `private` - available to user
- * - `public` - available to everyone
- * - `subscription` - available to user and subscribers
+ * - `PRIVATE` - available to user
+ * - `PUBLIC` - available to everyone
+ * - `SUBSCRIPTION` - available to user and subscribers
  */
-export type Access = 'private' | 'public' | 'subscription'
+export type Access = 'PRIVATE' | 'PUBLIC' | 'SUBSCRIPTION'
 export type Place = Square
+
+/**
+ * ORIGIN: default config for registered component
+ * PRESET: config for widget
+ */
+export type WidgetType = 'ORIGIN' | 'PRESET'
 
 // TODO: allow remove widget and widget version. After removing disable all presets with current widget version
 
@@ -35,6 +41,8 @@ export type Meta = {
 export type Widget = Meta & {
   /** Component Id. If not set then show placeholder widget */
   for?: Id
+  /** Component Id. If not set then show placeholder widget */
+  type?: WidgetType
   /** Last build version. If not defined, then the latest version is used or 0.0.0 if not exist */
   version: Version
   /** Endpoint Key for data type detection */
@@ -47,10 +55,11 @@ export type Widget = Meta & {
 
 export const WIDGETS: Widget[] = Array.from({length: 10}, (_, id) => ({
   id,
+  type: 'ORIGIN',
   name: `WIDGET NAME ${id}`,
   description: 'WIDGET DESCRIPTION',
   author: id,
-  access: 'private',
+  access: 'PRIVATE',
   version: '0.0.0',
   versions: ['0.0.0'],
 }))
