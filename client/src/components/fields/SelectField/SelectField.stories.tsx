@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import SelectField from './SelectField.component'
 
 const meta: Meta<typeof SelectField> = {
-  title: 'Components/FORM/SelectField',
+  title: 'Components/Forms/SelectField',
   component: SelectField,
   tags: ['autodocs'],
 }

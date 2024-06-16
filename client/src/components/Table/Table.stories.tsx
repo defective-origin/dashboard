@@ -125,7 +125,7 @@ const ITEMS = [
 
 const meta: Meta<typeof Table> = {
   component: Table,
-  title: 'Components/DATA DISPLAY/Table',
+  title: 'Components/Views/Table',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

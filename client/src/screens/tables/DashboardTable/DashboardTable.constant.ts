@@ -17,14 +17,17 @@ export const DASHBOARD_COLUMNS: TableColumn<Dashboard>[] = [
     fixed: true,
     nowrap: true,
   }),
+  column.number({
+    field: 'price',
+    format: 'currency',
+  }),
   column.text({
     field: 'access',
     width: 200,
     bold: true,
   }),
-  column.number({
+  column.user({
     field: 'author',
-    format: 'amount',
   }),
   column.usage({
     name: 'Usage',

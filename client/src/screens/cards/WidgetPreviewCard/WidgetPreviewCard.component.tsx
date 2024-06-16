@@ -6,11 +6,9 @@ import { Widget } from 'api'
 
 // ---| pages |---
 // ---| screens |---
-import PlaceholderCard from 'screens/cards/PlaceholderCard'
+import PreviewCard from 'screens/cards/PreviewCard'
 
 // ---| components |---
-import NavLink from 'components/NavLink'
-
 // ---| self |---
 import css from './WidgetPreviewCard.module.scss'
 
@@ -32,9 +30,13 @@ export function WidgetPreviewCard(props: WidgetPreviewCardProps): JSX.Element {
   const _className = cn(css.WidgetPreviewCard, className)
 
   return (
-    <NavLink className={_className} to='WIDGET' params={{ id: options.id!.toString() }} clear {...otherProps}>
-      <PlaceholderCard name='Widget Preview' height={300} width='100%' />
-    </NavLink>
+    <PreviewCard
+      className={_className}
+      to='WIDGET'
+      options={options}
+      params={{ id: options.id!.toString() }}
+      {...otherProps}
+    />
   )
 }
 

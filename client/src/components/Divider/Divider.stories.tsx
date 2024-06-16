@@ -7,7 +7,7 @@ import Block from 'components/Block'
 const VARIANTS: DividerProps['v'][] = ['x', 'y']
 
 const meta: Meta<typeof Divider> = {
-  title: 'Components/LAYOUT/Divider',
+  title: 'Components/Layouts/Divider',
   component: Divider,
   tags: ['autodocs'],
   argTypes: {

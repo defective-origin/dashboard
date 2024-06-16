@@ -15,6 +15,7 @@ export const USERS: User[] = Array.from({length: 10}, (_, id) => ({
   id,
   name: `User ${id}`,
   email: `user${id}@email.com`,
+  image: 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp',
 }))
 
 api.reg(ENDPOINT, USERS)

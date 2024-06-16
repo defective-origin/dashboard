@@ -5,7 +5,7 @@ import DashboardModalForm, { DashboardModalFormProps } from './DashboardModalFor
 
 const meta: Meta<typeof DashboardModalForm> = {
   component: DashboardModalForm,
-  title: 'Screens/FORMS/DashboardModalForm',
+  title: 'Screens/Forms/DashboardModalForm',
   tags: ['autodocs'],
   argTypes: {
     name: field.string(),
@@ -28,6 +28,7 @@ export const Demo: Story = {
       description: 'dashboard description',
       author: 0,
       access: 'PRIVATE',
+      image: 'url.com',
       devices: {
         computer: { active: true, rows: 10, columns: 10 },
       },

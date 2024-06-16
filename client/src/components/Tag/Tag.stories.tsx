@@ -8,7 +8,7 @@ import TextStoriesMeta from 'components/Text/Text.stories'
 
 const meta: Meta<typeof Tag> = {
   component: Tag,
-  title: 'Components/DATA DISPLAY/Tag',
+  title: 'Components/Views/Tag',
   tags: ['autodocs'],
   argTypes: {
     outline: field.boolean(),

@@ -7,7 +7,7 @@ import Field from 'components/fields'
 import Layout from 'components/Layout'
 
 const meta: Meta<typeof Form> = {
-  title: 'Components/FORM/Form',
+  title: 'Components/Forms/Form',
   component: Form,
   tags: ['autodocs'],
 }

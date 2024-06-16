@@ -11,7 +11,7 @@ const BUTTON_COLORS = COLORS.slice(0, 6)
 const VARIANTS: ButtonProps['v'][] = ['text', 'outlined', 'contained']
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/ACTIONS/Button',
+  title: 'Components/Actions/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {

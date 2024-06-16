@@ -5,7 +5,7 @@ import WidgetModalForm, { WidgetModalFormProps } from './WidgetModalForm.compone
 
 const meta: Meta<typeof WidgetModalForm> = {
   component: WidgetModalForm,
-  title: 'Screens/FORMS/WidgetModalForm',
+  title: 'Screens/Forms/WidgetModalForm',
   tags: ['autodocs'],
   argTypes: {
     name: field.string(),

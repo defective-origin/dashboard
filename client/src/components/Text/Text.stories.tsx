@@ -15,7 +15,7 @@ const FORMATS: TextProps['format'][] = [...TEXT_FORMATS, ...NUMBER_FORMATS, ...D
 const CONTENT = Array(4).fill('Lorem ipsum dolor sit amet, consectetur adipiscing elit.').join(' ')
 
 const meta: Meta<typeof Text> = {
-  title: 'Components/DATA DISPLAY/Text',
+  title: 'Components/Views/Text',
   component: Text,
   tags: ['autodocs'],
   argTypes: {

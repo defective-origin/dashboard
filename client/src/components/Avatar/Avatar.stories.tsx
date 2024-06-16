@@ -8,7 +8,7 @@ const src = 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.
 
 const meta: Meta<typeof Avatar> = {
   component: Avatar,
-  title: 'Components/DATA DISPLAY/Avatar',
+  title: 'Components/Views/Avatar',
   tags: ['autodocs'],
   argTypes: {
     size: field.variants(SIZES, 'AvatarSize'),

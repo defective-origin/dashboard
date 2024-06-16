@@ -7,7 +7,7 @@ import Layout from 'components/Layout'
 
 const meta: Meta<typeof ModalForm> = {
   component: ModalForm,
-  title: 'Screens/FORMS/ModalForm',
+  title: 'Screens/Forms/ModalForm',
   tags: ['autodocs'],
   argTypes: {
     name: field.string(),

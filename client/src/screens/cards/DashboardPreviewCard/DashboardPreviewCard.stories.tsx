@@ -5,7 +5,7 @@ import DashboardPreviewCard from './DashboardPreviewCard.component'
 
 const meta: Meta<typeof DashboardPreviewCard> = {
   component: DashboardPreviewCard,
-  title: 'Screens/CARDS/DashboardPreviewCard',
+  title: 'Screens/Cards/DashboardPreviewCard',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),
@@ -27,6 +27,7 @@ export const Demo: Story = {
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       author: 0,
       access: 'PRIVATE',
+      image: 'https://shorturl.at/xJu8i',
       devices: {
         computer: {
           rows: 10,

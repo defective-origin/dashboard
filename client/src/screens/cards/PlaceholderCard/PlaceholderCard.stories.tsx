@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import PlaceholderCard from './PlaceholderCard.component'
 
 const meta: Meta<typeof PlaceholderCard> = {
-  title: 'Screens/CARDS/PlaceholderCard',
+  title: 'Screens/Cards/PlaceholderCard',
   component: PlaceholderCard,
   tags: ['autodocs'],
   argTypes: {

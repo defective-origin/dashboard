@@ -5,7 +5,7 @@ import GroupField from './GroupField.component'
 import Field from '../index'
 
 const meta: Meta<typeof GroupField> = {
-  title: 'Components/FORM/GroupField',
+  title: 'Components/Forms/GroupField',
   component: GroupField,
   tags: ['autodocs'],
 }

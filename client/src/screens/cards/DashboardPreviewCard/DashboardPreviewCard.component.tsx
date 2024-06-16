@@ -6,11 +6,9 @@ import { Dashboard } from 'api'
 
 // ---| pages |---
 // ---| screens |---
-import PlaceholderCard from 'screens/cards/PlaceholderCard'
+import PreviewCard from 'screens/cards/PreviewCard'
 
 // ---| components |---
-import NavLink from 'components/NavLink'
-
 // ---| self |---
 import css from './DashboardPreviewCard.module.scss'
 
@@ -32,9 +30,13 @@ export function DashboardPreviewCard(props: DashboardPreviewCardProps): JSX.Elem
   const _className = cn(css.DashboardPreviewCard, className)
 
   return (
-    <NavLink className={_className} to='BOARD' params={{ id: options.id!.toString() }} clear {...otherProps}>
-      <PlaceholderCard name='Dashboard Preview' height={300} width='100%' />
-    </NavLink>
+    <PreviewCard
+      className={_className}
+      to='BOARD'
+      options={options}
+      params={{ id: options.id!.toString() }}
+      {...otherProps}
+    />
   )
 }
 

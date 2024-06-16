@@ -27,7 +27,7 @@ const render = (props: ItemProps) => {
 
 const meta: Meta<typeof Item> = {
   component: Item,
-  title: 'Components/LAYOUT/Item',
+  title: 'Components/Layouts/Item',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

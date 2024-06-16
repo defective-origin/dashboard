@@ -5,7 +5,7 @@ import WidgetPreviewCard from './WidgetPreviewCard.component'
 
 const meta: Meta<typeof WidgetPreviewCard> = {
   component: WidgetPreviewCard,
-  title: 'Screens/CARDS/WidgetPreviewCard',
+  title: 'Screens/Cards/WidgetPreviewCard',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),
@@ -31,6 +31,7 @@ export const Demo: Story = {
       author: 0,
       version: '0.0.0',
       access: 'PRIVATE',
+      image: 'https://shorturl.at/xJu8i',
       place: { v1: { x: 0, y: 0 }, v2: { x: 0, y: 0 } },
     },
   },

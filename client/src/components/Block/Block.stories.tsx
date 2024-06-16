@@ -12,7 +12,7 @@ const ALIGNS: BlockProps['aligns'][] = ['flex-start', 'center', 'flex-end', 'bas
 const JUSTIFIES: BlockProps['justifies'][] = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']
 
 const meta: Meta<typeof Block> = {
-  title: 'Components/LAYOUT/Block',
+  title: 'Components/Layouts/Block',
   component: Block,
   tags: ['autodocs'],
   argTypes: {

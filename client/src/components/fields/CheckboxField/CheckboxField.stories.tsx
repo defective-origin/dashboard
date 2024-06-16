@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import CheckboxField from './CheckboxField.component'
 
 const meta: Meta<typeof CheckboxField> = {
-  title: 'Components/FORM/CheckboxField',
+  title: 'Components/Forms/CheckboxField',
   component: CheckboxField,
   tags: ['autodocs'],
 }

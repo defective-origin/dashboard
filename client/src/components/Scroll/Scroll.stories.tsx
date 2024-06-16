@@ -6,7 +6,7 @@ import Scroll, { ScrollProps } from './Scroll.component'
 import { DIRECTION, SIZES } from 'theme'
 
 const meta: Meta<typeof Scroll> = {
-  title: 'Components/LAYOUT/Scroll',
+  title: 'Components/Layouts/Scroll',
   component: Scroll,
   tags: ['autodocs'],
   argTypes: {

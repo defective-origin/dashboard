@@ -7,7 +7,7 @@ import Block from 'components/Block'
 const COLORS: AlertProps['color'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof Alert> = {
-  title: 'Components/DATA DISPLAY/Alert',
+  title: 'Components/Views/Alert',
   component: Alert,
   tags: ['autodocs'],
   argTypes: {

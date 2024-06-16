@@ -7,7 +7,7 @@ const DEVICES: DeviceVariant[] = ['tv', 'computer', 'tablet', 'mobile', 'watch']
 
 const meta: Meta<typeof Device> = {
   component: Device,
-  title: 'Screens/DATA DISPLAY/Device',
+  title: 'Screens/Views/Device',
   tags: ['autodocs'],
   argTypes: {
     v: field.variants(DEVICES, 'DeviceVariant'),

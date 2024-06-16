@@ -5,7 +5,7 @@ import DashboardTable, { DashboardTableProps } from './DashboardTable.component'
 
 const meta: Meta<typeof DashboardTable> = {
   component: DashboardTable,
-  title: 'Screens/TABLES/DashboardTable',
+  title: 'Screens/Tables/DashboardTable',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

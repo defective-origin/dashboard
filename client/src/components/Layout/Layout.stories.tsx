@@ -13,7 +13,7 @@ const ALIGNS: LayoutProps['aligns'][] = ['start', 'center', 'end', 'baseline', '
 const JUSTIFIES: LayoutProps['justifies'][] = ['start', 'end', 'center', 'space-between', 'space-around', 'space-evenly']
 
 const meta: Meta<typeof Layout> = {
-  title: 'Components/LAYOUT/Layout',
+  title: 'Components/Layouts/Layout',
   component: Layout,
   tags: ['autodocs'],
   argTypes: {

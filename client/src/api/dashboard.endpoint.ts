@@ -31,6 +31,8 @@ const DASHBOARDS: Dashboard[] = Array.from({length: 21}, (_, id) => ({
   description: 'dashboard description',
   author: id,
   access: 'PRIVATE',
+  price: id ** 10,
+  tags: ['finance', 'shares'],
   devices: {
     tv: { rows: 10, columns: 20, active: id % 2 === 0 },
     computer: { rows: 10, columns: 20, active: true },

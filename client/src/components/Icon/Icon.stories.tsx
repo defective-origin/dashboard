@@ -7,7 +7,7 @@ import { COLORS, SIZES } from 'theme'
 import { ICONS } from './Icon.constant'
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/DATA DISPLAY/Icon',
+  title: 'Components/Views/Icon',
   component: Icon,
   tags: ['autodocs'],
   argTypes: {

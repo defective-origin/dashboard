@@ -5,7 +5,7 @@ import Devices, { DevicesProps } from './Devices.component'
 
 const meta: Meta<typeof Devices> = {
   component: Devices,
-  title: 'Screens/DATA DISPLAY/Devices',
+  title: 'Screens/Views/Devices',
   tags: ['autodocs'],
   argTypes: {
     items: field.object('DeviceItems'),

@@ -12,7 +12,7 @@ const CENTER_VARIANTS: OverlayProps['v'][] = ['center', 'full']
 const VARIANTS: OverlayProps['v'][] = [...SIDE_VARIANTS, ...SIDE_CERNER_VARIANTS, ...CERNER_VARIANTS, ...CENTER_VARIANTS]
 
 const meta: Meta<typeof Overlay> = {
-  title: 'Components/LAYOUT/Overlay',
+  title: 'Components/Layouts/Overlay',
   // throws ref error if we pass as 'component: Overlay'
   component: (props) => <Overlay {...props} />,
   tags: ['autodocs'],

@@ -36,12 +36,11 @@ export type Meta = {
   /** User access. Private By default */
   access: Access
   /** Preview image */
-  image?: string
-
-  // /** Price in order to use widget */
-  // price: number
-  // /** Meta tags to look for */
-  // tags: string[]
+  image: string
+  /** Price in order to use widget */
+  price?: number
+  /** Meta tags to look for */
+  tags?: string[]
   // TODO: separate tables: rating(widget/board id, date, value), comments(widget/board id, date, value)
 }
 
@@ -85,6 +84,7 @@ export const WIDGETS: Widget[] = [
 ].map((place, id) => ({
   id,
   for: id % 2 ? id : undefined,
+  price: id ** 10,
   name: `WIDGET NAME ${id}`,
   type: 'CUSTOM',
   image: 'https://shorturl.at/u34nd',
@@ -94,6 +94,7 @@ export const WIDGETS: Widget[] = [
   endpoint: 'url.com',
   description: 'widget description',
   version: `${id}.${id}.${id}`,
+  tags: ['chart', 'bars', 'linear', 'donut', 's-curve'],
   place,
 }))
 

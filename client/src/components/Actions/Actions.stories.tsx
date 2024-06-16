@@ -29,7 +29,7 @@ const ITEMS: ActionItem[] = [
 
 const meta: Meta<typeof Actions> = {
   component: Actions,
-  title: 'Components/ACTIONS/Actions',
+  title: 'Components/Actions/Actions',
   tags: ['autodocs'],
   argTypes: {
     menu: field.variants(['top', 'right', 'bottom', 'left'], 'MenuVariant'),

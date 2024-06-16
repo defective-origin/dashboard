@@ -9,7 +9,7 @@ const VARIANTS: ModalProps['v'][] = ['center', 'right']
 const NAMES: ModalProps['name'][] = ['global', 'board-settings', 'widget-settings']
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Popup/Modal',
+  title: 'Components/Popups/Modal',
   component: Modal,
   tags: ['autodocs'],
   argTypes: {

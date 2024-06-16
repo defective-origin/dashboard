@@ -8,7 +8,7 @@ const JUSTIFIES = ['start', 'end']
 
 const meta: Meta<typeof Specs> = {
   component: Specs,
-  title: 'Components/DATA DISPLAY/Specs',
+  title: 'Components/Views/Specs',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

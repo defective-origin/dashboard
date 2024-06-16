@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import SliderField from './SliderField.component'
 
 const meta: Meta<typeof SliderField> = {
-  title: 'Components/FORM/SliderField',
+  title: 'Components/Forms/SliderField',
   component: SliderField,
   tags: ['autodocs'],
 }

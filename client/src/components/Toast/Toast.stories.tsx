@@ -29,7 +29,7 @@ const Notification = (props: ToastOptions) => {
 }
 
 const meta: Meta<typeof Notification> = {
-  title: 'Components/POPUP/Toast',
+  title: 'Components/Popups/Toast',
   component: Notification,
   tags: ['autodocs'],
   argTypes: {

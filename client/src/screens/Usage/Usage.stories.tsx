@@ -5,7 +5,7 @@ import Usage, { UsageProps } from './Usage.component'
 
 const meta: Meta<typeof Usage> = {
   component: Usage,
-  title: 'Screens/DATA DISPLAY/Usage',
+  title: 'Screens/Views/Usage',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

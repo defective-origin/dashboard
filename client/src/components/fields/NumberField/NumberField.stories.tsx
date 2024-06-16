@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import NumberField from './NumberField.component'
 
 const meta: Meta<typeof NumberField> = {
-  title: 'Components/FORM/NumberField',
+  title: 'Components/Forms/NumberField',
   component: NumberField,
   tags: ['autodocs'],
   argTypes: {

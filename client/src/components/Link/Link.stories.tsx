@@ -10,7 +10,7 @@ const LINK_ICONS = [undefined, ...ICONS]
 const LINK_COLORS = COLORS.slice(0, 6)
 
 const meta: Meta<typeof Link> = {
-  title: 'Components/ACTIONS/Link',
+  title: 'Components/Actions/Link',
   component: Link,
   tags: ['autodocs'],
   argTypes: {

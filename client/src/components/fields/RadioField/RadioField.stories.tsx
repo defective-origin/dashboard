@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import RadioField from './RadioField.component'
 
 const meta: Meta<typeof RadioField> = {
-  title: 'Components/FORM/RadioField',
+  title: 'Components/Forms/RadioField',
   component: RadioField,
   tags: ['autodocs'],
 }

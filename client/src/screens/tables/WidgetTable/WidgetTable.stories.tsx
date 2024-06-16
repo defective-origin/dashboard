@@ -5,7 +5,7 @@ import WidgetTable, { WidgetTableProps } from './WidgetTable.component'
 
 const meta: Meta<typeof WidgetTable> = {
   component: WidgetTable,
-  title: 'Screens/TABLES/WidgetTable',
+  title: 'Screens/Tables/WidgetTable',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

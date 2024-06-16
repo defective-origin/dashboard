@@ -28,7 +28,7 @@ const trigger = (o: MenuTriggerOptions) => <Item width={50} height={50} backgrou
 
 const meta: Meta<typeof Menu> = {
   component: Menu,
-  title: 'Components/ACTIONS/Menu',
+  title: 'Components/Actions/Menu',
   tags: ['autodocs'],
   argTypes: {
     trigger: field.func(),

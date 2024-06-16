@@ -12,7 +12,7 @@ const VARIANTS: TooltipProps['v'][] = [
 ]
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/POPUP/Tooltip',
+  title: 'Components/Popups/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
   argTypes: {

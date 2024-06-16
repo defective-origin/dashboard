@@ -16,7 +16,7 @@ const VARIANTS: PopupProps['v'][] = [
 
 const meta: Meta<typeof Popup> = {
   component: Popup,
-  title: 'Components/POPUP/Popup',
+  title: 'Components/Popups/Popup',
   tags: ['autodocs'],
   argTypes: {
     v: field.variants(VARIANTS, 'PopupVariant'),

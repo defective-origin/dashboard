@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import SwitchField from './SwitchField.component'
 
 const meta: Meta<typeof SwitchField> = {
-  title: 'Components/FORM/SwitchField',
+  title: 'Components/Forms/SwitchField',
   component: SwitchField,
   tags: ['autodocs'],
 }

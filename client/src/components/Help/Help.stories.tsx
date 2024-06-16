@@ -5,7 +5,7 @@ import Help from './Help.component'
 
 const meta: Meta<typeof Help> = {
   component: Help,
-  title: 'Components/DATA DISPLAY/Help',
+  title: 'Components/Views/Help',
   tags: ['autodocs'],
   argTypes: {
     title: field.string(),

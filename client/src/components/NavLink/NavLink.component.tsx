@@ -22,7 +22,8 @@ import Action, { ActionProps } from 'components/Action'
 // ---| self |---
 import css from './NavLink.module.scss'
 
-export type NavLinkProps<Name extends RouteLinks = 'ROOT'> = ActionProps & {
+export type NavLinkVariant = RouteLinks
+export type NavLinkProps<Name extends NavLinkVariant = 'ROOT'> = ActionProps & {
   to?: Name
   search?: URLSearchParamsInit
   params?: {
@@ -38,7 +39,7 @@ export type NavLinkProps<Name extends RouteLinks = 'ROOT'> = ActionProps & {
  * @example
  * <NavLink to='WIDGETS' />
  */
-export const NavLink = forwardRef<unknown, NavLinkProps>(<Name extends RouteLinks,>(props: NavLinkProps<Name>, ref: React.LegacyRef<unknown>): JSX.Element => {
+export const NavLink = forwardRef<unknown, NavLinkProps>(<Name extends NavLinkVariant,>(props: NavLinkProps<Name>, ref: React.LegacyRef<unknown>): JSX.Element => {
   const { to = 'ROOT', params, search, active, className, ...otherProps } = props
   const _className = cn(css.NavLink, className)
   const template = `${ROUTE_LINKS[to]}?${createSearchParams(search)}`

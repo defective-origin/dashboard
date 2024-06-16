@@ -7,7 +7,7 @@ import Block from 'components/Block'
 const VARIANTS: SkeletonProps['v'][] = ['text', 'rounded', 'circular']
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Components/DATA DISPLAY/Skeleton',
+  title: 'Components/Views/Skeleton',
   component: Skeleton,
   tags: ['autodocs'],
   argTypes: {
