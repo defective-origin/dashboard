@@ -1,71 +1,74 @@
-import { CURRENCY_OPTIONS, SIZE_OPTIONS, WEIGHT_OPTIONS } from './Number.constant'
+import { NUMBER_OPTIONS, SIZE_OPTIONS, WEIGHT_OPTIONS, NumberUnit } from './Number.constant'
 
 export type NumberValue = number | string
 
-export type UnitOption = {
-  value: number,
-  postfix?: string,
+export type NumberOptions = Intl.NumberFormatOptions & {
+  /** If true then show fraction part */
+  isInt?: boolean
+  /** If true then show full digit without unit preparation */
+  full?: boolean
+  /** Extra sign */
+  sign?: string
+  /** Unit configs */
+  units?: NumberUnit[]
 }
 
-export type UnitOptions = UnitOption[]
+export function getMaxUnit(value: NumberValue, units: NumberUnit[] = NUMBER_OPTIONS, reverse?: boolean) {
+  const items = reverse ? units.toReversed() : units
+
+  return items.find((unit) => (Number(value) / unit.value) >= 1)
+}
 
 export const isNumberValid = (value: NumberValue) => {
-  return !isNaN(Number(value))
+  return !isNaN(Number(value)) && isFinite(Number(value))
 }
 
-/** 123,456,789.98 */
-export function toNumber(value: NumberValue, options?: Intl.NumberFormatOptions & { isInt?: boolean }) {
+/** Return fixed decimal string without rounding fraction part and sign */
+export function formatNumber(value: NumberValue, options?: NumberOptions) {
+  const fractionDigits = 20
+  const [integer, fraction] = Intl.NumberFormat('en', { ...options, minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits })
+    .format(Number(value))
+    .split('.')
+
+  const digit = options?.isInt ? integer : `${integer}.${fraction.slice(0, 2)}`
+
+  return options?.sign ? `${digit} ${options?.sign ?? ''}` : digit
+}
+
+/** 123,456,789.98 or 123.98 M */
+export function toNumber(value: NumberValue, options?: NumberOptions) {
   if (!isNumberValid(value)) {
     return value
   }
-  // TODO: [kseniya_boldak] fix rounding up and Infinity case
 
-  const fractionDigits = 20
-  const number = Intl.NumberFormat('en', { ...options, minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits }).format(Number(value))
-  const integer = number.split('.')[0]
-  const fraction = number.toString().split('.')[1].slice(0, 2)
+  const unit = getMaxUnit(value, options?.units, options?.full) ?? { value: 1 }
+  const convertedValue = Number(value) / unit.value
+  const sign = `${unit?.sign ?? ''}${options?.sign ?? ''}`
 
-  return options?.isInt ? integer : `${integer}.${fraction}`
+  return formatNumber(convertedValue, { ...options, sign })
 }
 
-export function getMaxOptions(value: NumberValue, options: UnitOptions){
-  return options.find((option) => (Number(value) / option.value) >= 1)
-}
-
-/** Number value with unit postfix */
-export function toUnit(v: NumberValue, optionVariant: UnitOptions, options?: Intl.NumberFormatOptions & { isInt?: boolean }) {
-  const option = getMaxOptions(v, optionVariant)
-
-  if (!option) {
-    return toNumber(0, options)
-  }
-
-  const intlValue = toNumber(Number(v) / option.value, options)
-
-  return option.postfix ? `${intlValue} ${option.postfix}` : intlValue
-}
-
-/** 123,456,789 */
+/** 123,456,789 or 123 M */
 export const toAmount = (v: NumberValue) => toNumber(v, { isInt: true })
 
-/** 123,456,789.98 % */
-export const toDecimalPercent = (v: NumberValue, postfix = '%') => `${toNumber(v, { style: 'percent' })} ${postfix}`
+/** 123,456,789.98 % or 123.98 M% */
+export const toDecimalPercent = (v: NumberValue, options?: NumberOptions) => toNumber(v, { sign: '%', style: 'percent', ...options })
 
-export const toPercent = (v: NumberValue, postfix = '%') => `${toNumber(v)} ${postfix}`
+/** 123,456,789.9876 % or 12,398.76 M% */
+export const toPercent = (v: NumberValue, options?: NumberOptions) => toNumber(v, { sign: '%', ...options })
 
 /** 123.46 M$ - K, M, B */
-export const toCurrency = (v: NumberValue) => toUnit(v, CURRENCY_OPTIONS)
+export const toCurrency = (v: NumberValue, options?: NumberOptions) => toNumber(v, { sign: '$', ...options })
 
 /** 123.46 TB - B, KB, MB, GB, TB */
-export const toSize = (v: NumberValue) => toUnit(v, SIZE_OPTIONS)
+export const toSize = (v: NumberValue, options?: NumberOptions) => toNumber(v, { sign: 'B', units: SIZE_OPTIONS, ...options })
 
 /** 123.46 T  - G, K, T */
-export const toWeight = (v: NumberValue) => toUnit(v, WEIGHT_OPTIONS)
-
+export const toWeight = (v: NumberValue, options?: NumberOptions) => toNumber(v, { units: WEIGHT_OPTIONS, ...options })
 
 export default {
+  formatNumber,
   toNumber,
-  toUnit,
   toAmount,
   toPercent,
   toCurrency,

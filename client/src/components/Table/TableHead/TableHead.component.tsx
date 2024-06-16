@@ -30,7 +30,6 @@ export function TableHead<T extends TableRecord>(props: TableHeadProps<T>): JSX.
   const { onSort, columns, className, ...otherProps } = props
   const _className = cn(css.TableHead, className)
   const style: React.CSSProperties = {
-    position: 'relative',
     zIndex: (columns?.length ?? 0) + 1,
   }
 

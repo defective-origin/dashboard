@@ -1,24 +1,26 @@
-const SIZE_SIGN = 'B'
+export type Unit<T> = {
+  value: T,
+  sign?: string,
+}
+export type NumberUnit = Unit<number>
 
-export const SIZE_OPTIONS = [
-  { value: 1_024**4, postfix: `T${SIZE_SIGN}` },
-  { value: 1_024**3, postfix: `G${SIZE_SIGN}` },
-  { value: 1_024**2, postfix: `M${SIZE_SIGN}` },
-  { value: 1_024, postfix: `K${SIZE_SIGN}` },
-  { value: 1, postfix: `${SIZE_SIGN}` },
+export const SIZE_OPTIONS: NumberUnit[] = [
+  { value: 1_024**4, sign: 'T' },
+  { value: 1_024**3, sign: 'G' },
+  { value: 1_024**2, sign: 'M' },
+  { value: 1_024, sign: 'K' },
+  { value: 1 },
 ]
 
-export const WEIGHT_OPTIONS = [
-  { value: 1_000_000, postfix: 'T' },
-  { value: 1_000, postfix: 'KG' },
-  { value: 1, postfix: 'G' },
+export const WEIGHT_OPTIONS: NumberUnit[] = [
+  { value: 1_000_000, sign: 'T' },
+  { value: 1_000, sign: 'KG' },
+  { value: 1, sign: 'G' },
 ]
 
-const CURRENCY_SIGN = '$'
-
-export const CURRENCY_OPTIONS = [
-  { value: 1_000**3, postfix: `B${CURRENCY_SIGN}` },
-  { value: 1_000**2, postfix: `M${CURRENCY_SIGN}` },
-  { value: 1_000, postfix: `K${CURRENCY_SIGN}` },
-  { value: 1, postfix: `${CURRENCY_SIGN}` },
+export const NUMBER_OPTIONS: NumberUnit[] = [
+  { value: 1_000**3, sign: 'B' },
+  { value: 1_000**2, sign: 'M' },
+  { value: 1_000, sign: 'K' },
+  { value: 1 },
 ]

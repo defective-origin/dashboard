@@ -1,5 +1,8 @@
 import React from 'react'
 
+// ---| components |---
+import Block, { BlockProps } from 'components/Block'
+
 // ---| core |---
 import { cn } from 'tools'
 import { PortalReturnOptions, usePortal } from 'hooks'
@@ -34,10 +37,8 @@ export function Portal(props: PortalProps): PortalReturnOptions {
 
 Portal.displayName = 'Portal'
 
-export type PortalContainerProps = {
+export type PortalContainerProps = BlockProps & {
   name: PortalName
-  className?: string
-  children?: React.ReactNode
 }
 
 /**
@@ -51,7 +52,7 @@ export function PortalContainer(props: PortalContainerProps): JSX.Element {
   const { name, children, className, ...otherProps } = props
   const _className = cn(css.PortalContainer, className)
 
-  return <div id={initPortalKey(name)} className={_className} {...otherProps}>{children}</div>
+  return <Block id={initPortalKey(name)} className={_className} {...otherProps}>{children}</Block>
 }
 
 PortalContainer.displayName = 'PortalContainer'

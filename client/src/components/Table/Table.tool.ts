@@ -1,8 +1,10 @@
-import { TableColumn, TableRecord } from 'components/Table'
+// ---| components |---
 import Text, { TextProps } from 'components/Text'
 
+// ---| self |---
+import { TableColumn, TableRecord } from './Table.type'
 
-export type TextColumnOptions = Pick<TextProps, 'format' | 'placeholder' | 'color' | 'ellipsis' | 'bold'>
+export type TextColumnOptions = Pick<TextProps, 'format' | 'placeholder' | 'color' | 'ellipsis' | 'bold' | 'nowrap'>
 export type TextColumn<T extends TableRecord,> = TableColumn<T, TextProps> & TextColumnOptions
 
 export const textColumn = <T extends TableRecord>(column: TextColumn<T>): TextColumn<T> => ({
@@ -18,6 +20,7 @@ export const textColumn = <T extends TableRecord>(column: TextColumn<T>): TextCo
     color: column.color,
     ellipsis: column.ellipsis,
     bold: column.bold,
+    nowrap: column.nowrap,
     ...column.props,
   },
 })

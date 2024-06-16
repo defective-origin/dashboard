@@ -22,4 +22,6 @@
   .m { @include attach-space-margin-variables(margin);}
 
   .stretch { @include stretch; }
+
+  .fit { width: fit-content; height: fit-content; }
 }

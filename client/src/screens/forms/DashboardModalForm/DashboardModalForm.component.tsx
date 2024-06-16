@@ -54,11 +54,12 @@ export function DashboardModalForm(props: DashboardModalFormProps): JSX.Element 
       <Field.Text name='description' label={locale.t('FIELD.DESCRIPTION')} value={options?.description} multiline />
 
       <Text.H3 content='Active layout' />
-      <Layout v='board' columns={4} g='sm' >
+      <Layout v='board' columns={5} g='sm' >
         <Field.Switch v='top' name='tv' label='Tv' checked={options?.devices.tv?.active} />
         <Field.Switch v='top' name='computer' label='Computer' checked={options?.devices.computer?.active} />
         <Field.Switch v='top' name='tablet' label='Tablet' checked={options?.devices.tablet?.active} />
         <Field.Switch v='top' name='mobile' label='Mobile' checked={options?.devices.mobile?.active} />
+        <Field.Switch v='top' name='watch' label='Watch' checked={options?.devices.watch?.active} />
       </Layout>
 
       {children}

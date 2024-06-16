@@ -45,6 +45,7 @@ export type ItemOptions = {
   span?: string
 
 
+  fit?: boolean
   stretch?: boolean
   style?: React.CSSProperties
   className?: string
@@ -65,6 +66,7 @@ export type ItemReturnOptions<O extends object> = O & {
  */
 export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnOptions<O> => {
   const {
+    fit,
     column,
     row,
     span,
@@ -98,7 +100,8 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
       [`p--${p}`]: p,
       [`m--${m}`]: m,
       [`g--${g}`]: g,
-      stretch: stretch,
+      stretch,
+      fit,
     }, className),
     style: {
       order,
@@ -128,7 +131,6 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
       // gap,
       // row-gap,
       // column-gap
-
 
       ...style,
     },

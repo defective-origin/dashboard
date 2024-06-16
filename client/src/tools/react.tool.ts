@@ -14,13 +14,37 @@ export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P 
 
 // object types
 
+/**
+ * Return all full path keys for the object and nested objects.
+ *
+ * @example
+ * FlattenObjectFullPathKeys<{ a: 1, b: { c: 2 }}>
+ * // union: a, b.c
+ */
+export type FlattenObjectFullPathKeys<
+  T extends Record<string | number, unknown>,
+  Sep extends string = '.',
+  Key = keyof T
+> = Key extends string
+  ? T[Key] extends Record<string, unknown>
+    ? `${Key}${Sep}${FlattenObjectFullPathKeys<T[Key], Sep>}`
+    : `${Key}`
+  : never
+
+/**
+ * Return all keys for the object and nested objects.
+ *
+ * @example
+ * FlattenObjectKeys<{ a: 1, b: { c: 2 }}>
+ * // union: a, b, b.c
+ */
 export type FlattenObjectKeys<
   T extends Record<string | number, unknown>,
   Sep extends string = '.',
   Key = keyof T
 > = Key extends string
   ? T[Key] extends Record<string, unknown>
-    ? `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
+    ? `${Key}` | `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
     : `${Key}`
   : never
 

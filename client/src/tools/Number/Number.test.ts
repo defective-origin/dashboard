@@ -2,8 +2,20 @@
 import * as tools from './Number.tool'
 
 describe('[Number] tool', () => {
+  describe('[formatNumber] action', () => {
+    it('should add unit sign', () => {
+      expect(tools.formatNumber(1, { sign: '$' })).toEqual('1.00 $')
+    })
+
+    it('should separate each 3 digits by comma and dot before fraction part', () => {
+      expect(tools.formatNumber(1)).toEqual('1.00')
+      expect(tools.formatNumber(1_000)).toEqual('1,000.00')
+      expect(tools.formatNumber(100_000)).toEqual('100,000.00')
+    })
+  })
+
   describe('[toNumber] action', () => {
-    it('should return string representation of number value', () => {
+    it('should return string representation of number', () => {
       expect(tools.toNumber(0)).toEqual('0.00')
       expect(tools.toNumber(0.5555)).toEqual('0.55')
       expect(tools.toNumber(0, { isInt: true })).toEqual('0')
@@ -16,28 +28,30 @@ describe('[Number] tool', () => {
     })
 
     it('should work with positive and negative numbers', () => {
-      // expect(tools.toNumber(-Infinity)).toEqual('-Infinity')
+      expect(tools.toNumber(-Infinity)).toEqual(-Infinity)
       expect(tools.toNumber('-1')).toEqual('-1.00')
       expect(tools.toNumber('0')).toEqual('0.00')
       expect(tools.toNumber('1')).toEqual('1.00')
-      // expect(tools.toNumber(Infinity)).toEqual('Infinity')
-    })
-
-    it('should separate each 3 digits by comma and dot before fraction part', () => {
-      expect(tools.toNumber(1)).toEqual('1.00')
-      expect(tools.toNumber(1_000)).toEqual('1,000.00')
-      expect(tools.toNumber(100_000)).toEqual('100,000.00')
+      expect(tools.toNumber(Infinity)).toEqual(Infinity)
     })
 
     it('should not round digits up', () => {
+      expect(tools.toNumber(4.27)).toEqual('4.27')
       expect(tools.toNumber(4.4444)).toEqual('4.44')
       expect(tools.toNumber(5.5555)).toEqual('5.55')
       expect(tools.toNumber(9.9999)).toEqual('9.99')
     })
+
+    it('should return full representation without sign', () => {
+      expect(tools.toNumber(10, { full: true })).toEqual('10.00')
+      expect(tools.toNumber(1_000, { full: true })).toEqual('1,000.00')
+      expect(tools.toNumber(1_000_000, { full: true })).toEqual('1,000,000.00')
+      expect(tools.toNumber(1_000_000_000, { full: true })).toEqual('1,000,000,000.00')
+    })
   })
 
   describe('[toCurrency] action', () => {
-    it('should return string representation of number value with relevant currency postfix', () => {
+    it('should return string representation of currency', () => {
       expect(tools.toCurrency(10)).toEqual('10.00 $')
       expect(tools.toCurrency(1_000)).toEqual('1.00 K$')
       expect(tools.toCurrency(1_000_000)).toEqual('1.00 M$')
@@ -46,7 +60,7 @@ describe('[Number] tool', () => {
   })
 
   describe('[toSize] action', () => {
-    it('should return string representation of number value with relevant size postfix', () => {
+    it('should return string representation of size', () => {
       expect(tools.toSize(10)).toEqual('10.00 B')
       expect(tools.toSize(1024.56)).toEqual('1.00 KB')
       expect(tools.toSize(25_451_215)).toEqual('24.27 MB')
@@ -55,7 +69,7 @@ describe('[Number] tool', () => {
   })
 
   describe('[toWeight] action', () => {
-    it('should return string representation of number value with relevant weight postfix', () => {
+    it('should return string representation of weight', () => {
       expect(tools.toWeight(100)).toEqual('100.00 G')
       expect(tools.toWeight(1_567.99)).toEqual('1.56 KG')
       expect(tools.toWeight(1_000_000)).toEqual('1.00 T')
@@ -63,7 +77,7 @@ describe('[Number] tool', () => {
   })
 
   describe('[toAmount] action', () => {
-    it('should return string representation of integer number value', () => {
+    it('should return string representation of amount', () => {
       expect(tools.toAmount(0.6)).toEqual('0')
       expect(tools.toAmount(1.2)).toEqual('1')
       expect(tools.toAmount(100.52)).toEqual('100')
@@ -71,14 +85,14 @@ describe('[Number] tool', () => {
   })
 
   describe('[toPercent] action', () => {
-    it('should convert number to string representation of number value with % postfix', () => {
+    it('should return string representation of percent', () => {
       expect(tools.toPercent(100)).toEqual('100.00 %')
       expect(tools.toPercent(52.799)).toEqual('52.79 %')
     })
   })
 
   describe('[toDecimalPercent] action', () => {
-    it('should convert decimal to string representation of number value with % postfix', () => {
+    it('should return string representation of decimal percent', () => {
       expect(tools.toDecimalPercent(0.7999)).toEqual('79.99 %')
       expect(tools.toDecimalPercent(1)).toEqual('100.00 %')
     })

@@ -32,7 +32,7 @@ export function PlaceholderCard(props: PlaceholderCardProps): JSX.Element {
   const locale = useLocale()
 
   return (
-    <Item className={_className} border='var(--border)' p='xl' {...otherProps}>
+    <Item className={_className} p='xl' {...otherProps}>
       <Text.Body2
         className={css.Message}
         color='secondary'

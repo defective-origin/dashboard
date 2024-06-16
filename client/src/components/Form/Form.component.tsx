@@ -13,7 +13,7 @@ import Layout, { LayoutProps } from 'components/Layout'
 import css from './Form.module.scss'
 import FormButton from './FormButton'
 
-export type FormProps = FormOptions<FormGroupValue> & LayoutProps & {
+export type FormProps<F extends object = FormGroupValue> = FormOptions<F> & LayoutProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -130,15 +130,15 @@ export type FormProps = FormOptions<FormGroupValue> & LayoutProps & {
  *      </Layout>
  *    </Form>
  */
-export function Form(props: FormProps): JSX.Element {
-  const { resetId, submitId, value = {}, name, onSubmit, onReset, onChange, children, className, ...otherProps } = props
+export function Form<F extends object = FormGroupValue>(props: FormProps<F>): JSX.Element {
+  const { resetId, submitId, value = {} as F, name, onSubmit, onReset, onChange, children, className, ...otherProps } = props
   const _className = cn(css.Form, className)
-  const field = useForm({ value, name, onChange, onReset, onSubmit, resetId, submitId })
+  const field = useForm<F>({ value, name, onChange, onReset, onSubmit, resetId, submitId })
 
   // TODO: add rules: [] check for fields
 
   return (
-    <FormContext.Provider value={field} >
+    <FormContext.Provider value={field as any} >
       <Layout as='form' className={_className} onSubmit={field.submit} onReset={field.reset} g='xs' {...otherProps}>
         {children}
       </Layout>

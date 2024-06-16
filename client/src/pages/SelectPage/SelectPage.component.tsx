@@ -30,7 +30,7 @@ export function SelectPage<T>(props: SelectPageProps<T>): JSX.Element {
 
   return (
     <Page className={_className} {...otherProps}>
-      <Page.Content columns={3} scroll='y' p='xs'>
+      <Page.Content columns={5} scroll='y' p='xs' g='md'>
         {items.map((item, index) => <Tag key={keygen?.(item, index) ?? index} options={item} />)}
       </Page.Content>
 

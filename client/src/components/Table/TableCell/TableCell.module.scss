@@ -6,6 +6,9 @@
 
 .TableCell {
   box-sizing: border-box;
+
+  // allows thead filter works
+  background-color: transparent;
 }
 
 .Fixed {

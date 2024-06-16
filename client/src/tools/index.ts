@@ -3,12 +3,12 @@
 /* INJECT_DEFAULT_EXPORT_PLACE */
 
 /* INJECT_EXPORT_PLACE */
-export * from './Object'
-export * from './Array'
-export * from './Nil'
-export * from './Date'
-export * from './String'
-export * from './Number'
+export * as obj from './Object'
+export * as arr from './Array'
+export * as nil from './Nil'
+export * as date from './Date'
+export * as str from './String'
+export * as num from './Number'
 
 // export { default as _ } from 'lodash-es'
 export { default as cn } from 'classnames'

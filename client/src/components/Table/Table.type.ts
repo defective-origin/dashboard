@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SortOrder, SortType, react } from 'tools'
+import { arr, react } from 'tools'
 
 export type TableColumnAlign = 'left' | 'center' | 'right'
-export type TableOrder = SortOrder
+export type TableOrder = arr.SortOrder
 export type TableRecordKey = string | number
 export type TableRecord = Record<TableRecordKey, unknown>
 export type TableFilter<T extends TableRecord> = (item: T) => boolean
 export type TableKeygen<T extends TableRecord> = (item: T, index: number) => React.Key
-export type TableSort<T extends TableRecord, P extends object = object> = (item: T, column: TableColumn<T, P>, field: any) => SortType
+export type TableSort<T extends TableRecord, P extends object = object> = (item: T, column: TableColumn<T, P>, field: any) => arr.SortType
 export type TableMapper<T extends TableRecord, P extends object = object> = (item: T, column: TableColumn<T, P>, field: any) => Partial<P>
 export type TableRender<T extends TableRecord, P extends object = object> = (item: T, column: TableColumn<T, P>, field: any) => React.ReactNode
 

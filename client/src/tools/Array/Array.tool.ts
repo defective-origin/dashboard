@@ -1,4 +1,4 @@
-import { isNil } from 'tools/Nil'
+import nil from 'tools/Nil'
 
 /** create array without false values */
 export const initArray = (...args: unknown[]) => {
@@ -18,7 +18,10 @@ export type SortType = Date | boolean | number | string | null | undefined
 /**
  * Sort items by selector.
  * `null` and `undefined` items stay in the end of the list.
- * */
+ *
+ * - asc - [1, 2, 3, null, undefined]
+ * - desc - [3, 2, 1, null, undefined]
+ */
 export const sort = <T>(
   arr: T[],
   order: SortOrder = 'asc',
@@ -31,11 +34,11 @@ export const sort = <T>(
     const valueB = selector(b)
 
     // nullable items should be in the end of the list
-    if (isNil(valueA) && isNil(valueB)) {
+    if (nil.isNil(valueA) && nil.isNil(valueB)) {
       return 0
-    } else if (isNil(valueA)) {
+    } else if (nil.isNil(valueA)) {
       return 1
-    } else if (isNil(valueB)) {
+    } else if (nil.isNil(valueB)) {
       return -1
     } else if (valueA > valueB) {
       return -1 * multiplier
@@ -47,8 +50,12 @@ export const sort = <T>(
   })
 }
 
+/** Create array with x items by callback */
+export const repeat = <T>(times: number, cb: (index: number) => T) => Array.from(Array(times).keys()).map(cb)
+
 export default {
   initArray,
   toArray,
+  repeat,
   sort,
 }

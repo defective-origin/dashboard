@@ -11,10 +11,10 @@ import { cn } from 'tools'
 // ---| self |---
 import css from './Tooltip.module.scss'
 
-const POPUP_STYLE = { tooltip: { style: {margin: 0, padding: 0, background: '#FFF', border: 'var(--border)' } } }
+const POPUP_STYLE = { tooltip: { style: {margin: 0, padding: 0, background: '#FFF', border: 'var(--border)', boxShadow: 'var(--box-shadow)' } } }
 
 export type TooltipVariant =
-|'bottom-start' | 'bottom' | 'bottom-end'
+| 'bottom-start' | 'bottom' | 'bottom-end'
 | 'left-start' | 'left' | 'left-end'
 | 'right-start' | 'right' | 'right-end'
 | 'top-start' | 'top' | 'top-end'

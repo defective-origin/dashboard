@@ -1,14 +1,14 @@
-import { useState } from 'react'
 import { Id } from './api.type'
-import { useListEndpoint, useOptionsEndpoint, ApiResponse } from './api.endpoint'
-import { Meta, Widget } from './widget.endpoint'
+import api from './api.endpoint'
+import { Meta, useWidgets } from './widget.endpoint'
+import { useState } from 'react'
 
 const ENDPOINT = 'boards'
 
-export type DashboardWidget = Widget
-export type DashboardDevice = 'TV' | 'COMPUTER' | 'TABLET' | 'MOBILE' // 'infinity'
+export type DashboardDevice = 'tv' | 'computer' | 'tablet' | 'mobile' | 'watch' // 'infinity'
+export type DashboardDevices = Record<DashboardDevice, DashboardMarkup>
 
-export const DASHBOARD_DEVICES: DashboardDevice[] = ['TV', 'COMPUTER', 'TABLET', 'MOBILE']
+export const DASHBOARD_DEVICES: DashboardDevice[] = ['tv', 'computer', 'tablet', 'mobile', 'watch']
 
 export type DashboardMarkup = {
   /** Active layout. By default only computer markup is on */
@@ -17,8 +17,6 @@ export type DashboardMarkup = {
   rows: number
   /** Quantity of columns */
   columns: number
-  /** Board widget presets */
-  widgets: DashboardWidget[]
 }
 
 export type Dashboard = Meta & {
@@ -26,100 +24,47 @@ export type Dashboard = Meta & {
   devices: Partial<Record<DashboardDevice, DashboardMarkup>>
 }
 
-export const DASHBOARD_WIDGETS: DashboardWidget[] = [
-  { v1: { x: 0, y: 0 }, v2: { x: 3, y: 3 } },
-  { v1: { x: 0, y: 4 }, v2: { x: 1, y: 5 } },
-  { v1: { x: 1, y: 4 }, v2: { x: 2, y: 5 } },
-  { v1: { x: 2, y: 4 }, v2: { x: 3, y: 5 } },
-  { v1: { x: 3, y: 4 }, v2: { x: 4, y: 5 } },
-  { v1: { x: 4, y: 4 }, v2: { x: 5, y: 5 } },
-  { v1: { x: 5, y: 4 }, v2: { x: 6, y: 5 } },
-  { v1: { x: 0, y: 5 }, v2: { x: 6, y: 6 } },
-  { v1: { x: 0, y: 6 }, v2: { x: 6, y: 10 } },
-  { v1: { x: 9, y: 0 }, v2: { x: 18, y: 4 } },
-  { v1: { x: 6, y: 4 }, v2: { x: 14, y: 7 } },
-  { v1: { x: 6, y: 7 }, v2: { x: 14, y: 10 } },
-  { v1: { x: 14, y: 4 }, v2: { x: 20, y: 5 } },
-  { v1: { x: 14, y: 5 }, v2: { x: 20, y: 6 } },
-  { v1: { x: 14, y: 6 }, v2: { x: 20, y: 7 } },
-  { v1: { x: 14, y: 7 }, v2: { x: 17, y: 10 } },
-  { v1: { x: 17, y: 7 }, v2: { x: 20, y: 10 } },
-  { v1: { x: 18, y: 0 }, v2: { x: 20, y: 4 } },
-].map((place, id) => ({
-  id,
-  name: 'WIDGET NAME',
-  type: 'PRESET',
-  author: id,
-  access: 'PRIVATE',
-  key: 'WIDGET.KEY',
-  endpoint: 'url.com',
-  description: 'widget description',
-  version: '0.0.0',
-  versions: ['0.0.0'],
-  place,
-}))
-
-export const BASE_BREAKPOINT_MAP: Record<DashboardDevice, DashboardMarkup> = {
-  TV: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
-  COMPUTER: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: true },
-  TABLET: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
-  MOBILE: { widgets: DASHBOARD_WIDGETS, rows: 10, columns: 20, active: false },
-}
-
 const DASHBOARDS: Dashboard[] = Array.from({length: 21}, (_, id) => ({
   id,
+  image: 'https://shorturl.at/xJu8i',
   name: `BOARD NAME ${id}`,
   description: 'dashboard description',
   author: id,
   access: 'PRIVATE',
-  devices: BASE_BREAKPOINT_MAP,
+  devices: {
+    tv: { rows: 10, columns: 20, active: id % 2 === 0 },
+    computer: { rows: 10, columns: 20, active: true },
+    tablet: { rows: 10, columns: 20, active: id % 6 === 0 },
+    mobile: { rows: 10, columns: 20, active: id % 4 === 0 },
+    watch: { rows: 10, columns: 20, active: id % 5 === 0 },
+  },
 }))
 
-export const useDashboards = () => useListEndpoint(ENDPOINT, [...DASHBOARDS])
+api.reg(ENDPOINT, DASHBOARDS)
 
 
-export type DashboardManager = ApiResponse<Dashboard> & {
-  markup: (device: DashboardDevice) => DashboardMarkup | undefined
-  update: (patch: Partial<Dashboard>) => void
-  clear: (device: DashboardDevice) => void
-  removeWidget: (device: DashboardDevice, id: Id) => void
-  addWidget: (device: DashboardDevice, patch: DashboardWidget) => void
-  updateWidget: (device: DashboardDevice, patch: Partial<DashboardWidget>) => void
+export const useDashboardMutations = (ids?: Id | Id[]) => {
+  return api.useMutations<Dashboard>(ENDPOINT, ids)
 }
 
-export const useDashboard = (id?: Id): DashboardManager => {
-  const response = useOptionsEndpoint(`${ENDPOINT}/${id}`, DASHBOARDS.find((board) => board.id == id) as Dashboard)
-  const [board, setBoard] = useState<Dashboard>(DASHBOARDS.find((board) => board.id == id) as Dashboard)
-  const update = (patch: Partial<Dashboard>) => setBoard((prev) => ({...prev, ...patch}))
+export const useDashboards = () => {
+  const response = api.useListEndpoint<Dashboard>(ENDPOINT)
+  const mutations = useDashboardMutations()
 
-  const markup = (device: DashboardDevice) => board.devices[device]
+  return Object.assign(response, mutations)
+}
 
-  const clear = (device: DashboardDevice) => updateMarkupWidgets(device, [])
+export const useDashboard = (id?: Id) => {
+  // const response = api.useOptionsEndpoint(`${ENDPOINT}/${id}`)
+  const response = api.useOptionsEndpoint<Dashboard>(ENDPOINT, id)
+  const mutations = useDashboardMutations(id)
+  const widgets = useWidgets()
+  // TODO: setDevice after loading by active flag
+  const [device, setDevice] = useState<DashboardDevice>('computer')
+  const markup = response.devices?.[device]
 
-  // TODO: save only id in dashboard
-  // TODO: remove widgets by id list [id1, id2, id3]
-  const updateMarkupWidgets = (device: DashboardDevice, widgets: DashboardWidget[] = []) => setBoard((prev) => ({
-    ...prev,
-    devices: {
-      ...prev.devices,
-      [device]: { ...prev.devices[device], widgets },
-    },
-  }))
+  const isDevice = (value: DashboardDevice) => device === value
+  const clear = () => widgets.remove(widgets.map((widget) => widget?.id as number))
 
-  const addWidget = (device: DashboardDevice, widget: DashboardWidget) => updateMarkupWidgets(
-    device,
-    [...markup(device)?.widgets ?? [], { ...widget, id: markup(device)?.widgets.length } as DashboardWidget],
-  )
-
-  const updateWidget = (device: DashboardDevice, widget: Partial<DashboardWidget>) => updateMarkupWidgets(
-    device,
-    markup(device)?.widgets.map((i) => (i.id === widget.id ? {...i, ...widget} : i)),
-  )
-
-  const removeWidget = (device: DashboardDevice, id: Id) => updateMarkupWidgets(
-    device,
-    markup(device)?.widgets.filter((widget) => widget.id !== id),
-  )
-
-  return { loading: false, ...board, markup, update, clear, addWidget, updateWidget, removeWidget }
+  return { ...response, ...mutations, widgets, device, markup, isDevice, setDevice, clear }
 }

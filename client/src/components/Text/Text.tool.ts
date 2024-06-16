@@ -1,35 +1,31 @@
-import {
-  toTitle, toLowercase, toCapital, toUppercase,
-  toNumber, toAmount, toPercent, toCurrency, toSize, toWeight, toDecimalPercent,
-  toDate, toDay, toMonth, toYear, toDayMonthYear, toDayOfMonthYear, toDayName, toMonthName,
-} from 'tools'
+import { num, str, date } from 'tools'
 
 const STRING_FORMAT_MAP = {
-  title: toTitle,
-  capitalize: toCapital,
-  uppercase: toUppercase,
-  lowercase: toLowercase,
+  title: str.toTitle,
+  capitalize: str.toCapital,
+  uppercase: str.toUppercase,
+  lowercase: str.toLowercase,
 }
 
 const NUMBER_FORMAT_MAP = {
-  size: toSize,
-  weight: toWeight,
-  number: toNumber,
-  amount: toAmount,
-  currency: toCurrency,
-  percent: toPercent,
-  'decimal-percent': toDecimalPercent,
+  size: num.toSize,
+  weight: num.toWeight,
+  number: num.toNumber,
+  amount: num.toAmount,
+  currency: num.toCurrency,
+  percent: num.toPercent,
+  'decimal-percent': num.toDecimalPercent,
 }
 
 const DATE_FORMAT_MAP = {
-  date: toDate,
-  day: toDay,
-  month: toMonth,
-  year: toYear,
-  'day/month/year': toDayMonthYear,
-  'day-of-month-year': toDayOfMonthYear,
-  'day-name': toDayName,
-  'month-name': toMonthName,
+  date: date.toDate,
+  day: date.toDay,
+  month: date.toMonth,
+  year: date.toYear,
+  'day/month/year': date.toDayMonthYear,
+  'day-of-month-year': date.toDayOfMonthYear,
+  'day-name': date.toDayName,
+  'month-name': date.toMonthName,
 }
 
 export const FORMAT_MAP = {

@@ -5,8 +5,15 @@
 }
 
 .TableRow {
+  &:has(th) {
+    filter: var(--table-body-filter);
+  }
 }
 
 .Hover:hover > * {
-  background-color: #F7F7F7;
+  background-color: var(--table-primary-bg-color--hover);
+
+  &[class*='Fixed'] {
+    background-color: var(--table-secondary-bg-color--hover);
+  }
 }

@@ -5,7 +5,7 @@ import { cn } from 'tools'
 import { useParams } from 'router'
 import { useLocale } from 'locale'
 import { useApp } from 'App'
-import { DashboardDevice, DashboardWidget, useDashboard } from 'api'
+import { useDashboard, Widget as WidgetType } from 'api'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
@@ -15,7 +15,7 @@ import DashboardModalForm from 'screens/forms/DashboardModalForm'
 import WidgetModalForm from 'screens/forms/WidgetModalForm'
 
 // ---| components |---
-import Board, { BoardItem } from 'components/Board'
+import Board from 'components/Board'
 import Widget from 'components/Widget'
 import Menu from 'components/Menu'
 
@@ -39,13 +39,11 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const app = useApp()
   const { id } = useParams()
   const board = useDashboard(id)
-  // TODO: move to useDashboard and setDevice after loading by active flag
-  const [device, setDevice] = useState<DashboardDevice>('COMPUTER')
-  const [mode, setMode] = useState<boolean | DashboardWidget | undefined>(false)
+  const [mode, setMode] = useState<boolean | WidgetType | undefined>(false)
   const switchSelect = useCallback(() => setMode((flag) => !flag), [])
 
   const handleSelect = (place: any) => {
-    board.addWidget(device, {
+    board.widgets.create({
       name: 'NEW WIDGET',
       place,
       id: 99,
@@ -55,22 +53,23 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
     })
     switchSelect()
   }
-  const handleReselect = (item: BoardItem) => {
+  const handleReselect = (item: WidgetType) => {
     setMode(false)
-    board.updateWidget(device, item)
+    board.widgets.update(item)
   }
   const handleError = (error: any) => { console.log('handleError', error) }
 
   const actions = [
-    { start: 'lightbulb', tooltip: 'Active', active: board.markup(device)?.active },
+    { start: 'lightbulb', tooltip: 'Active', active: board.markup?.active },
     { start: 'dashboard_customize', tooltip: locale.t('ACTION.ADD_WIDGET'), onClick: switchSelect },
-    { start: 'border_clear', tooltip: locale.t('ACTION.CLEAR'), onClick: () => board.clear(device) },
+    { start: 'border_clear', tooltip: locale.t('ACTION.CLEAR'), onClick: () => board.clear() },
     {
       start: 'computer', items: [
-        { start: 'tv', content: locale.t('DEVICE.TV'), active: device === 'TV', onClick: () => setDevice('TV') },
-        { start: 'computer', content: locale.t('DEVICE.COMPUTER'), active: device === 'COMPUTER', onClick: () => setDevice('COMPUTER') },
-        { start: 'tablet_mac', content: locale.t('DEVICE.TABLET'), active: device === 'TABLET', onClick: () => setDevice('TABLET') },
-        { start: 'phone_iphone', content: locale.t('DEVICE.MOBILE'), active: device === 'MOBILE', onClick: () => setDevice('MOBILE') },
+        { start: 'tv', content: locale.t('DEVICE.TV'), active: board.isDevice('tv'), onClick: () => board.setDevice('tv') },
+        { start: 'computer', content: locale.t('DEVICE.COMPUTER'), active: board.isDevice('computer'), onClick: () => board.setDevice('computer') },
+        { start: 'tablet_mac', content: locale.t('DEVICE.TABLET'), active: board.isDevice('tablet'), onClick: () => board.setDevice('tablet') },
+        { start: 'phone_iphone', content: locale.t('DEVICE.MOBILE'), active: board.isDevice('mobile'), onClick: () => board.setDevice('mobile') },
+        { start: 'watch', content: locale.t('DEVICE.WATCH'), active: board.isDevice('watch'), onClick: () => board.setDevice('watch') },
       ],
     },
     { start: 'beenhere', tooltip: locale.t('ACTION.ADD_TO_MENU') },
@@ -79,14 +78,14 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   ]
 
   return (
-    <Page className={_className} name={board?.name} actions={actions} noFooter {...otherProps}>
+    <Page className={_className} name={board?.name} actions={actions} {...otherProps}>
       <Page.Content>
         {/* TODO: add spinner on loading to page component */}
         <Board
           padding={8}
-          rows={board.markup(device)?.rows}
-          columns={board.markup(device)?.columns}
-          items={board.markup(device)?.widgets}
+          rows={board.markup?.rows}
+          columns={board.markup?.columns}
+          items={board.widgets}
           select={mode}
           widget={(p) => (
             <Menu
@@ -99,7 +98,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
                 { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
                 { start: 'book', tooltip: locale.t('ACTION.DOCS') },
                 { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'widget-settings', payload: p.options }) },
-                { start: 'close', tooltip: locale.t('ACTION.REMOVE'), onClick: () => board.removeWidget(device, p.options.id) },
+                { start: 'close', tooltip: locale.t('ACTION.REMOVE'), onClick: () => board.widgets.remove(p.options.id) },
               ]}
               trigger={(o) => <Widget active={o.open} {...p} />}
             />
@@ -111,7 +110,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
       </Page.Content>
 
       <DashboardModalForm payload={board} onSubmit={(patch) => patch && board.update(patch)} />
-      <WidgetModalForm onSubmit={(patch) => patch && board.updateWidget(device, patch)} />
+      <WidgetModalForm onSubmit={(patch) => patch && board.widgets.update(patch)} />
 
       {children}
     </Page>

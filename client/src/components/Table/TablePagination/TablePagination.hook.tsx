@@ -27,9 +27,9 @@ export function useTablePagination(options: TablePaginationOptions): TablePagina
   } = options
   const [currentPage, setPage] = React.useState(page)
   const [currentRowsPerPage, setCurrentRowsPerPage] = React.useState(
-    typeof rowsPerPageOptions[0] === 'number'
-      ? rowsPerPageOptions[0]
-      : rowsPerPageOptions[0].value,
+    typeof rowsPerPageOptions[1] === 'number'
+      ? rowsPerPageOptions[1]
+      : rowsPerPageOptions[1].value,
   )
 
   const onPageChange = useCallback((_: unknown, newPage: number) => setPage(newPage), [])

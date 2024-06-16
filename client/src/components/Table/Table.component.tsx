@@ -18,16 +18,20 @@ import TableBody from './TableBody'
 import { useTableManager } from './Table.hook'
 import TablePagination, { TablePaginationProps } from './TablePagination'
 import { TableColumn, TableFilter, TableKeygen, TableRecord } from './Table.type'
+import { TableRowMenuItem } from './TableRowMenu'
 
 export type TableProps<T extends TableRecord> = {
   items?: T[]
   width?: number | string
   height?: number | string
+  minHeight?: number | string
   columns?: TableColumn<T>[]
   filters?: TableFilter<T>[]
   pagination?: boolean | TablePaginationProps
   loading?: boolean
+  actions?: TableRowMenuItem[]
   className?: string
+  children?: React.ReactNode
   keygen?: TableKeygen<T>
 }
 
@@ -39,17 +43,21 @@ export type TableProps<T extends TableRecord> = {
  * <Table />
  */
 export function Table<T extends TableRecord>(props: TableProps<T>): JSX.Element {
-  const { width = '100%', height = '100%', loading, items, columns, filters, pagination, keygen, className, ...otherProps } = props
+  const { actions, width = '100%', height = '100%', minHeight, loading, items, columns, filters, pagination, keygen, children, className, ...otherProps } = props
   const _className = cn(css.Table, className)
-  const manager = useTableManager({ items, columns, filters, pagination })
+  const manager = useTableManager({ items, columns, filters, pagination, actions })
 
   // TODO: add Reset button to last column: reset sorting and filters and other column settings
   return (
-    <div style={{ width, height }} className={_className} {...otherProps}>
-      <MuiTableContainer sx={{ height: 'inherit', width: 'inherit' }}>
+    <div className={_className} style={{ width, height, minHeight }} {...otherProps}>
+      <TablePagination show={!!pagination} {...manager.pagination} />
+
+      <MuiTableContainer className={css.TableContainer} sx={{ height: '100%', width: '100%' }}>
         <MuiTable stickyHeader aria-label='sticky table'>
           <TableHead columns={manager.columns} onSort={manager.sort} />
           <TableBody columns={manager.columns} items={manager.pageItems} keygen={keygen} />
+
+          {children}
         </MuiTable>
 
         <Scroll key={manager.pageItems.length} v='xy' size='sm' top={60}>
@@ -61,8 +69,6 @@ export function Table<T extends TableRecord>(props: TableProps<T>): JSX.Element 
           />
         </Scroll>
       </MuiTableContainer>
-
-      <TablePagination show={!!pagination} {...manager.pagination} />
     </div>
   )
 }

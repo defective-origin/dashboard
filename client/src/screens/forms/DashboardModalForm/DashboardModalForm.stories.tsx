@@ -29,7 +29,7 @@ export const Demo: Story = {
       author: 0,
       access: 'PRIVATE',
       devices: {
-        computer: { active: true, rows: 10, columns: 10, widgets: [] },
+        computer: { active: true, rows: 10, columns: 10 },
       },
     },
   },

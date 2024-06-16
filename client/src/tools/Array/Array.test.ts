@@ -55,4 +55,10 @@ describe('[Array] tool', () => {
       expect(tools.sort(items, 'desc', (item) => item.field)).toEqual([obj3, obj2, obj1, objNull, objUndefined])
     })
   })
+
+  describe('[repeat] action', () => {
+    it('should create items x times', () => {
+      expect(tools.repeat(4, (index) => index)).toEqual([0, 1, 2, 3])
+    })
+  })
 })

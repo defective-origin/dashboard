@@ -1,20 +1,23 @@
 import { useState, useMemo, useCallback } from 'react'
 import { ThemeVariant } from 'theme'
-import { ApiResponse, useOptionsEndpoint } from './api.endpoint'
-import { USER, User } from './user.endpoint'
+import api, { ApiResponse } from './api.endpoint'
+import { Id } from './api.type'
+import { useUser } from './user.endpoint'
 
 
 const ENDPOINT = 'account'
 
-export type AccountRole = 'admin' | 'anonymous' | 'user'
+export type AccountRole = 'ADMIN' | 'ANONYMOUS' | 'USER'
 
 export type Account = {
-  user: User
+  user: Id
   theme: ThemeVariant
   role: AccountRole
 }
 
-export const ACCOUNT: Account = { user: USER, theme: 'light', role: 'anonymous' }
+export const ACCOUNT: Account = { user: 0, theme: 'light', role: 'ANONYMOUS' }
+
+api.reg(ENDPOINT, ACCOUNT)
 
 export type AccountManager = ApiResponse<Account> & {
   login: () => void,
@@ -24,8 +27,9 @@ export type AccountManager = ApiResponse<Account> & {
 }
 
 export const useAccount = (): AccountManager => {
-  const response = useOptionsEndpoint(ENDPOINT, ACCOUNT)
-  const [account, update] = useState<Partial<Account> | null>(null)
+  const response = api.useOptionsEndpoint<Account>(ENDPOINT)
+  const user = useUser(response.user)
+  const [account, update] = useState<Partial<Account> | null>(ACCOUNT)
 
   const login = useCallback(() => update(ACCOUNT), [])
   const logout = useCallback(() => update(null), [])

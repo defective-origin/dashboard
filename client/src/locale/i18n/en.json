@@ -73,7 +73,8 @@
     "TABLET_HORIZONTAL": "$t(DEVICE.TABLET) [$t(ORIENTATION.HORIZONTAL)]",
     "MOBILE": "Mobile",
     "MOBILE_VERTICAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.VERTICAL)]",
-    "MOBILE_HORIZONTAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.HORIZONTAL)]"
+    "MOBILE_HORIZONTAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.HORIZONTAL)]",
+    "WATCH": "Watch"
   },
   "GROUPS": {
     "DISPLAY": "Display",
@@ -86,11 +87,16 @@
     "GUIDE": "Guide",
     "DONATION": "Donation",
     "SUPPORT": "Support",
-    "ACCOUNT": "Account"
+    "ACCOUNT": "Account",
+    "SUBSCRIPTIONS": "Subscriptions"
   },
   "MESSAGES": {
     "UNDER_CONSTRUCTION": "{{name}} is under construction.",
     "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
+  },
+  "LABEL": {
+    "FAVORITE": "Favorite: {{count}}",
+    "USAGE": "Usage: {{count}}"
   },
   "FORM": {
     "BOARD_SETTINGS": "Dashboard settings",

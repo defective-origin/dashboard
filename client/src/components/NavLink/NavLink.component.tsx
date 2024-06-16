@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -29,6 +29,7 @@ export type NavLinkProps<Name extends RouteLinks = 'ROOT'> = ActionProps & {
     [key in PathParam<RoutePath<Name>>]: string | null;
   }
 }
+// TODO: remove forwardRef after migrating to react 19
 
 /**
  * Component description.
@@ -37,7 +38,7 @@ export type NavLinkProps<Name extends RouteLinks = 'ROOT'> = ActionProps & {
  * @example
  * <NavLink to='WIDGETS' />
  */
-export function NavLink<Name extends RouteLinks>(props: NavLinkProps<Name>): JSX.Element {
+export const NavLink = forwardRef<unknown, NavLinkProps>(<Name extends RouteLinks,>(props: NavLinkProps<Name>, ref: React.LegacyRef<unknown>): JSX.Element => {
   const { to = 'ROOT', params, search, active, className, ...otherProps } = props
   const _className = cn(css.NavLink, className)
   const template = `${ROUTE_LINKS[to]}?${createSearchParams(search)}`
@@ -46,6 +47,7 @@ export function NavLink<Name extends RouteLinks>(props: NavLinkProps<Name>): JSX
 
   return (
     <Action
+      ref={ref}
       as={RouteLink}
       className={_className}
       to={url}
@@ -53,8 +55,8 @@ export function NavLink<Name extends RouteLinks>(props: NavLinkProps<Name>): JSX
       {...otherProps}
     />
   )
-}
+}) as <Name extends RouteLinks,>(props: NavLinkProps<Name>, ref: unknown) => JSX.Element
 
-NavLink.displayName = 'NavLink'
+// NavLink.displayName = 'NavLink'
 
 export default NavLink

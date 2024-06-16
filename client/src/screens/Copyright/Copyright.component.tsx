@@ -7,13 +7,14 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
+import Icon, { IconProps } from 'components/Icon'
+import Tooltip, { TooltipVariant } from 'components/Tooltip'
 
 // ---| self |---
 import css from './Copyright.module.scss'
 
-export type CopyrightProps = {
-  className?: string
+export type CopyrightProps = Partial<IconProps> & {
+  tooltip?: TooltipVariant
 }
 
 /**
@@ -24,17 +25,14 @@ export type CopyrightProps = {
  * <Copyright />
  */
 export function Copyright(props: CopyrightProps): JSX.Element {
-  const { className, ...otherProps } = props
+  const { tooltip, className, ...otherProps } = props
   const _className = cn(css.Copyright, className)
   const locale = useLocale()
 
   return (
-    <Text.Body2
-      className={_className}
-      color='secondary'
-      content={locale.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}
-      {...otherProps}
-    />
+    <Tooltip v={tooltip} content={locale.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}>
+      <Icon className={_className} v='copyright' size='sm' {...otherProps} />
+    </Tooltip>
   )
 }
 

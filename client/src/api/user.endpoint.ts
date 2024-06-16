@@ -1,5 +1,5 @@
-import { Email, Id } from './api.type'
-import { useOptionsEndpoint } from './api.endpoint'
+import { Email, Id, ShortText } from './api.type'
+import api from './api.endpoint'
 
 
 const ENDPOINT = 'users'
@@ -7,8 +7,16 @@ const ENDPOINT = 'users'
 export type User = {
   id: Id
   email: Email
+  name: ShortText
+  image?: string
 }
 
-export const USER: User = { id: 0, email: 'user@email.com' }
+export const USERS: User[] = Array.from({length: 10}, (_, id) => ({
+  id,
+  name: `User ${id}`,
+  email: `user${id}@email.com`,
+}))
 
-export const useUser = () => useOptionsEndpoint(ENDPOINT, USER)
+api.reg(ENDPOINT, USERS)
+
+export const useUser = (id?: Id) => api.useOptionsEndpoint<User>(ENDPOINT, id)

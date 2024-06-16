@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 // ---| core |---
-import { SortSelector, get, sort } from 'tools'
+import { obj, arr, str } from 'tools'
 
 // ---| self |---
 import { TableColumn, TableFilter, TableOrder, TableRecord, TableSort } from './Table.type'
 import { TablePaginationOptions, useTablePagination } from './TablePagination'
+import TableRowMenu, { TableRowMenuItem } from './TableRowMenu'
 
 const ORDER_NEXT_MAP: Record<TableOrder | 'undefined', TableOrder | undefined> = {
   undefined: 'asc',
@@ -18,6 +19,7 @@ export type TableManagerOptions<T extends TableRecord> = {
   columns?: TableColumn<T>[]
   filters?: TableFilter<T>[]
   pagination?: boolean | TablePaginationOptions
+  actions?: TableRowMenuItem[]
 }
 
 export const useTableManager = <T extends TableRecord>(options: TableManagerOptions<T>) => {
@@ -31,6 +33,19 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
 
   // setup columns
   useLayoutEffect(() => {
+    // add actions
+    if (options.actions && !options.columns?.find((c) => c.key === 'actions')) {
+      options.columns?.push({
+        key: 'actions',
+        align: 'center',
+        width: 56,
+        fixed: true,
+        cell: TableRowMenu,
+        props: { padding: 0 },
+        mapper: (record, column) => ({ items: options.actions, record, column }),
+      })
+    }
+
     // setup left and right position for fixed columns
     const fixedColumns = options.columns?.filter((column) => column.fixed) ?? []
 
@@ -56,13 +71,16 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
       if (!leftColumn.width || !rightColumn.width) {
         const columnWithoutSize = leftColumn.width ? leftColumn : rightColumn
 
-        throw new Error(`Fixed column should have width or minWidth property: ${JSON.stringify(columnWithoutSize)}`)
+        console.error(`Fixed column should have width or minWidth property: ${JSON.stringify(columnWithoutSize)}`)
       }
     }
 
     options.columns?.forEach((column, idx) => {
       // setup key
       column.key = column.key ?? column.field ?? idx
+
+      // setup name by field name by default
+      column.name = column.name ?? str.toCapital(column.field?.split('.').at(-1) ?? '')
 
       // setup alignment
       column.alignCell = column.alignCell ?? column.align
@@ -71,10 +89,11 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
       column.sortBy = column.sort ? column.sortBy ?? column.field : undefined
       if (typeof column.sort === 'boolean') {
         if (!column.sortBy) {
-          throw new Error(`If column has column.sort: true then column.field or column.sortBy should be set. Column: ${JSON.stringify(column)}`)
+          console.error(`If column has column.sort: true then column.field or column.sortBy should be set. Column: ${JSON.stringify(column)}`)
+          column.sort = undefined
+        } else {
+          column.sort = (_, __, field) => field
         }
-
-        column.sort = (_, __, field) => field
       }
 
       // setup render function
@@ -91,7 +110,7 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
     })
 
     setColumns(options.columns?.map((column) => ({ ...column })) ?? [])
-  }, [options.columns])
+  }, [options.actions, options.columns])
 
 
   // setup items
@@ -107,9 +126,9 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
 
   const sortItems = useCallback((column: TableColumn<T>) => {
     const order = ORDER_NEXT_MAP[column.order as TableOrder]
-    const selector = (item: T) => (column.sort as TableSort<T>)(item, column, get(item, column.sortBy))
+    const selector = (item: T) => (column.sort as TableSort<T>)(item, column, obj.get(item, column.sortBy))
     const sortedItems = order
-      ? sort(preparedItems.current, order, selector)
+      ? arr.sort(preparedItems.current, order, selector)
       : preparedItems.current
 
 

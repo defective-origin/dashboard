@@ -12,7 +12,7 @@ import Form, { FormProps } from 'components/Form'
 // ---| self |---
 import css from './ModalForm.module.scss'
 
-export type ModalFormProps<T> = ModalProps<T> & Pick<FormProps, 'onReset' | 'onSubmit'> & {
+export type ModalFormProps<T extends object, F extends object = T> = ModalProps<T> & Pick<FormProps<F>, 'onReset' | 'onSubmit'> & {
   name?: ModalName
   title?: React.ReactNode
 }
@@ -41,7 +41,7 @@ export type ModalFormProps<T> = ModalProps<T> & Pick<FormProps, 'onReset' | 'onS
  *  )
  * }
  */
-export function ModalForm<T>(props: ModalFormProps<T>): JSX.Element {
+export function ModalForm<T extends object, F extends object = T>(props: ModalFormProps<T, F>): JSX.Element {
   const { onSubmit, onReset, open, title, name, children, className, ...otherProps } = props
   const _className = cn(css.ModalForm, className)
   const resetId = `modal-form-reset-${name}`

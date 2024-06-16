@@ -1,13 +1,10 @@
 import React from 'react'
 
 // ---| core |---
-import { useApp } from 'App'
 import { TranslateKeys, useLocale } from 'locale'
 import { cn, react } from 'tools'
 
 // ---| screens |---
-import Copyright from 'screens/Copyright'
-
 // ---| components |---
 import Text from 'components/Text'
 import Portal from 'components/Portal'
@@ -26,12 +23,13 @@ import Section from 'components/Section'
 // ---| self |---
 import css from './Page.module.scss'
 
+export type PageMenuItem = ActionItem
+
 export type PageProps = LayoutProps & {
   name?: TranslateKeys
   meta?: MetaItem[]
   menu?: ActionItem[]
   actions?: ActionItem[]
-  noFooter?: boolean
 }
 
 /**
@@ -42,17 +40,11 @@ export type PageProps = LayoutProps & {
  * <Page />
  */
 export function Page(props: PageProps): JSX.Element {
-  const { noFooter, menu = [], actions = [], name, meta, children, className, ...otherProps } = props
+  const { menu = [], actions = [], name, meta, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
-  const app = useApp()
   const locale = useLocale()
   const pageName = locale.t(name)
   const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
-
-  const menuItems: ActionItem[] = [
-    ...menu,
-    { key: '0', start: 'login', v: 'outlined', content: locale.t('ACTION.LOGIN'), color: 'secondary', onClick: app.login, hide: app.isAuthorized() },
-  ]
 
   const actionItems: ActionItem[] = actions.map((item) =>
     typeof item === 'object'
@@ -69,16 +61,10 @@ export function Page(props: PageProps): JSX.Element {
       <Meta title={tabName} items={meta} />
 
       <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
-      <Portal name='page-menu' content={<Actions items={menuItems} g='xs' size='xs' />} />
+      <Portal name='page-menu' content={<Actions items={menu} g='xs' size='xs' />} />
       <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' size='lg' />} />
 
       {children}
-
-      {!noFooter && (
-        <Footer justifies='center'>
-          <Copyright />
-        </Footer>
-      )}
     </Layout>
   )
 }

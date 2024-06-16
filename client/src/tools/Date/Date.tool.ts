@@ -1,4 +1,4 @@
-import { UnitOptions } from '../Number'
+import { NumberUnit } from '../Number'
 import { DATE_OPTIONS } from './Date.constant'
 
 export type DateValue = number | string
@@ -33,8 +33,8 @@ export const toDayName = (v: DateValue) => toDate(v, { weekday: 'long' })
 /** February */
 export const toMonthName = (v: DateValue) => toDate(v, { month: 'long' })
 
-export const getDayPostfix = (value: DateValue, options: UnitOptions, defaultPostfix = 'th') => {
-  return options.find((option) => Number(value) === option.value)?.postfix ?? defaultPostfix
+export const getDayPostfix = (value: DateValue, units: NumberUnit[], defaultSign = 'th') => {
+  return units.find((unit) => Number(value) === unit.value)?.sign ?? defaultSign
 }
 
 /** 27th of February 2024 */

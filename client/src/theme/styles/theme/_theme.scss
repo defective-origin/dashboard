@@ -20,8 +20,8 @@
   @include init-space-variables;
   @include init-scroll-variables;
 
-  --divider-color: #26557326;
+  --divider-color: #CACDD1A1;
   --border-radius: 4px;
   --border: 1px solid var(--divider-color);
-  --box-shadow: #0000001A 0 1px 3px 0;
+  --box-shadow: #0000001A 0 0 2px 0;
 }

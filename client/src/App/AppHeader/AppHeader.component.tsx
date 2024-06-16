@@ -1,9 +1,6 @@
 import React from 'react'
-import { Avatar } from '@mui/material'
 
 // ---| core |---
-import { useLocale } from 'locale'
-import { useApp } from 'App'
 import { cn } from 'tools'
 
 // ---| pages |---
@@ -11,7 +8,6 @@ import { cn } from 'tools'
 // ---| components |---
 import Block from 'components/Block'
 import Portal from 'components/Portal'
-import Button from 'components/Button'
 import Header, { HeaderProps } from 'components/Header'
 
 // ---| self |---
@@ -29,25 +25,17 @@ export type AppHeaderProps = HeaderProps
 export function AppHeader(props: AppHeaderProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
-  const app = useApp()
-  const locale = useLocale()
 
   return (
     <Header className={_className} as='header' area='top' justifies='space-between' p='xxs' g='xxs' {...otherProps}>
       <Block className={css.Content} v='x' aligns='center' g='xxs'>
-        <Portal.Container name='page-name' />
+        <Portal.Container name='page-name' v='x' g='xs' />
 
         {children}
       </Block>
 
       <Block className={css.Extra} v='x' aligns='center' g='xxs'>
         <Portal.Container name='page-menu' />
-
-        {app.isAuthorized() && (
-          <Button round onClick={app.logout} tooltip={locale.t('ROUTE.ACCOUNT')}>
-            <Avatar sx={{ width: 36, height: 36 }} alt='user image' />
-          </Button>
-        )}
       </Block>
     </Header>
   )

@@ -3,7 +3,7 @@ import MuiTableCell from '@mui/material/TableCell'
 import MuiTableSortLabel from '@mui/material/TableSortLabel'
 
 // ---| core |---
-import { cn, get } from 'tools'
+import { cn, obj } from 'tools'
 
 // ---| pages |---
 // ---| screens |---
@@ -62,7 +62,7 @@ export function TableCell<T extends TableRecord>(props: TableCellProps<T>): JSX.
     )
   }
 
-  const field = column.field && get(item as T, column.field)
+  const field = column.field && obj.get(item as T, column.field)
 
   return (
     <MuiTableCell className={_className} align={column.alignCell} style={style} {...otherProps}>

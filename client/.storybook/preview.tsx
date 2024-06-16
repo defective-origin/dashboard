@@ -4,17 +4,25 @@ import ThemeProvider from '../src/theme'
 import { BrowserRouter } from '../src/router'
 import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import { AppProvider } from '../src/App/App.context'
+import { useAccount } from '../src/api'
 
 import "./index.scss";
 
-const StorybookLauncher = ({ children, theme = undefined }) => (
-  <BrowserRouter>
-    {/* Mui injectFirst doesn't work with this decorator */}
-    <ThemeProvider theme={theme}>
-      {children}
-    </ThemeProvider>
-  </BrowserRouter>
-)
+const StorybookLauncher = ({ children, theme = undefined }) => {
+  const account = useAccount()
+
+  return (
+    <AppProvider account={account}>
+      <BrowserRouter>
+        {/* Mui injectFirst doesn't work with this decorator */}
+        <ThemeProvider theme={theme}>
+          {children}
+        </ThemeProvider>
+      </BrowserRouter>
+    </AppProvider>
+  )
+}
 
 export const decorators = [
   (Story) => (

@@ -34,7 +34,6 @@ type TextVariant = 'primary' | 'secondary'
 All api union types should have `uppercase` notation
 ```typescript
 type ACCESS = 'PRIVATE' | 'PUBLIC'
-type DEVICE = 'TV' | 'COMPUTER' | 'TABLET' | 'MOBILE'
 ```
 
 ### Variables

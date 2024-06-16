@@ -7,11 +7,14 @@ import { cn } from 'tools'
 
 // ---| components |---
 import Aside, { AsideProps } from 'components/Aside'
-import Logo from 'components/Logo'
 import Actions from 'components/Actions'
+
+// ---| components |---
+import Account from 'screens/Account'
 
 // ---| self |---
 import css from './AppMenu.module.scss'
+import Copyright from 'screens/Copyright'
 
 export type AppMenuProps = AsideProps
 
@@ -30,12 +33,12 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
 
   return (
     <Aside className={_className} as='nav' {...otherProps}>
-      <Logo />
+      <Account />
 
       <Actions className={css.Main} v='y' grow={1}>
         <Actions.Nav start='dashboard' to='BOARDS' tooltip={locale.t('ROUTE.BOARDS')} tooltipSide='right' size='lg' />
         <Actions.Nav start='insert_chart' to='WIDGETS' tooltip={locale.t('ROUTE.WIDGETS')} tooltipSide='right' size='lg' />
-        <Actions.Button start='add' to='WIDGETS' tooltip='Add Board' tooltipSide='right' size='lg' />
+        <Actions.Button start='add' tooltip='Add Board' tooltipSide='right' size='lg' />
 
         {children}
       </Actions>
@@ -57,7 +60,10 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
         >
           {locale.languages.map((lang) => <Actions.Button key={lang} v='text' size='xs' stretch content={lang} />)}
         </Actions.Menu> */}
+
+        <Copyright className={css.Copyright} tooltip='right' />
       </Actions>
+
     </Aside>
   )
 }

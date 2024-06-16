@@ -19,6 +19,7 @@ type Item = {
 }
 
 const COLUMNS: TableColumn<Item>[] = [
+  // base config with alignment, data mapping and props providing
   {
     fixed: true,
     name: 'Name',
@@ -37,12 +38,13 @@ const COLUMNS: TableColumn<Item>[] = [
     minWidth: 100,
     bold: true,
   }),
+  // name taken from field
   column.number({
-    name: 'Population',
     field: 'population',
     format: 'amount',
     bold: true,
   }),
+  // fixed column
   column.number({
     fixed: true,
     field: 'size',
@@ -58,6 +60,7 @@ const COLUMNS: TableColumn<Item>[] = [
     field: 'salary',
     format: 'currency',
   }),
+  // manual map data to component props
   column.number({
     fixed: true,
     name: 'GDP',
@@ -142,6 +145,10 @@ export const Demo: Story = {
     height: 500,
     pagination: true,
     loading: false,
+    actions: [
+      { start: 'add', content: 'Add' },
+      { start: 'delete', content: 'Delete' },
+    ],
     keygen: (item, index) => `${item.name}-${item.code}-${index}`,
   },
 }

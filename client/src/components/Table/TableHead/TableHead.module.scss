@@ -5,4 +5,7 @@
 }
 
 .TableHead {
+  background: var(--table-bg-color);
+  position: sticky;
+  top: 0;
 }

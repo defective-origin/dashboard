@@ -38,13 +38,15 @@ export function Help(props: HelpProps): JSX.Element {
   const { messages, title, open, height = 300, className, content, children = content, ...otherProps } = props
   const _className = cn(css.Help, className)
 
-  return <Popup
-    className={_className}
-    arrow
-    open={open}
-    v='top'
-    trigger={() => <Button start='help' />}
-    content={
+  return (
+    <Popup
+      className={_className}
+      arrow
+      open={open}
+      v='top'
+      trigger={(o) => <Button start='help' active={o.open} />}
+      {...otherProps}
+    >
       <Card style={{ maxHeight: height }}>
         <Card.Header title={title}/>
         <Card.Content>
@@ -53,9 +55,8 @@ export function Help(props: HelpProps): JSX.Element {
           <Messages items={messages} size='xs'/>
         </Card.Content>
       </Card>
-    }
-    {...otherProps}
-  />
+    </Popup>
+  )
 }
 
 Help.displayName = 'Help'

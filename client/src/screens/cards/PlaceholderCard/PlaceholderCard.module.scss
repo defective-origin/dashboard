@@ -8,6 +8,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
 }
 
 .Message {

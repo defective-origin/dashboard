@@ -1,5 +1,5 @@
-import { Id, IsoDate, RichText, Url } from './api.type'
-import { useListEndpoint } from './api.endpoint'
+import { Id, IsoDate, RichText } from './api.type'
+import api from './api.endpoint'
 
 const ENDPOINT = 'releases'
 
@@ -25,5 +25,7 @@ export const RELEASES: Release[] = Array.from({length: 4}, (_, id) => ({
   date: new Date().toISOString(),
 }))
 
+api.reg(ENDPOINT, RELEASES)
+
 /** Return releases for item with passed `id` */
-export const useReleases = (id?: Id) => useListEndpoint(`${ENDPOINT}/${id}`, [...RELEASES])
+export const useReleases = (id: Id) => api.useListEndpoint<Release>(ENDPOINT)
