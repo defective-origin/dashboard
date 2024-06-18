@@ -20,6 +20,7 @@
 }
 
 .TableContainer {
+  background: var(--table-bg-color);
   box-shadow: var(--table-shadow);
   border-radius: var(--border-radius);
   flex-grow: 1;
