@@ -92,7 +92,7 @@ export const WIDGETS: Widget[] = [
   access: 'PRIVATE',
   key: 'WIDGET.KEY',
   endpoint: 'url.com',
-  description: 'widget description',
+  description: 'description '.repeat(50),
   version: `${id}.${id}.${id}`,
   tags: ['chart', 'bars', 'linear', 'donut', 's-curve'],
   place,
@@ -112,7 +112,7 @@ export const useWidgets = (ids?: Id[]) => {
   return Object.assign(response, mutations)
 }
 
-export const useWidget = (id: Id) => {
+export const useWidget = (id?: Id) => {
   // const response = api.useOptionsEndpoint(`${ENDPOINT}/${id}`, id)
   const response = api.useOptionsEndpoint<Widget>(ENDPOINT, id)
   const mutations = useWidgetMutations(id)

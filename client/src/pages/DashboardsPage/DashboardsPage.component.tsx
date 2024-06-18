@@ -28,10 +28,15 @@ export function DashboardsPage(props: DashboardsPageProps): JSX.Element {
   const _className = cn(css.DashboardsPage, className)
   const boards = useDashboards()
 
+  const menu = [
+    { start: 'add', tooltip: 'Add Board', tooltipSide: 'right', size: 'lg' },
+  ]
+
   return (
     <SelectPage
       className={_className}
       name='PAGES.DASHBOARDS'
+      menu={menu}
       items={boards}
       as={DashboardPreviewCard}
     />

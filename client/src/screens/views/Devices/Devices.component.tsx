@@ -6,7 +6,7 @@ import { DashboardDevice, DashboardDevices } from 'api'
 
 // ---| pages |---
 // ---| screens |---
-import Device from 'screens/Device'
+import Device from 'screens/views/Device'
 
 // ---| components |---
 import Block, { BlockProps } from 'components/Block'

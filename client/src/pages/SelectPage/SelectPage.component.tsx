@@ -28,6 +28,8 @@ export function SelectPage<T>(props: SelectPageProps<T>): JSX.Element {
   const { items, as: Tag, keygen, children, className, ...otherProps } = props
   const _className = cn(css.SelectPage, className)
 
+  // TODO: add filters: devices, author ...
+
   return (
     <Page className={_className} {...otherProps}>
       <Page.Content columns={5} scroll='y' p='xs' g='md'>

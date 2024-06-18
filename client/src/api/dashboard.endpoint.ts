@@ -28,7 +28,7 @@ const DASHBOARDS: Dashboard[] = Array.from({length: 21}, (_, id) => ({
   id,
   image: 'https://shorturl.at/xJu8i',
   name: `BOARD NAME ${id}`,
-  description: 'dashboard description',
+  description: 'description '.repeat(50),
   author: id,
   access: 'PRIVATE',
   price: id ** 10,

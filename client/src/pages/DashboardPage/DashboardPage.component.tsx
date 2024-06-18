@@ -50,6 +50,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
       author: 0,
       access: 'PRIVATE',
       version: '0.0.0',
+      image: 'https://shorturl.at/xJu8i',
     })
     switchSelect()
   }

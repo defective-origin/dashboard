@@ -38,7 +38,6 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <Actions className={css.Main} v='y' grow={1}>
         <Actions.Nav start='insert_chart' to='WIDGETS' tooltip={locale.t('ROUTE.WIDGETS')} tooltipSide='right' size='lg' />
         <Actions.Nav start='dashboard' to='BOARDS' tooltip={locale.t('ROUTE.BOARDS')} tooltipSide='right' size='lg' />
-        <Actions.Button start='add' tooltip='Add Board' tooltipSide='right' size='lg' />
 
         {children}
       </Actions>
