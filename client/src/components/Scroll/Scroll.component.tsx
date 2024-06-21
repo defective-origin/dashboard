@@ -146,6 +146,9 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
           marginBottom: hasBarX ? otherOptions.indent : undefined,
         }}
       />
+
+      {barY?.shadows}
+      {barX?.shadows}
     </div>
   )
 }

@@ -15,7 +15,8 @@
   --scroll-thumb-color--hover: #33333354;
   --scroll-thumb-color--active: #33333354;
 
-  // --ui-framework-color: var(--account-framework-color);
+  // shadow
+  --scroll-shadow-color: #0000000F;
 }
 
 :global {
@@ -56,5 +57,37 @@
     &:hover {
       opacity: 1;
     }
+  }
+
+  .shadow {
+    position: absolute;
+  }
+
+  .shadow-y--start {
+    width: 100%;
+    height: 10px;
+    top: 0;
+    background: linear-gradient(180deg, var(--scroll-shadow-color), transparent);
+  }
+
+  .shadow-y--end {
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+    background: linear-gradient(0deg, var(--scroll-shadow-color), transparent);
+  }
+
+  .shadow-x--start {
+    width: 10px;
+    height: 100%;
+    left: 0;
+    background: linear-gradient(90deg, var(--scroll-shadow-color), transparent);
+  }
+
+  .shadow-x--end {
+    width: 10px;
+    height: 100%;
+    right: 0;
+    background: linear-gradient(270deg, var(--scroll-shadow-color), transparent);
   }
 }

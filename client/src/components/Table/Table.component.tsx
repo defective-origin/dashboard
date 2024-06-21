@@ -62,7 +62,7 @@ export function Table<T extends TableRecord>(props: TableProps<T>): JSX.Element 
           {children}
         </MuiTable>
 
-        <Scroll key={manager.pageItems.length} v='xy' size='sm' top={60}>
+        <Scroll key={manager.pageItems.length} v='xy' size='sm' top={56}>
           <Banner
             v='empty'
             loading={loading}

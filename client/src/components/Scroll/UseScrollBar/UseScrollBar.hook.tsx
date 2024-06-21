@@ -56,8 +56,9 @@ export type ScrollBarReturnOptions = null | {
   hide: () => void
   show: () => void
   resize: (_container?: number, _content?: number, shift?: number) => void
-  element: JSX.Element | boolean
-  button: JSX.Element | boolean
+  shadows: JSX.Element
+  element: JSX.Element
+  button: JSX.Element
 }
 
 /**
@@ -85,6 +86,8 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   const startMovePos = useRef<ScrollShift | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const thumbRef = useRef<HTMLDivElement>(null)
+  const shadowStartRef = useRef<HTMLDivElement>(null)
+  const shadowEndRef = useRef<HTMLDivElement>(null)
   const backButtonRef = useRef<HTMLDivElement>(null)
   const property = SCROLLBAR_PROPERTY_MAP[v]
   const scrollTrackClassName = cn('scroll-track', {
@@ -116,6 +119,14 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     }
   })
 
+  const showShadow = useFunc((ref: React.RefObject<HTMLDivElement>, position = 0) => {
+    if (position === 0) {
+      set(ref.current?.style, property.visibility, 'hidden')
+    } else {
+      set(ref.current?.style, property.visibility, 'visible')
+    }
+  })
+
   const resize = useFunc((container = 0, content = 0, position = 0) => {
     // show/hide back buttons
     if (back && position >= back) {
@@ -134,6 +145,10 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
 
     set(thumbRef.current?.style, property.size, px(optionsRef.current?.thumb))
     set(thumbRef.current?.style, property.pos, px(optionsRef.current?.thumbPosition))
+
+    // show scroll side shadow
+    showShadow(shadowStartRef, position)
+    showShadow(shadowEndRef, position + container - content)
   })
 
   const endMove = useFunc(() => {
@@ -172,6 +187,12 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     hide,
     show,
     resize,
+    shadows: (
+      <>
+        <div ref={shadowStartRef} className={cn('shadow', `shadow-${v}--start`)} />
+        <div ref={shadowEndRef} className={cn('shadow', `shadow-${v}--end`)} />
+      </>
+    ),
     element: (
       <div ref={trackRef} className={scrollTrackClassName} style={{ [property.margin]: px(indent) }}>
         <div ref={thumbRef} className={scrollThumbClassName} />
