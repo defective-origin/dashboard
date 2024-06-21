@@ -71,7 +71,7 @@ export const Demo: Story = {
             <Form.Submit content='Submit' color='success' size='xs' />
           </Actions>
 
-          <Layout v='row' g='xs'>
+          <Layout v='x' g='xs'>
             <Field.Radio name='group-radio' label='Radio' value={true} onChange={log} />
             <Field.Switch name='group-switch' label='Switch' value={true} onChange={log} />
             <Field.Checkbox name='group-checkbox' label='Checkbox' value='checkbox' checked onChange={log} />
@@ -89,7 +89,7 @@ export const Demo: Story = {
             <Form.Submit content='Submit' color='success' size='xs' />
           </Actions>
 
-          <Layout v='row' g='xs'>
+          <Layout v='x' g='xs'>
             <Field.Radio name='item_0' label='Radio' value={true} onChange={log} />
             <Field.Switch name='item_1' label='Switch' value={true} onChange={log} />
             <Field.Checkbox name='item_2' label='Checkbox' value='checkbox' checked onChange={log} />

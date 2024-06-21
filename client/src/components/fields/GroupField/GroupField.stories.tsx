@@ -25,14 +25,14 @@ export const Demo: Story = {
   parameters: params('GroupField'),
   render: (props) => (
     <>
-      <Field.Group v='row' g='xs' {...props}>
+      <Field.Group v='x' g='xs' {...props}>
         <Field.Radio name='group-radio' label='Radio' value={true} onChange={log} />
         <Field.Switch name='group-switch' label='Switch' value={true} onChange={log} />
         <Field.Checkbox name='group-checkbox' label='Checkbox' value='checkbox' checked onChange={log} />
         <Field.Slider name='group-slider' label='Slider' value={50} onChange={log} v='start' />
       </Field.Group>
 
-      <Field.Group v='row' g='xs' {...props}>
+      <Field.Group v='x' g='xs' {...props}>
         <Field.Select name='group-select' label='Select' value='value0' message='Help text' onChange={log} items={SELECT_OPTIONS} />
         <Field.Text name='group-text' label='Text' value='value' message='Help text' onChange={log} />
         <Field.Number name='group-number' label='Number' value={50} message='Help text' onChange={log} />

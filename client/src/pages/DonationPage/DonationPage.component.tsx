@@ -7,9 +7,12 @@ import { cn } from 'tools'
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
+import DonationTable from 'screens/tables/DonationTable'
 import PlaceholderCard from 'screens/cards/PlaceholderCard'
 
 // ---| components |---
+import Block from 'components/Block'
+
 // ---| self |---
 import css from './DonationPage.module.scss'
 
@@ -28,13 +31,16 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
 
   return (
     <Page className={_className} name='PAGES.DONATION' {...otherProps}>
-      <Page.Content v='board' columns={3}>
-        <PlaceholderCard name='Plans' area='1 / 1 / 3 / 2' />
-        <PlaceholderCard name='Needs' area='1 / 2 / 3 / 3' />
-        <PlaceholderCard name='Others' area='1 / 3 / 3 / 4' />
+      <Page.Content p='sm'>
+        <Page.Section title='List of expenses' v='row' g='xs' area='1 / 1 / 3 / 4'>
+          <PlaceholderCard name='Plans' />
+          <PlaceholderCard name='Needs' />
+          <PlaceholderCard name='Others' />
 
-        <PlaceholderCard name='History' area='3 / 1 / 4 / 4' />
-        <PlaceholderCard name='Donations' area='4 / 1 / 7 / 4' />
+          {/* <PlaceholderCard name='History' area='3 / 1 / 4 / 4' /> */}
+        </Page.Section>
+
+        <DonationTable area='3 / 1 / 7 / 4' />
 
         {children}
       </Page.Content>

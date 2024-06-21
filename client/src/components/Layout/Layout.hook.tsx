@@ -11,7 +11,7 @@ import { ItemOptions, ItemReturnOptions, useItem } from 'components/Item'
 import './Layout.module.scss'
 
 export type LayoutSpace = Size
-export type LayoutVariant = 'board' | 'row' | 'rows' | 'column' | 'columns' | 'top' | 'bottom' | 'left' | 'right'
+export type LayoutVariant = 'board' | 'row' | 'rows' | 'column' | 'columns' | 'top' | 'bottom' | 'left' | 'right' | 'x' | 'y'
 // TODO: add grid-template-columns: repeat(/* auto-fill или auto-fit */, /* размер колонки */); https://doka.guide/css/grid-guide/
 // TODO: add dense
 

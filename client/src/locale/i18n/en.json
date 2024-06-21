@@ -95,8 +95,10 @@
     "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
   },
   "LABEL": {
-    "FAVORITE": "Favorite: {{count}}",
-    "USAGE": "Usage: {{count}}"
+    "PAYMENTS": "Payments",
+    "REQUESTS": "Requests",
+    "USAGE": "Usage: {{count}}",
+    "FAVORITE": "Favorite: {{count}}"
   },
   "FORM": {
     "BOARD_SETTINGS": "Dashboard settings",

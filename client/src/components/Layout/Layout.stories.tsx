@@ -6,7 +6,7 @@ import Layout, { LayoutProps } from './Layout.component'
 import Item from 'components/Item'
 import Tag from 'components/Tag'
 
-const CARD_VARIANTS: LayoutProps['v'][] = ['column', 'row', 'board']
+const CARD_VARIANTS: LayoutProps['v'][] = ['x', 'y', 'column', 'row', 'board']
 const LAYOUT_VARIANTS: LayoutProps['v'][] = ['columns', 'rows', 'top', 'right', 'bottom', 'left']
 const VARIANTS: LayoutProps['v'][] = [...CARD_VARIANTS, ...LAYOUT_VARIANTS]
 const ALIGNS: LayoutProps['aligns'][] = ['start', 'center', 'end', 'baseline', 'stretch' ]
@@ -95,8 +95,8 @@ export const Variants: Story = {
               key={i}
               background={SB_CSS.item}
               area={LAYOUT_VARIANTS.includes(v) ? i : undefined}
-              minHeight={50}
-              minWidth={50}
+              minHeight={v && ['x', 'y'].includes(v) ? 20 : 50}
+              minWidth={v && ['x', 'y'].includes(v) ? 20 : 50}
             />,
           )}
         </Layout>

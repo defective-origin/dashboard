@@ -42,7 +42,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
 
   return (
     <Page className={_className} name={widget.name} p='md' {...otherProps}>
-      <Page.Content scroll='y' g='lg'>
+      <Page.Content scroll='y' g='lg' v='y'>
         <Block v='x' justifies='space-between'>
           <Block>
             <Text v='h3' content={widget.name} />
@@ -62,7 +62,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
 
         <Text v='body2' content={widget.description} />
 
-        <Section title='Screens' scroll='x'>
+        <Section title='Screens' scroll='x' v='x' g='xs'>
           <PlaceholderCard height={300} width={150} />
           <PlaceholderCard height={300} width={150} />
           <PlaceholderCard height={300} width={150} />
@@ -83,7 +83,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
       </Page.Content>
 
       <Page.RightAside scroll='y' p='md' g='lg'>
-        <Section title='Releases' v='column'>
+        <Section title='Releases' v='column' g='xs'>
           <PlaceholderCard height={200} />
           <PlaceholderCard height={200} />
           <PlaceholderCard height={200} />

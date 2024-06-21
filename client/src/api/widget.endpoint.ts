@@ -60,6 +60,8 @@ export type Widget = Meta & {
   board?: Id
   /** Place on dashboard */
   place?: Place
+
+  bordered?: boolean
 }
 
 export const WIDGETS: Widget[] = [

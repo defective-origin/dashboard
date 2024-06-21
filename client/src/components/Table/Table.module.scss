@@ -2,7 +2,7 @@
 
 :root {
   --table-body-filter: drop-shadow(0px 0 2px #0000001A);
-  --table-bg-color: #FFFFFF;
+  --table-bg-color: var(--card-background);
   --table-shadow: var(--box-shadow);
 
   // primary should have alpha channel in order to table filter works on cell

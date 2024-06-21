@@ -29,9 +29,9 @@ export function Content(props: ContentProps): JSX.Element {
 
   return (
     <Layout className={_className} area='center' g='xxs' {...otherProps}>
-      {scroll && <Scroll v={scroll} actions />}
-
       {children}
+
+      {scroll && <Scroll v={scroll} actions />}
     </Layout>
   )
 }

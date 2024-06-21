@@ -8,6 +8,8 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Text from 'components/Text'
+import Block, { BlockProps } from 'components/Block'
 import Scroll from 'components/Scroll'
 import Banner from 'components/Banner'
 
@@ -20,18 +22,14 @@ import TablePagination, { TablePaginationProps } from './TablePagination'
 import { TableColumn, TableFilter, TableKeygen, TableRecord } from './Table.type'
 import { TableRowMenuItem } from './TableRowMenu'
 
-export type TableProps<T extends TableRecord> = {
+export type TableProps<T extends TableRecord> = BlockProps & {
+  title?: React.ReactNode
   items?: T[]
-  width?: number | string
-  height?: number | string
-  minHeight?: number | string
   columns?: TableColumn<T>[]
   filters?: TableFilter<T>[]
   pagination?: boolean | TablePaginationProps
   loading?: boolean
   actions?: TableRowMenuItem[]
-  className?: string
-  children?: React.ReactNode
   keygen?: TableKeygen<T>
 }
 
@@ -43,14 +41,18 @@ export type TableProps<T extends TableRecord> = {
  * <Table />
  */
 export function Table<T extends TableRecord>(props: TableProps<T>): JSX.Element {
-  const { actions, width = '100%', height = '100%', minHeight, loading, items, columns, filters, pagination, keygen, children, className, ...otherProps } = props
+  const { title, actions, width = '100%', height = '100%', minHeight, loading, items, columns, filters, pagination, keygen, children, className, ...otherProps } = props
   const _className = cn(css.Table, className)
   const manager = useTableManager({ items, columns, filters, pagination, actions })
 
+  // TODO: add sort by html cell content
   // TODO: add Reset button to last column: reset sorting and filters and other column settings
   return (
-    <div className={_className} style={{ width, height, minHeight }} {...otherProps}>
-      <TablePagination show={!!pagination} {...manager.pagination} />
+    <Block className={_className} style={{ width, height, minHeight }} {...otherProps}>
+      <Block v='x' justifies='space-between' aligns='center'>
+        <Text>{title}</Text>
+        <TablePagination show={!!pagination} {...manager.pagination} />
+      </Block>
 
       <MuiTableContainer className={css.TableContainer} sx={{ height: '100%', width: '100%' }}>
         <MuiTable stickyHeader aria-label='sticky table'>
@@ -69,7 +71,7 @@ export function Table<T extends TableRecord>(props: TableProps<T>): JSX.Element 
           />
         </Scroll>
       </MuiTableContainer>
-    </div>
+    </Block>
   )
 }
 

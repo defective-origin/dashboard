@@ -34,7 +34,7 @@ export type TableCellProps<T extends TableRecord> = {
  */
 export function TableCell<T extends TableRecord>(props: TableCellProps<T>): JSX.Element {
   const { th, item, column, zIndex, onSort, className, ...otherProps } = props
-  const _className = cn(css.TableCell, { [css.Fixed]: column.fixed }, className)
+  const _className = cn(css.TableCell, { [css.Fixed]: column.fixed, [css.th]: th }, className)
   const style: React.CSSProperties = {
     zIndex: zIndex,
     left: column.left,

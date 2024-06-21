@@ -99,7 +99,7 @@ export type FormProps<F extends object = FormGroupValue> = FormOptions<F> & Layo
  *            <Form.Submit content='Submit' color='success' size='xs' />
  *          </Actions>
  *
- *          <Layout v='row' g='xs'>
+ *          <Layout v='x' g='xs'>
  *            <Field.Radio name='group-radio' label='radio' value={true} onChange={log} />
  *            <Field.Switch name='group-switch' label='switch' value={true} onChange={log} />
  *            <Field.Checkbox name='group-checkbox' label='checkbox' value='checkbox' checked onChange={log} />
@@ -117,7 +117,7 @@ export type FormProps<F extends object = FormGroupValue> = FormOptions<F> & Layo
  *            <Form.Submit content='Submit' color='success' size='xs' />
  *          </Actions>
  *
- *          <Layout v='row' g='xs'>
+ *          <Layout v='x' g='xs'>
  *            <Field.Radio name='item_0' label='radio' value={true} onChange={log} />
  *            <Field.Switch name='item_1' label='switch' value={true} onChange={log} />
  *            <Field.Checkbox name='item_2' label='checkbox' value='checkbox' checked onChange={log} />

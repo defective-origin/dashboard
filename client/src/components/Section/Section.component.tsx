@@ -6,12 +6,11 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Text from 'components/Text'
+import Block from 'components/Block'
 import Layout, { LayoutProps } from 'components/Layout'
 import Actions, { ActionsProps } from 'components/Actions'
 import Scroll, { ScrollVariant } from 'components/Scroll'
-import Content from 'components/Content'
-import Header from 'components/Header'
-import Text from 'components/Text'
 
 // ---| self |---
 import css from './Section.module.scss'
@@ -30,21 +29,24 @@ export type SectionProps = LayoutProps & {
  * <Section />
  */
 export function Section(props: SectionProps): JSX.Element {
-  const { scroll, v = 'row', title, actions, children, className, ...otherProps } = props
+  const { scroll, v, g, title, actions, children, className, ...otherProps } = props
   const _className = cn(css.Section, className)
 
+  // FIXME: height='min-content'
   return (
-    <Layout className={_className} v='columns' g='xs' height='min-content' {...otherProps}>
-      <Header className={css.Header}>
-        <Text className={css.Title} content={title} v='h3' />
+    <Layout className={_className} v='y' g='xs' {...otherProps}>
+      {(title || actions) && (
+        <Block className={css.Header}>
+          <Text className={css.Title} content={title} v='h3' />
 
-        <Actions className={css.Actions} items={actions} />
-      </Header>
+          <Actions className={css.Actions} items={actions} />
+        </Block>
+      )}
 
-      <Content className={css.Content} v={v}>
+      <Layout className={css.Content} v={v} g={g}>
         {scroll && <Scroll v={scroll} />}
         {children}
-      </Content>
+      </Layout>
     </Layout>
   )
 }
