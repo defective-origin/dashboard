@@ -61,7 +61,7 @@ export const toPercent = (v: NumberValue, options?: NumberOptions) => toNumber(v
 export const toCurrency = (v: NumberValue, options?: NumberOptions) => toNumber(v, { sign: '$', ...options })
 
 /** 123.46 TB - B, KB, MB, GB, TB */
-export const toSize = (v: NumberValue, options?: NumberOptions) => toNumber(v, { sign: 'B', units: SIZE_OPTIONS, ...options })
+export const toSize = (v: NumberValue, options?: NumberOptions) => toNumber(v, { units: SIZE_OPTIONS, ...options })
 
 /** 123.46 T  - G, K, T */
 export const toWeight = (v: NumberValue, options?: NumberOptions) => toNumber(v, { units: WEIGHT_OPTIONS, ...options })

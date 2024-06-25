@@ -61,10 +61,10 @@ describe('[Number] tool', () => {
 
   describe('[toSize] action', () => {
     it('should return string representation of size', () => {
-      expect(tools.toSize(10)).toEqual('10.00 B')
+      expect(tools.toSize(10)).toEqual('1.25 B')
       expect(tools.toSize(1024.56)).toEqual('1.00 KB')
-      expect(tools.toSize(25_451_215)).toEqual('24.27 MB')
-      expect(tools.toSize(2_545_121_525_569)).toEqual('2.31 TB')
+      expect(tools.toSize(25_451_215)).toEqual('24.85 MB')
+      expect(tools.toSize(2_545_121_525_569)).toEqual('2.48 TB')
     })
   })
 
