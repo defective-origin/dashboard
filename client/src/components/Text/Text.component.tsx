@@ -11,7 +11,7 @@ import Skeleton from 'components/Skeleton'
 
 // ---| self |---
 import './Text.module.scss'
-import { FORMAT_MAP } from './Text.tool'
+import { TEXT_FORMAT_MAP } from './Text.tool'
 
 const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
   h1: 'xl',
@@ -30,7 +30,7 @@ const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
 }
 
 
-export type TextFormat = keyof typeof FORMAT_MAP
+export type TextFormat = keyof typeof TEXT_FORMAT_MAP
 export type TextVariant = 'button' | 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'overline'
 export type TextAlign = MuiTypographyProps['align']
 export type TextColor = Color
@@ -88,7 +88,7 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
     ellipsis,
     [`text--${size}`]: size, // FIXME: doesn't work - fix on line 92
   }, className)
-  const _content = useFormat(content, FORMAT_MAP, { format, placeholder })
+  const _content = useFormat(content, TEXT_FORMAT_MAP, { format, placeholder })
   const styles = {
     ...style,
     fontWeight: bold ? 'bold' : undefined,

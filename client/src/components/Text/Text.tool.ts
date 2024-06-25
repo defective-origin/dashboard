@@ -1,6 +1,7 @@
 import { num, str, date } from 'tools'
 
 const STRING_FORMAT_MAP = {
+  string: str.toString,
   title: str.toTitle,
   capitalize: str.toCapital,
   uppercase: str.toUppercase,
@@ -28,7 +29,7 @@ const DATE_FORMAT_MAP = {
   'month-name': date.toMonthName,
 }
 
-export const FORMAT_MAP = {
+export const TEXT_FORMAT_MAP = {
   ...STRING_FORMAT_MAP,
   ...NUMBER_FORMAT_MAP,
   ...DATE_FORMAT_MAP,
