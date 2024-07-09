@@ -98,7 +98,8 @@
     "PAYMENTS": "Payments",
     "REQUESTS": "Requests",
     "USAGE": "Usage: {{count}}",
-    "FAVORITE": "Favorite: {{count}}"
+    "FAVORITE": "Favorite: {{count}}",
+    "RATE": "Favorite: {{count}}"
   },
   "FORM": {
     "BOARD_SETTINGS": "Dashboard settings",

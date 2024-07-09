@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 
 // ---| core |---
-import { FeaturesReturnOptions, HotKeysReturnOptions, useFeatures, useHotKeys } from 'hooks'
+import { HotKeysReturnOptions, useHotKeys } from 'hooks'
 import { AccountManager, MonitoringReturnOptions, useMonitoring } from 'api'
 
 // ---| components |---
@@ -14,7 +14,6 @@ export type AppOptions =
   & HotKeysReturnOptions
   & ToastReturnOptions
   & {
-    feature: FeaturesReturnOptions
     modal: ModalReturnOptions
   }
 
@@ -37,11 +36,10 @@ export function AppProvider(props: AppProviderProps): JSX.Element {
   // ui
   const toast = useToast()
   const modal = useModal()
-  const feature = useFeatures()
 
   const options = useMemo(
-    () => Object.assign({ modal, feature }, toast, monitor, hotkeys, account, defaultOptions),
-    [account, defaultOptions, hotkeys, monitor, toast, feature, modal],
+    () => Object.assign({ modal }, toast, monitor, hotkeys, account, defaultOptions),
+    [account, defaultOptions, hotkeys, monitor, toast, modal],
   )
 
   return (

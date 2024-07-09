@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useWidget } from 'api'
+import { useWidgetView } from 'api'
 import { useParams } from 'router'
 
 // ---| pages |---
@@ -34,7 +34,7 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.WidgetPage, className)
   const { id } = useParams()
-  const widget = useWidget(id)
+  const widget = useWidgetView(id)
 
   // TODO: Logo
   // TODO: counters [installed, stars, reviews, rating]

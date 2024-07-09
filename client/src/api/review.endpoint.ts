@@ -1,44 +1,29 @@
 import { Id, IsoDate, RichText } from './api.type'
 import api from './api.endpoint'
 
-const ENDPOINT = 'comments'
+const ENDPOINT = 'reviews'
 
 export type Review = {
   id: Id
-  author: Id
-  value: RichText
-  likes: number
-  dislike: number
+  user: Id
+  description: RichText
   date: IsoDate
+  rate: number
 }
 
 export const REVIEWS: Review[] = Array.from({length: 10}, (_, id) => ({
   id,
-  author: 1,
-  value: 'Comment '.repeat(50),
-  likes: id ** 3,
-  dislike: id ** 2,
+  user: 1,
+  description: 'Comment '.repeat(50),
   date: new Date().toISOString(),
+  rate: 4.5,
 }))
 
 api.reg(ENDPOINT, REVIEWS)
 
 
-// TODO: sort reviews by value = likes - dislikes
-export const useReviewMutations = (ids?: Id | Id[]) => {
-  return api.useMutations<Review>(ENDPOINT, ids)
-}
+export const useReviewMutations = (ids?: Id | Id[]) => api.useMutations<Review>(ENDPOINT, ids)
 
-export const useReviews = (id?: Id) => {
-  const response = api.useListEndpoint<Review>(ENDPOINT)
-  const mutations = useReviewMutations()
+export const useReviews = () => api.useListEndpoint<Review>(ENDPOINT)
 
-  return Object.assign(response, mutations)
-}
-
-export const useReview = (id: Id) => {
-  const response = api.useOptionsEndpoint<Review>(ENDPOINT, id)
-  const mutations = useReviewMutations(id)
-
-  return { ...response, ...mutations }
-}
+export const useReview = (id: Id) => api.useOptionsEndpoint<Review>(ENDPOINT, id)

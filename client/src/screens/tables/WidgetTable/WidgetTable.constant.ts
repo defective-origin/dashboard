@@ -1,8 +1,8 @@
-import { Widget } from 'api'
+import { WidgetPreset } from 'api'
 import { TableColumn } from 'components/Table'
 import column from '../columns'
 
-export const WIDGET_COLUMNS: TableColumn<Widget>[] = [
+export const WIDGET_COLUMNS: TableColumn<WidgetPreset>[] = [
   column.clipboard({
     field: 'id',
     fixed: true,
@@ -30,20 +30,21 @@ export const WIDGET_COLUMNS: TableColumn<Widget>[] = [
     field: 'author',
   }),
   column.attach({
-    field: 'for',
+    field: 'view',
   }),
   column.text({
     field: 'version',
+    align: 'center',
   }),
   column.text({
-    field: 'type',
+    field: 'isPreset',
   }),
   column.usage({
     name: 'Usage',
     mapper: (record) => ({ id: record.id, v: 'widget' }),
   }),
   column.text({
-    field: 'key',
+    field: 'payload',
   }),
   column.text({
     field: 'endpoint',

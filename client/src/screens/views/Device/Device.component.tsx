@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { DashboardDevice } from 'api'
+import { DashboardMarkupType } from 'api'
 import { TranslateKeys, useLocale } from 'locale'
 
 // ---| pages |---
@@ -14,7 +14,7 @@ import Icon, { DeviceIconVariant, IconProps } from 'components/Icon'
 // ---| self |---
 import css from './Device.module.scss'
 
-export type DeviceVariant = DashboardDevice
+export type DeviceVariant = DashboardMarkupType
 
 const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: TranslateKeys }> = {
   tv: { v: 'tv', tooltip: 'DEVICE.TV' },
@@ -25,7 +25,7 @@ const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: Transla
 }
 
 export type DeviceProps = Omit<IconProps, 'v'> & {
-  v: DashboardDevice
+  v: DashboardMarkupType
 }
 
 /**

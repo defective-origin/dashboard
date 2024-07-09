@@ -1,8 +1,8 @@
-import { Support } from 'api'
+import { SupportRequest } from 'api'
 import { TableColumn } from 'components/Table'
 import column from '../columns'
 
-export const SUPPORT_COLUMNS: TableColumn<Support>[] = [
+export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [
   column.clipboard({
     field: 'id',
     fixed: true,

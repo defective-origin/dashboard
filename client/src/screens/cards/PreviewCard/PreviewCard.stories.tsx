@@ -27,7 +27,6 @@ export const Demo: Story = {
       description: 'CARD DESCRIPTION',
       author: 0,
       access: 'PRIVATE',
-      image: 'https://shorturl.at/xJu8i',
     },
   },
 }

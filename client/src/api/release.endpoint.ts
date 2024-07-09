@@ -3,23 +3,18 @@ import api from './api.endpoint'
 
 const ENDPOINT = 'releases'
 
+/** Release version: `major.minor.patch`  */
 export type Version = `${number}.${number}.${number}`
 
 export type Release = {
   id: Id
-  /** Item for which the release was created  */
-  for: Id
-  /** Release version: `major.minor.patch`  */
-  version: Version
-  /** Describes release notes and data interfaces */
-  description?: RichText
-  /** When release was made. Can be overwritten */
   date: IsoDate
+  version: Version
+  description?: RichText
 }
 
 export const RELEASES: Release[] = Array.from({length: 4}, (_, id) => ({
   id,
-  for: 0,
   version: `${id}.${id}.${id}`,
   description: 'RELEASE DESCRIPTION',
   date: new Date().toISOString(),

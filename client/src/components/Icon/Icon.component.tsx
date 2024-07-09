@@ -33,7 +33,7 @@ export type IconVariant =
 | 'dashboard' | 'insert_chart'
 | 'auto_stories' | 'logo_dev'
 | 'settings' | 'beenhere' | 'book' | 'add' | 'dashboard_customize' | 'resize' | 'favorite'
-| 'help' | 'thumb_up' | 'thumb_down'
+| 'help' | 'thumb_up' | 'thumb_down' | 'star'
 
 export type IconColor = Color
 export type IconSize = Size

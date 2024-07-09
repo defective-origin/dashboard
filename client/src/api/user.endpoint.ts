@@ -9,6 +9,7 @@ export type User = {
   email: Email
   name: ShortText
   image?: string
+  verified: boolean
 }
 
 export const USERS: User[] = Array.from({length: 10}, (_, id) => ({
@@ -16,6 +17,7 @@ export const USERS: User[] = Array.from({length: 10}, (_, id) => ({
   name: `User ${id}`,
   email: `user${id}@email.com`,
   image: 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp',
+  verified: false,
 }))
 
 api.reg(ENDPOINT, USERS)

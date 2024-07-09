@@ -33,7 +33,7 @@ export function Reviews(props: ReviewsProps): JSX.Element {
   // TODO: show first 5 items. After them add show all buttons. On this button click open drawer
   return (
     <Block className={_className} g='md' {...otherProps}>
-      {reviews.slice(0, 5).map((review) => <Review options={review} />)}
+      {reviews.slice(0, 5).map((review) => <Review key={review.id} options={review} />)}
 
       {children}
     </Block>

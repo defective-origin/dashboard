@@ -5,7 +5,7 @@ import { cn } from 'tools'
 import { useParams } from 'router'
 import { useLocale } from 'locale'
 import { useApp } from 'App'
-import { useDashboard, Widget as WidgetType } from 'api'
+import { DashboardMarkupWidget, useDashboard } from 'api'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
@@ -39,7 +39,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const app = useApp()
   const { id } = useParams()
   const board = useDashboard(id)
-  const [mode, setMode] = useState<boolean | WidgetType | undefined>(false)
+  const [mode, setMode] = useState<boolean | DashboardMarkupWidget | undefined>(false)
   const switchSelect = useCallback(() => setMode((flag) => !flag), [])
 
   const handleSelect = (place: any) => {
@@ -50,11 +50,10 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
       author: 0,
       access: 'PRIVATE',
       version: '0.0.0',
-      image: 'https://shorturl.at/xJu8i',
     })
     switchSelect()
   }
-  const handleReselect = (item: WidgetType) => {
+  const handleReselect = (item: DashboardMarkupWidget) => {
     setMode(false)
     board.widgets.update(item)
   }
@@ -66,11 +65,11 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
     { start: 'border_clear', tooltip: locale.t('ACTION.CLEAR'), onClick: () => board.clear() },
     {
       start: 'computer', items: [
-        { start: 'tv', content: locale.t('DEVICE.TV'), active: board.isDevice('tv'), onClick: () => board.setDevice('tv') },
-        { start: 'computer', content: locale.t('DEVICE.COMPUTER'), active: board.isDevice('computer'), onClick: () => board.setDevice('computer') },
-        { start: 'tablet_mac', content: locale.t('DEVICE.TABLET'), active: board.isDevice('tablet'), onClick: () => board.setDevice('tablet') },
-        { start: 'phone_iphone', content: locale.t('DEVICE.MOBILE'), active: board.isDevice('mobile'), onClick: () => board.setDevice('mobile') },
-        { start: 'watch', content: locale.t('DEVICE.WATCH'), active: board.isDevice('watch'), onClick: () => board.setDevice('watch') },
+        { start: 'tv', content: locale.t('DEVICE.TV'), active: board.isMarkup('tv'), onClick: () => board.setDevice('tv') },
+        { start: 'computer', content: locale.t('DEVICE.COMPUTER'), active: board.isMarkup('computer'), onClick: () => board.setDevice('computer') },
+        { start: 'tablet_mac', content: locale.t('DEVICE.TABLET'), active: board.isMarkup('tablet'), onClick: () => board.setDevice('tablet') },
+        { start: 'phone_iphone', content: locale.t('DEVICE.MOBILE'), active: board.isMarkup('mobile'), onClick: () => board.setDevice('mobile') },
+        { start: 'watch', content: locale.t('DEVICE.WATCH'), active: board.isMarkup('watch'), onClick: () => board.setDevice('watch') },
       ],
     },
     { start: 'beenhere', tooltip: locale.t('ACTION.ADD_TO_MENU') },
@@ -86,7 +85,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
           padding={8}
           rows={board.markup?.rows}
           columns={board.markup?.columns}
-          items={board.widgets}
+          items={board.markup?.widgets}
           select={mode}
           widget={(p) => (
             <Menu

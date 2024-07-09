@@ -28,8 +28,8 @@ export const Demo: Story = {
       description: 'dashboard description',
       author: 0,
       access: 'PRIVATE',
-      image: 'url.com',
-      devices: {
+      preview: 'url.com',
+      markups: {
         computer: { active: true, rows: 10, columns: 10 },
       },
     },

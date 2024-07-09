@@ -3,27 +3,47 @@ import api from './api.endpoint'
 
 const ENDPOINT = 'support'
 
-export type SupportType = 'BUG' | 'QUESTION' | 'OTHER'
-export type SupportStatus = 'OPENED' | 'PENDING' | 'IN PROGRESS' | 'RESOLVED'
+export type SupportRequestType = 'BUG' | 'QUESTION' | 'OTHER'
+export type SupportRequestStatus = 'OPENED' | 'PENDING' | 'IN PROGRESS' | 'RESOLVED'
 
-export type Support = {
-  id: Id
+export type SupportRequestChange = {
   user: Id,
   date: IsoDate
-  type: SupportType
-  status: SupportStatus
+  status: SupportRequestStatus
   description: RichText
+  attach: string[]
 }
 
-export const SUPPORTS: Support[] = Array.from({length: 10}, (_, id) => ({
+export type SupportRequest = {
+  id: Id
+  user: Id,
+  type: SupportRequestType
+  status: SupportRequestStatus
+  created: IsoDate
+  closed?: IsoDate
+  changes: SupportRequestChange[]
+}
+
+export const SUPPORT_REQUESTS: SupportRequest[] = Array.from({length: 10}, (_, id) => ({
   id,
-  user: 1,
+  user: id,
   type: id % 2 === 1 ? 'BUG' : 'QUESTION',
   status: id % 2 === 1 ? 'OPENED' : 'IN PROGRESS',
-  date: new Date().toISOString(),
-  description: 'description '.repeat(25),
+  created: new Date().toISOString(),
+  closed: new Date().toISOString(),
+  changes: [
+    {
+      user: id,
+      date: new Date().toISOString(),
+      status: 'OPENED',
+      description: 'description '.repeat(25),
+      attach: [],
+    },
+  ],
 }))
 
-api.reg(ENDPOINT, SUPPORTS)
+api.reg(ENDPOINT, SUPPORT_REQUESTS)
 
-export const useSupports = () => api.useListEndpoint<Support>(ENDPOINT)
+export const useSupportRequests = () => api.useListEndpoint<SupportRequest>(ENDPOINT)
+
+export const useSupportRequest = () => api.useOptionsEndpoint<SupportRequest>(ENDPOINT)

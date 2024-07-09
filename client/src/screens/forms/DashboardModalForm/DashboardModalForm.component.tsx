@@ -55,11 +55,11 @@ export function DashboardModalForm(props: DashboardModalFormProps): JSX.Element 
 
       <Text.H3 content='Active layout' />
       <Layout v='board' columns={5} g='sm' >
-        <Field.Switch v='top' name='tv' label='Tv' checked={options?.devices.tv?.active} />
-        <Field.Switch v='top' name='computer' label='Computer' checked={options?.devices.computer?.active} />
-        <Field.Switch v='top' name='tablet' label='Tablet' checked={options?.devices.tablet?.active} />
-        <Field.Switch v='top' name='mobile' label='Mobile' checked={options?.devices.mobile?.active} />
-        <Field.Switch v='top' name='watch' label='Watch' checked={options?.devices.watch?.active} />
+        <Field.Switch v='top' name='tv' label='Tv' checked={options?.markups.tv?.active} />
+        <Field.Switch v='top' name='computer' label='Computer' checked={options?.markups.computer?.active} />
+        <Field.Switch v='top' name='tablet' label='Tablet' checked={options?.markups.tablet?.active} />
+        <Field.Switch v='top' name='mobile' label='Mobile' checked={options?.markups.mobile?.active} />
+        <Field.Switch v='top' name='watch' label='Watch' checked={options?.markups.watch?.active} />
       </Layout>
 
       {children}

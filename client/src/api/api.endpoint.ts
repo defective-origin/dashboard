@@ -3,7 +3,7 @@ import { Id, Url } from './api.type'
 import { useEffect, useState } from 'react'
 
 export type DBRecord = { id: Id }
-export type ApiResponse<R extends object> = R & { loading: boolean, error?: unknown }
+export type ApiResponse<R extends object> = R & { loading: boolean, error?: unknown, data: R }
 export type ApiMutation<P, R> = (payload?: P) => Promise<{ payload: R, error?: unknown }>
 
 const MOCK_DB: Record<string, any> = {}
@@ -30,29 +30,7 @@ export const useEndpoint = <R extends object = any>(url: string, selector?: (val
     )
   }, [url])
 
-  return Object.assign(payload, { loading: false, errors: null })
-}
-
-export const useListEndpoint = <R extends object>(url: string, ids?: Id[]): ApiResponse<R[]> => {
-  return useEndpoint(url, (value) => {
-    if (Array.isArray(value) && ids) {
-      const idList = Array.isArray(ids) ? ids : [ids]
-
-      return idList.map((id) => value.find((item) => item.id === id))
-    }
-
-    return value
-  })
-}
-
-export const useOptionsEndpoint = <R extends object>(url: string, id?: Id): ApiResponse<R> => {
-  return useEndpoint(url, (value) => {
-    if (Array.isArray(value) && id) {
-      return value.find((item) => item.id === id) ?? value[0]
-    }
-
-    return value
-  })
+  return Object.assign(payload, { loading: false, errors: null, data: payload })
 }
 
 export const useMutationEndpoint = <P, R extends object = object>(url: string, action: (value: any, payload: any) => any): ApiMutation<P, R> => {
@@ -98,7 +76,7 @@ export const useRemoveEndpoint = <R extends object = object>(url: string, defaul
   })
 }
 
-export const useCreateEndpoint = <P extends object, R extends DBRecord>(url: string): ApiMutation<P, R> => {
+export const useCreateEndpoint = <P extends object, R extends DBRecord = P & { id: Id }>(url: string): ApiMutation<P, R> => {
   return useMutationEndpoint(url, (items, payload) => {
     const response = { ...payload, id: Date.now() }
     const change = [...items, response]
@@ -113,6 +91,34 @@ export const useMutations = <R extends DBRecord>(url: string, ids?: Id | Id[]) =
   const create = useCreateEndpoint<R, R>(url)
 
   return { update, remove, create }
+}
+
+export const useListEndpoint = <R extends object>(url: string, ids?: Id[]) => {
+  const mutations = useMutations(url, ids)
+  const response = useEndpoint<R[]>(url, (value) => {
+    if (Array.isArray(value) && ids) {
+      const idList = Array.isArray(ids) ? ids : [ids]
+
+      return idList.map((id) => value.find((item) => item.id === id))
+    }
+
+    return value
+  })
+
+  return Object.assign(response, mutations)
+}
+
+export const useOptionsEndpoint = <R extends object>(url: string, id?: Id) => {
+  const mutations = useMutations(url, id)
+  const response = useEndpoint<R>(url, (value) => {
+    if (Array.isArray(value) && id) {
+      return value.find((item) => item.id === id) ?? value[0]
+    }
+
+    return value
+  })
+
+  return Object.assign(response, mutations)
 }
 
 export default {
