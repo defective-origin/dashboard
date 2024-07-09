@@ -1,7 +1,22 @@
 {
+  "ts-node": {
+    "files": true,
+    // path aliases doesn't work without this line
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
-    "module": "CommonJS",
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "resolveJsonModule":  true
-  }
+    "resolveJsonModule": true,
+    "types": ["node", "jest"],
+    "lib": ["es2023"],
+    "baseUrl": "./",
+    "paths": {
+      "@*": ["src/*"],
+    },
+  },
+  "include": ["src", "jest.setup.ts", "env.d.ts"]
 }

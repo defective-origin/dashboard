@@ -1,126 +1,93 @@
+import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from '@tanstack/react-query'
+import axios, { AxiosRequestConfig } from 'axios'
 import { ENV } from 'App/App.conf'
-import { Id, Url } from './api.type'
-import { useEffect, useState } from 'react'
-
-export type DBRecord = { id: Id }
-export type ApiResponse<R extends object> = R & { loading: boolean, error?: unknown }
-export type ApiMutation<P, R> = (payload?: P) => Promise<{ payload: R, error?: unknown }>
-
-const MOCK_DB: Record<string, any> = {}
-
-export const reg = (url: Url, mock: unknown | unknown[]) => {
-  MOCK_DB[url] = mock
-}
-
-const API_STORE_EVENT_NAME = 'API_STORE_EVENT'
+import { Id, Json } from './api.type'
+import { apiClient } from './api.context'
 
 
+const api = axios.create({
+  baseURL: ENV.SYSTEM.API,
+  timeout: 1000,
+})
 
-export const useEndpoint = <R extends object = any>(url: string, selector?: (value: any) => any): ApiResponse<R> => {
-  const [, refresh] = useState(0)
-  const payload = selector?.(MOCK_DB[url]) ?? MOCK_DB[url]
 
-  useEffect(() => {
-    console.log('Endpoint:', `${ENV.SYSTEM.BASE_URL}${ENV.SYSTEM.API}/${url}`)
+export type RestReadEndpointOptions<T = Json, E = Error> = Partial<UseQueryOptions<T, E>>
 
-    document.addEventListener(
-      API_STORE_EVENT_NAME,
-      () => refresh(Date.now()),
-      false,
-    )
-  }, [url])
-
-  return Object.assign(payload, { loading: false, errors: null })
-}
-
-export const useListEndpoint = <R extends object>(url: string, ids?: Id[]): ApiResponse<R[]> => {
-  return useEndpoint(url, (value) => {
-    if (Array.isArray(value) && ids) {
-      const idList = Array.isArray(ids) ? ids : [ids]
-
-      return idList.map((id) => value.find((item) => item.id === id))
-    }
-
-    return value
+export const useRestReadEndpoint = <T = Json, E = Error>(url: string, options?: RestReadEndpointOptions<T, E>) => {
+  return useQuery<T, E>({
+    ...options,
+    queryKey: [url],
+    queryFn: () => api.get(url).then(response => response.data),
   })
 }
 
-export const useOptionsEndpoint = <R extends object>(url: string, id?: Id): ApiResponse<R> => {
-  return useEndpoint(url, (value) => {
-    if (Array.isArray(value) && id) {
-      return value.find((item) => item.id === id) ?? value[0]
-    }
-
-    return value
-  })
+export type RestMutationEndpointOptions<P = Json, T = Json, E = Error> = UseMutationOptions<T, E, P> & {
+  pathname?: string
+  method?: string
+  url?: (payload: Json) => string
+  queryKey?: (data: T, variables: Json, context: unknown) => unknown[]
+  request?: AxiosRequestConfig
 }
 
-export const useMutationEndpoint = <P, R extends object = object>(url: string, action: (value: any, payload: any) => any): ApiMutation<P, R> => {
-  return (payload) => {
-    const [change, response] = action(MOCK_DB[url], payload)
-    MOCK_DB[url] = change
+export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: RestMutationEndpointOptions<P, T, E>) => {
+  const { pathname, method, request, queryKey, url, onSuccess, ...queryOptions } = options
 
-    return Promise.resolve(response)
-      .finally(() => document.dispatchEvent(new CustomEvent(API_STORE_EVENT_NAME)))
-  }
-}
+  return useMutation<T, E, P>({
+    ...queryOptions,
+    mutationFn: (payload: Json) => api({
+      method,
+      url: url?.(payload) ?? pathname,
+      data: payload,
+      ...request,
+    }).then(response => response.data),
+    onSuccess: (data, variables, context) => {
+      // refresh list of items
+      apiClient.invalidateQueries({ queryKey: [pathname] })
 
-export const useUpdateEndpoint = <P extends object, R extends object = object>(url: string): ApiMutation<P, R> => {
-  return useMutationEndpoint(url, (items, payload) => {
-    let response
-    const change = items.map((item: any) => {
-      if (item.id === payload.id) {
-        return response = { ...item, ...payload }
+      // refresh item
+      if (queryKey) {
+        apiClient.invalidateQueries({ queryKey: queryKey(data, variables, context) })
       }
 
-      return item
-    })
-
-    return [change, response]
+      onSuccess?.(data, variables, context)
+    },
   })
 }
 
-export const useRemoveEndpoint = <R extends object = object>(url: string, defaultIds?: Id | Id[]): ApiMutation<Id | Id[] | undefined, R> => {
-  return useMutationEndpoint(url, (items, payload) => {
-    const idsToRemove = Array.isArray(payload ?? defaultIds) ? payload : [payload]
-    const response: any[] = []
-    const change = items.filter((item: any) => {
-      if (idsToRemove.includes(item.id)) {
-        response.push(item)
 
-        return false
-      }
 
-      return true
-    })
-
-    return [change, response]
+export const useRestCreateEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Omit<P, 'id'>, T, E>) => {
+  return useRestMutationEndpoint<Omit<P, 'id'>, T, E>({
+    pathname,
+    method: 'post',
+    url: () => pathname,
+    ...options,
   })
 }
 
-export const useCreateEndpoint = <P extends object, R extends DBRecord>(url: string): ApiMutation<P, R> => {
-  return useMutationEndpoint(url, (items, payload) => {
-    const response = { ...payload, id: Date.now() }
-    const change = [...items, response]
-
-    return [change, response]
+export const useRestUpdateEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<P, T, E>) => {
+  return useRestMutationEndpoint<P, T, E>({
+    pathname,
+    method: 'put',
+    url: payload => `${pathname}/${payload.id}`,
+    queryKey: (_, payload) => [`${pathname}/${payload.id}`],
+    ...options,
   })
 }
 
-export const useMutations = <R extends DBRecord>(url: string, ids?: Id | Id[]) => {
-  const update = useUpdateEndpoint<R, R>(url)
-  const remove = useRemoveEndpoint<R>(url, ids)
-  const create = useCreateEndpoint<R, R>(url)
-
-  return { update, remove, create }
+export const useRestDeleteEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<P, T, E>) => {
+  return useRestMutationEndpoint<P, T, E>({
+    pathname,
+    method: 'delete',
+    url: payload => `${pathname}/${payload.id}`,
+    ...options,
+  })
 }
+
 
 export default {
-  reg,
-  useListEndpoint,
-  useOptionsEndpoint,
-  useUpdateEndpoint,
-  useRemoveEndpoint,
-  useCreateEndpoint,
-  useMutations,
+  useRestReadEndpoint,
+  useRestCreateEndpoint,
+  useRestUpdateEndpoint,
+  useRestDeleteEndpoint,
 }

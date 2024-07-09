@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig",
+  "ts-node": {
+    "files": true
+  },
+  "compilerOptions": {
+    "outDir": "dist",
+  },
+  "include": ["src", "env.d.ts"],
+  "exclude": ["./**/*jest.setup.ts", "./**/*.test.ts"]
+}

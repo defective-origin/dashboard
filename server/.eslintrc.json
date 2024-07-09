@@ -12,6 +12,28 @@
       "imports": "always-multiline",
       "exports": "always-multiline",
       "functions": "always-multiline"
+    }],
+    // general
+    "indent": ["warn", 2],
+    "semi": ["warn", "never"],
+    "quotes": ["warn", "single"],
+    "no-multi-spaces": "warn",
+    "eol-last": ["warn", "always"],
+    "arrow-parens": ["warn", "as-needed"],
+    "space-in-parens": ["warn", "never"],
+    "no-trailing-spaces": "warn",
+    "key-spacing": ["warn", { "beforeColon": false }],
+    "comma-dangle": ["warn", "always-multiline"],
+    "operator-linebreak": ["warn", "before"],
+    "padding-line-between-statements": ["warn",
+      { "blankLine": "always", "prev": "let", "next": "return" },
+      { "blankLine": "always", "prev": "const", "next": "return" },
+      { "blankLine": "always", "prev": "block-like", "next": "return" },
+    ],
+    "object-curly-newline": ["warn", {
+      "multiline": true,
+      "consistent": true,
+      "minProperties": "Infinity"
     }]
   }
 }

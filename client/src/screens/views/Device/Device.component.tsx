@@ -2,8 +2,8 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { DashboardDevice } from 'api'
-import { TranslateKeys, useLocale } from 'locale'
+import { BoardMarkupSize } from 'api'
+import { TranslateKeys, t } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
@@ -14,7 +14,7 @@ import Icon, { DeviceIconVariant, IconProps } from 'components/Icon'
 // ---| self |---
 import css from './Device.module.scss'
 
-export type DeviceVariant = DashboardDevice
+export type DeviceVariant = BoardMarkupSize
 
 const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: TranslateKeys }> = {
   tv: { v: 'tv', tooltip: 'DEVICE.TV' },
@@ -25,7 +25,7 @@ const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: Transla
 }
 
 export type DeviceProps = Omit<IconProps, 'v'> & {
-  v: DashboardDevice
+  v: BoardMarkupSize
 }
 
 /**
@@ -38,11 +38,10 @@ export type DeviceProps = Omit<IconProps, 'v'> & {
 export function Device(props: DeviceProps): JSX.Element {
   const { v, className, ...otherProps } = props
   const _className = cn(css.Device, className)
-  const locale = useLocale()
   const option = DEVICE_MAP[v]
 
   return (
-    <Tooltip content={locale.t(option.tooltip)}>
+    <Tooltip content={t(option.tooltip)}>
       <Icon className={_className} v={option.v} {...otherProps} />
     </Tooltip>
   )

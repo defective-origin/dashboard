@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { TranslateKeys, useLocale } from 'locale'
+import { TranslateKeys, t } from 'locale'
 import { cn } from 'tools'
 
 // ---| pages |---
@@ -45,7 +45,6 @@ export type BannerPageProps = {
 export function BannerPage(props: BannerPageProps): JSX.Element {
   const { v = 'empty', children, className, ...otherProps } = props
   const _className = cn(css.BannerPage, className)
-  const locale = useLocale()
   const status = BANNER_PAGE_MAP[v]
 
   return (
@@ -53,9 +52,9 @@ export function BannerPage(props: BannerPageProps): JSX.Element {
       <Page.Content>
         <Banner
           className={css.Banner}
-          title={locale.t(status.title)}
-          subtitle={locale.t(status.subtitle)}
-          text={locale.t(status.text)}
+          title={t(status.title)}
+          subtitle={t(status.subtitle)}
+          text={t(status.text)}
           v={v}
         >
           {children}

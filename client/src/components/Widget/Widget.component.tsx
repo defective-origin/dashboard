@@ -1,4 +1,4 @@
-import React, { LegacyRef, forwardRef } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -16,7 +16,6 @@ export type WidgetProps<O> = ItemProps & {
   active?: boolean
 }
 
-// TODO: remove forwardRef after migrating to react 19
 
 /**
  * Component description.
@@ -25,17 +24,17 @@ export type WidgetProps<O> = ItemProps & {
  * @example
  * <Widget />
  */
-export const Widget = forwardRef(<O,>(props: WidgetProps<O>, ref: LegacyRef<unknown>): JSX.Element => {
+export const Widget = <O,>(props: WidgetProps<O>): JSX.Element => {
   const { active, options, children, className, ...otherProps } = props
 
   // TODO: provide data for widget: breakpoint, theme, language, key, endpoint, version
 
   return (
-    <Item ref={ref} className={cn(css.Widget, active && css.Active, className)} {...otherProps}>
+    <Item className={cn(css.Widget, active && css.Active, className)} {...otherProps}>
       {children}
     </Item>
   )
-})
+}
 
 Widget.displayName = 'Widget'
 

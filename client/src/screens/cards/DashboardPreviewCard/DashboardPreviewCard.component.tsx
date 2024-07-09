@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Dashboard } from 'api'
+import { Board } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,7 +15,7 @@ import css from './DashboardPreviewCard.module.scss'
 export type DashboardPreviewCardProps = {
   className?: string
   children?: React.ReactNode
-  options: Dashboard
+  options: Board
 }
 
 /**
@@ -34,7 +34,7 @@ export function DashboardPreviewCard(props: DashboardPreviewCardProps): JSX.Elem
       className={_className}
       to='BOARD'
       options={options}
-      params={{ id: options.id!.toString() }}
+      params={{ id: options.id }}
       {...otherProps}
     />
   )

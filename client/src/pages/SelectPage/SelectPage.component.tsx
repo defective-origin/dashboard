@@ -12,7 +12,7 @@ import Page, { PageProps } from 'pages/Page'
 import css from './SelectPage.module.scss'
 
 export type SelectPageProps<T> = PageProps & {
-  items: T[]
+  items?: T[]
   as: React.ElementType
   keygen?: (item: T, index: number) => React.Key
 }
@@ -33,7 +33,7 @@ export function SelectPage<T>(props: SelectPageProps<T>): JSX.Element {
   return (
     <Page className={_className} {...otherProps}>
       <Page.Content columns={5} scroll='y' p='xs' g='md'>
-        {items.map((item, index) => <Tag key={keygen?.(item, index) ?? index} options={item} />)}
+        {items?.map((item, index) => <Tag key={keygen?.(item, index) ?? index} options={item} />)}
       </Page.Content>
 
       {children}

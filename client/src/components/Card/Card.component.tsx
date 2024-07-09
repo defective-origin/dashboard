@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import MuiCard from '@mui/material/Card'
 import MuiCardActionArea from '@mui/material/CardActionArea'
 import MuiCardActions from '@mui/material/CardActions'
@@ -23,7 +23,6 @@ export type CardProps = {
   children?: React.ReactNode
 }
 
-// TODO: remove forwardRef after migrating to react 19
 
 /**
  * Component description.
@@ -32,7 +31,7 @@ export type CardProps = {
  * @example
  * <Card />
  */
-export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref): JSX.Element | null => {
+export const Card = (props: CardProps): JSX.Element | null => {
   const { divided, horizontal, children, className, ...otherProps } = props
   const _className = cn(css.Card, {
     [css.horizontal]: horizontal,
@@ -40,11 +39,11 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref): JSX.Elem
   }, className)
 
   return (
-    <MuiCard ref={ref} className={_className} {...otherProps}>
+    <MuiCard className={_className} {...otherProps}>
       {children}
     </MuiCard>
   )
-}) as unknown as React.FC<CardProps> & Record<'ActionArea' | 'Actions' | 'Content' | 'Header' | 'Media' | 'Divider', React.FC<any>>
+}
 
 Card.displayName = 'Card'
 

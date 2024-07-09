@@ -1,4 +1,4 @@
-@import 'src/theme';
+@import '/src/theme';
 
 @mixin style-icon($fill: 0, $weight: 200, $gradient: 0, $opacity: 24) {
   font-variation-settings:

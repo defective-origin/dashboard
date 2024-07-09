@@ -4,6 +4,7 @@ import React from 'react'
 import RouterProvider from 'router/router.context'
 import LocaleProvider from 'locale/locale.context'
 import ThemeProvider from 'theme/theme.context'
+import ApiProvider from 'api/api.context'
 import { useAccount } from 'api'
 
 // ---| self |---
@@ -24,18 +25,23 @@ export function Launcher(props: LauncherProps): JSX.Element {
 
   return (
     <React.StrictMode>
-      <LocaleProvider>
-        <ThemeProvider theme={account.theme} onChange={(theme) => account.update({ theme })}>
-          <React.Suspense fallback={<h1>Loading...</h1>}>
-            <AppProvider account={account}>
-              {/* Router should be last provider */}
-              <RouterProvider>
-                { children }
-              </RouterProvider>
-            </AppProvider>
-          </React.Suspense>
-        </ThemeProvider>
-      </LocaleProvider>
+      <ApiProvider>
+        <LocaleProvider>
+          <ThemeProvider
+            theme={account.user?.settings.theme.toLowerCase()}
+            onChange={theme => account.update({ user: { settings: { theme: theme.toUpperCase() } } })}
+          >
+            <React.Suspense fallback={<h1>Loading...</h1>}>
+              <AppProvider account={account}>
+                {/* Router should be last provider */}
+                <RouterProvider>
+                  { children }
+                </RouterProvider>
+              </AppProvider>
+            </React.Suspense>
+          </ThemeProvider>
+        </LocaleProvider>
+      </ApiProvider>
     </React.StrictMode>
   )
 }

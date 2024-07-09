@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [],
+
+  // file configs
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+
+  // linter configs
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
+
+  // test configs
+  "vitest.commandLine": "yarn test --"
+}

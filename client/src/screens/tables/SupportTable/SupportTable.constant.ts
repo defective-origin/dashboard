@@ -1,33 +1,34 @@
-import { Support } from 'api'
+import { SupportRequest } from 'api'
 import { TableColumn } from 'components/Table'
 import column from '../columns'
 
-export const SUPPORT_COLUMNS: TableColumn<Support>[] = [
-  column.clipboard({
-    field: 'id',
-    fixed: true,
-  }),
+export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [
   column.user({
     field: 'user',
-    fixed: true,
   }),
   column.date({
-    field: 'date',
+    name: 'Date',
+    field: 'createdAt',
   }),
   column.text({
-    field: 'type',
+    field: 'reason',
+    align: 'center',
     minWidth: 150,
-    bold: true,
+  }),
+  column.text({
+    field: 'urgency',
+    align: 'center',
+    minWidth: 150,
   }),
   column.text({
     field: 'status',
+    align: 'center',
     minWidth: 150,
     bold: true,
   }),
   column.text({
-    field: 'description',
+    field: 'content',
     minWidth: 200,
-    bold: true,
     ellipsis: true,
   }),
 ]

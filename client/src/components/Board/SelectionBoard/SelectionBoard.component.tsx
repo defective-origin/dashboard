@@ -96,7 +96,7 @@ export function SelectionBoard<I extends Record<string, unknown>>(props: Selecti
   const { width, height, ref } = useResize<HTMLCanvasElement>()
   const startCellRef = useRef<xy.Square | null>(null)
   const lastCellRef = useRef<xy.Square | null>(null)
-  const places = useMemo(() => items?.map((item) => item[placeKey] ?? item), [items, placeKey]) as xy.Square[]
+  const places = useMemo(() => items?.map(item => item[placeKey] ?? item), [items, placeKey]) as xy.Square[]
   const reselectPlace = (select && select[placeKey]) as xy.Square
   const margin = gap / 2
   const colors = useProperties({
@@ -154,8 +154,8 @@ export function SelectionBoard<I extends Record<string, unknown>>(props: Selecti
 
     // paint cards
     places
-      .map((place) => card(place, reselectPlace === place ? colors.warning : colors.info))
-      .forEach((place) => square(context, place))
+      .map(place => card(place, reselectPlace === place ? colors.warning : colors.info))
+      .forEach(place => square(context, place))
 
     if (options && options.selectedArea) {
       const selected = card(options.selectedArea, options.isSelectionAllowed ? colors.success : colors.error)
@@ -165,7 +165,7 @@ export function SelectionBoard<I extends Record<string, unknown>>(props: Selecti
     updateCursor(options)
   })
 
-  const isPlaceValid = useFunc((area: xy.Square | null) => places.every((place) => {
+  const isPlaceValid = useFunc((area: xy.Square | null) => places.every(place => {
     const isAreaCrossed = area && xy.crossSquare(place, area)
     const isCrossingAllowed = overlap || place === reselectPlace
 

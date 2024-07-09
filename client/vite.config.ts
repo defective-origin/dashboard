@@ -19,5 +19,13 @@ export default defineConfig({
       treeshake: false,
     },
   },
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       // allows to remove import from each .scss file
+  //       additionalData: '@import "/src/theme";',
+  //     },
+  //   },
+  // },
 })
 // alias config vite https://www.youtube.com/watch?v=ic-P67jinhw

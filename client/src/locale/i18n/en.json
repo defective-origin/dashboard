@@ -62,19 +62,13 @@
     "CLEAR": "Clear",
     "INSTALL": "Install"
   },
-  "ORIENTATION": {
-    "VERTICAL": "Vertical",
-    "HORIZONTAL": "Horizontal"
-  },
   "DEVICE": {
+    "INFINITY": "Infinity",
     "TV": "Television",
     "COMPUTER": "Computer",
+    "LAPTOP": "Laptop",
     "TABLET": "Tablet",
-    "TABLET_VERTICAL": "$t(DEVICE.TABLET) [$t(ORIENTATION.VERTICAL)]",
-    "TABLET_HORIZONTAL": "$t(DEVICE.TABLET) [$t(ORIENTATION.HORIZONTAL)]",
     "MOBILE": "Mobile",
-    "MOBILE_VERTICAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.VERTICAL)]",
-    "MOBILE_HORIZONTAL": "$t(DEVICE.MOBILE) [$t(ORIENTATION.HORIZONTAL)]",
     "WATCH": "Watch"
   },
   "GROUPS": {
@@ -88,8 +82,7 @@
     "GUIDE": "Guide",
     "DONATION": "Donation",
     "SUPPORT": "Support",
-    "ACCOUNT": "Account",
-    "SUBSCRIPTIONS": "Subscriptions"
+    "ACCOUNT": "Account"
   },
   "MESSAGES": {
     "UNDER_CONSTRUCTION": "{{name}} is under construction.",
@@ -99,7 +92,8 @@
     "PAYMENTS": "Payments",
     "REQUESTS": "Requests",
     "USAGE": "Usage: {{count}}",
-    "FAVORITE": "Favorite: {{count}}"
+    "FAVORITE": "Favorite: {{count}}",
+    "RATE": "Favorite: {{count}}"
   },
   "FORM": {
     "BOARD_SETTINGS": "Dashboard settings",
@@ -117,7 +111,6 @@
   },
   "ACCESS": {
     "PRIVATE": "Private",
-    "PUBLIC": "Public",
-    "SUBSCRIPTION": "Subscription"
+    "PUBLIC": "Public"
   }
 }

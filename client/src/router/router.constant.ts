@@ -8,7 +8,6 @@ export const ROUTE_LINKS = {
   ACCOUNT: '/account',
   ACCOUNT_WIDGETS: '/account/widgets',
   ACCOUNT_BOARDS: '/account/dashboards',
-  ACCOUNT_SUBSCRIPTIONS: '/account/subscriptions',
   GUIDE: '/guide',
   DONATION: '/donation',
   SUPPORT: '/support',

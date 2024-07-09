@@ -1,28 +1,25 @@
 import dotenv from 'dotenv'
-import { importFolder } from './tools'
-
-export type Service = {
-  init?(): Promise<void>;
-  close?(): Promise<void>;
-}
-
-const services = importFolder<Service>('services')
-
-async function init() {
-  return Promise.all((await services).map((service) => service.init()))
-}
-
-async function close() {
-  return Promise.all((await services).map((service) => service.close()))
-}
+import Database from './services/Database'
+import Router from './services/Router'
+import api from './api'
 
 dotenv.config()
 
-init()
-  .catch((err) => {
-    console.error('ERROR: ', err)
+// init services
+Database.init()
+Router.init(api)
 
-    return close()
-  })
+// run services
+Database.run()
+Router.run()
 
-process.on('SIGTERM', close)
+// stop services
+const stop = () => {
+  Database.stop()
+  Router.stop()
+}
+
+process.on('SIGHUP', stop) // close terminal
+process.on('SIGINT', stop) // ctrl + C
+process.on('SIGQUIT', stop) // ctrl + D
+process.on('SIGTERM', stop) // stop process request

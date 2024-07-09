@@ -30,7 +30,12 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
   const _className = cn(css.DonationPage, className)
 
   return (
-    <Page className={_className} name='PAGES.DONATION' {...otherProps}>
+    <Page
+      className={_className}
+      name='PAGES.DONATION'
+      menu={[{ start: 'add', tooltip: 'new request', tooltipSide: 'right', size: 'lg' }]}
+      {...otherProps}
+    >
       <Page.Content p='sm'>
         <Page.Section title='List of expenses' v='row' g='xs' area='1 / 1 / 3 / 4'>
           <PlaceholderCard name='Plans' />
