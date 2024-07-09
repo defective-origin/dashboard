@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { TranslateKeys, useLocale } from 'locale'
+import { TranslateKeys, t } from 'locale'
 import { cn, react } from 'tools'
 
 // ---| screens |---
@@ -42,11 +42,10 @@ export type PageProps = LayoutProps & {
 export function Page(props: PageProps): JSX.Element {
   const { menu = [], actions = [], name, meta, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
-  const locale = useLocale()
-  const pageName = locale.t(name)
-  const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
+  const pageName = t(name)
+  const tabName = t('SYSTEM.TAB_NAME', { title: pageName })
 
-  const actionItems: ActionItem[] = actions.map((item) =>
+  const actionItems: ActionItem[] = actions.map(item =>
     typeof item === 'object' ? ({ ...item, v: 'text', color: 'primary' }) : item,
   ) as ActionItem[]
 
@@ -54,7 +53,7 @@ export function Page(props: PageProps): JSX.Element {
     <Layout className={_className} v='columns' {...otherProps}>
       <Meta title={tabName} items={meta} />
 
-      <Portal name='page-name' content={<Text.H1 color='primary' content={pageName} />} />
+      <Portal name='page-name' content={<Text.H1 size='md' color='primary' content={pageName} />} />
       <Portal name='page-menu' content={<Actions items={menu} g='xs' size='xs' />} />
       <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' size='lg' />} />
 

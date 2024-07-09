@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useLocale } from 'locale'
+import { t } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
@@ -29,7 +29,6 @@ export type PlaceholderCardProps = ItemProps & {
 export function PlaceholderCard(props: PlaceholderCardProps): JSX.Element {
   const { name = 'COMPONENT', children, className, ...otherProps } = props
   const _className = cn(css.PlaceholderCard, className)
-  const locale = useLocale()
 
   return (
     <Item className={_className} p='xl' {...otherProps}>
@@ -37,7 +36,7 @@ export function PlaceholderCard(props: PlaceholderCardProps): JSX.Element {
         className={css.Message}
         color='secondary'
         format='capitalize'
-        content={locale.t('MESSAGES.UNDER_CONSTRUCTION', { name })}
+        content={t('MESSAGES.UNDER_CONSTRUCTION', { name })}
       />
 
       {children}

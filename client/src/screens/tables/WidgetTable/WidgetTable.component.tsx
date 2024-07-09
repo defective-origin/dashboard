@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -7,13 +7,11 @@ import { Widget, useWidgets } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Table, { TableProps, TableRowMenuItem } from 'components/Table'
-
 // ---| self |---
 import css from './WidgetTable.module.scss'
-import { WIDGET_COLUMNS } from './WidgetTable.constant'
+import FeatureTable, { FeatureTableProps } from '../FeatureTable'
 
-export type WidgetTableProps = TableProps<Widget>
+export type WidgetTableProps = FeatureTableProps<Widget>
 
 /**
  * Component description.
@@ -23,27 +21,17 @@ export type WidgetTableProps = TableProps<Widget>
  * <WidgetTable />
  */
 export function WidgetTable(props: WidgetTableProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { className, ...otherProps } = props
   const _className = cn(css.WidgetTable, className)
-  const dashboards = useWidgets()
-
-  const actions = useMemo<TableRowMenuItem[]>(() => [
-    { start: 'edit', content: 'Edit' },
-    { start: 'delete', content: 'Delete' },
-  ], [])
+  const widgets = useWidgets()
 
   return (
-    <Table
+    <FeatureTable
       className={_className}
-      columns={WIDGET_COLUMNS}
-      items={dashboards}
-      actions={actions}
-      loading={dashboards.loading}
-      pagination
+      items={widgets.data}
+      loading={widgets.isLoading}
       {...otherProps}
-    >
-      {children}
-    </Table>
+    />
   )
 }
 

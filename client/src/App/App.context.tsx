@@ -1,8 +1,8 @@
 import React, { useContext, useMemo } from 'react'
 
 // ---| core |---
-import { FeaturesReturnOptions, HotKeysReturnOptions, useFeatures, useHotKeys } from 'hooks'
-import { AccountManager, MonitoringReturnOptions, useMonitoring } from 'api'
+import { HotKeysReturnOptions, useHotKeys } from 'hooks'
+import { AccountManager, LogReturnOptions, EventReturnOptions, useLog, useEvent, useFeatureFlags } from 'api'
 
 // ---| components |---
 import { ToastReturnOptions, useToast } from 'components/Toast'
@@ -10,11 +10,11 @@ import { ModalReturnOptions, useModal } from 'components/Modal'
 
 export type AppOptions =
   & AccountManager
-  & MonitoringReturnOptions
   & HotKeysReturnOptions
   & ToastReturnOptions
   & {
-    feature: FeaturesReturnOptions
+    log: LogReturnOptions
+    event: EventReturnOptions
     modal: ModalReturnOptions
   }
 
@@ -31,17 +31,20 @@ export type AppProviderProps = React.PropsWithChildren & {
 
 export function AppProvider(props: AppProviderProps): JSX.Element {
   const { account, children, ...defaultOptions } = props
+
   // system
+  const ff = useFeatureFlags()
+  const log = useLog()
+  const event = useEvent()
   const hotkeys = useHotKeys()
-  const monitor = useMonitoring()
+
   // ui
   const toast = useToast()
   const modal = useModal()
-  const feature = useFeatures()
 
   const options = useMemo(
-    () => Object.assign({ modal, feature }, toast, monitor, hotkeys, account, defaultOptions),
-    [account, defaultOptions, hotkeys, monitor, toast, feature, modal],
+    () => Object.assign({ log, event, modal }, toast, hotkeys, account, defaultOptions),
+    [account, defaultOptions, hotkeys, toast, log, event, modal],
   )
 
   return (

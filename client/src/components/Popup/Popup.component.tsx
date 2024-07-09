@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -10,6 +10,7 @@ import Tooltip, { TooltipProps } from 'components/Tooltip'
 
 // ---| self |---
 import css from './Popup.module.scss'
+import { useToggler } from 'hooks'
 
 export type PopupTriggerOptions = {
   open?: boolean
@@ -41,21 +42,19 @@ export type PopupProps = TooltipProps & {
 export function Popup(props: PopupProps): JSX.Element {
   const { trigger, children, className, ...otherProps } = props
   const _className = cn(css.Popup, className)
-  const [open, setOpen] = useState(false)
-  const onOpen = useCallback(() => setOpen(true), [])
-  const onClose = useCallback(() => setOpen(false), [])
+  const open = useToggler()
 
   return (
     <Tooltip
       className={_className}
       content={children}
-      open={open}
-      onOpen={onOpen}
-      onClose={onClose}
+      open={open.isOn}
+      onOpen={open.on}
+      onClose={open.off}
       popup
       {...otherProps}
     >
-      {trigger({ open })}
+      {trigger({ open: open.isOn })}
     </Tooltip>
   )
 }

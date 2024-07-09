@@ -2,7 +2,6 @@ import defaultColumns, { TextColumn, textColumn } from 'components/Table/Table.t
 import Devices, { DeviceItems, DevicesProps } from 'screens/views/Devices'
 import Clipboard, { ClipboardProps } from 'components/Clipboard'
 import { TableColumn, TableRecord } from 'components/Table'
-import Usage, { UsageProps } from 'screens/views/Usage'
 import User, { UserProps } from 'screens/views/User'
 
 export type ClipboardColumnOptions = Pick<ClipboardProps, 'content'>
@@ -42,21 +41,11 @@ export const devicesColumn = <T extends TableRecord>(column: DevicesColumn<T>): 
   minWidth: 170,
   align: 'center',
   cell: Devices,
-  sort: (_, __, value: DeviceItems) => Object.values(value).filter((device) => device.active).length,
+  sort: (_, __, value: DeviceItems) => Object.values(value).filter(device => device.active).length,
   mapper: (_, __, items) => ({ items, margin: 'auto' }),
   ...column,
 })
 
-export type UsageColumnOptions = Partial<Pick<UsageProps, 'id' | 'v'>>
-export type UsageColumn<T extends TableRecord,> = TableColumn<T, UsageProps> & UsageColumnOptions
-
-export const usageColumn = <T extends TableRecord>(column: UsageColumn<T>): UsageColumn<T> => ({
-  minWidth: 85,
-  align: 'center',
-  cell: Usage,
-  props: { margin: 'auto' },
-  ...column,
-})
 
 export type UserColumnOptions = Partial<Pick<UserProps, 'id' | 'v'>>
 export type UserColumn<T extends TableRecord,> = TableColumn<T, UserProps> & UserColumnOptions
@@ -71,7 +60,6 @@ export const userColumn = <T extends TableRecord>(column: UserColumn<T>): UserCo
 export default {
   ...defaultColumns,
   user: userColumn,
-  usage: usageColumn,
   attach: AttachColumn,
   devices: devicesColumn,
   clipboard: clipboardColumn,

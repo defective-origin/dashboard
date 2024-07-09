@@ -27,8 +27,7 @@ export const Demo: Story = {
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       author: 0,
       access: 'PRIVATE',
-      image: 'https://shorturl.at/xJu8i',
-      devices: {
+      markups: {
         computer: {
           rows: 10,
           columns: 20,

@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Dashboard, useDashboards } from 'api'
+import { Board, useBoards } from 'api'
 
 // ---| pages |---
 import SelectPage, { SelectPageProps } from 'pages/SelectPage'
@@ -14,7 +14,7 @@ import DashboardPreviewCard from 'screens/cards/DashboardPreviewCard'
 // ---| self |---
 import css from './DashboardsPage.module.scss'
 
-export type DashboardsPageProps = Partial<SelectPageProps<Dashboard>>
+export type DashboardsPageProps = Partial<SelectPageProps<Board>>
 
 /**
  * Component description.
@@ -26,18 +26,14 @@ export type DashboardsPageProps = Partial<SelectPageProps<Dashboard>>
 export function DashboardsPage(props: DashboardsPageProps): JSX.Element {
   const { className } = props
   const _className = cn(css.DashboardsPage, className)
-  const boards = useDashboards()
-
-  const menu = [
-    { start: 'add', tooltip: 'Add Board', tooltipSide: 'right', size: 'lg' },
-  ]
+  const boards = useBoards()
 
   return (
     <SelectPage
       className={_className}
       name='PAGES.DASHBOARDS'
-      menu={menu}
-      items={boards}
+      menu={[{ start: 'add', tooltip: 'Add Board', tooltipSide: 'right', size: 'lg' }]}
+      items={boards.data}
       as={DashboardPreviewCard}
     />
   )

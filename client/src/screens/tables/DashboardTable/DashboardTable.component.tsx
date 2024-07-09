@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Dashboard, useDashboards } from 'api'
+import { Board, useBoards } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -12,9 +12,9 @@ import Table, { TableProps } from 'components/Table'
 // ---| self |---
 import css from './DashboardTable.module.scss'
 import { DASHBOARD_COLUMNS } from './DashboardTable.constant'
-import { TableRowMenuItem } from 'components/Table/TableRowMenu'
+import FeatureTable, { FeatureTableProps } from '../FeatureTable'
 
-export type DashboardTableProps = TableProps<Dashboard>
+export type DashboardTableProps = FeatureTableProps<Board>
 
 /**
  * Component description.
@@ -24,27 +24,18 @@ export type DashboardTableProps = TableProps<Dashboard>
  * <DashboardTable />
  */
 export function DashboardTable(props: DashboardTableProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+  const { className, ...otherProps } = props
   const _className = cn(css.DashboardTable, className)
-  const dashboards = useDashboards()
-
-  const actions = useMemo<TableRowMenuItem[]>(() => [
-    { start: 'edit', content: 'Edit' },
-    { start: 'delete', content: 'Delete' },
-  ], [])
+  const boards = useBoards()
 
   return (
-    <Table
+    <FeatureTable
       className={_className}
       columns={DASHBOARD_COLUMNS}
-      items={dashboards}
-      loading={dashboards.loading}
-      actions={actions}
-      pagination
+      items={boards.data}
+      loading={boards.isLoading}
       {...otherProps}
-    >
-      {children}
-    </Table>
+    />
   )
 }
 

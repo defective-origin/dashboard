@@ -21,15 +21,23 @@ export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P 
  * FlattenObjectFullPathKeys<{ a: 1, b: { c: 2 }}>
  * // union: a, b.c
  */
-export type FlattenObjectFullPathKeys<
-  T extends Record<string | number, unknown>,
-  Sep extends string = '.',
-  Key = keyof T
-> = Key extends string
-  ? T[Key] extends Record<string, unknown>
-    ? `${Key}${Sep}${FlattenObjectFullPathKeys<T[Key], Sep>}`
-    : `${Key}`
-  : never
+export type FlattenObjectFullPathKeys<T, Prefix extends string = ''> = {
+  [K in keyof T]: T[K] extends object
+    ? FlattenObjectFullPathKeys<T[K], `${Prefix}${K & string}.`>
+    : `${Prefix}${K & string}`;
+}[keyof T];
+
+// // this solution freeze application when types are recalculating
+// // because it has infinity depth check
+// export type FlattenObjectFullPathKeys<
+//   T extends Record<string | number, unknown>,
+//   Sep extends string = '.',
+//   Key = keyof T
+// > = Key extends string
+//   ? T[Key] extends Record<string, unknown>
+//     ? `${Key}${Sep}${FlattenObjectFullPathKeys<T[Key], Sep>}`
+//     : `${Key}`
+//   : never
 
 /**
  * Return all keys for the object and nested objects.
@@ -38,15 +46,25 @@ export type FlattenObjectFullPathKeys<
  * FlattenObjectKeys<{ a: 1, b: { c: 2 }}>
  * // union: a, b, b.c
  */
-export type FlattenObjectKeys<
-  T extends Record<string | number, unknown>,
-  Sep extends string = '.',
-  Key = keyof T
-> = Key extends string
-  ? T[Key] extends Record<string, unknown>
-    ? `${Key}` | `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
-    : `${Key}`
-  : never
+export type FlattenObjectKeys<T, Prefix extends string = ''> = {
+  [K in keyof T]: T[K] extends object
+    ?
+      | FlattenObjectKeys<T[K], `${Prefix}${K & string}.`> // Recurse into child objects
+      | `${Prefix}${K & string}` // Include the partial path
+    : `${Prefix}${K & string}`; // For primitives, just return the full path
+}[keyof T];
+
+// // this solution freeze application when types are recalculating
+// // because it has infinity depth check
+// export type FlattenObjectKeys<
+//   T extends Record<string | number, unknown>,
+//   Sep extends string = '.',
+//   Key = keyof T
+// > = Key extends string
+//   ? T[Key] extends Record<string, unknown>
+//     ? `${Key}` | `${Key}${Sep}${FlattenObjectKeys<T[Key], Sep>}`
+//     : `${Key}`
+//   : never
 
 // literals
 
@@ -87,7 +105,7 @@ export type ClearObject<
 export function clearProps<
   P extends Record<string, unknown>,
 >(props: P): ClearObject<P> {
-  Object.keys(props).forEach((key) => {
+  Object.keys(props).forEach(key => {
     if (props[key] === undefined) {
       delete props[key]
     }
@@ -131,7 +149,7 @@ export function overrideComponent<C extends React.ElementType<any>>(
   options: OverrideComponentOptions = {},
 ): C {
   // FIXME: it works only for functional components
-  let overrideComponent: React.ElementType<any> = (props) => (component as any).apply(null, [{ ...overrideProps, ...props }])
+  let overrideComponent: React.ElementType<any> = props => (component as any).apply(null, [{ ...overrideProps, ...props }])
 
   if (options.memoize) {
     overrideComponent = React.memo(overrideComponent)
@@ -193,7 +211,7 @@ export function attachOverrides<
   overridePropMap: Record<K, Partial<React.ComponentProps<C>>>,
   options: OverrideComponentOptions = {},
 ): C & Record<K, C> {
-  Object.keys(overridePropMap).forEach((name) =>
+  Object.keys(overridePropMap).forEach(name =>
     attachOverride(
       component,
       overridePropMap[name as K],
@@ -250,7 +268,7 @@ export function attachComponents<
   overrideComponentMap: M,
   options: OverrideComponentOptions = {},
 ): C & M {
-  Object.keys(overrideComponentMap).forEach((name) =>
+  Object.keys(overrideComponentMap).forEach(name =>
     attachComponent(
       component,
       overrideComponentMap[name as keyof M],
@@ -268,7 +286,7 @@ export const isExemplar = (component: React.ElementType<any>, exemplar: React.Re
 }
 
 export const hasExemplar = (items: React.ElementType<any>[], exemplar: React.ReactNode) => {
-  return items.some((item) => isExemplar(item, exemplar))
+  return items.some(item => isExemplar(item, exemplar))
 }
 
 /**

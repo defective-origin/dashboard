@@ -25,9 +25,9 @@ export function AccountPage(props: AccountPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AccountPage, className)
   const menu: PageMenuItem[] = [
-    { variant: 'nav', content: 'Account', to: 'ACCOUNT' },
-    { variant: 'nav', content: 'Widgets', to: 'ACCOUNT_WIDGETS' },
-    { variant: 'nav', content: 'Dashboards', to: 'ACCOUNT_BOARDS' },
+    { variant: 'nav', content: 'ACCOUNT', to: 'ACCOUNT' },
+    { variant: 'nav', content: 'WIDGETS', to: 'ACCOUNT_WIDGETS' },
+    { variant: 'nav', content: 'DASHBOARDS', to: 'ACCOUNT_BOARDS' },
   ]
 
   return (

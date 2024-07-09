@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   env: { browser: true, es2020: true },
   extends: [
@@ -18,7 +19,7 @@ module.exports = {
     quotes: ['warn', 'single'],
     'no-multi-spaces': 'warn',
     'eol-last': ['warn', 'always'],
-    'arrow-parens': ['warn', 'always'],
+    'arrow-parens': ['warn', 'as-needed'],
     'space-in-parens': ['warn', 'never'],
     'no-trailing-spaces': 'warn',
     'key-spacing': ['warn', { beforeColon: false }],

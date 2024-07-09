@@ -3,7 +3,7 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 import { useApp } from 'App'
-import { useLocale } from 'locale'
+import { t } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
@@ -32,13 +32,12 @@ export function Account(props: AccountProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Account, className)
   const app = useApp()
-  const locale = useLocale()
 
   return (
     <Menu
       className={_className}
       v='right'
-      trigger={(o) => (
+      trigger={o => (
         app.isAuthorized()
           ? (
             <NavLink variant='nav' to='ACCOUNT' active={o.open} size='lg'>
@@ -53,15 +52,14 @@ export function Account(props: AccountProps): JSX.Element {
       {...otherProps}
     >
       <div>
-        {!app.isAuthorized() && <Menu.Item start='login' content={locale.t('ACTION.LOGIN')} onClick={app.login} />}
+        {!app.isAuthorized() && <Menu.Item start='login' content={t('ACTION.LOGIN')} onClick={app.login} />}
 
         {app.isAuthorized() && (
           <>
-            <Menu.Item variant='nav' start='person' to='ACCOUNT' content={locale.t('ROUTE.ACCOUNT')} />
-            <Menu.Item variant='nav' start='group' to='ACCOUNT_SUBSCRIPTIONS' content={locale.t('ROUTE.SUBSCRIPTIONS')} />
-            <Menu.Item variant='nav' start='insert_chart' to='ACCOUNT_WIDGETS' content={locale.t('ROUTE.WIDGETS')} />
-            <Menu.Item variant='nav' start='dashboard' to='ACCOUNT_BOARDS' content={locale.t('ROUTE.BOARDS')} />
-            <Menu.Item variant='button' start='logout' content={locale.t('ACTION.LOGOUT')} onClick={app.logout} />
+            <Menu.Item variant='nav' start='person' to='ACCOUNT' content={t('ROUTE.ACCOUNT')} />
+            <Menu.Item variant='nav' start='insert_chart' to='ACCOUNT_WIDGETS' content={t('ROUTE.WIDGETS')} />
+            <Menu.Item variant='nav' start='dashboard' to='ACCOUNT_BOARDS' content={t('ROUTE.BOARDS')} />
+            <Menu.Item variant='button' start='logout' content={t('ACTION.LOGOUT')} onClick={app.logout} />
           </>
         )}
         {children}

@@ -12,20 +12,15 @@ export const DONATION_COLUMNS: TableColumn<Donation>[] = [
     fixed: true,
   }),
   column.date({
-    field: 'date',
-  }),
-  column.text({
-    field: 'type',
-    minWidth: 150,
-    bold: true,
+    name: 'Date',
+    field: 'createdAt',
   }),
   column.number({
     field: 'value',
     format: 'currency',
   }),
   column.text({
-    field: 'description',
-    minWidth: 200,
+    field: 'content',
     bold: true,
     ellipsis: true,
   }),

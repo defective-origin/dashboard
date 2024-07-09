@@ -47,7 +47,7 @@ export function ModalForm<T extends object, F extends object = T>(props: ModalFo
   const resetId = `modal-form-reset-${name}`
   const submitId = `modal-form-submit-${name}`
 
-  // TODO: add reset, save, release, cancel flags to props?
+  // TODO: add pre save, reset, save, release, cancel flags to props?
   return (
     <Modal
       className={_className}

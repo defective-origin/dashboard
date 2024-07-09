@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Meta } from 'api'
+import { Feature } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,7 +15,7 @@ import NavLink, { NavLinkProps, NavLinkVariant } from 'components/NavLink'
 import css from './PreviewCard.module.scss'
 
 export type PreviewCardProps<V extends NavLinkVariant> = NavLinkProps<V> & {
-  options?: Meta
+  options?: Feature
   className?: string
   children?: React.ReactNode
 }
@@ -33,7 +33,7 @@ export function PreviewCard<V extends NavLinkVariant,>(props: PreviewCardProps<V
 
   return (
     <NavLink className={_className} clear {...otherProps}>
-      <Image src={options?.image} width='100%' height={200} />
+      <Image src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' height={200} />
       <Text v='h4' content={options?.name} />
       <Text v='caption' content={options?.price} format='currency' size='xxs' />
 

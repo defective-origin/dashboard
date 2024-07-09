@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import useBreakpoint, { Breakpoint, BreakpointOptions, BreakpointReturnOptions } from '../UseBreakpoint'
+import { useToggler } from 'hooks/states'
 
 export type MoreBreakpoint = Breakpoint & {
   /** Count of elements for current breakpoints. */
@@ -60,9 +61,9 @@ export const useMoreBreakpoint = <T, E extends Element, B extends MoreBreakpoint
   options?: MoreBreakpointOptions<E>,
 ): MoreBreakpointReturnOptions<T, E, B> => {
   const breakpoint = useBreakpoint(breakpoints, options)
-  const [showAllItems, setShowAllItems] = useState(false)
+  const showAllItems = useToggler()
   const count = useMemo(() => {
-    if (showAllItems) {
+    if (showAllItems.isOn) {
       return allItems.length
     }
 
@@ -71,16 +72,13 @@ export const useMoreBreakpoint = <T, E extends Element, B extends MoreBreakpoint
     }
 
     return breakpoint.count
-  }, [allItems.length, breakpoint.count, options?.excludeLast, showAllItems])
+  }, [allItems.length, breakpoint.count, options?.excludeLast, showAllItems.isOn])
   const items = useMemo(() => allItems.slice(0, count), [allItems, count])
   const remainingItems = useMemo(() => allItems.slice(count), [allItems, count])
 
-  const more = useCallback(() => { setShowAllItems(true) }, [])
-  const less = useCallback(() => { setShowAllItems(false) }, [])
-
   return useMemo(
-    () => ({ ...breakpoint, items, remainingItems, more, less }),
-    [breakpoint, items, remainingItems, more, less],
+    () => ({ ...breakpoint, items, remainingItems, more: showAllItems.on, less: showAllItems.off }),
+    [breakpoint, items, remainingItems, showAllItems.on, showAllItems.off],
   )
 }
 

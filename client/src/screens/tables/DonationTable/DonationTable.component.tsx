@@ -1,8 +1,8 @@
 import React from 'react'
 
 // ---| core |---
+import { t } from 'locale'
 import { cn } from 'tools'
-import { useLocale } from 'locale'
 import { Donation, useDonations } from 'api'
 
 // ---| pages |---
@@ -27,15 +27,14 @@ export function DonationTable(props: DonationTableProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DonationTable, className)
   const dashboards = useDonations()
-  const locale = useLocale()
 
   return (
     <Table
-      title={locale.t('LABEL.PAYMENTS')}
+      title={t('LABEL.PAYMENTS')}
       className={_className}
       columns={DONATION_COLUMNS}
-      items={dashboards}
-      loading={dashboards.loading}
+      items={dashboards.data}
+      loading={dashboards.isLoading}
       pagination
       {...otherProps}
     >

@@ -32,8 +32,8 @@ export function User(props: UserProps): JSX.Element {
 
   return (
     <Block v='x' g='xs' aligns='center' className={_className} {...otherProps}>
-      <Avatar alt='user 4' size='lg' src={user.image} />
-      <Text content={user.name ?? user.email} size='xs' nowrap />
+      <Avatar alt='user 4' size='lg' src={user.data?.image} />
+      <Text content={user.data?.name ?? user.data?.email} size='xs' nowrap />
     </Block>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { DashboardDevice, DashboardDevices } from 'api'
+import { DashboardMarkupType, DashboardMarkups } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -14,7 +14,7 @@ import Block, { BlockProps } from 'components/Block'
 // ---| self |---
 import css from './Devices.module.scss'
 
-export type DeviceItems = DashboardDevices
+export type DeviceItems = DashboardMarkups
 
 export type DevicesProps = BlockProps & {
   items?: DeviceItems
@@ -33,7 +33,7 @@ export function Devices(props: DevicesProps): JSX.Element {
 
   return (
     <Block className={_className} v='x' g='xxs' fit {...otherProps}>
-      {Object.keys(items ?? {}).map((key) => items?.[key as DashboardDevice].active && <Device key={key} v={key as DashboardDevice} />)}
+      {Object.keys(items ?? {}).map(key => items?.[key as DashboardMarkupType].active && <Device key={key} v={key as DashboardMarkupType} />)}
 
       {children}
     </Block>

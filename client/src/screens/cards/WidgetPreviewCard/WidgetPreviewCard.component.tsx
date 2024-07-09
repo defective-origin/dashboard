@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Widget } from 'api'
+import { WidgetPreset } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,7 +15,7 @@ import css from './WidgetPreviewCard.module.scss'
 export type WidgetPreviewCardProps = {
   className?: string
   children?: React.ReactNode
-  options: Widget
+  options: WidgetPreset
 }
 
 /**

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { useLocale } from 'locale'
+import { t } from 'locale'
 import { cn } from 'tools'
 
 // ---| pages |---
@@ -27,10 +27,9 @@ export type CopyrightProps = Partial<IconProps> & {
 export function Copyright(props: CopyrightProps): JSX.Element {
   const { tooltip, className, ...otherProps } = props
   const _className = cn(css.Copyright, className)
-  const locale = useLocale()
 
   return (
-    <Tooltip v={tooltip} content={locale.t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}>
+    <Tooltip v={tooltip} content={t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}>
       <Icon className={_className} v='copyright' size='sm' {...otherProps} />
     </Tooltip>
   )
