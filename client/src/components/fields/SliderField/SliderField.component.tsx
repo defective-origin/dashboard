@@ -1,23 +1,18 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import MuiSliderField, { SliderProps as MuiSliderFieldProps } from '@mui/material/Slider'
-import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
-import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FieldProps, formField } from 'components/Form'
 
 // ---| self |---
 import css from './SliderField.module.scss'
 
-export type SliderFieldProps = Pick<FormOptions<number>, 'value' | 'name' | 'onChange'> & {
-  v?: 'end' | 'start' | 'top' | 'bottom'
-  label?: React.ReactNode
-  className?: string
-  disabled?: boolean
+export type SliderFieldProps = FieldProps<number | number[]> & {
   marks?: MuiSliderFieldProps['marks']
 }
 
@@ -29,31 +24,24 @@ export type SliderFieldProps = Pick<FormOptions<number>, 'value' | 'name' | 'onC
  * <SliderField />
  */
 export function SliderField(props: SliderFieldProps): JSX.Element {
-  const { v = 'top', marks, label, disabled, name, value, onChange, className, ...otherProps } = props
+  const { value = 0, marks, onChange, className, ...otherProps } = props
   const _className = cn(css.SliderField, className)
-  const field = useForm({ name, value, onChange })
-  const handleChange = useFunc((event: Event) => field.set(Number((event.target as HTMLInputElement).value)))
+  const handleChange = useCallback((event: Event, value: number | number[]) =>
+    onChange?.(value, event)
+  , [onChange])
 
   return (
-    <FormControlLabel
-      labelPlacement={v}
-      label={label}
+    <MuiSliderField
+      size='small'
       className={_className}
-      control={
-        <MuiSliderField
-          name={field.name}
-          size='small'
-          value={field.value()}
-          onChange={handleChange}
-          disabled={disabled}
-          marks={marks}
-          {...otherProps}
-        />
-      }
+      value={value}
+      marks={marks}
+      onChange={handleChange}
+      {...otherProps}
     />
   )
 }
 
 SliderField.displayName = 'SliderField'
 
-export default SliderField
+export default formField(SliderField)

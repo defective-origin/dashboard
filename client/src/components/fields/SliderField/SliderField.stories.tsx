@@ -16,9 +16,13 @@ type Story = StoryObj<typeof SliderField>
 export const Demo: Story = {
   parameters: params('SliderField'),
   args: {
-    messages: [{ content: 'message', color: 'info' }],
-    errors: ['error'],
     label: 'Label',
-    value: 123456.789,
+    init: 100,
+    help: 'help text',
+    checkOnBlur: true,
+    checkOnChange: true,
+    rules: [
+      (value) => value > 50 && 'NUMBER CANNOT BE MORE THEN 5',
+    ],
   },
 }

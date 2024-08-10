@@ -2,12 +2,12 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import useForm from './UseForm.hook'
+import useThrottle from './UseThrottle.hook'
 
 
-describe('[useForm] hook', () => {
+describe('[useThrottle] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => useForm())
+    const { result } = renderHook(() => useThrottle())
 
     expect(result.current).toEqual(null)
   })

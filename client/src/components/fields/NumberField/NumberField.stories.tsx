@@ -22,10 +22,15 @@ export const Demo: Story = {
   parameters: params('NumberField'),
   args: {
     label: 'Label',
-    value: 123456.789,
+    init: 123456.789,
+    help: 'help text',
     required: false,
     disabled: false,
-    message: 'help text',
+    checkOnBlur: true,
+    checkOnChange: true,
+    rules: [
+      (value) => value > 50 && 'NUMBER CANNOT BE MORE THEN 5',
+    ],
   },
 
 }

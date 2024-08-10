@@ -1,32 +1,34 @@
-import React from 'react'
-import MuiCheckboxField from '@mui/material/Checkbox'
+import React, { useCallback } from 'react'
 import { FormControlLabel } from '@mui/material'
+import MuiCheckboxField from '@mui/material/Checkbox'
 
 // ---| core |---
 import { cn } from 'tools'
-import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FieldProps, formField } from 'components/Form'
+
 // ---| self |---
 import css from './CheckboxField.module.scss'
 
-const toValue = (checked?: boolean, value?: string | boolean | number) => {
+export type CheckboxValue = string | boolean | number | undefined
+
+const toValue = (checked?: boolean, value?: CheckboxValue) => {
   // if value passed
+  // then value should be saved as string
   if (value) {
     return checked ? value : undefined
   }
 
-  // if value is not passed
-  return checked
+  // if value is not passed then
+  // value should be saved as boolean
+  return !!checked
 }
 
-export type CheckboxFieldProps = Pick<FormOptions<string | boolean | number>, 'value' | 'name' | 'onChange'> & {
-  v?: 'end' | 'start' | 'top' | 'bottom'
+export type CheckboxFieldProps = FieldProps<CheckboxValue> & {
   checked?: boolean
-  label?: React.ReactNode
-  className?: string
 }
 
 /**
@@ -37,25 +39,24 @@ export type CheckboxFieldProps = Pick<FormOptions<string | boolean | number>, 'v
  * <CheckboxField />
  */
 export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
-  const { v, label, name, value, checked, onChange, className, ...otherProps } = props
+  const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
   const _className = cn(css.CheckboxField, className)
-  const field = useForm({ name, value: toValue(checked, value), onChange })
 
-  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => {
-    field.set(toValue(event.target.checked, value))
-  })
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
+    onChange?.(toValue(checked, value), event)
+  , [value, onChange])
 
   return (
     <FormControlLabel
-      labelPlacement={v}
       label={label}
+      required={required}
+      disabled={disabled}
       control={
         <MuiCheckboxField
           className={_className}
-          name={field.name}
           size='small'
-          value={field.value()}
-          checked={!!field.value()}
+          value={value}
+          checked={checked}
           onChange={handleChange}
           {...otherProps}
         />
@@ -66,4 +67,7 @@ export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
 
 CheckboxField.displayName = 'CheckboxField'
 
-export default CheckboxField
+export default formField(CheckboxField, {
+  toInit: (init, props) => toValue(props.checked ?? !!init, props.init),
+  toProps: (value, props) => ({ value: props.init, checked: !!value }),
+})

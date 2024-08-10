@@ -91,7 +91,7 @@ type ACCESS = 'PRIVATE' | 'PUBLIC'
 }
 ```
 
-#### Composition and mapper
+#### Composition, mappers, substitution
 In tables and forms, in special cases of inputs, create composition and mappers. Example:
 
 ```typescript
@@ -118,4 +118,73 @@ const columns = [
 ]
 
 useMapTableItems(items, columns)
+
+// substitution
+export const textColumn = <T extends TableRecord>(column: TextColumn<T>): TextColumn<T> => ({
+  sort: true,
+  // custom component
+  cell: Text,
+  mapper: (_, __, field) => ({ content: field }),
+  ...column,
+  props: {
+    v: 'caption',
+    size: 'xxs',
+    format: column.format,
+    placeholder: column.placeholder,
+    color: column.color,
+    ellipsis: column.ellipsis,
+    bold: column.bold,
+    nowrap: column.nowrap,
+    ...column.props,
+  },
+})
+```
+
+#### Props
+If prop for sub component is passed via props then do type: `common type` | `component props`.
+It allows to prevent stupid names in props and huge quantity of props.
+
+```typescript
+type ExampleProps = {
+  help?: React.ReactNode | HelpProps
+}
+
+const Example = (props: ExampleProps) => {
+  const { help } = props
+  const helpProps = typeof help === 'string' ? { content: help } : help
+
+  return <Help {...helpProps} >
+}
+```
+
+Use `React.ReactNode` if prop is used as content
+
+```typescript
+type ExampleProps = {
+  title?: React.ReactNode
+  content?: React.ReactNode
+}
+
+const Example = (props: ExampleProps) => {
+  const { title, content, ...otherProps } = props
+
+  return (
+    <div {...otherProps}>
+      {title}
+      {content}
+    </div>
+  )
+}
+```
+
+If the array passed to the props has a generic type, then `items`. Otherwise, by the `component name`.
+
+```typescript
+// generic
+item: T
+items: T[]
+
+// by component name: Column, ColumnItem ...
+column: Column
+columns: Column[]
 ```

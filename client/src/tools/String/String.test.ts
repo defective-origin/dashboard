@@ -17,6 +17,19 @@ describe('[String] tool', () => {
     })
   })
 
+  describe('[isString] action', () => {
+    it('should return true if value is string', () => {
+      expect(tools.isString('test')).toEqual(true)
+    })
+
+    it('should return false if value is not string', () => {
+      expect(tools.isString(1)).toEqual(false)
+      expect(tools.isString({})).toEqual(false)
+      expect(tools.isString(null)).toEqual(false)
+      expect(tools.isString(undefined)).toEqual(false)
+    })
+  })
+
   describe('[toUppercase] action', () => {
     it('should convert string to upper case', () => {
       expect(tools.toUppercase('test test')).toEqual('TEST TEST')

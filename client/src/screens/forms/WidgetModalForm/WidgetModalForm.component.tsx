@@ -7,11 +7,10 @@ import { DashboardWidget, useReleases } from 'api'
 
 // ---| pages |---
 // ---| screens |---
-import Field from 'screens/fields'
-import ModalForm, { ModalFormProps } from 'screens/forms/ModalForm'
-
 // ---| components |---
+import Field from 'components/fields'
 import Layout from 'components/Layout'
+import ModalForm, { ModalFormProps } from 'components/ModalForm'
 
 // ---| self |---
 import css from './WidgetModalForm.module.scss'
@@ -47,17 +46,17 @@ export function WidgetModalForm(props: WidgetModalFormProps): JSX.Element {
 
   return (
     <ModalForm className={_className} name='widget-settings' title={locale.t('FORM.WIDGET_SETTINGS')} onOpen={setOptions} {...otherProps}>
-      <Field.Text name='id' label={locale.t('FIELD.ID')} value={options?.id.toString()} disabled />
+      <Field.Text path='id' label={locale.t('FIELD.ID')} value={options?.id.toString()} disabled />
       <Layout v='board' columns={3} g='sm'>
-        <Field.Text name='author' label={locale.t('FIELD.AUTHOR')} value={options?.author.toString()} disabled />
-        <Field.Select name='access' label={locale.t('FIELD.ACCESS')} items={ACCESS_OPTIONS} value={options?.access} />
-        <Field.Select name='version' label={locale.t('FIELD.VERSION')} items={versionOptions} value={options?.version} />
+        <Field.Text path='author' label={locale.t('FIELD.AUTHOR')} value={options?.author.toString()} disabled />
+        <Field.Select path='access' label={locale.t('FIELD.ACCESS')} items={ACCESS_OPTIONS} value={options?.access} />
+        <Field.Select path='version' label={locale.t('FIELD.VERSION')} items={versionOptions} value={options?.version} />
       </Layout>
 
-      <Field.Text name='name' label={locale.t('FIELD.NAME')} value={options?.name} />
-      <Field.Text name='key' label={locale.t('FIELD.KEY')} value={options?.key} />
-      <Field.Text name='endpoint' label={locale.t('FIELD.ENDPOINT')} value={options?.endpoint} />
-      <Field.Text name='description' label={locale.t('FIELD.DESCRIPTION')} value={options?.description} multiline />
+      <Field.Text path='name' label={locale.t('FIELD.NAME')} value={options?.name} />
+      <Field.Text path='key' label={locale.t('FIELD.KEY')} value={options?.key} />
+      <Field.Text path='endpoint' label={locale.t('FIELD.ENDPOINT')} value={options?.endpoint} />
+      <Field.Text path='description' label={locale.t('FIELD.DESCRIPTION')} value={options?.description} multiline />
 
       {children}
     </ModalForm>

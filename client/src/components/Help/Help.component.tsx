@@ -2,6 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { Size } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -18,6 +19,7 @@ import Scroll from 'components/Scroll'
 import css from './Help.module.scss'
 
 export type HelpProps = {
+  size?: Size
   open?: boolean
   height?: number
   title?: React.ReactNode
@@ -47,12 +49,12 @@ export function Help(props: HelpProps): JSX.Element {
       trigger={(o) => <Button start='help' active={o.open} />}
       {...otherProps}
     >
-      <Card style={{ maxHeight: height }}>
-        <Card.Header title={title}/>
+      <Card className={css.Card} style={{ maxHeight: height }}>
+        {title && <Card.Header className={css.Header} title={<Text content={title} size='sm' height={1} />}/>}
         <Card.Content>
           <Scroll v='y' size='xs' />
-          <Text v='body2' size='xs'>{children}</Text>
-          <Messages items={messages} size='xs'/>
+          <Text v='body2' size='xxs'>{children}</Text>
+          {messages && <Messages items={messages} size='xxs'/>}
         </Card.Content>
       </Card>
     </Popup>

@@ -2,6 +2,8 @@ export type StringValue = string | number
 
 export const toString = (value: StringValue) => String(value).trim()
 
+export const isString = (value: any): value is string => typeof value === 'string' || value instanceof String
+
 /** ABC DEF */
 export const toUppercase = (value: StringValue) => toString(value).toUpperCase()
 
@@ -23,6 +25,7 @@ export const toCapital = (value: StringValue, whitespace = ' ') => toString(valu
 export const toTitle = (value: StringValue) => capitalize(toString(value))
 
 export default {
+  isString,
   toString,
   toUppercase,
   toLowercase,

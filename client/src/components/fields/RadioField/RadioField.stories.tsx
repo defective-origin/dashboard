@@ -17,6 +17,7 @@ export const Demo: Story = {
   parameters: params('RadioField'),
   args: {
     label: 'Label',
-    checked: true,
+    init: true,
+    help: 'help text',
   },
 }

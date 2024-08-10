@@ -1,0 +1,23 @@
+@import 'src/theme';
+
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
+
+.FormField {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+}
+
+.fit {
+  align-self: flex-start;
+}
+
+:global(.MuiFormLabel-asterisk) {
+  color: #FFD700;
+}

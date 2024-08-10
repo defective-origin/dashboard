@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react'
 
 const ERROR_CALLBACK = () => { throw new Error('Callback cannot be called') }
 
-
+// TODO: rename to useAction
 /**
  * Return stable function bound with ref.
  * It can be useful for events and handlers.

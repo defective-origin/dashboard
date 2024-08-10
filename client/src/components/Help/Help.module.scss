@@ -6,3 +6,12 @@
 
 .Help {
 }
+
+.Card > * {
+  padding: 5px;
+  padding-bottom: 5px !important;
+}
+
+.Header:not(:only-child) {
+  padding-bottom: 0;
+}

@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useCallback } from 'react'
 import MuiRadioField from '@mui/material/Radio'
 import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
-import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FieldProps, formField } from 'components/Form'
+
 // ---| self |---
 import css from './RadioField.module.scss'
 
-export type RadioFieldProps = Pick<FormOptions<string | boolean | number>, 'value' | 'name' | 'onChange'> & {
-  v?: 'end' | 'start' | 'top' | 'bottom'
+export type RadioFieldProps = FieldProps & {
   checked?: boolean
-  label?: React.ReactNode
-  className?: string
 }
 
 /**
@@ -27,32 +25,24 @@ export type RadioFieldProps = Pick<FormOptions<string | boolean | number>, 'valu
  * <RadioField />
  */
 export function RadioField(props: RadioFieldProps): JSX.Element {
-  const { v, label, name, value, checked, onChange, className, ...otherProps } = props
+  const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
   const _className = cn(css.RadioField, className)
-  const field = useForm({ name, value, dependency: true, onChange })
 
-  useEffect(() => {
-    if (checked && value !== field.value()) {
-      field.set(value as string)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => {
-    field.set((event.target.checked ? value : field.value()) as string)
-  })
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
+    checked && onChange?.(value, event)
+  , [onChange, value])
 
   return (
     <FormControlLabel
-      labelPlacement={v}
       label={label}
+      required={required}
+      disabled={disabled}
       control={
         <MuiRadioField
           className={_className}
-          name={field.name}
           size='small'
           value={value}
-          checked={value === field.value()}
+          checked={checked}
           onChange={handleChange}
           {...otherProps}
         />
@@ -63,4 +53,7 @@ export function RadioField(props: RadioFieldProps): JSX.Element {
 
 RadioField.displayName = 'RadioField'
 
-export default RadioField
+export default formField(RadioField, {
+  toInit: (init, props) => props.checked || props.init === init ? props.init : init,
+  toProps: (value, props) => ({ value: props.init, checked: props.init === value }),
+})

@@ -49,6 +49,7 @@ export type TextProps = FormatOptions<TextFormat> & {
   bold?: boolean
   nowrap?: boolean
   style?: React.CSSProperties
+  height?: string | number
 }
 
 /**
@@ -70,6 +71,7 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
   const {
     v = 'body1',
     size = TEXT_SIZE_MAP[v],
+    height,
     bold,
     color,
     ellipsis,
@@ -91,6 +93,7 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
   const _content = useFormat(content, TEXT_FORMAT_MAP, { format, placeholder })
   const styles = {
     ...style,
+    lineHeight: height,
     fontWeight: bold ? 'bold' : undefined,
     fontSize: THEME.components.text.size[size],
     WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,

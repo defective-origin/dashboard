@@ -19,8 +19,8 @@ export const Demo: Story = {
     disabled: false,
     required: false,
     label: 'Label',
-    value: 'value0',
-    message: 'help text',
+    init: 'value0',
+    help: 'help text',
     items: [
       { value: 'value0', children: 'FIRST' },
       { value: 'value1', children: 'SECOND' },

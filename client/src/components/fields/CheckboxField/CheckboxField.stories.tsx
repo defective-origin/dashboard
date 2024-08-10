@@ -17,6 +17,7 @@ export const Demo: Story = {
   parameters: params('CheckboxField'),
   args: {
     label: 'Label',
-    checked: true,
+    init: true,
+    help: 'help text',
   },
 }

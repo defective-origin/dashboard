@@ -122,6 +122,8 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
   useEvent('mouseout', hideScrollbars, { ref: container })
   useEffect(hideScrollbars, [hideScrollbars])
 
+  // TODO: shadow shows even if there is no scroll
+
   // attach overlay anchor ref for getting parent if container selector is not provided
   return (
     <div className={cn('scroll-overlay', className)} ref={overlayRef} style={{ zIndex }}>

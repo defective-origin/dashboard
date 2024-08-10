@@ -1,22 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import MuiSwitchField from '@mui/material/Switch'
-import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
-import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FieldProps, formField } from 'components/Form'
+
 // ---| self |---
 import css from './SwitchField.module.scss'
 
-export type SwitchFieldProps = Pick<FormOptions<boolean>, 'value' | 'name' | 'onChange'> & {
-  v?: 'end' | 'start' | 'top' | 'bottom'
+
+export type SwitchFieldProps = FieldProps<boolean> & {
   checked?: boolean
-  label?: React.ReactNode
-  className?: string
 }
 
 /**
@@ -27,29 +25,23 @@ export type SwitchFieldProps = Pick<FormOptions<boolean>, 'value' | 'name' | 'on
  * <SwitchField />
  */
 export function SwitchField(props: SwitchFieldProps): JSX.Element {
-  const { v, label, name, checked, onChange, className, ...otherProps } = props
+  const { value, checked = !!value, onChange, className, ...otherProps } = props
   const _className = cn(css.SwitchField, className)
-  const field = useForm({ name, value: !!checked, onChange })
-  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(event.target.checked))
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
+    onChange?.(checked, event)
+  , [onChange])
 
   return (
-    <FormControlLabel
-      labelPlacement={v}
-      label={label}
-      control={
-        <MuiSwitchField
-          className={_className}
-          name={field.name}
-          size='small'
-          checked={!!field.value()}
-          onChange={handleChange}
-          {...otherProps}
-        />
-      }
+    <MuiSwitchField
+      className={_className}
+      size='small'
+      checked={checked}
+      onChange={handleChange}
+      {...otherProps}
     />
   )
 }
 
 SwitchField.displayName = 'SwitchField'
 
-export default SwitchField
+export default formField(SwitchField)

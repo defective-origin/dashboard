@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn, react } from 'tools'
-import { useForm, useFunc } from 'hooks'
+import { useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -11,8 +11,10 @@ import Button, { ButtonProps } from 'components/Button'
 
 // ---| self |---
 import css from './FormButton.module.scss'
+import { useForm } from '../Form.context'
 
 export type FormButtonProps = ButtonProps & {
+  path?: string
   className?: string
   children?: React.ReactNode
 }
@@ -25,17 +27,17 @@ export type FormButtonProps = ButtonProps & {
  * <FormButton />
  */
 export function FormButton(props: FormButtonProps): JSX.Element {
-  const { type, children, onClick, className, ...otherProps } = props
+  const { path, type, children, onClick, className, ...otherProps } = props
   const _className = cn(css.FormButton, className)
-  const field = useForm()
+  const form = useForm()
 
   const handleClick = useFunc((event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
 
     if (type === 'submit') {
-      field.submit(event)
+      form?.submit(path)
     } else if (type === 'reset') {
-      field.reset()
+      form?.reset(path)
     }
 
     onClick?.(event)

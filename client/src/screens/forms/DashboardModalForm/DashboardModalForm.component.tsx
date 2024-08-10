@@ -7,12 +7,11 @@ import { useLocale } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
-import ModalForm, { ModalFormProps } from 'screens/forms/ModalForm'
-import Field from 'screens/fields'
-
 // ---| components |---
 import Text from 'components/Text'
 import Layout from 'components/Layout'
+import Field from 'components/fields'
+import ModalForm, { ModalFormProps } from 'components/ModalForm'
 
 // ---| self |---
 import css from './DashboardModalForm.module.scss'
@@ -46,20 +45,20 @@ export function DashboardModalForm(props: DashboardModalFormProps): JSX.Element 
   return (
     <ModalForm className={_className} name='board-settings' title={locale.t('FORM.BOARD_SETTINGS')} onOpen={setOptions} {...otherProps}>
       <Layout v='board' columns={2} g='sm'>
-        <Field.Text name='author' label={locale.t('FIELD.AUTHOR')} value={options?.author.toString()} disabled />
-        <Field.Select name='access' label={locale.t('FIELD.ACCESS')} items={ACCESS_OPTIONS} value={options?.access} />
+        <Field.Text path='author' label={locale.t('FIELD.AUTHOR')} value={options?.author.toString()} disabled />
+        <Field.Select path='access' label={locale.t('FIELD.ACCESS')} items={ACCESS_OPTIONS} value={options?.access} />
       </Layout>
 
-      <Field.Text name='name' label={locale.t('FIELD.NAME')} value={options?.name} />
-      <Field.Text name='description' label={locale.t('FIELD.DESCRIPTION')} value={options?.description} multiline />
+      <Field.Text path='name' label={locale.t('FIELD.NAME')} value={options?.name} />
+      <Field.Text path='description' label={locale.t('FIELD.DESCRIPTION')} value={options?.description} multiline />
 
       <Text.H3 content='Active layout' />
       <Layout v='board' columns={5} g='sm' >
-        <Field.Switch v='top' name='tv' label='Tv' checked={options?.devices.tv?.active} />
-        <Field.Switch v='top' name='computer' label='Computer' checked={options?.devices.computer?.active} />
-        <Field.Switch v='top' name='tablet' label='Tablet' checked={options?.devices.tablet?.active} />
-        <Field.Switch v='top' name='mobile' label='Mobile' checked={options?.devices.mobile?.active} />
-        <Field.Switch v='top' name='watch' label='Watch' checked={options?.devices.watch?.active} />
+        <Field.Switch path='tv' label='Tv' checked={options?.devices.tv?.active} />
+        <Field.Switch path='computer' label='Computer' checked={options?.devices.computer?.active} />
+        <Field.Switch path='tablet' label='Tablet' checked={options?.devices.tablet?.active} />
+        <Field.Switch path='mobile' label='Mobile' checked={options?.devices.mobile?.active} />
+        <Field.Switch path='watch' label='Watch' checked={options?.devices.watch?.active} />
       </Layout>
 
       {children}

@@ -34,9 +34,9 @@ export type ModalFormProps<T extends object, F extends object = T> = ModalProps<
  *  const [options, setOptions] = useState()
  *
  *  return (
- *    <ModalForm name='form-modal' title={locale.t('FORM.BOARD_SETTINGS')} onOpen={setOptions}>
- *      <Field.Text name='name' label={locale.t('FIELD.NAME')} value={options?.name} />
- *      <Field.Text name='endpoint' label={locale.t('FIELD.ENDPOINT')} value={options?.endpoint} />
+ *    <ModalForm title={locale.t('FORM.BOARD_SETTINGS')} onOpen={setOptions}>
+ *      <Field.Text path='name' label={locale.t('FIELD.NAME')} init={options?.name} />
+ *      <Field.Text path='endpoint' label={locale.t('FIELD.ENDPOINT')} init={options?.endpoint} />
  *    </ModalForm>
  *  )
  * }
@@ -61,7 +61,7 @@ export function ModalForm<T extends object, F extends object = T>(props: ModalFo
       ]}
       {...otherProps}
     >
-      <Form name={name} resetId={resetId} submitId={submitId} g='md' onSubmit={onSubmit} onReset={onReset}>
+      <Form resetId={resetId} submitId={submitId} g='md' onSubmit={onSubmit} onReset={onReset}>
         {children}
       </Form>
     </Modal>

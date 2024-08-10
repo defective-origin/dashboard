@@ -1,19 +1,21 @@
-import TextField from './TextField'
-import CheckboxField from './CheckboxField'
-import GroupField from './GroupField'
-import NumberField from './NumberField'
-import RadioField from './RadioField'
-import SelectField from './SelectField'
-import SliderField from './SliderField'
-import SwitchField from './SwitchField'
+import TextFormField from './TextField'
+import NumberFormField from './NumberField'
+import SliderFormField from './SliderField'
+import CheckboxFormField from './CheckboxField'
+import CheckboxListFormField from './CheckboxListField'
+import RadioFormField from './RadioField'
+import RadioGroupField from './RadioGroupField'
+import SwitchFormField from './SwitchField'
+import SelectFormField from './SelectField'
 
 export default {
-  Text: TextField,
-  Number: NumberField,
-  Slider: SliderField,
-  Radio: RadioField,
-  Switch: SwitchField,
-  Checkbox: CheckboxField,
-  Select: SelectField,
-  Group: GroupField,
+  Text: TextFormField,
+  Number: NumberFormField,
+  Slider: SliderFormField,
+  Checkbox: CheckboxFormField,
+  CheckboxList: CheckboxListFormField,
+  Radio: RadioFormField,
+  RadioGroup: RadioGroupField,
+  Switch: SwitchFormField,
+  Select: SelectFormField,
 }

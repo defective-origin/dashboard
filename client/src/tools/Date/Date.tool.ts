@@ -3,12 +3,12 @@ import { DATE_OPTIONS } from './Date.constant'
 
 export type DateValue = number | string
 
-export const isDateValid = (value: DateValue) => {
+export const isDate = (value: DateValue) => {
   return !isNaN(new Date(value).getTime())
 }
 
 export const toDate = (value: DateValue, options?: Intl.DateTimeFormatOptions) => {
-  if (!isDateValid(value)) {
+  if (!isDate(value)) {
     return value
   }
 
@@ -46,6 +46,7 @@ export const toDayOfMonthYear = (v: DateValue, defaultPostfix?: string) => {
 }
 
 export default {
+  isDate,
   toDate,
   toDay,
   toMonth,

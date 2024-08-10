@@ -2,12 +2,12 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import useNestedState from './UseNestedState.hook'
+import useSubscriptions from './UseSubscriptions.hook'
 
 
-describe('[useNestedState] hook', () => {
+describe('[useSubscriptions] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => useNestedState())
+    const { result } = renderHook(() => useSubscriptions())
 
     expect(result.current).toEqual(null)
   })

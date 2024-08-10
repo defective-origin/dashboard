@@ -19,7 +19,7 @@ export function getMaxUnit(value: NumberValue, units: NumberUnit[] = NUMBER_OPTI
   return items.find((unit) => (Number(value) / unit.value) >= 1)
 }
 
-export const isNumberValid = (value: NumberValue) => {
+export const isNumber = (value: NumberValue) => {
   return !isNaN(Number(value)) && isFinite(Number(value))
 }
 
@@ -37,7 +37,7 @@ export function formatNumber(value: NumberValue, options?: NumberOptions) {
 
 /** 123,456,789.98 or 123.98 M */
 export function toNumber(value: NumberValue, options?: NumberOptions) {
-  if (!isNumberValid(value)) {
+  if (!isNumber(value)) {
     return value
   }
 
@@ -67,6 +67,7 @@ export const toSize = (v: NumberValue, options?: NumberOptions) => toNumber(v, {
 export const toWeight = (v: NumberValue, options?: NumberOptions) => toNumber(v, { units: WEIGHT_OPTIONS, ...options })
 
 export default {
+  isNumber,
   formatNumber,
   toNumber,
   toAmount,

@@ -1,8 +1,8 @@
 /* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../.storybook/tool'
 import type { Meta, StoryObj } from '@storybook/react'
 import ModalForm, { ModalFormProps } from './ModalForm.component'
-import Field from 'screens/fields'
+import Field from 'components/fields'
 import Layout from 'components/Layout'
 
 const meta: Meta<typeof ModalForm> = {
@@ -23,7 +23,7 @@ type Story = StoryObj<typeof ModalForm>
 export const Demo: Story = {
   parameters: params('ModalForm'),
   render: () => {
-    const SELECT_OPTIONS = [
+    const SELECT_ITEMS = [
       { value: 'value0', children: 'FIRST' },
       { value: 'value1', children: 'SECOND' },
       { value: 'value2', children: 'THIRD' },
@@ -32,19 +32,19 @@ export const Demo: Story = {
     return (
       <ModalForm name='board-settings' title='Settings' open>
         <Layout v='board' columns={3} g='sm'>
-          <Field.Radio name='radio' label='Radio' value={true} />
-          <Field.Switch name='switch' label='Switch' value={true} />
-          <Field.Checkbox name='checkbox' label='Checkbox' value='checkbox' checked />
+          <Field.Radio path='radio' label='Radio' value={true} />
+          <Field.Switch path='switch' label='Switch' value={true} />
+          <Field.Checkbox path='checkbox' label='Checkbox' value='checkbox' checked />
         </Layout>
 
         <Layout v='board' columns={2} g='sm'>
-          <Field.Text name='text' label='Text' value='value' message='Help text' />
-          <Field.Number name='number' label='Number' value={50} message='Help text' />
+          <Field.Text path='text' label='Text' value='value' help='Help text' />
+          <Field.Number path='number' label='Number' value={50} help='Help text' />
         </Layout>
 
-        <Field.Slider name='slider' label='Slider' value={50} />
-        <Field.Select name='select' label='Select' value='value0' message='Help text' items={SELECT_OPTIONS} />
-        <Field.Text name='text-multiline' label='Text multiline' value='value' message='Help text' multiline />
+        <Field.Slider path='slider' label='Slider' value={50} />
+        <Field.Select path='select' label='Select' value='value0' help='Help text' items={SELECT_ITEMS} />
+        <Field.Text path='text-multiline' label='Text multiline' value='value' help='Help text' multiline />
       </ModalForm>
     )
   },

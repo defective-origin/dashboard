@@ -22,10 +22,15 @@ export const Demo: Story = {
   parameters: params('TextField'),
   args: {
     label: 'Label',
-    value: 'Some value',
+    init: 'Some value',
+    help: 'help text',
     multiline: false,
     required: false,
     disabled: false,
-    message: 'help text',
+    checkOnBlur: true,
+    checkOnChange: true,
+    rules: [
+      (value) => value.length > 5 && 'TEXT CANNOT BE MORE THEN 5 CHARS',
+    ],
   },
 }

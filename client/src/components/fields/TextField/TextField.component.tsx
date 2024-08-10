@@ -1,26 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
-import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FieldProps, formField } from 'components/Form'
+
 // ---| self |---
 import css from './TextField.module.scss'
 
-export type TextFieldProps = Pick<FormOptions<string>, 'value' | 'name' | 'onChange'> & {
-  message?: React.ReactNode
-  label?: React.ReactNode
+export type TextFieldProps = FieldProps<string> & {
   multiline?: boolean
-  className?: string
-  required?: boolean
-  disabled?: boolean
 }
-
-// TODO: add throttle for input onChange event?
 
 /**
  * Component description.
@@ -30,24 +24,19 @@ export type TextFieldProps = Pick<FormOptions<string>, 'value' | 'name' | 'onCha
  * <TextField />
  */
 export function TextField(props: TextFieldProps): JSX.Element {
-  const { message, name, value, onChange, className, ...otherProps } = props
+  const { value = '', onChange, className, ...otherProps } = props
   const _className = cn(css.TextField, className)
-  const field = useForm({ name, value, onChange })
-  const onBlur = useFunc(() => field.validate())
-  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(event.target.value))
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+    onChange?.(event.target.value, event)
+  , [onChange])
 
-  // TODO: add Help icon near label which show tooltip on hover
   return (
     <MuiTextField
       className={_className}
-      name={field.name}
       size='small'
-      value={field.value()}
+      value={value}
       rows={otherProps.multiline ? 5 : undefined}
-      onBlur={onBlur}
       onChange={handleChange}
-      helperText={field.errors()?.[0] ?? message}
-      error={!!field.errors()}
       {...otherProps}
     />
   )
@@ -55,4 +44,4 @@ export function TextField(props: TextFieldProps): JSX.Element {
 
 TextField.displayName = 'TextField'
 
-export default TextField
+export default formField(TextField)

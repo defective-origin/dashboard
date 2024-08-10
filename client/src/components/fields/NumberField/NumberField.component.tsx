@@ -1,23 +1,18 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
-import { FormOptions, useForm, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { FieldProps, formField } from 'components/Form'
+
 // ---| self |---
 import css from './NumberField.module.scss'
 
-export type NumberFieldProps = Pick<FormOptions<number>, 'value' | 'name' | 'onChange'> & {
-  message?: React.ReactNode
-  label?: React.ReactNode
-  className?: string
-  required?: boolean
-  disabled?: boolean
-}
+export type NumberFieldProps = FieldProps<number>
 
 /**
  * Component description.
@@ -27,23 +22,19 @@ export type NumberFieldProps = Pick<FormOptions<number>, 'value' | 'name' | 'onC
  * <NumberField />
  */
 export function NumberField(props: NumberFieldProps): JSX.Element {
-  const { message, name, value, onChange, className, ...otherProps } = props
+  const { value = 0, onChange, className, ...otherProps } = props
   const _className = cn(css.NumberField, className)
-  const field = useForm({ name, value, onChange })
-  const onBlur = useFunc(() => field.validate())
-  const handleChange = useFunc((event: React.ChangeEvent<HTMLInputElement>) => field.set(Number(event.target.value)))
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+    onChange?.(Number(event.target.value), event)
+  , [onChange])
 
   return (
     <MuiTextField
       className={_className}
-      name={field.name}
       type='number'
       size='small'
-      value={field.value()}
-      onBlur={onBlur}
+      value={value}
       onChange={handleChange}
-      helperText={field.errors()?.[0] ?? message}
-      error={!!field.errors()}
       {...otherProps}
     />
   )
@@ -51,4 +42,4 @@ export function NumberField(props: NumberFieldProps): JSX.Element {
 
 NumberField.displayName = 'NumberField'
 
-export default NumberField
+export default formField(NumberField)
