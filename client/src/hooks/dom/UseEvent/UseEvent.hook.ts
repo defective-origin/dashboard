@@ -10,6 +10,7 @@ export type ExtendedEventMap = HTMLElementEventMap & {
 export type EventOptions<E extends Element> = AddEventListenerOptions & {
   ref?: ElementOptions<E>
   disable?: boolean
+  deps?: unknown[]
 }
 
 export type EventReturnOptions<E extends Element> = ElementRef<E>
@@ -38,7 +39,7 @@ export function useEvent<E extends HTMLElement, K extends keyof ExtendedEventMap
       return () => element?.removeEventListener(name, func as EventListener, options)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [func, name, options?.disable, ref])
+  }, [func, name, options?.disable, ref, ...options?.deps ?? []])
 
   return ref
 }

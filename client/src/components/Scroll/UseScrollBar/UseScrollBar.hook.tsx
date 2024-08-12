@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, obj } from 'tools'
 import { Direction, Size } from 'theme'
 import { useElement, ElementOptions, useEvent, useFunc } from 'hooks'
 
@@ -12,8 +12,6 @@ import Button from 'components/Button'
 import './UseScrollBar.module.scss'
 
 export const px = (value: string | number = 0) => `${value}px`
-export const set = <T extends object>(obj: T | undefined | null, key: string, value: T[keyof T]) => obj && (obj[key as keyof T] = value)
-export const get = <T extends object>(obj: T | undefined | null, key: string): any => obj && obj[key as keyof T]
 
 const SCROLLBAR_PROPERTY_MAP = {
   x: { mouse: 'pageX', margin: 'marginBottom', size: 'width', height: 'offsetWidth', width: 'offsetHeight', pos: 'left', visibility: 'visibility' },
@@ -53,9 +51,8 @@ export type ScrollBarOptions = ScrollOptions & {
 }
 
 export type ScrollBarReturnOptions = null | {
-  hide: () => void
-  show: () => void
-  resize: (_container?: number, _content?: number, shift?: number) => void
+  display: (isMouseInside?: boolean) => void
+  refresh: (_container?: number, _content?: number, shift?: number) => void
   shadows: JSX.Element
   element: JSX.Element
   button: JSX.Element
@@ -89,6 +86,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   const shadowStartRef = useRef<HTMLDivElement>(null)
   const shadowEndRef = useRef<HTMLDivElement>(null)
   const backButtonRef = useRef<HTMLDivElement>(null)
+  const isMouseInsideContainer = useRef(false)
   const property = SCROLLBAR_PROPERTY_MAP[v]
   const scrollTrackClassName = cn('scroll-track', {
     [`scroll-track--${v}`]: v,
@@ -98,13 +96,8 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     [`scroll-thumb--${size}`]: size,
   }, thumbClassName)
 
-  const isEnabled = useFunc(() => optionsRef.current?.scrollable && enabled)
-
-  const show = useFunc(() => optionsRef.current?.scrollable && set(trackRef.current?.style, property.visibility, 'visible'))
-  const hide = useFunc(() => !startMovePos.current && set(trackRef.current?.style, property.visibility, 'hidden'))
-
   const initOptions = useFunc((container = 0, content = 0, position = 0) => {
-    const track = get(trackRef.current, property.height)
+    const track = obj.get(trackRef.current, property.height)
     const pages = content / container
     const scrollable = container < content
     const thumb = track / pages
@@ -119,54 +112,61 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     }
   })
 
-  const showShadow = useFunc((ref: React.RefObject<HTMLDivElement>, position = 0) => {
-    if (position === 0) {
-      set(ref.current?.style, property.visibility, 'hidden')
-    } else {
-      set(ref.current?.style, property.visibility, 'visible')
-    }
+  const display = useFunc((ref: React.RefObject<HTMLDivElement>, isVisible: unknown = true) => {
+    const state = isVisible ? 'visible' : 'hidden'
+
+    obj.set(ref.current?.style, property.visibility, state)
   })
 
-  const resize = useFunc((container = 0, content = 0, position = 0) => {
-    // show/hide back buttons
-    if (back && position >= back) {
-      set(backButtonRef.current?.style, property.visibility, 'visible')
-    } else {
-      set(backButtonRef.current?.style, property.visibility, 'hidden')
+  const displayScrollbar = useFunc((isMouseInside?: boolean) => {
+    // we need to know mouse position
+    // for mouse move and scroll events
+    if (typeof isMouseInside === 'boolean') {
+      isMouseInsideContainer.current = !!isMouseInside
+    }
+
+    const hasActiveAction = isMouseInsideContainer.current || !!visible || !!startMovePos.current
+    const isVisible = optionsRef.current?.scrollable && hasActiveAction
+
+    display(trackRef, isVisible)
+  })
+
+  const refresh = useFunc((container = 0, content = 0, position = 0) => {
+    if (!enabled) {
+      return
     }
 
     initOptions(container, content, position)
 
-    if (!isEnabled()) {
-      return hide()
-    } else if (startMovePos.current || visible) {
-      show()
-    }
+    // set positions
+    obj.set(thumbRef.current?.style, property.size, px(optionsRef.current?.thumb))
+    obj.set(thumbRef.current?.style, property.pos, px(optionsRef.current?.thumbPosition))
 
-    set(thumbRef.current?.style, property.size, px(optionsRef.current?.thumb))
-    set(thumbRef.current?.style, property.pos, px(optionsRef.current?.thumbPosition))
+    displayScrollbar()
+
+    // show back buttons
+    display(backButtonRef, back && position >= back)
 
     // show scroll side shadow
-    showShadow(shadowStartRef, position)
-    showShadow(shadowEndRef, position + container - content)
+    display(shadowStartRef, position)
+    display(shadowEndRef, position + container - content)
   })
 
-  const endMove = useFunc(() => {
-    if (isEnabled()) {
-      startMovePos.current = null
-    }
+  const endMove = useFunc((event: MouseEvent) => {
+    event.preventDefault()
+    startMovePos.current = null
+
+    displayScrollbar()
   })
 
   const startMove = useFunc((event: MouseEvent) => {
-    if (isEnabled()) {
-      startMovePos.current = get(event, property.mouse)
-      event.preventDefault()
-    }
+    event.preventDefault()
+    startMovePos.current = obj.get(event, property.mouse)
   })
 
   const move = useFunc((event: MouseEvent) => {
-    if (isEnabled() && startMovePos.current && optionsRef.current) {
-      const delta = get(event, property.mouse) - startMovePos.current
+    if (startMovePos.current && optionsRef.current) {
+      const delta = obj.get(event, property.mouse) - startMovePos.current
       const position = delta * optionsRef.current.pages
 
       startMove(event)
@@ -175,18 +175,15 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   })
 
   // scroll page
-  useEvent('mousedown', startMove, { ref: thumbRef })
-  useEvent('mousemove', move)
-  useEvent('mouseup', endMove)
+  useEvent('mousedown', startMove, { ref: thumbRef, disable: !enabled })
+  useEvent('mousemove', move, { disable: !enabled })
+  useEvent('mouseup', endMove, { disable: !enabled })
 
-  const scrollBack = useFunc(() => {
-    containerRef.current?.scrollTo({ [property.pos]: 0, behavior })
-  })
+  const scrollBack = useFunc(() => containerRef.current?.scrollTo({ [property.pos]: 0, behavior }))
 
   return useMemo(() => !enabled ? null : ({
-    hide,
-    show,
-    resize,
+    display: displayScrollbar,
+    refresh,
     shadows: (
       <>
         <div ref={shadowStartRef} className={cn('shadow', `shadow-${v}--start`)} />
@@ -208,7 +205,11 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
         />
       </div>
     ),
-  }), [enabled, hide, show, resize, scrollTrackClassName, property.margin, indent, scrollThumbClassName, backClassName, size, v, scrollBack])
+  }), [
+    enabled, v, scrollTrackClassName, property.margin,
+    indent, scrollThumbClassName, backClassName, size,
+    displayScrollbar, refresh, scrollBack,
+  ])
 }
 
 export default useScrollBar

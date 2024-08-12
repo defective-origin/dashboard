@@ -32,7 +32,10 @@ export type PropertiesReturnOptions<T extends Record<string, unknown>> = Record<
  *  secondary: '--secondary-color',
  * }, [theme])
  */
-export const useProperties = <T extends Record<string, unknown>>(options: PropertiesOptions<T>, deps: unknown[] = []): PropertiesReturnOptions<T> => {
+export const useProperties = <T extends Record<string, unknown>>(
+  options: PropertiesOptions<T>,
+  deps: unknown[] = [],
+): PropertiesReturnOptions<T> => {
   const { ref, ...map } = options
   const elementRef = useElement(ref, document.body)
   const [result, setResult] = useState(() => getProperties(elementRef, map))

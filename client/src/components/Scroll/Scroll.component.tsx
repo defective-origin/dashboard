@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 
 // ---| core |---
 import { useElement, useEvent, useFunc, useMode, useResizeObserver } from 'hooks'
@@ -59,7 +59,6 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
     top = 0,
     zIndex,
     actions,
-    visible,
     children,
     className,
     trackClassName,
@@ -74,32 +73,20 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
   const actionOffset = offset(actions, 50)
   const hasBarX = ['x', 'xy'].includes(v)
   const hasBarY = ['y', 'xy'].includes(v)
-  const barX = useScrollBar({ enabled: hasBarX, v: 'x', back: backOffset?.x, className: trackClassName, visible, container, ...otherOptions })
-  const barY = useScrollBar({ enabled: hasBarY, v: 'y', back: backOffset?.y, className: trackClassName, visible, container, ...otherOptions })
+  const barX = useScrollBar({ enabled: hasBarX, v: 'x', back: backOffset?.x, className: trackClassName, container, ...otherOptions })
+  const barY = useScrollBar({ enabled: hasBarY, v: 'y', back: backOffset?.y, className: trackClassName, container, ...otherOptions })
 
-  const hideScrollbars = useFunc(() => {
-    if (!visible) {
-      barY?.hide()
-      barX?.hide()
-    }
+
+  const display = useFunc((isMouseInside?: boolean) => {
+    barY?.display(isMouseInside)
+    barX?.display(isMouseInside)
   })
 
-  const showScrollbars = useFunc(() => {
-    if (!visible) {
-      barY?.show()
-      barX?.show()
-    }
-  })
-
-  const resize = useFunc(() => {
+  const refresh = useFunc(() => {
     const parent = containerRef.current
     if (!parent) {
       return
     }
-
-    // resize scrollbars
-    barY?.resize(parent.offsetHeight, parent.scrollHeight, parent.scrollTop)
-    barX?.resize(parent.offsetWidth, parent.scrollWidth, parent.scrollLeft)
 
     // move overlay block
     if (overlayRef.current) {
@@ -108,21 +95,22 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
       overlayRef.current.style.height = px(parent.offsetHeight - top)
       overlayRef.current.style.width = px(parent.offsetWidth)
     }
+
+    // resize scrollbars
+    barY?.refresh(parent.offsetHeight, parent.scrollHeight, parent.scrollTop)
+    barX?.refresh(parent.offsetWidth, parent.scrollWidth, parent.scrollLeft)
   })
 
   // set class names with styles on parent element
   useMode(container, 'scroll', `scroll--${v}`)
 
   // resize scroll on container resize and scroll
-  useResizeObserver(resize, { ref: container })
-  useEvent('scroll', resize, { ref: container })
+  useResizeObserver(refresh, { ref: container })
+  useEvent('scroll', refresh, { ref: container })
 
   // show/hide scrollbars on container hover
-  useEvent('mouseover', showScrollbars, { ref: container })
-  useEvent('mouseout', hideScrollbars, { ref: container })
-  useEffect(hideScrollbars, [hideScrollbars])
-
-  // TODO: shadow shows even if there is no scroll
+  useEvent('mouseover', () => display(true), { ref: container })
+  useEvent('mouseout', () => display(false), { ref: container })
 
   // attach overlay anchor ref for getting parent if container selector is not provided
   return (
@@ -131,7 +119,10 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
         {children}
 
         {actions && (
-          <div className={cn('scroll-actions', actionsClassName)} style={{ left: actionOffset.x, bottom: actionOffset.y }}>
+          <div
+            className={cn('scroll-actions', actionsClassName)}
+            style={{ left: actionOffset.x, bottom: actionOffset.y }}
+          >
             {barY?.button}
             {barX?.button}
           </div>

@@ -38,7 +38,11 @@ export const has = (obj: Obj, path?: string): boolean => {
 }
 
 /** Return nested value by path or undefined if value is not exist */
-export const get = (obj: Obj, path?: string): any => {
+export const get = (obj: Obj | undefined | null, path?: string): any => {
+  if (!obj) {
+    return obj
+  }
+
   const keys = toKeys(path)
   let current = obj
 
@@ -53,7 +57,11 @@ export const get = (obj: Obj, path?: string): any => {
   return current
 }
 
-export const set = (obj: Obj, path: string, value: any): Obj => {
+export const set = (obj: Obj | undefined | null, path: string, value: any): Obj | undefined | null => {
+  if (!obj) {
+    return obj
+  }
+
   const keys = toKeys(path)
   let current = obj
 
@@ -72,7 +80,11 @@ export const set = (obj: Obj, path: string, value: any): Obj => {
   return obj
 }
 
-export const del = (obj: Obj, path: string, removeEmptyObjects?: boolean): Obj => {
+export const del = (obj: Obj | undefined | null, path: string, removeEmptyObjects?: boolean): Obj | undefined | null => {
+  if (!obj) {
+    return obj
+  }
+
   const keys = toKeys(path)
   const map: Record<string, Obj> = {}
   let current = obj

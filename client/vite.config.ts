@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   // only for gh pages
-  base: '/dashboard/',
+  base: process.env.NODE_ENV === 'production' ? '/dashboard/' : './',
   test: {
     globals: true,
     environment: 'jsdom',

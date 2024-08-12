@@ -47,13 +47,7 @@ export function Page(props: PageProps): JSX.Element {
   const tabName = locale.t('SYSTEM.TAB_NAME', { title: pageName })
 
   const actionItems: ActionItem[] = actions.map((item) =>
-    typeof item === 'object'
-      ? ({
-        ...item,
-        v: 'text',
-        color: 'primary',
-      })
-      : item,
+    typeof item === 'object' ? ({ ...item, v: 'text', color: 'primary' }) : item,
   ) as ActionItem[]
 
   return (
