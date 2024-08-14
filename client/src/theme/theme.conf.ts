@@ -1,3 +1,5 @@
+import { toVariable } from './theme.tool'
+
 export type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'contrast' | 'bg'
 export type ColorShadeNumber = 1 | 2 | 3 | 4 | 5 | 6
 export type PaletteColor = Color | `${Color}-${ColorShadeNumber}`
@@ -7,13 +9,11 @@ export type SizeArea = 'size' | 'gap' | 'margin' | 'padding'
 export type Direction = 'x' | 'y' | 'xy'
 export type SizeElements = 'text' | 'icon' | 'space' | 'scroll'
 
-export const toName = (name: string, mod?: string | number) => mod ? `--${name}--${mod}` : `--${name}`
-export const toVariable = (name: string, mod?: string | number) => `var(${toName(name, mod)})`
-
 export const DIRECTION: Direction[] = ['x', 'y', 'xy']
 export const SIZES: Size[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 export const ELEMENTS: SizeElements[] = ['text', 'icon', 'space', 'scroll']
 export const SIZE_AREA: SizeArea[] = ['size', 'gap', 'margin', 'padding']
+
 export const SIZE_MAP = ELEMENTS.reduce((acc, element) => {
   acc[element] = {} as Record<SizeArea, Record<Size, string>>
   SIZE_AREA.forEach((area) => {
@@ -24,6 +24,7 @@ export const SIZE_MAP = ELEMENTS.reduce((acc, element) => {
 
   return acc
 }, {} as Record<SizeElements, Record<SizeArea, Record<Size, string>>>)
+
 
 export const SUB_COLORS_COUNT = 6
 export const COLORS: Color[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'contrast', 'bg']

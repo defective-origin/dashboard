@@ -47,6 +47,7 @@ export function Table<T extends TableRecord>(props: TableProps<T>): JSX.Element 
 
   // TODO: add sort by html cell content
   // TODO: add Reset button to last column: reset sorting and filters and other column settings
+  // TODO: fix all columns if there is no scroll!
   return (
     <Block className={_className} style={{ width, height, minHeight }} {...otherProps}>
       <Block v='x' justifies='space-between' aligns='center'>

@@ -13,7 +13,7 @@ export const MENU_ACTION_ICONS: MenuActionIconVariant[] = ['more_horiz', 'more_v
 export const WINDOW_ACTION_ICONS: WindowActionIconVariant[] = ['fullscreen', 'fullscreen_exit', 'zoom_out_map', 'zoom_in_map', 'open_in_new']
 export const THEME_ICONS: ThemeIconVariant[] = ['light_mode', 'dark_mode']
 export const STATUS_ICONS: StatusIconVariant[] = ['info', 'warning', 'error', 'check_circle', 'check']
-export const ACTION_ICONS: ActionIconVariant[] = ['close', 'left_panel_open', 'left_panel_close', 'delete', 'edit']
+export const ACTION_ICONS: ActionIconVariant[] = ['close', 'left_panel_open', 'left_panel_close', 'delete', 'edit', 'download']
 export const DEVICE_ICONS: DeviceIconVariant[] = ['developer_mode_tv', 'tv', 'computer', 'tablet_mac', 'phone_iphone', 'watch']
 export const KEYBOARD_ICONS: KeyboardIconVariant[] = ['keyboard', 'keyboard_arrow_up', 'keyboard_arrow_down', 'keyboard_arrow_left', 'keyboard_arrow_right']
 

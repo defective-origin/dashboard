@@ -36,7 +36,7 @@ export function TableBody<T extends TableRecord>(props: TableBodyProps<T>): JSX.
   return (
     <MuiTableBody className={_className} {...otherProps}>
       {items?.map((item, idx) =>
-        <TableRow columns={columns} item={item} key={keygen(item, idx)} />,
+        <TableRow key={keygen(item, idx)} id={keygen(item, idx)} columns={columns} item={item} />,
       )}
     </MuiTableBody>
   )

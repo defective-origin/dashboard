@@ -41,6 +41,11 @@ export type ModalProps<T = unknown> = ModalOptions<T> & {
 /**
  * Allows to show modal, drawer and other.
  *
+ * Modal can be opened via
+ * - Component with `open` prop
+ * - Event hook `useModal` - can be called everywhere in app
+ * - By url `url/:id?modal=name&arg1=123` - can be called everywhere in app
+ *
  * How to use
  * @example
  * <Modal name='modal-name' v='right' payload='payload'>some content</Modal>
@@ -51,6 +56,8 @@ export function Modal<T = unknown>(props: ModalProps<T>): JSX.Element {
   const [options, setOptions] = useState<ModalOptions<T>>()
   const { payload, open, v = 'center', name, title, actions, onClose, onOpen, children, className, ...otherProps } = { ...props, ...options }
   const _className = cn(css.Modal, className)
+
+  // TODO: open modal by url (/url/:id?modal=name&arg1=123) useParams searchParams
 
   const close = useFunc(() => {
     options?.onClose?.()

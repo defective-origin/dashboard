@@ -20,7 +20,11 @@ export type FormatReturnOptions = React.ReactNode
  *
  * const content = useFormat(value, FORMAT_MAP, { format: 'uppercase', placeholder: 'UNKNOWN' })
  */
-export const useFormat = <V, K extends string>(value: React.ReactNode, map: Record<K, Formatter<V>>, options: FormatOptions<K> = {}): FormatReturnOptions => {
+export const useFormat = <V, K extends string>(
+  value: React.ReactNode,
+  map: Record<K, Formatter<V>>,
+  options: FormatOptions<K> = {},
+): FormatReturnOptions => {
   const { format, placeholder } = options
 
   if (nil.isNil(value) && placeholder) {

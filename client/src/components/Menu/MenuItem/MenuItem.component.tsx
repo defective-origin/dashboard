@@ -40,7 +40,7 @@ export const MenuItem = forwardRef<unknown, MenuItemProps & { triggerOptions?: P
     <MuiMenuItem ref={ref as React.ForwardedRef<HTMLLIElement>} className={_className}>
       {!children && Tag && (
         <Tag
-          size='sm'
+          size='xxs'
           active={active ?? o?.open}
           color='primary'
           align='left'

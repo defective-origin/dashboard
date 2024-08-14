@@ -17,6 +17,7 @@ import { TableColumn, TableRecord } from '../Table.type'
 export type CellSort<T extends TableRecord> = (column: TableColumn<T>) => void
 
 export type TableCellProps<T extends TableRecord> = {
+  id?: string
   th?: boolean
   item?: T
   column: TableColumn<T>
@@ -33,7 +34,7 @@ export type TableCellProps<T extends TableRecord> = {
  * <TableCell />
  */
 export function TableCell<T extends TableRecord>(props: TableCellProps<T>): JSX.Element {
-  const { th, item, column, zIndex, onSort, className, ...otherProps } = props
+  const { id, th, item, column, zIndex, onSort, className, ...otherProps } = props
   const _className = cn(css.TableCell, { [css.Fixed]: column.fixed, [css.th]: th }, className)
   const style: React.CSSProperties = {
     zIndex: zIndex,
@@ -46,7 +47,7 @@ export function TableCell<T extends TableRecord>(props: TableCellProps<T>): JSX.
   // separated for performance reason
   if (th) {
     return (
-      <MuiTableCell className={_className} align={column.align} style={style} {...otherProps}>
+      <MuiTableCell id={id} className={_className} align={column.align} style={style} {...otherProps}>
         {!column.sort && <Text v='caption' size='xxs' content={column.name} bold />}
 
         {column.sort && (
@@ -65,7 +66,7 @@ export function TableCell<T extends TableRecord>(props: TableCellProps<T>): JSX.
   const field = column.field && obj.get(item as T, column.field)
 
   return (
-    <MuiTableCell className={_className} align={column.alignCell} style={style} {...otherProps}>
+    <MuiTableCell id={id} className={_className} align={column.alignCell} style={style} {...otherProps}>
       {item && column.render?.(item, column, field)}
     </MuiTableCell>
   )

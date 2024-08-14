@@ -16,6 +16,7 @@ type Item = {
   salary?: number;
   gdp?: number;
   date?: Date;
+  isBig?: boolean;
 }
 
 const COLUMNS: TableColumn<Item>[] = [
@@ -43,6 +44,12 @@ const COLUMNS: TableColumn<Item>[] = [
     field: 'population',
     format: 'amount',
     bold: true,
+  }),
+  column.icon({
+    field: 'isBig',
+    name: 'big',
+    fill: true,
+    mapper: (_, __, is) => is ? { v: 'add' } : { v: 'info' },
   }),
   // fixed column
   column.number({
@@ -100,8 +107,9 @@ function createData(
 ) {
   const hasValue = population && size
   const density = hasValue && population / size
+  const isBig = !!size && size > 1_000_000
 
-  return { name, code, population, size, density, salary, gdp, date }
+  return { name, code, population, size, density, salary, gdp, date, isBig }
 }
 
 const ITEMS = [

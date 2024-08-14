@@ -2,12 +2,12 @@ import React, { useRef } from 'react'
 
 // ---| core |---
 import { useElement, useEvent, useFunc, useMode, useResizeObserver } from 'hooks'
-import { Direction } from 'theme'
+import { Direction, px } from 'theme'
 import { cn } from 'tools'
 
 // ---| self |---
 import './Scroll.module.scss'
-import useScrollBar, { ScrollBarOptions, ScrollShift, px } from './UseScrollBar'
+import useScrollBar, { ScrollBarOptions, ScrollShift } from './UseScrollBar'
 
 export type Offset = boolean | ScrollShift | {
   x: ScrollShift

@@ -92,6 +92,8 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
     style,
     ...otherOptions
   } = options
+  // TODO: add variants to p, m, g sizes: 'xl', 'xl xl', toSize('xl xl 0 xl', sep=' ')
+  // TODO: background, border, box shadow
 
   return {
     ...otherOptions,

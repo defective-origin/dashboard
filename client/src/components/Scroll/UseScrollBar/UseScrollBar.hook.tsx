@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from 'react'
 
 // ---| core |---
 import { cn, obj } from 'tools'
-import { Direction, Size } from 'theme'
+import { Direction, Size, px } from 'theme'
 import { useElement, ElementOptions, useEvent, useFunc } from 'hooks'
 
 // ---| components |---
@@ -10,8 +10,6 @@ import Button from 'components/Button'
 
 // ---| self |---
 import './UseScrollBar.module.scss'
-
-export const px = (value: string | number = 0) => `${value}px`
 
 const SCROLLBAR_PROPERTY_MAP = {
   x: { mouse: 'pageX', margin: 'marginBottom', size: 'width', height: 'offsetWidth', width: 'offsetHeight', pos: 'left', visibility: 'visibility' },

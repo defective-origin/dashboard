@@ -73,6 +73,7 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
         { start: 'watch', content: locale.t('DEVICE.WATCH'), active: board.isDevice('watch'), onClick: () => board.setDevice('watch') },
       ],
     },
+    { start: 'download', tooltip: locale.t('ACTION.INSTALL') },
     { start: 'beenhere', tooltip: locale.t('ACTION.ADD_TO_MENU') },
     { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'board-settings' }) },
     { start: 'delete', tooltip: locale.t('ACTION.REMOVE') }, // TODO: remove board and remove markup[forbid to remove computer markup]
@@ -90,12 +91,14 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
           select={mode}
           widget={(p) => (
             <Menu
+              size='sm'
               horizontal
               v='top-start'
               items={[
                 { start: 'resize', tooltip: locale.t('ACTION.REPLACE'), onClick: () => setMode(p.options) },
                 { start: 'move_up', tooltip: locale.t('ACTION.SUBSTITUTION') },
                 { start: 'zoom_out_map', tooltip: locale.t('ACTION.FULL_SCREEN') },
+                { start: 'download', tooltip: locale.t('ACTION.INSTALL') },
                 { start: 'favorite', tooltip: locale.t('ACTION.FAVORITE') },
                 { start: 'book', tooltip: locale.t('ACTION.DOCS') },
                 { start: 'settings', tooltip: locale.t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'widget-settings', payload: p.options }) },

@@ -6,3 +6,4 @@ export { default } from './theme.context'
 /* INJECT_EXPORT_PLACE */
 export * from './theme.context'
 export * from './theme.conf'
+export * from './theme.tool'

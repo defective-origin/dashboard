@@ -59,7 +59,8 @@
     "REMOVE": "Remove",
     "ADD_WIDGET": "Add widget",
     "ADD_TO_MENU": "Add to menu",
-    "CLEAR": "Clear"
+    "CLEAR": "Clear",
+    "INSTALL": "Install"
   },
   "ORIENTATION": {
     "VERTICAL": "Vertical",

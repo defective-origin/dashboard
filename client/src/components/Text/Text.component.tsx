@@ -90,6 +90,7 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
     ellipsis,
     [`text--${size}`]: size, // FIXME: doesn't work - fix on line 92
   }, className)
+  // TODO: add fixing number formats: units, millions, ... (fix: "M", by, to)
   const _content = useFormat(content, TEXT_FORMAT_MAP, { format, placeholder })
   const styles = {
     ...style,

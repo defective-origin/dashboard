@@ -15,7 +15,7 @@ import './Icon.module.scss'
 export type ThemeIconVariant = 'light_mode' | 'dark_mode'
 export type WindowActionIconVariant = 'fullscreen' | 'fullscreen_exit' | 'zoom_out_map' | 'zoom_in_map' | 'open_in_new'
 export type MenuActionIconVariant = 'more_vert' | 'more_horiz'
-export type ActionIconVariant = 'close' | 'left_panel_open' | 'left_panel_close' | 'delete' | 'edit'
+export type ActionIconVariant = 'close' | 'left_panel_open' | 'left_panel_close' | 'delete' | 'edit' | 'download'
 export type StatusIconVariant = 'info' | 'warning' | 'error' | 'check_circle' | 'check'
 export type KeyboardIconVariant = 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_down' | 'keyboard_arrow_left' | 'keyboard_arrow_right'
 export type DeviceIconVariant = 'developer_mode_tv' | 'tv' | 'computer' | 'tablet_mac' | 'phone_iphone' | 'watch'
@@ -40,7 +40,7 @@ export type IconSize = Size
 
 export type IconProps = {
   className?: string
-  v: IconVariant
+  v?: IconVariant
   size?: IconSize
   fill?: boolean
   loading?: boolean

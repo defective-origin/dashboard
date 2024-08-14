@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { MenuList } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
+import { Size } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -17,6 +18,7 @@ export type MenuTriggerOptions = PopupTriggerOptions
 export type MenuItem = React.ReactNode | MenuItemProps & { items?: MenuItem[] }
 
 export type MenuProps = PopupProps & {
+  size?: Size
   items?: MenuItem[]
   horizontal?: boolean
 }
@@ -51,13 +53,13 @@ export type MenuProps = PopupProps & {
  * />
  */
 export function Menu(props: MenuProps): JSX.Element {
-  const { horizontal, v = 'right', items, children, className, ...otherProps } = props
+  const { size = 'xxs', horizontal, v = 'right', items, children, className, ...otherProps } = props
   const _className = cn(css.Menu, className)
   const tooltipSide = horizontal ? 'top' : 'right'
   const generatedItems = items?.map((item, idx) => {
     // custom element
     if (React.isValidElement(item) || !item) {
-      return <MenuItem key={idx} children={item} />
+      return <MenuItem key={idx} size={size} children={item} />
     }
 
     const { hide, items, ...otherItemProps } = item as MenuItemProps
@@ -72,17 +74,12 @@ export function Menu(props: MenuProps): JSX.Element {
         <Menu
           key={idx}
           items={items}
-          trigger={(o) =>
-            <MenuItem
-              triggerOptions={o}
-              {...otherItemProps}
-            />
-          }
+          trigger={(o) => <MenuItem triggerOptions={o} {...otherItemProps} />}
         />
       )
     }
 
-    return <MenuItem key={idx} tooltipSide={tooltipSide} {...otherItemProps} />
+    return <MenuItem key={idx} size={size} tooltipSide={tooltipSide} {...otherItemProps} />
   })
 
   return (
