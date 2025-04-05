@@ -6,14 +6,16 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockProps } from 'components/Block'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import Review, { ReviewProps } from 'screens/views/Reviews/Review'
 import css from './Reviews.module.scss'
 
+export type ReviewItem = ReviewProps
+
 export type ReviewsProps = BlockProps & {
-  items?: ReviewProps[]
+  items?: ReviewItem[]
 }
 
 /**

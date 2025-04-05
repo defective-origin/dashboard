@@ -7,6 +7,10 @@ const OBJECT_KEY_MAP: Record<string, string[]> = {}
 
 export type Obj = { [key: string]: any }
 
+export const clone = <T extends object>(obj?: T): T => {
+  return JSON.parse(JSON.stringify(obj))
+}
+
 export const toKeys = (path?: string) => {
   return path ? OBJECT_KEY_MAP[path as string] ?? path?.split(OBJECT_KEY_SEPARATOR) : []
 }

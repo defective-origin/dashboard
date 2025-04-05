@@ -14,7 +14,7 @@ export type BoardCoordinate = {
 export const BoardCoordinateSchema = new mongoose.Schema<BoardCoordinate>({
   x: { type: Number, default: 0 },
   y: { type: Number, default: 0 },
-})
+}, { _id : false })
 
 export type BoardItem = {
   id: string
@@ -29,22 +29,24 @@ export const BoardItemSchema = new mongoose.Schema<BoardItem>({
   v2: { type: BoardCoordinateSchema, required: true },
 })
 
-export type BoardMarkupSize = 'INFINITY' | 'TV' | 'COMPUTER' | 'LAPTOP' | 'TABLET' | 'MOBILE' | 'WATCH'
+export type BoardMarkupDevice = 'BOARD' | 'TV' | 'COMPUTER' | 'LAPTOP' | 'TABLET' | 'MOBILE' | 'WATCH'
 export type BoardMarkup = {
   id: string
   /** Active layout. By default only `computer` markup is on */
-  active: boolean
+  visible: boolean
+  expandable: boolean
   rows: number
   columns: number
-  size: BoardMarkupSize
+  device: BoardMarkupDevice
   items: BoardItem[]
 }
 
 export const BoardMarkupSchema = new mongoose.Schema<BoardMarkup>({
-  active: { type: Boolean, default: false },
+  visible: { type: Boolean, default: false },
+  expandable: { type: Boolean, default: false },
   rows: { type: Number, default: 0 },
   columns: { type: Number, default: 0 },
-  size: { type: String, enum: ['INFINITY', 'TV', 'COMPUTER', 'LAPTOP', 'TABLET', 'MOBILE', 'WATCH'] },
+  device: { type: String, enum: ['BOARD', 'TV', 'COMPUTER', 'LAPTOP', 'TABLET', 'MOBILE', 'WATCH'] },
   items: { type: [BoardItemSchema], default: [] },
 })
 

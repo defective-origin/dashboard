@@ -12,19 +12,22 @@ export type BoardCoordinate = {
 }
 
 export type BoardItem = {
+  id: string
   widget: Ref
   v1: BoardCoordinate
   v2: BoardCoordinate
 }
 
-export type BoardMarkupSize = 'INFINITY' | 'TV' | 'COMPUTER' | 'LAPTOP' | 'TABLET' | 'MOBILE' | 'WATCH'
-export const BOARD_MARKUP_SIZES: BoardMarkupSize[] = ['INFINITY', 'TV', 'COMPUTER', 'LAPTOP', 'TABLET', 'MOBILE', 'WATCH']
+export type BoardMarkupDevice = 'BOARD' | 'TV' | 'COMPUTER' | 'LAPTOP' | 'TABLET' | 'MOBILE' | 'WATCH'
+export const BOARD_MARKUP_SIZES: BoardMarkupDevice[] = ['BOARD', 'TV', 'COMPUTER', 'LAPTOP', 'TABLET', 'MOBILE', 'WATCH']
 
 export type BoardMarkup = {
-  active: boolean
+  id: string
+  visible: boolean
+  expandable: boolean
   rows: number
   columns: number
-  size: BoardMarkupSize
+  device: BoardMarkupDevice
   items: BoardItem[]
 }
 
@@ -35,10 +38,28 @@ export type Board = Feature & {
 export const useBoard = (id?: Id) => api.useRestReadEndpoint<Board>(`${PATHNAME}/${id}`, { enabled: !!id })
 export const useBoards = () => api.useRestReadEndpoint<Board[]>(PATHNAME)
 
-export const useBoardMutations = () => {
+export const useBoardMutations = (boardId?: Id, markupId?: Id) => {
   const create = api.useRestCreateEndpoint<Board>(PATHNAME)
   const update = api.useRestUpdateEndpoint<Board>(PATHNAME)
   const remove = api.useRestDeleteEndpoint(PATHNAME)
+  const updateMarkup = api.useRestUpdateEndpoint<BoardMarkup>(`/${PATHNAME}/${boardId}/markups`, {
+    invalidate: () => [`${PATHNAME}/${boardId}`],
+  })
 
-  return useMemo(() => ({ create, update, remove }), [create, remove, update])
+  const createWidget = api.useRestCreateEndpoint<BoardItem>(`/${PATHNAME}/${boardId}/markups/${markupId}/widgets`, {
+    invalidate: () => [`${PATHNAME}/${boardId}`],
+  })
+  const updateWidget = api.useRestUpdateEndpoint<BoardItem>(`/${PATHNAME}/${boardId}/markups/${markupId}/widgets`, {
+    invalidate: () => [`${PATHNAME}/${boardId}`],
+  })
+  const removeWidget = api.useRestDeleteEndpoint(`/${PATHNAME}/${boardId}/markups/${markupId}/widgets`, {
+    invalidate: () => [`${PATHNAME}/${boardId}`],
+  })
+
+  return useMemo(
+    () => ({ create, update, remove, updateMarkup, createWidget, updateWidget, removeWidget }),
+    [create, createWidget, remove, removeWidget, update, updateMarkup, updateWidget],
+  )
 }
+
+// export const useBoardMarkupWidgets = (id?: Id, markupId?: Id) => api.useRestReadEndpoint<Board>(`${PATHNAME}/markups/${markupId}/${id}/widgets`, { enabled: !!id, queryKey: [`${PATHNAME}/${id}`] })

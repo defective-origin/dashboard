@@ -4,7 +4,7 @@ import api from '../api.endpoint'
 import { Feature } from './Feature.endpoint'
 import { WidgetView } from './WidgetView.endpoint'
 
-const PATHNAME = 'views'
+const PATHNAME = 'widgets'
 
 
 export type Widget = Feature & {

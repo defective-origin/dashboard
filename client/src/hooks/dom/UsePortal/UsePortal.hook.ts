@@ -26,7 +26,7 @@ export type PortalReturnOptions = React.ReactPortal | React.ReactNode | null
  * import { useFunc, usePortal, PortalReturnOptions } from 'hooks'
  * import css from './Portal.module.scss'
  *
- * export type PortalName = 'page-name' | 'page-actions' | 'main-menu' | 'aside'
+ * export type PortalName = 'page-name' | 'main-menu' | 'aside'
  *
  * export const initPortalKey = (name: PortalName) => `portal-${name}`
  *

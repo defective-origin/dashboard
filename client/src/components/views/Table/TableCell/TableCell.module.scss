@@ -1,0 +1,22 @@
+@import '/src/theme';
+
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
+
+.TableCell {
+  box-sizing: border-box;
+  padding: 4px;
+
+  // allows thead filter works
+  background-color: transparent;
+}
+
+.Fixed {
+  position: sticky;
+  background: var(--table-bg-color);
+}
+
+.th {
+  text-transform: uppercase;
+}

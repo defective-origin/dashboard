@@ -7,9 +7,9 @@ import { Id, useUser } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
-import Avatar from 'components/Avatar'
-import Block, { BlockProps } from 'components/Block'
+import Text from 'components/views/Text'
+import Avatar from 'components/views/Avatar'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './User.module.scss'

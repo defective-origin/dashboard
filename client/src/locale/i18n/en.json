@@ -39,6 +39,7 @@
     "STATUS": "Status",
     "DASHBOARDS": "Dashboards",
     "WIDGETS": "Widgets",
+    "WIDGET_VIEWS": "Widgets views",
     "SUPPORT": "Support",
     "GUIDE": "Guide",
     "DONATION": "Donation",
@@ -53,17 +54,26 @@
     "REPLACE": "Replace",
     "SUBSTITUTION": "Substitution",
     "FULL_SCREEN": "Full screen",
-    "FAVORITE": "Favorite",
-    "DOCS": "Docs",
     "SETTINGS": "Settings",
     "REMOVE": "Remove",
+    "EDIT": "Edit",
     "ADD_WIDGET": "Add widget",
+    "ADD_BOARD": "Add board",
     "ADD_TO_MENU": "Add to menu",
+    "ADD_BOOKMARK": "Add bookmark",
+    "ADD_TOPIC": "Add topic",
+    "REMOVE_BOOKMARK": "Remove bookmark",
     "CLEAR": "Clear",
-    "INSTALL": "Install"
+    "INSTALL": "Install",
+    "TURN_ON": "Turn on",
+    "TURN_OFF": "Turn off",
+    "FIT_SCREEN": "Fit screen",
+    "EXPANDABLE": "Expandable",
+    "PAY": "Pay",
+    "REVIEWS": "Reviews"
   },
   "DEVICE": {
-    "INFINITY": "Infinity",
+    "BOARD": "Board",
     "TV": "Television",
     "COMPUTER": "Computer",
     "LAPTOP": "Laptop",
@@ -79,6 +89,7 @@
   "ROUTE": {
     "BOARDS": "Boards",
     "WIDGETS": "Widgets",
+    "WIDGET_VIEWS": "Widget views",
     "GUIDE": "Guide",
     "DONATION": "Donation",
     "SUPPORT": "Support",
@@ -91,9 +102,7 @@
   "LABEL": {
     "PAYMENTS": "Payments",
     "REQUESTS": "Requests",
-    "USAGE": "Usage: {{count}}",
-    "FAVORITE": "Favorite: {{count}}",
-    "RATE": "Favorite: {{count}}"
+    "USAGE": "Usage: {{count}}"
   },
   "FORM": {
     "BOARD_SETTINGS": "Dashboard settings",
@@ -103,11 +112,16 @@
     "ID": "Id",
     "KEY": "Key",
     "NAME": "Name",
+    "RATE": "Rate",
+    "TAGS": "Tags",
+    "PRICE": "Price",
     "ACCESS": "Access",
     "AUTHOR": "Author",
+    "OPTIONS": "Options",
     "VERSION": "Version",
-    "ENDPOINT": "Endpoint",
-    "DESCRIPTION": "Description"
+    "CONTENT": "Content",
+    "DESCRIPTION": "Description",
+    "LAST_UPDATE": "Last update"
   },
   "ACCESS": {
     "PRIVATE": "Private",

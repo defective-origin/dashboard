@@ -30,7 +30,7 @@ export function SupportPage(props: SupportPageProps): JSX.Element {
     <Page
       className={_className}
       name='PAGES.SUPPORT'
-      menu={[{ start: 'add', tooltip: 'new request', tooltipSide: 'right', size: 'lg' }]}
+      menu={[{ start: 'add', tooltip: 'new request' }]}
       {...otherProps}
     >
       <Page.Content p='sm'>

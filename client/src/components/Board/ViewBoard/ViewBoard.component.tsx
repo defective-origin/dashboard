@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { cn, xy } from 'tools'
 
 // ---| components |---
-import Layout from 'components/Layout'
+import Layout from 'components/layouts/Layout'
 
 // ---| self |---
 import css from './ViewBoard.module.scss'

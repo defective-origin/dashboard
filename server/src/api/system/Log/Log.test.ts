@@ -2,8 +2,8 @@ import { Log, LogModel, PATHNAME } from './Log.model'
 
 
 let savedRecord: Log
-const MOCK_OPERATION_RECORD = { name: `INFO`, content: `CONTENT`, device: `MacBook`, browser: `Chrome 86` }
-const MOCK_SAVED_RECORD = { name: `WARN`, content: `CONTENT`, device: `MacBook`, browser: `Chrome 86` }
+const MOCK_OPERATION_RECORD = { name: `INFO`, content: `CONTENT`, agent: `Chrome 10` }
+const MOCK_SAVED_RECORD = { name: `WARN`, content: `CONTENT`, agent: `Chrome 90` }
 const MOCK_SAVED_RECORDS = [MOCK_SAVED_RECORD]
 
 describe(`[${PATHNAME}] api`, () => {

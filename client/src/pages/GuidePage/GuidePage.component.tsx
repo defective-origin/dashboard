@@ -2,16 +2,17 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { t } from 'locale'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
-import Image from 'components/Image'
-import Block from 'components/Block'
-import Actions from 'components/Actions'
+import Text from 'components/views/Text'
+import Image from 'components/views/Image'
+import Block from 'components/layouts/Block'
+import Actions from 'components/actions/Actions'
 
 // ---| self |---
 import css from './GuidePage.module.scss'
@@ -29,25 +30,36 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.GuidePage, className)
   const style = { justifyContent: 'left' }
+  // TODO: https://www.npmjs.com/package/tinymce
 
   return (
-    <Page className={_className} name='PAGES.GUIDE' {...otherProps}>
+    <Page
+      className={_className}
+      name='PAGES.GUIDE'
+      menu={[
+        { start: 'visibility', tooltip: true ? t('ACTION.TURN_OFF') : t('ACTION.TURN_ON') },
+        { start: 'edit_square', tooltip: t('ACTION.EDIT') },
+        { start: 'delete_forever', tooltip: t('ACTION.REMOVE') },
+        { start: 'add', tooltip: t('ACTION.ADD_TOPIC') },
+      ]}
+      {...otherProps}
+    >
       <Page.LeftAside width={400} p='xs'>
-        <Text content='Content' />
+        <Text content='Topics' />
 
         <Actions
           v='y'
           size='xs'
           aligns='stretch'
           items={[
-            { content: 'Title 1', style },
-            { content: 'Title 2', style },
-            { content: 'Title 3', style },
-            { content: 'Title 4', style },
-            { content: 'Title 5', style },
-            { content: 'Title 6', style },
-            { content: 'Title 7', style },
-            { content: 'Title 8', style },
+            { content: 'Topic 1', style },
+            { content: 'Topic 2', style },
+            { content: 'Topic 3', style },
+            { content: 'Topic 4', style },
+            { content: 'Topic 5', style },
+            { content: 'Topic 6', style },
+            { content: 'Topic 7', style },
+            { content: 'Topic 8', style },
           ]}
         />
       </Page.LeftAside>
@@ -107,21 +119,21 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
       </Page.Content>
 
       <Page.RightAside width={400} p='xs'>
-        <Text content='Topics' />
+        <Text content='Chapters' />
 
         <Actions
           v='y'
           size='xs'
           aligns='stretch'
           items={[
-            { content: 'Topic 1', style },
-            { content: 'Topic 2', style },
-            { content: 'Topic 3', style },
-            { content: 'Topic 4', style },
-            { content: 'Topic 5', style },
-            { content: 'Topic 6', style },
-            { content: 'Topic 7', style },
-            { content: 'Topic 8', style },
+            { content: 'Title 1', style },
+            { content: 'Title 2', style },
+            { content: 'Title 3', style },
+            { content: 'Title 4', style },
+            { content: 'Title 5', style },
+            { content: 'Title 6', style },
+            { content: 'Title 7', style },
+            { content: 'Title 8', style },
           ]}
         />
       </Page.RightAside>

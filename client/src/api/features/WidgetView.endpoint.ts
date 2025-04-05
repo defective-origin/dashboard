@@ -7,6 +7,7 @@ const PATHNAME = 'widget-views'
 
 
 export type Release = TimeStamps & {
+  id: string
   version: string
   content: string
   options: object
@@ -20,7 +21,6 @@ export type WidgetView = Feature & {
 
 export const useWidgetView = (id?: Id) => api.useRestReadEndpoint<WidgetView>(`${PATHNAME}/${id}`, { enabled: !!id })
 export const useWidgetViews = () => api.useRestReadEndpoint<WidgetView[]>(PATHNAME)
-// export const useWidgetViewReleases = (id?: Id) => api.useRestReadEndpoint<Release[]>(`${PATHNAME}/${id}/releases`)
 
 export const useWidgetViewMutations = () => {
   const create = api.useRestCreateEndpoint<WidgetView>(PATHNAME)

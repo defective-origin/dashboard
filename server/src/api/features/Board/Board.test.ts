@@ -2,8 +2,8 @@ import { Board, BoardModel, PATHNAME } from './Board.model'
 
 
 let savedRecord: Board
-const MOCK_OPERATION_RECORD = { name: 'OPERATION_NAME', markups: [{ size: 'TV' }] }
-const MOCK_SAVED_RECORD = { name: 'SAVED_NAME', markups: [{ size: 'LAPTOP' }] }
+const MOCK_OPERATION_RECORD = { name: 'OPERATION_NAME', markups: [] }
+const MOCK_SAVED_RECORD = { name: 'SAVED_NAME', markups: [] }
 const MOCK_SAVED_RECORDS = [MOCK_SAVED_RECORD]
 
 describe(`[${PATHNAME}] api`, () => {

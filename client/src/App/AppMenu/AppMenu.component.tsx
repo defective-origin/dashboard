@@ -6,8 +6,8 @@ import { useTheme } from 'theme'
 import { cn } from 'tools'
 
 // ---| components |---
-import Aside, { AsideProps } from 'components/Aside'
-import Actions from 'components/Actions'
+import Aside, { AsideProps } from 'components/layouts/Aside'
+import Actions from 'components/actions/Actions'
 
 // ---| components |---
 import Account from 'screens/Account'
@@ -35,6 +35,7 @@ export function AppMenu(props: AppMenuProps): JSX.Element {
       <Account />
 
       <Actions className={css.Main} v='y' grow={1}>
+        <Actions.Nav start='data_thresholding' to='WIDGET_VIEWS' tooltip={t('ROUTE.WIDGET_VIEWS')} tooltipSide='right' size='lg' />
         <Actions.Nav start='insert_chart' to='WIDGETS' tooltip={t('ROUTE.WIDGETS')} tooltipSide='right' size='lg' />
         <Actions.Nav start='dashboard' to='BOARDS' tooltip={t('ROUTE.BOARDS')} tooltipSide='right' size='lg' />
         {/* <Actions.Nav start='network_node' tooltip='ENDPOINTS' tooltipSide='right' size='lg' /> */}

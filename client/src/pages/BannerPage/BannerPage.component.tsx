@@ -9,7 +9,7 @@ import Page from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
-import Banner, { BannerVariant } from 'components/Banner'
+import Banner, { BannerVariant } from 'components/views/Banner'
 
 // ---| self |---
 import css from './BannerPage.module.scss'

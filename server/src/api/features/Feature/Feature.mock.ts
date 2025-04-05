@@ -6,7 +6,7 @@ export default Array.from({length: 10}, (_, i): Feature => ({
   name: `NAME_${i}`,
   price: i**i,
   content: 'content '.repeat(100),
-  access: 'PUBLIC',
+  public: true,
   tags: ['tag 1', 'tag 2', 'tag 3'],
   reviews: Array.from({length: 10}, (_, i) => ({
     id: new mongoose.Types.ObjectId(i).toString(),
@@ -31,8 +31,14 @@ export default Array.from({length: 10}, (_, i): Feature => ({
       background: 'gray',
     },
     filters: {
-      from: '2011-10-05T14:48:00.000Z',
-      to: '2011-10-05T14:48:00.000Z',
+      range: {
+        from: '2011-10-05T14:48:00.000Z',
+        to: '2011-10-05T14:48:00.000Z',
+      },
+      search: "search string",
+      tags: ['a', 'b', 'c'],
+      sort: true,
+      count: 25
     },
   },
 }))

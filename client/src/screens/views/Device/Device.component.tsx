@@ -2,19 +2,19 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { BoardMarkupSize } from 'api'
+import { BoardMarkupDevice } from 'api'
 import { TranslateKeys, t } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Tooltip from 'components/Tooltip'
-import Icon, { DeviceIconVariant, IconProps } from 'components/Icon'
+import Tooltip from 'components/popups/Tooltip'
+import Icon, { DeviceIconVariant, IconProps } from 'components/views/Icon'
 
 // ---| self |---
 import css from './Device.module.scss'
 
-export type DeviceVariant = BoardMarkupSize
+export type DeviceVariant = BoardMarkupDevice
 
 const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: TranslateKeys }> = {
   tv: { v: 'tv', tooltip: 'DEVICE.TV' },
@@ -25,7 +25,7 @@ const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: Transla
 }
 
 export type DeviceProps = Omit<IconProps, 'v'> & {
-  v: BoardMarkupSize
+  v: BoardMarkupDevice
 }
 
 /**

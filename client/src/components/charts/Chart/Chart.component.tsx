@@ -16,7 +16,7 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Banner from 'components/Banner'
+import Banner from 'components/views/Banner'
 
 // ---| self |---
 import css from './Chart.module.scss'

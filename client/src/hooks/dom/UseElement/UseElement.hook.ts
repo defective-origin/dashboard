@@ -16,9 +16,9 @@ export const getNode = (elem?: ElementOptions<Element>, defaultElem?: ElementOpt
   return element ?? null
 }
 
-export type ElementOptions<E extends Element> = React.MutableRefObject<E | null | undefined> | (() => E | null | undefined) | E | undefined | null
+export type ElementOptions<E extends Element> = React.RefObject<E | null | undefined> | (() => E | null | undefined) | E | undefined | null
 
-export type ElementRef<E extends Element> = React.MutableRefObject<E | null>
+export type ElementRef<E extends Element> = React.RefObject<E | null>
 
 /**
  * Return element ref.

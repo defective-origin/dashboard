@@ -6,6 +6,7 @@ const PATHNAME = 'system/support'
 
 export type SupportRequestStatus = 'OPEN' | 'PENDING' | 'IN PROGRESS' | 'RESOLVED' | 'CLOSED'
 export type SupportRequestActivity = ChangeStamps & {
+  id: string
   status?: SupportRequestStatus
   content?: string
   attach?: string[]

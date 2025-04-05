@@ -2,27 +2,29 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useWidgetView } from 'api'
+import { useWidget } from 'api'
 import { useParams } from 'router'
+import { t } from 'locale'
+import { useApp } from 'App'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 import PlaceholderCard from 'screens/cards/PlaceholderCard'
-import Reviews from 'screens/views/Reviews'
+import WidgetModal from 'screens/modals/WidgetModal'
+import ReviewsModal from 'screens/modals/ReviewsModal'
 import User from 'screens/views/User'
 
 // ---| components |---
-import Tag from 'components/Tag'
-import Text from 'components/Text'
-import Block from 'components/Block'
-import Label from 'components/Label'
-import Section from 'components/Section'
+import Tag from 'components/views/Tag'
+import Text from 'components/views/Text'
+import Block from 'components/layouts/Block'
+import Label from 'components/views/Label'
+import Section from 'components/layouts/Section'
 
 // ---| self |---
 import css from './WidgetPage.module.scss'
-import Actions from 'components/Actions'
 
 export type WidgetPageProps = PageProps
 
@@ -36,8 +38,9 @@ export type WidgetPageProps = PageProps
 export function WidgetPage(props: WidgetPageProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.WidgetPage, className)
+  const app = useApp()
   const { id } = useParams()
-  const widget = useWidgetView(id)
+  const widget = useWidget(id)
 
   // options: object;
   // releases
@@ -49,7 +52,14 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
       className={_className}
       name={widget.data?.name}
       p='md'
-      menu={[{ start: 'add', tooltip: 'Add Widget', tooltipSide: 'right', size: 'lg' }]}
+      menu={[
+        { start: 'download', tooltip: t('ACTION.INSTALL') },
+        { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK') },
+        { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: WidgetModal.modalName, payload: widget.data }) },
+        { start: 'delete_forever', tooltip: t('ACTION.REMOVE') },
+        { start: 'payments', tooltip: t('ACTION.PAY') },
+        { start: 'reviews', tooltip: t('ACTION.REVIEWS'), onClick: () => app.modal({ name: ReviewsModal.modalName, payload: widget.data?.reviews }) },
+      ]}
       {...otherProps}
     >
       <Page.Content scroll='y' g='lg' v='y'>
@@ -62,23 +72,14 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
               <User id={widget.data?.id} />
 
               <Block v='y' g='xxs'>
-                <Label icon='schedule' content={widget.data?.updatedAt} format='day-of-month-year' />
+                <Label icon='schedule' content={widget.data?.updatedAt} format='day-of-month-year' tooltip={t('FIELD.LAST_UPDATE')} />
 
                 <Block v='x' g='xxs'>
-                  <Label icon='star' content={widget.data?.rate} format='number' />
-                  <Label icon='payments' content={widget.data?.price} format='currency' />
-                  <Label icon='confirmation_number' content={widget.data?.releases.at(-1)?.version} />
+                  <Label icon='star' content={widget.data?.rate} format='number' tooltip={t('FIELD.RATE')} />
+                  <Label icon='payments' content={widget.data?.price} format='currency' tooltip={t('FIELD.PRICE')} />
                 </Block>
               </Block>
             </Block>
-
-            <Actions
-              size='xs'
-              items={[
-                { variant: 'button', start: 'payments', content: 'pay' },
-                { variant: 'button', start: 'share', content: 'share'},
-              ]}
-            />
           </Block>
 
           <Text v='body2' size='xs' content={widget.data?.content} />
@@ -88,9 +89,8 @@ export function WidgetPage(props: WidgetPageProps): JSX.Element {
           {widget.data?.tags.map(tag => <Tag key={tag} v='body2' size='xxs' content={tag} />)}
         </Block>
 
-        <Section title='Reviews'>
-          <Reviews items={widget.data?.reviews} />
-        </Section>
+        <ReviewsModal />
+        <WidgetModal />
 
         {children}
       </Page.Content>

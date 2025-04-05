@@ -15,8 +15,8 @@ export function init(routes: Route[], prefix = process.env.API_NAME) {
   // pre middleware
   app.use(
     express.json(),
+    CustomMiddleware.AuthMiddleware,
     CustomMiddleware.RequestLoggerMiddleware,
-    CustomMiddleware.UserMiddleware,
   )
 
   if (process.env.NODE_ENV === 'development') {

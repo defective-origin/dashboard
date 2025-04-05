@@ -5,6 +5,12 @@
 }
 
 .PreviewCard {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  position: relative;
+}
+
+.Meta {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

@@ -1,8 +1,6 @@
 import mongoose from 'mongoose'
 import { ref, ChangeStamps } from './Database.model'
-
-// TODO: use async_hooks instead of stubs
-const getUser = () => ({ id: new mongoose.Types.ObjectId(1).toString() })
+import { Storage } from '@tools'
 
 export function UserStampsMiddleware(schema: mongoose.Schema<ChangeStamps>) {
   if (!schema.options.ChangeStamps) {
@@ -16,21 +14,28 @@ export function UserStampsMiddleware(schema: mongoose.Schema<ChangeStamps>) {
     updatedBy: ref('users'),
   })
 
+  // if you don't call next then tests will get errors
   // bulkWrite doesn't work on pre save
-  schema.pre('findOneAndUpdate', function preFindOneAndUpdate(this) {
-    this.set('updatedBy', getUser())
+  schema.pre('updateOne', function (this, next) {
+    this.set('updatedBy', Storage.get('user'))
+    next()
+  })
+  schema.pre('updateMany', function (this, next) {
+    this.set('updatedBy', Storage.get('user'))
+    next()
+  })
+  schema.pre('findOneAndUpdate', function (this, next) {
+    this.set('updatedBy', Storage.get('user'))
+    next()
   })
 
-  schema.pre('updateMany', function preUpdateMany(this) {
-    this.set('updatedBy', getUser())
-  })
-
-  schema.pre('validate', function preValidate(this) {
-    const user = getUser()
+  schema.pre('validate', function (this, next) {
+    const user = Storage.get('user')
 
     // protection if someone passes an empty object
     this.createdBy = this.createdBy?.id ? { id: this.createdBy.id } : user
     this.updatedBy = user
+    next()
   })
 }
 

@@ -1,15 +1,14 @@
 import { Donation } from 'api'
-import { TableColumn } from 'components/Table'
+import { TableColumn } from 'components/views/Table'
 import column from '../columns'
 
 export const DONATION_COLUMNS: TableColumn<Donation>[] = [
   column.clipboard({
     field: 'id',
-    fixed: true,
   }),
   column.user({
-    field: 'user',
-    fixed: true,
+    name: 'User',
+    field: 'createdBy',
   }),
   column.date({
     name: 'Date',

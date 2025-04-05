@@ -1,5 +1,5 @@
 import { Feature } from 'api'
-import { TableColumn } from 'components/Table'
+import { TableColumn } from 'components/views/Table'
 import column from '../columns'
 
 export const FEATURE_COLUMNS: TableColumn<Feature>[] = [
@@ -25,12 +25,11 @@ export const FEATURE_COLUMNS: TableColumn<Feature>[] = [
     field: 'rate',
     format: 'amount',
   }),
-  column.text({
-    field: 'access',
-    width: 200,
-    bold: true,
+  column.boolean({
+    field: 'public',
   }),
   column.user({
+    name: 'User',
     field: 'createdBy',
   }),
   // column.number({

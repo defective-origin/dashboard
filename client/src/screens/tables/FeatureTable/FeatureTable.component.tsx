@@ -7,7 +7,7 @@ import { Feature } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Table, { TableProps, TableRowMenuItem } from 'components/Table'
+import Table, { TableProps, TableRowMenuItem } from 'components/views/Table'
 
 // ---| self |---
 import css from './FeatureTable.module.scss'
@@ -28,7 +28,7 @@ export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>): JS
 
   const actions = useMemo<TableRowMenuItem[]>(() => [
     { start: 'edit', content: 'Edit' },
-    { start: 'delete', content: 'Delete' },
+    { start: 'delete_forever', content: 'Delete' },
     // add details
   ], [])
 

@@ -7,7 +7,7 @@ export const PATHNAME = 'features'
 export type FeatureReview = ChangeStamps & {
   id: string
   rate: number
-  content?: string
+  content: string
 }
 
 export const FeatureReviewSchema = new mongoose.Schema<FeatureReview>({
@@ -15,18 +15,14 @@ export const FeatureReviewSchema = new mongoose.Schema<FeatureReview>({
   content: { type: String, default: '', maxlength: 1000 },
 }, { ChangeStamps: true })
 
-/**
-  * How other users can see and use current feature.
-  * - `PRIVATE` - available to user [default]
-  * - `PUBLIC` - available to everyone
-  */
-export type FeatureAccess = 'PRIVATE' | 'PUBLIC'
+
+
 export type Feature = ChangeStamps & {
   id: string
   name: string
   price: number
-  content?: string
-  access: FeatureAccess
+  content: string
+  public: boolean
   tags: string[] // TODO: add tag schema?
   /**
    * Widget options: setup widget behavior  
@@ -68,7 +64,7 @@ export const FeatureSchema = new mongoose.Schema<Feature>({
   name: { type: String, required: true },
   price: { type: Number, default: 0 },
   content: { type: String, default: '', maxlength: 4000 },
-  access: { type: String, default: 'PUBLIC', enum: ['PRIVATE', 'PUBLIC'] },
+  public: { type: Boolean, default: true },
   tags: { type: [String], default: [] },
   options: { type: Object, default: {} },
   reviews: { type: [FeatureReviewSchema], default: [] },

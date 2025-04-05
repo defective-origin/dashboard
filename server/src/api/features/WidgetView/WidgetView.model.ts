@@ -18,7 +18,7 @@ export type Release = TimeStamps & {
    *    field: { type: String, default: 0, value: 10, description: "Description" }
    * }
    */
-  options: object // TODO: update type
+  options: object
 }
 
 export const ReleaseSchema = new mongoose.Schema<Release>({
@@ -32,7 +32,7 @@ export type WidgetView = Feature & {
 }
 
 export const WidgetViewSchema = new mongoose.Schema<WidgetView>({
-  releases: [ReleaseSchema],
+  releases: { type: [ReleaseSchema], default: [] },
 }).add(FeatureSchema)
 
 export const WidgetViewModel = mongoose.model(PATHNAME, WidgetViewSchema)

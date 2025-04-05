@@ -1,14 +1,14 @@
 import { SupportRequest } from 'api'
-import { TableColumn } from 'components/Table'
+import { TableColumn } from 'components/views/Table'
 import column from '../columns'
 
 export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [
-  column.user({
-    field: 'user',
+  column.clipboard({
+    field: 'id',
   }),
-  column.date({
-    name: 'Date',
-    field: 'createdAt',
+  column.user({
+    name: 'User',
+    field: 'createdBy',
   }),
   column.text({
     field: 'reason',
@@ -25,6 +25,14 @@ export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [
     align: 'center',
     minWidth: 150,
     bold: true,
+  }),
+  column.date({
+    name: 'Creation date',
+    field: 'createdAt',
+  }),
+  column.date({
+    name: 'Last update',
+    field: 'updatedAt',
   }),
   column.text({
     field: 'content',

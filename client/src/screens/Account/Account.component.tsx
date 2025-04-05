@@ -8,9 +8,9 @@ import { t } from 'locale'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Menu from 'components/Menu'
-import Avatar from 'components/Avatar'
-import NavLink from 'components/NavLink'
+import Menu from 'components/actions/Menu'
+import Avatar from 'components/views/Avatar'
+import NavLink from 'components/actions/NavLink'
 
 // ---| self |---
 import css from './Account.module.scss'

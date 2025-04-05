@@ -18,21 +18,34 @@ cd ./server
 yarn run pods:up
 ```
 
+Run pods if it's not first launch
+- launch Podman app
+- launch pods: pod_dashboard-server
+
+
 Run app
 ```sh
 yarn run dev
 ```
+
+
+### Prefill database with mock data
+Build containers if it's first launch
+```sh
+yarn run prefill
+```
+
+### Launches tests
+
+```
+yarn test
+```
+
 #### Code checkers
 
 Commands with **:fix** prefix - fix linter errors.
 
 Other commands just check parts of code.
-
-#### Launches tests
-
-```
-yarn test
-```
 
 #### Launches all lint checkers for code and styles.
 

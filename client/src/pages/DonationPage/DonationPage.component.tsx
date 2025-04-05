@@ -8,11 +8,9 @@ import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 import DonationTable from 'screens/tables/DonationTable'
-import PlaceholderCard from 'screens/cards/PlaceholderCard'
+import ExpensesTable from 'screens/tables/ExpensesTable'
 
 // ---| components |---
-import Block from 'components/Block'
-
 // ---| self |---
 import css from './DonationPage.module.scss'
 
@@ -33,19 +31,15 @@ export function DonationPage(props: DonationPageProps): JSX.Element {
     <Page
       className={_className}
       name='PAGES.DONATION'
-      menu={[{ start: 'add', tooltip: 'new request', tooltipSide: 'right', size: 'lg' }]}
+      menu={[{ start: 'add', tooltip: 'new request' }]}
       {...otherProps}
     >
       <Page.Content p='sm'>
-        <Page.Section title='List of expenses' v='row' g='xs' area='1 / 1 / 3 / 4'>
-          <PlaceholderCard name='Plans' />
-          <PlaceholderCard name='Needs' />
-          <PlaceholderCard name='Others' />
+        <ExpensesTable type='PLANS' area='1 / 1 / 2 / 2' />
+        <ExpensesTable type='NEEDS' area='1 / 2 / 2 / 3' />
+        <ExpensesTable type='OTHERS' area='1 / 3 / 2 / 4' />
 
-          {/* <PlaceholderCard name='History' area='3 / 1 / 4 / 4' /> */}
-        </Page.Section>
-
-        <DonationTable area='3 / 1 / 7 / 4' />
+        <DonationTable area='2 / 1 / 4 / 4' />
 
         {children}
       </Page.Content>

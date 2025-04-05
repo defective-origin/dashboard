@@ -12,5 +12,6 @@ module.exports = {
   moduleNameMapper: {
     '^@services/(.*)$': '<rootDir>/src/services/$1',
     '^@api/(.*)$': '<rootDir>/src/api/$1',
+    '^@tools(.*)$': '<rootDir>/src/tools$1',
   },
 }

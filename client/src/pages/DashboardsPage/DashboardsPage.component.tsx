@@ -2,14 +2,13 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { t } from 'locale'
 import { Board, useBoards } from 'api'
 
 // ---| pages |---
-import SelectPage, { SelectPageProps } from 'pages/SelectPage'
+import SelectPage, { SelectPageProps } from 'pages/SearchPage'
 
 // ---| screens |---
-import DashboardPreviewCard from 'screens/cards/DashboardPreviewCard'
-
 // ---| components |---
 // ---| self |---
 import css from './DashboardsPage.module.scss'
@@ -32,9 +31,11 @@ export function DashboardsPage(props: DashboardsPageProps): JSX.Element {
     <SelectPage
       className={_className}
       name='PAGES.DASHBOARDS'
-      menu={[{ start: 'add', tooltip: 'Add Board', tooltipSide: 'right', size: 'lg' }]}
+      to='BOARD'
+      menu={[
+        { start: 'add', tooltip: t('ACTION.ADD_BOARD') },
+      ]}
       items={boards.data}
-      as={DashboardPreviewCard}
     />
   )
 }

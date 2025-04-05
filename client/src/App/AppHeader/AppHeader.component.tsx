@@ -6,9 +6,8 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block from 'components/Block'
-import Portal from 'components/Portal'
-import Header, { HeaderProps } from 'components/Header'
+import Portal from 'components/layouts/Portal'
+import Header, { HeaderProps } from 'components/layouts/Header'
 
 // ---| self |---
 import css from './AppHeader.module.scss'
@@ -27,16 +26,12 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
   const _className = cn(css.AppHeader, className)
 
   return (
-    <Header className={_className} as='header' area='top' justifies='space-between' p='xxs' g='xxs' {...otherProps}>
-      <Block className={css.Content} v='x' aligns='center' g='xxs'>
-        <Portal.Container name='page-name' v='x' g='xs' />
+    <Header className={_className} as='header' area='top' justifies='space-between' v='x' aligns='center' g='xxs' p='xxs' {...otherProps}>
+      {children}
 
-        {children}
-      </Block>
-
-      <Block className={css.Extra} v='x' aligns='center' g='xxs'>
-        <Portal.Container name='page-menu' />
-      </Block>
+      <Portal.Container name='page-name' v='x' aligns='center' g='xxs' />
+      <Portal.Container name='page-nav' v='x' aligns='center' g='xxs' />
+      <Portal.Container name='page-extra' v='x' aligns='center' g='xxs' justifies='end' />
     </Header>
   )
 }

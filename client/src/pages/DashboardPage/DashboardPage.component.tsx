@@ -5,19 +5,21 @@ import { cn } from 'tools'
 import { useParams } from 'router'
 import { t } from 'locale'
 import { useApp } from 'App'
-import { BoardMarkupSize, BoardItem, useBoard, useBoardMutations } from 'api'
+import { BoardMarkupDevice, BoardItem, useBoard, useBoardMutations } from 'api'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
-import DashboardModalForm from 'screens/forms/DashboardModalForm'
-import WidgetModalForm from 'screens/forms/WidgetModalForm'
+import ReviewsModal from 'screens/modals/ReviewsModal'
+import WidgetModal from 'screens/modals/WidgetModal'
+import DashboardModal from 'screens/modals/DashboardModal'
 
 // ---| components |---
 import Board from 'components/Board'
-import Widget from 'components/Widget'
-import Menu from 'components/Menu'
+import Widget from 'components/views/Widget'
+import Menu from 'components/actions/Menu'
+import ButtonGroup from 'components/actions/ButtonGroup'
 
 // ---| self |---
 import css from './DashboardPage.module.scss'
@@ -38,68 +40,59 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
   const app = useApp()
   const { id } = useParams()
   const board = useBoard(id)
-  const boardMutations = useBoardMutations()
-  const [markupSize, setMarkupSize] = useState<BoardMarkupSize>('COMPUTER')
-  const markup = useMemo(() => board.data?.markups.find(markup => markup.size === markupSize), [board.data?.markups, markupSize])
+  const [markupDevice, setMarkupDevice] = useState<BoardMarkupDevice>('COMPUTER')
+  const markup = useMemo(() => board.data?.markups.find(markup => markup.device === markupDevice), [board.data?.markups, markupDevice])
+  const boardMutations = useBoardMutations(id, markup?.id)
   const [mode, setMode] = useState<boolean | BoardItem | undefined>(false)
   const switchSelect = useCallback(() => setMode(flag => !flag), [])
 
-  const isMarkupActive = (size: BoardMarkupSize) => board.data?.markups.find(m => m.size === size)
-  const clear = () => {
-    if (markup?.items && board.data) {
-      boardMutations.update.mutateAsync({
-        ...board.data,
-        markups: board.data.markups.map(m => m.size === markup.size ? { ...markup, items: [] } : m),
-      })
-      markup.items = []
-      // response.update(response.data)
-    }
-  }
-
-  const updateMarkup = (place: any) => {}
-  const addMarkupWidget = (place: any) => {}
-  const updateMarkupWidget = (place: any) => {}
-  const removeMarkupWidget = (id: string) => {}
+  const isMarkupActive = (device: BoardMarkupDevice) => board.data?.markups.find(m => m.device === device)?.visible
+  const clear = () => boardMutations.updateMarkup.mutateAsync({ ...markup, items: [] })
+  const activateMarkup = () => boardMutations.updateMarkup.mutateAsync({ ...markup, visible: !markup?.visible })
+  const expandMarkup = () => boardMutations.updateMarkup.mutateAsync({ ...markup, expandable: !markup?.expandable })
+  const removeMarkupWidget = (id: string) => boardMutations.removeWidget.mutateAsync({ id })
 
   const handleSelect = (place: any) => {
-    // board.widgets.create({
-    //   name: 'NEW WIDGET',
-    //   place,
-    //   id: 99,
-    //   author: 0,
-    //   access: 'PRIVATE',
-    //   version: '0.0.0',
-    // })
+    boardMutations.createWidget.mutateAsync({ ...place, widget: { id: '000000000bebd4f7c72b8e3a' } })
+
     switchSelect()
   }
   const handleReselect = (item: BoardItem) => {
+    boardMutations.updateWidget.mutateAsync(item)
+
     setMode(false)
-    // board.widgets.update(item)
   }
   const handleError = (error: any) => { console.log('handleError', error) }
 
-  const actions = [
-    { start: 'lightbulb', tooltip: 'Active', active: markup?.active },
-    { start: 'dashboard_customize', tooltip: t('ACTION.ADD_WIDGET'), onClick: switchSelect },
-    { start: 'border_clear', tooltip: t('ACTION.CLEAR'), onClick: clear },
-    {
-      start: 'computer', items: [
-        { start: 'all_inclusive', content: t('DEVICE.INFINITY'), active: isMarkupActive('INFINITY'), onClick: () => setMarkupSize('INFINITY') },
-        { start: 'tv', content: t('DEVICE.TV'), active: isMarkupActive('TV'), onClick: () => setMarkupSize('TV') },
-        { start: 'computer', content: t('DEVICE.COMPUTER'), active: isMarkupActive('COMPUTER'), onClick: () => setMarkupSize('COMPUTER') },
-        { start: 'laptop_chromebook', content: t('DEVICE.LAPTOP'), active: isMarkupActive('LAPTOP'), onClick: () => setMarkupSize('LAPTOP') },
-        { start: 'tablet_mac', content: t('DEVICE.TABLET'), active: isMarkupActive('TABLET'), onClick: () => setMarkupSize('TABLET') },
-        { start: 'phone_iphone', content: t('DEVICE.MOBILE'), active: isMarkupActive('MOBILE'), onClick: () => setMarkupSize('MOBILE') },
-        { start: 'watch', content: t('DEVICE.WATCH'), active: isMarkupActive('WATCH'), onClick: () => setMarkupSize('WATCH') },
-      ],
-    },
-    { start: 'download', tooltip: t('ACTION.INSTALL') },
-    { start: 'beenhere', tooltip: t('ACTION.ADD_TO_MENU') },
-    { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'board-settings' }) },
-  ]
-
   return (
-    <Page className={_className} name={board.data?.name} actions={actions} {...otherProps}>
+    <Page
+      className={_className}
+      name={board.data?.name}
+      nav={
+        <ButtonGroup items={[
+          { start: 'high_quality', tooltip: t('DEVICE.BOARD'), active: isMarkupActive('BOARD'), onClick: () => setMarkupDevice('BOARD') },
+          { start: 'live_tv', tooltip: t('DEVICE.TV'), active: isMarkupActive('TV'), onClick: () => setMarkupDevice('TV') },
+          { start: 'desktop_windows', tooltip: t('DEVICE.COMPUTER'), active: isMarkupActive('COMPUTER'), onClick: () => setMarkupDevice('COMPUTER') },
+          { start: 'laptop_chromebook', tooltip: t('DEVICE.LAPTOP'), active: isMarkupActive('LAPTOP'), onClick: () => setMarkupDevice('LAPTOP') },
+          { start: 'tablet_mac', tooltip: t('DEVICE.TABLET'), active: isMarkupActive('TABLET'), onClick: () => setMarkupDevice('TABLET') },
+          { start: 'phone_iphone', tooltip: t('DEVICE.MOBILE'), active: isMarkupActive('MOBILE'), onClick: () => setMarkupDevice('MOBILE') },
+          { start: 'watch', tooltip: t('DEVICE.WATCH'), active: isMarkupActive('WATCH'), onClick: () => setMarkupDevice('WATCH') },
+        ]} />
+      }
+      menu={[
+        { start: 'visibility', tooltip: markup?.visible ? t('ACTION.TURN_OFF') : t('ACTION.TURN_ON'), active: markup?.visible, onClick: activateMarkup },
+        { start: 'fit_screen', tooltip: markup?.expandable ? t('ACTION.EXPANDABLE') : t('ACTION.FIT_SCREEN'), active: markup?.expandable, onClick: expandMarkup },
+        { start: 'remove_selection', tooltip: t('ACTION.CLEAR'), onClick: clear },
+        { start: 'dashboard_customize', tooltip: t('ACTION.ADD_WIDGET'), onClick: switchSelect },
+        { start: 'download', tooltip: t('ACTION.INSTALL') },
+        { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK') },
+        { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: DashboardModal.modalName, payload: board.data }) },
+        { start: 'delete_forever', tooltip: t('ACTION.REMOVE') },
+        { start: 'payments', tooltip: t('ACTION.PAY') }, // TODO: pay board and widgets on board
+        { start: 'reviews', tooltip: t('ACTION.REVIEWS'), onClick: () => app.modal({ name: ReviewsModal.modalName, payload: board.data?.reviews }) },
+      ]}
+      {...otherProps}
+    >
       <Page.Content>
         {/* TODO: add spinner on loading to page component */}
         <Board
@@ -119,12 +112,10 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
               items={[
                 { start: 'resize', tooltip: t('ACTION.REPLACE'), onClick: () => setMode(p.options) },
                 { start: 'move_up', tooltip: t('ACTION.SUBSTITUTION') },
-                { start: 'zoom_out_map', tooltip: t('ACTION.FULL_SCREEN') },
                 { start: 'download', tooltip: t('ACTION.INSTALL') },
-                { start: 'favorite', tooltip: t('ACTION.FAVORITE') },
-                { start: 'book', tooltip: t('ACTION.DOCS') },
-                { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: 'widget-settings', payload: p.options }) },
-                { start: 'close', tooltip: t('ACTION.REMOVE'), onClick: () => removeMarkupWidget(p.options.id) },
+                { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK') },
+                { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: WidgetModal.modalName, payload: p.options }) },
+                { start: 'delete_forever', tooltip: t('ACTION.REMOVE'), onClick: () => removeMarkupWidget(p.options.id) },
               ]}
               trigger={o => <Widget active={o.open} {...p} />}
             />
@@ -132,8 +123,9 @@ export function DashboardPage(props: DashboardPageProps): JSX.Element {
         />
       </Page.Content>
 
-      <DashboardModalForm payload={board.data} onSubmit={patch => patch && board.update(patch)} />
-      <WidgetModalForm onSubmit={patch => patch && board.widgets.update(patch)} />
+      <WidgetModal />
+      <DashboardModal />
+      <ReviewsModal />
 
       {children}
     </Page>

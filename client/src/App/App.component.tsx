@@ -5,16 +5,15 @@ import { cn } from 'tools'
 
 // ---| screens |---
 // ---| components |---
-import Layout, { LayoutProps } from 'components/Layout'
-import Modal from 'components/Modal'
-import Toast from 'components/Toast'
+import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Modal from 'components/popups/Modal'
+import Toast from 'components/popups/Toast'
 
 // ---| self |---
 import './App.module.scss'
 import AppMenu from './AppMenu'
 import AppHeader from './AppHeader'
 import AppContent from './AppContent'
-import AppActions from './AppActions'
 
 export type AppProps = LayoutProps
 
@@ -34,7 +33,6 @@ export function App(props: AppProps): JSX.Element {
       <AppMenu />
       <AppHeader />
       <AppContent />
-      <AppActions />
 
       {children}
 

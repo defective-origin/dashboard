@@ -11,13 +11,15 @@ const api = axios.create({
 })
 
 
-export type RestReadEndpointOptions<T = Json, E = Error> = Partial<UseQueryOptions<T, E>>
+export type RestReadEndpointOptions<T = Json, E = Error> = Partial<UseQueryOptions<T, E>> & {
+  request?: AxiosRequestConfig
+}
 
 export const useRestReadEndpoint = <T = Json, E = Error>(url: string, options?: RestReadEndpointOptions<T, E>) => {
   return useQuery<T, E>({
     ...options,
-    queryKey: [url],
-    queryFn: () => api.get(url).then(response => response.data),
+    queryKey: [url, options?.request?.params],
+    queryFn: () => api.get(url, options?.request).then(response => response.data),
   })
 }
 
@@ -25,12 +27,12 @@ export type RestMutationEndpointOptions<P = Json, T = Json, E = Error> = UseMuta
   pathname?: string
   method?: string
   url?: (payload: Json) => string
-  queryKey?: (data: T, variables: Json, context: unknown) => unknown[]
+  invalidate?: (data: T, variables: Json, context: unknown) => unknown[]
   request?: AxiosRequestConfig
 }
 
 export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: RestMutationEndpointOptions<P, T, E>) => {
-  const { pathname, method, request, queryKey, url, onSuccess, ...queryOptions } = options
+  const { pathname, method, request, invalidate, url, onSuccess, ...queryOptions } = options
 
   return useMutation<T, E, P>({
     ...queryOptions,
@@ -45,8 +47,8 @@ export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: 
       apiClient.invalidateQueries({ queryKey: [pathname] })
 
       // refresh item
-      if (queryKey) {
-        apiClient.invalidateQueries({ queryKey: queryKey(data, variables, context) })
+      if (invalidate) {
+        apiClient.invalidateQueries({ queryKey: invalidate(data, variables, context) })
       }
 
       onSuccess?.(data, variables, context)
@@ -65,12 +67,12 @@ export const useRestCreateEndpoint = <P extends { id: Id }, T = Json, E = Error>
   })
 }
 
-export const useRestUpdateEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<P, T, E>) => {
-  return useRestMutationEndpoint<P, T, E>({
+export const useRestUpdateEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Partial<P>, T, E>) => {
+  return useRestMutationEndpoint<Partial<P>, T, E>({
     pathname,
     method: 'put',
     url: payload => `${pathname}/${payload.id}`,
-    queryKey: (_, payload) => [`${pathname}/${payload.id}`],
+    invalidate: (_, payload) => [`${pathname}/${payload.id}`],
     ...options,
   })
 }

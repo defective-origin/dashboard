@@ -2,17 +2,16 @@ import { ChangeStamps } from 'api/api.type'
 
 export type FeatureReview = ChangeStamps & {
   rate: number
-  content?: string
+  content: string
 }
 
-export type FeatureAccess = 'PRIVATE' | 'PUBLIC'
 export type Feature = ChangeStamps & {
   id: string
   name: string
   price: number
   rate: number
-  content?: string
-  access: FeatureAccess
+  content: string
+  public: boolean
   tags: string[]
   options: object
   reviews: FeatureReview[]

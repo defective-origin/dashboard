@@ -7,4 +7,6 @@
 .AppHeader {
   box-sizing: border-box;
   height: 60px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
 }

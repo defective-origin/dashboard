@@ -5,6 +5,8 @@ export const ROUTE_LINKS = {
   BOARD: '/boards/:id',
   WIDGETS: '/widgets',
   WIDGET: '/widgets/:id',
+  WIDGET_VIEWS: '/widget-views',
+  WIDGET_VIEW: '/widget-views/:id',
   ACCOUNT: '/account',
   ACCOUNT_WIDGETS: '/account/widgets',
   ACCOUNT_BOARDS: '/account/dashboards',
