@@ -7,8 +7,8 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Icon, { IconProps } from 'components/Icon'
-import Tooltip, { TooltipVariant } from 'components/Tooltip'
+import Icon, { IconProps } from 'components/views/Icon'
+import Tooltip, { TooltipVariant } from 'components/popups/Tooltip'
 
 // ---| self |---
 import css from './Copyright.module.scss'

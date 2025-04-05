@@ -7,7 +7,7 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Content, { ContentProps } from 'components/Content'
+import Content, { ContentProps } from 'components/layouts/Content'
 
 // ---| self |---
 import css from './AppContent.module.scss'

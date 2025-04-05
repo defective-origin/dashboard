@@ -14,15 +14,15 @@ import Reviews from 'screens/views/Reviews'
 import User from 'screens/views/User'
 
 // ---| components |---
-import Tag from 'components/Tag'
-import Text from 'components/Text'
-import Block from 'components/Block'
-import Label from 'components/Label'
-import Section from 'components/Section'
+import Tag from 'components/views/Tag'
+import Text from 'components/views/Text'
+import Block from 'components/layouts/Block'
+import Label from 'components/views/Label'
+import Actions from 'components/actions/Actions'
+import Section from 'components/layouts/Section'
 
 // ---| self |---
 import css from './WidgetPage.module.scss'
-import Actions from 'components/Actions'
 
 export type WidgetPageProps = PageProps
 

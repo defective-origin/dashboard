@@ -30,7 +30,6 @@ export function WidgetsPage(props: WidgetsPageProps): JSX.Element {
 
   return (
     <SelectPage
-      menu={[{ start: 'add', tooltip: 'Add Widget', tooltipSide: 'right', size: 'lg' }]}
       className={_className}
       name='PAGES.WIDGETS'
       items={widgetViews.data}

@@ -7,9 +7,11 @@ import { Feature } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
-import Image from 'components/Image'
-import NavLink, { NavLinkProps, NavLinkVariant } from 'components/NavLink'
+import Text from 'components/views/Text'
+import Label from 'components/views/Label'
+import Image from 'components/views/Image'
+import Block from 'components/layouts/Block'
+import NavLink, { NavLinkProps, NavLinkVariant } from 'components/actions/NavLink'
 
 // ---| self |---
 import css from './PreviewCard.module.scss'
@@ -33,9 +35,12 @@ export function PreviewCard<V extends NavLinkVariant,>(props: PreviewCardProps<V
 
   return (
     <NavLink className={_className} clear {...otherProps}>
-      <Image src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' height={200} />
       <Text v='h4' content={options?.name} />
-      <Text v='caption' content={options?.price} format='currency' size='xxs' />
+      <Image src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' height={200} />
+      <Block className={css.Meta} v='x' g='xxs' p='xxs'>
+        <Label icon='star' content={options?.rate} format='number' />
+        <Label icon='payments' content={options?.price} format='currency' />
+      </Block>
 
       {children}
     </NavLink>

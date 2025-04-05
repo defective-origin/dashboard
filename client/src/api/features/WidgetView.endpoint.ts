@@ -7,6 +7,7 @@ const PATHNAME = 'widget-views'
 
 
 export type Release = TimeStamps & {
+  id: string
   version: string
   content: string
   options: object

@@ -8,10 +8,10 @@ import Page, { PageProps } from 'pages/Page'
 
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
-import Image from 'components/Image'
-import Block from 'components/Block'
-import Actions from 'components/Actions'
+import Text from 'components/views/Text'
+import Image from 'components/views/Image'
+import Block from 'components/layouts/Block'
+import Actions from 'components/actions/Actions'
 
 // ---| self |---
 import css from './GuidePage.module.scss'

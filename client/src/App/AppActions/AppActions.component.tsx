@@ -6,8 +6,8 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Aside from 'components/Aside'
-import Portal from 'components/Portal'
+import Aside from 'components/layouts/Aside'
+import Portal from 'components/layouts/Portal'
 
 // ---| self |---
 import css from './AppActions.module.scss'

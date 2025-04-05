@@ -7,4 +7,12 @@
 .PreviewCard {
   display: flex;
   flex-direction: column;
+  position: relative;
+  align-items: start;
+}
+
+.Meta {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

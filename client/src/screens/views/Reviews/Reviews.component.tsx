@@ -6,7 +6,7 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockProps } from 'components/Block'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import Review, { ReviewProps } from 'screens/views/Reviews/Review'

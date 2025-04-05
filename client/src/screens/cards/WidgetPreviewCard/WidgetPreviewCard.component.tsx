@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { WidgetPreset } from 'api'
+import { Widget } from 'api'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,7 +15,7 @@ import css from './WidgetPreviewCard.module.scss'
 export type WidgetPreviewCardProps = {
   className?: string
   children?: React.ReactNode
-  options: WidgetPreset
+  options: Widget
 }
 
 /**
@@ -34,7 +34,7 @@ export function WidgetPreviewCard(props: WidgetPreviewCardProps): JSX.Element {
       className={_className}
       to='WIDGET'
       options={options}
-      params={{ id: options.id!.toString() }}
+      params={{ id: options.id }}
       {...otherProps}
     />
   )

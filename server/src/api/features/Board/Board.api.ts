@@ -33,4 +33,43 @@ router.delete(`/${PATHNAME}/:id`, (req, res, next) => {
     .catch(next)
 })
 
+// markups
+router.put(`/${PATHNAME}/:id/markups/:markupId`, (req, res, next) => {
+  BoardModel.findOneAndUpdate(
+    { "_id": req.params.id, "markups._id": req.params.markupId },
+    { "$set": { "markups.$": req.body } },
+  )
+    .then(() => res.sendStatus(200))
+    .catch(next)
+})
+
+// widgets
+router.post(`/${PATHNAME}/:id/markups/:markupId/widgets`, (req, res, next) => {
+  BoardModel.updateOne(
+    { _id: req.params.id, 'markups._id': req.params.markupId },
+    { $push: { 'markups.$.items': req.body } },
+  )
+    .then(() => res.sendStatus(200))
+    .catch(next)
+})
+
+router.put(`/${PATHNAME}/:id/markups/:markupId/widgets/:widgetId`, (req, res, next) => {
+  BoardModel.updateOne(
+    { _id: req.params.id, 'markups._id': req.params.markupId },
+    { $set: { 'markups.$.items.$[item]': req.body } },
+    { arrayFilters: [{ 'item._id': req.params.widgetId }] },
+  )
+    .then(() => res.sendStatus(200))
+    .catch(next)
+})
+
+router.delete(`/${PATHNAME}/:id/markups/:markupId/widgets/:widgetId`, (req, res, next) => {
+  BoardModel.updateOne(
+    { _id: req.params.id, 'markups._id': req.params.markupId },
+    { $pull: { 'markups.$.items': { _id: req.params.widgetId } } },
+  )
+    .then(() => res.sendStatus(200))
+    .catch(next)
+})
+
 export default router

@@ -2,17 +2,20 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Board } from 'api'
+import { Board, Ref, useBoard, useBoardMutations } from 'api'
 import { t } from 'locale'
 
 // ---| pages |---
 // ---| screens |---
-import FeatureModalForm, { FeatureModalFormProps } from '../FeatureModalForm'
+import FeatureModalForm, { FeatureModalFormProps } from 'screens/forms/FeatureModalForm'
 
 // ---| components |---
+import { useModalPayload } from 'components/popups/Modal'
 
 // ---| self |---
 import css from './DashboardModalForm.module.scss'
+
+const BOARD_MODAL_NAME = 'board-settings'
 
 export type DashboardModalFormProps = FeatureModalFormProps<Board>
 
@@ -26,9 +29,19 @@ export type DashboardModalFormProps = FeatureModalFormProps<Board>
 export function DashboardModalForm(props: DashboardModalFormProps): JSX.Element {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DashboardModalForm, className)
+  const payload = useModalPayload<Ref>(BOARD_MODAL_NAME)
+  const board = useBoard(payload?.id)
+  const boardMutations = useBoardMutations()
 
   return (
-    <FeatureModalForm className={_className} name='board-settings' title={t('FORM.BOARD_SETTINGS')} {...otherProps}>
+    <FeatureModalForm
+      className={_className}
+      name='board-settings'
+      title={t('FORM.BOARD_SETTINGS')}
+      init={board.data}
+      onSubmit={patch => boardMutations.update.mutateAsync(patch)}
+      {...otherProps}
+    >
       {/* <Text.H3 content='Active layout' /> */}
       {/* <Layout v='board' columns={5} g='sm' >
         <Field.Switch path='tv' label='Tv' checked={options?.markups.tv?.active} />

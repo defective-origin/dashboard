@@ -7,8 +7,8 @@ import { t } from 'locale'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Item, { ItemProps } from 'components/Item'
-import Text from 'components/Text'
+import Item, { ItemProps } from 'components/layouts/Item'
+import Text from 'components/views/Text'
 
 // ---| self |---
 import css from './PlaceholderCard.module.scss'

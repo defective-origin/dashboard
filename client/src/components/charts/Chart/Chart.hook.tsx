@@ -12,7 +12,7 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import { TEXT_FORMAT_MAP, TextFormat } from 'components/Text'
+import { TEXT_FORMAT_MAP, TextFormat } from 'components/views/Text'
 
 // ---| self |---
 

@@ -9,7 +9,7 @@ import { DashboardMarkupType, DashboardMarkups } from 'api'
 import Device from 'screens/views/Device'
 
 // ---| components |---
-import Block, { BlockProps } from 'components/Block'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './Devices.module.scss'

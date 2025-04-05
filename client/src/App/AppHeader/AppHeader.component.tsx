@@ -6,9 +6,9 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block from 'components/Block'
-import Portal from 'components/Portal'
-import Header, { HeaderProps } from 'components/Header'
+import Block from 'components/layouts/Block'
+import Portal from 'components/layouts/Portal'
+import Header, { HeaderProps } from 'components/layouts/Header'
 
 // ---| self |---
 import css from './AppHeader.module.scss'
@@ -35,6 +35,7 @@ export function AppHeader(props: AppHeaderProps): JSX.Element {
       </Block>
 
       <Block className={css.Extra} v='x' aligns='center' g='xxs'>
+        <Portal.Container name='page-extra' />
         <Portal.Container name='page-menu' />
       </Block>
     </Header>

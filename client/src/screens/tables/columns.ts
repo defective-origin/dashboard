@@ -1,7 +1,7 @@
-import defaultColumns, { TextColumn, textColumn } from 'components/Table/Table.tool'
+import defaultColumns, { TextColumn, textColumn } from 'components/views/Table/Table.tool'
 import Devices, { DeviceItems, DevicesProps } from 'screens/views/Devices'
-import Clipboard, { ClipboardProps } from 'components/Clipboard'
-import { TableColumn, TableRecord } from 'components/Table'
+import Clipboard, { ClipboardProps } from 'components/actions/Clipboard'
+import { TableColumn, TableRecord } from 'components/views/Table'
 import User, { UserProps } from 'screens/views/User'
 
 export type ClipboardColumnOptions = Pick<ClipboardProps, 'content'>

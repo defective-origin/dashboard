@@ -11,7 +11,7 @@ import DonationTable from 'screens/tables/DonationTable'
 import PlaceholderCard from 'screens/cards/PlaceholderCard'
 
 // ---| components |---
-import Block from 'components/Block'
+import Block from 'components/layouts/Block'
 
 // ---| self |---
 import css from './DonationPage.module.scss'

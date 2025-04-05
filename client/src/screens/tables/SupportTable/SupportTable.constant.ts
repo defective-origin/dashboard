@@ -1,5 +1,5 @@
 import { SupportRequest } from 'api'
-import { TableColumn } from 'components/Table'
+import { TableColumn } from 'components/views/Table'
 import column from '../columns'
 
 export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [

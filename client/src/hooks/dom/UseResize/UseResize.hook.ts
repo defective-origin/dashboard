@@ -2,7 +2,7 @@ import { useState } from 'react'
 import useResizeObserver, { ResizeObserverOptions } from '../UseResizeObserver'
 import useElement, { ElementRef } from '../UseElement'
 
-const getOptions = <E extends Element>(ref: React.MutableRefObject<E | null>): ResizeReturnOptions<E> => {
+const getOptions = <E extends Element>(ref: React.RefObject<E | null>): ResizeReturnOptions<E> => {
   const rect = ref.current?.getBoundingClientRect()
 
   return {

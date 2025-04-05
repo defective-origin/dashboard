@@ -36,6 +36,7 @@
     "i18next": "^24.2.3",
     "i18next-browser-languagedetector": "8.0.4",
     "i18next-http-backend": "3.0.2",
+    "json-edit-react": "^1.25.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-helmet": "6.1.0",

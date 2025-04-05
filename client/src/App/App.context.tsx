@@ -5,8 +5,8 @@ import { HotKeysReturnOptions, useHotKeys } from 'hooks'
 import { AccountManager, LogReturnOptions, EventReturnOptions, useLog, useEvent, useFeatureFlags } from 'api'
 
 // ---| components |---
-import { ToastReturnOptions, useToast } from 'components/Toast'
-import { ModalReturnOptions, useModal } from 'components/Modal'
+import { ToastReturnOptions, useToast } from 'components/popups/Toast'
+import { ModalReturnOptions, useModal } from 'components/popups/Modal'
 
 export type AppOptions =
   & AccountManager

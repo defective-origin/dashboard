@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 // ---| core |---
 import { TranslateKeys, t } from 'locale'
@@ -6,19 +6,19 @@ import { cn, react } from 'tools'
 
 // ---| screens |---
 // ---| components |---
-import Text from 'components/Text'
-import Portal from 'components/Portal'
-import Meta, { MetaItem } from 'components/Meta'
-import Actions, { ActionItem } from 'components/Actions'
-import Layout, { LayoutProps } from 'components/Layout'
+import Text from 'components/views/Text'
+import Portal from 'components/layouts/Portal'
+import Meta, { MetaItem } from 'components/layouts/Meta'
+import Actions, { ActionItem } from 'components/actions/Actions'
+import Layout, { LayoutProps } from 'components/layouts/Layout'
 
-import Item from 'components/Item'
-import Aside from 'components/Aside'
-import Block from 'components/Block'
-import Content from 'components/Content'
-import Footer from 'components/Footer'
-import Header from 'components/Header'
-import Section from 'components/Section'
+import Item from 'components/layouts/Item'
+import Aside from 'components/layouts/Aside'
+import Block from 'components/layouts/Block'
+import Content from 'components/layouts/Content'
+import Footer from 'components/layouts/Footer'
+import Header from 'components/layouts/Header'
+import Section from 'components/layouts/Section'
 
 // ---| self |---
 import css from './Page.module.scss'
@@ -30,6 +30,7 @@ export type PageProps = LayoutProps & {
   meta?: MetaItem[]
   menu?: ActionItem[]
   actions?: ActionItem[]
+  extra?: ReactNode
 }
 
 /**
@@ -40,7 +41,7 @@ export type PageProps = LayoutProps & {
  * <Page />
  */
 export function Page(props: PageProps): JSX.Element {
-  const { menu = [], actions = [], name, meta, children, className, ...otherProps } = props
+  const { extra, menu = [], actions = [], name, meta, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
   const pageName = t(name)
   const tabName = t('SYSTEM.TAB_NAME', { title: pageName })
@@ -54,7 +55,8 @@ export function Page(props: PageProps): JSX.Element {
       <Meta title={tabName} items={meta} />
 
       <Portal name='page-name' content={<Text.H1 size='md' color='primary' content={pageName} />} />
-      <Portal name='page-menu' content={<Actions items={menu} g='xs' size='xs' />} />
+      <Portal name='page-extra' content={extra} />
+      <Portal name='page-menu' content={<Actions items={menu} g='xs' size='sm' />} />
       <Portal name='page-actions' content={<Actions items={actionItems} v='y' menu='left' size='lg' />} />
 
       {children}

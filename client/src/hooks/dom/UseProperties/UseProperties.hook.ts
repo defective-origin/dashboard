@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from 'react'
 import useElement, { ElementOptions, ElementRef } from '../UseElement'
 
-export const getProperties = <T extends Record<string, unknown>>(ref: React.MutableRefObject<Element | null>, map: T) => {
+export const getProperties = <T extends Record<string, unknown>>(ref: React.RefObject<Element | null>, map: T) => {
   const styles = ref.current && getComputedStyle(ref.current)
   const props = Object.keys(map).reduce((acc, key) => {
     acc[key] = styles?.getPropertyValue(map[key] as string)

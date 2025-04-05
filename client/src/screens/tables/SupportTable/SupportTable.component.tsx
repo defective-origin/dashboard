@@ -8,7 +8,7 @@ import { SupportRequest, useSupportRequests } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Table, { TableProps } from 'components/Table'
+import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
 import css from './SupportTable.module.scss'

@@ -9,12 +9,12 @@ import { FeatureReview } from 'api'
 import User from 'screens/views/User'
 
 // ---| components |---
-import Text from 'components/Text'
-import Block, { BlockProps } from 'components/Block'
+import Text from 'components/views/Text'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './Review.module.scss'
-import Label from 'components/Label'
+import Label from 'components/views/Label'
 
 export type ReviewProps = BlockProps & FeatureReview
 

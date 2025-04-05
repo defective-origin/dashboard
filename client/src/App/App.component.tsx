@@ -5,9 +5,9 @@ import { cn } from 'tools'
 
 // ---| screens |---
 // ---| components |---
-import Layout, { LayoutProps } from 'components/Layout'
-import Modal from 'components/Modal'
-import Toast from 'components/Toast'
+import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Modal from 'components/popups/Modal'
+import Toast from 'components/popups/Toast'
 
 // ---| self |---
 import './App.module.scss'
