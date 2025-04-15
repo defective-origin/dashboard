@@ -1,31 +1,27 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useParams } from 'router'
 import { t } from 'locale'
-import { useApp } from 'App'
-import { BoardMarkupDevice, BoardItem, useBoard, useBoardMutations } from 'api'
+import { BoardMarkup, useBoard, useBoardMutations } from 'api'
+import { generateRouterPath, useNavigate, useParams } from 'router'
 
 // ---| pages |---
-import Page, { PageProps } from 'pages/Page'
-
+import FeaturePage, { FEATURE_SNAPSHOT_ID, FeaturePageProps } from 'pages/FeaturePage'
 // ---| screens |---
-import ReviewsModal from 'screens/modals/ReviewsModal'
-import WidgetModal from 'screens/modals/WidgetModal'
-import DashboardModal from 'screens/modals/DashboardModal'
-
+import Widget from 'screens/views/Widget'
+import MarkupMenu from 'screens/views/MarkupMenu'
+import MarkupBoard, { MarkupBoardManager } from 'screens/views/MarkupBoard'
 // ---| components |---
-import Board from 'components/Board'
-import Widget from 'components/views/Widget'
 import Menu from 'components/actions/Menu'
-import ButtonGroup from 'components/actions/ButtonGroup'
+import { modal } from 'components/popups/Modal'
 
 // ---| self |---
 import css from './DashboardPage.module.scss'
+import { useHistory } from 'hooks'
 
-export type DashboardPageProps = PageProps
 
+export type DashboardPageProps = FeaturePageProps
 
 /**
  * Component description.
@@ -34,101 +30,100 @@ export type DashboardPageProps = PageProps
  * @example
  * <DashboardPage />
  */
-export function DashboardPage(props: DashboardPageProps): JSX.Element {
+export function DashboardPage(props: DashboardPageProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DashboardPage, className)
-  const app = useApp()
   const { id } = useParams()
+  const navigate = useNavigate()
   const board = useBoard(id)
-  const [markupDevice, setMarkupDevice] = useState<BoardMarkupDevice>('COMPUTER')
-  const markup = useMemo(() => board.data?.markups.find(markup => markup.device === markupDevice), [board.data?.markups, markupDevice])
-  const boardMutations = useBoardMutations(id, markup?.id)
-  const [mode, setMode] = useState<boolean | BoardItem | undefined>(false)
-  const switchSelect = useCallback(() => setMode(flag => !flag), [])
+  const mutations = useBoardMutations()
+  const [widget, setWidget] = useState<string>()
+  const history = useHistory<BoardMarkup>()
+  const manager = useRef<MarkupBoardManager>(null)
 
-  const isMarkupActive = (device: BoardMarkupDevice) => board.data?.markups.find(m => m.device === device)?.visible
-  const clear = () => boardMutations.updateMarkup.mutateAsync({ ...markup, items: [] })
-  const activateMarkup = () => boardMutations.updateMarkup.mutateAsync({ ...markup, visible: !markup?.visible })
-  const expandMarkup = () => boardMutations.updateMarkup.mutateAsync({ ...markup, expandable: !markup?.expandable })
-  const removeMarkupWidget = (id: string) => boardMutations.removeWidget.mutateAsync({ id })
+  // TODO: move update screen action to preview component instead of global menu
 
-  const handleSelect = (place: any) => {
-    boardMutations.createWidget.mutateAsync({ ...place, widget: { id: '000000000bebd4f7c72b8e3a' } })
+  // TODO: test fit_page_height grid_on
+  // TODO: add change hotkeys / ctrl + Z, ctrl + shift + Z, ctrl + S, esc ...
+  // TODO: merge features by parent field& Parent config fields have less priority [images, styles ...]
 
-    switchSelect()
-  }
-  const handleReselect = (item: BoardItem) => {
-    boardMutations.updateWidget.mutateAsync(item)
+  // TODO: render sub board as widget too
+  // TODO: create laptop markup by default
 
-    setMode(false)
-  }
-  const handleError = (error: any) => { console.log('handleError', error) }
+  // TODO: add spinner on loading to page component
+  // TODO: remove from widgets only it there is no any markup
+  // TODO: remove, replace for one and all markups buttons (modal window)
+  // TODO: move to hook and add tests?
+  // TODO: pay board and widgets on board
+  // TODO: add to FORM width, height, row gap column gap
 
   return (
-    <Page
+    <FeaturePage
       className={_className}
-      name={board.data?.name}
+      options={board.data}
       nav={
-        <ButtonGroup items={[
-          { start: 'high_quality', tooltip: t('DEVICE.BOARD'), active: isMarkupActive('BOARD'), onClick: () => setMarkupDevice('BOARD') },
-          { start: 'live_tv', tooltip: t('DEVICE.TV'), active: isMarkupActive('TV'), onClick: () => setMarkupDevice('TV') },
-          { start: 'desktop_windows', tooltip: t('DEVICE.COMPUTER'), active: isMarkupActive('COMPUTER'), onClick: () => setMarkupDevice('COMPUTER') },
-          { start: 'laptop_chromebook', tooltip: t('DEVICE.LAPTOP'), active: isMarkupActive('LAPTOP'), onClick: () => setMarkupDevice('LAPTOP') },
-          { start: 'tablet_mac', tooltip: t('DEVICE.TABLET'), active: isMarkupActive('TABLET'), onClick: () => setMarkupDevice('TABLET') },
-          { start: 'phone_iphone', tooltip: t('DEVICE.MOBILE'), active: isMarkupActive('MOBILE'), onClick: () => setMarkupDevice('MOBILE') },
-          { start: 'watch', tooltip: t('DEVICE.WATCH'), active: isMarkupActive('WATCH'), onClick: () => setMarkupDevice('WATCH') },
-        ]} />
+        <MarkupMenu
+          select={history.value}
+          items={board.data?.markups}
+          onSelect={history.reset}
+          onSave={markups => mutations.update({ ...board.data, markups })}
+        />
       }
       menu={[
-        { start: 'visibility', tooltip: markup?.visible ? t('ACTION.TURN_OFF') : t('ACTION.TURN_ON'), active: markup?.visible, onClick: activateMarkup },
-        { start: 'fit_screen', tooltip: markup?.expandable ? t('ACTION.EXPANDABLE') : t('ACTION.FIT_SCREEN'), active: markup?.expandable, onClick: expandMarkup },
-        { start: 'remove_selection', tooltip: t('ACTION.CLEAR'), onClick: clear },
-        { start: 'dashboard_customize', tooltip: t('ACTION.ADD_WIDGET'), onClick: switchSelect },
-        { start: 'download', tooltip: t('ACTION.INSTALL') },
-        { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK') },
-        { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: DashboardModal.modalName, payload: board.data }) },
-        { start: 'delete_forever', tooltip: t('ACTION.REMOVE') },
-        { start: 'payments', tooltip: t('ACTION.PAY') }, // TODO: pay board and widgets on board
-        { start: 'reviews', tooltip: t('ACTION.REVIEWS'), onClick: () => app.modal({ name: ReviewsModal.modalName, payload: board.data?.reviews }) },
+        { start: 'undo', tooltip: t('ACTION.UNDO'), active: history.hasPrev, onClick: history.prev },
+        { start: 'redo', tooltip: t('ACTION.REDO'), active: history.hasNext, onClick: history.next },
+        { start: 'save', tooltip: t('ACTION.SAVE'), active: true },
+        { start: 'view_apps', tooltip: t('ACTION.PREVIEW'), active: true },
+        history.value?.height !== 'auto' && { start: 'fit_screen', tooltip: t('ACTION.EXPANDABLE'), active: true, onClick: () => manager.current?.resize('auto') },
+        history.value?.height === 'auto' && { start: 'fit_screen', tooltip: t('ACTION.FIT_SCREEN'), onClick: () => manager.current?.resize('100%') },
+        { start: 'dashboard_customize', tooltip: t('ACTION.ADD_WIDGET') },
+        {
+          start: 'remove_selection',
+          tooltip: t('ACTION.CLEAR'),
+          onClick: () => modal({
+            name: 'confirm',
+            content: t('MESSAGE.CONFIRM.CLEAR_BOARD'),
+            onSuccess: manager.current?.clear,
+          }),
+        },
       ]}
+      onRemove={() => {
+        mutations.remove(board.data)
+        navigate('BOARDS')
+      }}
+      onClone={() => console.log('CREATE CLONE')}
       {...otherProps}
     >
-      <Page.Content>
-        {/* TODO: add spinner on loading to page component */}
-        <Board
-          padding={8}
-          rows={markup?.rows}
-          columns={markup?.columns}
-          items={markup?.items}
-          select={mode}
-          onSelect={handleSelect}
-          onReselect={handleReselect}
-          onError={handleError}
-          widget={p => (
-            <Menu
-              size='sm'
-              horizontal
-              v='top-start'
-              items={[
-                { start: 'resize', tooltip: t('ACTION.REPLACE'), onClick: () => setMode(p.options) },
-                { start: 'move_up', tooltip: t('ACTION.SUBSTITUTION') },
-                { start: 'download', tooltip: t('ACTION.INSTALL') },
-                { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK') },
-                { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: WidgetModal.modalName, payload: p.options }) },
-                { start: 'delete_forever', tooltip: t('ACTION.REMOVE'), onClick: () => removeMarkupWidget(p.options.id) },
-              ]}
-              trigger={o => <Widget active={o.open} {...p} />}
-            />
-          )}
-        />
-      </Page.Content>
-
-      <WidgetModal />
-      <DashboardModal />
-      <ReviewsModal />
+      <MarkupBoard
+        ref={manager}
+        id={FEATURE_SNAPSHOT_ID}
+        className={css.Board}
+        value={history.value}
+        view={false} // TODO: fix
+        items={board.data?.widgets}
+        // onChange={options => mutations.update({ ...board.data, markups: board.data?.markups.map(m => m.width === options.width ? options : m) })}
+        onChange={history.push}
+        onError={error => console.log('handleError', error)}
+        widget={id => (
+          <Menu
+            size='sm'
+            horizontal
+            v='top-start'
+            items={[
+              { start: 'settings', tooltip: t('ACTION.SETTINGS') },
+              { start: 'resize', tooltip: t('ACTION.REPLACE'), onClick: () => manager.current?.placeItem(id) },
+              { start: 'move_up', tooltip: t('ACTION.SUBSTITUTION'), onClick: () => manager.current?.replaceItem(id, '123') },
+              { start: 'delete_forever', tooltip: t('ACTION.REMOVE'), onClick: () => manager.current?.removeItem(id) },
+              { variant: 'divider', v: 'y' },
+              { variant: 'link', tooltip: t('ACTION.OPEN_WIDGET'), href: generateRouterPath('WIDGET', { id }), target: '_blank' },
+            ]}
+            trigger={o => <Widget data-highlight={o.isOn} id={id} />}
+          />
+        )}
+      />
 
       {children}
-    </Page>
+    </FeaturePage>
   )
 }
 

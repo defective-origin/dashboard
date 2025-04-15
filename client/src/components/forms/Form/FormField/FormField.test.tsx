@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import FormField from './FormField.component'
-// import useFormField from './FormField.hook'
+// import useFormField from './FormField.hooks'
 // import FormFieldProvider, FormField from './FormField.context'
 
 describe('[FormField] component', () => {

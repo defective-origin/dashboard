@@ -10,7 +10,7 @@ import { cn } from 'tools'
 
 // ---| self |---
 import css from './TableRow.module.scss'
-import { TableColumn, TableRecord } from '../Table.type'
+import { TableColumn, TableRecord } from '../Table.types'
 import TableCell, { CellSort } from '../TableCell'
 
 export type TableRowProps<T extends TableRecord> = {
@@ -29,13 +29,13 @@ export type TableRowProps<T extends TableRecord> = {
  * @example
  * <TableRow />
  */
-export const TableRow = React.memo(<T extends TableRecord>(props: TableRowProps<T>): JSX.Element => {
+export const TableRow = React.memo(<T extends TableRecord>(props: TableRowProps<T>) => {
   const { id = 'head', item, th = !item, columns, onSort, className, ...otherProps } = props
   const _className = cn(css.TableRow, { [css.Hover]: !th }, className)
 
   return (
     <MuiTableRow id={id as string} className={_className} tabIndex={-1} {...otherProps}>
-      {columns?.map((column) => (
+      {columns?.map(column => (
         <TableCell
           id={`${id}-${column.key}`}
           key={column.key}
@@ -48,6 +48,6 @@ export const TableRow = React.memo(<T extends TableRecord>(props: TableRowProps<
       ))}
     </MuiTableRow>
   )
-}) as <T extends TableRecord>(props: TableRowProps<T>) => JSX.Element
+})
 
 export default TableRow

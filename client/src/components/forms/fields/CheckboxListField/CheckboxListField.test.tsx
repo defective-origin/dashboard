@@ -3,8 +3,6 @@ import { render } from 'tests'
 
 // ---| self |---
 import CheckboxListField from './CheckboxListField.component'
-// import useCheckboxListField from './CheckboxListField.hook'
-// import CheckboxListFieldProvider, CheckboxListField from './CheckboxListField.context'
 
 describe('[CheckboxListField] component', () => {
   it('should render component', () => {

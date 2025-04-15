@@ -1,11 +1,9 @@
-import mock from './Board.mock'
+import mocks from './Board.mocks'
 import model from './Board.model'
-import router from './Board.api'
-
-export * from './Board.model'
+import api from './Board.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

@@ -11,7 +11,7 @@ import Skeleton from 'components/views/Skeleton'
 
 // ---| self |---
 import './Text.module.scss'
-import { TEXT_FORMAT_MAP } from './Text.tool'
+import { TEXT_FORMAT_MAP } from './Text.tools'
 
 const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
   h1: 'xl',
@@ -67,13 +67,13 @@ export type TextProps = FormatOptions<TextFormat> & {
  *    ellipsis={3}
  * />
  */
-export function Text(props: TextProps): JSX.Element { // FIXME: extend with useItem
+export function Text(props: TextProps) { // FIXME: extend with useItem
   const {
-    v = 'body1',
+    v = 'body2',
     size = TEXT_SIZE_MAP[v],
     height,
     bold,
-    color,
+    color = 'primary',
     ellipsis,
     loading,
     format,
@@ -118,6 +118,7 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
 }
 
 Text.displayName = 'Text'
+
 
 export default react.attachOverrides(Text, {
   H1: { v: 'h1' },

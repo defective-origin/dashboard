@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import MuiModal from '@mui/material/Modal'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useEvent, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,15 +14,19 @@ import Button, { ButtonProps } from 'components/actions/Button'
 
 // ---| self |---
 import css from './Modal.module.scss'
-import { initModalKey, ModalName, ModalOptions } from './Modal.hook'
+import { initModalKey, ModalName } from './Modal.hooks'
 
-export type ModalProps<T = unknown> = ModalOptions<T> & {
+export type ModalPosition = 'center' | 'right'
+export type ModalProps = {
+  name?: ModalName
   open?: boolean
   icon?: IconVariant
   title?: React.ReactNode
+  position?: ModalPosition
   actions?: ButtonProps[] // TODO: types to actions?
   className?: string
   children?: React.ReactNode
+  onClose?: () => void
 }
 
 /**
@@ -36,26 +39,13 @@ export type ModalProps<T = unknown> = ModalOptions<T> & {
  *
  * How to use
  * @example
- * <Modal name='modal-name' v='right' payload='payload'>some content</Modal>
+ * <Modal name='modal-name' position='right'>some content</Modal>
  *
- * const modal = useModal({ name: 'modal-name', v: 'center' payload: 'payload override' })
+ * const modal = useModal({ name: 'modal-name', someField: 'override' })
  */
-export function Modal<T = unknown>(props: ModalProps<T>): JSX.Element {
-  const [details, setDetails] = useState<ModalOptions<T>>()
-  const { payload, icon, open, v = details?.v ?? 'center', name, title, actions, onClose, children, className, ...otherProps } = props
+export function Modal(props: ModalProps) {
+  const { icon, open, position = 'center', name, title, actions, onClose, children, className, ...otherProps } = props
   const _className = cn(css.Modal, className)
-
-  const close = useFunc(() => {
-    details?.onClose?.()
-    onClose?.()
-    setDetails(undefined)
-  })
-
-  useEvent(initModalKey(name), (e: CustomEvent<ModalOptions<T>>) => {
-    if (e.detail.name === name) {
-      setDetails(e.detail)
-    }
-  }, { disable: !name })
 
   // TODO: open modal by url (/url/:id?modal=name&arg1=123) useParams searchParams
 
@@ -67,20 +57,20 @@ export function Modal<T = unknown>(props: ModalProps<T>): JSX.Element {
         ?? document.getElementById(initModalKey('global'))
         ?? document.body
       }
-      open={!!open || !!details}
-      onClose={close}
+      open={!!open}
+      onClose={onClose}
       {...otherProps}
     >
-      <Card className={cn(css.Content, css[v])}>
+      <Card className={cn(css.Content, css[position])}>
         {(title || icon) && (
           <Card.Header
-            action={<Button start='close' onClick={close} />}
             title={
               <span style={{ display: 'flex', alignItems: 'center' }}>
                 {icon && <Icon v={icon} />}
                 {title}
               </span>
             }
+            action={<Button start='close' onClick={onClose} />}
           />
         )}
 
@@ -91,7 +81,7 @@ export function Modal<T = unknown>(props: ModalProps<T>): JSX.Element {
         </Card.Content>
 
         {!!actions?.length && (
-          <Card.Actions style={{ padding: 16 }}>
+          <Card.Actions>
             {actions.map((action, idx) => <Button key={idx} size='xxs' v='outlined' {...action} />)}
           </Card.Actions>
         )}
@@ -108,14 +98,10 @@ export type ModalContainerProps = {
   className?: string
 }
 
-export function ModalContainer(props: ModalContainerProps): JSX.Element {
+Modal.Container = function ModalContainer(props: ModalContainerProps) {
   const { name, ...otherProps } = props
 
   return <div id={initModalKey(name)} {...otherProps} />
 }
-
-ModalContainer.displayName = 'ModalContainer'
-
-Modal.Container = ModalContainer
 
 export default Modal

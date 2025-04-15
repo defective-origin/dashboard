@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import { COLORS, SIZES } from 'theme'
 import ReviewsModal, { ReviewsModalProps } from './ReviewsModal.component'
 
-const VARIANTS: ReviewsModalProps['v'][] = ['success', 'info', 'warning', 'error']
+const VARIANTS: ReviewsModalProps['position'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof ReviewsModal> = {
   component: ReviewsModal,

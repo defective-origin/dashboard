@@ -22,7 +22,7 @@ export type {{pascalCase name}}Props = {
  * @example
  * <{{pascalCase name}} />
  */
-export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Element {
+export function {{pascalCase name}}(props: {{pascalCase name}}Props) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.{{pascalCase name}}, className)
 
@@ -30,5 +30,6 @@ export function {{pascalCase name}}(props: {{pascalCase name}}Props): JSX.Elemen
 }
 
 {{pascalCase name}}.displayName = '{{pascalCase name}}'
+
 
 export default {{pascalCase name}}

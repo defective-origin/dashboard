@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import BannerPage from './BannerPage.component'
-// import useBannerPage from './BannerPage.hook'
+// import useBannerPage from './BannerPage.hooks'
 // import BannerPageProvider, BannerPage from './BannerPage.context'
 
 describe('[BannerPage] component', () => {

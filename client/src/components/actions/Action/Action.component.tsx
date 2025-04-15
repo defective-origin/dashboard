@@ -6,10 +6,10 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Popup, { PopupProps, PopupVariant } from 'components/popups/Popup'
+import Skeleton from 'components/views/Skeleton'
 import Icon, { IconVariant } from 'components/views/Icon'
 import Text, { TextProps, TextVariant } from 'components/views/Text'
-import Tooltip, { TooltipVariant } from 'components/popups/Tooltip'
-import Skeleton from 'components/views/Skeleton'
 
 // ---| self |---
 import './Action.module.scss'
@@ -28,14 +28,15 @@ export type ActionProps = Omit<TextProps, 'v'> & {
   textV?: TextVariant
   start?: IconVariant | Exclude<React.ReactNode, string>
   end?: IconVariant | Exclude<React.ReactNode, string>
-  tooltip?: React.ReactNode
-  tooltipSide?: TooltipVariant
+  tooltip?: React.ReactNode | PopupProps
+  tooltipSide?: PopupVariant
   active?: boolean
   as?: React.ElementType
   href?: string
   target?: React.HTMLAttributeAnchorTarget
   round?: boolean
   stretch?: boolean
+  disabled?: boolean
   /** remove paddings */
   clear?: boolean
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
@@ -49,7 +50,7 @@ export type ActionProps = Omit<TextProps, 'v'> & {
  * @example
  * <Action />
  */
-export const Action = (props: ActionProps): JSX.Element | null => {
+export const Action = (props: ActionProps) => {
   const {
     as = 'button',
     size = 'md',
@@ -61,6 +62,7 @@ export const Action = (props: ActionProps): JSX.Element | null => {
     end,
     round,
     color,
+    disabled,
     loading,
     tooltip,
     active,
@@ -77,7 +79,7 @@ export const Action = (props: ActionProps): JSX.Element | null => {
   const item = (
     <Tag
       className={_className}
-      disabled={loading}
+      disabled={disabled || loading}
       color={color}
       {...otherProps}
     >
@@ -104,7 +106,9 @@ export const Action = (props: ActionProps): JSX.Element | null => {
   )
 
   if (tooltip) {
-    return <Tooltip v={tooltipSide} content={tooltip}>{item}</Tooltip>
+    const popupProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
+
+    return <Popup v={tooltipSide} trigger={item} {...popupProps} />
   }
 
   return item

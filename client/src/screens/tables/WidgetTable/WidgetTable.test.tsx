@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import WidgetTable from './WidgetTable.component'
-// import useWidgetTable from './WidgetTable.hook'
+// import useWidgetTable from './WidgetTable.hooks'
 // import WidgetTableProvider, WidgetTable from './WidgetTable.context'
 
 describe('[WidgetTable] component', () => {

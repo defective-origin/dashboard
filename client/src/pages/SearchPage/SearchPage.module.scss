@@ -6,3 +6,26 @@
 
 .SearchPage {
 }
+
+.Search {
+  background: var(--card-background);
+
+  :global(.MuiInputBase-input) {
+    padding: 4px 8px;
+  }
+
+  :global(.MuiInputBase-adornedEnd) {
+    padding-right: 0;
+  }
+}
+
+.Filters {
+  button {
+    height: 31px;
+  }
+
+  button:first-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

@@ -1,14 +1,14 @@
-import defaultColumns, { TextColumn, textColumn } from 'components/views/Table/Table.tool'
-import Devices, { DeviceItems, DevicesProps } from 'screens/views/Devices'
+import defaultColumns, { TextColumn, textColumn } from 'components/views/Table/Table.tools'
 import Clipboard, { ClipboardProps } from 'components/actions/Clipboard'
 import { TableColumn, TableRecord } from 'components/views/Table'
 import User, { UserProps } from 'screens/views/User'
+import { Markup, MarkupListProps } from 'screens/views/MarkupMenu'
 
 export type ClipboardColumnOptions = Pick<ClipboardProps, 'content'>
 export type ClipboardColumn<T extends TableRecord,> = TableColumn<T, ClipboardProps> & ClipboardColumnOptions
 
 export const clipboardColumn = <T extends TableRecord>(column: ClipboardColumn<T>): ClipboardColumn<T> => ({
-  width: 56,
+  width: 30,
   align: 'center',
   cell: Clipboard,
   mapper: (_, __, content) => ({ content }),
@@ -34,14 +34,14 @@ export const AttachColumn = <T extends TableRecord>(column: TextColumn<T>): Text
 })
 
 
-export type DevicesColumnOptions = Pick<DevicesProps, 'items'>
-export type DevicesColumn<T extends TableRecord,> = TableColumn<T, DevicesProps> & DevicesColumnOptions
+export type MarkupsColumnOptions = Pick<MarkupListProps, 'items'>
+export type MarkupsColumn<T extends TableRecord,> = TableColumn<T, MarkupListProps> & MarkupsColumnOptions
 
-export const devicesColumn = <T extends TableRecord>(column: DevicesColumn<T>): DevicesColumn<T> => ({
+export const markupsColumn = <T extends TableRecord>(column: MarkupsColumn<T>): MarkupsColumn<T> => ({
   minWidth: 170,
   align: 'center',
-  cell: Devices,
-  sort: (_, __, value: DeviceItems) => Object.values(value).filter(device => device.active).length,
+  cell: Markup.List,
+  sort: (_, __, value: number[]) => value.length,
   mapper: (_, __, items) => ({ items, margin: 'auto' }),
   ...column,
 })
@@ -61,6 +61,6 @@ export default {
   ...defaultColumns,
   user: userColumn,
   attach: AttachColumn,
-  devices: devicesColumn,
+  markups: markupsColumn,
   clipboard: clipboardColumn,
 }

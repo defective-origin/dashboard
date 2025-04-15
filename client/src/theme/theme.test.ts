@@ -1,16 +1,16 @@
 // ---| self |---
-import * as tools from './theme.tool'
+import * as tools from './theme.tools'
 
 
-describe('[Theme] tool', () => {
-  describe('[px] action', () => {
+describe('[Theme] tools', () => {
+  describe('[px] func', () => {
     it('should return converted value with px postfix', () => {
       expect(tools.px(10)).toEqual('10px')
       expect(tools.px('10')).toEqual('10px')
     })
   })
 
-  describe('[toVariable] action', () => {
+  describe('[toVariable] func', () => {
     it('should return converted value to css variable', () => {
       expect(tools.toVariable('name')).toEqual('var(--name)')
     })
@@ -19,7 +19,7 @@ describe('[Theme] tool', () => {
     })
   })
 
-  describe('[toSpace] action', () => {
+  describe('[toSpace] func', () => {
     it('should return converted value', () => {
       expect(tools.toSpace('xl')).toEqual('var(--space-size--xl)')
       expect(tools.toSpace('xl xl xl xl')).toEqual('var(--space-size--xl) var(--space-size--xl) var(--space-size--xl) var(--space-size--xl)')

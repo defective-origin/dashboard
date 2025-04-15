@@ -2,7 +2,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import scrollBar from './UseScrollBar.hook'
+import scrollBar from './UseScrollBar.hooks'
 
 
 describe('[scrollBar] hook', () => {

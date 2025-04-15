@@ -3,8 +3,8 @@ import { Widget, WidgetModel, PATHNAME } from './Widget.model'
 
 
 let savedRecord: Widget
-const MOCK_OPERATION_RECORD = { name: 'OPERATION_NAME', view: { id: new mongoose.Types.ObjectId(1).toString() } }
-const MOCK_SAVED_RECORD = { name: 'SAVED_NAME', view: { id: new mongoose.Types.ObjectId(2).toString() } }
+const MOCK_OPERATION_RECORD = { name: 'OPERATION_NAME', parent: { id: new mongoose.Types.ObjectId(1).toString() } }
+const MOCK_SAVED_RECORD = { name: 'SAVED_NAME', parent: { id: new mongoose.Types.ObjectId(2).toString() } }
 const MOCK_SAVED_RECORDS = [MOCK_SAVED_RECORD]
 
 describe(`[${PATHNAME}] api`, () => {

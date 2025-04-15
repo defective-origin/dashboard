@@ -47,7 +47,7 @@ export type RepeatProps<
  * Build array with rendered components in it.
  * @example
  * // Render items with one component type
- * function Item({ content }): JSX.Element {
+ * function Item({ content }) {
  *   return <p className='item'>{content}</p>
  * }
  *
@@ -103,7 +103,7 @@ export type RepeatProps<
 export function Repeat<
   RC extends RepeatComponent<any>,
   RI extends RepeatItem<RC>,
->(props: RepeatProps<RC, RI>): (JSX.Element | null)[] | null {
+>(props: RepeatProps<RC, RI>) {
   const { variant: v, cmp, items = [], keygen, selectProps, ...sharedProps } = props
 
   if (!cmp || !items.length) {

@@ -1,8 +1,8 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './Number.tool'
+export { default } from './Number.tools'
 
 /* INJECT_EXPORT_PLACE */
-export * from './Number.tool'
-export * from './Number.constant'
+export * from './Number.tools'
+export * from './Number.constants'

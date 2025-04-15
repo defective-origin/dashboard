@@ -5,7 +5,7 @@ import useElement, { ElementRef } from '../../dom/UseElement'
 export const getBreakpoint = <B extends Breakpoint>(breakpoints: B[], direction?: BreakpointDirection, element?: Element | null) => {
   const size = direction === 'y' ? element?.clientHeight : element?.clientWidth
 
-  return breakpoints.find((breakpoint) => !size || size <= breakpoint.size) as B
+  return breakpoints.find(breakpoint => !size || size <= breakpoint.size) as B
 }
 
 export type BreakpointDirection = 'x' | 'y'

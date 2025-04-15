@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Text, { TextProps } from './Text.component'
 import Block from 'components/layouts/Block'
 import { COLORS, SIZES } from 'theme'
-import Specs from 'components/views/Specs'
+import Spec from 'components/views/Spec'
 
 const ALIGNMENTS: TextProps['align'][] = ['right', 'center', 'left']
 const VARIANTS: TextProps['v'][] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'button', 'caption', 'overline']
@@ -87,9 +87,9 @@ export const Formats: Story = {
       ].map(([name, value, variants], idx) => (
         <Block key={idx}>
           <Text.H5 size='md' content={name} />
-          <Specs>
-            {(variants as never[]).map((item) =>
-              <Specs.Item
+          <Block v='y'>
+            {(variants as never[]).map(item =>
+              <Spec
                 key={item}
                 name={item ?? 'with placeholder'}
                 content={item && value}
@@ -98,7 +98,7 @@ export const Formats: Story = {
                 placeholder
               />,
             )}
-          </Specs>
+          </Block>
         </Block>
       ))}
     </Block>

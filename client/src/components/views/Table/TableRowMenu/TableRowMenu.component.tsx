@@ -11,7 +11,7 @@ import Menu, { MenuItem, MenuProps } from 'components/actions/Menu'
 
 // ---| self |---
 import css from './TableRowMenu.module.scss'
-import { TableColumn, TableRecord } from '../Table.type'
+import { TableColumn, TableRecord } from '../Table.types'
 
 export type TableRowMenuItem = MenuItem
 export type TableRowMenuProps<T extends TableRecord> = Omit<MenuProps, 'trigger'> & {
@@ -26,7 +26,7 @@ export type TableRowMenuProps<T extends TableRecord> = Omit<MenuProps, 'trigger'
  * @example
  * <TableRowMenu />
  */
-export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>): JSX.Element {
+export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>) {
   const { record, column, items, className, ...otherProps } = props
   const _className = cn(css.TableRowMenu, className)
 
@@ -35,7 +35,7 @@ export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>)
       v='left'
       items={items}
       className={_className}
-      trigger={(o) => <Button start='more_vert' active={o.open} clear />}
+      trigger={o => <Button start='more_vert' active={o.isOn} clear />}
       {...otherProps}
     />
   )

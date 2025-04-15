@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import DashboardTable from './DashboardTable.component'
-// import useDashboardTable from './DashboardTable.hook'
+// import useDashboardTable from './DashboardTable.hooks'
 // import DashboardTableProvider, DashboardTable from './DashboardTable.context'
 
 describe('[DashboardTable] component', () => {

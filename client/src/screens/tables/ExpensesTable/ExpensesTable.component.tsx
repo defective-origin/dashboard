@@ -11,7 +11,7 @@ import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
 import css from './ExpensesTable.module.scss'
-import { EXPENSE_COLUMNS } from './ExpensesTable.constant'
+import { EXPENSE_COLUMNS } from './ExpensesTable.constants'
 
 export type ExpensesTableProps = TableProps<Expense> & {
   type?: ExpenseType
@@ -24,7 +24,7 @@ export type ExpensesTableProps = TableProps<Expense> & {
  * @example
  * <ExpensesTable />
  */
-export function ExpensesTable(props: ExpensesTableProps): JSX.Element {
+export function ExpensesTable(props: ExpensesTableProps) {
   const { type, children, className, ...otherProps } = props
   const _className = cn(css.ExpensesTable, className)
   const response = useExpenses(type)
