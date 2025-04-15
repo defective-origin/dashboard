@@ -23,18 +23,22 @@ export type SupportTableProps = TableProps<SupportRequest>
  * @example
  * <SupportTable />
  */
-export function SupportTable(props: SupportTableProps): JSX.Element {
+export function SupportTable(props: SupportTableProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.SupportTable, className)
-  const dashboards = useSupportRequests()
+  const requests = useSupportRequests()
 
   return (
     <Table
       title={t('LABEL.REQUESTS')}
       className={_className}
       columns={SUPPORT_COLUMNS}
-      items={dashboards.data}
-      loading={dashboards.isLoading}
+      items={requests.data}
+      loading={requests.isLoading}
+      menu={[
+        { start: 'refresh', tooltip: 'Refresh', onClick: () => requests.refetch() },
+        { start: 'add', tooltip: 'Add Request' },
+      ]}
       pagination
       {...otherProps}
     >

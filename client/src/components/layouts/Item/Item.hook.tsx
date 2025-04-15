@@ -1,14 +1,14 @@
 import React from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, obj } from 'tools'
 import { Color, Size } from 'theme'
 
 // ---| self |---
 import './Item.module.scss'
 
-export type ItemSpace = Size
-export type ItemColor = Color
+export type ItemSpace = Size | 'none'
+export type ItemColor = Color | 'none'
 export type ItemArea = 'left' | 'right' | 'top' | 'bottom' | 'center'
 
 export type ItemOptions = {
@@ -39,6 +39,12 @@ export type ItemOptions = {
   position?: React.CSSProperties['position']
   color?: React.CSSProperties['color']
 
+  top?: React.CSSProperties['top']
+  bottom?: React.CSSProperties['bottom']
+  left?: React.CSSProperties['left']
+  right?: React.CSSProperties['right']
+
+  visible?: boolean
 
   column?: string
   row?: string
@@ -70,6 +76,7 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
     column,
     row,
     span,
+    visible = true,
     color,
     position,
     display,
@@ -87,6 +94,7 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
     grow, shrink, basis,
     minWidth, width, maxWidth,
     minHeight, height, maxHeight,
+    top, bottom, left, right,
     children,
     className,
     style,
@@ -102,10 +110,11 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
       [`p--${p}`]: p,
       [`m--${m}`]: m,
       [`g--${g}`]: g,
+      invisible: !visible,
       stretch,
       fit,
     }, className),
-    style: {
+    style: obj.clear({
       order,
       gridArea: area,
       alignSelf: align,
@@ -116,6 +125,7 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
       margin, padding, gap,
       minWidth, width, maxWidth,
       minHeight, height, maxHeight,
+      top, bottom, left, right,
       background,
       border,
       display,
@@ -135,7 +145,7 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
       // column-gap
 
       ...style,
-    },
+    }),
   } as ItemReturnOptions<O>
 }
 

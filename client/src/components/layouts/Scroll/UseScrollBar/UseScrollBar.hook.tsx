@@ -51,9 +51,9 @@ export type ScrollBarOptions = ScrollOptions & {
 export type ScrollBarReturnOptions = null | {
   display: (isMouseInside?: boolean) => void
   refresh: (_container?: number, _content?: number, shift?: number) => void
-  shadows: JSX.Element
-  element: JSX.Element
-  button: JSX.Element
+  shadows
+  element
+  button
 }
 
 /**
@@ -77,7 +77,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     container,
   } = options
   const containerRef = useElement(container)
-  const optionsRef = useRef<SizeOptions>()
+  const optionsRef = useRef<SizeOptions>(null)
   const startMovePos = useRef<ScrollShift | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const thumbRef = useRef<HTMLDivElement>(null)
@@ -110,7 +110,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     }
   })
 
-  const display = useFunc((ref: React.RefObject<HTMLDivElement>, isVisible: unknown = true) => {
+  const display = useFunc((ref: React.RefObject<HTMLDivElement | null>, isVisible: unknown = true) => {
     const state = isVisible ? 'visible' : 'hidden'
 
     obj.set(ref.current?.style, property.visibility, state)
@@ -147,7 +147,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
 
     // show scroll side shadow
     display(shadowStartRef, position)
-    display(shadowEndRef, position + container - content)
+    display(shadowEndRef, position + container + 1 >= content)
   })
 
   const endMove = useFunc((event: MouseEvent) => {

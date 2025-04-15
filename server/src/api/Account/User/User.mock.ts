@@ -12,4 +12,6 @@ export default Array.from({length: 10}, (_, i): User => ({
     language: 'en',
     theme: i % 2 ? 'LIGHT' : 'DARK',
   },
+  staff: [],
+  bookmarks: [],
 }))

@@ -37,7 +37,7 @@ export type BannerProps = {
   text?: React.ReactNode
   absolute?: boolean
   loading?: boolean
-  show?: boolean
+  visible?: boolean
   v?: BannerVariant
   // TODO: add size
 }
@@ -52,16 +52,16 @@ export type BannerProps = {
  *  title='Something happened'
  *  text='description'
  *  loading={isDataLoading}
- *  show={!data}
+ *  visible={!data}
  * >
  *  Additional information
  * </Banner>
  */
-export function Banner(props: BannerProps): JSX.Element | null {
+export function Banner(props: BannerProps) {
   const {
     v = 'empty',
     loading,
-    show = true,
+    visible = true,
     title,
     subtitle,
     text,
@@ -74,13 +74,13 @@ export function Banner(props: BannerProps): JSX.Element | null {
   const _className = cn(css.Banner, { [css.Absolute]: absolute }, className)
   const options = BANNER_OPTION_MAP[v]
 
-  if (!show && !loading) {
+  if (!visible && !loading) {
     return null
   }
 
   return (
     <Block className={_className} stretch {...otherProps}>
-      <Progress className={css.Progress} show={loading} />
+      <Progress className={css.Progress} visible={loading} />
 
       {!loading && (
         <Block className={cn(css.Content, contentClassName)}>

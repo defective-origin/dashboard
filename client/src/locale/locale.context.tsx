@@ -13,7 +13,7 @@ export type LocaleProviderProps = React.PropsWithChildren & Partial<I18nextProvi
  * @example
  * <LocaleProvider defaultProp={1} />
  */
-export function LocaleProvider(props: LocaleProviderProps): JSX.Element {
+export function LocaleProvider(props: LocaleProviderProps) {
   return <I18nextProvider i18n={i18next} {...props} />
 }
 

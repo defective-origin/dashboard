@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 // ---| core |---
 import { useEvent, useFunc } from 'hooks'
@@ -8,52 +8,30 @@ import { useEvent, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 
-export type ModalVariant = 'center' | 'right'
-export type ModalName = 'global' | 'board-settings' | 'widget-settings' | 'widget-view-settings' | 'feature-review'
+export type ModalName = 'global' | 'feature-review' | 'confirm'
 
-export type ModalOptions<T = unknown> = {
-  /** position */
-  v?: ModalVariant
+export type ModalDetails = {
   /** insert to named container and open this modal by name */
-  name?: ModalName
-  payload?: T
-  onClose?: () => void
+  name: ModalName // TODO: d.ts extend interface depends on name
 }
 
-export const initModalKey = (name: ModalName = 'global') => `modal-${name}` as const
-
-export type ModalReturnOptions = (options: ModalOptions) => void
-
-/**
- * Hook descriptions
- *
- * @example
- * const modal = useModal({ name: 'modal-name', v: 'center' payload: 'payload override' })
- */
-
-export const useModal = (defaultOptions?: ModalOptions): ModalReturnOptions => {
-  // TODO: return promise with action type?
-  return useFunc((options: ModalOptions) => {
-    const detail = { ...defaultOptions, ...options }
-    const modalName = initModalKey(detail.name)
-    const event = new CustomEvent<ModalOptions>(modalName, { detail })
-
-    document.body.dispatchEvent(event)
-  })
-}
-
-export default useModal
+export const initModalKey = (name: ModalName = 'global') => `modal:${name}`
 
 
-/** Returns modal payload when modal is called */
-export const useModalPayload = <T>(name?: ModalName) => {
+/** Returns modal details when modal is called */
+export const useModal = <T extends ModalDetails>(name?: ModalName) => {
   const [options, setOptions] = useState<T>()
 
-  useEvent(initModalKey(name), (e: CustomEvent<ModalOptions<T>>) => {
+  const onClose = useFunc(() => setOptions(undefined))
+
+  // listen to open modal event
+  useEvent(initModalKey(name), (e: CustomEvent<T>) => {
     if (e.detail.name === name) {
-      setOptions(e.detail.payload)
+      setOptions(e.detail)
     }
   }, { disable: !name })
 
-  return options
+  return useMemo(() => ({ ...options as Partial<T>, open: !!options, onClose }), [onClose, options])
 }
+
+export default useModal

@@ -14,31 +14,35 @@ export default Array.from({length: 10}, (_, i): Feature => ({
     content: 'content '.repeat(50),
   })),
   options: {
-    theme: 'light',
-    language: 'en',
-    service: {
-      url: '{{API}}/api/items',
-      headers: {
-        Authorization: 'Bearer {{ACCESS_TOKEN}}',
-      },
-    },
-    mapper: {
-      'a.b': 'a.c.d',
-      'b[0]': 'b',
-    },
-    styles: {
+    theme: '{{global.theme}}',
+    language: '{{global.lang}}',
+    ...[
+      {
+        // // default
+        // __value: 'value',
+        // __onChange: 'onChange',
+        value: 'range',
+      }, {
+        __value: 'filters',
+        __onChange: 'onFiltersChange',
+        filters: {
+          from: 'range.from',
+          to: 'range.to',
+        },
+      }
+    ][i % 2],
+    prop1: '{{state.range.from}}',
+    prop2: '{{state.tags[0]}}',
+    style: {
       border: '{{BORDER}}',
       background: 'gray',
     },
-    filters: {
-      range: {
-        from: '2011-10-05T14:48:00.000Z',
-        to: '2011-10-05T14:48:00.000Z',
+    service: {
+      url: '{{env.api}}/api/items',
+      interval: 1000,
+      headers: {
+        Authorization: 'Bearer {{ACCESS_TOKEN}}',
       },
-      search: "search string",
-      tags: ['a', 'b', 'c'],
-      sort: true,
-      count: 25
     },
   },
 }))

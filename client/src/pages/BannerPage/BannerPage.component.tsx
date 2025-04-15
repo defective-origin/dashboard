@@ -6,7 +6,6 @@ import { cn } from 'tools'
 
 // ---| pages |---
 import Page from 'pages/Page'
-
 // ---| screens |---
 // ---| components |---
 import Banner, { BannerVariant } from 'components/views/Banner'
@@ -42,7 +41,7 @@ export type BannerPageProps = {
  * @example
  * <BannerPage />
  */
-export function BannerPage(props: BannerPageProps): JSX.Element {
+export function BannerPage(props: BannerPageProps) {
   const { v = 'empty', children, className, ...otherProps } = props
   const _className = cn(css.BannerPage, className)
   const status = BANNER_PAGE_MAP[v]

@@ -28,12 +28,12 @@ export type LabelProps = BlockProps & {
  * @example
  * <Label />
  */
-export function Label(props: LabelProps): JSX.Element {
-  const { tooltip, content, format, icon, className, ...otherProps } = props
+export function Label(props: LabelProps) {
+  const { tooltip, content, children, format, icon, className, ...otherProps } = props
   const _className = cn(css.Label, className)
   const item = (
     <Block className={_className} v='x' g='xxs' aligns='center' {...otherProps}>
-      <Icon v={icon} size='xs' /> <Text v='body2' size='xxs' content={content} format={format} />
+      <Icon v={icon} size='xs' /> {children ? children : <Text v='body2' size='xxs' content={content} format={format} />}
     </Block>
   )
 

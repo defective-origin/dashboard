@@ -52,7 +52,7 @@ export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
  *   <Scroll v={scroll} actions visible />
  * </div>
  */
-export function Scroll(props: ScrollProps): JSX.Element | null {
+export function Scroll(props: ScrollProps) {
   const {
     v = 'y',
     back,
@@ -90,6 +90,7 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
 
     // move overlay block
     if (overlayRef.current) {
+      // TODO: use sticky instead
       overlayRef.current.style.left = px(parent.scrollLeft)
       overlayRef.current.style.top = px(parent.scrollTop + top)
       overlayRef.current.style.height = px(parent.offsetHeight - top)

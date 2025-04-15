@@ -23,7 +23,7 @@ export type LinkProps = ActionProps & {
  * @example
  * <Link />
  */
-export function Link(props: LinkProps): JSX.Element {
+export function Link(props: LinkProps) {
   const { end, href, target, withIcon, className, ...otherProps } = props
   const _className = cn(css.Link, className)
   const isOpenInNewTab = isNewTabLink(href, target)

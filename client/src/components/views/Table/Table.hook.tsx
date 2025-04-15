@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 // ---| core |---
 import { obj, arr } from 'tools'
 
 // ---| self |---
 import { TableColumn, TableFilter, TableOrder, TableRecord, TableSort } from './Table.type'
-import { TablePaginationOptions, useTablePagination } from './TablePagination'
 import TableRowMenu, { TableRowMenuItem } from './TableRowMenu'
 
 const ORDER_NEXT_MAP: Record<TableOrder | 'undefined', TableOrder | undefined> = {
@@ -18,7 +17,6 @@ export type TableManagerOptions<T extends TableRecord> = {
   items?: T[]
   columns?: TableColumn<T>[]
   filters?: TableFilter<T>[]
-  pagination?: boolean | TablePaginationOptions
   actions?: TableRowMenuItem[]
 }
 
@@ -26,19 +24,15 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
   const preparedItems = useRef<T[]>([])
   const [items, setItems] = useState<T[]>([])
   const [columns, setColumns] = useState<TableColumn<T>[]>([])
-  const paginationManager = useTablePagination({
-    count: items?.length,
-    ...typeof options.pagination === 'object' ? options.pagination : {},
-  })
 
   // setup columns
   useLayoutEffect(() => {
     // add actions
-    if (options.actions && !options.columns?.find((c) => c.key === 'actions')) {
+    if (options.actions && !options.columns?.find(c => c.key === 'actions')) {
       options.columns?.push({
         key: 'actions',
         align: 'center',
-        width: 56,
+        width: 33,
         fixed: true,
         cell: TableRowMenu,
         props: { padding: 0 },
@@ -47,7 +41,7 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
     }
 
     // setup left and right position for fixed columns
-    const fixedColumns = options.columns?.filter((column) => column.fixed) ?? []
+    const fixedColumns = options.columns?.filter(column => column.fixed) ?? []
 
     for (let i = 0, left = 0, right = 0; i < fixedColumns.length; i++) {
       const leftColumn = fixedColumns[i]
@@ -109,7 +103,7 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
       }
     })
 
-    setColumns(options.columns?.map((column) => ({ ...column })) ?? [])
+    setColumns(options.columns?.map(column => ({ ...column })) ?? [])
   }, [options.actions, options.columns])
 
 
@@ -117,24 +111,22 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
   useEffect(() => {
     // filter items
     preparedItems.current = options.filters?.length
-      ? options.items?.filter((item) => options.filters?.every((filter) => filter(item))) ?? []
+      ? options.items?.filter(item => options.filters?.every(filter => filter(item))) ?? []
       : options.items ?? []
 
     setItems(preparedItems.current)
   }, [options.filters, options.items])
 
 
-  const sortItems = useCallback((column: TableColumn<T>) => {
+  const sort = useCallback((column: TableColumn<T>) => {
     const order = ORDER_NEXT_MAP[column.order as TableOrder]
     const selector = (item: T) => (column.sort as TableSort<T>)(item, column, obj.get(item, column.sortBy))
     const sortedItems = order
       ? arr.sort(preparedItems.current, order, selector)
       : preparedItems.current
 
-
-
     setItems(sortedItems)
-    setColumns((columns) => columns.map((c) => {
+    setColumns(columns => columns.map(c => {
       if (column.key === c.key) {
         return { ...c, order }
       } else if (c.order) {
@@ -145,12 +137,5 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
     }))
   }, [])
 
-  const pageItems = useMemo(() => {
-    const start = paginationManager.page * paginationManager.rowsPerPage
-    const end = start + paginationManager.rowsPerPage
-
-    return items.slice(start, end)
-  }, [items, paginationManager.page, paginationManager.rowsPerPage])
-
-  return { columns, items, pageItems, sort: sortItems, pagination: paginationManager }
+  return { columns, items, sort }
 }

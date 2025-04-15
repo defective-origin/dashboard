@@ -17,7 +17,7 @@ export type ItemProps<E extends React.ElementType = React.ElementType> = react.C
  * @example
  * <Item />
  */
-export const Item = <E extends React.ElementType = 'div',>(props: ItemProps<E>): JSX.Element | null => {
+export const Item = <E extends React.ElementType = 'div',>(props: ItemProps<E>) => {
   const { as: Tag = 'div', ...itemProps } = useItem(props)
 
   return <Tag {...itemProps} />

@@ -24,4 +24,8 @@
   .stretch { @include stretch; }
 
   .fit { width: fit-content; height: fit-content; }
+
+  .item.invisible {
+    display: none;
+  }
 }

@@ -6,12 +6,12 @@ import { cn, react } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockProps } from 'components/layouts/Block'
+import Layout, { LayoutProps } from 'components/layouts/Layout'
 
 // ---| self |---
 import css from './Aside.module.scss'
 
-export type AsideProps = BlockProps
+export type AsideProps = LayoutProps
 
 /**
  * Component description.
@@ -20,11 +20,11 @@ export type AsideProps = BlockProps
  * @example
  * <Aside />
  */
-export function Aside(props: AsideProps): JSX.Element {
+export function Aside(props: AsideProps) {
   const { area = 'left', children, className, ...otherProps } = props
   const _className = cn(css.Aside, className)
 
-  return <Block className={_className} area={area} {...otherProps}>{children}</Block>
+  return <Layout className={_className} area={area} v='y' {...otherProps}>{children}</Layout>
 }
 
 Aside.displayName = 'Aside'

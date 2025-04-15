@@ -21,7 +21,7 @@ export type BlockProps<E extends React.ElementType = React.ElementType> = react.
  * @example
  * <Block g='md' p='md' v="xy" />
  */
-export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>): JSX.Element | null {
+export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>) {
   const { as: Tag = 'div', ...blockProps } = useBlock(props)
 
   return <Tag {...blockProps} />

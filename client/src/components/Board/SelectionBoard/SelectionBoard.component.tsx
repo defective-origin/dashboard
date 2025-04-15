@@ -54,7 +54,7 @@ export type SelectionBoardProps<I extends Record<string, unknown>> = {
  *   { text: 'text', placement: { v1: { x: 6, y: 6 }, v2: { x: 9, y: 9 } } },
  * ]
  *
- * export default function App(): JSX.Element {
+ * export default function App() {
  *   const [items, setItems] = useState(cards)
  *   const handleError = (error: Error) => { console.log('handleError', error) }
  *   const handleSelect = (item: BoardItem) => { setItems([...items, item]) }
@@ -78,7 +78,7 @@ export type SelectionBoardProps<I extends Record<string, unknown>> = {
  *   )
  * }
  */
-export function SelectionBoard<I extends Record<string, unknown>>(props: SelectionBoardProps<I>): JSX.Element {
+export function SelectionBoard<I extends Record<string, unknown>>(props: SelectionBoardProps<I>) {
   const {
     items,
     select,
@@ -86,7 +86,7 @@ export function SelectionBoard<I extends Record<string, unknown>>(props: Selecti
     columns,
     rows,
     placeKey = '',
-    padding = 0,
+    padding = 2,
     gap = 0,
     className,
     onSelect,

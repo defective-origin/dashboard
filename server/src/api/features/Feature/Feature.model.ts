@@ -74,3 +74,7 @@ FeatureSchema.virtual('rate').get(function() {
   return this.reviews.reduce((sum, review) => sum + review.rate, 0) / this.reviews.length
 })
 
+FeatureSchema.virtual('snapshot').get(function() {
+  return `images/snapshots/${this.id}`
+})
+

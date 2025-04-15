@@ -24,9 +24,16 @@ export type AppProps = LayoutProps
  * @example
  * <App />
  */
-export function App(props: AppProps): JSX.Element {
+export function App(props: AppProps) {
   const { children, className, ...otherProps } = props
   const _className = cn('app', className)
+
+  // TODO: change and load account theme
+  // // update account theme on app theme change
+  // useEffect(() => account.update({ user: { settings: { theme: theme.current.toUpperCase() } } }), [theme])
+
+  // update app theme on account load
+  // useEffect(() => theme.set(account.user?.settings.theme.toLowerCase()), [account])
 
   return (
     <Layout className={_className} stretch v='left' {...otherProps}>

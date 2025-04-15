@@ -26,7 +26,7 @@ export type TableHeadProps<T extends TableRecord> = {
  * @example
  * <TableHead />
  */
-export function TableHead<T extends TableRecord>(props: TableHeadProps<T>): JSX.Element {
+export function TableHead<T extends TableRecord>(props: TableHeadProps<T>) {
   const { onSort, columns, className, ...otherProps } = props
   const _className = cn(css.TableHead, className)
   const style: React.CSSProperties = {

@@ -1,32 +1,32 @@
 import mongoose from 'mongoose'
-import { ref, Ref } from '@services/Database'
+import { ref, Ref, refs } from '@services/Database'
 import { Feature, FeatureSchema } from '../Feature'
 import { Widget } from '../Widget'
 
 export const PATHNAME = 'boards'
 
 
-export type BoardCoordinate = {
+export type BoardMarkupCoordinate = {
   x: number
   y: number
 }
 
-export const BoardCoordinateSchema = new mongoose.Schema<BoardCoordinate>({
+export const BoardMarkupCoordinateSchema = new mongoose.Schema<BoardMarkupCoordinate>({
   x: { type: Number, default: 0 },
   y: { type: Number, default: 0 },
 }, { _id : false })
 
-export type BoardItem = {
+export type BoardMarkupItem = {
   id: string
   widget: Ref<Widget>
-  v1: BoardCoordinate
-  v2: BoardCoordinate
+  v1: BoardMarkupCoordinate
+  v2: BoardMarkupCoordinate
 }
 
-export const BoardItemSchema = new mongoose.Schema<BoardItem>({
+export const BoardMarkupItemSchema = new mongoose.Schema<BoardMarkupItem>({
   widget: ref('widgets'),
-  v1: { type: BoardCoordinateSchema, required: true },
-  v2: { type: BoardCoordinateSchema, required: true },
+  v1: { type: BoardMarkupCoordinateSchema, required: true },
+  v2: { type: BoardMarkupCoordinateSchema, required: true },
 })
 
 export type BoardMarkupDevice = 'BOARD' | 'TV' | 'COMPUTER' | 'LAPTOP' | 'TABLET' | 'MOBILE' | 'WATCH'
@@ -38,7 +38,7 @@ export type BoardMarkup = {
   rows: number
   columns: number
   device: BoardMarkupDevice
-  items: BoardItem[]
+  items: BoardMarkupItem[]
 }
 
 export const BoardMarkupSchema = new mongoose.Schema<BoardMarkup>({
@@ -47,15 +47,16 @@ export const BoardMarkupSchema = new mongoose.Schema<BoardMarkup>({
   rows: { type: Number, default: 0 },
   columns: { type: Number, default: 0 },
   device: { type: String, enum: ['BOARD', 'TV', 'COMPUTER', 'LAPTOP', 'TABLET', 'MOBILE', 'WATCH'] },
-  items: { type: [BoardItemSchema], default: [] },
+  items: { type: [BoardMarkupItemSchema], default: [] },
 })
 
 export type Board = Feature & {
+  widgets: Ref<Feature>[]
   markups: BoardMarkup[]
-  // TODO: widgets[] or view Id
 }
 
 export const BoardSchema = new mongoose.Schema<Board>({
+  widgets: refs(),
   markups: { type: [BoardMarkupSchema], default: [] },
 }).add(FeatureSchema)
 

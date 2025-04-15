@@ -34,20 +34,6 @@
       "SUBTITLE": "Looks like we are having some issues. We'll get it fixed as soon as possible. Please try again later."
     }
   },
-  "PAGES": {
-    "APP": "App",
-    "STATUS": "Status",
-    "DASHBOARDS": "Dashboards",
-    "WIDGETS": "Widgets",
-    "WIDGET_VIEWS": "Widgets views",
-    "SUPPORT": "Support",
-    "GUIDE": "Guide",
-    "DONATION": "Donation",
-    "ACCOUNT": "Account"
-  },
-  "SYSTEM": {
-    "TAB_NAME": "{{title}} Page"
-  },
   "ACTION": {
     "LOGIN": "Login",
     "LOGOUT": "Logout",
@@ -62,6 +48,7 @@
     "ADD_TO_MENU": "Add to menu",
     "ADD_BOOKMARK": "Add bookmark",
     "ADD_TOPIC": "Add topic",
+    "CREATE_CLONE": "Create clone",
     "REMOVE_BOOKMARK": "Remove bookmark",
     "CLEAR": "Clear",
     "INSTALL": "Install",
@@ -70,7 +57,13 @@
     "FIT_SCREEN": "Fit screen",
     "EXPANDABLE": "Expandable",
     "PAY": "Pay",
-    "REVIEWS": "Reviews"
+    "SHOW_REVIEWS": "Show reviews",
+    "SHOW_INFO": "Show information",
+    "SHOW_PREVIEW": "Show preview",
+    "CONFIRM_OPERATION": "Confirm operation",
+    "OPEN_WIDGET": "Open widget",
+    "SAVE": "Save",
+    "UPDATE_SNAPSHOT": "Update snapshot"
   },
   "DEVICE": {
     "BOARD": "Board",
@@ -81,32 +74,31 @@
     "MOBILE": "Mobile",
     "WATCH": "Watch"
   },
-  "GROUPS": {
-    "DISPLAY": "Display",
-    "HELP": "Help",
-    "SYSTEM": "System"
-  },
-  "ROUTE": {
-    "BOARDS": "Boards",
-    "WIDGETS": "Widgets",
-    "WIDGET_VIEWS": "Widget views",
-    "GUIDE": "Guide",
-    "DONATION": "Donation",
-    "SUPPORT": "Support",
-    "ACCOUNT": "Account"
-  },
-  "MESSAGES": {
-    "UNDER_CONSTRUCTION": "{{name}} is under construction.",
-    "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
-  },
   "LABEL": {
     "PAYMENTS": "Payments",
     "REQUESTS": "Requests",
-    "USAGE": "Usage: {{count}}"
-  },
-  "FORM": {
-    "BOARD_SETTINGS": "Dashboard settings",
-    "WIDGET_SETTINGS": "Widget settings"
+    "USAGE": "Usage: {{count}}",
+    "PAGE_NAME": "{{title}} Page",
+    "PRIVATE": "Private",
+    "PUBLIC": "Public",
+    "APP": "App",
+    "STATUS": "Status",
+    "DASHBOARDS": "Dashboards",
+    "WIDGETS": "Widgets",
+    "SUPPORT": "Support",
+    "GUIDE": "Guide",
+    "DONATIONS": "Donations",
+    "DONATION": "Donation",
+    "ACCOUNT": "Account",
+    "BOARDS": "Boards",
+    "ROWS_PER_PAGE": "Rows per page",
+    "PAGES": "Pages",
+    "ALL": "All",
+    "PAID": "Paid",
+    "PERSONAL": "Personal",
+    "BOOKMARKS": "Bookmarks",
+    "REVIEWS" : "Reviews",
+    "LAST_UPDATE" : "Last update"
   },
   "FIELD": {
     "ID": "Id",
@@ -118,13 +110,14 @@
     "ACCESS": "Access",
     "AUTHOR": "Author",
     "OPTIONS": "Options",
-    "VERSION": "Version",
     "CONTENT": "Content",
     "DESCRIPTION": "Description",
     "LAST_UPDATE": "Last update"
   },
-  "ACCESS": {
-    "PRIVATE": "Private",
-    "PUBLIC": "Public"
+  "MESSAGE": {
+    "UNDER_CONSTRUCTION": "{{name}} is under construction.",
+    "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved.",
+    "REMOVE_CONFIRM": "Are you sure you want to remove it?",
+    "CLEAR_BOARD_CONFIRM": "Are you sure you want to clear board?"
   }
 }

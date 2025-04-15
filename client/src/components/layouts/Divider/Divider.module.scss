@@ -5,7 +5,13 @@
 }
 
 .Divider {
-}
+  &.x {
+    width: auto; /* or ensure width is not set */
+    align-self: stretch;
+  }
 
-.Text {
+  &.y {
+    height: auto; /* or ensure height is not set */
+    align-self: stretch;
+  }
 }

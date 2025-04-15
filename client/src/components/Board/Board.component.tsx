@@ -13,6 +13,7 @@ export * from './SelectionBoard/SelectionBoard.error'
 export type BoardItem = ViewBoardItem
 
 export type BoardProps<I extends Record<string, unknown>> = Omit<SelectionBoardProps<I>, 'select'> & ViewBoardProps<I> & {
+  id?: string
   // show selection board if true otherwise show view board
   select?: boolean | SelectionBoardProps<I>['select'] // TODO: back reselect
   // TODO: move logic of update reselect value to here?
@@ -33,7 +34,7 @@ export type BoardProps<I extends Record<string, unknown>> = Omit<SelectionBoardP
  *   { placement: { v1: { x: 6, y: 6 }, v2: { x: 9, y: 9 } } },
  * ]
  *
- * export default function App(): JSX.Element {
+ * export default function App() {
  *  const [items, setItems] = useState(cards)
  *  const handleError = (error: any) => { console.log('handleError', error) }
  *  const handleSelect = (placement: any) => { setItems([...items, { placement }]) }
@@ -59,13 +60,13 @@ export type BoardProps<I extends Record<string, unknown>> = Omit<SelectionBoardP
  *   )
  * }
  */
-export function Board<I extends Record<string, unknown>>(props: BoardProps<I>): JSX.Element {
-  const { padding, columns, rows, select, gap = 4, items, widget, placeKey, className, ...selectionBoardProps } = props
+export function Board<I extends Record<string, unknown>>(props: BoardProps<I>) {
+  const { id, padding, columns, rows, select, gap = 4, items, widget, placeKey, className, ...selectionBoardProps } = props
   const _className = cn(css.Board, className)
   // TODO: if need preview screen in the edge then create CanvasBoard and refactor SelectionBoard
 
   return (
-    <div className={_className}>
+    <div id={id} className={_className}>
       <ViewBoard
         rows={rows}
         columns={columns}
@@ -77,7 +78,7 @@ export function Board<I extends Record<string, unknown>>(props: BoardProps<I>): 
         className={css.ViewBoard}
       />
 
-      { select && (
+      {select && (
         <SelectionBoard
           rows={rows}
           columns={columns}

@@ -10,6 +10,7 @@ import { Size } from 'theme'
 import Menu, { MenuProps } from 'components/actions/Menu'
 import Link from 'components/actions/Link'
 import Button from 'components/actions/Button'
+import Divider from 'components/layouts/Divider'
 import NavLink from 'components/actions/NavLink'
 import { PropsWithItems, RepeatItem } from 'components/layouts/Repeat'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -18,6 +19,7 @@ import Block, { BlockProps } from 'components/layouts/Block'
 import css from './Actions.module.scss'
 
 export const ACTION_MAP = {
+  divider: Divider,
   button: Button,
   link: Link,
   nav: NavLink,
@@ -51,7 +53,7 @@ export type ActionsProps = PropsWithItems<ActionItem, BlockProps> & {
  *
  * <Actions items={items} menu='left' />
  */
-export function Actions(props: ActionsProps): JSX.Element {
+export function Actions(props: ActionsProps) {
   const { size, menu, items, children, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
   const menuItems = items?.map((item, idx) => {

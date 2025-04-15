@@ -24,10 +24,10 @@ export type WidgetProps<O> = ItemProps & {
  * @example
  * <Widget />
  */
-export const Widget = <O,>(props: WidgetProps<O>): JSX.Element => {
+export const Widget = <O,>(props: WidgetProps<O>) => {
   const { active, options, children, className, ...otherProps } = props
 
-  // TODO: provide data for widget: breakpoint, theme, language, key, endpoint, version
+  // TODO: provide data for widget: breakpoint, theme, language, key, endpoint
 
   return (
     <Item className={cn(css.Widget, active && css.Active, className)} {...otherProps}>

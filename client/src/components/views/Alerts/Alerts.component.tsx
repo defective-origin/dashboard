@@ -27,7 +27,7 @@ export type AlertsProps = PropsWithItems<AlertItem, BlockProps> & {
  * @example
  * <Alerts />
  */
-export function Alerts(props: AlertsProps): JSX.Element {
+export function Alerts(props: AlertsProps) {
   const { items = [], color = 'primary', children, className, ...otherProps } = props
   const _className = cn(css.Alerts, className)
   const alerts = useMemo(() =>

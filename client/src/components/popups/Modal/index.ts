@@ -6,3 +6,4 @@ export { default } from './Modal.component'
 /* INJECT_EXPORT_PLACE */
 export * from './Modal.component'
 export * from './Modal.hook'
+export * from './Modal.tool'

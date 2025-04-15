@@ -8,7 +8,7 @@ export type ClipboardColumnOptions = Pick<ClipboardProps, 'content'>
 export type ClipboardColumn<T extends TableRecord,> = TableColumn<T, ClipboardProps> & ClipboardColumnOptions
 
 export const clipboardColumn = <T extends TableRecord>(column: ClipboardColumn<T>): ClipboardColumn<T> => ({
-  width: 56,
+  width: 30,
   align: 'center',
   cell: Clipboard,
   mapper: (_, __, content) => ({ content }),

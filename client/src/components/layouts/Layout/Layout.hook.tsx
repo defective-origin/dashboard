@@ -2,7 +2,7 @@ import React from 'react'
 
 // ---| core |---
 import { Size } from 'theme'
-import { cn } from 'tools'
+import { cn, obj } from 'tools'
 
 // ---| components |---
 import { ItemOptions, ItemReturnOptions, useItem } from 'components/layouts/Item'
@@ -11,16 +11,16 @@ import { ItemOptions, ItemReturnOptions, useItem } from 'components/layouts/Item
 import './Layout.module.scss'
 
 export type LayoutSpace = Size
-export type LayoutVariant = 'board' | 'row' | 'rows' | 'column' | 'columns' | 'top' | 'bottom' | 'left' | 'right' | 'x' | 'y'
+export type LayoutVariant = 'board' | 'row' | 'rows' | 'column' | 'columns' | 'top' | 'bottom' | 'left' | 'right' | 'x' | 'y' | 'lcr' | 'lc' | 'cr' | 'tcb' | 'tc' | 'cb'
 // TODO: add grid-template-columns: repeat(/* auto-fill или auto-fit */, /* размер колонки */); https://doka.guide/css/grid-guide/
 // TODO: add dense
 
 export type LayoutOptions = ItemOptions & {
   v?: LayoutVariant
-  /** quantity of columns */
-  columns?: number
-  /** quantity of rows */
-  rows?: number
+  /** quantity of columns or columns template */
+  columns?: number | string
+  /** quantity of rows or rows template */
+  rows?: number | string
   /** grid template */
   template?: string
   /** grid template areas */
@@ -71,19 +71,19 @@ export const useLayout = <O extends object>(options: LayoutOptions & O): LayoutR
     className: cn('layout', {
       [`layout--${v}`]: !areas && v,
     }, className),
-    style: {
+    style: obj.clear({
       placeItems: places,
       alignItems: aligns,
       justifyItems: justifies,
       gridTemplate: template,
       gridTemplateAreas: areas,
-      gridTemplateColumns: columns && `repeat(${columns}, 1fr)`,
-      gridTemplateRows: rows && `repeat(${rows}, 1fr)`,
+      gridTemplateColumns: typeof columns === 'number' ? `repeat(${columns}, 1fr)` : columns,
+      gridTemplateRows: typeof rows ==='number' ? `repeat(${rows}, 1fr)` : rows,
       gridAutoColumns: auto?.[0],
       gridAutoRows: auto?.[1] ?? auto?.[0],
       gridAutoFlow: flow,
       ...style,
-    },
+    }),
   } as LayoutReturnOptions<O>
 }
 

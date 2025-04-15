@@ -16,7 +16,7 @@ export type ViewBoardItemProps<I extends Record<string, unknown>> = {
   widget?: React.ElementType<{ options: I, className?: string, area: string }>
 }
 
-function ViewBoardItem<I extends Record<string, unknown>>(props: ViewBoardItemProps<I>): JSX.Element | null {
+function ViewBoardItem<I extends Record<string, unknown>>(props: ViewBoardItemProps<I>) {
   const { widget: Widget, options, placeKey = '', ...otherProps } = props
   const place = (options[placeKey] ?? options) as xy.Square
   const area = `${place.v1.y + 1} / ${place.v1.x + 1} / ${place.v2.y + 1} / ${place.v2.x + 1}`

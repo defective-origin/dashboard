@@ -60,7 +60,7 @@ export type ChartProps<M extends object> = Omit<ResponsiveContainerProps, 'child
  * @example
  * <Chart />
  */
-export function Chart<M extends object>(props: ChartProps<M>): JSX.Element | null {
+export function Chart<M extends object>(props: ChartProps<M>) {
   const { formats, map, options, syncId, items, loading, tooltip, legend, context: ChartContext, children, className, ...otherProps } = props
   const _className = cn(css.Chart, className)
   const formatMap = useChartFormats(formats)
@@ -103,7 +103,7 @@ export function Chart<M extends object>(props: ChartProps<M>): JSX.Element | nul
       {...otherProps}
     >
       {showBanner
-        ? <Banner v='empty' loading={loading} show={!items?.length} absolute />
+        ? <Banner v='empty' loading={loading} visible={!items?.length} absolute />
         : (
           <ChartContext data={items} syncId={syncId} margin={MARGIN}>
             {tooltip && <Tooltip formatter={formatMap.tooltip} {...toProps(tooltip)} />}

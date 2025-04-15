@@ -36,7 +36,7 @@ export type HelpProps = {
  * @example
  * <Help title='Title' content='Content' messages={['Message 1', 'Message 2']} width={500} />
  */
-export function Help(props: HelpProps): JSX.Element {
+export function Help(props: HelpProps) {
   const { messages, title, open, height = 300, className, content, children = content, ...otherProps } = props
   const _className = cn(css.Help, className)
 

@@ -46,7 +46,7 @@ export type ViewBoardProps<I extends Record<string, unknown>> = Omit<ViewBoardIt
  *   widget={Widget}
  * />
  */
-export default function ViewBoard<I extends Record<string, unknown>>(props: ViewBoardProps<I>): JSX.Element {
+export default function ViewBoard<I extends Record<string, unknown>>(props: ViewBoardProps<I>) {
   const { gap, items, placeKey, widget, className, ...otherProps } = props
   const viewItems = useMemo(() => items?.map((item, idx) =>
     <ViewBoardItem key={idx} options={item} placeKey={placeKey} widget={widget} />,

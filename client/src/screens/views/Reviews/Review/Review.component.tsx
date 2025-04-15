@@ -8,7 +8,6 @@ import { FeatureReview } from 'api'
 // ---| pages |---
 // ---| screens |---
 import User from 'screens/views/User'
-
 // ---| components |---
 import Text from 'components/views/Text'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -26,7 +25,7 @@ export type ReviewProps = BlockProps & FeatureReview
  * @example
  * <Review />
  */
-export function Review(props: ReviewProps): JSX.Element {
+export function Review(props: ReviewProps) {
   const { rate, content, updatedAt, createdBy, children, className, ...otherProps } = props
   const _className = cn(css.Review, className)
 

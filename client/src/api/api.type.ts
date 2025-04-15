@@ -1,5 +1,5 @@
 export type Json = any
-export type Id = string | number
+export type Id = string // | number
 export type Url = string
 export type Email = `${string}@${string}.${string}`
 export type Emails = Email[] // RepeatWithSep<Email, ','>

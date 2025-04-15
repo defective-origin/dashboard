@@ -16,5 +16,5 @@ export type LogReturnOptions = (name: LogName, content: string) => Promise<void>
 export const useLog = (): LogReturnOptions => {
   const create = api.useRestCreateEndpoint<Log>(PATHNAME)
 
-  return useCallback((name: LogName, content: string) => create.mutateAsync({ name, content, agent: navigator.userAgent }), [create])
+  return useCallback((name: LogName, content: string) => create({ name, content, agent: navigator.userAgent }), [create])
 }

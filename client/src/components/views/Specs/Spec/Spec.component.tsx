@@ -31,7 +31,7 @@ export type SpecProps = BlockProps & {
  * <Spec name='Name' content='bOotS' format='uppercase' size='xxs' />
  * <Spec name='Size' content={123456} format='weight' vertical />
  */
-export function Spec(props: SpecProps): JSX.Element {
+export function Spec(props: SpecProps) {
   const { vertical, sep = ':', name, color, placeholder, justifies, format, size = 'xs', content, children, className, ...otherProps } = props
   const _className = cn(css.Spec, className)
 

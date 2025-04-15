@@ -15,8 +15,6 @@ import DashboardsPage from 'pages/DashboardsPage'
 import DashboardPage from 'pages/DashboardPage'
 import WidgetsPage from 'pages/WidgetsPage'
 import WidgetPage from 'pages/WidgetPage'
-import WidgetViewsPage from 'pages/WidgetViewsPage'
-import WidgetViewPage from 'pages/WidgetViewPage'
 
 // ---| self |---
 import { ROUTE_LINKS } from './router.constant'
@@ -32,8 +30,6 @@ export const APP_ROUTES = createBrowserRouter([
       { path: ROUTE_LINKS.BOARD, element: <DashboardPage /> },
       { path: ROUTE_LINKS.WIDGETS, element: <WidgetsPage /> },
       { path: ROUTE_LINKS.WIDGET, element: <WidgetPage /> },
-      { path: ROUTE_LINKS.WIDGET_VIEWS, element: <WidgetViewsPage /> },
-      { path: ROUTE_LINKS.WIDGET_VIEW, element: <WidgetViewPage /> },
       {
         path: ROUTE_LINKS.ACCOUNT,
         element: <AccountPage />,

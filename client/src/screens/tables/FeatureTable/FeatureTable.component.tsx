@@ -22,7 +22,7 @@ export type FeatureTableProps<T extends Feature> = TableProps<T>
  * @example
  * <FeatureTable />
  */
-export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>): JSX.Element {
+export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>) {
   const { columns, children, className, ...otherProps } = props
   const _className = cn(css.FeatureTable, className)
 

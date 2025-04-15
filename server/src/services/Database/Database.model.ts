@@ -1,4 +1,4 @@
-import { Schema, SchemaTypeOptions } from 'mongoose'
+import mongoose, { Schema, SchemaTypeOptions } from 'mongoose'
 
 export type TimeStamps = {
   createdAt?: Date
@@ -15,5 +15,8 @@ export type ChangeStamps = TimeStamps & UserStamps
 export type ModelRef = { id: string }
 export type Ref<T extends Ref = ModelRef> = ModelRef | T
 
+export const RefSchema = new mongoose.Schema<Ref>({
+  id: { type: String, required: true, unique: true }
+}, { _id: false })
 export const ref = (name?: string, opts: SchemaTypeOptions<any> = {}) => name ? ({ id: { type: Schema.Types.ObjectId, ref: name, required: true, ...opts } }) : ({ id: { type: Schema.Types.ObjectId, required: true, ...opts } })
-export const refs = (name?: string, opts: SchemaTypeOptions<any> = {}) => ({ type: [ref(name)], default: [], ...opts })
+export const refs = (opts: SchemaTypeOptions<any> = {}) => ({ type: [RefSchema], default: [], ...opts })

@@ -16,3 +16,4 @@ export { default as wk } from 'weak-key'
 
 export * as xy from './XY'
 export * as react from './react.tool'
+export * as h2i from 'html-to-image'
