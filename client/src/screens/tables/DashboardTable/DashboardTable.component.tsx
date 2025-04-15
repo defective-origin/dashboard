@@ -23,7 +23,7 @@ export type DashboardTableProps = FeatureTableProps<Board>
  * @example
  * <DashboardTable />
  */
-export function DashboardTable(props: DashboardTableProps): JSX.Element {
+export function DashboardTable(props: DashboardTableProps) {
   const { className, ...otherProps } = props
   const _className = cn(css.DashboardTable, className)
   const boards = useBoards()

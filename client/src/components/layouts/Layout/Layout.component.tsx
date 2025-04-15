@@ -45,7 +45,7 @@ export type LayoutProps<E extends React.ElementType = React.ElementType> = react
  *  <Footer />
  * </Layout>
  */
-export function Layout<E extends React.ElementType = 'div'>(props: LayoutProps<E>): JSX.Element | null {
+export function Layout<E extends React.ElementType = 'div'>(props: LayoutProps<E>) {
   const { as: Tag = 'div', ...layoutProps } = useLayout(props)
 
   return <Tag {...layoutProps} />

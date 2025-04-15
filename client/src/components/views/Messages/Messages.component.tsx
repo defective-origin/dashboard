@@ -40,7 +40,7 @@ export type MessagesProps = PropsWithItems<MessageItem, BlockProps> & {
  * @example
  * <Messages />
  */
-export function Messages(props: MessagesProps): JSX.Element {
+export function Messages(props: MessagesProps) {
   const { size, sort = true, items = [], color = 'primary', children, className, ...otherProps } = props
   const _className = cn(css.Messages, className)
   const messages = useMemo(() =>

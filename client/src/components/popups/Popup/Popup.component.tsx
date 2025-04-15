@@ -39,7 +39,7 @@ export type PopupProps = TooltipProps & {
  *  Popup Content
  * </Popup>
  */
-export function Popup(props: PopupProps): JSX.Element {
+export function Popup(props: PopupProps) {
   const { trigger, children, className, ...otherProps } = props
   const _className = cn(css.Popup, className)
   const open = useToggler()

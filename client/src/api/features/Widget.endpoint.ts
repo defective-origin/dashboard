@@ -13,11 +13,4 @@ export type Widget = Feature & {
 
 export const useWidget = (id?: Id) => api.useRestReadEndpoint<Widget>(`${PATHNAME}/${id}`, { enabled: !!id })
 export const useWidgets = () => api.useRestReadEndpoint<Widget[]>(PATHNAME)
-
-export const useWidgetMutations = () => {
-  const create = api.useRestCreateEndpoint<Widget>(PATHNAME)
-  const update = api.useRestUpdateEndpoint<Widget>(PATHNAME)
-  const remove = api.useRestDeleteEndpoint(PATHNAME)
-
-  return useMemo(() => ({ create, update, remove }), [create, remove, update])
-}
+export const useWidgetMutations = () => api.useRestMutations<Widget>(PATHNAME)

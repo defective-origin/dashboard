@@ -2,31 +2,19 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useWidgetView } from 'api'
-import { useParams } from 'router'
-import { t } from 'locale'
-import { useApp } from 'App'
+import { useWidgetView, useWidgetViewMutations } from 'api'
+import { useNavigate, useParams } from 'router'
 
 // ---| pages |---
-import Page, { PageProps } from 'pages/Page'
-
+import FeaturePage, { FEATURE_SNAPSHOT_ID, FeaturePageProps } from 'pages/FeaturePage'
 // ---| screens |---
-import WidgetViewModal from 'screens/modals/WidgetViewModal'
-import PlaceholderCard from 'screens/cards/PlaceholderCard'
-import ReviewsModal from 'screens/modals/ReviewsModal'
-import User from 'screens/views/User'
-
+import Playground from 'screens/views/Playground'
 // ---| components |---
-import Tag from 'components/views/Tag'
-import Text from 'components/views/Text'
-import Block from 'components/layouts/Block'
-import Label from 'components/views/Label'
-import Section from 'components/layouts/Section'
 
 // ---| self |---
 import css from './WidgetViewPage.module.scss'
 
-export type WidgetViewPageProps = PageProps
+export type WidgetViewPageProps = FeaturePageProps
 
 /**
  * Component description.
@@ -35,67 +23,32 @@ export type WidgetViewPageProps = PageProps
  * @example
  * <WidgetViewPage />
  */
-export function WidgetViewPage(props: WidgetViewPageProps): JSX.Element {
+export function WidgetViewPage(props: WidgetViewPageProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.WidgetViewPage, className)
-  const app = useApp()
   const { id } = useParams()
+  const navigate = useNavigate()
   const widget = useWidgetView(id)
-
-  // options: object;
-  // releases
+  const mutations = useWidgetViewMutations()
 
   // TODO: security | Data safety | https://play.google.com/store/apps/datasafety?id=org.telegram.messenger
 
   return (
-    <Page
+    <FeaturePage
       className={_className}
-      name={widget.data?.name}
-      p='md'
+      options={widget.data}
       menu={[
-        { start: 'add', tooltip: 'Add Widget' },
-        { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK') },
-        { start: 'settings', tooltip: t('ACTION.SETTINGS'), onClick: () => app.modal({ name: WidgetViewModal.modalName, payload: widget.data }) },
-        { start: 'delete_forever', tooltip: t('ACTION.REMOVE') },
-        { start: 'payments', tooltip: t('ACTION.PAY') },
-        { start: 'reviews', tooltip: t('ACTION.REVIEWS'), onClick: () => app.modal({ name: ReviewsModal.modalName, payload: widget.data?.reviews }) },
+        { start: 'add', tooltip: 'Create widget based on current widget' },
       ]}
+      onRemove={() => {
+        mutations.remove(widget.data)
+        navigate('WIDGET_VIEWS')
+      }}
       {...otherProps}
     >
-      <Page.Content scroll='y' g='lg' v='y'>
-        {/* add slider to change width and height */}
-        <PlaceholderCard height={300} name='PLAYGROUND' />
-
-        <Section title='Description'>
-          <Block v='x' g='xxs' justifies='space-between'>
-            <Block v='x' g='xxs'>
-              <User id={widget.data?.id} />
-
-              <Block v='y' g='xxs'>
-                <Label icon='schedule' content={widget.data?.updatedAt} format='day-of-month-year' tooltip={t('FIELD.LAST_UPDATE')} />
-
-                <Block v='x' g='xxs'>
-                  <Label icon='star' content={widget.data?.rate} format='number' tooltip={t('FIELD.RATE')} />
-                  <Label icon='payments' content={widget.data?.price} format='currency' tooltip={t('FIELD.PRICE')} />
-                  <Label icon='confirmation_number' content={widget.data?.releases.at(-1)?.version} tooltip={t('FIELD.VERSION')} />
-                </Block>
-              </Block>
-            </Block>
-          </Block>
-
-          <Text v='body2' size='xs' content={widget.data?.content} />
-        </Section>
-
-        <Block v='x' g='xxs'>
-          {widget.data?.tags.map(tag => <Tag key={tag} v='body2' size='xxs' content={tag} />)}
-        </Block>
-
-        <ReviewsModal />
-        <WidgetViewModal />
-
-        {children}
-      </Page.Content>
-    </Page>
+      <Playground previewId={FEATURE_SNAPSHOT_ID} />
+      {children}
+    </FeaturePage>
   )
 }
 

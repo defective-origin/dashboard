@@ -15,8 +15,6 @@ import css from './PlaceholderCard.module.scss'
 
 export type PlaceholderCardProps = ItemProps & {
   name?: string
-  className?: string
-  children?: React.ReactNode
 }
 
 /**
@@ -26,7 +24,7 @@ export type PlaceholderCardProps = ItemProps & {
  * @example
  * <PlaceholderCard />
  */
-export function PlaceholderCard(props: PlaceholderCardProps): JSX.Element {
+export function PlaceholderCard(props: PlaceholderCardProps) {
   const { name = 'COMPONENT', children, className, ...otherProps } = props
   const _className = cn(css.PlaceholderCard, className)
 
@@ -36,7 +34,7 @@ export function PlaceholderCard(props: PlaceholderCardProps): JSX.Element {
         className={css.Message}
         color='secondary'
         format='capitalize'
-        content={t('MESSAGES.UNDER_CONSTRUCTION', { name })}
+        content={t('MESSAGE.UNDER_CONSTRUCTION', { name })}
       />
 
       {children}

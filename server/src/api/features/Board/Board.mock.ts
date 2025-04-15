@@ -4,6 +4,41 @@ import feature from '../Feature'
 
 export default Array.from({length: 10}, (_, i): Board => ({
   ...feature[i],
+  options: {
+    style: {
+      border: '{{BORDER}}',
+      background: 'white',
+    },
+    state: {
+      search: 'name',
+      range: {
+        from: "2011-10-05T14:48:00.000Z",
+        to: "2011-11-05T14:48:00.000Z",
+      }
+    },
+    widgets: {
+      widget1: {
+        property: 'propNameInComponent',
+        input: 'range.from',
+        output: 'range.from',
+        extraProp1ForWidget: 'value',
+        extraProp2ForWidget: 'value'
+      },
+      widget2: {
+        property: 'value',
+        input: {
+          'range.from': 'range.from',
+          'range.to': 'range.to',
+        },
+        output: {
+          'range.from': 'range.from',
+          'range.to': 'range.to',
+        },
+        extraProp1ForWidget: 'value',
+        extraProp2ForWidget: 'value'
+      },
+    },
+  },
   markups: [
     { id: new mongoose.Types.ObjectId(0).toString(), visible: false, expandable: false, rows: 50, columns: 100, items: [], device: 'BOARD' },
     { id: new mongoose.Types.ObjectId(1).toString(), visible: false, expandable: false, rows: 40, columns: 80, items: [], device: 'TV' },

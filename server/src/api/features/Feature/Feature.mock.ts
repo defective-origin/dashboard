@@ -18,6 +18,7 @@ export default Array.from({length: 10}, (_, i): Feature => ({
     language: 'en',
     service: {
       url: '{{API}}/api/items',
+      interval: 1000,
       headers: {
         Authorization: 'Bearer {{ACCESS_TOKEN}}',
       },
@@ -26,7 +27,7 @@ export default Array.from({length: 10}, (_, i): Feature => ({
       'a.b': 'a.c.d',
       'b[0]': 'b',
     },
-    styles: {
+    style: {
       border: '{{BORDER}}',
       background: 'gray',
     },

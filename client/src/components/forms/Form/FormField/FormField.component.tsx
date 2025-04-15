@@ -70,7 +70,7 @@ export type FormFieldProps<V = any, F extends object = object> = {
  *    checkOnBlur
  * />
  */
-export function FormField<V, F extends object>(props: FormFieldProps<V, F>): JSX.Element {
+export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
   const {
     as: Field, path, init, rules, label, help, throttle, checkOnBlur, checkOnChange,
     fit, required, disabled, toInit, toProps, onChange, className, ...otherProps

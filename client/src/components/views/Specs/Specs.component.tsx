@@ -34,7 +34,7 @@ export type SpecsProps = PropsWithItems<SpecsItem, BlockProps> & {
  *    <Specs.Item name='Size' content={123456} format='weight' />
  * </Specs>
  */
-export function Specs(props: SpecsProps): JSX.Element {
+export function Specs(props: SpecsProps) {
   const { vertical, justifies, items = [], size, sep, placeholder, children, className, ...otherProps } = props
   const _className = cn(css.Specs, className)
 

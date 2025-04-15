@@ -22,15 +22,17 @@ export type DashboardsPageProps = Partial<SelectPageProps<Board>>
  * @example
  * <DashboardsPage />
  */
-export function DashboardsPage(props: DashboardsPageProps): JSX.Element {
+export function DashboardsPage(props: DashboardsPageProps) {
   const { className } = props
   const _className = cn(css.DashboardsPage, className)
   const boards = useBoards()
 
+  // TODO: add devices to preview card
+
   return (
     <SelectPage
       className={_className}
-      name='PAGES.DASHBOARDS'
+      name='LABEL.DASHBOARDS'
       to='BOARD'
       menu={[
         { start: 'add', tooltip: t('ACTION.ADD_BOARD') },

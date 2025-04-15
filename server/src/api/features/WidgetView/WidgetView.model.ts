@@ -4,36 +4,9 @@ import { Feature, FeatureSchema } from '../Feature'
 
 export const PATHNAME = 'widget-views'
 
+export type WidgetView = Feature
 
-export type Release = TimeStamps & {
-  id: string
-  /** Release version: `major.minor.patch`  */
-  version: string
-  /** Description of release changes */
-  content: string
-  /**
-   * Settings of interface, requirements and default values
-   * @example
-   * {
-   *    field: { type: String, default: 0, value: 10, description: "Description" }
-   * }
-   */
-  options: object
-}
-
-export const ReleaseSchema = new mongoose.Schema<Release>({
-  version: { type: String, required: true },
-  content: { type: String, required: true },
-  options: { type: Object, default: {} },
-}, { timestamps: true })
-
-export type WidgetView = Feature & {
-  releases: Release[]
-}
-
-export const WidgetViewSchema = new mongoose.Schema<WidgetView>({
-  releases: { type: [ReleaseSchema], default: [] },
-}).add(FeatureSchema)
+export const WidgetViewSchema = new mongoose.Schema<WidgetView>({}).add(FeatureSchema)
 
 export const WidgetViewModel = mongoose.model(PATHNAME, WidgetViewSchema)
 

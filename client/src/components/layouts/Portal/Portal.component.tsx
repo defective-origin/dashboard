@@ -48,7 +48,7 @@ export type PortalContainerProps = BlockProps & {
  * @example
  * <Portal.Container name='page-name' />
  */
-export function PortalContainer(props: PortalContainerProps): JSX.Element {
+export function PortalContainer(props: PortalContainerProps) {
   const { name, children, className, ...otherProps } = props
   const _className = cn(css.PortalContainer, className)
 

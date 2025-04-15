@@ -9,19 +9,21 @@ import { TranslateKeys, t } from 'locale'
 // ---| screens |---
 // ---| components |---
 import Tooltip from 'components/popups/Tooltip'
-import Icon, { DeviceIconVariant, IconProps } from 'components/views/Icon'
+import Icon, { IconProps, IconVariant } from 'components/views/Icon'
 
 // ---| self |---
 import css from './Device.module.scss'
 
 export type DeviceVariant = BoardMarkupDevice
 
-const DEVICE_MAP: Record<DeviceVariant, { v: DeviceIconVariant, tooltip: TranslateKeys }> = {
-  tv: { v: 'tv', tooltip: 'DEVICE.TV' },
-  computer: { v: 'computer', tooltip: 'DEVICE.COMPUTER' },
-  tablet: { v: 'tablet_mac', tooltip: 'DEVICE.TABLET' },
-  mobile: { v: 'phone_iphone', tooltip: 'DEVICE.MOBILE' },
-  watch: { v: 'watch', tooltip: 'DEVICE.WATCH' },
+const DEVICE_MAP: Record<DeviceVariant, { v: IconVariant, tooltip: TranslateKeys }> = {
+  BOARD: { v: 'high_quality', tooltip: 'DEVICE.BOARD' },
+  TV: { v: 'live_tv', tooltip: 'DEVICE.TV' },
+  COMPUTER: { v: 'desktop_windows', tooltip: 'DEVICE.COMPUTER' },
+  LAPTOP: { v: 'laptop_chromebook', tooltip: 'DEVICE.LAPTOP' },
+  TABLET: { v: 'tablet_mac', tooltip: 'DEVICE.TABLET' },
+  MOBILE: { v: 'phone_iphone', tooltip: 'DEVICE.MOBILE' },
+  WATCH: { v: 'watch', tooltip: 'DEVICE.WATCH' },
 }
 
 export type DeviceProps = Omit<IconProps, 'v'> & {
@@ -35,7 +37,7 @@ export type DeviceProps = Omit<IconProps, 'v'> & {
  * @example
  * <Device />
  */
-export function Device(props: DeviceProps): JSX.Element {
+export function Device(props: DeviceProps) {
   const { v, className, ...otherProps } = props
   const _className = cn(css.Device, className)
   const option = DEVICE_MAP[v]

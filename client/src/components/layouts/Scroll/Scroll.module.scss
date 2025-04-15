@@ -44,6 +44,7 @@
     pointer-events: none;
     position: absolute;
     inset: 0;
+    z-index: 1;
     display: grid;
     grid-template-areas:
       'scroll-content scroll-y'

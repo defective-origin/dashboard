@@ -4,6 +4,8 @@
 
 /* INJECT_EXPORT_PLACE */
 export * from './router.constant'
+export * from './router.hook'
+export * from './router.tool'
 
 export {
   useParams,

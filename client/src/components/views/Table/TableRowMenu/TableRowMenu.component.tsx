@@ -26,7 +26,7 @@ export type TableRowMenuProps<T extends TableRecord> = Omit<MenuProps, 'trigger'
  * @example
  * <TableRowMenu />
  */
-export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>): JSX.Element {
+export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>) {
   const { record, column, items, className, ...otherProps } = props
   const _className = cn(css.TableRowMenu, className)
 

@@ -24,12 +24,12 @@ export type CopyrightProps = Partial<IconProps> & {
  * @example
  * <Copyright />
  */
-export function Copyright(props: CopyrightProps): JSX.Element {
+export function Copyright(props: CopyrightProps) {
   const { tooltip, className, ...otherProps } = props
   const _className = cn(css.Copyright, className)
 
   return (
-    <Tooltip v={tooltip} content={t('MESSAGES.COPYRIGHT', { year: (new Date).getFullYear() })}>
+    <Tooltip v={tooltip} content={t('MESSAGE.COPYRIGHT', { year: (new Date).getFullYear() })}>
       <Icon className={_className} v='copyright' size='sm' {...otherProps} />
     </Tooltip>
   )

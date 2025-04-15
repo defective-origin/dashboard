@@ -7,12 +7,15 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import { useItem, ItemProps } from 'components/layouts/Item'
 
 // ---| self |---
 import css from './Tabs.module.scss'
 import Tab from './Tab'
+import { TabsProvider, useTabs } from './Tabs.context'
+import TabContent from './TabContent'
 
-export type TabsProps = MuiTabsProps & {
+export type TabsProps = Pick<MuiTabsProps, 'value'> & ItemProps & {
   className?: string
   children?: React.ReactNode
 }
@@ -24,12 +27,18 @@ export type TabsProps = MuiTabsProps & {
  * @example
  * <Tabs />
  */
-export function Tabs(props: TabsProps): JSX.Element {
-  const { children, className, ...otherProps } = props
+export function Tabs(props: TabsProps) {
+  const { value, children, className, ...otherProps } = useItem(props)
   const _className = cn(css.Tabs, className)
+  const tabs = useTabs()
 
   return (
-    <MuiTabs className={_className} {...otherProps}>
+    <MuiTabs
+      className={_className}
+      value={tabs?.value ?? value}
+      onChange={(_, val) => tabs?.setValue(val)}
+      {...otherProps}
+    >
       {children}
     </MuiTabs>
   )
@@ -38,5 +47,7 @@ export function Tabs(props: TabsProps): JSX.Element {
 Tabs.displayName = 'Tabs'
 
 Tabs.Tab = Tab
+Tabs.TabContent = TabContent
+Tabs.Provider = TabsProvider
 
 export default Tabs

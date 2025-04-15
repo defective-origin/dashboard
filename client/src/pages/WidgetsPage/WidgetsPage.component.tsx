@@ -21,7 +21,7 @@ export type WidgetsPageProps = Partial<SelectPageProps<Widget>>
  * @example
  * <WidgetsPage />
  */
-export function WidgetsPage(props: WidgetsPageProps): JSX.Element {
+export function WidgetsPage(props: WidgetsPageProps) {
   const { className } = props
   const _className = cn(css.WidgetsPage, className)
   const widgetViews = useWidgets()
@@ -29,7 +29,7 @@ export function WidgetsPage(props: WidgetsPageProps): JSX.Element {
   return (
     <SelectPage
       className={_className}
-      name='PAGES.WIDGETS'
+      name='LABEL.WIDGETS'
       to='WIDGET'
       items={widgetViews.data}
     />

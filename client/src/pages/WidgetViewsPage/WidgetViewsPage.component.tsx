@@ -6,7 +6,6 @@ import { useWidgetViews } from 'api'
 
 // ---| pages |---
 import SelectPage from 'pages/SearchPage'
-
 // ---| screens |---
 // ---| components |---
 
@@ -25,7 +24,7 @@ export type WidgetViewsPageProps = {
  * @example
  * <WidgetViewsPage />
  */
-export function WidgetViewsPage(props: WidgetViewsPageProps): JSX.Element {
+export function WidgetViewsPage(props: WidgetViewsPageProps) {
   const { className } = props
   const _className = cn(css.WidgetViewsPage, className)
   const widgetViews = useWidgetViews()
@@ -33,7 +32,7 @@ export function WidgetViewsPage(props: WidgetViewsPageProps): JSX.Element {
   return (
     <SelectPage
       className={_className}
-      name='PAGES.WIDGET_VIEWS'
+      name='LABEL.WIDGET_VIEWS'
       to='WIDGET_VIEW'
       items={widgetViews.data}
     />

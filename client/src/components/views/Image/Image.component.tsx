@@ -39,7 +39,7 @@ export type ImageProps = {
  * @example
  * <Image />
  */
-export function Image(props: ImageProps): JSX.Element {
+export function Image(props: ImageProps) {
   const { width, height, v, src, loading, children, className, ...otherProps } = props
   const _className = cn('image', className)
   const imgSrc = src ?? IMAGE_MAP[v as ImageVariant]

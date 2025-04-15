@@ -45,7 +45,7 @@ router.put(`/${PATHNAME}/:id/markups/:markupId`, (req, res, next) => {
 
 // widgets
 router.post(`/${PATHNAME}/:id/markups/:markupId/widgets`, (req, res, next) => {
-  BoardModel.updateOne(
+  BoardModel.findOneAndUpdate(
     { _id: req.params.id, 'markups._id': req.params.markupId },
     { $push: { 'markups.$.items': req.body } },
   )
@@ -54,7 +54,7 @@ router.post(`/${PATHNAME}/:id/markups/:markupId/widgets`, (req, res, next) => {
 })
 
 router.put(`/${PATHNAME}/:id/markups/:markupId/widgets/:widgetId`, (req, res, next) => {
-  BoardModel.updateOne(
+  BoardModel.findOneAndUpdate(
     { _id: req.params.id, 'markups._id': req.params.markupId },
     { $set: { 'markups.$.items.$[item]': req.body } },
     { arrayFilters: [{ 'item._id': req.params.widgetId }] },
@@ -64,7 +64,7 @@ router.put(`/${PATHNAME}/:id/markups/:markupId/widgets/:widgetId`, (req, res, ne
 })
 
 router.delete(`/${PATHNAME}/:id/markups/:markupId/widgets/:widgetId`, (req, res, next) => {
-  BoardModel.updateOne(
+  BoardModel.findOneAndUpdate(
     { _id: req.params.id, 'markups._id': req.params.markupId },
     { $pull: { 'markups.$.items': { _id: req.params.widgetId } } },
   )

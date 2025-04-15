@@ -49,7 +49,7 @@ export type ActionProps = Omit<TextProps, 'v'> & {
  * @example
  * <Action />
  */
-export const Action = (props: ActionProps): JSX.Element | null => {
+export const Action = (props: ActionProps) => {
   const {
     as = 'button',
     size = 'md',

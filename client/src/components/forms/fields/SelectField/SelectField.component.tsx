@@ -25,7 +25,7 @@ export type SelectFieldProps = FieldProps & PropsWithItems<SelectFieldItem>
  * @example
  * <SelectField />
  */
-export function SelectField(props: SelectFieldProps): JSX.Element {
+export function SelectField(props: SelectFieldProps) {
   const { value = '', name, onChange, items = [], className, ...otherProps } = props
   const _className = cn(css.SelectField, className)
   const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })

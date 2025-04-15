@@ -26,7 +26,7 @@ export type RadioGroupFieldProps = FieldProps & {
  * @example
  * <RadioGroupField />
  */
-export function RadioGroupField(props: RadioGroupFieldProps): JSX.Element {
+export function RadioGroupField(props: RadioGroupFieldProps) {
   const { columns, value, items = [], id, name, className, ...otherProps } = props
   const _className = cn(css.RadioGroupField, className)
 

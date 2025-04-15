@@ -1,4 +1,5 @@
 import TextFormField from './TextField'
+import TagsField from './TagsField'
 import JsonFormField from './JsonField'
 import NumberFormField from './NumberField'
 import SliderFormField from './SliderField'
@@ -20,4 +21,5 @@ export default {
   RadioGroup: RadioGroupField,
   Switch: SwitchFormField,
   Select: SelectFormField,
+  Tags: TagsField,
 }

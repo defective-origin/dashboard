@@ -121,6 +121,21 @@ export const del = (obj: Obj | undefined | null, path: string, removeEmptyObject
   return obj
 }
 
+/** Remove undefined values */
+export const clear = <T extends Obj>(obj: T | undefined | null): T | undefined | null => {
+  if (!obj) {
+    return obj
+  }
+
+  return Object.keys(obj).reduce((acc, key: keyof T) => {
+    if (obj[key] !== undefined) {
+      acc[key] = obj[key]
+    }
+
+    return acc
+  }, {} as T)
+}
+
 export default {
   isObject,
   toObject,
@@ -130,4 +145,5 @@ export default {
   set,
   del,
   has,
+  clear,
 }

@@ -25,3 +25,10 @@
   border-radius: var(--border-radius);
   flex-grow: 1;
 }
+
+.TableHeader {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-bottom: 4px;
+}

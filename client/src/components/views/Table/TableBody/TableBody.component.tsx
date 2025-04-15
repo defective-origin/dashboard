@@ -29,7 +29,7 @@ export type TableBodyProps<T extends TableRecord> = {
  * @example
  * <TableBody />
  */
-export function TableBody<T extends TableRecord>(props: TableBodyProps<T>): JSX.Element {
+export function TableBody<T extends TableRecord>(props: TableBodyProps<T>) {
   const { items, columns, keygen = DEFAULT_KEYGEN, className, ...otherProps } = props
   const _className = cn(css.TableBody, className)
 

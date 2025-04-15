@@ -24,7 +24,7 @@ export type ExpensesTableProps = TableProps<Expense> & {
  * @example
  * <ExpensesTable />
  */
-export function ExpensesTable(props: ExpensesTableProps): JSX.Element {
+export function ExpensesTable(props: ExpensesTableProps) {
   const { type, children, className, ...otherProps } = props
   const _className = cn(css.ExpensesTable, className)
   const response = useExpenses(type)

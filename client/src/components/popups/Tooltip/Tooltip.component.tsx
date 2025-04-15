@@ -39,7 +39,7 @@ export type TooltipProps = {
  * @example
  * <Tooltip />
  */
-export function Tooltip(props: TooltipProps): JSX.Element | null {
+export function Tooltip(props: TooltipProps) {
   const { onOpen, onClose, popup, content, children, className, v = 'top', open, ...otherProps } = props
   const _className = cn(css.Tooltip, className)
 

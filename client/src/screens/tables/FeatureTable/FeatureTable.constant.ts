@@ -8,7 +8,6 @@ export const FEATURE_COLUMNS: TableColumn<Feature>[] = [
     fixed: true,
   }),
   // TODO: name + description + image -> + link to widget page
-  // TODO: version[on hover show all versions] on click show modal with possibilities of version removing
   column.text({
     field: 'name',
     width: 200,
