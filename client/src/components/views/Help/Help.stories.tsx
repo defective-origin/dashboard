@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Help from './Help.component'
 
@@ -13,7 +13,6 @@ const meta: Meta<typeof Help> = {
     className: field.string(),
     children: field.reactNode(),
     content: field.reactNode(),
-    messages: field.list('MessageItem'),
   },
 }
 
@@ -27,7 +26,6 @@ export const Demo: Story = {
     title: 'Demo',
     open: true,
     content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum optio tenetur eos non quam aperiam repudiandae ullam maxime Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum optio tenetur eos non quam aperiam repudiandae ullam maxime sapiente minus, eum amet ut! Inventore, at iste est ullam minima dolorem',
-    messages: ['Messages', 'Messages', 'Messages', 'Messages'],
   },
 }
 

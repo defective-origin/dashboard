@@ -28,7 +28,7 @@ export function useMode(refOrOption: unknown, ...args: unknown[]) {
   useEffect(() => {
     const element = ref.current
     const flattedOptions = [isMode(refOrOption) ? refOrOption : undefined, ...args].flat()
-    const modes = flattedOptions.map((option) => typeof option === 'function' ? option(ref.current) : option).flat().filter(Boolean)
+    const modes = flattedOptions.map(option => typeof option === 'function' ? option(ref.current) : option).flat().filter(Boolean)
 
     element?.classList.add(...modes)
 

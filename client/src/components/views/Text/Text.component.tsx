@@ -7,11 +7,11 @@ import { Color, Size, THEME } from 'theme'
 import { FormatOptions, useFormat } from 'hooks'
 
 // ---| components |---
-import Skeleton from 'components/views/Skeleton'
+import { withSkeleton } from 'components/views/Skeleton'
 
 // ---| self |---
 import './Text.module.scss'
-import { TEXT_FORMAT_MAP } from './Text.tool'
+import { TEXT_FORMAT_MAP } from './Text.tools'
 
 const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
   h1: 'xl',
@@ -45,7 +45,6 @@ export type TextProps = FormatOptions<TextFormat> & {
   v?: TextVariant
   align?: TextAlign
   ellipsis?: boolean | number
-  loading?: boolean
   bold?: boolean
   nowrap?: boolean
   style?: React.CSSProperties
@@ -67,15 +66,14 @@ export type TextProps = FormatOptions<TextFormat> & {
  *    ellipsis={3}
  * />
  */
-export function Text(props: TextProps): JSX.Element { // FIXME: extend with useItem
+export function Text(props: TextProps) { // FIXME: extend with useItem
   const {
-    v = 'body1',
+    v = 'body2',
     size = TEXT_SIZE_MAP[v],
     height,
     bold,
-    color,
+    color = 'primary',
     ellipsis,
-    loading,
     format,
     nowrap,
     placeholder,
@@ -91,6 +89,7 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
     [`text--${size}`]: size, // FIXME: doesn't work - fix on line 92
   }, className)
   // TODO: add fixing number formats: units, millions, ... (fix: "M", by, to)
+  // TODO: text animation on resize add by default on Text component
   const _content = useFormat(content, TEXT_FORMAT_MAP, { format, placeholder })
   const styles = {
     ...style,
@@ -103,23 +102,23 @@ export function Text(props: TextProps): JSX.Element { // FIXME: extend with useI
   return (
     <MuiTypography
       className={_className}
-      variant={loading ? 'body1' : v}
+      variant={v}
       align='left'
       color={color && THEME.palette[color]}
       style={styles}
       fontFamily='Montserrat'
       {...otherProps}
     >
-      {!loading && _content}
-      {!loading && children}
-      {loading && <Skeleton className={_className} v='text' content={_content} />}
+      {_content}
+      {children}
     </MuiTypography>
   )
 }
 
 Text.displayName = 'Text'
 
-export default react.attachOverrides(Text, {
+
+export default react.attachOverrides(withSkeleton(Text, props => ({ v: 'text', children: props.children || props.content })), {
   H1: { v: 'h1' },
   H2: { v: 'h2' },
   H3: { v: 'h3' },

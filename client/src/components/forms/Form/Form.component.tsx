@@ -17,6 +17,7 @@ import { FormContext, FormFieldManager, FormManager, FormErrors, FormEvent, Form
 
 export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
   init?: O
+  // TODO: validateTrigger={["onSubmit", "onChange"]}
   // TODO: pass manager instead of ref
   manager?: React.Ref<FormManager<O>>
   notifyParent?: boolean
@@ -161,8 +162,8 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  *   </Layout>
  * </Form>
  */
-export function Form<O extends object>(props: FormProps<O>): JSX.Element {
-  const { init, manager, checkOnSubmit, notifyParent, onSubmit, onChange, onReset, p, g = 'xs', v, children, className } = props
+export function Form<O extends object>(props: FormProps<O>) {
+  const { init, manager, checkOnSubmit, notifyParent, onSubmit, onChange, onReset, children, className, ...otherProps } = props
   const _className = cn(css.Form, className)
   const [initial] = useState<O>({} as O)
   const [state] = useState<O>({} as O)
@@ -294,13 +295,11 @@ export function Form<O extends object>(props: FormProps<O>): JSX.Element {
   return (
     <FormContext.Provider value={formManager as unknown as FormManager<object>}>
       <Layout
-        v={v}
-        p={p}
-        g={g}
         as='form'
         className={_className}
         onSubmit={submitForm}
         onReset={resetForm}
+        {...otherProps}
       >
         {children}
       </Layout>

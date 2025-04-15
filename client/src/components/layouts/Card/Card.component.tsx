@@ -31,7 +31,7 @@ export type CardProps = {
  * @example
  * <Card />
  */
-export const Card = (props: CardProps): JSX.Element | null => {
+export const Card = (props: CardProps) => {
   const { divided, horizontal, children, className, ...otherProps } = props
   const _className = cn(css.Card, {
     [css.horizontal]: horizontal,

@@ -22,7 +22,7 @@ export type TabProps = MuiTabProps & {
  * @example
  * <Tab />
  */
-export function Tab(props: TabProps): JSX.Element {
+export function Tab(props: TabProps) {
   const { className, ...otherProps } = props
   const _className = cn(css.Tab, className)
 

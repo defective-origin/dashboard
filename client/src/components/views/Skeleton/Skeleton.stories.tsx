@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Skeleton, { SkeletonProps } from './Skeleton.component'
 import Block from 'components/layouts/Block'
@@ -13,7 +13,6 @@ const meta: Meta<typeof Skeleton> = {
   argTypes: {
     className: field.string(),
     children: field.reactNode(),
-    content: field.reactNode(true),
     v: field.variants(VARIANTS, 'SkeletonVariant', 'text'),
   },
 }
@@ -24,7 +23,7 @@ type Story = StoryObj<typeof Skeleton>
 
 const initVariants = <P extends keyof SkeletonProps>(prop: P, items: SkeletonProps[P][]) => (
   <Block v='x' g='xxs'>
-    {items.map((item) => <Skeleton content={item === 'circular' ? 'cir' : item} {...{ [prop]: item }}/>)}
+    {items.map(item => <Skeleton children={item === 'circular' ? 'cir' : item} {...{ [prop]: item }}/>)}
   </Block>
 )
 
@@ -32,7 +31,7 @@ export const Demo: Story = {
   parameters: params('Skeleton'),
   args: {
     v: 'text',
-    content: 'content to hide',
+    children: 'content to hide',
   },
 }
 

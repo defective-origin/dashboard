@@ -5,12 +5,11 @@ import { cn } from 'tools'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
-
 // ---| screens |---
 import DonationTable from 'screens/tables/DonationTable'
 import ExpensesTable from 'screens/tables/ExpensesTable'
-
 // ---| components |---
+
 // ---| self |---
 import css from './DonationPage.module.scss'
 
@@ -23,18 +22,20 @@ export type DonationPageProps = PageProps
  * @example
  * <DonationPage />
  */
-export function DonationPage(props: DonationPageProps): JSX.Element {
+export function DonationPage(props: DonationPageProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DonationPage, className)
+
+  // TODO: show cold map by  day, week, month, year, period. show list of dons on cell hover
 
   return (
     <Page
       className={_className}
-      name='PAGES.DONATION'
+      name='LABEL.PAYMENTS'
       menu={[{ start: 'add', tooltip: 'new request' }]}
       {...otherProps}
     >
-      <Page.Content p='sm'>
+      <Page.Content p='sm' g='sm'>
         <ExpensesTable type='PLANS' area='1 / 1 / 2 / 2' />
         <ExpensesTable type='NEEDS' area='1 / 2 / 2 / 3' />
         <ExpensesTable type='OTHERS' area='1 / 3 / 2 / 4' />

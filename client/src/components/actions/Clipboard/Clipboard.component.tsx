@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { useEvent } from 'hooks'
+import { emitEvent, useEvent } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -21,7 +21,7 @@ export type ClipboardProps = ButtonProps
  * @example
  * <Clipboard />
  */
-export function Clipboard(props: ClipboardProps): JSX.Element {
+export function Clipboard(props: ClipboardProps) {
   const { content, className, ...otherProps } = props
   const _className = cn(css.Clipboard, className)
   const [isActive, setIsActive] = useState<boolean>()
@@ -30,11 +30,11 @@ export function Clipboard(props: ClipboardProps): JSX.Element {
   const copy = useCallback(() => {
     if (content) {
       navigator.clipboard.writeText(content.toString())
-        .then(() => document.body.dispatchEvent(new CustomEvent('clipboard-copy')))
+        .then(() => emitEvent(['clipboard', 'copy']))
     }
   }, [content])
 
-  useEvent('clipboard-copy', () => {
+  useEvent(['clipboard', 'copy'], () => {
     navigator.clipboard.readText()
       .then(value => setIsActive(content?.toString() === value))
   }, { disable: !content })

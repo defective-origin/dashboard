@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import AccountWidgetsPage from './AccountWidgetsPage.component'
-// import useAccountWidgetsPage from './AccountWidgetsPage.hook'
+// import useAccountWidgetsPage from './AccountWidgetsPage.hooks'
 // import AccountWidgetsPageProvider, AccountWidgetsPage from './AccountWidgetsPage.context'
 
 describe('[AccountWidgetsPage] component', () => {

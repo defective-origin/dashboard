@@ -26,6 +26,7 @@ import css from './Page.module.scss'
 export type PageMenuItem = ActionItem
 
 export type PageProps = LayoutProps & {
+  title?: ReactNode
   name?: TranslateKeys
   meta?: MetaItem[]
   menu?: ActionItem[]
@@ -40,29 +41,31 @@ export type PageProps = LayoutProps & {
  * @example
  * <Page />
  */
-export function Page(props: PageProps): JSX.Element {
-  const { nav, extra, menu = [], name, meta, children, className, ...otherProps } = props
+export function Page(props: PageProps) {
+  const { title, nav, extra, menu = [], name, meta, children, className, ...otherProps } = props
   const _className = cn(css.Page, className)
   const pageName = t(name)
-  const tabName = t('SYSTEM.TAB_NAME', { title: pageName })
+  const tabName = t('LABEL.PAGE_NAME', { title: pageName })
 
   return (
     <Layout className={_className} v='columns' {...otherProps}>
       <Meta title={tabName} items={meta} />
 
-      <Portal name='page-name' content={<Text.H1 size='md' color='primary' content={pageName} />} />
+      <Portal name='page-name' content={<Text.H1 size='md' color='primary' content={title ?? pageName} />} />
       <Portal name='page-nav' content={nav} />
       <Portal
         name='page-extra'
         content={(
           <>
             {extra}
-            <Actions items={menu} g='xs' size='sm' />
+            <Actions items={menu} g='xxs' size='xxs' />
           </>
         )}
       />
 
       {children}
+
+      <div className={css.copyright}>{t('MESSAGE.COPYRIGHT', { year: (new Date).getFullYear() })}</div>
     </Layout>
   )
 }

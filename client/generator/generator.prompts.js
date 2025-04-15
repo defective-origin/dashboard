@@ -6,7 +6,7 @@ export const InputPrompt = (options = {}) => ({
 
 export const StringInputPrompt = (options = {}) => InputPrompt({
   ...options,
-  filter: (input) => {
+  filter: input => {
     const filteredInput = [
       options.prefix ? `${options.prefix} ` : '',
       input ?? '',

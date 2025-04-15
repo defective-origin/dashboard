@@ -23,7 +23,7 @@ export type ContentProps = LayoutProps & {
  * @example
  * <Content />
  */
-export function Content(props: ContentProps): JSX.Element {
+export function Content(props: ContentProps) {
   const { scroll, children, className, ...otherProps } = props
   const _className = cn(css.Content, className)
 

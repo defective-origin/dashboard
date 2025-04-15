@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import { SIZES } from 'theme'
 import Avatar, { AvatarProps } from './Avatar.component'

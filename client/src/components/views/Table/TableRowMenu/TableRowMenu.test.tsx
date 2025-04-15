@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import TableRowMenu from './TableRowMenu.component'
-// import useTableRowMenu from './TableRowMenu.hook'
+// import useTableRowMenu from './TableRowMenu.hooks'
 // import TableRowMenuProvider, TableRowMenu from './TableRowMenu.context'
 
 describe('[TableRowMenu] component', () => {

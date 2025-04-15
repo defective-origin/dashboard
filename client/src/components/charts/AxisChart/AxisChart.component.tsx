@@ -53,7 +53,7 @@ export type AxisChartProps = ChartProps<typeof AXIS_ITEMS_MAP> & {
  * @example
  * <AxisChart />
  */
-export function AxisChart(props: AxisChartProps): JSX.Element {
+export function AxisChart(props: AxisChartProps) {
   const { refs, x, y, xr, yr, formats, grid, brush, items, children, className, ...otherProps } = props
   const _className = cn(css.AxisChart, className)
   const formatMap = useChartFormats(formats)

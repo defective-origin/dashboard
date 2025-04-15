@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`[Alerts] component > should render component 1`] = `
-<DocumentFragment>
-  <div
-    class="block block--y item _Alerts_10e67a"
-  />
-</DocumentFragment>
-`;

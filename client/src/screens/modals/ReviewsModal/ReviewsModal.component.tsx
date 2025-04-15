@@ -7,16 +7,17 @@ import { t } from 'locale'
 // ---| pages |---
 // ---| screens |---
 import Reviews, { ReviewItem } from 'screens/views/Reviews'
-
 // ---| components |---
-import Modal, { ModalProps, useModalPayload } from 'components/popups/Modal'
+import Modal, { ModalDetails, ModalProps, useModal } from 'components/popups/Modal'
 
 // ---| self |---
 import css from './ReviewsModal.module.scss'
 
-export type ReviewsModalProps = ModalProps
+export type ReviewsModalDetails = ModalDetails & {
+  options: ReviewItem[]
+}
 
-const MODAL_NAME = 'feature-review'
+export type ReviewsModalProps = ModalProps
 
 /**
  * Component description.
@@ -25,20 +26,26 @@ const MODAL_NAME = 'feature-review'
  * @example
  * <ReviewsModal />
  */
-export function ReviewsModal(props: ReviewsModalProps): JSX.Element {
-  const { name = MODAL_NAME, children, className, ...otherProps } = props
+export function ReviewsModal(props: ReviewsModalProps) {
+  const { name = 'feature-review', children, className, ...otherProps } = props
   const _className = cn(css.ReviewsModal, className)
-  const items = useModalPayload<ReviewItem[]>(name)
+  const modal = useModal<ReviewsModalDetails>(name)
 
   return (
-    <Modal title={t('ACTION.REVIEWS')} className={_className} v='right' name={name} {...otherProps}>
-      <Reviews items={items} />
+    <Modal
+      className={_className}
+      title={t('LABEL.REVIEWS')}
+      name={name}
+      open={modal.open}
+      onClose={modal.onClose}
+      {...otherProps}
+    >
+      <Reviews items={modal?.options} />
       {children}
     </Modal>
   )
 }
 
-ReviewsModal.modalName = MODAL_NAME
 ReviewsModal.displayName = 'ReviewsModal'
 
 export default ReviewsModal

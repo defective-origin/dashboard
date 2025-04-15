@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import { COLORS, SIZES } from 'theme'
 import ExpensesTable, { ExpensesTableProps } from './ExpensesTable.component'

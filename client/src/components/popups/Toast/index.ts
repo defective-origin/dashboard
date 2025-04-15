@@ -5,4 +5,4 @@ export { default } from './Toast.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Toast.component'
-export * from './Toast.hook'
+export * from './Toast.tools'

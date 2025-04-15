@@ -16,7 +16,7 @@ import css from './Toast.module.scss'
 
 export type ToastName = 'messages' | 'guards' | 'alerts'
 
-export const initToastKey = (name: ToastName) => `toast-${name}`
+export const initToastKey = (name: ToastName) => `toast:${name}`
 
 export type ToastOptions = {
   content?: React.ReactNode
@@ -35,7 +35,7 @@ export type ToastProps = RTToastContentProps<ToastOptions>
  * @example
  * <Toast />
  */
-export function Toast(props: ToastProps): JSX.Element {
+export function Toast(props: ToastProps) {
   const { closeToast, data = {} as ToastOptions } = props
 
   const handleClose = () => {
@@ -87,7 +87,7 @@ export type ToastContainerProps = {
   position: RTToastContentProps['toastProps']['position']
 }
 
-export function ToastContainer(props: ToastContainerProps): JSX.Element {
+Toast.Container = function ToastContainer(props: ToastContainerProps) {
   const { name, width, ...otherProps } = props
 
   return (
@@ -99,9 +99,5 @@ export function ToastContainer(props: ToastContainerProps): JSX.Element {
     />
   )
 }
-
-ToastContainer.displayName = 'ToastContainer'
-
-Toast.Container = ToastContainer
 
 export default Toast

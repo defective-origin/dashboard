@@ -1,0 +1,22 @@
+import { useState } from 'react'
+
+export type {{pascalCase name}}Options = null
+
+export type {{pascalCase name}}ReturnOptions = null
+// export type {{pascalCase name}}Manager = null
+
+/**
+ * Hook descriptions
+ *
+ * @example
+ * const state = use{{pascalCase name}}(options)
+ */
+export const use{{pascalCase name}} = (options?: {{pascalCase name}}Options): {{pascalCase name}}ReturnOptions => {
+  const [state] = useState<{{pascalCase name}}ReturnOptions>(null)
+
+  console.log(options, state)
+
+  return state
+}
+
+export default use{{pascalCase name}}

@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import DonationTable from './DonationTable.component'
-// import useDonationTable from './DonationTable.hook'
+// import useDonationTable from './DonationTable.hooks'
 // import DonationTableProvider, DonationTable from './DonationTable.context'
 
 describe('[DonationTable] component', () => {

@@ -7,6 +7,12 @@
 .Card {
   display: flex;
   flex-direction: column;
+
+  :global(.MuiCardHeader-root),
+  :global(.MuiCardContent-root),
+  :global(.MuiCardActions-root) {
+    padding: 8px;
+  }
 }
 
 .horizontal {

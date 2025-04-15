@@ -61,7 +61,7 @@ export type OverlayProps = React.HTMLAttributes<HTMLDivElement> & {
  *    )
  * }
  */
-export function Overlay(props: OverlayProps): JSX.Element {
+export function Overlay(props: OverlayProps) {
   const {
     v = 'center',
     width,

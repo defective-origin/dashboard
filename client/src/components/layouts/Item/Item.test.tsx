@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Item from './Item.component'
-// import useItem from './Item.hook'
+// import useItem from './Item.hooks'
 // import ItemProvider, Item from './Item.context'
 
 describe('[Item] component', () => {

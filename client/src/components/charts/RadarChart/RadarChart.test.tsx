@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import RadarChart from './RadarChart.component'
-// import useRadarChart from './RadarChart.hook'
+// import useRadarChart from './RadarChart.hooks'
 // import RadarChartProvider, RadarChart from './RadarChart.context'
 
 describe('[RadarChart] component', () => {

@@ -11,7 +11,7 @@ import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
 import css from './DashboardTable.module.scss'
-import { DASHBOARD_COLUMNS } from './DashboardTable.constant'
+import { DASHBOARD_COLUMNS } from './DashboardTable.constants'
 import FeatureTable, { FeatureTableProps } from '../FeatureTable'
 
 export type DashboardTableProps = FeatureTableProps<Board>
@@ -23,7 +23,7 @@ export type DashboardTableProps = FeatureTableProps<Board>
  * @example
  * <DashboardTable />
  */
-export function DashboardTable(props: DashboardTableProps): JSX.Element {
+export function DashboardTable(props: DashboardTableProps) {
   const { className, ...otherProps } = props
   const _className = cn(css.DashboardTable, className)
   const boards = useBoards()

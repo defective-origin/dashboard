@@ -25,7 +25,7 @@ export type LogoProps = {
  * @example
  * <Logo />
  */
-export function Logo(props: LogoProps): JSX.Element {
+export function Logo(props: LogoProps) {
   const { width = 42, height, className, ...otherProps } = props
   const _className = cn(css.Logo, className)
 

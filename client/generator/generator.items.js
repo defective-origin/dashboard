@@ -1,6 +1,6 @@
 import prompts from './generator.prompts.js'
 import actions from './generator.actions.js'
-import tools from './generator.tool.js'
+import tools from './generator.tools.js'
 
 const ITEM_PROMPT_MAP = {
   name: prompts.NameInput,
@@ -26,7 +26,7 @@ export const Item = ({
   }, [])
   const filteredActions = actions
     // add possibility to have nested items
-    .map((action) => action?.actions ? action.actions : action)
+    .map(action => action?.actions ? action.actions : action)
 
   return {
     description,
@@ -100,12 +100,12 @@ export const Hook = ({
 export const Tool = ({
   description = 'Create a reusable, pure, unified react tool',
   postfixName,
-  defaultName = 'Tool',
+  defaultName = 'Tools',
   defaultSubpath = 'tools',
-  files = ['tool', 'test'],
+  files = ['tools', 'test'],
   module = {
     notExports: ['test'],
-    defaultExport: 'tool',
+    defaultExport: 'tools',
   },
   data,
   isSubmodule = true,
@@ -128,7 +128,7 @@ export const Tool = ({
 })
 
 export const Store = ({
-  files = ['component', 'selector', 'action', 'mock'],
+  files = ['component', 'selectors', 'actions', 'mocks'],
   module = {
     notExports: [],
     defaultExport: 'component',
@@ -150,10 +150,10 @@ export const StoreSlice = ({
   postfixName = 'Slice',
   defaultName = 'Name',
   defaultSubpath = 'store',
-  files = ['store', 'selector', 'action', 'mock', 'test'],
+  files = ['store', 'selectors', 'actions', 'mocks', 'test'],
   module = {
     notExports: ['test'],
-    defaultExport: 'hook',
+    defaultExport: 'hooks',
   },
   data,
   isSubmodule = true,
@@ -177,7 +177,7 @@ export const StoreSlice = ({
 })
 
 export const Api = ({
-  files = ['request', 'tool', 'component', 'mock'],
+  files = ['requests', 'tools', 'component', 'mocks'],
   module = {
     notExports: [],
     defaultExport: 'component',
@@ -199,10 +199,10 @@ export const ApiSlice = ({
   postfixName = 'Slice',
   defaultName = 'Name',
   defaultSubpath = 'api',
-  files = ['request', 'tool', 'schema', 'mock'],
+  files = ['requests', 'tools', 'schemas', 'mocks'],
   module = {
     notExports: [],
-    defaultExport: 'request',
+    defaultExport: 'requests',
   },
   data,
   isSubmodule = true,
@@ -234,7 +234,7 @@ export const Language = ({
     name: { default: defaultName },
   },
   actions: [
-    [ 'i18n', 'l10n' ].map((submodule) => [
+    [ 'i18n', 'l10n' ].map(submodule => [
       actions.ModuleFile({
         type: 'partial',
         target: `locale/${submodule}`,

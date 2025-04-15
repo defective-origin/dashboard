@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { params, field } from '../../../../.storybook/tool'
+import { params, field } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Actions, { ActionItem } from './Actions.component'
 

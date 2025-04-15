@@ -24,7 +24,7 @@ export type ButtonProps = ActionProps & {
  * @example
  * <Button />
  */
-export const Button = (props: ButtonProps): JSX.Element => {
+export const Button = (props: ButtonProps) => {
   const { v, className, ...otherProps } = props
   const _className = cn(css.Button, className)
 

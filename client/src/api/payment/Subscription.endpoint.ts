@@ -1,4 +1,4 @@
-import { ChangeStamps } from '../api.type'
+import { ChangeStamps } from '../api.types'
 import api from '../api.endpoint'
 
 const PATHNAME = 'payment/subscription'

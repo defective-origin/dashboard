@@ -1,11 +1,9 @@
-import mock from './Donation.mock'
+import mocks from './Donation.mocks'
 import model from './Donation.model'
-import router from './Donation.api'
-
-export * from './Donation.model'
+import api from './Donation.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

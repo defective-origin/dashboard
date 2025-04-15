@@ -24,7 +24,7 @@ export type SwitchFieldProps = FieldProps<boolean> & {
  * @example
  * <SwitchField />
  */
-export function SwitchField(props: SwitchFieldProps): JSX.Element {
+export function SwitchField(props: SwitchFieldProps) {
   const { value, checked = !!value, onChange, className, ...otherProps } = props
   const _className = cn(css.SwitchField, className)
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>

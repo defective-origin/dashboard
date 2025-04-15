@@ -6,7 +6,7 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Skeleton from 'components/views/Skeleton'
+import { withSkeleton } from 'components/views/Skeleton'
 
 // ---| self |---
 import './Image.module.scss'
@@ -26,7 +26,6 @@ export type ImageProps = {
   className?: string
   children?: React.ReactNode
   v?: ImageVariant
-  loading?: boolean
   src?: string
   width?: string | number
   height?: string | number
@@ -39,30 +38,18 @@ export type ImageProps = {
  * @example
  * <Image />
  */
-export function Image(props: ImageProps): JSX.Element {
-  const { width, height, v, src, loading, children, className, ...otherProps } = props
+export function Image(props: ImageProps) {
+  const { width, height, v, src, children, className, ...otherProps } = props
   const _className = cn('image', className)
   const imgSrc = src ?? IMAGE_MAP[v as ImageVariant]
 
-  const item = (
-    <img
-      className={_className}
-      src={imgSrc}
-      style={{ width, height }}
-      {...otherProps}
-    >
+  return (
+    <img className={_className} src={imgSrc} style={{ width, height }} {...otherProps}>
       {children}
     </img>
   )
-
-  if (loading) {
-    //TODO: [kseniya_boldak] fix classname
-    return <Skeleton className={_className} v='rounded' content={item} />
-  }
-
-  return item
 }
 
 Image.displayName = 'Image'
 
-export default Image
+export default withSkeleton(Image, () => ({ v: 'rounded', wrap: true }))

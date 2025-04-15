@@ -32,7 +32,7 @@ export type AlertProps = {
  * @example
  * <Alert />
  */
-export function Alert(props: AlertProps): JSX.Element | null {
+export function Alert(props: AlertProps) {
   const { title, color, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Alert, className)
 

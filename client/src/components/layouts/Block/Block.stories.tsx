@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Block, { BlockProps } from './Block.component'
 import Item from 'components/layouts/Item'

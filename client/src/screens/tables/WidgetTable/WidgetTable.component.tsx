@@ -20,7 +20,7 @@ export type WidgetTableProps = FeatureTableProps<Widget>
  * @example
  * <WidgetTable />
  */
-export function WidgetTable(props: WidgetTableProps): JSX.Element {
+export function WidgetTable(props: WidgetTableProps) {
   const { className, ...otherProps } = props
   const _className = cn(css.WidgetTable, className)
   const widgets = useWidgets()

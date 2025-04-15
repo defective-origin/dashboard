@@ -5,6 +5,6 @@ export { default } from './Table.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Table.component'
-export * from './Table.type'
-export * from './Table.tool'
+export * from './Table.types'
+export * from './Table.tools'
 export * from './TableRowMenu'

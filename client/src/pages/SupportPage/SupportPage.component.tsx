@@ -5,11 +5,10 @@ import { cn } from 'tools'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
-
 // ---| screens |---
 import SupportTable from 'screens/tables/SupportTable'
-
 // ---| components |---
+
 // ---| self |---
 import css from './SupportPage.module.scss'
 
@@ -22,14 +21,16 @@ export type SupportPageProps = PageProps
  * @example
  * <SupportPage />
  */
-export function SupportPage(props: SupportPageProps): JSX.Element {
+export function SupportPage(props: SupportPageProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.SupportPage, className)
+
+  // TODO: add stepper to see progress
 
   return (
     <Page
       className={_className}
-      name='PAGES.SUPPORT'
+      name='LABEL.SUPPORT'
       menu={[{ start: 'add', tooltip: 'new request' }]}
       {...otherProps}
     >

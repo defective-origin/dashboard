@@ -21,7 +21,7 @@ export type AppContentProps = ContentProps
  * @example
  * <AppContent />
  */
-export function AppContent(props: AppContentProps): JSX.Element {
+export function AppContent(props: AppContentProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppContent, className)
 

@@ -1,11 +1,9 @@
-import mock from './Widget.mock'
+import mocks from './Widget.mocks'
 import model from './Widget.model'
-import router from './Widget.api'
-
-export * from './Widget.model'
+import api from './Widget.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

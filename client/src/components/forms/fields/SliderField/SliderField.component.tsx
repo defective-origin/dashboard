@@ -23,7 +23,7 @@ export type SliderFieldProps = FieldProps<number | number[]> & {
  * @example
  * <SliderField />
  */
-export function SliderField(props: SliderFieldProps): JSX.Element {
+export function SliderField(props: SliderFieldProps) {
   const { value = 0, marks, onChange, className, ...otherProps } = props
   const _className = cn(css.SliderField, className)
   const handleChange = useCallback((event: Event, value: number | number[]) =>

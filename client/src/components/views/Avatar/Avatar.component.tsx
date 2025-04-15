@@ -31,7 +31,7 @@ export type AvatarProps = {
  * @example
  * <Avatar />
  */
-export function Avatar(props: AvatarProps): JSX.Element {
+export function Avatar(props: AvatarProps) {
   const { src, size, alt = 'user image', content, children = content, className, ...otherProps } = props
   const _className = cn(css.Avatar, {
     [`icon--${size}`]: size,

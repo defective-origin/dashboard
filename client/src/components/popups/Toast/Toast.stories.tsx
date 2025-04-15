@@ -1,24 +1,19 @@
 // eslint-disable-next-line no-restricted-imports
-import { SB_CSS, field, params } from '../../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Block from 'components/layouts/Block'
-import useToast from './Toast.hook'
 import Toast, { ToastOptions } from './Toast.component'
 import { DIRECTION, COLORS } from 'theme'
 import Button from 'components/actions/Button'
+import { toast } from './Toast.tools'
 
 const Notification = (props: ToastOptions) => {
-  const notification = useToast()
-  const checkMessage = () => notification.message(props)
-  const checkGuard = () => notification.guard(props)
-  const checkAlert = () => notification.alert(props)
-
   return (
     <Block height={400} width={600} style={{ overflow: 'hidden' }} justifies='center' aligns='center' border={SB_CSS.border}>
       <Block v='x' g='xs' p='xs'>
-        <Button size='xxs' v='outlined' content='ALERT' color='info' onClick={checkAlert} />
-        <Button size='xxs' v='outlined' content='GUARD' color='error' onClick={checkGuard} />
-        <Button size='xxs' v='outlined' content='MESSAGE' color='warning' onClick={checkMessage} />
+        <Button size='xxs' v='outlined' content='ALERT' color='info' onClick={() => toast.alert(props)} />
+        <Button size='xxs' v='outlined' content='GUARD' color='error' onClick={() => toast.guard(props)} />
+        <Button size='xxs' v='outlined' content='MESSAGE' color='warning' onClick={() => toast.message(props)} />
       </Block>
 
       <Toast.Container name='alerts' position='top-center' width={400} />

@@ -5,3 +5,4 @@ export { default } from './Skeleton.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Skeleton.component'
+export * from './Skeleton.hoc'

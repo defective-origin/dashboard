@@ -1,0 +1,13 @@
+@import '/src/theme';
+
+:root {
+  // --ui-framework-color: var(--account-framework-color);
+}
+
+.TagsField {
+  :global(.MuiChip-root) {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background: transparent;
+  }
+}

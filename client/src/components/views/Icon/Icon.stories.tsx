@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Icon, { IconProps } from './Icon.component'
 import Block from 'components/layouts/Block'
 import { COLORS, SIZES } from 'theme'
-import { ICONS } from './Icon.constant'
+import { ICONS } from './Icon.constants'
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Views/Icon',

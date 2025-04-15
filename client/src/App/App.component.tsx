@@ -24,9 +24,22 @@ export type AppProps = LayoutProps
  * @example
  * <App />
  */
-export function App(props: AppProps): JSX.Element {
+export function App(props: AppProps) {
   const { children, className, ...otherProps } = props
   const _className = cn('app', className)
+
+  // TODO: избегать функций и хуков по возможности. Использовать глобальные вызовы. например modal({}), toast.success()
+
+  // TODO: add knip script to clear unused exports and unused files and codes
+
+  // TODO: change and load account theme
+  // TODO: add network health-check and other services
+
+  // TODO: update account theme on app theme change
+  // TODO: useEffect(() => account.update({ user: { settings: { theme: theme.current.toUpperCase() } } }), [theme])
+
+  // TODO: update app theme on account load
+  // TODO: useEffect(() => theme.set(account.user?.settings.theme.toLowerCase()), [account])
 
   return (
     <Layout className={_className} stretch v='left' {...otherProps}>

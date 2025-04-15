@@ -23,8 +23,7 @@
     "gen:init": "plop --plopfile ./generator/generator.init.js --dest ./src",
     "stories": "storybook dev -p 6006",
     "stories:build": "storybook build --docs",
-    "deps": "dpdm --no-warning --no-tree ./src/main.tsx",
-    "deps:tree": "dpdm --no-warning ./src/main.tsx"
+    "deps": "madge --circular ./src/main.tsx"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -33,10 +32,11 @@
     "@tanstack/react-query": "5.71.10",
     "axios": "1.8.4",
     "classnames": "2.5.1",
-    "i18next": "^24.2.3",
+    "html-to-image": "1.11.13",
+    "i18next": "24.2.3",
     "i18next-browser-languagedetector": "8.0.4",
     "i18next-http-backend": "3.0.2",
-    "json-edit-react": "^1.25.0",
+    "json-edit-react": "1.25.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-helmet": "6.1.0",
@@ -44,6 +44,7 @@
     "react-router-dom": "7.5.0",
     "react-toastify": "11.0.5",
     "recharts": "2.15.2",
+    "vite-plugin-pwa": "1.0.0",
     "weak-key": "1.0.3"
   },
   "devDependencies": {
@@ -70,12 +71,12 @@
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "@vitejs/plugin-react-swc": "3.6.0",
-    "dpdm": "3.14.0",
     "eslint": "8.57.0",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-refresh": "0.4.6",
     "eslint-plugin-storybook": "0.8.0",
     "jsdom": "24.0.0",
+    "madge": "8.0.0",
     "plop": "4.0.1",
     "sass": "1.75.0",
     "storybook": "8.0.8",

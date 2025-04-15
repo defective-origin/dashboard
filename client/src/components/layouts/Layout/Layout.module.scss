@@ -45,6 +45,43 @@
       grid-auto-rows: 1fr;
     }
 
+    &--lcr {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas:'left center right';
+    }
+
+    &--lc {
+      grid-template-columns: auto 1fr;
+      grid-template-areas:'left center';
+    }
+
+    &--cr {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:'center right';
+    }
+
+    &--tcb {
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        'top'
+        'center'
+        'bottom';
+    }
+
+    &--tc {
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        'top'
+        'center';
+    }
+
+    &--cb {
+      grid-template-rows: 1fr auto;
+      grid-template-areas:
+        'center'
+        'bottom';
+    }
+
     &--rows {
       @include init-markup;
 

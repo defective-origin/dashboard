@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Clipboard from './Clipboard.component'
-// import useClipboard from './Clipboard.hook'
+// import useClipboard from './Clipboard.hooks'
 // import ClipboardProvider, Clipboard from './Clipboard.context'
 
 describe('[Clipboard] component', () => {

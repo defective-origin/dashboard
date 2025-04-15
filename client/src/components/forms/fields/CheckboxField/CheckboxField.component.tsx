@@ -38,7 +38,7 @@ export type CheckboxFieldProps = FieldProps<CheckboxValue> & {
  * @example
  * <CheckboxField />
  */
-export function CheckboxField(props: CheckboxFieldProps): JSX.Element {
+export function CheckboxField(props: CheckboxFieldProps) {
   const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
   const _className = cn(css.CheckboxField, className)
 

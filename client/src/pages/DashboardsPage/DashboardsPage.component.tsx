@@ -6,14 +6,14 @@ import { t } from 'locale'
 import { Board, useBoards } from 'api'
 
 // ---| pages |---
-import SelectPage, { SelectPageProps } from 'pages/SearchPage'
+import SearchPage, { SearchPageProps } from 'pages/SearchPage'
 
 // ---| screens |---
 // ---| components |---
 // ---| self |---
 import css from './DashboardsPage.module.scss'
 
-export type DashboardsPageProps = Partial<SelectPageProps<Board>>
+export type DashboardsPageProps = Partial<SearchPageProps<Board>>
 
 /**
  * Component description.
@@ -22,20 +22,20 @@ export type DashboardsPageProps = Partial<SelectPageProps<Board>>
  * @example
  * <DashboardsPage />
  */
-export function DashboardsPage(props: DashboardsPageProps): JSX.Element {
+export function DashboardsPage(props: DashboardsPageProps) {
   const { className } = props
   const _className = cn(css.DashboardsPage, className)
   const boards = useBoards()
 
+  // TODO: add markups to preview card
+
   return (
-    <SelectPage
+    <SearchPage
       className={_className}
-      name='PAGES.DASHBOARDS'
+      name='LABEL.DASHBOARDS'
       to='BOARD'
-      menu={[
-        { start: 'add', tooltip: t('ACTION.ADD_BOARD') },
-      ]}
       items={boards.data}
+      onCreate={() => console.log('create')}
     />
   )
 }

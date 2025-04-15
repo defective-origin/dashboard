@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import MuiTextField from '@mui/material/TextField'
+import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -14,6 +14,7 @@ import css from './TextField.module.scss'
 
 export type TextFieldProps = FieldProps<string> & {
   multiline?: boolean
+  slotProps?: MuiTextFieldProps['slotProps']
 }
 
 /**
@@ -23,7 +24,7 @@ export type TextFieldProps = FieldProps<string> & {
  * @example
  * <TextField />
  */
-export function TextField(props: TextFieldProps): JSX.Element {
+export function TextField(props: TextFieldProps) {
   const { value = '', onChange, className, ...otherProps } = props
   const _className = cn(css.TextField, className)
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>

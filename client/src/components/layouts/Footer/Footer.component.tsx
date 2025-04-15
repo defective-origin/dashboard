@@ -20,7 +20,7 @@ export type FooterProps = BlockProps
  * @example
  * <Footer />
  */
-export function Footer(props: FooterProps): JSX.Element {
+export function Footer(props: FooterProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Footer, className)
 

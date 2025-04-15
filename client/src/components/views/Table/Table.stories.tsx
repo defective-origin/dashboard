@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Text from 'components/views/Text'
 import Table, { TableProps } from './Table.component'
-import { TableColumn } from './Table.type'
-import column from './Table.tool'
+import { TableColumn } from './Table.types'
+import column from './Table.tools'
 import { Color } from 'theme'
 
 type Item = {

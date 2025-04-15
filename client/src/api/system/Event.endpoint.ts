@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { TimeStamps } from '../api.type'
+import { TimeStamps } from '../api.types'
 import api from '../api.endpoint'
 
 const PATHNAME = 'system/events'
@@ -15,5 +15,5 @@ export type EventReturnOptions = (name: EventName) => Promise<void>
 export const useEvent = (): EventReturnOptions => {
   const create = api.useRestCreateEndpoint<Event>(PATHNAME)
 
-  return useCallback((name: EventName) => create.mutateAsync({ name }), [create])
+  return useCallback((name: EventName) => create({ name }), [create])
 }

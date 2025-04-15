@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import SearchPage from './SearchPage.component'
-// import useSearchPage from './SearchPage.hook'
+// import useSearchPage from './SearchPage.hooks'
 // import SearchPageProvider, SearchPage from './SearchPage.context'
 
 describe('[SearchPage] component', () => {

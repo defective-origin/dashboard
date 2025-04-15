@@ -13,7 +13,6 @@
       "exports": "always-multiline",
       "functions": "always-multiline"
     }],
-    // general
     "indent": ["warn", 2],
     "semi": ["warn", "never"],
     "quotes": ["warn", "single"],
@@ -28,7 +27,7 @@
     "padding-line-between-statements": ["warn",
       { "blankLine": "always", "prev": "let", "next": "return" },
       { "blankLine": "always", "prev": "const", "next": "return" },
-      { "blankLine": "always", "prev": "block-like", "next": "return" },
+      { "blankLine": "always", "prev": "block-like", "next": "return" }
     ],
     "object-curly-newline": ["warn", {
       "multiline": true,

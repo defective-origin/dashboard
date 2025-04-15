@@ -21,17 +21,17 @@ export type AppHeaderProps = HeaderProps
  * @example
  * <AppHeader />
  */
-export function AppHeader(props: AppHeaderProps): JSX.Element {
+export function AppHeader(props: AppHeaderProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AppHeader, className)
 
   return (
-    <Header className={_className} as='header' area='top' justifies='space-between' v='x' aligns='center' g='xxs' p='xxs' {...otherProps}>
+    <Header className={_className} as='header' area='top' justifies='space-between' g='xxs' p='xxs' v='lcr' columns='1fr auto 1fr' {...otherProps}>
       {children}
 
-      <Portal.Container name='page-name' v='x' aligns='center' g='xxs' />
-      <Portal.Container name='page-nav' v='x' aligns='center' g='xxs' />
-      <Portal.Container name='page-extra' v='x' aligns='center' g='xxs' justifies='end' />
+      <Portal.Container name='page-name' v='x' aligns='center' g='xxs' area='left' />
+      <Portal.Container name='page-nav' v='x' aligns='center' g='xxs' area='center' />
+      <Portal.Container name='page-extra' v='x' aligns='center' g='xxs' justifies='end' area='right' />
     </Header>
   )
 }

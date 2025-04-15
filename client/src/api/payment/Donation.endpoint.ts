@@ -1,4 +1,4 @@
-import { ChangeStamps, Ref } from '../api.type'
+import { ChangeStamps, Ref } from '../api.types'
 import api from '../api.endpoint'
 
 const PATHNAME = 'payment/donation'

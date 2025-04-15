@@ -3,8 +3,6 @@ import { render } from 'tests'
 
 // ---| self |---
 import AppContent from './AppContent.component'
-// import useAppContent from './AppContent.hook'
-// import AppContentProvider, AppContent from './AppContent.context'
 
 describe('[AppContent] component', () => {
   it('should render component', () => {

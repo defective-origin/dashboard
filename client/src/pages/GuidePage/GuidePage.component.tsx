@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
 import { t } from 'locale'
+import { useGuides, useGuideMutations, Guide } from 'api'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
-
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
-import Image from 'components/views/Image'
-import Block from 'components/layouts/Block'
+import Button from 'components/actions/Button'
+import { modal } from 'components/popups/Modal'
 import Actions from 'components/actions/Actions'
+import ConfirmModal from 'screens/modals/ConfirmModal'
 
 // ---| self |---
 import css from './GuidePage.module.scss'
@@ -26,99 +27,82 @@ export type GuidePageProps = PageProps
  * @example
  * <GuidePage />
  */
-export function GuidePage(props: GuidePageProps): JSX.Element {
+export function GuidePage(props: GuidePageProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.GuidePage, className)
-  const style = { justifyContent: 'left' }
+  const [current, setCurrent] = useState<Guide>()
+  const guides = useGuides()
+  const mutations = useGuideMutations()
   // TODO: https://www.npmjs.com/package/tinymce
+
+  // TODO: https://mui.com/x/react-tree-view/
+
+  useEffect(() => {
+    if (guides.data) {
+      setCurrent(guides.data[0])
+    }
+  }, [guides.data])
 
   return (
     <Page
       className={_className}
-      name='PAGES.GUIDE'
+      name='LABEL.GUIDE'
+      g='xs'
+      p='xs'
+      v='lcr'
       menu={[
-        { start: 'visibility', tooltip: true ? t('ACTION.TURN_OFF') : t('ACTION.TURN_ON') },
+        { start: 'add', tooltip: t('ACTION.CREATE_NEW') },
         { start: 'edit_square', tooltip: t('ACTION.EDIT') },
-        { start: 'delete_forever', tooltip: t('ACTION.REMOVE') },
-        { start: 'add', tooltip: t('ACTION.ADD_TOPIC') },
+        {
+          start: 'delete_forever',
+          tooltip: t('ACTION.REMOVE'),
+          onClick: () => modal({
+            name: 'confirm',
+            content: t('MESSAGE.CONFIRM.REMOVE'),
+            onSuccess: () => mutations.remove(current),
+          }),
+        },
       ]}
       {...otherProps}
     >
-      <Page.LeftAside width={400} p='xs'>
+      <Page.LeftAside className={css.Aside} width={400} p='xs'>
         <Text content='Topics' />
 
         <Actions
           v='y'
           size='xs'
           aligns='stretch'
-          items={[
-            { content: 'Topic 1', style },
-            { content: 'Topic 2', style },
-            { content: 'Topic 3', style },
-            { content: 'Topic 4', style },
-            { content: 'Topic 5', style },
-            { content: 'Topic 6', style },
-            { content: 'Topic 7', style },
-            { content: 'Topic 8', style },
-          ]}
+          items={guides.data?.map(guide => ({
+            content: guide.name,
+            active: current?.id === guide.id,
+            end: (
+              <Button
+                size='xs'
+                start='visibility'
+                active={guide?.disabled}
+                tooltip={guide?.disabled ? t('ACTION.TURN_OFF') : t('ACTION.TURN_ON')}
+                onClick={event => {
+                  event.stopPropagation()
+                  mutations.update({ ...guide, disabled: !guide?.disabled })
+                }}
+              />
+            ),
+            style: { justifyContent: 'left' },
+            onClick: () => setCurrent(guide),
+          }))}
         />
       </Page.LeftAside>
 
-      <Page.Content p='xs' g='sm' scroll='y'>
-        <Text v='h2' content='Topic' />
+      <Page.Content className={css.Content} p='xs' g='sm' scroll='y'>
+        <Text v='h2' content={current?.name} />
 
-        <Block height='min-content'>
-          <Text v='h3' content='Title 1' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 2' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 3' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 4' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 5' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 6' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 7' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
-        <Block height='min-content'>
-          <Text v='h3' content='Title 8' />
-          <Text v='body2' content={'content '.repeat(50)} />
-          <Image width='100%' height={300} />
-        </Block>
-
+        {current?.content}
         {children}
+
+        <ConfirmModal />
       </Page.Content>
 
-      <Page.RightAside width={400} p='xs'>
+      <Page.RightAside className={css.Aside} width={400} p='xs'>
         <Text content='Chapters' />
 
         <Actions
@@ -126,14 +110,14 @@ export function GuidePage(props: GuidePageProps): JSX.Element {
           size='xs'
           aligns='stretch'
           items={[
-            { content: 'Title 1', style },
-            { content: 'Title 2', style },
-            { content: 'Title 3', style },
-            { content: 'Title 4', style },
-            { content: 'Title 5', style },
-            { content: 'Title 6', style },
-            { content: 'Title 7', style },
-            { content: 'Title 8', style },
+            { content: 'Title 1', style: { justifyContent: 'left' } },
+            { content: 'Title 2', style: { justifyContent: 'left' } },
+            { content: 'Title 3', style: { justifyContent: 'left' } },
+            { content: 'Title 4', style: { justifyContent: 'left' } },
+            { content: 'Title 5', style: { justifyContent: 'left' } },
+            { content: 'Title 6', style: { justifyContent: 'left' } },
+            { content: 'Title 7', style: { justifyContent: 'left' } },
+            { content: 'Title 8', style: { justifyContent: 'left' } },
           ]}
         />
       </Page.RightAside>

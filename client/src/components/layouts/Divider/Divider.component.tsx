@@ -30,9 +30,9 @@ export type DividerProps = Omit<TextProps, 'v'> & {
  * @example
  * <Divider v='y' content='text' format='uppercase' />
  */
-export function Divider(props: DividerProps): JSX.Element {
+export function Divider(props: DividerProps) {
   const { v ='x', content, children, className, ...otherProps } = props
-  const _className = cn(css.Divider, className)
+  const _className = cn(css.Divider, css[v], className)
   const hasContent = content ?? children
   const _content = children ?? <Text content={content} {...otherProps} />
 

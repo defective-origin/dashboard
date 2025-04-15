@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
-import { SerializationMiddleware, UserStampsMiddleware } from './Database.middleware'
+import * as middlewares from './Database.middlewares'
 
 // add plugins. It should be applied before model creation
 // https://mongoosejs.com/docs/plugins.html#apply-plugins-before-compiling-models
-mongoose.plugin(UserStampsMiddleware)
-mongoose.plugin(SerializationMiddleware)
+mongoose.plugin(middlewares.UserStampsMiddleware)
+mongoose.plugin(middlewares.SerializationMiddleware)
 
 export function init() {
   mongoose.set("strictQuery", false)

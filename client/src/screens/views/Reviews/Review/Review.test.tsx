@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Review from './Review.component'
-// import useReview from './Review.hook'
+// import useReview from './Review.hooks'
 // import ReviewProvider, Review from './Review.context'
 
 describe('[Review] component', () => {

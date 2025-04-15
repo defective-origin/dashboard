@@ -39,7 +39,7 @@ export type RadarChartProps = ChartProps<typeof RADAR_ITEMS_MAP> & {
  * @example
  * <RadarChart />
  */
-export function RadarChart(props: RadarChartProps): JSX.Element {
+export function RadarChart(props: RadarChartProps) {
   const { formats, radius, angle, grid, children, className, ...otherProps } = props
   const _className = cn(css.RadarChart, className)
   const formatMap = useChartFormats(formats)

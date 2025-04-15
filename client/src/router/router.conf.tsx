@@ -1,25 +1,23 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 // ---| core |---
-import App from 'App/App.component'
+import App from 'App'
 
 // ---| pages |---
 import GuidePage from 'pages/GuidePage'
 import BannerPage from 'pages/BannerPage'
 import SupportPage from 'pages/SupportPage'
 import AccountPage from 'pages/AccountPage'
+import DonationPage from 'pages/DonationPage'
+import WidgetPage from 'pages/WidgetPage'
+import WidgetsPage from 'pages/WidgetsPage'
+import DashboardPage from 'pages/DashboardPage'
+import DashboardsPage from 'pages/DashboardsPage'
 import AccountWidgetsPage from 'pages/AccountWidgetsPage'
 import AccountDashboardsPage from 'pages/AccountDashboardsPage'
-import DonationPage from 'pages/DonationPage'
-import DashboardsPage from 'pages/DashboardsPage'
-import DashboardPage from 'pages/DashboardPage'
-import WidgetsPage from 'pages/WidgetsPage'
-import WidgetPage from 'pages/WidgetPage'
-import WidgetViewsPage from 'pages/WidgetViewsPage'
-import WidgetViewPage from 'pages/WidgetViewPage'
 
 // ---| self |---
-import { ROUTE_LINKS } from './router.constant'
+import { ROUTE_LINKS } from './router.constants'
 
 
 export const APP_ROUTES = createBrowserRouter([
@@ -32,8 +30,12 @@ export const APP_ROUTES = createBrowserRouter([
       { path: ROUTE_LINKS.BOARD, element: <DashboardPage /> },
       { path: ROUTE_LINKS.WIDGETS, element: <WidgetsPage /> },
       { path: ROUTE_LINKS.WIDGET, element: <WidgetPage /> },
-      { path: ROUTE_LINKS.WIDGET_VIEWS, element: <WidgetViewsPage /> },
-      { path: ROUTE_LINKS.WIDGET_VIEW, element: <WidgetViewPage /> },
+      { path: ROUTE_LINKS.APPS, element: <></> },
+      { path: ROUTE_LINKS.APP, element: <></> },
+      { path: ROUTE_LINKS.SERVICES, element: <></> },
+      { path: ROUTE_LINKS.SERVICE, element: <></> },
+      { path: ROUTE_LINKS.TRANSLATES, element: <></> },
+      { path: ROUTE_LINKS.TRANSLATE, element: <></> },
       {
         path: ROUTE_LINKS.ACCOUNT,
         element: <AccountPage />,

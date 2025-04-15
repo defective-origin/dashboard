@@ -1,4 +1,4 @@
-import { TimeStamps } from '../api.type'
+import { TimeStamps } from '../api.types'
 import api from '../api.endpoint'
 
 const PATHNAME = 'payment/expenses'

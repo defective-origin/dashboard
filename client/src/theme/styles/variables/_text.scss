@@ -1,7 +1,7 @@
 @import '../tools';
 
 $text-name: text;
-
+// TODO: move to Text component? or leave possibility to use from anywhere
 // size
 $text-size-name: init-name($text-name, size);
 $text-size-map: init-size-map(12, 16, 20, 24, 32, 40, 48);

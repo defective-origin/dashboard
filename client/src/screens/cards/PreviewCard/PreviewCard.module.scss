@@ -13,4 +13,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
+  padding: 4px;
+  border-radius: 4px;
+  border: var(--border);
+  background: var(--card-background);
 }

@@ -1,12 +1,13 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Modal, { ModalProps } from './Modal.component'
-import useModal from './Modal.hook'
+import useModal from './Modal.hooks'
 import Button from 'components/actions/Button'
+import { modal } from './Modal.tools'
 
-const VARIANTS: ModalProps['v'][] = ['center', 'right']
-const NAMES: ModalProps['name'][] = ['global', 'board-settings', 'widget-settings']
+const VARIANTS: ModalProps['position'][] = ['center', 'right']
+const NAMES: ModalProps['name'][] = ['global']
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Popups/Modal',
@@ -16,7 +17,7 @@ const meta: Meta<typeof Modal> = {
     className: field.string(),
     title: field.reactNode(),
     children: field.reactNode(),
-    v: field.variants(VARIANTS, 'ModalVariant'),
+    position: field.variants(VARIANTS, 'ModalVariant'),
     name: field.variants(NAMES, 'ModalName'),
   },
 }
@@ -26,8 +27,6 @@ export default meta
 type Story = StoryObj<typeof Modal>
 
 const render = (props: ModalProps) => {
-  const modal = useModal()
-
   return (
     <>
       <Modal {...props}>
@@ -43,7 +42,7 @@ export const Demo: Story = {
   parameters: params('Modal'),
   render,
   args: {
-    v: 'center',
+    position: 'center',
     title: 'Title',
     name: 'global',
     actions: [

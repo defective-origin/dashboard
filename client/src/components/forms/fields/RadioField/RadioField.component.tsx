@@ -24,7 +24,7 @@ export type RadioFieldProps = FieldProps & {
  * @example
  * <RadioField />
  */
-export function RadioField(props: RadioFieldProps): JSX.Element {
+export function RadioField(props: RadioFieldProps) {
   const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
   const _className = cn(css.RadioField, className)
 

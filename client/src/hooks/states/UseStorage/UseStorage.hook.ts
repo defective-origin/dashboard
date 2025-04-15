@@ -1,19 +1,11 @@
-import { useCallback, useLayoutEffect, useState } from 'react'
-import useEvent from '../../dom/UseEvent'
-
-const STORAGE_MAP = {
-  local: localStorage,
-  session: sessionStorage,
-}
-
-type StorageName = keyof typeof STORAGE_MAP
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { LocalStorage, SessionStorage, BrowserStorage } from 'tools'
 
 export type StorageOptions<T> = {
   defaultValue?: T
-  type?: StorageName
+  storage: BrowserStorage
 }
 
-export type StorageReturnOptions<T> = [T, (value: T) => void]
 // export type StorageManager = null
 
 /**
@@ -21,25 +13,18 @@ export type StorageReturnOptions<T> = [T, (value: T) => void]
  * LocalStorage is used by default
  *
  * @example
- * const [value, setValue] = useStorage('VALUE_NAME', options)
+ * const [value, setValue] = useStorage('VALUE_NAME', DEFAULT_VALUE)
  */
-export const useStorage = <T>(name: string, options: StorageOptions<T> = {}): StorageReturnOptions<T> => {
-  const [state, setState] = useState<T>(options.defaultValue as T)
-  const type = options?.type ?? 'local'
-  const key = `${type}:storage:${name}`
-  const storage = STORAGE_MAP[type]
+export const useStorage = <T>(key: string, options: StorageOptions<T>) => {
+  const { defaultValue, storage } = options
+  const [state, setState] = useState<T | undefined>(defaultValue)
 
-  const get = useCallback(() => {
-    const storeValue = storage.getItem(name)
-    const parsedValue = storeValue && JSON.parse(storeValue)
-
-    return parsedValue
-  }, [name, storage])
-
+  const get = useCallback(() => storage.get(key, defaultValue), [defaultValue, key, storage])
+  const mutate = useCallback((callback: (prev?: T) => T) => storage.mutate(key, callback, defaultValue), [defaultValue, key, storage])
   const set = useCallback((val: T) => {
-    storage.setItem(name, JSON.stringify(val))
-    document.body.dispatchEvent(new CustomEvent(key))
-  }, [key, name, storage])
+    setState(val)
+    storage.set(key, val)
+  }, [key, storage])
 
   // initialize state
   useLayoutEffect(() => {
@@ -49,17 +34,29 @@ export const useStorage = <T>(name: string, options: StorageOptions<T> = {}): St
     } else if (options.defaultValue != undefined) {
       set(options.defaultValue)
     }
-  }, [get, set, options.defaultValue])
-
-  // subscribes on storage change
-  useEvent(key, () => set(get()))
+  }, [get, options.defaultValue, set])
 
 
-  return [state, set]
+  // subscribe on change
+  useEffect(() => {
+    const update = (newValue?: T) => setState(newValue)
+
+    storage.subscribe(key, update)
+
+    return () => storage.unsubscribe(key, update)
+  }, [get, key, storage])
+
+
+  return {
+    state,
+    get,
+    set,
+    mutate,
+  }
 }
 
-export const useLocalStorage = <T>(name: string, options?: StorageOptions<T>) => useStorage<T>(name, { type: 'local', ...options })
-export const useSessionStorage = <T>(name: string, options?: StorageOptions<T>) => useStorage<T>(name, { type: 'session', ...options })
+export const useLocalStorage = <T>(key: string, defaultValue?: T) => useStorage<T>(key, { storage: LocalStorage, defaultValue })
+export const useSessionStorage = <T>(key: string, defaultValue?: T) => useStorage<T>(key, { storage: SessionStorage, defaultValue })
 
 export default useStorage
 

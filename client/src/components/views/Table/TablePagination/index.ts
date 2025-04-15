@@ -5,4 +5,3 @@ export { default } from './TablePagination.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './TablePagination.component'
-export * from './TablePagination.hook'

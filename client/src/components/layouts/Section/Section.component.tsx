@@ -28,7 +28,7 @@ export type SectionProps = LayoutProps & {
  * @example
  * <Section />
  */
-export function Section(props: SectionProps): JSX.Element {
+export function Section(props: SectionProps) {
   const { scroll, v, g, title, actions, children, className, ...otherProps } = props
   const _className = cn(css.Section, className)
 
@@ -36,7 +36,7 @@ export function Section(props: SectionProps): JSX.Element {
   return (
     <Layout className={_className} v='y' g='xs' {...otherProps}>
       {(title || actions) && (
-        <Block className={css.Header}>
+        <Block className={css.Header} v='x' justifies='space-between'>
           <Text className={css.Title} content={title} v='h3' />
 
           <Actions className={css.Actions} items={actions} />

@@ -48,15 +48,11 @@ export type PortalContainerProps = BlockProps & {
  * @example
  * <Portal.Container name='page-name' />
  */
-export function PortalContainer(props: PortalContainerProps): JSX.Element {
+Portal.Container = function PortalContainer(props: PortalContainerProps) {
   const { name, children, className, ...otherProps } = props
   const _className = cn(css.PortalContainer, className)
 
   return <Block id={initPortalKey(name)} className={_className} {...otherProps}>{children}</Block>
 }
-
-PortalContainer.displayName = 'PortalContainer'
-
-Portal.Container = PortalContainer
 
 export default Portal

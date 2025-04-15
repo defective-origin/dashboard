@@ -1,8 +1,8 @@
 // ---| self |---
-import * as tools from './Nil.tool'
+import * as tools from './Nil.tools'
 
-describe('[Nil] tool', () => {
-  describe('[isNull] action', () => {
+describe('[Nil] tools', () => {
+  describe('[isNull] func', () => {
     it('should return true if value is null', () => {
       expect(tools.isNull(null)).toEqual(true)
       expect(tools.isNull(0)).toEqual(false)
@@ -13,7 +13,7 @@ describe('[Nil] tool', () => {
     })
   })
 
-  describe('[isUndefined] action', () => {
+  describe('[isUndefined] func', () => {
     it('should return true if value is undefined', () => {
       expect(tools.isUndefined(undefined)).toEqual(true)
       expect(tools.isUndefined(0)).toEqual(false)
@@ -24,7 +24,7 @@ describe('[Nil] tool', () => {
     })
   })
 
-  describe('[isNil] action', () => {
+  describe('[isNil] func', () => {
     it('should return true if value is undefined or null', () => {
       expect(tools.isNil(undefined)).toEqual(true)
       expect(tools.isNil(null)).toEqual(true)

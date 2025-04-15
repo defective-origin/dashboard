@@ -52,7 +52,7 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 	- templates/
 	- generator.init.ts
 	- generator.parts.ts
-	- generator.tool.ts
+	- generator.tools.ts
 	- generator.prompt.ts
 	- generator.action.ts
 	
@@ -66,7 +66,7 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 		- models/
 
   - __tools/__ -- contains general independent code/features which can be moved into packages, overriding packages.
-  	- ToolUsageTypeName.tool.ts
+  	- ToolUsageTypeName.tools.ts
   	- ToolUsageTypeName.other-extensions.ts
   	- index.ts
 
@@ -80,22 +80,22 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
   - __api/__ -- contains tools and handlers for work with network interaction
     - __ApiSliceName__ -- Each api  endpoint does default export. Methods receive data from server API or browser API
       - ApiSliceName.conf.ts
-      - ApiSliceName.hook.ts -- containes unified api useApiNameApiManager hook to handle equals server reponse, caching, cancellation of requests
-      - ApiSliceName.mock.ts -- has mock object hook for jest.spy and mock data
-      - ApiSliceName.schema.ts -- contains data validations and models for METADATA, RESPONSE, ERROR RESPONSE
-      - ApiSliceName.model.ts -- containes only models for data received from api and Errors
-      - ApiSliceName.error.ts -- containes errors
+      - ApiSliceName.hooks.ts -- containes unified api useApiNameApiManager hook to handle equals server reponse, caching, cancellation of requests
+      - ApiSliceName.mocks.ts -- has mock object hook for jest.spy and mock data
+      - ApiSliceName.schemas.ts -- contains data validations and models for METADATA, RESPONSE, ERROR RESPONSE
+      - ApiSliceName.models.ts -- containes only models for data received from api and Errors
+      - ApiSliceName.errors.ts -- containes errors
       - ApiSliceName.test.ts
-      - ApiSliceName.tool.ts
+      - ApiSliceName.tools.ts
       - index.ts
 
     - api.conf.ts
     - api.context.ts
-    - api.tool.ts
-    - api.hook.ts
-    - api.model.ts
-    - api.interceptor.ts -- contains request interceptors
-    - api.error.ts -- Base | Response | Request errors
+    - api.tools.ts
+    - api.hooks.ts
+    - api.models.ts
+    - api.interceptors.ts -- contains request interceptors
+    - api.errors.ts -- Base | Response | Request errors
     - index.ts -- configurations and settings - export useApiManager hook
 
   - __assets/__ -- contains all assets which should be loaded with application
@@ -109,7 +109,7 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
   
   - __theme/__ -- folder for global styles, handlers, providers, configs, types
     - __styles/__
-  		- tool/ -- mixins, functions ....
+  		- tools/ -- mixins, functions ....
   		- theme/ -- color, size theme configurations
   		- variables/ -- element styles, tools, settings
     	- _index.scss
@@ -133,15 +133,15 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 			//- separated component approach [outdated] -//
       - ComponentName.container.tsx -- contains container which contains only logic and render view component [outdated]
       - ComponentName.view.tsx -- contains view which render data getting from props [outdated]
-      - ComponentName.model.tsx -- contains models which is used in view and container [outdated]
+      - ComponentName.models.tsx -- contains models which is used in view and container [outdated]
 			//- simple component approach -//
       - ComponentName.component.tsx
       - ComponentName.module.scss
-      - ComponentName.hook.ts
+      - ComponentName.hooks.ts
       - ComponentName.context.ts
       - ComponentName.conf.ts
-      - ComponentName.tool.ts
-      - ComponentName.error.ts
+      - ComponentName.tools.ts
+      - ComponentName.errors.ts
       - ComponentName.test.ts
       - ComponentName.conf.ts -- default conf for component. Also can includes types
 			- ComponentName.stories.json -- config for storybook
@@ -155,10 +155,10 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 
 	- __locale/__ -- contains localized labels, texts, digits, signs, ...
 		- index.ts -- configurations and settings
-		- locale.tool.ts
+		- locale.tools.ts
 		- locale.conf.tsx
 		- locale.context.tsx
-		- locale.hook.ts
+		- locale.hooks.ts
 		- locale.test.ts
 		- __i18n/__
 			- en.json
@@ -187,27 +187,27 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 			- index.ts
 		- router.component.ts
 		- router.conf.ts
-		- router.tool.ts
-		- router.hook.ts
-		- router.model.ts
-		- router.error.ts
+		- router.tools.ts
+		- router.hooks.ts
+		- router.models.ts
+		- router.errors.ts
 		- router.context.tsx
 		- index.ts -- configurations and settings
 
   - __store/__ -- contains project store (use redux-toolkit)
     - index.ts -- store configurations and settings
     - store.conf.ts
-    - store.tool.ts
-    - store.hook.ts
-    - store.model.ts
-    - store.error.ts
-    - store.mock.ts -- has mock object hook for jest.spy and mock data
+    - store.tools.ts
+    - store.hooks.ts
+    - store.models.ts
+    - store.errors.ts
+    - store.mocks.ts -- has mock object hook for jest.spy and mock data
     - __StoreSlice/__
       - StoreSlice.slice.ts
       - StoreSlice.thunk.ts -- outdated - use hooks instead (managers)
-      - StoreSlice.selector.ts
-      - StoreSlice.hook.ts -- contains useManagerNameStoreManager hook - which call dispatch and select data and also MOCK for it
-      - StoreSlice.mock.ts -- has mock object hook for jest.spy and mock data
+      - StoreSlice.selectors.ts
+      - StoreSlice.hooks.ts -- contains useManagerNameStoreManager hook - which call dispatch and select data and also MOCK for it
+      - StoreSlice.mocks.ts -- has mock object hook for jest.spy and mock data
       - StoreSlice.test.ts
       - index.ts
 	
@@ -222,8 +222,8 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
   - __web-workers/__ -- contains configs and settings for web-workers
     - __WebWorkerNameWW/__
       - WebWorkerTypeNameWW.ww.ts
-      - WebWorkerTypeNameWW.tool.ts
-      - WebWorkerTypeNameWW.error.ts
+      - WebWorkerTypeNameWW.tools.ts
+      - WebWorkerTypeNameWW.errors.ts
       - index.ts
     - index.ts
 
@@ -248,7 +248,7 @@ CLIENT STRUCTURE -- all parts should be modular and should keep Facade/Adapter p
 	- .stylelintrc.json -- styles style config
 	- .gitignore
 	- .package.json -- project config
-	- .storybook/ -- config of tool for UI development
+	- .storybook/ -- config of tools for UI development
 	- README.md -- project description
 	- tsconfig.json -- program language config
 	- yarn.lock -- package manager cache

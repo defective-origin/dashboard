@@ -5,4 +5,4 @@ export { default } from './Item.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Item.component'
-export * from './Item.hook'
+export * from './Item.hooks'

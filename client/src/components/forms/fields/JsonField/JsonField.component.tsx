@@ -24,11 +24,13 @@ export type JsonFieldProps = FieldProps<object>
  * @example
  * <JsonField />
  */
-export function JsonField(props: JsonFieldProps): JSX.Element {
+export function JsonField(props: JsonFieldProps) {
   const { disabled, value = {}, onChange, className, ...otherProps } = props
   const _className = cn(css.JsonField, className)
 
   const handleChange = useCallback<UpdateFunction>(opts => onChange?.(opts.newData as object), [onChange])
+
+  // TODO: add select field for enums
 
   return (
     <JsonEditor

@@ -25,7 +25,7 @@ export type UserProps = BlockProps & {
  * @example
  * <User />
  */
-export function User(props: UserProps): JSX.Element {
+export function User(props: UserProps) {
   const { id, className, ...otherProps } = props
   const _className = cn(css.User, className)
   const user = useUser(id)

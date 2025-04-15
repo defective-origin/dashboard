@@ -7,7 +7,6 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Repeat from 'components/layouts/Repeat'
 import Button, { ButtonProps } from 'components/actions/Button'
 
 // ---| self |---
@@ -26,7 +25,7 @@ export type ButtonGroupProps = {
  * @example
  * <ButtonGroup />
  */
-export function ButtonGroup(props: ButtonGroupProps): JSX.Element {
+export function ButtonGroup(props: ButtonGroupProps) {
   const { items = [], className, ...otherProps } = props
   const _className = cn(css.ButtonGroup, className)
 

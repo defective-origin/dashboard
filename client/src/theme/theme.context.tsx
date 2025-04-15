@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { StyledEngineProvider, Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material'
 
 // ---| core |---
@@ -35,6 +35,7 @@ export type ThemeVariant = 'light' | 'dark'
 export type ThemeOptions = {
   current: ThemeVariant
   is: (value: ThemeVariant) => boolean
+  set: (value: ThemeVariant) => void
   toggle: () => void
 }
 
@@ -43,10 +44,9 @@ ThemeContext.displayName = 'ThemeContext'
 
 export const useTheme = () => useContext(ThemeContext)
 
-export type ThemeProviderProps = React.PropsWithChildren & {
-  theme?: ThemeVariant
-  onChange?: (theme: ThemeVariant) => void
-}
+const getCurrentTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
+export type ThemeProviderProps = React.PropsWithChildren
 
 /**
  * Component description.
@@ -55,18 +55,37 @@ export type ThemeProviderProps = React.PropsWithChildren & {
  * @example
  * <ThemeProvider />
  */
-export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  const { theme, onChange, children } = props
+export function ThemeProvider(props: ThemeProviderProps) {
   const breakpoint = useBreakpoint(MEDIA_BREAKPOINTS)
+  const [theme, set] = useState<ThemeVariant>(getCurrentTheme())
   const current = theme || 'light' // use || instead of ?? because storybook return '' instead of undefined
   const is = useCallback((value: ThemeVariant) => current === value, [current])
-  const toggle = useCallback(() => onChange?.(is('dark') ? 'light': 'dark'), [is, onChange])
+  const toggle = useCallback(() => set(curr => curr === 'dark' ? 'light': 'dark'), [set])
+
+  // detect browser theme
+  useEffect(() => {
+    const setColorScheme = () => set(getCurrentTheme())
+
+    // MediaQueryList
+    const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
+
+    // recommended method for newer browsers: specify event-type as first argument
+    darkModePreference.addEventListener('change', setColorScheme)
+
+    // deprecated method for backward compatibility
+    darkModePreference.addListener(setColorScheme)
+
+    return () => {
+      darkModePreference.removeEventListener('change', setColorScheme)
+      darkModePreference.removeListener(setColorScheme)
+    }
+  }, [])
 
   useMode(current)
   useMode(breakpoint.names)
 
   const value = useMemo(
-    () => ({ current, is, toggle }),
+    () => ({ current, is, toggle, set }),
     [current, is, toggle],
   )
 
@@ -76,7 +95,7 @@ export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
     <StyledEngineProvider injectFirst>
       <CssVarsProvider>
         <ThemeContext.Provider value={value}>
-          { children }
+          { props.children }
         </ThemeContext.Provider>
       </CssVarsProvider>
     </StyledEngineProvider>

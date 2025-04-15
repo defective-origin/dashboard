@@ -1,3 +1,5 @@
+
+// TODO: remove and use direct
 export const ENV = {
   MODE: {
     DEV: import.meta.env.DEV,

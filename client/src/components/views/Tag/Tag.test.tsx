@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Tag from './Tag.component'
-// import useTag from './Tag.hook'
+// import useTag from './Tag.hooks'
 // import TagProvider, Tag from './Tag.context'
 
 describe('[Tag] component', () => {

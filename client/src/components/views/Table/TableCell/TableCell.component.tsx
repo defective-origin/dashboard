@@ -12,7 +12,7 @@ import Text from 'components/views/Text'
 
 // ---| self |---
 import css from './TableCell.module.scss'
-import { TableColumn, TableRecord } from '../Table.type'
+import { TableColumn, TableRecord } from '../Table.types'
 
 export type CellSort<T extends TableRecord> = (column: TableColumn<T>) => void
 
@@ -33,7 +33,7 @@ export type TableCellProps<T extends TableRecord> = {
  * @example
  * <TableCell />
  */
-export function TableCell<T extends TableRecord>(props: TableCellProps<T>): JSX.Element {
+export function TableCell<T extends TableRecord>(props: TableCellProps<T>) {
   const { id, th, item, column, zIndex, onSort, className, ...otherProps } = props
   const _className = cn(css.TableCell, { [css.Fixed]: column.fixed, [css.th]: th }, className)
   const style: React.CSSProperties = {

@@ -1,9 +1,9 @@
 // ---| self |---
-import * as tools from './Object.tool'
+import * as tools from './Object.tools'
 
 
-describe('[Object] tool', () => {
-  describe('[toKeys] action', () => {
+describe('[Object] tools', () => {
+  describe('[toKeys] func', () => {
     it('should return empty array if path is not valid', () => {
       expect(tools.toKeys('')).toEqual([])
       expect(tools.toKeys(undefined)).toEqual([])
@@ -14,7 +14,7 @@ describe('[Object] tool', () => {
     })
   })
 
-  describe('[toPath] action', () => {
+  describe('[toPath] func', () => {
     it('should return empty string if keys is not passed', () => {
       expect(tools.toPath([])).toEqual('')
       expect(tools.toPath(undefined)).toEqual('')
@@ -25,13 +25,13 @@ describe('[Object] tool', () => {
     })
   })
 
-  describe('[toObject] action', () => {
+  describe('[toObject] func', () => {
     it('should return combined value value', () => {
       expect(tools.toObject({ a: 1 }, { b: 1 }, { a: 2 })).toEqual({ a: 2, b: 1 })
     })
   })
 
-  describe('[isObject] action', () => {
+  describe('[isObject] func', () => {
     it('should return true if passed value is object', () => {
       expect(tools.isObject({})).toEqual(true)
       expect(tools.isObject(() => {})).toEqual(true)
@@ -43,7 +43,7 @@ describe('[Object] tool', () => {
     })
   })
 
-  describe('[has] action', () => {
+  describe('[has] func', () => {
     it('should return true if object has nested value', () => {
       expect(tools.has({ a: { b: { c: 1 } } }, 'a')).toEqual(true)
       expect(tools.has({ a: { b: { c: 1 } } }, 'a.b')).toEqual(true)
@@ -55,7 +55,7 @@ describe('[Object] tool', () => {
     })
   })
 
-  describe('[get] action', () => {
+  describe('[get] func', () => {
     it('should return nested value', () => {
       expect(tools.get({ a: { b: { c: 1 } } }, 'a.b.c')).toEqual(1)
     })
@@ -65,7 +65,7 @@ describe('[Object] tool', () => {
     })
   })
 
-  describe('[set] action', () => {
+  describe('[set] func', () => {
     it('should set nested value by path', () => {
       expect(tools.set({}, 'a.b.c', 1)).toEqual({ a: { b: { c: 1 } } })
       expect(tools.set({ a: { b: {} } }, 'a.b.c', 1)).toEqual({ a: { b: { c: 1 } } })
@@ -77,7 +77,7 @@ describe('[Object] tool', () => {
     })
   })
 
-  describe('[del] action', () => {
+  describe('[del] func', () => {
     it('should del nested value by path', () => {
       expect(tools.del({ a: { b: { c: 1 } } }, 'a.b.c')).toEqual({ a: { b: {} } })
       expect(tools.del({ a: { b: { c: 1, d: 2 } } }, 'a.b.c')).toEqual({ a: { b: { d: 2 } } })

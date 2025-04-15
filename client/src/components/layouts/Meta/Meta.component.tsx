@@ -31,7 +31,7 @@ export type MetaProps = HelmetProps & {
  * @example
  * <Meta />
  */
-export function Meta(props: MetaProps): JSX.Element {
+export function Meta(props: MetaProps) {
   const { title, type='website', locale, description, keywords, viewport = 1, items = [], children, ...otherProps } = props
 
   const metaItems = useMemo(

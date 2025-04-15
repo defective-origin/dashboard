@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Help from './Help.component'
-// import useHelp from './Help.hook'
+// import useHelp from './Help.hooks'
 // import HelpProvider, Help from './Help.context'
 
 describe('[Help] component', () => {

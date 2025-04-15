@@ -1,63 +1,43 @@
 import mongoose from 'mongoose'
-import { ref, Ref } from '@services/Database'
-import { Feature, FeatureSchema } from '../Feature'
-import { Widget } from '../Widget'
+import { Widget, WidgetSchema } from '../Widget/Widget.model'
 
 export const PATHNAME = 'boards'
 
-
-export type BoardCoordinate = {
-  x: number
-  y: number
-}
-
-export const BoardCoordinateSchema = new mongoose.Schema<BoardCoordinate>({
-  x: { type: Number, default: 0 },
-  y: { type: Number, default: 0 },
-}, { _id : false })
-
-export type BoardItem = {
-  id: string
-  widget: Ref<Widget>
-  v1: BoardCoordinate
-  v2: BoardCoordinate
-}
-
-export const BoardItemSchema = new mongoose.Schema<BoardItem>({
-  widget: ref('widgets'),
-  v1: { type: BoardCoordinateSchema, required: true },
-  v2: { type: BoardCoordinateSchema, required: true },
-})
-
-export type BoardMarkupDevice = 'BOARD' | 'TV' | 'COMPUTER' | 'LAPTOP' | 'TABLET' | 'MOBILE' | 'WATCH'
 export type BoardMarkup = {
-  id: string
-  /** Active layout. By default only `computer` markup is on */
-  visible: boolean
-  expandable: boolean
-  rows: number
-  columns: number
-  device: BoardMarkupDevice
-  items: BoardItem[]
+  width: number
+  height: string
+  gap: string[]
+  rows: string[]
+  columns: string[]
+  areas: string[][]
 }
 
 export const BoardMarkupSchema = new mongoose.Schema<BoardMarkup>({
-  visible: { type: Boolean, default: false },
-  expandable: { type: Boolean, default: false },
-  rows: { type: Number, default: 0 },
-  columns: { type: Number, default: 0 },
-  device: { type: String, enum: ['BOARD', 'TV', 'COMPUTER', 'LAPTOP', 'TABLET', 'MOBILE', 'WATCH'] },
-  items: { type: [BoardItemSchema], default: [] },
-})
+  width: { type: Number, required: true },
+  height: { type: String, required: true },
+  gap: { type: [String], required: true },
+  rows: { type: [String], required: true },
+  columns: { type: [String], required: true },
+  areas: { type: [[String]], required: true },
+}, { _id: false })
 
-export type Board = Feature & {
+
+export type Board = Widget & {
   markups: BoardMarkup[]
-  // TODO: widgets[] or view Id
 }
 
 export const BoardSchema = new mongoose.Schema<Board>({
   markups: { type: [BoardMarkupSchema], default: [] },
-}).add(FeatureSchema)
+}).add(WidgetSchema)
+
+
+BoardSchema.virtual('widgets').get(function() {
+  const all = this.markups.flatMap(markup => markup.areas).flat()
+
+  return [...new Set(all)].filter(item => item !== '.')
+})
+
+// TODO: recursively calculate price and access
 
 export const BoardModel = mongoose.model(PATHNAME, BoardSchema)
 

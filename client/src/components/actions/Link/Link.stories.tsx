@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Link, { LinkProps } from './Link.component'
 import Block from 'components/layouts/Block'

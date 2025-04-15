@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tool'
+import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Alert, { AlertProps } from './Alert.component'
 import Block from 'components/layouts/Block'
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof Alert>
 
 const initVariants = <P extends keyof AlertProps>(prop: P, items: AlertProps[P][]) => (
   <Block g='xs' minWidth={250}>
-    {items.map((item) => <Alert content={item} {...{ [prop]: item }}/>)}
+    {items.map(item => <Alert content={item} {...{ [prop]: item }}/>)}
   </Block>
 )
 

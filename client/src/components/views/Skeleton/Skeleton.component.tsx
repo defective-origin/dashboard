@@ -15,7 +15,6 @@ export type SkeletonVariant = 'text' | 'rounded' | 'circular'
 
 export type SkeletonProps = {
   className?: string
-  content?: React.ReactNode
   children?: React.ReactNode
   v?: SkeletonVariant
 }
@@ -27,8 +26,8 @@ export type SkeletonProps = {
  * @example
  * <Skeleton />
  */
-export function Skeleton(props: SkeletonProps): JSX.Element {
-  const { v, content, children = content, className, ...otherProps } = props
+export function Skeleton(props: SkeletonProps) {
+  const { v, children, className, ...otherProps } = props
   const _className = cn(css.Skeleton, className)
 
   return <MuiSkeleton className={_className} variant={v} {...otherProps}>{children}</MuiSkeleton>
