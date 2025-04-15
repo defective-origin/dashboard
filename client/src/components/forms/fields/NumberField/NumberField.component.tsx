@@ -21,12 +21,12 @@ export type NumberFieldProps = FieldProps<number>
  * @example
  * <NumberField />
  */
-export function NumberField(props: NumberFieldProps): JSX.Element {
+export function NumberField(props: NumberFieldProps) {
   const { value = 0, onChange, className, ...otherProps } = props
   const _className = cn(css.NumberField, className)
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(Number(event.target.value), event)
-  , [onChange])
+  }, [onChange])
 
   return (
     <MuiTextField

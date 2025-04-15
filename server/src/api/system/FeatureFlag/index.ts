@@ -1,11 +1,9 @@
-import mock from './FeatureFlag.mock'
+import mocks from './FeatureFlag.mocks'
 import model from './FeatureFlag.model'
-import router from './FeatureFlag.api'
-
-export * from './FeatureFlag.model'
+import api from './FeatureFlag.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

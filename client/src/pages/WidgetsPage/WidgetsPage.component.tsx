@@ -1,18 +1,19 @@
 import React from 'react'
 
 // ---| core |---
+import { t } from 'locale'
 import { cn } from 'tools'
 import { Widget, useWidgets } from 'api'
 
 // ---| pages |---
-import SelectPage, { SelectPageProps } from 'pages/SearchPage'
+import SearchPage, { SearchPageProps } from 'pages/SearchPage'
 
 // ---| screens |---
 // ---| components |---
 // ---| self |---
 import css from './WidgetsPage.module.scss'
 
-export type WidgetsPageProps = Partial<SelectPageProps<Widget>>
+export type WidgetsPageProps = Partial<SearchPageProps<Widget>>
 
 /**
  * Component description.
@@ -21,17 +22,18 @@ export type WidgetsPageProps = Partial<SelectPageProps<Widget>>
  * @example
  * <WidgetsPage />
  */
-export function WidgetsPage(props: WidgetsPageProps): JSX.Element {
+export function WidgetsPage(props: WidgetsPageProps) {
   const { className } = props
   const _className = cn(css.WidgetsPage, className)
-  const widgetViews = useWidgets()
+  const widgets = useWidgets()
 
   return (
-    <SelectPage
+    <SearchPage
       className={_className}
-      name='PAGES.WIDGETS'
+      name='LABEL.WIDGETS'
       to='WIDGET'
-      items={widgetViews.data}
+      items={widgets.data}
+      onCreate={() => console.log('create')}
     />
   )
 }

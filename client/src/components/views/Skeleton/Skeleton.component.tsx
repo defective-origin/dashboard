@@ -27,7 +27,7 @@ export type SkeletonProps = {
  * @example
  * <Skeleton />
  */
-export function Skeleton(props: SkeletonProps): JSX.Element {
+export function Skeleton(props: SkeletonProps) {
   const { v, content, children = content, className, ...otherProps } = props
   const _className = cn(css.Skeleton, className)
 

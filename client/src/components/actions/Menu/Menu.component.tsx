@@ -23,6 +23,25 @@ export type MenuProps = PopupProps & {
   horizontal?: boolean
 }
 
+
+// TODO: use context for openin and clothing
+// Menu.Item - это кнопка которая добавляет попап с MenuListPanel
+// 	Menu
+// const actions2: ActionItem[] = [
+//   <Action tooltip={`${isEditMode ? 'View' : 'Edit'} mode`} start={isEditMode ? 'developer_mode_tv' : 'tv'} onClick={switchMode} />,
+//   <Action tooltip='Full screen' start='fullscreen' />,
+//   <Action tooltip='Add Widget' start='add' />,
+//   <Action tooltip='Resize' start='computer' />,
+//   <Action tooltip='Docs' start='book' items={[
+//     <Action tooltip='Full screen' start='fullscreen' />,
+//     <Action tooltip='Add Widget' start='add' />,
+//   ]}/>,
+//   <Action tooltip='Remove' start='delete' />,
+//   <Action tooltip='Add to Menu' start='beenhere' />,
+//   <Action tooltip='Settings' start='settings' />,
+// ]
+
+
 /**
  * Allows to show menu around component.
  *
@@ -44,15 +63,15 @@ export type MenuProps = PopupProps & {
  *    items={items}
  *    trigger={(options) => (
  *      <Button
- *        active={options.isOpen}
- *        onClick={options.open}
- *        onMouseEnter={options.open}
- *        onMouseLeave={options.close}
+ *        active={options.isOn}
+ *        onClick={options.on}
+ *        onMouseEnter={options.on}
+ *        onMouseLeave={options.off}
  *      />
  *   )}
  * />
  */
-export function Menu(props: MenuProps): JSX.Element {
+export function Menu(props: MenuProps) {
   const { size = 'xxs', horizontal, v = 'right', items, children, className, ...otherProps } = props
   const _className = cn(css.Menu, className)
   const tooltipSide = horizontal ? 'top' : 'right'
@@ -74,7 +93,7 @@ export function Menu(props: MenuProps): JSX.Element {
         <Menu
           key={idx}
           items={items}
-          trigger={(o) => <MenuItem triggerOptions={o} {...otherItemProps} />}
+          trigger={o => <MenuItem triggerOptions={o} {...otherItemProps} />}
         />
       )
     }
@@ -84,7 +103,7 @@ export function Menu(props: MenuProps): JSX.Element {
 
   return (
     <Popup className={_className} v={v} {...otherProps}>
-      <MenuList className={cn(horizontal && css.Horizontal)}>
+      <MenuList className={cn(css.MenuList, horizontal && css.Horizontal)}>
         {generatedItems}
 
         {children}

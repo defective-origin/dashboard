@@ -1,8 +1,8 @@
 // ---| self |---
-import * as tools from './Number.tool'
+import * as tools from './Number.tools'
 
-describe('[Number] tool', () => {
-  describe('[formatNumber] action', () => {
+describe('[Number] tools', () => {
+  describe('[formatNumber] func', () => {
     it('should add unit sign', () => {
       expect(tools.formatNumber(1, { sign: '$' })).toEqual('1.00 $')
     })
@@ -14,7 +14,7 @@ describe('[Number] tool', () => {
     })
   })
 
-  describe('[toNumber] action', () => {
+  describe('[toNumber] func', () => {
     it('should return string representation of number', () => {
       expect(tools.toNumber(0)).toEqual('0.00')
       expect(tools.toNumber(0.5555)).toEqual('0.55')
@@ -50,7 +50,7 @@ describe('[Number] tool', () => {
     })
   })
 
-  describe('[toCurrency] action', () => {
+  describe('[toCurrency] func', () => {
     it('should return string representation of currency', () => {
       expect(tools.toCurrency(10)).toEqual('10.00 $')
       expect(tools.toCurrency(1_000)).toEqual('1.00 K$')
@@ -59,7 +59,7 @@ describe('[Number] tool', () => {
     })
   })
 
-  describe('[toSize] action', () => {
+  describe('[toSize] func', () => {
     it('should return string representation of size', () => {
       expect(tools.toSize(10)).toEqual('1.25 B')
       expect(tools.toSize(1024.56)).toEqual('1.00 KB')
@@ -68,7 +68,7 @@ describe('[Number] tool', () => {
     })
   })
 
-  describe('[toWeight] action', () => {
+  describe('[toWeight] func', () => {
     it('should return string representation of weight', () => {
       expect(tools.toWeight(100)).toEqual('100.00 G')
       expect(tools.toWeight(1_567.99)).toEqual('1.56 KG')
@@ -76,7 +76,7 @@ describe('[Number] tool', () => {
     })
   })
 
-  describe('[toAmount] action', () => {
+  describe('[toAmount] func', () => {
     it('should return string representation of amount', () => {
       expect(tools.toAmount(0.6)).toEqual('0')
       expect(tools.toAmount(1.2)).toEqual('1')
@@ -84,14 +84,14 @@ describe('[Number] tool', () => {
     })
   })
 
-  describe('[toPercent] action', () => {
+  describe('[toPercent] func', () => {
     it('should return string representation of percent', () => {
       expect(tools.toPercent(100)).toEqual('100.00 %')
       expect(tools.toPercent(52.799)).toEqual('52.79 %')
     })
   })
 
-  describe('[toDecimalPercent] action', () => {
+  describe('[toDecimalPercent] func', () => {
     it('should return string representation of decimal percent', () => {
       expect(tools.toDecimalPercent(0.7999)).toEqual('79.99 %')
       expect(tools.toDecimalPercent(1)).toEqual('100.00 %')

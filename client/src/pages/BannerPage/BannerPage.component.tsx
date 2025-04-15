@@ -6,27 +6,31 @@ import { cn } from 'tools'
 
 // ---| pages |---
 import Page from 'pages/Page'
-
 // ---| screens |---
 // ---| components |---
-import Banner, { BannerVariant } from 'components/views/Banner'
+import { ImageVariant } from 'components/views/Image'
+import Banner from 'components/views/Banner'
 
 // ---| self |---
 import css from './BannerPage.module.scss'
 
+export type BannerVariant = 'empty' | 'greeting' | 'error' | 401 | 403 | 404 | 500 | 502 | 503
+
 export const BANNER_PAGE_MAP: Record<BannerVariant, {
   title: TranslateKeys,
-  subtitle: TranslateKeys,
+  subtitle?: TranslateKeys,
   text?: TranslateKeys,
+  image?: ImageVariant,
 }> = {
-  empty: { title: 'BANNER.EMPTY.TITLE', subtitle: 'BANNER.EMPTY.SUBTITLE', text: 'BANNER.EMPTY.TEXT' },
-  error: { title: 'BANNER.ERROR.TITLE', subtitle: 'BANNER.ERROR.SUBTITLE' },
-  401: { title: 'BANNER.401.TITLE', subtitle: 'BANNER.401.SUBTITLE' },
-  403: { title: 'BANNER.403.TITLE', subtitle: 'BANNER.403.SUBTITLE' },
-  404: { title: 'BANNER.404.TITLE', subtitle: 'BANNER.404.SUBTITLE' },
-  500: { title: 'BANNER.500.TITLE', subtitle: 'BANNER.500.SUBTITLE' },
-  502: { title: 'BANNER.502.TITLE', subtitle: 'BANNER.502.SUBTITLE' },
-  503: { title: 'BANNER.503.TITLE', subtitle: 'BANNER.503.SUBTITLE' },
+  empty: { image: 'empty', title: 'MESSAGE.NO_DATA' },
+  greeting: { title: 'MESSAGE.GREETING', subtitle: 'MESSAGE.READ_GUIDE' },
+  error: { image: 'error', title: 'MESSAGE.ERROR.SOMETHING_WRONG', subtitle: 'MESSAGE.ERROR.SOME_ISSUE' },
+  401: { image: 400, title: 'MESSAGE.ERROR.NOT_AUTHORIZED', subtitle: 'MESSAGE.ERROR.NOT_PASS' },
+  403: { image: 400, title: 'MESSAGE.ERROR.HAVE_NO_PERMISSION', subtitle: 'MESSAGE.ERROR.NOT_PASS' },
+  404: { image: 400, title: 'MESSAGE.ERROR.PAGE_NOT_FOUND', subtitle: 'MESSAGE.ERROR.NOT_EXIST' },
+  500: { image: 500, title: 'MESSAGE.ERROR.SERVER_ERROR', subtitle: 'MESSAGE.ERROR.SOME_ISSUE' },
+  502: { image: 500, title: 'MESSAGE.ERROR.BAD_GATEWAY', subtitle: 'MESSAGE.ERROR.SOME_ISSUE' },
+  503: { image: 500, title: 'MESSAGE.ERROR.SERVICE_UNAVAILABLE', subtitle: 'MESSAGE.ERROR.SOME_ISSUE' },
 }
 
 export type BannerPageProps = {
@@ -42,7 +46,7 @@ export type BannerPageProps = {
  * @example
  * <BannerPage />
  */
-export function BannerPage(props: BannerPageProps): JSX.Element {
+export function BannerPage(props: BannerPageProps) {
   const { v = 'empty', children, className, ...otherProps } = props
   const _className = cn(css.BannerPage, className)
   const status = BANNER_PAGE_MAP[v]
@@ -52,10 +56,10 @@ export function BannerPage(props: BannerPageProps): JSX.Element {
       <Page.Content>
         <Banner
           className={css.Banner}
-          title={t(status.title)}
+          title={t(status.title)?.toUpperCase()}
           subtitle={t(status.subtitle)}
           text={t(status.text)}
-          v={v}
+          image={status.image}
         >
           {children}
         </Banner>

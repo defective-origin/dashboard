@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import TablePagination from './TablePagination.component'
-// import useTablePagination from './TablePagination.hook'
+// import useTablePagination from './TablePagination.hooks'
 // import TablePaginationProvider, TablePagination from './TablePagination.context'
 
 describe('[TablePagination] component', () => {

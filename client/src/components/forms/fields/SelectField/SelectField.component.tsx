@@ -9,14 +9,15 @@ import { cn } from 'tools'
 // ---| screens |---
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
-import Repeat, { PropsWithItems } from 'components/layouts/Repeat'
 
 // ---| self |---
 import css from './SelectField.module.scss'
 
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
-export type SelectFieldProps = FieldProps & PropsWithItems<SelectFieldItem>
+export type SelectFieldProps = FieldProps & {
+  items?: SelectFieldItem[];
+}
 
 /**
  * Component description.
@@ -25,10 +26,10 @@ export type SelectFieldProps = FieldProps & PropsWithItems<SelectFieldItem>
  * @example
  * <SelectField />
  */
-export function SelectField(props: SelectFieldProps): JSX.Element {
+export function SelectField(props: SelectFieldProps) {
   const { value = '', name, onChange, items = [], className, ...otherProps } = props
   const _className = cn(css.SelectField, className)
-  const menuItems = Repeat({ className: css.Option, cmp: MuiMenuItem, items })
+
   const handleChange = useCallback((event: SelectChangeEvent<unknown>) =>
     onChange?.(event.target.value, event)
   , [onChange])
@@ -44,7 +45,7 @@ export function SelectField(props: SelectFieldProps): JSX.Element {
       disabled={items.length < 2 ? true : undefined}
       {...otherProps}
     >
-      {menuItems}
+      {items.map(item => <MuiMenuItem className={css.Option} {...item} />)}
     </MuiSelectField>
   )
 }

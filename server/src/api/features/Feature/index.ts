@@ -1,2 +1,2 @@
-export { default } from './Feature.mock'
-export * from './Feature.model'
+export { default } from './Feature.mocks'
+export * from './Feature.schemas'

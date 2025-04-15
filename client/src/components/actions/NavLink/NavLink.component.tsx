@@ -39,7 +39,7 @@ export type NavLinkProps<Name extends NavLinkVariant = 'ROOT'> = ActionProps & {
  * @example
  * <NavLink to='WIDGETS' />
  */
-export const NavLink = <Name extends NavLinkVariant,>(props: NavLinkProps<Name>): JSX.Element => {
+export const NavLink = <Name extends NavLinkVariant,>(props: NavLinkProps<Name>) => {
   const { to = 'ROOT', params, search, active, className, ...otherProps } = props
   const _className = cn(css.NavLink, className)
   const template = `${ROUTE_LINKS[to]}?${createSearchParams(search)}`

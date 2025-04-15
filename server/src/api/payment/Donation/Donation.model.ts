@@ -15,7 +15,7 @@ export const DonationSchema = new mongoose.Schema<Donation>({
   content: { type: String, default: '' },
   meta: { type: String, default: '' },
   value: { type: Number, required: true },
-  reason: ref('payment/expenses'),
+  reason: ref('payment/expenses', { required: true }),
 }, { ChangeStamps: true })
 
 export const DonationModel = mongoose.model(PATHNAME, DonationSchema)

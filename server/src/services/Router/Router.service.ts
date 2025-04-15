@@ -2,10 +2,10 @@ import express, { Router } from 'express'
 import http from 'http'
 import cors from 'cors'
 import { AddressInfo } from 'net'
-import * as CustomMiddleware from './Router.middleware'
+import * as middlewares from './Router.middlewares'
 
 export type Route = {
-  router: Router
+  api: Router
 }
 
 const app = express() // TODO: check Koa and fastify
@@ -15,8 +15,8 @@ export function init(routes: Route[], prefix = process.env.API_NAME) {
   // pre middleware
   app.use(
     express.json(),
-    CustomMiddleware.AuthMiddleware,
-    CustomMiddleware.RequestLoggerMiddleware,
+    middlewares.AuthMiddleware,
+    middlewares.RequestLoggerMiddleware,
   )
 
   if (process.env.NODE_ENV === 'development') {
@@ -24,12 +24,12 @@ export function init(routes: Route[], prefix = process.env.API_NAME) {
   }
 
   // add route endpoints
-  routes.forEach(route => app.use(prefix, route.router))
+  routes.forEach(route => app.use(prefix, route.api))
   
   // post middleware
   app.use(
-    CustomMiddleware.NotFoundMiddleware,
-    CustomMiddleware.ErrorMiddleware,
+    middlewares.NotFoundMiddleware,
+    middlewares.ErrorMiddleware,
   )
 
   // add listener

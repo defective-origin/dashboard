@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Popup from './Popup.component'
-// import usePopup from './Popup.hook'
+// import usePopup from './Popup.hooks'
 // import PopupProvider, Popup from './Popup.context'
 
 describe('[Popup] component', () => {

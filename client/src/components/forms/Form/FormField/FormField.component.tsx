@@ -11,11 +11,11 @@ import { useFunc, useThrottle } from 'hooks'
 // ---| components |---
 import Text from 'components/views/Text'
 import Help, { HelpProps } from 'components/views/Help'
-import Messages from 'components/views/Messages'
 
 // ---| self |---
 import css from './FormField.module.scss'
 import { FormFieldErrors, FormRule, useForm } from '../Form.context'
+import Block from 'components/layouts/Block'
 
 export type FieldProps<V = any> = {
   id?: string
@@ -70,7 +70,7 @@ export type FormFieldProps<V = any, F extends object = object> = {
  *    checkOnBlur
  * />
  */
-export function FormField<V, F extends object>(props: FormFieldProps<V, F>): JSX.Element {
+export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
   const {
     as: Field, path, init, rules, label, help, throttle, checkOnBlur, checkOnChange,
     fit, required, disabled, toInit, toProps, onChange, className, ...otherProps
@@ -147,7 +147,11 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>): JSX
         {...fieldProps}
       />
 
-      {!!errors?.length && <Messages items={errors} color='error' size='xxs' />}
+      {!!errors?.length && (
+        <Block v='y'>
+          {errors.map(error => <Text content={error} color='error' size='xxs' />)}
+        </Block>
+      )}
     </FormControl>
   )
 }

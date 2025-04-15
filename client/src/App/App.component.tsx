@@ -24,9 +24,25 @@ export type AppProps = LayoutProps
  * @example
  * <App />
  */
-export function App(props: AppProps): JSX.Element {
+export function App(props: AppProps) {
   const { children, className, ...otherProps } = props
   const _className = cn('app', className)
+
+  // TODO: избегать функций и хуков по возможности. Использовать глобальные вызовы. например modal({}), toast.success()
+
+  // TODO: add knip script to clear unused exports and unused files and codes
+
+  // TODO: change and load account theme
+  // TODO: add network healthcheck and other services
+
+  // TODO: add npm -g install madge
+  // madge --circular apps/one-hub/src/index.tsx
+
+  // // update account theme on app theme change
+  // useEffect(() => account.update({ user: { settings: { theme: theme.current.toUpperCase() } } }), [theme])
+
+  // update app theme on account load
+  // useEffect(() => theme.set(account.user?.settings.theme.toLowerCase()), [account])
 
   return (
     <Layout className={_className} stretch v='left' {...otherProps}>

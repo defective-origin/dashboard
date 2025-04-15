@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import FormButton from './FormButton.component'
-// import useFormButton from './FormButton.hook'
+// import useFormButton from './FormButton.hooks'
 // import FormButtonProvider, FormButton from './FormButton.context'
 
 describe('[FormButton] component', () => {

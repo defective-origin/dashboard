@@ -2,8 +2,8 @@ import { SupportRequest, SupportModel, PATHNAME } from './Support.model'
 
 
 let savedRecord: SupportRequest
-const MOCK_OPERATION_RECORD = { reason: 'BUG', content: 'OPERATION DESCRIPTION', urgency: 'CRITICAL', attach: [], activity: [] }
-const MOCK_SAVED_RECORD = { reason: 'REPORT', content: 'SAVED DESCRIPTION', urgency: 'CRITICAL', attach: [], activity: [] }
+const MOCK_OPERATION_RECORD = { reason: 'BUG', content: 'OPERATION DESCRIPTION', urgency: 'CRITICAL', attach: [], history: [] }
+const MOCK_SAVED_RECORD = { reason: 'REPORT', content: 'SAVED DESCRIPTION', urgency: 'CRITICAL', attach: [], history: [] }
 const MOCK_SAVED_RECORDS = [MOCK_SAVED_RECORD]
 
 describe(`[${PATHNAME}] api`, () => {

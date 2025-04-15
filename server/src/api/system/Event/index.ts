@@ -1,11 +1,9 @@
-import mock from './Event.mock'
+import mocks from './Event.mocks'
 import model from './Event.model'
-import router from './Event.api'
-
-export * from './Event.model'
+import api from './Event.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

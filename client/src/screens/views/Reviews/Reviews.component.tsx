@@ -25,7 +25,7 @@ export type ReviewsProps = BlockProps & {
  * @example
  * <Reviews />
  */
-export function Reviews(props: ReviewsProps): JSX.Element {
+export function Reviews(props: ReviewsProps) {
   const { items = [], children, className, ...otherProps } = props
   const _className = cn(css.Reviews, className)
 

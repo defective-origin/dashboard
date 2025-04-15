@@ -1,8 +1,8 @@
 // ---| self |---
-import * as tools from './String.tool'
+import * as tools from './String.tools'
 
-describe('[String] tool', () => {
-  describe('[toString] action', () => {
+describe('[String] tools', () => {
+  describe('[toString] func', () => {
     it('should return string', () => {
       expect(tools.toString('test')).toEqual('test')
     })
@@ -17,7 +17,7 @@ describe('[String] tool', () => {
     })
   })
 
-  describe('[isString] action', () => {
+  describe('[isString] func', () => {
     it('should return true if value is string', () => {
       expect(tools.isString('test')).toEqual(true)
     })
@@ -30,25 +30,25 @@ describe('[String] tool', () => {
     })
   })
 
-  describe('[toUppercase] action', () => {
+  describe('[toUppercase] func', () => {
     it('should convert string to upper case', () => {
       expect(tools.toUppercase('test test')).toEqual('TEST TEST')
     })
   })
 
-  describe('[toLowercase] action', () => {
+  describe('[toLowercase] func', () => {
     it('should convert string to lower case', () => {
       expect(tools.toLowercase('TEST TEST')).toEqual('test test')
     })
   })
 
-  describe('[toCapital] action', () => {
+  describe('[toCapital] func', () => {
     it('should convert first char of every word to upper case, rest chars to lower case', () => {
       expect(tools.toCapital('test TESt')).toEqual('Test Test')
     })
   })
 
-  describe('[toTitle] action', () => {
+  describe('[toTitle] func', () => {
     it('should convert only first char in sentence to upper case, rest chars to lower case', () => {
       expect(tools.toTitle('test TESt')).toEqual('Test test')
     })

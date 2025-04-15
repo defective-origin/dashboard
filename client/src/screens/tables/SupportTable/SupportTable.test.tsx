@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import SupportTable from './SupportTable.component'
-// import useSupportTable from './SupportTable.hook'
+// import useSupportTable from './SupportTable.hooks'
 // import SupportTableProvider, SupportTable from './SupportTable.context'
 
 describe('[SupportTable] component', () => {

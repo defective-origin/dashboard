@@ -5,4 +5,4 @@ export { default } from './Chart.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Chart.component'
-export * from './Chart.hook'
+export * from './Chart.hooks'

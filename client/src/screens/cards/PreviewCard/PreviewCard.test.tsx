@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import PreviewCard from './PreviewCard.component'
-// import usePreviewCard from './PreviewCard.hook'
+// import usePreviewCard from './PreviewCard.hooks'
 // import PreviewCardProvider, PreviewCard from './PreviewCard.context'
 
 describe('[PreviewCard] component', () => {

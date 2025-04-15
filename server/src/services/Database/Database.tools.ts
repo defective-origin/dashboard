@@ -2,7 +2,7 @@ import { Model } from 'mongoose'
 
 export type DatabaseCollection = {
   model: Model<any>
-  mock: object
+  mocks: object
 }
 
 export async function prefill(collections: DatabaseCollection[]) {
@@ -11,6 +11,6 @@ export async function prefill(collections: DatabaseCollection[]) {
   console.info("Existing data cleared")
 
   console.info("Insert mock data ...")
-  await Promise.all(collections.map(collection => collection.model.insertMany(collection.mock)))
+  await Promise.all(collections.map(collection => collection.model.insertMany(collection.mocks)))
   console.info("Mock data inserted")
 }

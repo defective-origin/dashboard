@@ -5,11 +5,10 @@ import { cn } from 'tools'
 
 // ---| pages |---
 import Page, { PageProps } from 'pages/Page'
-
 // ---| screens |---
 import DashboardTable from 'screens/tables/DashboardTable'
-
 // ---| components |---
+
 // ---| self |---
 import css from './AccountDashboardsPage.module.scss'
 
@@ -22,12 +21,12 @@ export type AccountDashboardsPageProps = PageProps
  * @example
  * <AccountDashboardsPage />
  */
-export function AccountDashboardsPage(props: AccountDashboardsPageProps): JSX.Element {
+export function AccountDashboardsPage(props: AccountDashboardsPageProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.AccountDashboardsPage, className)
 
   return (
-    <Page className={_className} name='PAGES.DASHBOARDS' {...otherProps}>
+    <Page className={_className} name='LABEL.DASHBOARDS' {...otherProps}>
       <Page.Content>
         <DashboardTable />
 

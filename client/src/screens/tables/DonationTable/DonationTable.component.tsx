@@ -12,7 +12,7 @@ import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
 import css from './DonationTable.module.scss'
-import { DONATION_COLUMNS } from './DonationTable.constant'
+import { DONATION_COLUMNS } from './DonationTable.constants'
 
 export type DonationTableProps = TableProps<Donation>
 
@@ -23,18 +23,22 @@ export type DonationTableProps = TableProps<Donation>
  * @example
  * <DonationTable />
  */
-export function DonationTable(props: DonationTableProps): JSX.Element {
+export function DonationTable(props: DonationTableProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.DonationTable, className)
-  const dashboards = useDonations()
+  const requests = useDonations()
 
   return (
     <Table
-      title={t('LABEL.PAYMENTS')}
+      title={t('LABEL.DONATIONS')}
       className={_className}
       columns={DONATION_COLUMNS}
-      items={dashboards.data}
-      loading={dashboards.isLoading}
+      items={requests.data}
+      loading={requests.isLoading}
+      menu={[
+        { start: 'refresh', tooltip: 'Refresh', onClick: () => requests.refetch() },
+        { start: 'add', tooltip: 'new request' },
+      ]}
       pagination
       {...otherProps}
     >

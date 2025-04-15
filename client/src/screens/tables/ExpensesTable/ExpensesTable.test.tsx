@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import ExpensesTable from './ExpensesTable.component'
-// import useExpensesTable from './ExpensesTable.hook'
+// import useExpensesTable from './ExpensesTable.hooks'
 // import ExpensesTableProvider, ExpensesTable from './ExpensesTable.context'
 
 describe('[ExpensesTable] component', () => {

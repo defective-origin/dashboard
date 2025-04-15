@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Menu, { MenuItem, MenuProps, MenuTriggerOptions } from './Menu.component'
 import Block from 'components/layouts/Block'
@@ -24,7 +24,7 @@ const ITEMS: MenuItem[] = [
   },
 ]
 
-const trigger = (o: MenuTriggerOptions) => <Item width={50} height={50} background={o.open ? 'orange' : SB_CSS.item} />
+const trigger = (o: MenuTriggerOptions) => <Item width={50} height={50} background={o.isOn ? 'orange' : SB_CSS.item} />
 
 const meta: Meta<typeof Menu> = {
   component: Menu,
@@ -50,7 +50,6 @@ const initVariants = <P extends keyof MenuProps>(prop: P, items: MenuProps[P][])
         key={idx}
         trigger={trigger}
         items={ITEMS}
-        open
         {...{ [prop]: item }}
       />
     ))}

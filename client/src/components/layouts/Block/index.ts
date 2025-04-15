@@ -5,4 +5,4 @@ export { default } from './Block.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Block.component'
-export * from './Block.hook'
+export * from './Block.hooks'

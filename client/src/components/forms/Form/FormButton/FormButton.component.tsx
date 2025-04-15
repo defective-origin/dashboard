@@ -26,7 +26,7 @@ export type FormButtonProps = ButtonProps & {
  * @example
  * <FormButton />
  */
-export function FormButton(props: FormButtonProps): JSX.Element {
+export function FormButton(props: FormButtonProps) {
   const { path, type, children, onClick, className, ...otherProps } = props
   const _className = cn(css.FormButton, className)
   const form = useForm()
