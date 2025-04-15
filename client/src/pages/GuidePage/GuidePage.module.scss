@@ -6,3 +6,11 @@
 
 .GuidePage {
 }
+
+.Aside,
+.Content {
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  background: var(--card-background);
+}

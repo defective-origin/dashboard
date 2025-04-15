@@ -2,8 +2,8 @@
 import Launcher from 'App/App.launcher'
 
 // ---| self |---
-import ComponentTestUtil from './render/component.tool'
-import { buildCustomRender } from './render/render.tool'
+import ComponentTestUtil from './render/component.tools'
+import { buildCustomRender } from './render/render.tools'
 
 const { render } = ComponentTestUtil
 const renderWithRootModule = buildCustomRender(render, Launcher)

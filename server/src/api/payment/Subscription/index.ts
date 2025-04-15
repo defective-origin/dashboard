@@ -1,11 +1,9 @@
-import mock from './Subscription.mock'
+import mocks from './Subscription.mocks'
 import model from './Subscription.model'
-import router from './Subscription.api'
-
-export * from './Subscription.model'
+import api from './Subscription.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

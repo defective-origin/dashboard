@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import TableRow from './TableRow.component'
-// import useTableRow from './TableRow.hook'
+// import useTableRow from './TableRow.hooks'
 // import TableRowProvider, TableRow from './TableRow.context'
 
 describe('[TableRow] component', () => {

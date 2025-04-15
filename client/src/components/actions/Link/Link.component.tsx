@@ -10,7 +10,7 @@ import Action, { ActionProps } from 'components/actions/Action'
 
 // ---| self |---
 import css from './Link.module.scss'
-import { isNewTabLink } from './Link.tool'
+import { isNewTabLink } from './Link.tools'
 
 export type LinkProps = ActionProps & {
   withIcon?: boolean
@@ -23,7 +23,7 @@ export type LinkProps = ActionProps & {
  * @example
  * <Link />
  */
-export function Link(props: LinkProps): JSX.Element {
+export function Link(props: LinkProps) {
   const { end, href, target, withIcon, className, ...otherProps } = props
   const _className = cn(css.Link, className)
   const isOpenInNewTab = isNewTabLink(href, target)

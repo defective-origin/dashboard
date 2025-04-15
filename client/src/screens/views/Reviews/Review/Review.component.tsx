@@ -8,7 +8,6 @@ import { FeatureReview } from 'api'
 // ---| pages |---
 // ---| screens |---
 import User from 'screens/views/User'
-
 // ---| components |---
 import Text from 'components/views/Text'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -26,7 +25,7 @@ export type ReviewProps = BlockProps & FeatureReview
  * @example
  * <Review />
  */
-export function Review(props: ReviewProps): JSX.Element {
+export function Review(props: ReviewProps) {
   const { rate, content, updatedAt, createdBy, children, className, ...otherProps } = props
   const _className = cn(css.Review, className)
 
@@ -35,8 +34,8 @@ export function Review(props: ReviewProps): JSX.Element {
       <Block v='x' {...otherProps}>
         <User id={createdBy?.id} />
         <Block v='y' {...otherProps}>
-          <Label icon='schedule' content={updatedAt} format='day-of-month-year' tooltip={t('FIELD.LAST_UPDATE')} />
-          <Label icon='star' content={rate} format='number' tooltip={t('FIELD.RATE')} />
+          <Label icon='schedule' content={updatedAt} format='day-of-month-year' tooltip={t('LABEL.LAST_UPDATE')} />
+          <Label icon='star' content={rate} format='number' tooltip={t('LABEL.RATE')} />
         </Block>
       </Block>
 

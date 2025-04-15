@@ -52,7 +52,7 @@ export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
  *   <Scroll v={scroll} actions visible />
  * </div>
  */
-export function Scroll(props: ScrollProps): JSX.Element | null {
+export function Scroll(props: ScrollProps) {
   const {
     v = 'y',
     back,
@@ -76,6 +76,8 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
   const barX = useScrollBar({ enabled: hasBarX, v: 'x', back: backOffset?.x, className: trackClassName, container, ...otherOptions })
   const barY = useScrollBar({ enabled: hasBarY, v: 'y', back: backOffset?.y, className: trackClassName, container, ...otherOptions })
 
+  // TODO: fix shadow
+  // TODO: fix size calculation
 
   const display = useFunc((isMouseInside?: boolean) => {
     barY?.display(isMouseInside)
@@ -90,6 +92,7 @@ export function Scroll(props: ScrollProps): JSX.Element | null {
 
     // move overlay block
     if (overlayRef.current) {
+      // TODO: use sticky instead?
       overlayRef.current.style.left = px(parent.scrollLeft)
       overlayRef.current.style.top = px(parent.scrollTop + top)
       overlayRef.current.style.height = px(parent.offsetHeight - top)

@@ -40,6 +40,9 @@ export const useProperties = <T extends Record<string, unknown>>(
   const elementRef = useElement(ref, document.body)
   const [result, setResult] = useState(() => getProperties(elementRef, map))
 
+  // TODO: add setter: ELEMENT.style.setProperty('--element-width', NEW_VALUE);
+
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(() => setResult(getProperties(elementRef, map)), deps)
 

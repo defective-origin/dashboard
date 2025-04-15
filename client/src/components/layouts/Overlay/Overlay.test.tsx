@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Overlay from './Overlay.component'
-// import useOverlay from './Overlay.hook'
+// import useOverlay from './Overlay.hooks'
 // import OverlayProvider, Overlay from './Overlay.context'
 
 describe('[Overlay] component', () => {

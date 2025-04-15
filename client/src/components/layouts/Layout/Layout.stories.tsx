@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tool'
+import { SB_CSS, field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import { SIZES } from 'theme'
 import Layout, { LayoutProps } from './Layout.component'

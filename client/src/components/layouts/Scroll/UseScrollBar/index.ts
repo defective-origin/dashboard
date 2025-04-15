@@ -1,7 +1,7 @@
 /* INJECT_IMPORT_PLACE */
 
 /* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './UseScrollBar.hook'
+export { default } from './UseScrollBar.hooks'
 
 /* INJECT_EXPORT_PLACE */
-export * from './UseScrollBar.hook'
+export * from './UseScrollBar.hooks'

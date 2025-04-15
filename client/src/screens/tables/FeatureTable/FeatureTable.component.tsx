@@ -11,7 +11,7 @@ import Table, { TableProps, TableRowMenuItem } from 'components/views/Table'
 
 // ---| self |---
 import css from './FeatureTable.module.scss'
-import { FEATURE_COLUMNS } from './FeatureTable.constant'
+import { FEATURE_COLUMNS } from './FeatureTable.constants'
 
 export type FeatureTableProps<T extends Feature> = TableProps<T>
 
@@ -22,7 +22,7 @@ export type FeatureTableProps<T extends Feature> = TableProps<T>
  * @example
  * <FeatureTable />
  */
-export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>): JSX.Element {
+export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>) {
   const { columns, children, className, ...otherProps } = props
   const _className = cn(css.FeatureTable, className)
 

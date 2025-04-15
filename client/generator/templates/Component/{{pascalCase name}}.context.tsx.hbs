@@ -45,7 +45,7 @@ export type {{pascalCase name}}ProviderProps = React.PropsWithChildren
  * @example
  * <{{pascalCase name}}Provider defaultProp={1} />
  */
-export function {{pascalCase name}}Provider(props: {{pascalCase name}}ProviderProps): JSX.Element {
+export function {{pascalCase name}}Provider(props: {{pascalCase name}}ProviderProps) {
   const state = useObject(DEFAULT_{{constantCase name}}_STATE)
 
   // actions are separated to prevent side effects

@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import Tool from './generator.tool.js'
+import tools from './generator.tools.js'
 
 export const InjectAction = ({ place, target, template, abortOnFail = false, data }) => ({
   type: 'append',
@@ -63,8 +63,8 @@ export const ModuleFileAction = ({
 
   return [
     BaseFileAction({ target, template, skipIfExists, abortOnFail, data }),
-    imports?.map((filePath) => ModuleInjectAction({ ...injectOptions, place: 'IMPORT', filePath })),
-    exports?.map((filePath) => ModuleInjectAction({ ...injectOptions, place: 'EXPORT', filePath })),
+    imports?.map(filePath => ModuleInjectAction({ ...injectOptions, place: 'IMPORT', filePath })),
+    exports?.map(filePath => ModuleInjectAction({ ...injectOptions, place: 'EXPORT', filePath })),
     defaultExport && ModuleInjectAction({ ...injectOptions, place: 'DEFAULT_EXPORT', filePath: defaultExport }),
   ]
 }
@@ -114,14 +114,14 @@ export const FolderAction = ({
   const clearFiles = files.filter(Boolean)
   const folderFiles = fs.readdirSync(`generator/${template}`)
     // take only necessary files
-    .filter((fileName) => Tool.hasMatch(clearFiles, fileName))
+    .filter(fileName => tools.hasMatch(clearFiles, fileName))
     // remove template extension
-    .map((fileName) => fileName.replace(ext, ''))
+    .map(fileName => fileName.replace(ext, ''))
     // add path relative to folder
-    .map((fileName) => `./${fileName}`)
-  const imports = module?.imports && folderFiles.filter((fileName) => Tool.hasMatch(module?.imports, fileName))
-  const exports = module?.notExports && folderFiles.filter((fileName) => !Tool.hasMatch(module?.notExports, fileName))
-  const defaultExport = module?.defaultExport && folderFiles.find((fileName) => Tool.isMatch(module?.defaultExport, fileName))
+    .map(fileName => `./${fileName}`)
+  const imports = module?.imports && folderFiles.filter(fileName => tools.hasMatch(module?.imports, fileName))
+  const exports = module?.notExports && folderFiles.filter(fileName => !tools.hasMatch(module?.notExports, fileName))
+  const defaultExport = module?.defaultExport && folderFiles.find(fileName => tools.isMatch(module?.defaultExport, fileName))
   const filePatterns = clearFiles.length ? `*{${clearFiles.join(',')}}*` : '*'
 
   return [

@@ -10,7 +10,7 @@ import { cn } from 'tools'
 
 // ---| self |---
 import css from './TableBody.module.scss'
-import { TableColumn, TableKeygen, TableRecord } from '../Table.type'
+import { TableColumn, TableKeygen, TableRecord } from '../Table.types'
 import TableRow from '../TableRow'
 
 const DEFAULT_KEYGEN: TableKeygen<TableRecord> = (item, index) => (item?.id ?? item?.key ?? index) as number
@@ -29,7 +29,7 @@ export type TableBodyProps<T extends TableRecord> = {
  * @example
  * <TableBody />
  */
-export function TableBody<T extends TableRecord>(props: TableBodyProps<T>): JSX.Element {
+export function TableBody<T extends TableRecord>(props: TableBodyProps<T>) {
   const { items, columns, keygen = DEFAULT_KEYGEN, className, ...otherProps } = props
   const _className = cn(css.TableBody, className)
 

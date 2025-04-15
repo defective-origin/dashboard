@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import ButtonGroup from './ButtonGroup.component'
-// import useButtonGroup from './ButtonGroup.hook'
+// import useButtonGroup from './ButtonGroup.hooks'
 // import ButtonGroupProvider, ButtonGroup from './ButtonGroup.context'
 
 describe('[ButtonGroup] component', () => {

@@ -6,4 +6,3 @@
 export * from './Board.endpoint'
 export * from './Feature.endpoint'
 export * from './Widget.endpoint'
-export * from './WidgetView.endpoint'

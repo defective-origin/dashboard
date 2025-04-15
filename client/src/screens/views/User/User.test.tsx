@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import User from './User.component'
-// import useUser from './User.hook'
+// import useUser from './User.hooks'
 // import UserProvider, User from './User.context'
 
 describe('[User] component', () => {

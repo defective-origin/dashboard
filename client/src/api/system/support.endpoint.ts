@@ -1,11 +1,10 @@
-import { useMemo } from 'react'
-import { ChangeStamps, Id } from '../api.type'
+import { ChangeStamps, Id } from '../api.types'
 import api from '../api.endpoint'
 
 const PATHNAME = 'system/support'
 
 export type SupportRequestStatus = 'OPEN' | 'PENDING' | 'IN PROGRESS' | 'RESOLVED' | 'CLOSED'
-export type SupportRequestActivity = ChangeStamps & {
+export type SupportRequestAction = ChangeStamps & {
   id: string
   status?: SupportRequestStatus
   content?: string
@@ -21,17 +20,10 @@ export type SupportRequest = ChangeStamps & {
   urgency: SupportRequestUrgency
   content: string
   attach: string[]
-  activity: SupportRequestActivity[]
+  history: SupportRequestAction[]
   status: SupportRequestStatus
 }
 
 export const useSupportRequest = (id?: Id) => api.useRestReadEndpoint<SupportRequest>(`${PATHNAME}/${id}`)
 export const useSupportRequests = () => api.useRestReadEndpoint<SupportRequest[]>(PATHNAME)
-
-export const useSupportMutations = () => {
-  const create = api.useRestCreateEndpoint<SupportRequest>(PATHNAME)
-  const update = api.useRestUpdateEndpoint<SupportRequest>(PATHNAME)
-  const remove = api.useRestDeleteEndpoint(PATHNAME)
-
-  return useMemo(() => ({ create, update, remove }), [create, remove, update])
-}
+export const useSupportMutations = () => api.useRestMutations<SupportRequest>(PATHNAME)

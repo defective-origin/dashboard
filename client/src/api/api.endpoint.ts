@@ -1,7 +1,8 @@
-import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import axios, { AxiosRequestConfig } from 'axios'
+import { MutateOptions, UseMutateAsyncFunction, useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions } from '@tanstack/react-query'
 import { ENV } from 'App/App.conf'
-import { Id, Json } from './api.type'
+import { Json, Ref } from './api.types'
 import { apiClient } from './api.context'
 
 
@@ -31,10 +32,12 @@ export type RestMutationEndpointOptions<P = Json, T = Json, E = Error> = UseMuta
   request?: AxiosRequestConfig
 }
 
-export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: RestMutationEndpointOptions<P, T, E>) => {
+export type RestMutationEndpointResult<P = Json, T = Json, E = Error> = UseMutateAsyncFunction<T, E, P, unknown> & UseMutationResult<T, E, P, unknown>
+
+export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: RestMutationEndpointOptions<P, T, E>): RestMutationEndpointResult<P, T, E> => {
   const { pathname, method, request, invalidate, url, onSuccess, ...queryOptions } = options
 
-  return useMutation<T, E, P>({
+  const mutation = useMutation<T, E, P>({
     ...queryOptions,
     mutationFn: (payload: Json) => api({
       method,
@@ -54,11 +57,18 @@ export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: 
       onSuccess?.(data, variables, context)
     },
   })
+
+  return useMemo(() => {
+    const mutate = (variables: P, options?: MutateOptions<T, E, P, unknown> | undefined) => mutation.mutateAsync(variables, options)
+    Object.assign(mutate, mutation)
+
+    return mutate
+  }, [mutation]) as RestMutationEndpointResult<P, T, E>
 }
 
 
 
-export const useRestCreateEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Omit<P, 'id'>, T, E>) => {
+export const useRestCreateEndpoint = <P extends Ref, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Omit<P, 'id'>, T, E>) => {
   return useRestMutationEndpoint<Omit<P, 'id'>, T, E>({
     pathname,
     method: 'post',
@@ -67,23 +77,49 @@ export const useRestCreateEndpoint = <P extends { id: Id }, T = Json, E = Error>
   })
 }
 
-export const useRestUpdateEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Partial<P>, T, E>) => {
+export const useRestUpdateEndpoint = <P extends Ref, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Partial<P>, T, E>) => {
   return useRestMutationEndpoint<Partial<P>, T, E>({
     pathname,
     method: 'put',
     url: payload => `${pathname}/${payload.id}`,
-    invalidate: (_, payload) => [`${pathname}/${payload.id}`],
+    invalidate: (_, payload) => [`${pathname}/${payload.id}`], // generatePath(pathname, payload)
     ...options,
   })
 }
 
-export const useRestDeleteEndpoint = <P extends { id: Id }, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<P, T, E>) => {
-  return useRestMutationEndpoint<P, T, E>({
+export const useRestDeleteEndpoint = <P extends Ref, T = Json, E = Error>(pathname: string, options?: RestMutationEndpointOptions<Partial<P> | undefined, T, E>) => {
+  return useRestMutationEndpoint<Partial<P> | undefined, T, E>({
     pathname,
     method: 'delete',
     url: payload => `${pathname}/${payload.id}`,
     ...options,
   })
+}
+
+export type MutationStatuses = Pick<UseMutationResult, 'isError' | 'isIdle' | 'isPaused' | 'isPending' | 'isSuccess'>
+export const toMutationStatuses = (...mutations: MutationStatuses[]) => {
+  const toStatus = (cb: (m: MutationStatuses) => boolean) => mutations.some(cb)
+
+  return {
+    isError: toStatus(m => m.isError),
+    isIdle: toStatus(m => m.isIdle),
+    isPaused: toStatus(m => m.isPaused),
+    isPending: toStatus(m => m.isPending),
+    isSuccess: toStatus(m => m.isSuccess),
+  }
+}
+
+export const useRestMutations = <P extends Ref>(PATHNAME: string, options?: RestMutationEndpointOptions<Partial<P> | undefined>) => {
+  const create = useRestCreateEndpoint<P>(PATHNAME, options as RestMutationEndpointOptions<Omit<P, 'id'>>)
+  const update = useRestUpdateEndpoint<P>(PATHNAME, options)
+  const remove = useRestDeleteEndpoint(PATHNAME, options)
+
+  return useMemo(() => ({
+    create,
+    update,
+    remove,
+    ...toMutationStatuses(create, update, remove),
+  }), [create, remove, update])
 }
 
 
@@ -92,4 +128,5 @@ export default {
   useRestCreateEndpoint,
   useRestUpdateEndpoint,
   useRestDeleteEndpoint,
+  useRestMutations,
 }

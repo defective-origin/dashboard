@@ -1,11 +1,9 @@
-import mock from './Support.mock'
+import mocks from './Support.mocks'
 import model from './Support.model'
-import router from './Support.api'
-
-export * from './Support.model'
+import api from './Support.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

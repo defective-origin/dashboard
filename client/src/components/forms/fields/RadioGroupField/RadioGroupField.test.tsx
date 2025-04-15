@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import RadioGroupField from './RadioGroupField.component'
-// import useRadioGroupField from './RadioGroupField.hook'
+// import useRadioGroupField from './RadioGroupField.hooks'
 // import RadioGroupFieldProvider, RadioGroupField from './RadioGroupField.context'
 
 describe('[RadioGroupField] component', () => {

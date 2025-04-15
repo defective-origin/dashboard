@@ -2,6 +2,7 @@ import { useCallback, useMemo, useRef } from 'react'
 
 export type SubscriptionEvent = (...args: any[]) => void
 
+// TODO: rewrite on browser events
 export type SubscriptionsManager<
   K extends string = string,
   C extends SubscriptionEvent = SubscriptionEvent,

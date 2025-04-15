@@ -1,11 +1,9 @@
-import mock from './Log.mock'
+import mocks from './Log.mocks'
 import model from './Log.model'
-import router from './Log.api'
-
-export * from './Log.model'
+import api from './Log.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

@@ -7,7 +7,7 @@ import { react } from 'tools'
 // ---| screens |---
 // ---| components |---
 // ---| self |---
-import useBlock, { BlockOptions } from './Block.hook'
+import useBlock, { BlockOptions } from './Block.hooks'
 
 // TODO: extend all type which use Block props by <E extends React.ElementType>
 // TODO: add width, height
@@ -21,7 +21,7 @@ export type BlockProps<E extends React.ElementType = React.ElementType> = react.
  * @example
  * <Block g='md' p='md' v="xy" />
  */
-export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>): JSX.Element | null {
+export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>) {
   const { as: Tag = 'div', ...blockProps } = useBlock(props)
 
   return <Tag {...blockProps} />

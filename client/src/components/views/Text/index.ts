@@ -5,4 +5,4 @@ export { default } from './Text.component'
 
 /* INJECT_EXPORT_PLACE */
 export * from './Text.component'
-export * from './Text.tool'
+export * from './Text.tools'

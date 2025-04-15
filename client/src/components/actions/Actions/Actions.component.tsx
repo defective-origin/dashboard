@@ -10,6 +10,7 @@ import { Size } from 'theme'
 import Menu, { MenuProps } from 'components/actions/Menu'
 import Link from 'components/actions/Link'
 import Button from 'components/actions/Button'
+import Divider from 'components/layouts/Divider'
 import NavLink from 'components/actions/NavLink'
 import { PropsWithItems, RepeatItem } from 'components/layouts/Repeat'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -18,6 +19,7 @@ import Block, { BlockProps } from 'components/layouts/Block'
 import css from './Actions.module.scss'
 
 export const ACTION_MAP = {
+  divider: Divider,
   button: Button,
   link: Link,
   nav: NavLink,
@@ -41,6 +43,8 @@ export type ActionsProps = PropsWithItems<ActionItem, BlockProps> & {
  * @example
  * const items: ActionItem[] = [
  *   <CustomItem />,
+ *   <Divider v='x />,
+ *   <Button v='outlined' content='ITEM 1' color='error', hide />,
  *   { variant: 'nav', v: 'outlined', content: 'ITEM 1', color: 'error', hide: true },
  *   { variant: 'link', v: 'outlined', content: 'ITEM 2', color: 'warning' },
  *   { variant: 'button', v: 'outlined', content: 'ITEM 3', color: 'info', items: [
@@ -51,7 +55,7 @@ export type ActionsProps = PropsWithItems<ActionItem, BlockProps> & {
  *
  * <Actions items={items} menu='left' />
  */
-export function Actions(props: ActionsProps): JSX.Element {
+export function Actions(props: ActionsProps) {
   const { size, menu, items, children, className, ...otherProps } = props
   const _className = cn(css.Actions, className)
   const menuItems = items?.map((item, idx) => {
@@ -77,7 +81,7 @@ export function Actions(props: ActionsProps): JSX.Element {
           trigger={o => (
             <Tag
               size={size}
-              active={o.open}
+              active={o.isOn}
               {...otherItemProps}
             />
           )}

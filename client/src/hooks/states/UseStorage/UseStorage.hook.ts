@@ -13,6 +13,8 @@ export type StorageOptions<T> = {
   type?: StorageName
 }
 
+// TODO: rewrite on LocalStorage from tools
+
 export type StorageReturnOptions<T> = [T, (value: T) => void]
 // export type StorageManager = null
 

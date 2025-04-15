@@ -17,7 +17,7 @@ export type ProgressVariant = keyof typeof PROGRESS_MAP
 // todo: add color
 export type ProgressProps = {
   className?: string
-  show?: boolean
+  visible?: boolean
   v?: ProgressVariant
   value?: number
 }
@@ -29,12 +29,12 @@ export type ProgressProps = {
  * @example
  * <Progress />
  */
-export function Progress(props: ProgressProps): JSX.Element | null {
-  const { show, v = 'circular', value, className, ...otherProps } = props
+export function Progress(props: ProgressProps) {
+  const { visible, v = 'circular', value, className, ...otherProps } = props
   const _className = cn(css.Progress, className)
   const Tag = PROGRESS_MAP[v]
 
-  if (!show) {
+  if (!visible) {
     return null
   }
 

@@ -23,7 +23,7 @@ export type TagProps = TextProps & {
  * @example
  * <Tag />
  */
-export function Tag(props: TagProps): JSX.Element {
+export function Tag(props: TagProps) {
   const { outline, color = 'primary', style, children, className, ...otherProps } = props
   const _className = cn(css.Tag, className)
   const styles: React.CSSProperties = {

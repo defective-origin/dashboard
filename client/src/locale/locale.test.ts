@@ -1,12 +1,12 @@
 import { renderHook } from '@testing-library/react-hooks'
 
 // ---| self |---
-import * as tools from './locale.tool'
-import useLocale from './locale.hook'
+import * as tools from './locale.tools'
+import useLocale from './locale.hooks'
 
 
-describe('[Locale] tool', () => {
-  describe('[getLocaleCode] action', () => {
+describe('[Locale] tools', () => {
+  describe('[getLocaleCode] func', () => {
     it.each([
       { value: 'AA-BB', result: { code: 'AA-BB', locale: 'AA', region: 'BB' } },
       { value: 'AA_BB', result: { code: 'AA_BB', locale: 'AA', region: 'BB' } },

@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import AxisChart from './AxisChart.component'
-// import useAxisChart from './AxisChart.hook'
+// import useAxisChart from './AxisChart.hooks'
 // import AxisChartProvider, AxisChart from './AxisChart.context'
 
 describe('[AxisChart] component', () => {

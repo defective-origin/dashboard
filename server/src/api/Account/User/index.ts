@@ -1,11 +1,9 @@
-import mock from './User.mock'
+import mocks from './User.mocks'
 import model from './User.model'
-import router from './User.api'
-
-export * from './User.model'
+import api from './User.api'
 
 export default {
-  mock,
+  mocks,
   model,
-  router,
+  api,
 }

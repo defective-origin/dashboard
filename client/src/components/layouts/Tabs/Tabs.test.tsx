@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import Tabs from './Tabs.component'
-// import useTabs from './Tabs.hook'
+// import useTabs from './Tabs.hooks'
 // import TabsProvider, Tabs from './Tabs.context'
 
 describe('[Tabs] component', () => {

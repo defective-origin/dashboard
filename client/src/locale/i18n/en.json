@@ -1,130 +1,129 @@
 {
-  "BANNER": {
-    "EMPTY": {
-      "TITLE": "WELCOME TO OUR APP!",
-      "SUBTITLE": "Please read the guide before start work.",
-      "TEXT": "insert button links to guide and dashboard page"
-    },
-    "401": {
-      "TITLE": "NOT AUTHORIZED!",
-      "SUBTITLE": "Sorry but it seems like we can't let you in."
-    },
-    "403": {
-      "TITLE": "YOU HAVE NO PERMISSION!",
-      "SUBTITLE": "Sorry but it seems like we can't let you in."
-    },
-    "404": {
-      "TITLE": "OOOOPS! WE COULDN'T FIND THIS PAGE!",
-      "SUBTITLE": "It could be deleted or never existed."
-    },
-    "500": {
-      "TITLE": "500 ERROR! SOMETHING WENT WRONG!",
-      "SUBTITLE": "Looks like we are having some server issues. We'll get it fixed as soon as possible. Please try again later."
-    },
-    "502": {
-      "TITLE": "BAD GATEWAY!",
-      "SUBTITLE": "Looks like we are having some server issues. We'll get it fixed as soon as possible. Please try again later."
-    },
-    "503": {
-      "TITLE": "SERVICE UNAVAILABLE!",
-      "SUBTITLE": "Looks like we are having some server issues. We'll get it fixed as soon as possible. Please try again later."
-    },
-    "ERROR": {
-      "TITLE": "SOMETHING WENT WRONG!",
-      "SUBTITLE": "Looks like we are having some issues. We'll get it fixed as soon as possible. Please try again later."
-    }
-  },
-  "PAGES": {
-    "APP": "App",
-    "STATUS": "Status",
-    "DASHBOARDS": "Dashboards",
-    "WIDGETS": "Widgets",
-    "WIDGET_VIEWS": "Widgets views",
-    "SUPPORT": "Support",
-    "GUIDE": "Guide",
-    "DONATION": "Donation",
-    "ACCOUNT": "Account"
-  },
-  "SYSTEM": {
-    "TAB_NAME": "{{title}} Page"
-  },
   "ACTION": {
+    "PAY": "Pay",
+    "EDIT": "Edit",
+    "UNDO": "Undo",
+    "REDO": "Redo",
+    "SAVE": "Save",
+    "CLEAR": "Clear",
+    "CLOSE": "Close",
     "LOGIN": "Login",
     "LOGOUT": "Logout",
-    "REPLACE": "Replace",
-    "SUBSTITUTION": "Substitution",
-    "FULL_SCREEN": "Full screen",
-    "SETTINGS": "Settings",
     "REMOVE": "Remove",
-    "EDIT": "Edit",
-    "ADD_WIDGET": "Add widget",
-    "ADD_BOARD": "Add board",
-    "ADD_TO_MENU": "Add to menu",
-    "ADD_BOOKMARK": "Add bookmark",
-    "ADD_TOPIC": "Add topic",
-    "REMOVE_BOOKMARK": "Remove bookmark",
-    "CLEAR": "Clear",
+    "PREVIEW": "Preview",
     "INSTALL": "Install",
+    "REPLACE": "Replace",
     "TURN_ON": "Turn on",
     "TURN_OFF": "Turn off",
+    "SETTINGS": "Settings",
+    "ADD_LINE": "Add line",
+    "ADD_BOARD": "Add board",
+    "SETUP_LINE": "Setup line",
+    "ADD_WIDGET": "Add widget",
+    "CREATE_NEW": "Create new",
     "FIT_SCREEN": "Fit screen",
-    "EXPANDABLE": "Expandable",
-    "PAY": "Pay",
-    "REVIEWS": "Reviews"
-  },
-  "DEVICE": {
-    "BOARD": "Board",
-    "TV": "Television",
-    "COMPUTER": "Computer",
-    "LAPTOP": "Laptop",
-    "TABLET": "Tablet",
-    "MOBILE": "Mobile",
-    "WATCH": "Watch"
-  },
-  "GROUPS": {
-    "DISPLAY": "Display",
-    "HELP": "Help",
-    "SYSTEM": "System"
-  },
-  "ROUTE": {
-    "BOARDS": "Boards",
-    "WIDGETS": "Widgets",
-    "WIDGET_VIEWS": "Widget views",
-    "GUIDE": "Guide",
-    "DONATION": "Donation",
-    "SUPPORT": "Support",
-    "ACCOUNT": "Account"
-  },
-  "MESSAGES": {
-    "UNDER_CONSTRUCTION": "{{name}} is under construction.",
-    "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved."
+    "FIT_CONTENT": "Fit content",
+    "OPEN_WIDGET": "Open widget",
+    "FULL_SCREEN": "Full screen",
+    "SHOW_PREVIEW": "Show preview",
+    "SHOW_REVIEWS": "Show reviews",
+    "ADD_BOOKMARK": "Add bookmark",
+    "SUBSTITUTION": "Substitution",
+    "CREATE_CLONE": "Create clone",
+    "SHOW_INFO": "Show information",
+    "REMOVE_BOOKMARK": "Remove bookmark",
+    "UPDATE_SNAPSHOT": "Update snapshot",
+    "CONFIRM_OPERATION": "Confirm operation",
+    "CHANGE_MARKUP_LIST": "Change markup list"
   },
   "LABEL": {
-    "PAYMENTS": "Payments",
-    "REQUESTS": "Requests",
-    "USAGE": "Usage: {{count}}"
-  },
-  "FORM": {
-    "BOARD_SETTINGS": "Dashboard settings",
-    "WIDGET_SETTINGS": "Widget settings"
-  },
-  "FIELD": {
     "ID": "Id",
     "KEY": "Key",
+    "APP": "App",
+    "ALL": "All",
+    "ROW": "Row",
+    "APPS": "Apps",
+    "PAID": "Paid",
     "NAME": "Name",
     "RATE": "Rate",
+    "SIZE": "Size",
     "TAGS": "Tags",
+    "GRID": "Grid",
+    "PAGES": "Pages",
     "PRICE": "Price",
-    "ACCESS": "Access",
+    "GUIDE": "Guide",
+    "WIDTH": "Width",
+    "HEIGHT": "Height",
+    "COLUMN": "Column",
+    "PUBLIC": "Public",
+    "STATUS": "Status",
+    "BOARDS": "Boards",
     "AUTHOR": "Author",
+    "SCREENS": "Screens",
+    "ACCOUNT": "Account",
+    "WIDGETS": "Widgets",
+    "SUPPORT": "Support",
     "OPTIONS": "Options",
-    "VERSION": "Version",
     "CONTENT": "Content",
-    "DESCRIPTION": "Description",
-    "LAST_UPDATE": "Last update"
-  },
-  "ACCESS": {
     "PRIVATE": "Private",
-    "PUBLIC": "Public"
+    "PAYMENTS": "Payments",
+    "REQUESTS": "Requests",
+    "DONATION": "Donation",
+    "REVIEWS" : "Reviews",
+    "SERVICES": "Services",
+    "PERSONAL": "Personal",
+    "PACKAGES": "Packages",
+    "DONATIONS": "Donations",
+    "BOOKMARKS": "Bookmarks",
+    "TRANSLATES": "Translates",
+    "DASHBOARDS": "Dashboards",
+    "USAGE": "Usage: {{count}}",
+    "DESCRIPTION": "Description",
+    "LAST_UPDATE" : "Last update",
+    "PAGE_NAME": "{{title}} Page",
+    "ROWS_PER_PAGE": "Rows per page",
+    "MARKUP": {
+      "GAP": "Gap",
+      "ROWS": "Rows",
+      "ITEMS": "Items",
+      "WIDTH": "Width",
+      "HEIGHT": "Height",
+      "COLUMNS": "Columns"
+    },
+    "SCREEN": {
+      "2K": "2K",
+      "4K": "4K",
+      "8K": "8K",
+      "HD": "HD",
+      "FHD": "Full HD",
+      "MOBILE": "Mobile",
+      "TABLET": "Tablet",
+      "LAPTOP": "Laptop",
+      "COMPUTER": "Computer",
+      "SMALL_SCREENS": "Small screens"
+    }
+  },
+  "MESSAGE": {
+    "GREETING": "Welcome to our app!",
+    "NO_DATA": "There is no data to display",
+    "UNDER_CONSTRUCTION": "{{name}} is under construction.",
+    "READ_GUIDE": "Please read the guide before start work.",
+    "COPYRIGHT": "© {{year}} now Systems. All Rights Reserved.",
+    "CONFIRM": {
+      "REMOVE": "Are you sure you want to remove it?",
+      "CLEAR_BOARD": "Are you sure you want to clear board?"
+    },
+    "ERROR": {
+      "BAD_GATEWAY": "Bad gateway!",
+      "NOT_AUTHORIZED": "Not authorized!",
+      "SOMETHING_WRONG": "Something went wrong!",
+      "SERVICE_UNAVAILABLE": "Service unavailable!",
+      "HAVE_NO_PERMISSION": "You have no permission!",
+      "SERVER_ERROR": "500 error! Something went wrong!",
+      "NOT_EXIST": "It could be deleted or never existed.",
+      "PAGE_NOT_FOUND": "OOOOPS! We couldn't find this page!",
+      "NOT_PASS": "Sorry but it seems like we can't let you in.",
+      "SOME_ISSUE": "Looks like we are having some issues. We'll get it fixed as soon as possible. Please try again later."
+    }
   }
 }

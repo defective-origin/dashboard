@@ -6,12 +6,12 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Block, { BlockProps } from 'components/layouts/Block'
+import Layout, { LayoutProps } from 'components/layouts/Layout'
 
 // ---| self |---
 import css from './Header.module.scss'
 
-export type HeaderProps = BlockProps
+export type HeaderProps = LayoutProps
 
 /**
  * Component description.
@@ -20,11 +20,11 @@ export type HeaderProps = BlockProps
  * @example
  * <Header />
  */
-export function Header(props: HeaderProps): JSX.Element {
+export function Header(props: HeaderProps) {
   const { children, className, ...otherProps } = props
   const _className = cn(css.Header, className)
 
-  return <Block className={_className} area='top' v='x' aligns='center' {...otherProps}>{children}</Block>
+  return <Layout className={_className} area='top' v='cr' aligns='center' {...otherProps}>{children}</Layout>
 }
 
 Header.displayName = 'Header'

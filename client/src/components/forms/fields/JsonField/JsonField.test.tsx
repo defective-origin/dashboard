@@ -3,7 +3,7 @@ import { render } from 'tests'
 
 // ---| self |---
 import JsonField from './JsonField.component'
-// import useJsonField from './JsonField.hook'
+// import useJsonField from './JsonField.hooks'
 // import JsonFieldProvider, JsonField from './JsonField.context'
 
 describe('[JsonField] component', () => {
