@@ -3,7 +3,7 @@ import { SB_CSS, field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Item, { ItemProps } from './Item.component'
 import Block from 'components/layouts/Block'
-import { COLORS, SIZES, toVariable } from 'theme'
+import { COLORS, SIZES, toVar } from 'theme'
 
 const AREAS: ItemProps['area'][] = ['left', 'right', 'center', 'top', 'bottom']
 
@@ -76,9 +76,9 @@ export const Spaces: Story = {
       {SIZES.filter(Boolean).map((size, i) => (
         <Item
           key={size}
-          width={toVariable('space-size', size)}
-          height={toVariable('space-size', size)}
-          background={toVariable('color', `${COLORS[i]}-4`)}
+          width={toVar('space-size', size)}
+          height={toVar('space-size', size)}
+          background={toVar('color', `${COLORS[i]}-4`)}
         />
       ))}
     </Block>

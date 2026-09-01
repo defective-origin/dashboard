@@ -1,3 +1,2 @@
-@import 'theme';
-@import 'tools';
-@import 'variables';
+@forward 'tools';
+@forward 'variables';

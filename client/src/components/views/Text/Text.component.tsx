@@ -71,7 +71,7 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     v = 'body2',
     size = TEXT_SIZE_MAP[v],
     height,
-    bold,
+    bold, // TODO: rename to b()bold, i(italic) and so on
     color = 'primary',
     ellipsis,
     format,
@@ -87,7 +87,7 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     nowrap,
     ellipsis,
     [`text--${size}`]: size, // FIXME: doesn't work - fix on line 92
-  }, className)
+  }, className) // TODO: Change base sizes for font, gaps, paddings to rems
   // TODO: add fixing number formats: units, millions, ... (fix: "M", by, to)
   // TODO: text animation on resize add by default on Text component
   const _content = useFormat(content, TEXT_FORMAT_MAP, { format, placeholder })
@@ -95,7 +95,7 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     ...style,
     lineHeight: height,
     fontWeight: bold ? 'bold' : undefined,
-    fontSize: THEME.components.text.size[size],
+    fontSize: THEME.components.text[size],
     WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
   }
 
@@ -106,7 +106,6 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
       align='left'
       color={color && THEME.palette[color]}
       style={styles}
-      fontFamily='Montserrat'
       {...otherProps}
     >
       {_content}

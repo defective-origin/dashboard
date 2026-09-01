@@ -1,3 +1,7 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use './variables';
+
 $sizes: xxs, xs, sm, md, lg, xl, xxl;
 
 /// Create size.
@@ -5,11 +9,16 @@ $sizes: xxs, xs, sm, md, lg, xl, xxl;
 /// @param {px | rem} $unit Value unit.
 /// @return {string} Joint value
 @function init-size($value, $unit) {
-  @return #{$value}#{$unit};
+  // if value is clear number
+  @if meta.type-of($value) == 'number' and math.is-unitless($value) {
+    @return #{$value}#{$unit};
+  }
+
+  @return $value;
 }
 
-// TODO: change to rem
 /// Create size map with keys: xxs, xs, sm, md, lg, xl, xxl.
+/// @param {number} $name Field name.
 /// @param {number} $xxs Size.
 /// @param {number} $xs Size.
 /// @param {number} $sm Size.
@@ -18,9 +27,8 @@ $sizes: xxs, xs, sm, md, lg, xl, xxl;
 /// @param {number} $xl Size.
 /// @param {number} $xxl Size.
 /// @param {px | rem} $unit Value unit.
-/// @return {map} Size map
-@function init-size-map($xxs, $xs, $sm, $md, $lg, $xl, $xxl, $unit: px) {
-  @return (
+@mixin init-size-variables($name, $xxs, $xs, $sm, $md, $lg, $xl, $xxl, $unit: rem) {
+  $size-map: (
     'xxs': init-size($xxs, $unit),
     'xs': init-size($xs, $unit),
     'sm': init-size($sm, $unit),
@@ -29,11 +37,13 @@ $sizes: xxs, xs, sm, md, lg, xl, xxl;
     'xl': init-size($xl, $unit),
     'xxl': init-size($xxl, $unit),
   );
+
+  @include variables.init-variables($name, $size-map);
 }
 
 /// Attach css size variables to element as modifier.
 /// @param {string} $name Element name.
 /// @param {any} $property Property name.
 @mixin attach-size-variables($name, $property) {
-  @include attach-variables($name, $sizes, $property);
+  @include variables.attach-variables($name, $property, $sizes);
 }

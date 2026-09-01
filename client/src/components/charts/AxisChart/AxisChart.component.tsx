@@ -66,11 +66,11 @@ export function AxisChart(props: AxisChartProps) {
 
   return (
     <Chart className={_className} context={ComposedChart} items={items} map={AXIS_ITEMS_MAP} formats={formats} {...otherProps}>
-      {grid && <CartesianGrid strokeDasharray='3 3' stroke='var(--color--primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(grid)} />}
-      {brush && <Brush height={14} stroke='var(--color--primary)' strokeWidth={0.4} strokeOpacity={0.4} tickFormatter={formatMap.x} {...toProps(brush)} />}
+      {grid && <CartesianGrid strokeDasharray='3 3' stroke='var(--color-primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(grid)} />}
+      {brush && <Brush height={14} stroke='var(--color-primary)' strokeWidth={0.4} strokeOpacity={0.4} tickFormatter={formatMap.x} {...toProps(brush)} />}
 
-      {zeroRefLines.x && <ReferenceLine x={0} stroke='var(--color--primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(xr, 'x')} />}
-      {zeroRefLines.y && <ReferenceLine y={0} stroke='var(--color--primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(yr, 'y')} />}
+      {zeroRefLines.x && <ReferenceLine x={0} stroke='var(--color-primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(xr, 'x')} />}
+      {zeroRefLines.y && <ReferenceLine y={0} stroke='var(--color-primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(yr, 'y')} />}
 
       {x && items?.length && <XAxis stroke='transparent' tickFormatter={formatMap.x} allowDecimals {...toProps(x)} />}
       {y && items?.length && <YAxis stroke='transparent' tickFormatter={formatMap.y} allowDecimals {...toProps(y)} />}

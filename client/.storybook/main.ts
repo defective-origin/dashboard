@@ -9,7 +9,6 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
-    "@storybook/addon-styling-webpack",
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -23,12 +22,10 @@ const config: StorybookConfig = {
 
     return mergeConfig(config, {
       build: {
-        // it fix issue when build removes 
-        // :global and :root styles written in component styles
         rollupOptions: {
-          treeshake: false
-        }
-      }
+          treeshake: false,
+        },
+      },
     });
   },
 };

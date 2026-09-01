@@ -2,9 +2,8 @@
 import { field, params } from '../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Modal, { ModalProps } from './Modal.component'
-import useModal from './Modal.hooks'
 import Button from 'components/actions/Button'
-import { modal } from './Modal.tools'
+import { modal } from './Modal.hooks'
 
 const VARIANTS: ModalProps['position'][] = ['center', 'right']
 const NAMES: ModalProps['name'][] = ['global']

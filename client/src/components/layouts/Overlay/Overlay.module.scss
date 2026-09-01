@@ -1,7 +1,5 @@
-@import '/src/theme';
-
 :root {
-  --popup-backdrop-color: var(--color--primary-9);
+  --popup-backdrop-color: var(--color-primary-6);
 }
 
 .OverlayContainer { position: relative; }
@@ -11,7 +9,7 @@
 
 .Backdrop {
   backdrop-filter: blur(3px);
-  background-color: rgba(#000000, 0.1); // background-color: rgba(var(--popup-backdrop-color), 0.1);
+  background-color: var(--popup-backdrop-color);
   pointer-events: all;
 }
 

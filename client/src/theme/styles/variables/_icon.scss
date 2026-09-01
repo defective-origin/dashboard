@@ -1,15 +1,14 @@
-@import '../tools';
+@use '../tools';
 
 $icon-name: icon;
 
-// size
-$icon-size-name: init-name($icon-name, size);
-$icon-size-map: init-size-map(16, 20, 24, 28, 32, 40, 48);
-
 @mixin init-icon-variables() {
-  @include init-variables($icon-size-name, $icon-size-map);
+  --icon-inline: 1.1em; /* Perfectly matches adjacent text height */
+
+  /* Standalone UI icons (Use these only when icon is NOT next to text) */
+  @include tools.init-size-variables($icon-name, 0.75rem, 1rem, 1.25rem, 1.5rem, 2rem, 2.5rem, 3rem);
 }
 
 @mixin attach-icon-size-variables($property: font-size) {
-  @include attach-size-variables($icon-size-name, $property);
+  @include tools.attach-size-variables($icon-name, $property);
 }

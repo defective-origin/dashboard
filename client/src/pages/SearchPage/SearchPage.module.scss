@@ -1,5 +1,3 @@
-@import '/src/theme';
-
 :root {
   // --ui-framework-color: var(--account-framework-color);
 }
@@ -8,7 +6,7 @@
 }
 
 .Search {
-  background: var(--card-background);
+  background: var(--color-contrast-secondary);
 
   :global(.MuiInputBase-input) {
     padding: 4px 8px;

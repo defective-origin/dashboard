@@ -1,17 +1,20 @@
 @use 'sass:color';
 @use 'sass:map';
+@use './variables';
 
-$colors: primary, secondary, success, info, warning, error, background, contrast;
+// colors
+$color-name: color;
+$colors: primary, secondary, success, info, warning, error, bg, contrast;
 
 /// Create size.
 /// @param {number} $value Color.
-/// @param {number} $alpha Alpha shift unit.
+/// @param {number} $alpha Alpha shift unit in presents.
 /// @return {string} Joint value
-@function init-color($value, $alpha: 1) {
-  @return color.adjust($value, $alpha: $alpha);
+@function init-color($value, $alpha: 100%, $mix-color: transparent) {
+  @return color-mix(in srgb, $value $alpha, $mix-color);
 }
 
-/// Create color map with keys: primary, secondary, success, info, warning, error, background, contrast.
+/// Create css color palette: primary, secondary, success, info, warning, error, background, contrast.
 /// @param {color} $primary Color in hex format.
 /// @param {color} $secondary Color in hex format.
 /// @param {color} $success Color in hex format.
@@ -21,36 +24,40 @@ $colors: primary, secondary, success, info, warning, error, background, contrast
 /// @param {color} $background Color in hex format.
 /// @param {color} $contrast Color in hex format.
 /// @param {number} $alpha Alpha shift unit.
-/// @return {map} Color map
-@function init-color-map($primary, $secondary, $success, $info, $warning, $error, $background, $contrast, $alpha: -0.15) {
+@mixin init-color-variables($primary, $secondary, $success, $info, $warning, $error, $contrast-primary, $contrast-secondary, $alpha: 15) {
   $palette: ();
   $colors: (
-    'primary': init-color($primary),
-    'secondary': init-color($secondary),
-    'success': init-color($success),
-    'info': init-color($info),
-    'warning': init-color($warning),
-    'error': init-color($error),
-    'contrast': init-color($contrast),
-    'bg': init-color($background),
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'error': $error,
+    'contrast-primary': $contrast-primary,
+    'contrast-secondary': $contrast-secondary,
   );
 
   @each $name, $color in $colors {
     $palette: map.set($palette, $name, $color);
 
+    /* Interactive shifts for Light Theme */
+    $palette: map.set($palette, #{$name}-hover, init-color(var(--color-#{$name}), 90%, #000000)); /* Darkens by 10% */
+    $palette: map.set($palette, #{$name}-active, init-color(var(--color-#{$name}), 80%, #000000)); /* Darkens by 20% */
+
+    /* Set sub colors */
     @for $i from 1 through 6 {
       $new-name: '#{$name}-#{$i}';
-      $new-color: init-color($color, $i * $alpha);
+      $new-color: init-color($color, 100% - $i * $alpha);
       $palette: map.set($palette, $new-name, $new-color);
     }
   }
 
-  @return $palette;
+  @include variables.init-variables($color-name, $palette);
 }
 
 /// Attach css color variables to element as modifier.
 /// @param {string} $name Element name.
 /// @param {any} $property Property name.
 @mixin attach-color-variables($name, $property) {
-  @include attach-variables($name, $colors, $property);
+  @include variables.attach-variables($name, $property, $colors);
 }

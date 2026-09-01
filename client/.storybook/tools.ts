@@ -1,5 +1,5 @@
 import type { InputType } from '@storybook/types'
-import { toVariable } from '../src/theme'
+import { toVar } from '../src/theme'
 
 export const tableDocs = (summary: unknown, defaultSummary?: unknown) => ({
   type: {
@@ -106,8 +106,8 @@ export const params = (name: string, variants?: unknown[], defaultVariant?: unkn
 
 
 export const SB_CSS = {
-  margin: toVariable('sb-margin-color'),
-  space: toVariable('sb-space-color'),
-  border: toVariable('sb-border'),
-  item: toVariable('sb-item-color'),
+  margin: toVar('sb-margin-color'),
+  space: toVar('sb-space-color'),
+  border: toVar('sb-border'),
+  item: toVar('sb-item-color'),
 }

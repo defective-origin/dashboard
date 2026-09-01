@@ -1,17 +1,27 @@
+@use 'sass:list';
+
 /// Create value name.
-/// @param {string} $name Element name.
-/// @param {string} $type Type name.
+/// @param {list} $args Array of names to join.
 /// @return {string} Joint value
-@function init-name($name, $type) {
-  @return #{$name}-#{$type};
+@function init-name($args...) {
+  $result: '';
+
+  @each $arg in $args {
+    @if $result == '' {
+      $result: '#{$arg}';
+    } @else {
+      $result: '#{$result}-#{$arg}';
+    }
+  }
+
+  @return $result;
 }
 
 /// Create variable name.
-/// @param {string} $name Element name.
-/// @param {string} $modifier Modifier name.
+/// @param {list} $args Array of names to join.
 /// @return {string} Joint value
-@function init-variable($name, $modifier) {
-  @return --#{$name}--#{$modifier};
+@function init-variable($args...) {
+  @return --#{init-name($args...)};
 }
 
 /// Create css variables.
@@ -25,9 +35,9 @@
 
 /// Attach css variables to element as modifier.
 /// @param {string} $name Element name.
-/// @param {list} $list modifier list.
 /// @param {any} $property Property name.
-@mixin attach-variables($name, $list, $property) {
+/// @param {list} $list modifier list.
+@mixin attach-variables($name, $property, $list) {
   @each $modifier in $list {
     &--#{$modifier} { #{$property}: var(init-variable($name, $modifier)); }
   }

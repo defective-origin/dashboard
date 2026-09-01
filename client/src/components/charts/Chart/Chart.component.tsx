@@ -71,7 +71,7 @@ export function Chart<M extends object>(props: ChartProps<M>) {
 
   const chartItems = useMemo(() => Object.entries(options ?? {}).map(([key, variant], idx) => {
     const ChartItem = map?.[variant] as React.FC<any>
-    const color = `var(--color--${COLORS[idx] ?? 'primary'})`
+    const color = `var(--color-${COLORS[idx] ?? 'primary'})`
 
     if (!ChartItem) {
       return null

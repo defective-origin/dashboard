@@ -19,4 +19,3 @@ export { default as wk } from 'weak-key'
 
 export * as react from './react.tools'
 export * as h2i from 'html-to-image'
-export * from './storage.tools'

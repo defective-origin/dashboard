@@ -46,7 +46,10 @@ export const useTheme = () => useContext(ThemeContext)
 
 const getCurrentTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 
-export type ThemeProviderProps = React.PropsWithChildren
+export type ThemeProviderProps = React.PropsWithChildren<{
+  /** it's used for storybook only */
+  theme?: ThemeVariant;
+}>
 
 /**
  * Component description.
@@ -58,12 +61,17 @@ export type ThemeProviderProps = React.PropsWithChildren
 export function ThemeProvider(props: ThemeProviderProps) {
   const breakpoint = useBreakpoint(MEDIA_BREAKPOINTS)
   const [theme, set] = useState<ThemeVariant>(getCurrentTheme())
-  const current = theme || 'light' // use || instead of ?? because storybook return '' instead of undefined
-  const is = useCallback((value: ThemeVariant) => current === value, [current])
+  const current = props.theme ?? theme;
+  
+  const is = useCallback((value: ThemeVariant) => theme === value, [theme])
   const toggle = useCallback(() => set(curr => curr === 'dark' ? 'light': 'dark'), [set])
 
   // detect browser theme
   useEffect(() => {
+    if (props.theme) {
+      return
+    }
+
     const setColorScheme = () => set(getCurrentTheme())
 
     // MediaQueryList
@@ -79,10 +87,10 @@ export function ThemeProvider(props: ThemeProviderProps) {
       darkModePreference.removeEventListener('change', setColorScheme)
       darkModePreference.removeListener(setColorScheme)
     }
-  }, [])
+  }, [props.theme])
 
-  useMode(current)
-  useMode(breakpoint.names)
+  useMode(document.documentElement, current)
+  useMode(document.documentElement, breakpoint.names)
 
   const value = useMemo(
     () => ({ current, is, toggle, set }),

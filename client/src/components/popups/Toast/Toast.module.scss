@@ -1,25 +1,23 @@
-@import '/src/theme';
-
 :root {
   --toastify-font-family: 'Montserrat';
 
   // background
-  --toastify-color-info: var(--color--info-6);
-  --toastify-color-success: var(--color--success-6);
-  --toastify-color-warning: var(--color--warning-6);
-  --toastify-color-error: var(--color--error-6);
+  --toastify-color-info: var(--color-info-6);
+  --toastify-color-success: var(--color-success-6);
+  --toastify-color-warning: var(--color-warning-6);
+  --toastify-color-error: var(--color-error-6);
 
   // text
-  --toastify-text-color-info: var(--color--info);
-  --toastify-text-color-success: var(--color--success);
-  --toastify-text-color-warning: var(--color--warning);
-  --toastify-text-color-error: var(--color--error);
+  --toastify-text-color-info: var(--color-info);
+  --toastify-text-color-success: var(--color-success);
+  --toastify-text-color-warning: var(--color-warning);
+  --toastify-text-color-error: var(--color-error);
 
   // icon
-  --toastify-icon-color-info: var(--color--info);
-  --toastify-icon-color-success: var(--color--success);
-  --toastify-icon-color-warning: var(--color--warning);
-  --toastify-icon-color-error: var(--color--error);
+  --toastify-icon-color-info: var(--color-info);
+  --toastify-icon-color-success: var(--color-success);
+  --toastify-icon-color-warning: var(--color-warning);
+  --toastify-icon-color-error: var(--color-error);
 }
 
 :global {
@@ -38,5 +36,5 @@
 }
 
 :global(.Toastify__close-button) {
-  color: var(--color--primary);
+  color: var(--color-primary);
 }

@@ -1,42 +1,31 @@
-import { toVariable } from './theme.tools'
+import { toVar } from './theme.tools'
 
-export type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'contrast' | 'bg'
+export type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'contrast-primary'  | 'contrast-secondary'
+export const COLORS: Color[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'contrast-primary', 'contrast-secondary']
+
 export type ColorShadeNumber = 1 | 2 | 3 | 4 | 5 | 6
-export type PaletteColor = Color | `${Color}-${ColorShadeNumber}`
-export type ColorVariableName = `--color--${Color}`
-export type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-export type SizeArea = 'size' | 'gap' | 'margin' | 'padding'
-export type Direction = 'x' | 'y' | 'xy'
-export type SizeElements = 'text' | 'icon' | 'space' | 'scroll'
-
-export const DIRECTION: Direction[] = ['x', 'y', 'xy']
-export const SIZES: Size[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-export const ELEMENTS: SizeElements[] = ['text', 'icon', 'space', 'scroll']
-export const SIZE_AREA: SizeArea[] = ['size', 'gap', 'margin', 'padding']
-
-export const SIZE_MAP = ELEMENTS.reduce((acc, element) => {
-  acc[element] = {} as Record<SizeArea, Record<Size, string>>
-  SIZE_AREA.forEach(area => {
-    acc[element][area] = {} as Record<Size, string>
-
-    SIZES.forEach(size => { acc[element][area][size] = toVariable(`${element}-${area}`, size) })
-  })
-
-  return acc
-}, {} as Record<SizeElements, Record<SizeArea, Record<Size, string>>>)
-
-
 export const SUB_COLORS_COUNT = 6
-export const COLORS: Color[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'contrast', 'bg']
+
+export type Size = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export const SIZES: Size[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+
+export type Direction = 'x' | 'y' | 'xy'
+export const DIRECTION: Direction[] = ['x', 'y', 'xy']
+
+export type SizeElements = 'text' | 'icon' | 'space' | 'scroll' | "radius"
+export const ELEMENTS: SizeElements[] = ['text', 'icon', 'space', 'scroll', "radius"] // TODO: hide scroll on mobile!
+
+export type PaletteColor = Color | `${Color}-${ColorShadeNumber}`
 export const PALETTE_COLORS: PaletteColor[] = COLORS.reduce((acc, color) => {
   const shades = Array.from({length: SUB_COLORS_COUNT}, (_, sub) => `${color}-${sub + 1}` as PaletteColor)
 
   return [...acc, color, ...shades]
 }, [] as PaletteColor[])
 
+
 export const PALETTE_COLOR_MAP = PALETTE_COLORS.reduce(
   (acc, color) => {
-    acc[color] = toVariable('color', color)
+    acc[color] = toVar('color', color)
 
     return acc
   },
@@ -53,6 +42,15 @@ export const PALETTE = COLORS.reduce((acc, color) => {
   return acc
 }, {} as Record<Color, Partial<Record<PaletteColor, string>>>)
 
+
+export const SIZE_MAP = ELEMENTS.reduce((acc, element) => {
+  acc[element] = {} as Record<Size, string>
+  SIZES.forEach(size => { acc[element][size] = toVar(element, size) })
+
+  return acc
+}, {} as Record<SizeElements, Record<Size, string>>)
+
+// TODO: remove
 export const THEME = {
   palette: PALETTE_COLOR_MAP,
   components: SIZE_MAP,
@@ -66,6 +64,6 @@ export const COLOR_ORDER: Record<Color, number> = {
   success: 3,
   primary: 4,
   secondary: 5,
-  contrast: 6,
-  bg: 7,
+  "contrast-primary": 6,
+  "contrast-secondary": 7,
 }

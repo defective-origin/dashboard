@@ -117,7 +117,7 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
       const isFree = isPlaceFree(place.startRow, place.startCol, place.endRow, place.endCol)
 
       selectionRef.current.style.display = 'block'
-      selectionRef.current.style.background = isFree ? 'var(--color--secondary-6)' : 'var(--color--error-6)'
+      selectionRef.current.style.background = isFree ? 'var(--color-secondary-6)' : 'var(--color-error-6)'
       selectionRef.current.style.gridArea = `${place.startRow}/${place.startCol}/${place.endRow}/${place.endCol}`
     }
   })

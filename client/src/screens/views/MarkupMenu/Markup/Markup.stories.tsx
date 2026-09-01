@@ -2,9 +2,9 @@
 import { field, params } from '../../../../../.storybook/tools'
 import type { Meta, StoryObj } from '@storybook/react'
 import Markup, { MarkupProps } from './Markup.component'
-import { MarkupWidth } from '../MarkupBoard.hooks'
+import { MarkupScreenWidth } from './Markup.constants'
 
-const MARKUPS: MarkupWidth[] = [0, 576, 768, 992, 1200, 1366, 1920, 2562, 3840, 7680]
+const MARKUPS: MarkupScreenWidth[] = [0, 576, 768, 992, 1200, 1366, 1920, 2562, 3840, 7680]
 
 const meta: Meta<typeof Markup> = {
   component: Markup,

@@ -1,20 +1,21 @@
-@import '../tools';
+@use '../tools';
 
-$text-name: text;
 // TODO: move to Text component? or leave possibility to use from anywhere
-// size
-$text-size-name: init-name($text-name, size);
-$text-size-map: init-size-map(12, 16, 20, 24, 32, 40, 48);
-
-// gap
-$text-gap-name: init-name($text-name, gap);
-$text-gap-size-map: init-size-map(4, 6, 8, 10, 12, 14, 16);
+$text-name: text;
 
 @mixin init-text-variables() {
-  @include init-variables($text-size-name, $text-size-map);
-  @include init-variables($text-gap-name, $text-gap-size-map);
+  @include tools.init-size-variables(
+    $text-name,
+    0.75rem,                                      /* 12px - Meta/labels */
+    0.875rem,                                     /* 14px - Sidebar/code/secondary UI */
+    clamp(0.938rem, 0.22vw + 0.89rem, 1rem),      /* 15px -> 16px (Base body) */
+    clamp(1.063rem, 0.43vw + 0.96rem, 1.188rem),  /* 17px -> 19px (Subheadings/lead text) */
+    clamp(1.25rem, 0.87vw + 1.05rem, 1.5rem),     /* 20px -> 24px (h3) */
+    clamp(1.625rem, 1.74vw + 1.22rem, 2.125rem),  /* 26px -> 34px (h2) */
+    clamp(2.125rem, 3.04vw + 1.43rem, 3rem),      /* 34px -> 48px (h1) */
+  );
 }
 
 @mixin attach-text-size-variables($property: font-size) {
-  @include attach-size-variables($text-size-name, $property);
+  @include tools.attach-size-variables($text-name, $property);
 }

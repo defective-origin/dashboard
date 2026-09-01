@@ -45,7 +45,7 @@ export function JsonField(props: JsonFieldProps) {
         styles: {
           container: {
             backgroundColor: 'white',
-            borderRadius: 'var(--mui-shape-borderRadius)',
+            borderRadius: 'var(--radius-xxs)',
             border: '1px solid rgba(0, 0, 0, 0.26)',
           },
         },

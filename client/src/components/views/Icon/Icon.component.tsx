@@ -56,7 +56,7 @@ export type IconProps = {
  * <Icon />
  */
 export const Icon = (props: IconProps) => {
-  const { size = 'md', v, fill, color, style, className, ...otherProps } = props
+  const { size, v, fill, color, style, className, ...otherProps } = props
   const _className = cn(
     'icon',
     'material-symbols-outlined', {

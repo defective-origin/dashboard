@@ -1,22 +1,22 @@
 import { Canvas, Meta, IconGallery, IconItem } from '@storybook/blocks';
-import * as IconStories from '../components/views/Icon/Icon.stories';
-import Icon, { ICONS } from '../components/views/Icon';
+import * as IconStories from '../../components/views/Icon/Icon.stories';
+import Icon, { ICONS } from '../../components/views/Icon';
 
 <Meta title='Requirements/Iconography' />
 
-# Iconography [[Playground](?path=/docs/components-data-display-icon--docs)]
+# Iconography [[Playground](?path=/docs/components-views-icon--docs)]
 
 **Font:** [Google Symbols](https://fonts.google.com/icons)  
-**Size[px]:** `xxs[12]` `xs[16]` `sm[20]` `md[24]` `lg[32]` `xl[40]` `xxl[48]`   
-**Variable template:** `--icon-size--{size}` `--icon-color--{color}`
+**Size[rem]:** `xxs` `xs` `sm` `md` `lg` `xl` `xxl`   
+**Variable template:** `--icon-{size}` `--icon-{color}`
 
 #### Sizes
-**Variable template:** `--icon-size--{size}`
+**Variable template:** `--icon-{size}`
 
 <Canvas of={IconStories.Sizes} />
 
 #### Colors [[Requirements](?path=/docs/requirements-colors--docs)]
-**Variable template:** `--icon-color--{color}`
+**Variable template:** `--icon-{color}`
 
 <Canvas of={IconStories.Colors} />
 

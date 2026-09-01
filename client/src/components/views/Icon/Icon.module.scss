@@ -1,5 +1,3 @@
-@import '/src/theme';
-
 @mixin style-icon($fill: 0, $weight: 200, $gradient: 0, $opacity: 24) {
   font-variation-settings:
     'FILL' $fill,
@@ -19,6 +17,9 @@
     // these sizes for skeleton
     @include attach-icon-size-variables(height);
     @include attach-icon-size-variables(width);
+
+    width: var(--icon-inline);
+    height: var(--icon-inline);
 
     &--outline { @include style-icon; }
     &--fill { @include style-icon(1); }

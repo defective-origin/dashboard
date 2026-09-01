@@ -31,7 +31,7 @@ export function Tag(props: TagProps) {
     border: `1px solid ${color && THEME.palette[`${color}-6`]}`,
     background: !outline ? color && THEME.palette[`${color}-6`] : undefined,
     borderRadius: 4,
-    padding: `0 ${THEME.components.text.size.xxs}`,
+    padding: `0 ${THEME.components.text.xxs}`,
   }
 
   return <Text v='caption' className={_className} color={color} style={styles} {...otherProps}>{children}</Text>
