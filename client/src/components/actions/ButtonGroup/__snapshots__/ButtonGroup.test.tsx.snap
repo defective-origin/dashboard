@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[ButtonGroup] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiButtonGroup-root MuiButtonGroup-outlined MuiButtonGroup-horizontal MuiButtonGroup-colorPrimary _ButtonGroup_0680ef css-19i0b4l-MuiButtonGroup-root"
+    role="group"
+  />
+</DocumentFragment>
+`;

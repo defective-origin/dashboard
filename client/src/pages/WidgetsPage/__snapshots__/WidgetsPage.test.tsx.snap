@@ -1,0 +1,69 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[WidgetsPage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--columns item _Page_318dc5 _SearchPage_e847fa _WidgetsPage_0e1c7b"
+  >
+    <div
+      class="layout layout--columns item p-xs g-md _Content_dbfcf8 scroll scroll--y"
+      style="grid-template-columns: repeat(3, 1fr); grid-area: center;"
+    >
+      <div
+        class="scroll-overlay"
+        style="left: 0px; top: 0px; height: 0px; width: 0px;"
+      >
+        <div
+          class="scroll-content"
+        >
+          <div
+            class="scroll-actions"
+            style="left: 50px; bottom: 50px;"
+          >
+            <div
+              class="scroll-back-button"
+              style="visibility: hidden;"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeMedium MuiButton-colorPrimary action md _Button_b1e8fd css-1dampmx-MuiButtonBase-root-MuiButton-root"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="icon material-symbols-outlined i-md c-primary icon--outline"
+                >
+                  keyboard_arrow_up
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="scroll-track scroll-track--y"
+          style="margin-right: 2px; visibility: hidden;"
+        >
+          <div
+            class="scroll-thumb scroll-thumb--y s-md"
+          />
+        </div>
+        <div
+          class="scroll-cerner"
+        />
+        <div
+          class="shadow shadow-y--start"
+          style="visibility: hidden;"
+        />
+        <div
+          class="shadow shadow-y--end"
+          style="visibility: visible;"
+        />
+      </div>
+    </div>
+    <div
+      class="_copyright_318dc5"
+    >
+      © 2026 now Systems. All Rights Reserved.
+    </div>
+  </div>
+</DocumentFragment>
+`;

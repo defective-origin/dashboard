@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 // ---| self |---
 import usePaginationBreakpoint from './UsePaginationBreakpoint.hook'
@@ -30,14 +30,14 @@ describe('[usePaginationBreakpoint] hook', () => {
     expect(result.current.hasPrev).toEqual(false)
     expect(result.current.hasNext).toEqual(true)
 
-    result.current.next()
+    act(() => result.current.next())
 
     expect(result.current.page).toEqual(2)
     expect(result.current.items).toEqual([6, 7, 8, 9])
     expect(result.current.hasPrev).toEqual(true)
     expect(result.current.hasNext).toEqual(false)
 
-    result.current.prev()
+    act(() => result.current.prev())
 
     expect(result.current.page).toEqual(1)
     expect(result.current.items).toEqual([1, 2, 3, 4, 5])

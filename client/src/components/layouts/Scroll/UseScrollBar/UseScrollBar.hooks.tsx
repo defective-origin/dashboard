@@ -91,7 +91,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   }, className)
   const scrollThumbClassName = cn('scroll-thumb', {
     [`scroll-thumb--${v}`]: v,
-    [`scroll-thumb--${size}`]: size,
+    [`s-${size}`]: size,
   }, thumbClassName)
 
   const initOptions = useFunc((container = 0, content = 0, position = 0) => {

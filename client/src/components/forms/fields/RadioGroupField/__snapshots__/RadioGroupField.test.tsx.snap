@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[RadioGroupField] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
+  >
+    <div
+      class="layout item _RadioGroupField_4f0e7a"
+    />
+  </div>
+</DocumentFragment>
+`;

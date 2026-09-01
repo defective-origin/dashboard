@@ -20,7 +20,7 @@ yarn run pods:up
 
 Run pods if it's not first launch
 - launch Podman app
-- launch pods: pod_dashboard-server
+- launch pods: pod-server
 
 
 Run app

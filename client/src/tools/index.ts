@@ -14,9 +14,8 @@ export * as str from './String'
 export * as num from './Number'
 
 // export { default as _ } from 'lodash-es'
+// export { default as wk } from 'weak-key'
 export { default as cn } from 'classnames'
-export { default as wk } from 'weak-key'
 
 export * as react from './react.tools'
 export * as h2i from 'html-to-image'
-export * from './storage.tools'

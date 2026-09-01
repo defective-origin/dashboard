@@ -44,6 +44,6 @@ describe('[Meta] component', () => {
     })
 
     expect(document.head).toMatchSnapshot()
-    expect(document.head.children.length).toEqual(13)
+    expect(document.head.children.length).toEqual(14)
   })
 })

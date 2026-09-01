@@ -1,4 +1,5 @@
-@import 'icon';
-@import 'text';
-@import 'space';
-@import 'scroll';
+@forward 'icon';
+@forward 'text';
+@forward 'space';
+@forward 'scroll';
+@forward 'radius';

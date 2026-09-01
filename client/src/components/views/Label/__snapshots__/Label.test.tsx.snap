@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Label] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="block block--x item g-xxs _Label_691938"
+    style="align-items: center;"
+  >
+    <span
+      class="icon material-symbols-outlined i-xs icon--outline"
+    />
+     
+    <p
+      class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+      style="--Typography-textAlign: left;"
+    />
+  </div>
+</DocumentFragment>
+`;

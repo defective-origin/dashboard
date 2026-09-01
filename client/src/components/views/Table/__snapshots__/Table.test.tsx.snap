@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Table] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="block block--y item _Table_92e4ec"
+    style="width: 100%; height: 100%;"
+  >
+    <div
+      class="block block--x item _TableHeader_92e4ec"
+      style="align-items: center; justify-content: space-between;"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-sm c-primary css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left;"
+      />
+      <div
+        class="block block--x item g-xxs _Actions_9baf69"
+        style="align-items: center; justify-content: end;"
+      />
+    </div>
+    <div
+      class="MuiTableContainer-root _TableContainer_92e4ec css-1rn28at-MuiTableContainer-root scroll scroll--xy"
+    >
+      <table
+        aria-label="sticky table"
+        class="MuiTable-root MuiTable-stickyHeader css-pvu7mv-MuiTable-root"
+      >
+        <thead
+          class="MuiTableHead-root _TableHead_87caf1 css-1a7iywq-MuiTableHead-root"
+          style="z-index: 1;"
+        >
+          <tr
+            class="MuiTableRow-root MuiTableRow-head _TableRow_f64a5c css-1xtozoh-MuiTableRow-root"
+            id="head"
+            tabindex="-1"
+          />
+        </thead>
+        <tbody
+          class="MuiTableBody-root _TableBody_69e6d6 css-gmh7jj-MuiTableBody-root"
+        />
+      </table>
+      <div
+        class="scroll-overlay"
+        style="left: 0px; top: 33px; width: 0px;"
+      >
+        <div
+          class="scroll-content"
+        >
+          <div
+            class="block block--y item stretch _Banner_279bdd _Absolute_279bdd"
+          >
+            <div
+              class="block block--y item _Content_279bdd"
+            >
+              <img
+                class="image"
+                src="https://www.dndbeyond.com/avatars/thumbnails/30836/227/1000/1000/638063931763028274.png"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="scroll-track scroll-track--y"
+          style="margin-right: 2px; visibility: hidden;"
+        >
+          <div
+            class="scroll-thumb scroll-thumb--y s-sm"
+          />
+        </div>
+        <div
+          class="scroll-track scroll-track--x"
+          style="margin-bottom: 2px; visibility: hidden;"
+        >
+          <div
+            class="scroll-thumb scroll-thumb--x s-sm"
+          />
+        </div>
+        <div
+          class="scroll-cerner"
+        />
+        <div
+          class="shadow shadow-y--start"
+          style="visibility: hidden;"
+        />
+        <div
+          class="shadow shadow-y--end"
+          style="visibility: visible;"
+        />
+        <div
+          class="shadow shadow-x--start"
+          style="visibility: hidden;"
+        />
+        <div
+          class="shadow shadow-x--end"
+          style="visibility: visible;"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

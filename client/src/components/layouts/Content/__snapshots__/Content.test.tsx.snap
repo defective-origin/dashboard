@@ -3,7 +3,7 @@
 exports[`[Content] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="layout item g--xxs _Content_99ea91"
+    class="layout item g-xxs _Content_dbfcf8"
     style="grid-area: center;"
   />
 </DocumentFragment>

@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import FeaturePage from './FeaturePage.component'
@@ -8,7 +8,7 @@ import FeaturePage from './FeaturePage.component'
 
 describe('[FeaturePage] component', () => {
   it('should render component', () => {
-    const container = render(<FeaturePage />)
+    const container = renderWithLauncher(<FeaturePage />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

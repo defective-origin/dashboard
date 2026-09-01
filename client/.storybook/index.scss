@@ -1,8 +1,23 @@
-@import '/src/theme';
+@use '/src/theme/' as *;
 
 :root {
   --sb-margin-color: #F9CC9D;
   --sb-space-color: #C3D08B;
   --sb-item-color: #808080CF;
   --sb-border: 1px solid #8080803A;
+}
+
+body {
+  #storybook-docs {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sb-bar, .docs-story, .docblock-typeset {
+    background: var(--color-contrast-secondary);
+  }
+
+  #storybook-docs .docblock-typeset * {
+    color: var(--color-secondary);
+  }
 }

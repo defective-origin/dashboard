@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import Tab from './Tab.component'
@@ -8,7 +8,7 @@ import Tab from './Tab.component'
 
 describe('[Tab] component', () => {
   it('should render component', () => {
-    const container = render(<Tab />)
+    const container = renderWithLauncher(<Tab />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

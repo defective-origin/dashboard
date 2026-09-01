@@ -3,7 +3,6 @@ import Text, { TextProps } from 'components/views/Text'
 
 // ---| core |---
 import { cn } from 'tools'
-import { THEME } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
@@ -24,17 +23,10 @@ export type TagProps = TextProps & {
  * <Tag />
  */
 export function Tag(props: TagProps) {
-  const { outline, color = 'primary', style, children, className, ...otherProps } = props
-  const _className = cn(css.Tag, className)
-  const styles: React.CSSProperties = {
-    ...style,
-    border: `1px solid ${color && THEME.palette[`${color}-6`]}`,
-    background: !outline ? color && THEME.palette[`${color}-6`] : undefined,
-    borderRadius: 4,
-    padding: `0 ${THEME.components.text.size.xxs}`,
-  }
+  const { outline, color = 'primary', children, className, ...otherProps } = props
+  const _className = cn(css.Tag, !outline && css.fill, className)
 
-  return <Text v='caption' className={_className} color={color} style={styles} {...otherProps}>{children}</Text>
+  return <Text v='caption' className={_className} color={color} {...otherProps}>{children}</Text>
 }
 
 Tag.displayName = 'Tag'

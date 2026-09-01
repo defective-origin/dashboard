@@ -1,6 +1,3 @@
-@import '/src/theme';
-
-
 :root {
   // TODO: move to global styles/variables
   // bar
@@ -46,9 +43,6 @@
 
     &:hover { background: var(--scroll-thumb-color--hover); }
     &:active { background: var(--scroll-thumb-color--active); }
-
-    @include attach-scroll-size-variables(height);
-    @include attach-scroll-size-variables(width);
   }
 
   .scroll-back-button {

@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 // ---| self |---
 import useMoreBreakpoint from './UseMoreBreakpoint.hook'
@@ -41,12 +41,12 @@ describe('[useMoreBreakpoint] hook', () => {
     expect(result.current.items).toEqual([1, 2, 3, 4, 5])
     expect(result.current.remainingItems).toEqual([6, 7, 8, 9])
 
-    result.current.more()
+    act(() => { result.current.more() })
 
     expect(result.current.items).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9])
     expect(result.current.remainingItems).toEqual([])
 
-    result.current.less()
+    act(() => { result.current.less() })
 
     expect(result.current.items).toEqual([1, 2, 3, 4, 5])
     expect(result.current.remainingItems).toEqual([6, 7, 8, 9])

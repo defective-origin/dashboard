@@ -14,7 +14,9 @@ export type ApiProviderProps = Partial<QueryClientProviderProps>
  * <ApiProvider defaultProp={1} />
  */
 function ApiProvider(props: ApiProviderProps) {
-  return <QueryClientProvider client={apiClient} {...props} />
+  const { client = apiClient, ...otherProps } = props
+
+  return <QueryClientProvider client={client} {...otherProps} />
 }
 
 ApiProvider.displayName = 'ApiProvider'

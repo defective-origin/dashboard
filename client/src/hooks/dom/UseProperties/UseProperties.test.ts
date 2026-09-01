@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 // ---| self |---
 import useProperties from './UseProperties.hook'
@@ -13,7 +13,7 @@ describe('[useProperties] hook', () => {
     }))
 
     expect(result.current).toEqual({
-      margin: '8px',
+      margin: '0',
       background: 'rgba(0, 0, 0, 0)',
       ref: {
         current: document.body,

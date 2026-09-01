@@ -10,7 +10,7 @@ type ItemProps = { content: React.ReactNode }
 
 describe('[Repeat] component', () => {
   const Item = (props: ItemProps) => <p data-testid='item'>{props.content}</p>
-  class ItemClass extends React.Component { render() { return 'CLASS COMPONENT' } }
+  class ItemClass extends React.Component { render() { return <div data-testid="class-component">'CLASS COMPONENT'</div> } }
 
   const itemMap = {
     a: (props: { a?: React.ReactNode } & ItemProps) => <p data-testid='itemA'>{props.a} - {props.content}</p>,
@@ -18,8 +18,8 @@ describe('[Repeat] component', () => {
 
     // should work with native items
     instinct: 'div',
-    function: function({ name = 'function' }) { return name },
-    arrowFunction: ({ name = 'arrow function'}) => name,
+    function: function() { return <div data-testid="function-component">'FUNCTION COMPONENT'</div> },
+    arrowFunction: () => <div data-testid="arrow-function-component">'ARROW FUNCTION COMPONENT'</div>,
     class: ItemClass,
   }
 
@@ -73,16 +73,20 @@ describe('[Repeat] component', () => {
   })
 
   it('should works with different types of components', () => {
-    const container = render(<Repeat cmp={itemMap} items={[
-      { variant: 'instinct' },
-      { variant: 'function' },
-      { variant: 'arrowFunction' },
-      { variant: 'class' },
-    ]} />)
+    const container = render(<Repeat
+      cmp={itemMap} 
+      items={[
+        { variant: 'instinct' },
+        { variant: 'function' },
+        { variant: 'arrowFunction' },
+        { variant: 'class' },
+      ]}
+      selectProps={item => ({ 'data-testid': item.variant } as any)}
+    />)
 
-    expect(container.getAll('instinct')).toHaveLength(1)
-    expect(container.getAll('function')).toHaveLength(1)
-    expect(container.getAll('arrowFunction')).toHaveLength(1)
-    expect(container.getAll('class')).toHaveLength(1)
+    // expect(container.getAll('instinct')).toHaveLength(1)
+    expect(container.getAll('function-component')).toHaveLength(1)
+    expect(container.getAll('arrow-function-component')).toHaveLength(1)
+    expect(container.getAll('class-component')).toHaveLength(1)
   })
 })

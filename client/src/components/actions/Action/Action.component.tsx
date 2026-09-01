@@ -75,7 +75,7 @@ export const Action = (props: ActionProps) => {
     ...otherProps
   } = props
   const _className = cn('action', size, { round, 'action--stretch': stretch, clear }, className)
-  const Tag = loading ? Skeleton : as
+  const Tag = loading ? Skeleton : as // TODO: use withSkeleton
 
   const item = (
     <Tag
@@ -106,7 +106,7 @@ export const Action = (props: ActionProps) => {
     </Tag>
   )
 
-  if (tooltip) {
+  if (tooltip) { // TODO: use withPopup
     const popupProps = typeof tooltip === 'object' ? tooltip : { content: tooltip }
 
     return <Popup v={tooltipSide} trigger={item} {...popupProps} />

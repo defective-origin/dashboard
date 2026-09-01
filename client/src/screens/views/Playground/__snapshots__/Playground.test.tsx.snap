@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Playground] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="item stretch _Playground_bfa7fe"
+  >
+    <div
+      class="item p-xl _PlaceholderCard_19ac2f"
+      style="grid-area: top; height: 300px; top: 0px; position: sticky;"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-sm c-secondary _Message_19ac2f css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left;"
+      >
+        Playground Is Under Construction.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

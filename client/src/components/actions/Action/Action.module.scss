@@ -1,5 +1,3 @@
-@import '/src/theme';
-
 :root {
   // --ui-framework-color: var(--account-framework-color);
 }
@@ -18,8 +16,8 @@
   .action--stretch {
     width: 100%;
     border-radius: 0;
-    padding-left: var(--space-size--xs);
-    padding-right: var(--space-size--xs);
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
 
     .action-content {
       flex-grow: 1;

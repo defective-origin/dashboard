@@ -1,9 +1,125 @@
-@import '/src/theme';
-
 :root {
-  @include init-size-theme;
+  @include init-text-variables;
+  @include init-icon-variables;
+  @include init-space-variables;
+  @include init-scroll-variables;
+  @include init-radius-variables;
+
+  // shadow
+  --box-shadow-color: rgb(var(--color-primary) 0.05);
+  --box-shadow: 0 4px 6px -1px var(--box-shadow-color), 0 2px 4px -2px var(--box-shadow-color);
+
+  // border and dividers
+  --divider-color: color-mix(in srgb, var(--color-secondary) 8%, transparent);
+  --border-width: 1px;
+  --border: var(--border-width) solid var(--divider-color);
+  --border-dashed: var(--border-width) dashed var(--divider-color);
+
+  // fonts
+  --font-main: 'Montserrat', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-code: 'Fira Code', monospace;
+  --lh-heading: 1.25; /* Tight line-height for headings to avoid gaps */
+  --lh-body: 1.65;    /* Spacious line-height for long-form reading comfort */
+
+  @include attach-text-size-variables;
+  @include attach-icon-size-variables;
+  @include attach-space-variables;
+  @include attach-radius-variables;
+  @include attach-scroll-size-variables;
+  @include attach-color-variables;
 }
 
 // use light, dark class on element to prevent changing theme on it
-.light { @include init-color-theme(light); }
-.dark { @include init-color-theme(dark); }
+.light { @include init-color-variables(#0F172A, #334155, #6dbf3c, #1e61fd, #FFAE00, #ff3100, #EDF2F7, #F8F8F8); }
+.dark { @include init-color-variables(#F8FAFC, #94A3B8, #56b843, #60A5FA, #FBBF24, #F87171, #333333, #2c2b2b); }
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  line-height: var(--lh-body);
+  color: var(--color-secondary);
+}
+
+// Text blocks should take sizes from area where it's places
+h1, h2, h3, h4, h5, h6 {
+  line-height: var(--lh-heading);
+  color: var(--color-primary);
+}
+
+b, strong {
+  font-weight: 500;
+}
+
+i, em {
+  font-style: italic;
+}
+
+del {
+
+}
+
+ins {
+
+}
+
+mark {
+
+}
+
+a {
+  color: var(--color-info);
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--color-secondary);
+  }
+}
+
+blockquote {
+
+}
+
+q {
+
+}
+
+cite  {
+
+}
+
+code {
+  font-family: var(--font-code);
+}
+
+time {
+
+}
+
+abbr {
+
+}
+
+// /* --- Semantic Web Scrollbars --- */
+// ::-webkit-scrollbar {
+//   width: 8px;
+//   height: 8px;
+// }
+
+// ::-webkit-scrollbar-track {
+//   background: var(--color-contrast-primary);
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+//   border-radius: 99px;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background: color-mix(in srgb, var(--color-primary) 35%, transparent);
+// }
+

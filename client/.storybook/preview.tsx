@@ -1,53 +1,48 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
-import ThemeProvider from '../src/theme'
-import { BrowserRouter } from '../src/router'
 import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
-import { AppProvider } from '../src/App/App.context'
-import { useAccount } from '../src/api'
+
+// ---| core |---
+import { MockLauncher } from '../src/App/App.launcher'
 
 import "./index.scss";
 
-const StorybookLauncher = ({ children, theme = undefined }) => {
-  const account = useAccount()
-
-  return (
-    <AppProvider account={account}>
-      <BrowserRouter>
-        {/* Mui injectFirst doesn't work with this decorator */}
-        <ThemeProvider theme={theme}>
-          {children}
-        </ThemeProvider>
-      </BrowserRouter>
-    </AppProvider>
-  )
-}
-
-export const decorators = [
-  (Story) => (
-    <StorybookLauncher>
-        <Story />
-    </StorybookLauncher>
-  ),
-  withThemeByClassName({
-    themes: {
-      light: "light",
-      dark: "dark",
-    },
-    defaultTheme: "light",
-  }),
-];
-
 const preview: Preview = {
+  decorators: [
+    (Story, context) => {
+      return (
+      <MockLauncher theme={context.globals.theme}>
+        <Story />
+      </MockLauncher>
+    )
+    },
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
   parameters: {
+    layout: 'centered',
     docs: {
       container: ({ context, ...other }) => {
+        // 1. Trying to retrieve the theme from deep hidden fields of the Storybook store (for pure MDX)
+        // In SB 8.3+, this is usually userGlobals; in earlier versions, it's store.globals
+        const storeGlobals = 
+          (context as any).store?.userGlobals?.globals || 
+          (context as any).store?.globals?.globals || 
+          (context as any).store?.globals;
+
+        const currentTheme = storeGlobals?.theme || context.globals?.theme || "light";
+
         // It's hack. Decorators doesn't work with mdx files without any stories
         return (
-          <StorybookLauncher theme={context.store.globals.globals.theme}>
+          <MockLauncher theme={currentTheme}>
             <DocsContainer context={context} {...other} />
-          </StorybookLauncher>
+          </MockLauncher>
         )
       },
     },
@@ -57,7 +52,6 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    layout: 'centered',
   },
 };
 

@@ -3,8 +3,8 @@
 exports[`[Tag] component > should render component 1`] = `
 <DocumentFragment>
   <span
-    class="MuiTypography-root MuiTypography-caption MuiTypography-alignLeft text text--sm _Tag_2dd11e css-1hesuab-MuiTypography-root"
-    style="border-radius: 4px;"
+    class="MuiTypography-root MuiTypography-caption MuiTypography-alignLeft text t-sm c-primary _Tag_36d35e _fill_36d35e css-1844jbj-MuiTypography-root"
+    style="--Typography-textAlign: left;"
   />
 </DocumentFragment>
 `;

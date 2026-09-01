@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import ExpensesTable from './ExpensesTable.component'
@@ -8,7 +8,7 @@ import ExpensesTable from './ExpensesTable.component'
 
 describe('[ExpensesTable] component', () => {
   it('should render component', () => {
-    const container = render(<ExpensesTable />)
+    const container = renderWithLauncher(<ExpensesTable />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

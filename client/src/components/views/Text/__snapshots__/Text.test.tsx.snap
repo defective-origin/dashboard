@@ -3,7 +3,8 @@
 exports[`[Text] component > should render component 1`] = `
 <DocumentFragment>
   <p
-    class="MuiTypography-root MuiTypography-body1 MuiTypography-alignLeft text text--md css-728lp0-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-sm c-primary css-141xmpu-MuiTypography-root"
+    style="--Typography-textAlign: left;"
   />
 </DocumentFragment>
 `;

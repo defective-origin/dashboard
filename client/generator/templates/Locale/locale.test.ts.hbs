@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 // ---| self |---
 import * as tools from './locale.tools'
@@ -40,6 +40,9 @@ describe('[Locale] hooks', () => {
   describe('[useLocale] hook', () => {
     it('should return options', () => {
       const { result } = renderHook(() => useLocale())
+
+      // act works automatic only for DOM interaction events and rerender() func
+      // act(() => { result.toggle() })
 
       expect(result.current).toEqual(null)
     })

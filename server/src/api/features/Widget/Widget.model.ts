@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { ref, Ref } from '@services/Database'
+import { ref, Ref } from 'services/Database'
 import { Feature, FeatureReview, FeatureReviewSchema, FeatureSchema } from '../Feature'
 import { Translate } from '../Translate/Translate.model'
 import { Config } from '../Config/Config.model'

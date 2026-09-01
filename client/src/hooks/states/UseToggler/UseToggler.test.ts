@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 // ---| self |---
 import useToggler from './UseToggler.hook'
@@ -21,7 +21,7 @@ describe('[useToggler] hook', () => {
   it('should toggle state', () => {
     const { result } = renderHook(() => useToggler({}))
 
-    result.current.toggle()
+    act(() => { result.current.toggle() })
 
     expect(result.current.isOn).toEqual(true)
   })
@@ -29,7 +29,7 @@ describe('[useToggler] hook', () => {
   it('should turn on state', () => {
     const { result } = renderHook(() => useToggler())
 
-    result.current.on()
+    act(() => { result.current.on() })
 
     expect(result.current.isOn).toEqual(true)
   })
@@ -37,7 +37,7 @@ describe('[useToggler] hook', () => {
   it('should turn off state', () => {
     const { result } = renderHook(() => useToggler(true))
 
-    result.current.off()
+    act(() => { result.current.off() })
 
     expect(result.current.isOff).toEqual(true)
   })
@@ -45,7 +45,7 @@ describe('[useToggler] hook', () => {
   it('should set state', () => {
     const { result } = renderHook(() => useToggler())
 
-    result.current.turn(true)
+    act(() => { result.current.turn(true) })
 
     expect(result.current.isOn).toEqual(true)
   })

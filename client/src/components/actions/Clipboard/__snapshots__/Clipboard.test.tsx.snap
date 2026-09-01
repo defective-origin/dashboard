@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Clipboard] component > should render component 1`] = `
+<DocumentFragment>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary _Popup_fd4307 action md clear _Button_b1e8fd _Clipboard_ee093e css-dizc30-MuiButtonBase-root-MuiButton-root"
+    data-mui-internal-clone-element="true"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="icon material-symbols-outlined c-primary icon--outline"
+    >
+      content_copy
+    </span>
+  </button>
+</DocumentFragment>
+`;

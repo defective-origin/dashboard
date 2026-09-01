@@ -3,33 +3,30 @@
 exports[`[TextField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="block block--y item g--xs _BaseField_dd3532 _TextField_38be52"
+    class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
   >
-    <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
-    />
     <div
-      class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiTextField-root _TextField_38db33 css-1xp5r68-MuiFormControl-root-MuiTextField-root"
     >
       <div
-        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root"
       >
         <input
           aria-invalid="false"
-          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-          id=":r0:"
-          name=""
+          class="MuiInputBase-input MuiOutlinedInput-input css-1pzfmz2-MuiInputBase-input-MuiOutlinedInput-input"
+          id="_r_0_"
           type="text"
           value=""
         />
         <fieldset
           aria-hidden="true"
-          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          class="MuiOutlinedInput-notchedOutline css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            class="css-ihdtdm"
+            class="css-1nf2c5d-MuiNotchedOutlined-root"
           >
             <span
+              aria-hidden="true"
               class="notranslate"
             >
               ​
@@ -38,9 +35,6 @@ exports[`[TextField] component > should render component 1`] = `
         </fieldset>
       </div>
     </div>
-    <div
-      class="block block--y item _Messages_e4e642"
-    />
   </div>
 </DocumentFragment>
 `;

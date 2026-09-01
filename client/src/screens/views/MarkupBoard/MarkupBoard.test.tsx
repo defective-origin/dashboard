@@ -44,20 +44,31 @@ describe('[MarkupBoard] tools', () => {
 
   const markup = {
     width: 992,
-    height: '100%',
+    height: "100%",
     areas: [
-      ['1', '|', '2', '|', '3'],
-      ['-', '-', '-', '-', '-'],
-      ['4', '|', '5', '|', '6'],
-      ['-', '-', '-', '-', '-'],
-      ['7', '|', '8', '|', '.'],
+      [".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", "."],
     ],
-    rows: ['1fr', '4px', '1fr', '4px', '1fr'],
-    columns: ['1fr', '4px', '1fr', '4px', '1fr'],
-    gap: ['4px', '4px'],
+    gap: ["0","0"],
+    rows: ["auto", "1fr", "4px", "1fr", "4px", "1fr", "auto"],
+    columns: ["auto", "1fr", "4px", "1fr", "4px", "1fr", "auto"],
+    items: {
+      ".": { "endCol": 2, "endRow": 2, "startCol": 2, "startRow": 2 },
+      "1": { "endCol": 0, "endRow": 0, "startCol": 0, "startRow": 0 },
+      "2": { "endCol": 1, "endRow": 0, "startCol": 1, "startRow": 0 },
+      "3": { "endCol": 2, "endRow": 0, "startCol": 2, "startRow": 0 },
+      "4": { "endCol": 0, "endRow": 1, "startCol": 0, "startRow": 1 },
+      "5": { "endCol": 1, "endRow": 1, "startCol": 1, "startRow": 1 },
+      "6": { "endCol": 2, "endRow": 1, "startCol": 2, "startRow": 1 },
+      "7": { "endCol": 0, "endRow": 2, "startCol": 0, "startRow": 2 },
+      "8": { "endCol": 1, "endRow": 2, "startCol": 1, "startRow": 2 },
+    },
   }
-
-
 
   describe('[toMarkupGrid] func', () => {
     it('should convert grid into markup', () => {
@@ -68,16 +79,13 @@ describe('[MarkupBoard] tools', () => {
   describe('[toCssGrid] func', () => {
     it('should return css grid options', () => {
       expect(tools.toCssGrid(options)).toEqual({
-        width: '992px',
         height: '100%',
-        areas: `
-      1 2 3
-      4 5 6
-      7 8 .
-      `,
-        rows: '1fr 1fr 1fr',
-        columns: '1fr 1fr 1fr',
-        gap: '4px 4px',
+        // minWidth: '992px',
+        display: "grid",
+        gap: "4px 4px",
+        gridTemplateColumns: "1fr 1fr 1fr",
+        gridTemplateRows: "1fr 1fr 1fr",
+        gridTemplateAreas: `"1 2 3"\n"4 5 6"\n"7 8 ."`,
       })
     })
   })

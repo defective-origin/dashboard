@@ -1,8 +1,5 @@
 {
   "extends": "./tsconfig",
-  "ts-node": {
-    "files": true
-  },
   "compilerOptions": {
     "outDir": "dist",
   },

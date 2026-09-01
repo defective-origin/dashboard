@@ -3,7 +3,7 @@ import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/mater
 
 // ---| core |---
 import { cn, react } from 'tools'
-import { Color, Size, THEME } from 'theme'
+import { Color, Size } from 'theme'
 import { FormatOptions, useFormat } from 'hooks'
 
 // ---| components |---
@@ -71,7 +71,7 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     v = 'body2',
     size = TEXT_SIZE_MAP[v],
     height,
-    bold,
+    bold, // TODO: rename to b()bold, i(italic) and so on
     color = 'primary',
     ellipsis,
     format,
@@ -86,7 +86,8 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
   const _className = cn('text', {
     nowrap,
     ellipsis,
-    [`text--${size}`]: size, // FIXME: doesn't work - fix on line 92
+    [`t-${size}`]: size,
+    [`c-${color}`]: color,
   }, className)
   // TODO: add fixing number formats: units, millions, ... (fix: "M", by, to)
   // TODO: text animation on resize add by default on Text component
@@ -95,7 +96,6 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     ...style,
     lineHeight: height,
     fontWeight: bold ? 'bold' : undefined,
-    fontSize: THEME.components.text.size[size],
     WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
   }
 
@@ -104,9 +104,7 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
       className={_className}
       variant={v}
       align='left'
-      color={color && THEME.palette[color]}
       style={styles}
-      fontFamily='Montserrat'
       {...otherProps}
     >
       {_content}

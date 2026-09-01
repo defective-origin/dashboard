@@ -107,9 +107,9 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
     ...otherOptions,
     children,
     className: cn('item', {
-      [`p--${p}`]: p,
-      [`m--${m}`]: m,
-      [`g--${g}`]: g,
+      [`p-${p}`]: p,
+      [`m-${m}`]: m,
+      [`g-${g}`]: g,
       invisible: !visible,
       stretch,
       fit,

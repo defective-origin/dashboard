@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Markup] component > should render component 1`] = `
+<DocumentFragment>
+  <span
+    class="icon material-symbols-outlined icon--outline _Popup_fd4307 _Markup_fc4682"
+    data-mui-internal-clone-element="true"
+  >
+    devices_wearables
+  </span>
+</DocumentFragment>
+`;

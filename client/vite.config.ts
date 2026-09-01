@@ -1,13 +1,11 @@
 import { defineConfig } from 'vitest/config'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    tsconfigPaths(),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
@@ -41,6 +39,9 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    tsconfigPaths: true // Включает нативное разрешение путей
+  },
   // only for gh pages
   base: process.env.NODE_ENV === 'production' ? '/dashboard/' : './',
   test: {
@@ -55,13 +56,14 @@ export default defineConfig({
       treeshake: false,
     },
   },
-  // css: {
-  //   preprocessorOptions: {
-  //     scss: {
-  //       // allows to remove import from each .scss file
-  //       additionalData: '@import "/src/theme";',
-  //     },
-  //   },
-  // },
+  css: {
+  preprocessorOptions: {
+    scss: {
+        // allows to remove import from each .scss file
+      additionalData: `
+        @use "/src/theme" as *;
+      `,
+    },
+  },
+},
 })
-// alias config vite https://www.youtube.com/watch?v=ic-P67jinhw

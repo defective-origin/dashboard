@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { ref, Ref, refs, TimeStamps } from '@services/Database'
+import { ref, Ref, refs, TimeStamps } from 'services/Database'
 
 export const PATHNAME = 'users'
 

@@ -58,8 +58,8 @@ export function useHistory(value?: unknown) {
       value: stack[position],
       hasPrev,
       hasNext,
-      prev: () => { hasPrev && setPosition(position - 1) },
-      next: () => { hasNext && setPosition(position + 1) },
+      prev: () => { hasPrev && setPosition(prev => prev - 1) },
+      next: () => { hasNext && setPosition(prev => prev + 1) },
       reset: (newValue = value) => update([newValue]),
       push: (value: unknown) => update([...stack, value], position + 1),
       pull: (value: unknown) => {

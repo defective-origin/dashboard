@@ -3,7 +3,7 @@
 exports[`[Skeleton] component > should render component 1`] = `
 <DocumentFragment>
   <span
-    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _Skeleton_ae7802 css-1n7gpw1-MuiSkeleton-root"
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _Skeleton_b89034 css-kkcbhd-MuiSkeleton-root"
   />
 </DocumentFragment>
 `;

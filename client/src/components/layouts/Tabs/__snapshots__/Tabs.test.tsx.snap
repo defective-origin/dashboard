@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Tabs] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiTabs-root _Tabs_5b16e5 item css-jhczcq-MuiTabs-root"
+  >
+    <div
+      class="MuiTabs-scroller MuiTabs-fixed css-s2t35c-MuiTabs-scroller"
+      style="overflow: hidden; margin-bottom: 0px;"
+    >
+      <div
+        class="MuiTabs-list css-hzcega-MuiTabs-list"
+        role="tablist"
+      />
+      <span
+        class="MuiTabs-indicator css-1qltlow-MuiTabs-indicator"
+        style="left: 0px; width: 0px;"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

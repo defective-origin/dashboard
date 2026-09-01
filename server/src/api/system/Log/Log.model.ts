@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { TimeStamps } from '@services/Database'
+import { TimeStamps } from 'services/Database'
 
 export const PATHNAME = 'system/logs'
 

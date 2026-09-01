@@ -3,39 +3,32 @@
 exports[`[CheckboxField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="block block--y item g--xs _BaseField_dd3532 _CheckboxField_9d1f64"
-    style="align-items: start;"
+    class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
   >
-    <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
-    />
-    <span
-      class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-root MuiCheckbox-colorPrimary css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
+    <label
+      class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-19opgx6-MuiFormControlLabel-root"
     >
-      <input
-        class="PrivateSwitchBase-input css-1m9pwf3"
-        data-indeterminate="false"
-        name=""
-        type="checkbox"
-      />
-      <svg
-        aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root"
-        data-testid="CheckBoxOutlineBlankIcon"
-        focusable="false"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-        />
-      </svg>
       <span
-        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
-    </span>
-    <div
-      class="block block--y item _Messages_e4e642"
-    />
+        class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeSmall _CheckboxField_e43c77 css-1ml7hhy-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+      >
+        <input
+          class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
+          data-indeterminate="false"
+          type="checkbox"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-120dh41-MuiSvgIcon-root"
+          data-testid="CheckBoxOutlineBlankIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+          />
+        </svg>
+      </span>
+    </label>
   </div>
 </DocumentFragment>
 `;

@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import WidgetTable from './WidgetTable.component'
@@ -8,7 +8,7 @@ import WidgetTable from './WidgetTable.component'
 
 describe('[WidgetTable] component', () => {
   it('should render component', () => {
-    const container = render(<WidgetTable />)
+    const container = renderWithLauncher(<WidgetTable />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

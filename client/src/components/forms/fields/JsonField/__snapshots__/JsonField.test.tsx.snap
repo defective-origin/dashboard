@@ -1,0 +1,113 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[JsonField] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
+  >
+    <div
+      class="jer-editor-container _JsonField_6526de"
+      style="background-color: white; font-family: monospace; border-radius: var(--radius-xxs); border: 1px solid rgba(0, 0, 0, 0.26); min-width: 250px; max-width: min(600px, 90vw);"
+    >
+      <div
+        class="jer-component jer-collection-component"
+        draggable="false"
+        style="margin-left: 0em; position: relative;"
+      >
+        <div
+          class="jer-clickzone"
+          style="width: 2em; z-index: 10;"
+        />
+        <div
+          class="jer-collection-header-row"
+          style="position: relative;"
+        >
+          <div
+            class="jer-collection-name"
+          >
+            <div
+              class="jer-collapse-icon jer-accordion-icon"
+              style="z-index: 11; transition: 0.3s;"
+            >
+              <span
+                class="icon material-symbols-outlined i-sm icon--outline"
+              >
+                keyboard_arrow_down
+              </span>
+            </div>
+            <span
+              class="jer-key-text"
+              style="color: rgb(41, 41, 41); min-width: 5ch; flex-shrink: 0;"
+            >
+              options
+              <span
+                class="jer-key-colon"
+              >
+                :
+              </span>
+            </span>
+            <span
+              class="jer-brackets jer-bracket-open"
+              style="color: rgb(0, 43, 54); font-weight: bold;"
+            >
+              {
+            </span>
+          </div>
+          <div
+            class="jer-brackets jer-hidden"
+            style="color: rgb(0, 43, 54); font-weight: bold; transition: 0.3s;"
+          >
+            }
+          </div>
+          <div
+            class="jer-edit-buttons"
+          >
+            <div
+              class="jer-copy-pulse"
+              title=""
+            >
+              <span
+                class="icon material-symbols-outlined i-sm icon--fill"
+              >
+                content_copy
+              </span>
+            </div>
+            <div
+              title=""
+            >
+              <span
+                class="icon material-symbols-outlined i-sm c-warning icon--outline"
+              >
+                edit_square
+              </span>
+            </div>
+            <div
+              title=""
+            >
+              <span
+                class="icon material-symbols-outlined i-sm c-success icon--outline"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="jer-collection-inner"
+          style="overflow-y: visible; transition: 0.3s;"
+        >
+          <div
+            class="jer-collection-error-row-edit"
+          />
+          <div
+            class="jer-brackets jer-bracket-outside"
+            style="color: rgb(0, 43, 54); font-weight: bold;"
+          >
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

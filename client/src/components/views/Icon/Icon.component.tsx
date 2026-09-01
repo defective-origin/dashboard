@@ -1,9 +1,8 @@
 import React from 'react'
-import MuiIcon from '@mui/material/Icon'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Color, THEME, Size } from 'theme'
+import { Color, Size } from 'theme'
 
 // ---| components |---
 import { withSkeleton } from 'components/views/Skeleton'
@@ -56,22 +55,19 @@ export type IconProps = {
  * <Icon />
  */
 export const Icon = (props: IconProps) => {
-  const { size = 'md', v, fill, color, style, className, ...otherProps } = props
+  const { size, v, fill, color, className, ...otherProps } = props
   const _className = cn(
     'icon',
     'material-symbols-outlined', {
-      [`icon--${size}`]: size,
+      [`i-${size}`]: size,
+      [`c-${color}`]: color,
       ['icon--fill']: fill,
       ['icon--outline']: !fill,
     },
     className,
   )
-  const styles = {
-    ...style,
-    color: color && THEME.palette[color],
-  }
 
-  return <MuiIcon className={_className} style={styles} {...otherProps}>{v}</MuiIcon>
+  return <span className={_className} {...otherProps}>{v}</span>
 }
 
 Icon.displayName = 'Icon'

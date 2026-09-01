@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[AccountPage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--columns item _Page_318dc5 _AccountPage_918f73"
+  >
+    <div
+      class="layout item p-xs g-xxs _Content_dbfcf8"
+      style="grid-area: center;"
+    />
+    <div
+      class="_copyright_318dc5"
+    >
+      © 2026 now Systems. All Rights Reserved.
+    </div>
+  </div>
+</DocumentFragment>
+`;

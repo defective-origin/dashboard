@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import SearchPage from './SearchPage.component'
@@ -8,7 +8,7 @@ import SearchPage from './SearchPage.component'
 
 describe('[SearchPage] component', () => {
   it('should render component', () => {
-    const container = render(<SearchPage />)
+    const container = renderWithLauncher(<SearchPage />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

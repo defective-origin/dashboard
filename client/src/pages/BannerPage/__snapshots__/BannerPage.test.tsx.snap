@@ -1,0 +1,38 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[BannerPage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--columns item _Page_318dc5 _BannerPage_252acb"
+  >
+    <div
+      class="layout item g-xxs _Content_dbfcf8"
+      style="grid-area: center;"
+    >
+      <div
+        class="block block--y item stretch _Banner_279bdd _Banner_252acb"
+      >
+        <div
+          class="block block--y item _Content_279bdd"
+        >
+          <img
+            class="image"
+            src="https://www.dndbeyond.com/avatars/thumbnails/30836/227/1000/1000/638063931763028274.png"
+          />
+          <h4
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter text ellipsis t-sm c-primary css-1ya2hdm-MuiTypography-root"
+            style="--Typography-textAlign: center;"
+          >
+            THERE IS NO DATA TO DISPLAY
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div
+      class="_copyright_318dc5"
+    >
+      © 2026 now Systems. All Rights Reserved.
+    </div>
+  </div>
+</DocumentFragment>
+`;

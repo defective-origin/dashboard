@@ -1,12 +1,12 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import GuidePage from './GuidePage.component'
 
 describe('[GuidePage] component', () => {
   it('should render component', () => {
-    const container = render(<GuidePage />)
+    const container = renderWithLauncher(<GuidePage />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

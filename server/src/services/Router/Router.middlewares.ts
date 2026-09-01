@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
-import UserModel from '@api/account/User/User.model'
-import { Storage } from '@tools'
+import UserModel from 'api/account/User/User.model'
+import { Storage } from 'tools'
 
 export function ErrorMiddleware(err: Error, req: Request, res: Response, _next: NextFunction) {
   res.status(500).json(err)

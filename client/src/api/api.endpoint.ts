@@ -45,7 +45,7 @@ export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: 
       data: payload,
       ...request,
     }).then(response => response.data),
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data, variables, onMutateResult, context) => {
       // refresh list of items
       apiClient.invalidateQueries({ queryKey: [pathname] })
 
@@ -54,7 +54,7 @@ export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: 
         apiClient.invalidateQueries({ queryKey: invalidate(data, variables, context) })
       }
 
-      onSuccess?.(data, variables, context)
+      onSuccess?.(data, variables, onMutateResult, context)
     },
   })
 

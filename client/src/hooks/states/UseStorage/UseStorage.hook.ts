@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
-import { LocalStorage, SessionStorage, BrowserStorage } from 'tools'
+
+// ---| self |---
+import { LocalStorage, SessionStorage, BrowserStorage } from './UseStorage.tools'
 
 export type StorageOptions<T> = {
   defaultValue?: T

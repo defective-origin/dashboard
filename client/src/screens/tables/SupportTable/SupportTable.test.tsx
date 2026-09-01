@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import SupportTable from './SupportTable.component'
@@ -8,7 +8,7 @@ import SupportTable from './SupportTable.component'
 
 describe('[SupportTable] component', () => {
   it('should render component', () => {
-    const container = render(<SupportTable />)
+    const container = renderWithLauncher(<SupportTable />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

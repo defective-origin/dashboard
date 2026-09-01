@@ -1,0 +1,33 @@
+import { Canvas, Meta, Typeset } from '@storybook/blocks';
+import * as TextStories from '../../components/views/Text/Text.stories.tsx';
+import { SIZE_MAP } from '../theme.conf.ts';
+
+<Meta title="Requirements/Typography" />
+
+export const SampleText = 'Lorem ipsum dolor sit amet.';
+
+# Typography [[Playground](?path=/docs/components-views-text--docs)]
+
+**Font:** [Montserrat](https://fonts.google.com/specimen/Montserrat)  
+**Weights:** `400[regular]` `700[bold]` `800[extrabold]` `900[black]`  
+**Size[rem]:** `xxs` `xs` `sm` `md` `lg` `xl` `xxl`   
+**Variable template:** `--text-{size}` `--text-{color}`
+
+### Sizes
+**Variable template:** `--text-{size}`
+
+<Typeset
+  fontSizes={Object.values(SIZE_MAP.text).map((item) => item.padStart(50, '  '))}
+  fontWeight='400'
+  sampleText={SampleText}
+  fontFamily='var(--font-main)'
+/>
+
+### Colors [[Requirements](?path=/docs/requirements-colors--docs)]
+**Variable template:** `--text-{color}`
+
+<Canvas of={TextStories.Colors} />
+
+### Style of Text Elements
+
+<Canvas of={TextStories.Variants} />

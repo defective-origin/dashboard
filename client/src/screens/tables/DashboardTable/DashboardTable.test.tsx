@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import DashboardTable from './DashboardTable.component'
@@ -8,7 +8,7 @@ import DashboardTable from './DashboardTable.component'
 
 describe('[DashboardTable] component', () => {
   it('should render component', () => {
-    const container = render(<DashboardTable />)
+    const container = renderWithLauncher(<DashboardTable />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

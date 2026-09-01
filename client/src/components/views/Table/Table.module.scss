@@ -1,8 +1,6 @@
-@import '/src/theme';
-
 :root {
   --table-body-filter: drop-shadow(0px 0 2px #0000001A);
-  --table-bg-color: var(--card-background);
+  --table-bg-color: var(--color-contrast-secondary);
   --table-shadow: var(--box-shadow);
 
   // primary should have alpha channel in order to table filter works on cell
@@ -22,7 +20,7 @@
 .TableContainer {
   background: var(--table-bg-color);
   box-shadow: var(--table-shadow);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius-xxs);
   flex-grow: 1;
 }
 

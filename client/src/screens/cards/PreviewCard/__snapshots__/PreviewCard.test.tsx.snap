@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[PreviewCard] component > should render component 1`] = `
+<DocumentFragment>
+  <a
+    aria-current="page"
+    class="action md clear _NavLink_21a715 _PreviewCard_18253c active"
+    data-discover="true"
+    href="/"
+  >
+    <div
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _Card_3d107a css-2epr5x-MuiPaper-root-MuiCard-root"
+      style="--Paper-shadow: var(--mui-shadows-1);"
+    >
+      <div
+        class="MuiCardContent-root css-1lt5qva-MuiCardContent-root"
+        style="height: -webkit-fill-available;"
+      >
+        <div
+          class="block block--x item g-xxs"
+          style="align-items: center; justify-content: space-between;"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+            style="--Typography-textAlign: left;"
+          />
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action sm _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="icon material-symbols-outlined i-sm c-primary icon--outline"
+            >
+              beenhere
+            </span>
+          </button>
+        </div>
+        <div
+          class="block block--x item g-xxs _Meta_18253c"
+        >
+          <div
+            class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+            data-mui-internal-clone-element="true"
+            style="align-items: center;"
+          >
+            <span
+              class="icon material-symbols-outlined i-xs icon--outline"
+            >
+              star
+            </span>
+             
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+              style="--Typography-textAlign: left;"
+            />
+          </div>
+          <div
+            class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+            data-mui-internal-clone-element="true"
+            style="align-items: center;"
+          >
+            <span
+              class="icon material-symbols-outlined i-xs icon--outline"
+            >
+              payments
+            </span>
+             
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+              style="--Typography-textAlign: left;"
+            />
+          </div>
+          <div
+            class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+            data-mui-internal-clone-element="true"
+            style="align-items: center;"
+          >
+            <span
+              class="icon material-symbols-outlined i-xs icon--outline"
+            >
+              schedule
+            </span>
+             
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+              style="--Typography-textAlign: left;"
+            />
+          </div>
+        </div>
+      </div>
+      <img
+        class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-1rqd4gh-MuiCardMedia-root"
+        src="https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg"
+      />
+    </div>
+  </a>
+</DocumentFragment>
+`;

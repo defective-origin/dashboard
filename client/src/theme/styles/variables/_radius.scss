@@ -1,0 +1,20 @@
+@use '../tools';
+
+$radius-name: radius;
+
+@mixin init-radius-variables() {
+  @include tools.init-size-variables(
+    $radius-name,
+    0.125rem,                               /* 2px */
+    0.25rem,                                /* 4px */
+    0.5rem,                                 /* 8px */
+    0.75rem,                                /* 12px */
+    clamp(0.875rem, 0.5vw + 0.75rem, 1rem), /* 14px -> 16px */
+    clamp(1.25rem, 1vw + 1rem, 1.5rem),     /* 20px -> 24px */
+    clamp(1.75rem, 2vw + 1.25rem, 2.5rem)   /* 28px -> 40px */
+  );
+}
+
+@mixin attach-radius-variables() {
+  .r { @include tools.attach-size-variables($radius-name, border-radius); }
+}

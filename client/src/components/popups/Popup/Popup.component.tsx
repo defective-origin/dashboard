@@ -20,9 +20,6 @@ import Button, { ButtonProps } from 'components/actions/Button'
 import css from './Popup.module.scss'
 import { TogglerReturnOptions, useToggler } from 'hooks'
 
-const POPUP_STYLE = { tooltip: { style: { background: 'var(--card-background)', padding: 0, border: 'var(--border)', boxShadow: 'var(--box-shadow)' } } }
-const POPUP_WITHOUT_ARROW_STYLE = { tooltip: { style: { margin: 0, ...POPUP_STYLE.tooltip.style } } }
-
 
 export type PopupVariant =
 | 'bottom-start' | 'bottom' | 'bottom-end'
@@ -125,7 +122,9 @@ export function Popup(props: PopupProps) {
       placement={v}
       arrow={arrow}
       open={open ?? toggler.isOn}
-      componentsProps={arrow ? POPUP_STYLE : POPUP_WITHOUT_ARROW_STYLE}
+      slotProps={{
+        tooltip: { className: cn(css.card, arrow && css.arrow) } 
+      }}
       onOpen={() => {
         toggler.on()
         onOpen?.()

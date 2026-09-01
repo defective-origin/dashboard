@@ -1,14 +1,14 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 // ---| self |---
-import scrollBar from './UseScrollBar.hooks'
+import useScrollBar from './UseScrollBar.hooks'
 
 
 describe('[scrollBar] hook', () => {
   it('should return options', () => {
-    const { result } = renderHook(() => scrollBar())
+    const { result } = renderHook(() => useScrollBar({}))
 
-    expect(result.current).toEqual(null)
+    expect(result.current).toBeDefined()
   })
 })

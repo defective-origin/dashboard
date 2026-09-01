@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Page] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--columns item _Page_318dc5"
+  >
+    <div
+      class="_copyright_318dc5"
+    >
+      © 2026 now Systems. All Rights Reserved.
+    </div>
+  </div>
+</DocumentFragment>
+`;

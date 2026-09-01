@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import WidgetsPage from './WidgetsPage.component'
@@ -8,7 +8,7 @@ import WidgetsPage from './WidgetsPage.component'
 
 describe('[WidgetsPage] component', () => {
   it('should render component', () => {
-    const container = render(<WidgetsPage />)
+    const container = renderWithLauncher(<WidgetsPage />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

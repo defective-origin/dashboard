@@ -31,7 +31,7 @@ export function initMarkup(width: number, rows: number, columns: number, gap: nu
     areas: matrix.initMatrix(rows, columns, () => EMPTY_CELL),
     rows: arr.repeat(rows, () => DEFAULT_CSS_SIZE),
     columns: arr.repeat(columns, () => DEFAULT_CSS_SIZE),
-    gap: arr.repeat(rows, () => px(gap)),
+    gap: arr.repeat(2, () => px(gap)),
   }
 }
 
@@ -53,7 +53,7 @@ export function toCssGrid(options: MarkupOptions) {
     // minWidth: px(options.width),
     gridTemplateRows: options.rows.join(CSS_VARS_SPACE),
     gridTemplateColumns: options.columns.join(CSS_VARS_SPACE),
-    // gridTemplateAreas: matrix.toString(options.areas),
+    gridTemplateAreas: matrix.toString(options.areas),
     gap: options.gap.join(CSS_VARS_SPACE),
   }
 }

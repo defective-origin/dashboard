@@ -1,11 +1,12 @@
 // ---| core |---
-import Launcher from 'App/App.launcher'
+import { MockLauncher } from 'App/App.launcher'
 
 // ---| self |---
-import ComponentTestUtil from './render/component.tools'
-import { buildCustomRender } from './render/render.tools'
+import ComponentTestUtil from './component.tools'
+import { buildCustomRender } from './render.tools'
 
 const { render } = ComponentTestUtil
-const renderWithRootModule = buildCustomRender(render, Launcher)
+const renderWithLauncher = buildCustomRender(render, MockLauncher)
 
-export { render, renderWithRootModule } // renderHook
+
+export { render, renderWithLauncher } // renderHook

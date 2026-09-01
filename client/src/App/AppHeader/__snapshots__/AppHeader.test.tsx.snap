@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[AppHeader] component > should render component 1`] = `
+<DocumentFragment>
+  <header
+    class="layout layout--lcr item p-xxs g-xxs _Header_5cabd4 _AppHeader_cec57d"
+    style="align-items: center; grid-template-columns: 1fr auto 1fr; grid-area: top;"
+  >
+    <div
+      class="block block--x item g-xxs _PortalContainer_589b69"
+      id="portal-page-name"
+      style="align-items: center; grid-area: left;"
+    />
+    <div
+      class="block block--x item g-xxs _PortalContainer_589b69"
+      id="portal-page-nav"
+      style="align-items: center; grid-area: center;"
+    />
+    <div
+      class="block block--x item g-xxs _PortalContainer_589b69"
+      id="portal-page-extra"
+      style="align-items: center; justify-content: end; grid-area: right;"
+    />
+  </header>
+</DocumentFragment>
+`;

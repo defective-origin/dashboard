@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import ConfirmModal from './ConfirmModal.component'
@@ -8,7 +8,7 @@ import ConfirmModal from './ConfirmModal.component'
 
 describe('[ConfirmModal] component', () => {
   it('should render component', () => {
-    const container = render(<ConfirmModal />)
+    const container = renderWithLauncher(<ConfirmModal />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

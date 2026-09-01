@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import BannerPage from './BannerPage.component'
@@ -8,7 +8,7 @@ import BannerPage from './BannerPage.component'
 
 describe('[BannerPage] component', () => {
   it('should render component', () => {
-    const container = render(<BannerPage />)
+    const container = renderWithLauncher(<BannerPage />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

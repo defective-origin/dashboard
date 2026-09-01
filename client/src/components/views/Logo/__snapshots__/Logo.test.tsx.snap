@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Logo] component > should render component 1`] = `
+<DocumentFragment>
+  <a
+    aria-current="page"
+    class="action md clear _NavLink_21a715 _Logo_d10d9c active"
+    data-discover="true"
+    href="/"
+  >
+    <img
+      class="image _Image_d10d9c"
+      src="https://images.crunchbase.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1426633865/die6a2gp9buarvojwxk9.png"
+      style="width: 42px;"
+    />
+  </a>
+</DocumentFragment>
+`;

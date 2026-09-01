@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import NavLink from './NavLink.component'
@@ -8,7 +8,7 @@ import NavLink from './NavLink.component'
 
 describe('[NavLink] component', () => {
   it('should render component', () => {
-    const container = render(<NavLink />)
+    const container = renderWithLauncher(<NavLink />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

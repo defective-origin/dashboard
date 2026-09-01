@@ -3,8 +3,8 @@ import { Donation, DonationModel, PATHNAME } from './Donation.model'
 
 
 let savedRecord: Donation
-const MOCK_OPERATION_RECORD = { value: 0, content: 'OPERATION CONTENT', meta: 'OPERATION META', reason: { id: new mongoose.Types.ObjectId(1).toString() } }
-const MOCK_SAVED_RECORD = { value: 123456789, content: 'SAVED CONTENT', meta: 'SAVED META', reason: { id: new mongoose.Types.ObjectId(2).toString() } }
+const MOCK_OPERATION_RECORD = { value: 0, content: 'OPERATION CONTENT', meta: 'OPERATION META', reason: { id: new mongoose.Types.ObjectId().toString() } }
+const MOCK_SAVED_RECORD = { value: 123456789, content: 'SAVED CONTENT', meta: 'SAVED META', reason: { id: new mongoose.Types.ObjectId().toString() } }
 const MOCK_SAVED_RECORDS = [MOCK_SAVED_RECORD]
 
 describe(`[${PATHNAME}] api`, () => {

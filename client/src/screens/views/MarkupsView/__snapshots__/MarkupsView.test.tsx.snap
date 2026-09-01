@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[MarkupsView] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="_MarkupsView_3b48c5"
+    style="display: grid; height: 100%; grid-template-rows: 1fr 1fr 1fr; grid-template-columns: 1fr 1fr 1fr; grid-template-areas: ". . ."
+". . ."
+". . ."; gap: 4px 4px;"
+  />
+</DocumentFragment>
+`;

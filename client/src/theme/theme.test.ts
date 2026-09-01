@@ -10,25 +10,25 @@ describe('[Theme] tools', () => {
     })
   })
 
-  describe('[toVariable] func', () => {
+  describe('[toVar] func', () => {
     it('should return converted value to css variable', () => {
-      expect(tools.toVariable('name')).toEqual('var(--name)')
+      expect(tools.toVar('name')).toEqual('var(--name)')
     })
     it('should return converted value to css variable with mode', () => {
-      expect(tools.toVariable('name', 'mode')).toEqual('var(--name--mode)')
+      expect(tools.toVar('name', 'mode')).toEqual('var(--name-mode)')
     })
   })
 
   describe('[toSpace] func', () => {
     it('should return converted value', () => {
-      expect(tools.toSpace('xl')).toEqual('var(--space-size--xl)')
-      expect(tools.toSpace('xl xl xl xl')).toEqual('var(--space-size--xl) var(--space-size--xl) var(--space-size--xl) var(--space-size--xl)')
-      expect(tools.toSpace('xl/xl/xl/xl', '/')).toEqual('var(--space-size--xl)/var(--space-size--xl)/var(--space-size--xl)/var(--space-size--xl)')
+      expect(tools.toSpace('xl')).toEqual('var(--space-xl)')
+      expect(tools.toSpace('xl xl xl xl')).toEqual('var(--space-xl) var(--space-xl) var(--space-xl) var(--space-xl)')
+      expect(tools.toSpace('xl/xl/xl/xl', '/')).toEqual('var(--space-xl)/var(--space-xl)/var(--space-xl)/var(--space-xl)')
     })
 
     it('should return not converted value if value is not in map', () => {
-      expect(tools.toSpace('xl xl 0 xl')).toEqual('var(--space-size--xl) var(--space-size--xl) 0 var(--space-size--xl)')
-      expect(tools.toSpace('xl/xl/0/xl', '/')).toEqual('var(--space-size--xl)/var(--space-size--xl)/0/var(--space-size--xl)')
+      expect(tools.toSpace('xl xl 0 xl')).toEqual('var(--space-xl) var(--space-xl) 0 var(--space-xl)')
+      expect(tools.toSpace('xl/xl/0/xl', '/')).toEqual('var(--space-xl)/var(--space-xl)/0/var(--space-xl)')
     })
   })
 })

@@ -7,8 +7,7 @@
   "files.eol": "\n",
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
-  "javascript.preferences.quoteStyle": "single",
-  "typescript.preferences.quoteStyle": "single",
+  "js/ts.preferences.quoteStyle": "single",
 
   // linter configs
   "editor.codeActionsOnSave": {
@@ -20,6 +19,12 @@
   "css.lint.emptyRules": "ignore",
   "scss.lint.emptyRules": "ignore",
   "less.lint.emptyRules": "ignore",
+
+  // vs code highlight
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.highlightActiveBracketPair": true,
+  "editor.guides.highlightActiveIndentation": true,
 
   // test configs
   "vitest.commandLine": "yarn test --"

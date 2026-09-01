@@ -1,0 +1,200 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[GuidePage] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--lcr item p-xs g-xs _Page_318dc5 _GuidePage_c03770"
+  >
+    <div
+      class="layout layout--y item p-xs _Aside_5414c7 _Aside_c03770"
+      style="grid-area: left; width: 400px;"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-sm c-primary css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left;"
+      >
+        Topics
+      </p>
+      <div
+        class="block block--y item _Actions_9baf69"
+        style="align-items: stretch;"
+      />
+    </div>
+    <div
+      class="layout item p-xs g-sm _Content_dbfcf8 _Content_c03770 scroll scroll--y"
+      style="grid-area: center;"
+    >
+      <h2
+        class="MuiTypography-root MuiTypography-h2 MuiTypography-alignLeft text t-lg c-primary css-3u1qyp-MuiTypography-root"
+        style="--Typography-textAlign: left;"
+      />
+      <div
+        class="scroll-overlay"
+        style="left: 0px; top: 0px; height: 0px; width: 0px;"
+      >
+        <div
+          class="scroll-content"
+        >
+          <div
+            class="scroll-actions"
+            style="left: 50px; bottom: 50px;"
+          >
+            <div
+              class="scroll-back-button"
+              style="visibility: hidden;"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-sizeMedium MuiButton-colorPrimary action md _Button_b1e8fd css-1dampmx-MuiButtonBase-root-MuiButton-root"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="icon material-symbols-outlined i-md c-primary icon--outline"
+                >
+                  keyboard_arrow_up
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="scroll-track scroll-track--y"
+          style="margin-right: 2px; visibility: hidden;"
+        >
+          <div
+            class="scroll-thumb scroll-thumb--y s-md"
+          />
+        </div>
+        <div
+          class="scroll-cerner"
+        />
+        <div
+          class="shadow shadow-y--start"
+          style="visibility: hidden;"
+        />
+        <div
+          class="shadow shadow-y--end"
+          style="visibility: visible;"
+        />
+      </div>
+    </div>
+    <div
+      class="layout layout--y item p-xs _Aside_5414c7 _Aside_c03770"
+      style="grid-area: right; width: 400px;"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-sm c-primary css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left;"
+      >
+        Chapters
+      </p>
+      <div
+        class="block block--y item _Actions_9baf69"
+        style="align-items: stretch;"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 1
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 2
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 3
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 4
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 5
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 6
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 7
+          </p>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary action xs _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          style="justify-content: left;"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 text t-xs c-primary action-content css-7ctihp-MuiTypography-root"
+          >
+            Title 8
+          </p>
+        </button>
+      </div>
+    </div>
+    <div
+      class="_copyright_318dc5"
+    >
+      © 2026 now Systems. All Rights Reserved.
+    </div>
+  </div>
+</DocumentFragment>
+`;

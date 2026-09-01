@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import PreviewCard from './PreviewCard.component'
@@ -8,7 +8,7 @@ import PreviewCard from './PreviewCard.component'
 
 describe('[PreviewCard] component', () => {
   it('should render component', () => {
-    const container = render(<PreviewCard />)
+    const container = renderWithLauncher(<PreviewCard />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

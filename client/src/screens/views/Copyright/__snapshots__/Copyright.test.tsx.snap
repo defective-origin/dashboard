@@ -2,10 +2,11 @@
 
 exports[`[Copyright] component > should render component 1`] = `
 <DocumentFragment>
-  <p
-    class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text text--sm _Copyright_a9bfa3 css-zvssqi-MuiTypography-root"
+  <span
+    class="icon material-symbols-outlined i-sm icon--outline _Popup_fd4307 _Copyright_277946"
+    data-mui-internal-clone-element="true"
   >
-    © 2024 now Systems. All Rights Reserved.
-  </p>
+    copyright
+  </span>
 </DocumentFragment>
 `;

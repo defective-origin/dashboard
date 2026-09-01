@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[NavLink] component > should render component 1`] = `
+<DocumentFragment>
+  <a
+    aria-current="page"
+    class="action md _NavLink_21a715 active"
+    data-discover="true"
+    href="/"
+  />
+</DocumentFragment>
+`;

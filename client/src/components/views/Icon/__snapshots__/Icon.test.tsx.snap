@@ -3,8 +3,7 @@
 exports[`[Icon] component > should render component 1`] = `
 <DocumentFragment>
   <span
-    aria-hidden="true"
-    class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium icon material-symbols-outlined icon--md icon--outline css-kp9ftd-MuiIcon-root"
+    class="icon material-symbols-outlined icon--outline"
   >
     dark_mode
   </span>

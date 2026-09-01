@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Popup] component > should render component 1`] = `
+<DocumentFragment>
+  <span
+    class="_Popup_fd4307"
+    data-mui-internal-clone-element="true"
+  />
+</DocumentFragment>
+`;

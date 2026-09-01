@@ -1,5 +1,5 @@
-@import 'size';
-@import 'color';
-@import 'block';
-@import 'popup';
-@import 'variables';
+@forward 'size';
+@forward 'color';
+@forward 'block';
+@forward 'popup';
+@forward 'variables';

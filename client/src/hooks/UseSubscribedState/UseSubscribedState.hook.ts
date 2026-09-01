@@ -9,13 +9,17 @@ import { DependencyList, Dispatch, SetStateAction, useEffect, useState } from 'r
  */
 export const useSubscribedState = <S = undefined>(value: S,deps: DependencyList = []): [S, Dispatch<SetStateAction<S>>] => {
   const [state, setState] = useState<S>(value)
+  const [prevValue, setPrevValue] = useState<S>(value)
 
-  useEffect(() => {
-    if (value !== state) {
-      setState(value)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, ...deps])
+  // Synchronized state right during rendering if the value has changed
+  // Pattern "State synchronization during rendering"
+  if (value !== prevValue) {
+    setPrevValue(value)
+    setState(value)
+  }
+
+  // We leave the effect only for tracking additional deps, if they are needed
+  useEffect(() => { setState(value) }, deps)
 
   return [state, setState]
 }

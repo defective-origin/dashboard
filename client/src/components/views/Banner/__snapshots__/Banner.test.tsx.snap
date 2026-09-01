@@ -3,14 +3,13 @@
 exports[`[Banner] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="block block--y item stretch _Banner_fd7a36"
+    class="block block--y item stretch _Banner_279bdd"
   >
     <div
-      class="block block--y item _Content_fd7a36"
+      class="block block--y item _Content_279bdd"
     >
       <img
         class="image"
-        src="https://www.dndbeyond.com/avatars/thumbnails/30836/227/1000/1000/638063931763028274.png"
       />
     </div>
   </div>

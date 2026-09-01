@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { UserModel, PATHNAME, User } from './User.model'
-import { Storage } from '@tools'
+import { Storage } from 'tools'
 
 const router = Router()
 

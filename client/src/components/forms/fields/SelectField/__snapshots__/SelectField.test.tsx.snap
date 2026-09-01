@@ -3,22 +3,20 @@
 exports[`[SelectField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="block block--y item g--xs _BaseField_dd3532 _SelectField_33cf46"
+    class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
   >
-    <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
-    />
     <div
-      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall _SelectField_eb070a MuiSelect-root css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
         aria-haspopup="listbox"
-        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-        role="button"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-18x85q0-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        role="combobox"
         tabindex="0"
       >
         <span
+          aria-hidden="true"
           class="notranslate"
         >
           ​
@@ -27,14 +25,14 @@ exports[`[SelectField] component > should render component 1`] = `
       <input
         aria-hidden="true"
         aria-invalid="false"
-        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
-        name=""
+        class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
+        id="_r_1_"
         tabindex="-1"
         value=""
       />
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-1rfqz7c-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
         data-testid="ArrowDropDownIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -45,12 +43,13 @@ exports[`[SelectField] component > should render component 1`] = `
       </svg>
       <fieldset
         aria-hidden="true"
-        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        class="MuiOutlinedInput-notchedOutline css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="css-ihdtdm"
+          class="css-1nf2c5d-MuiNotchedOutlined-root"
         >
           <span
+            aria-hidden="true"
             class="notranslate"
           >
             ​
@@ -58,9 +57,6 @@ exports[`[SelectField] component > should render component 1`] = `
         </legend>
       </fieldset>
     </div>
-    <div
-      class="block block--y item _Messages_e4e642"
-    />
   </div>
 </DocumentFragment>
 `;

@@ -10,7 +10,7 @@ import Modal from 'components/popups/Modal'
 import Toast from 'components/popups/Toast'
 
 // ---| self |---
-import './App.module.scss'
+import css from './App.module.scss'
 import AppMenu from './AppMenu'
 import AppHeader from './AppHeader'
 import AppContent from './AppContent'
@@ -26,7 +26,7 @@ export type AppProps = LayoutProps
  */
 export function App(props: AppProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn('app', className)
+  const _className = cn(css.App, className)
 
   // TODO: избегать функций и хуков по возможности. Использовать глобальные вызовы. например modal({}), toast.success()
 

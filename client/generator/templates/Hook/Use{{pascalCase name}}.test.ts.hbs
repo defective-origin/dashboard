@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 // ---| self |---
 import use{{pascalCase name}} from './Use{{pascalCase name}}.hook'
@@ -9,6 +9,21 @@ describe('[use{{pascalCase name}}] hook', () => {
   it('should return options', () => {
     const { result } = renderHook(() => use{{pascalCase name}}())
 
+    // act works automatic only for DOM interaction events and rerender() func
+    // act(() => { result.toggle() })
+
     expect(result.current).toEqual(null)
   })
 })
+
+// describe('[use{{pascalCase name}}] tools', () => {
+//   describe('[action name] func', () => {
+//     it('should do something', () => {
+//       const mockValue = 0
+// 
+//       const result = doSomething(mockValue)
+// 
+//       expect(result).toEqual()
+//     })
+//   })
+// })

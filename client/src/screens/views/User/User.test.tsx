@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import User from './User.component'
@@ -8,7 +8,7 @@ import User from './User.component'
 
 describe('[User] component', () => {
   it('should render component', () => {
-    const container = render(<User />)
+    const container = renderWithLauncher(<User />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

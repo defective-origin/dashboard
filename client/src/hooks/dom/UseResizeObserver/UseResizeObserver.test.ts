@@ -1,42 +1,35 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 // ---| self |---
 import useResizeObserver from './UseResizeObserver.hook'
 
 
 describe('[useResizeObserver] hook', () => {
-  let observer: ResizeObserver
+  let observer: ResizeObserver | undefined
   const element = document.body
   const options = { ref: element }
 
   beforeEach(() => {
-    Object.defineProperty(global, 'ResizeObserver', {
-      writable: true,
-      value: vi.fn().mockImplementation(() => {
-        observer = {
-          observe: vi.fn(),
-          unobserve: vi.fn(),
-          disconnect: vi.fn(),
-        }
+    observer = undefined;
+    // Создаем полноценный класс mock-конструктор
+    const MockResizeObserver = vi.fn().mockImplementation(function () {
+      observer = {
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn(),
+      };
+      return observer;
+    });
 
-        return observer
-      }),
-    })
-  })
-
-  afterEach(() => {
-    Object.defineProperty(global, 'ResizeObserver', {
-      writable: true,
-      value: undefined,
-    })
+    vi.stubGlobal('ResizeObserver', MockResizeObserver);
   })
 
   it('should subscribe on changes on mount', () => {
     const { result } = renderHook(() => useResizeObserver(() => {}, options))
 
     expect(result.current.current).toEqual(element)
-    expect(observer.observe).toHaveBeenCalledWith(element, options)
+    expect(observer?.observe).toHaveBeenCalledWith(element, options)
   })
 
   it('should not subscribe on changes on mount if it is disabled', () => {
@@ -51,6 +44,6 @@ describe('[useResizeObserver] hook', () => {
 
     unmount()
 
-    expect(observer.disconnect).toHaveBeenCalledTimes(1)
+    expect(observer?.disconnect).toHaveBeenCalledTimes(1)
   })
 })

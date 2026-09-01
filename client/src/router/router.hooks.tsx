@@ -1,12 +1,11 @@
 
-import { NavigateOptions as ReactNavigateOptions, PathParam, useNavigate as useRouterNavigate, generatePath } from 'react-router-dom'
-import { ROUTE_LINKS, RouteLinks, RoutePath } from './router.constants'
+import { NavigateOptions as ReactNavigateOptions, useNavigate as useRouterNavigate } from 'react-router-dom'
+import { RouteLinks } from './router.constants'
 import { useFunc } from 'hooks'
+import { generateRouterPath, GenerateRouterPathOptions } from './router.tools'
 
 export type NavigateOptions<Name extends RouteLinks> = ReactNavigateOptions & {
-  params: {
-    [key in PathParam<RoutePath<Name>>]: string | null;
-  }
+  params: GenerateRouterPathOptions<Name>
 }
 
 export function useNavigate<Name extends RouteLinks>() {
@@ -14,8 +13,8 @@ export function useNavigate<Name extends RouteLinks>() {
 
   return useFunc((name: Name, options?: NavigateOptions<Name>) => {
     return nav(
-      generatePath(
-        ROUTE_LINKS[name],
+      generateRouterPath(
+        name,
         options?.params as any,
       ),
       options,

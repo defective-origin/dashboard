@@ -3,8 +3,8 @@ import { Config, ConfigModel, PATHNAME } from './Config.model'
 
 
 let savedRecord: Config
-const MOCK_OPERATION_RECORD = { name: 'OPERATION_NAME', parent: { id: new mongoose.Types.ObjectId(1).toString() } }
-const MOCK_SAVED_RECORD = { name: 'SAVED_NAME', parent: { id: new mongoose.Types.ObjectId(2).toString() } }
+const MOCK_OPERATION_RECORD = { name: 'OPERATION_NAME', parent: { id: new mongoose.Types.ObjectId().toString() } }
+const MOCK_SAVED_RECORD = { name: 'SAVED_NAME', parent: { id: new mongoose.Types.ObjectId().toString() } }
 const MOCK_SAVED_RECORDS = [MOCK_SAVED_RECORD]
 
 describe(`[${PATHNAME}] api`, () => {

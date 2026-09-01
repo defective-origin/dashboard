@@ -1,0 +1,126 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[MarkupSpec] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="_MarkupSpec_7976f5"
+  >
+    <div
+      class="block block--x item g-xs _Spec_f67604"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary _Name_f67604 css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left; font-weight: bold;"
+      >
+        Width:
+      </p>
+      <div
+        class="block block--xy item _Content_f67604"
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        />
+      </div>
+    </div>
+    <div
+      class="block block--x item g-xs _Spec_f67604"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary _Name_f67604 css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left; font-weight: bold;"
+      >
+        Height:
+      </p>
+      <div
+        class="block block--xy item _Content_f67604"
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        />
+      </div>
+    </div>
+    <div
+      class="block block--x item g-xs _Spec_f67604"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary _Name_f67604 css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left; font-weight: bold;"
+      >
+        Columns:
+      </p>
+      <div
+        class="block block--xy item _Content_f67604"
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        />
+      </div>
+    </div>
+    <div
+      class="block block--x item g-xs _Spec_f67604"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary _Name_f67604 css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left; font-weight: bold;"
+      >
+        Rows:
+      </p>
+      <div
+        class="block block--xy item _Content_f67604"
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        />
+      </div>
+    </div>
+    <div
+      class="block block--x item g-xs _Spec_f67604"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary _Name_f67604 css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left; font-weight: bold;"
+      >
+        Gap:
+      </p>
+      <div
+        class="block block--xy item _Content_f67604"
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        />
+      </div>
+    </div>
+    <div
+      class="block block--x item g-xs _Spec_f67604"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary _Name_f67604 css-141xmpu-MuiTypography-root"
+        style="--Typography-textAlign: left; font-weight: bold;"
+      >
+        Items:
+      </p>
+      <div
+        class="block block--xy item _Content_f67604"
+        style="flex-grow: 1;"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        >
+          0
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,5 +1,3 @@
-@import '/src/theme';
-
 :global {
   html,
   body,
@@ -7,8 +5,12 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: var(--app-background);
+    background-color: var(--color-contrast-primary);
 
     @include stretch;
   }
 }
+
+.App {
+}
+

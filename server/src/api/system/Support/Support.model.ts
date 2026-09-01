@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { ChangeStamps } from '@services/Database'
+import { ChangeStamps } from 'services/Database'
 
 export const PATHNAME = 'system/support'
 

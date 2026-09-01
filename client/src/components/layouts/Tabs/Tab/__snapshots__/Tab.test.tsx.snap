@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[Tab] component > should render component 1`] = `
+<DocumentFragment>
+  <h2>
+    Unexpected Application Error!
+  </h2>
+  <h3
+    style="font-style: italic;"
+  >
+    MUI: RovingTabIndexContext is missing. Roving tab index items must be placed within a roving tab index provider.
+  </h3>
+  <pre
+    style="padding: 0.5rem; background-color: rgba(200, 200, 200, 0.5);"
+  >
+    Error: MUI: RovingTabIndexContext is missing. Roving tab index items must be placed within a roving tab index provider.
+    at useRovingTabIndexContext (file:///D:/Code/dashboard/node_modules/@mui/utils/useRovingTabIndex/RovingTabIndexContext.mjs:11:11)
+    at Tab (file:///D:/Code/dashboard/node_modules/@mui/material/Tab/Tab.mjs:218:25)
+    at Object.react_stack_bottom_frame (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:25904:20)
+    at renderWithHooks (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:7662:22)
+    at updateForwardRef (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:9724:19)
+    at beginWork (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:12117:18)
+    at runWithFiberInDEV (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:874:13)
+    at performUnitOfWork (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:17641:22)
+    at workLoopSync (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:17469:41)
+    at renderRootSync (D:\\Code\\dashboard\\node_modules\\react-dom\\cjs\\react-dom-client.development.js:17450:11)
+  </pre>
+  <p>
+    💿 Hey developer 👋
+  </p>
+  <p>
+    You can provide a way better UX than this when your app throws errors by providing your own 
+    <code
+      style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+    >
+      ErrorBoundary
+    </code>
+     or 
+    <code
+      style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+    >
+      errorElement
+    </code>
+     prop on your route.
+  </p>
+</DocumentFragment>
+`;

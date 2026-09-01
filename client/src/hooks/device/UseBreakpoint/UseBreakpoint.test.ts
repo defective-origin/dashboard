@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 // ---| self |---
 import useBreakpoint, { Breakpoint } from './UseBreakpoint.hook'
@@ -36,11 +36,11 @@ describe('[useBreakpoint] hook', () => {
 
     expect(result.current.name).toEqual('second')
 
-    resize(1000)
+    act(() => resize(1000))
 
     expect(result.current.name).toEqual('first')
 
-    resize(1001)
+    act(() => resize(1001))
 
     expect(result.current.name).toEqual('second')
   })
@@ -50,11 +50,11 @@ describe('[useBreakpoint] hook', () => {
 
     expect(result.current.name).toEqual('second')
 
-    resize(1000)
+    act(() => resize(1000))
 
     expect(result.current.name).toEqual('first')
 
-    resize(1001)
+    act(() => resize(1001))
 
     expect(result.current.name).toEqual('second')
   })

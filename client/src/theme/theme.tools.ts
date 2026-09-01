@@ -1,21 +1,18 @@
 /** Add px postfix to value */
 export const px = (value: string | number = 0) => `${value}px`
+export const toName = (...args: (string | number)[]) => `--${args.join("-")}`
+export const toVar = (...args: (string | number)[]) => `var(${toName(...args)})`
 
-export const toVar = (value: string) => `var(--${value})`
-
-export const toName = (name: string, mod?: string | number) => mod ? `--${name}--${mod}` : `--${name}`
-export const toVariable = (name: string, mod?: string | number) => `var(${toName(name, mod)})`
-
-export const SPACE_SIZE_NAME = 'space-size'
+export const SPACE_SIZE_NAME = 'space'
 
 export const SPACE_VAR_MAP: Record<string, string> = {
-  xxl: toVariable(SPACE_SIZE_NAME, 'xxl'),
-  xl: toVariable(SPACE_SIZE_NAME, 'xl'),
-  lg: toVariable(SPACE_SIZE_NAME, 'lg'),
-  md: toVariable(SPACE_SIZE_NAME, 'md'),
-  sm: toVariable(SPACE_SIZE_NAME, 'sm'),
-  xs: toVariable(SPACE_SIZE_NAME, 'xs'),
-  xxs: toVariable(SPACE_SIZE_NAME, 'xxs'),
+  xxl: toVar(SPACE_SIZE_NAME, 'xxl'),
+  xl: toVar(SPACE_SIZE_NAME, 'xl'),
+  lg: toVar(SPACE_SIZE_NAME, 'lg'),
+  md: toVar(SPACE_SIZE_NAME, 'md'),
+  sm: toVar(SPACE_SIZE_NAME, 'sm'),
+  xs: toVar(SPACE_SIZE_NAME, 'xs'),
+  xxs: toVar(SPACE_SIZE_NAME, 'xxs'),
 }
 
 /** Convert css space value to margin, padding, gap.
@@ -27,5 +24,6 @@ export const toSpace = (value: string, sep = ' ') => value.split(sep).map((item)
 
 export default {
   px,
-  toVariable,
+  toVar,
+  toSpace,
 }

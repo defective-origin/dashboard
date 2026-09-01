@@ -58,7 +58,7 @@ export function Page(props: PageProps) {
         content={(
           <>
             {extra}
-            <Actions items={menu} g='xxs' size='xxs' />
+            <Actions items={menu} g='xxs' size='sm' />
           </>
         )}
       />

@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import AccountDashboardsPage from './AccountDashboardsPage.component'
@@ -8,7 +8,7 @@ import AccountDashboardsPage from './AccountDashboardsPage.component'
 
 describe('[AccountDashboardsPage] component', () => {
   it('should render component', () => {
-    const container = render(<AccountDashboardsPage />)
+    const container = renderWithLauncher(<AccountDashboardsPage />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

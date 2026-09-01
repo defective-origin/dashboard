@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import { Feature } from './Feature.schemas'
 
 export default Array.from({length: 10}, (_, i): Feature => ({
-  id: new mongoose.Types.ObjectId(i).toString(),
+  id: new mongoose.Types.ObjectId().toString(),
   name: `NAME_${i}`,
   content: 'content '.repeat(100),
   public: true,
@@ -42,5 +42,5 @@ export default Array.from({length: 10}, (_, i): Feature => ({
       },
     },
   },
-  parent: { id: new mongoose.Types.ObjectId(i).toString() },
+  parent: { id: new mongoose.Types.ObjectId().toString() },
 }))

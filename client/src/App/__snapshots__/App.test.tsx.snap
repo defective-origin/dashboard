@@ -1,0 +1,214 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[App] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="layout layout--left item stretch _App_f2e805"
+  >
+    <nav
+      class="layout layout--tcb item _Aside_5414c7 _AppMenu_e2e24d"
+      style="grid-area: left;"
+    >
+      <a
+        aria-current="page"
+        class="action lg _NavLink_21a715 active"
+        data-discover="true"
+        href="/"
+      >
+        <span
+          class="icon material-symbols-outlined i-lg c-primary icon--fill"
+        >
+          person
+        </span>
+      </a>
+      <div
+        class="block block--y item _Actions_9baf69 _Main_e2e24d"
+        style="align-items: center; flex-grow: 1;"
+      >
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/apps"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            crossword
+          </span>
+        </a>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/boards"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            dashboard
+          </span>
+        </a>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/widgets"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            widgets
+          </span>
+        </a>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/services"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            dns
+          </span>
+        </a>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/translates"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            g_translate
+          </span>
+        </a>
+      </div>
+      <div
+        class="block block--y item _Actions_9baf69 _Extra_e2e24d"
+        style="align-items: center;"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorError _Popup_fd4307 action lg _Button_b1e8fd css-145wes-MuiButtonBase-root-MuiButton-root"
+          data-mui-internal-clone-element="true"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-error icon--outline"
+          >
+            brightness_alert
+          </span>
+        </button>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/guide"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            auto_stories
+          </span>
+        </a>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/donation"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            local_atm
+          </span>
+        </a>
+        <a
+          class="_Popup_fd4307 action lg _NavLink_21a715"
+          data-discover="true"
+          data-mui-internal-clone-element="true"
+          href="/support"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--outline"
+          >
+            support_agent
+          </span>
+        </a>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary _Popup_fd4307 action lg _Button_b1e8fd css-1wc7cgh-MuiButtonBase-root-MuiButton-root"
+          data-mui-internal-clone-element="true"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="icon material-symbols-outlined i-lg c-primary icon--fill"
+          >
+            light_mode
+          </span>
+        </button>
+        <span
+          class="icon material-symbols-outlined i-sm icon--outline _Popup_fd4307 _Copyright_277946 _Copyright_e2e24d"
+          data-mui-internal-clone-element="true"
+        >
+          copyright
+        </span>
+      </div>
+    </nav>
+    <header
+      class="layout layout--lcr item p-xxs g-xxs _Header_5cabd4 _AppHeader_cec57d"
+      style="align-items: center; grid-template-columns: 1fr auto 1fr; grid-area: top;"
+    >
+      <div
+        class="block block--x item g-xxs _PortalContainer_589b69"
+        id="portal-page-name"
+        style="align-items: center; grid-area: left;"
+      />
+      <div
+        class="block block--x item g-xxs _PortalContainer_589b69"
+        id="portal-page-nav"
+        style="align-items: center; grid-area: center;"
+      />
+      <div
+        class="block block--x item g-xxs _PortalContainer_589b69"
+        id="portal-page-extra"
+        style="align-items: center; justify-content: end; grid-area: right;"
+      />
+    </header>
+    <main
+      class="layout item g-xxs _Content_dbfcf8 _AppContent_82118c"
+      style="grid-area: center;"
+    />
+    <div
+      id="modal:global"
+    />
+    <section
+      aria-atomic="false"
+      aria-label="Notifications Alt+T"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="Toastify"
+      id="toast:alerts"
+    />
+    <section
+      aria-atomic="false"
+      aria-label="Notifications Alt+T"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="Toastify"
+      id="toast:messages"
+    />
+    <section
+      aria-atomic="false"
+      aria-label="Notifications Alt+T"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="Toastify"
+      id="toast:guards"
+    />
+  </div>
+</DocumentFragment>
+`;

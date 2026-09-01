@@ -7,7 +7,7 @@ import {
 // ---| self |---
 import { APP_ROUTES } from './router.conf'
 
-export type RouterProviderProps = React.PropsWithChildren & Partial<RrdRouterProviderProps>
+export type RouterProviderProps = Partial<RrdRouterProviderProps>
 
 /**
  * Setup RouterProvider context.
@@ -17,15 +17,9 @@ export type RouterProviderProps = React.PropsWithChildren & Partial<RrdRouterPro
  * <RouterProvider />
  */
 export function RouterProvider(props: RouterProviderProps) {
-  const { children, ...otherProps } = props
+  const { router = APP_ROUTES, ...otherProps } = props
 
-  return (
-    <>
-      <RrdRouterProvider router={APP_ROUTES} {...otherProps} />
-
-      {children}
-    </>
-  )
+  return <RrdRouterProvider router={router} {...otherProps} />
 }
 
 RouterProvider.displayName = 'RouterProvider'

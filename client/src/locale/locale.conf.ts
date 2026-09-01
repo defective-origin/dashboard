@@ -62,7 +62,7 @@ i18next
     nonExplicitSupportedLngs: true,
 
     fallbackLng: 'en',
-    debug: ENV.MODE.DEV,
+    // debug: ENV.MODE.DEV,
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

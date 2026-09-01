@@ -1,0 +1,313 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[FeaturePage] component > should render component 1`] = `
+<DocumentFragment>
+  <form
+    class="layout item _Form_201574 layout layout--columns item m-xs _Page_318dc5 _FeaturePage_c89efb"
+  >
+    <div
+      class="layout item p-sm g-lg _Content_dbfcf8 _Content_c89efb scroll scroll--y"
+      style="grid-area: center;"
+    >
+      <div
+        class="scroll-overlay"
+        style="left: 0px; top: 0px; height: 0px; width: 0px;"
+      >
+        <div
+          class="scroll-content"
+        />
+        <div
+          class="scroll-track scroll-track--y"
+          style="margin-right: 2px; visibility: hidden;"
+        >
+          <div
+            class="scroll-thumb scroll-thumb--y s-xxs"
+          />
+        </div>
+        <div
+          class="scroll-cerner"
+        />
+        <div
+          class="shadow shadow-y--start"
+          style="visibility: hidden;"
+        />
+        <div
+          class="shadow shadow-y--end"
+          style="visibility: visible;"
+        />
+      </div>
+      <div
+        class="layout layout--y item g-xs invisible _Section_a6b9ad"
+        style="justify-self: center; max-width: 760px;"
+      >
+        <div
+          class="layout item g-xs _Content_a6b9ad"
+        >
+          <img
+            class="image"
+            src="https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg"
+            style="width: 100%;"
+          />
+          <div
+            class="block block--x item g-xxs"
+          >
+            <div
+              class="block block--x item g-xs _User_3b9fb7"
+              style="align-items: center;"
+            >
+              <div
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _Avatar_ff0aaf icon--lg css-bgqpfx-MuiAvatar-root"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-pamvpt-MuiSvgIcon-root-MuiAvatar-fallback"
+                  data-testid="PersonIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                  />
+                </svg>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text nowrap t-xs c-primary css-141xmpu-MuiTypography-root"
+                style="--Typography-textAlign: left;"
+              />
+            </div>
+            <div
+              class="block block--y item"
+            >
+              <div
+                class="block block--x item g-xxs"
+              >
+                <div
+                  class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+                  data-mui-internal-clone-element="true"
+                  style="align-items: center;"
+                >
+                  <span
+                    class="icon material-symbols-outlined i-xs icon--outline"
+                  >
+                    star
+                  </span>
+                   
+                  <p
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+                    style="--Typography-textAlign: left;"
+                  />
+                </div>
+                <div
+                  class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+                  data-mui-internal-clone-element="true"
+                  style="align-items: center;"
+                >
+                  <span
+                    class="icon material-symbols-outlined i-xs icon--outline"
+                  >
+                    payments
+                  </span>
+                   
+                  <p
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+                    style="--Typography-textAlign: left;"
+                  />
+                </div>
+                <div
+                  class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+                  data-mui-internal-clone-element="true"
+                  style="align-items: center;"
+                >
+                  <span
+                    class="icon material-symbols-outlined i-xs icon--outline"
+                  >
+                    visibility
+                  </span>
+                   
+                  <p
+                    class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+                    style="--Typography-textAlign: left;"
+                  />
+                </div>
+              </div>
+              <div
+                class="block block--x item g-xxs _Popup_fd4307 _Label_691938"
+                data-mui-internal-clone-element="true"
+                style="align-items: center;"
+              >
+                <span
+                  class="icon material-symbols-outlined i-xs icon--outline"
+                >
+                  schedule
+                </span>
+                 
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xxs c-primary css-141xmpu-MuiTypography-root"
+                  style="--Typography-textAlign: left;"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="block block--x item g-xxs"
+          />
+          <p
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-xs c-primary css-141xmpu-MuiTypography-root"
+            style="--Typography-textAlign: left;"
+          />
+        </div>
+      </div>
+      <div
+        class="block block--y item"
+      />
+    </div>
+    <div
+      class="layout layout--y item g-xxs invisible _Aside_5414c7 _Options_c89efb"
+      style="grid-template-rows: auto 1fr; grid-area: right; width: 500px;"
+    >
+      <div
+        class="block block--x item p-xs g-xxs"
+      >
+        <span
+          class="icon material-symbols-outlined i-xs icon--outline"
+        >
+          data_object
+        </span>
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-alignLeft text t-sm c-primary css-141xmpu-MuiTypography-root"
+          style="--Typography-textAlign: left;"
+        >
+          Options
+        </p>
+      </div>
+      <div
+        class="block block--y item p-xs g-xxs scroll scroll--y"
+        style="justify-self: stretch;"
+      >
+        <div
+          class="scroll-overlay"
+          style="left: 0px; top: 0px; height: 0px; width: 0px;"
+        >
+          <div
+            class="scroll-content"
+          />
+          <div
+            class="scroll-track scroll-track--y"
+            style="margin-right: 2px; visibility: hidden;"
+          >
+            <div
+              class="scroll-thumb scroll-thumb--y s-xxs"
+            />
+          </div>
+          <div
+            class="scroll-cerner"
+          />
+          <div
+            class="shadow shadow-y--start"
+            style="visibility: hidden;"
+          />
+          <div
+            class="shadow shadow-y--end"
+            style="visibility: visible;"
+          />
+        </div>
+        <div
+          class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
+        >
+          <div
+            class="jer-editor-container _JsonField_6526de"
+            id="options"
+            style="background-color: white; font-family: monospace; border-radius: var(--radius-xxs); border: 1px solid rgba(0, 0, 0, 0.26); min-width: 250px; max-width: min(600px, 90vw);"
+          >
+            <div
+              class="jer-component jer-collection-component"
+              draggable="false"
+              style="margin-left: 0em; position: relative;"
+            >
+              <div
+                class="jer-clickzone"
+                style="width: 2em; z-index: 10;"
+              />
+              <div
+                class="jer-collection-header-row"
+                style="position: relative;"
+              >
+                <div
+                  class="jer-collection-name"
+                >
+                  <div
+                    class="jer-collapse-icon jer-accordion-icon"
+                    style="z-index: 11; transition: 0.3s;"
+                  >
+                    <span
+                      class="icon material-symbols-outlined i-sm icon--outline"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </div>
+                  <span
+                    class="jer-key-text"
+                    style="color: rgb(41, 41, 41); min-width: 5ch; flex-shrink: 0;"
+                  >
+                    options
+                    <span
+                      class="jer-key-colon"
+                    >
+                      :
+                    </span>
+                  </span>
+                  <span
+                    class="jer-brackets jer-bracket-open"
+                    style="color: rgb(0, 43, 54); font-weight: bold;"
+                  >
+                    {
+                  </span>
+                </div>
+                <div
+                  class="jer-brackets jer-hidden"
+                  style="color: rgb(0, 43, 54); font-weight: bold; transition: 0.3s;"
+                >
+                  }
+                </div>
+                <div
+                  class="jer-edit-buttons"
+                >
+                  <div
+                    class="jer-copy-pulse"
+                    title=""
+                  >
+                    <span
+                      class="icon material-symbols-outlined i-sm icon--fill"
+                    >
+                      content_copy
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="jer-collection-inner"
+                style="overflow-y: visible; transition: 0.3s;"
+              >
+                <div
+                  class="jer-collection-error-row-edit"
+                />
+                <div
+                  class="jer-brackets jer-bracket-outside"
+                  style="color: rgb(0, 43, 54); font-weight: bold;"
+                >
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="_copyright_318dc5"
+    >
+      © 2026 now Systems. All Rights Reserved.
+    </div>
+  </form>
+</DocumentFragment>
+`;

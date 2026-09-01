@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[MarkupMenu] component > should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="block block--x item g-xs _MarkupMenu_116838"
+    style="align-items: center;"
+  >
+    <div
+      class="MuiButtonGroup-root MuiButtonGroup-outlined MuiButtonGroup-horizontal MuiButtonGroup-colorPrimary _ButtonGroup_0680ef _MarkupMenuScreens_116838 css-19i0b4l-MuiButtonGroup-root"
+      role="group"
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary _Popup_fd4307 action md _Button_b1e8fd _Popup_fd4307 css-dizc30-MuiButtonBase-root-MuiButton-root"
+      data-mui-internal-clone-element="true"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="icon material-symbols-outlined c-primary icon--outline"
+      >
+        settings_slow_motion
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;

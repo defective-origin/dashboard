@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { ChangeStamps, ref, Ref } from '@services/Database'
+import { ChangeStamps, ref, Ref } from 'services/Database'
 
 export const PATHNAME = 'payment/donation'
 

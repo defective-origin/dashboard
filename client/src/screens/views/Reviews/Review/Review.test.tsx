@@ -1,5 +1,5 @@
 // ---| tests |---
-import { render } from 'tests'
+import { renderWithLauncher } from 'tests'
 
 // ---| self |---
 import Review from './Review.component'
@@ -8,7 +8,7 @@ import Review from './Review.component'
 
 describe('[Review] component', () => {
   it('should render component', () => {
-    const container = render(<Review />)
+    const container = renderWithLauncher(<Review rate={0} content={'content'} />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

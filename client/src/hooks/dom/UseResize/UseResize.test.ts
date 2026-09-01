@@ -1,5 +1,5 @@
 // ---| tests |---
-import { renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 
 // ---| self |---
 import useResize from './UseResize.hook'
@@ -41,7 +41,7 @@ describe('[useResize] hook', () => {
       y: 100,
     })
 
-    updater()
+    act(() => updater())
 
     expect(result.current).toEqual({
       ref: { current: element },

@@ -3,24 +3,28 @@
 exports[`[Section] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="layout item stretch _Section_44cb7f"
+    class="layout layout--y item g-xs _Section_a6b9ad"
   >
     <div
-      class="block block--x item _Header_f4f7a7 _Header_44cb7f"
-      style="align-items: center; grid-area: top;"
+      class="block block--x item _Header_a6b9ad"
+      style="justify-content: space-between;"
     >
       <h3
-        class="MuiTypography-root MuiTypography-h3 MuiTypography-alignLeft text text--md _Title_44cb7f css-zy7tjt-MuiTypography-root"
-      />
+        class="MuiTypography-root MuiTypography-h3 MuiTypography-alignLeft text t-md c-primary _Title_a6b9ad css-1uwvwmv-MuiTypography-root"
+        style="--Typography-textAlign: left;"
+      >
+        Title
+      </h3>
       <div
-        class="block block--x item _Actions_dd10e3 _Actions_44cb7f"
+        class="block block--x item _Actions_9baf69 _Actions_a6b9ad"
         style="align-items: center;"
       />
     </div>
     <div
-      class="layout item g--xxs _Content_99ea91 _Content_44cb7f"
-      style="grid-area: center;"
-    />
+      class="layout item _Content_a6b9ad"
+    >
+      content
+    </div>
   </div>
 </DocumentFragment>
 `;

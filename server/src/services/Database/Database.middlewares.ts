@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { ref, ChangeStamps } from './Database.schemas'
-import { Storage } from '@tools'
+import { Storage } from 'tools'
 
 export function UserStampsMiddleware(schema: mongoose.Schema<ChangeStamps>) {
   if (!schema.options.ChangeStamps) {

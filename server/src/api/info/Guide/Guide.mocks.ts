@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import { Guide } from './Guide.model'
 
 export default Array.from({length: 10}, (_, i): Guide => ({
-  id: new mongoose.Types.ObjectId(i).toString(),
+  id: new mongoose.Types.ObjectId().toString(),
   name: `NAME_${i}`,
   content: `
   <h3>Title ${i}</h3>

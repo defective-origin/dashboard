@@ -3,23 +3,20 @@
 exports[`[SliderField] component > should render component 1`] = `
 <DocumentFragment>
   <div
-    class="block block--y item g--xs _BaseField_dd3532 _SliderField_b59d2a"
+    class="MuiFormControl-root _FormField_e1166e css-1iw3t7y-MuiFormControl-root"
   >
-    <h6
-      class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-alignLeft text text--sm css-rak55z-MuiTypography-root"
-    />
     <span
-      class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeSmall css-53tbrc-MuiSlider-root"
+      class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeSmall _SliderField_4258ee css-hgkhyn-MuiSlider-root"
     >
       <span
-        class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+        class="MuiSlider-rail css-hat6nr-MuiSlider-rail"
       />
       <span
-        class="MuiSlider-track css-1n40zqk-MuiSlider-track"
+        class="MuiSlider-track css-ijht1x-MuiSlider-track"
         style="left: 0%; width: 0%;"
       />
       <span
-        class="MuiSlider-thumb MuiSlider-thumbSizeSmall MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeSmall MuiSlider-thumbColorPrimary css-14gf62f-MuiSlider-thumb"
+        class="MuiSlider-thumb MuiSlider-thumb css-398ij6-MuiSlider-thumb"
         data-index="0"
         style="left: 0%;"
       >
@@ -31,17 +28,13 @@ exports[`[SliderField] component > should render component 1`] = `
           data-index="0"
           max="100"
           min="0"
-          name=""
           step="1"
-          style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+          style="border: 0px; clip-path: inset(50%); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
           type="range"
           value="0"
         />
       </span>
     </span>
-    <div
-      class="block block--y item _Messages_e4e642"
-    />
   </div>
 </DocumentFragment>
 `;
