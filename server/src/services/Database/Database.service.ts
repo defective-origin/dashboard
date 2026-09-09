@@ -7,19 +7,19 @@ mongoose.plugin(middlewares.UserStampsMiddleware)
 mongoose.plugin(middlewares.SerializationMiddleware)
 
 export function init() {
-  mongoose.set("strictQuery", false)
+  mongoose.set('strictQuery', false)
 
   // add listener
   mongoose.connection.on('connected', () => console.log('Mongoose connection established.'))
   mongoose.connection.on('disconnected', () => console.warn('Mongoose connection disconnected.'))
-  mongoose.connection.on('error', (err) => console.error('Mongoose connection error:', err))
+  mongoose.connection.on('error', err => console.error('Mongoose connection error:', err))
 
   return mongoose
-} 
+}
 
 export function run(url = process.env.MONGO_DATABASE_URL) {
   return mongoose.connect(url)
-} 
+}
 
 export function stop() {
   return mongoose.disconnect()

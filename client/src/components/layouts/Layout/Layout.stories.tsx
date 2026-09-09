@@ -46,7 +46,7 @@ const render = (props: LayoutProps) => (
     {props.m && <div style={{ height: '0.5px' }} />}
 
     <Layout minWidth={200} minHeight={200} background={SB_CSS.space} {...props}>
-      {['left', 'right', 'top', 'bottom', 'center'].map((v) =>
+      {['left', 'right', 'top', 'bottom', 'center'].map(v =>
         <Item
           key={v}
           background={SB_CSS.item}
@@ -77,7 +77,7 @@ export const Variants: Story = {
   parameters: params('View', VARIANTS),
   render: () => (
     <Layout g='xs' v='board' columns={3} position='relative'>
-      {VARIANTS.filter(Boolean).map((v) => (
+      {VARIANTS.filter(Boolean).map(v => (
         <Layout key={v} background={SB_CSS.space} v={v} g='xxs' p='xxs' columns={v === 'board' ? 2 : undefined} position='relative'>
           <Tag
             content={v}
@@ -90,7 +90,7 @@ export const Variants: Story = {
             }}
           />
 
-          {['left', 'right', 'top', 'bottom', 'center'].map((i) =>
+          {['left', 'right', 'top', 'bottom', 'center'].map(i =>
             <Item
               key={i}
               background={SB_CSS.item}

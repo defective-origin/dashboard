@@ -67,16 +67,16 @@ export type TableColumnDisplay = {
   left?: number
   /** Right indent for fixed column. It calculates automatically */
   right?: number
-};
+}
 
 // TODO: init static and default props via columns([]), group() function. not inside component
 // TODO: add column props and table components: filters (filter?: boolean | (item, field) => boolean), search
 // TODO: add payload to table to spread for all configs instead of functions wrappers
 // TODO: fix Type instantiation is excessively deep and possibly infinite
-export type TableColumn<T extends TableRecord, P extends object = object> =
-  TableColumnHeader &
-  TableColumnDisplay &
-  TableColumnSorting<T, P> &
-  TableColumnFilter<T, P> &
-  TableColumnCellView<T, P> &
-  TableColumnCellEdit<T, P>
+export type TableColumn<T extends TableRecord, P extends object = object>
+  = TableColumnHeader
+  & TableColumnDisplay
+  & TableColumnSorting<T, P>
+  & TableColumnFilter<T, P>
+  & TableColumnCellView<T, P>
+  & TableColumnCellEdit<T, P>

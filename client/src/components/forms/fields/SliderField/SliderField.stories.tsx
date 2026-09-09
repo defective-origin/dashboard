@@ -22,7 +22,7 @@ export const Demo: Story = {
     checkOnBlur: true,
     checkOnChange: true,
     rules: [
-      (value) => value > 50 && 'NUMBER CANNOT BE MORE THEN 5',
+      value => value > 50 && 'NUMBER CANNOT BE MORE THEN 5',
     ],
   },
 }

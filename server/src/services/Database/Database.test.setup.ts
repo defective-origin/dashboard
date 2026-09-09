@@ -1,5 +1,5 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
-import Database from './Database.service'
+import Database from './Database.service.js'
 
 
 let mongoServer: MongoMemoryServer

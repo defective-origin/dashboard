@@ -27,7 +27,7 @@ describe('[Matrix] tools', () => {
 
   describe('[toString] func', () => {
     it('should return string matrix representation', () => {
-      expect(tools.toString(matrix(), ' ')).toEqual(`"1 2"\n"3 4"\n"5 6"`)
+      expect(tools.toString(matrix(), ' ')).toEqual('"1 2"\n"3 4"\n"5 6"')
     })
   })
 

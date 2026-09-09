@@ -1,5 +1,5 @@
 // ---| tests |---
-import { MockInstance } from 'vitest';
+import { MockInstance } from 'vitest'
 import { renderHook } from '@testing-library/react'
 
 // ---| self |---
@@ -9,11 +9,11 @@ import { BrowserStorage, LocalStorage } from './UseStorage.tools'
 
 describe('[useStorage] hook', () => {
   beforeEach(() => {
-    localStorage.clear(); 
-  });
+    localStorage.clear()
+  })
 
   it('should return options', () => {
-    const { result } = renderHook(() => useStorage('name',  { storage: LocalStorage }))
+    const { result } = renderHook(() => useStorage('name', { storage: LocalStorage }))
 
     result.current.set(3)
 
@@ -26,13 +26,13 @@ describe('[useStorage] hook', () => {
   })
 
   it('should return default value if value is not exist', () => {
-    const { result } = renderHook(() => useStorage('name',  { storage: LocalStorage, defaultValue: 'DEFAULT' }))
+    const { result } = renderHook(() => useStorage('name', { storage: LocalStorage, defaultValue: 'DEFAULT' }))
 
     expect(result.current.get()).toEqual('DEFAULT')
   })
 
   it('should set value', () => {
-    const { result } = renderHook(() => useStorage('name',  { storage: LocalStorage }))
+    const { result } = renderHook(() => useStorage('name', { storage: LocalStorage }))
 
     result.current.set('VALUE')
 
@@ -42,18 +42,18 @@ describe('[useStorage] hook', () => {
 
 describe('[useStorage] tools', () => {
   describe('[BrowserStorage] class', () => {
-    let storage: BrowserStorage;
-    let dispatchSpy: MockInstance;
+    let storage: BrowserStorage
+    let dispatchSpy: MockInstance
 
     beforeEach(() => {
-      dispatchSpy = vi.spyOn(document.body, 'dispatchEvent');
-      storage = new BrowserStorage(localStorage);
-    });
+      dispatchSpy = vi.spyOn(document.body, 'dispatchEvent')
+      storage = new BrowserStorage(localStorage)
+    })
 
     afterEach(() => {
-      dispatchSpy.mockRestore(); 
-      storage.clear();
-    });
+      dispatchSpy.mockRestore()
+      storage.clear()
+    })
 
     describe('[toEventKey] func', () => {
       it('should return storage key', () => {
@@ -104,7 +104,7 @@ describe('[useStorage] tools', () => {
       })
 
       it('should return default value if not exist', () => {
-        expect(storage.get('value', "DEFAULT_VALUE")).toEqual("DEFAULT_VALUE")
+        expect(storage.get('value', 'DEFAULT_VALUE')).toEqual('DEFAULT_VALUE')
       })
     })
 
@@ -180,82 +180,82 @@ describe('[useStorage] tools', () => {
 
     describe('[notify] func', () => {
       it('should dispatch a custom event on document.body with the correct type', () => {
-        storage.notify('test-key');
+        storage.notify('test-key')
 
-        expect(dispatchSpy).toHaveBeenCalledTimes(1);
-        
+        expect(dispatchSpy).toHaveBeenCalledTimes(1)
+
         // Grab the actual event passed to dispatchEvent
-        const callArg = dispatchSpy.mock.calls[0][0] as CustomEvent;
-        expect(callArg.type).toEqual('storage:test-key');
-        expect(callArg).toBeInstanceOf(CustomEvent);
-      });
-    });
+        const callArg = dispatchSpy.mock.calls[0][0] as CustomEvent
+        expect(callArg.type).toEqual('storage:test-key')
+        expect(callArg).toBeInstanceOf(CustomEvent)
+      })
+    })
 
     describe('[subscribe] func', () => {
-      let bodyAddSpy: MockInstance;
-      let windowAddSpy: MockInstance;
+      let bodyAddSpy: MockInstance
+      let windowAddSpy: MockInstance
 
       beforeEach(() => {
-        bodyAddSpy = vi.spyOn(document.body, 'addEventListener');
-        windowAddSpy = vi.spyOn(window, 'addEventListener');
-      });
+        bodyAddSpy = vi.spyOn(document.body, 'addEventListener')
+        windowAddSpy = vi.spyOn(window, 'addEventListener')
+      })
 
       afterEach(() => {
-        bodyAddSpy.mockRestore();
-        windowAddSpy.mockRestore();
-      });
+        bodyAddSpy.mockRestore()
+        windowAddSpy.mockRestore()
+      })
 
       it('should attach event listeners to body and window', () => {
-        const mockListener = vi.fn();
-        storage.subscribe('test-key', mockListener);
+        const mockListener = vi.fn()
+        storage.subscribe('test-key', mockListener)
 
-        expect(bodyAddSpy).toHaveBeenCalledWith('storage:test-key', mockListener);
-        expect(windowAddSpy).toHaveBeenCalledWith('storage', expect.any(Function));
-      });
+        expect(bodyAddSpy).toHaveBeenCalledWith('storage:test-key', mockListener)
+        expect(windowAddSpy).toHaveBeenCalledWith('storage', expect.any(Function))
+      })
 
       it('should trigger listener when a matching storage event occurs', () => {
-        const mockListener = vi.fn();
-        storage.subscribe('test-key', mockListener);
+        const mockListener = vi.fn()
+        storage.subscribe('test-key', mockListener)
 
         // Find the anonymous storage handler that was passed to window.addEventListener
-        const storageCall = windowAddSpy.mock.calls.find(call => call[0] === 'storage');
-        const registeredStorageHandler = storageCall?.[1] as Function;
+        const storageCall = windowAddSpy.mock.calls.find(call => call[0] === 'storage')
+        const registeredStorageHandler = storageCall?.[1]
 
-        expect(registeredStorageHandler).toBeDefined();
+        expect(registeredStorageHandler).toBeDefined()
 
         // Simulate a matching event
-        const matchingEvent = new StorageEvent('storage', { key: 'test-key', newValue: 'mocked-value' });
-        registeredStorageHandler(matchingEvent);
-        expect(mockListener).toHaveBeenCalledWith('mocked-value');
+        const matchingEvent = new StorageEvent('storage', { key: 'test-key', newValue: 'mocked-value' })
+        registeredStorageHandler(matchingEvent)
+        expect(mockListener).toHaveBeenCalledWith('mocked-value')
 
         // Simulate a non-matching event (should not trigger listener)
-        const nonMatchingEvent = new StorageEvent('storage', { key: 'different-key', newValue: 'ignored' });
-        registeredStorageHandler(nonMatchingEvent);
-        expect(mockListener).toHaveBeenCalledTimes(1); 
-      });
-    });
+        const nonMatchingEvent = new StorageEvent('storage', { key: 'different-key', newValue: 'ignored' })
+        registeredStorageHandler(nonMatchingEvent)
+        expect(mockListener).toHaveBeenCalledTimes(1)
+      })
+    })
 
     describe('[unsubscribe] func', () => {
-      let bodyRemoveSpy: MockInstance;
-      let windowRemoveSpy: MockInstance;
+      let bodyRemoveSpy: MockInstance
+      let windowRemoveSpy: MockInstance
 
       beforeEach(() => {
-        bodyRemoveSpy = vi.spyOn(document.body, 'removeEventListener');
-        windowRemoveSpy = vi.spyOn(window, 'removeEventListener');
-      });
+        bodyRemoveSpy = vi.spyOn(document.body, 'removeEventListener')
+        windowRemoveSpy = vi.spyOn(window, 'removeEventListener')
+      })
 
       afterEach(() => {
-        bodyRemoveSpy.mockRestore();
-        windowRemoveSpy.mockRestore();
-      });
+        bodyRemoveSpy.mockRestore()
+        windowRemoveSpy.mockRestore()
+      })
 
       it('should remove body event listener', () => {
-        const mockListener = vi.fn();
-        storage.unsubscribe('test-key', mockListener);
+        const mockListener = vi.fn()
+        storage.unsubscribe('test-key', mockListener)
 
-        expect(bodyRemoveSpy).toHaveBeenCalledWith('storage:test-key', mockListener);
-        expect(windowRemoveSpy).toHaveBeenCalledWith('storage', mockListener);
-      });
-    });
+        expect(bodyRemoveSpy).toHaveBeenCalledWith('storage:test-key', mockListener)
+        expect(windowRemoveSpy).toHaveBeenCalledWith('storage', mockListener)
+      })
+    })
   })
 })

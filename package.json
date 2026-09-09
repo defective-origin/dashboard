@@ -1,13 +1,25 @@
 {
-  "name": "dashboard",
+  "name": "project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "workspaces": ["client", "server"],
   "scripts": {
-    "dev": "yarn workspace dashboard-client run dev",
-    "build": "yarn workspace dashboard-client run build",
-    "verify": "yarn workspace dashboard-client run verify",
-    "ws": "yarn workspaces info"
+    "dev:client": "yarn workspace client run dev",
+    "dev:server": "yarn workspace server run dev",
+    "dev": "yarn workspaces foreach -P --include client --include server run dev",
+    "build:client": "yarn workspace client run build",
+    "build:server": "yarn workspace server run build",
+    "build": "yarn workspaces foreach --include client --include server run build",
+    "lint:client": "yarn workspace client run lint",
+    "lint:server": "yarn workspace server run lint",
+    "lint": "yarn workspaces foreach --include client --include server run lint",
+    "test:client": "yarn workspace client run test",
+    "test:server": "yarn workspace server run test",
+    "test": "yarn workspaces foreach --include client --include server run test",
+    "verify:client": "yarn workspace client run verify",
+    "verify:server": "yarn workspace server run verify",
+    "verify": "yarn workspaces foreach --include client --include server run verify",
+    "ws": "yarn workspaces list --json"
   }
 }

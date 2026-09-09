@@ -24,7 +24,7 @@ export type WidgetProps = ItemProps & {
  * <Widget />
  */
 export const Widget = (props: WidgetProps) => {
-  const { id, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
 
   // TODO: add banners: error, loading[title + animation background], no-data, under construction, no-access, not-paid[pay button]
   // TODO: if use self requests to prevent the same loadings how to manage create, read, update, delete

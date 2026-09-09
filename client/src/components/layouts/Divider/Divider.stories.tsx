@@ -46,7 +46,7 @@ export const Variants: Story = {
   parameters: params('View', VARIANTS),
   render: () => (
     <Block>
-      {VARIANTS.map((v) => render({ v, content: 'Text', format: 'uppercase' }))}
+      {VARIANTS.map(v => render({ v, content: 'Text', format: 'uppercase' }))}
     </Block>
   ),
 }

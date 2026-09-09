@@ -34,14 +34,14 @@ export type SubscriptionsManager<
  * obj.names('a.b')
  */
 export const useSubscriptions = <
-K extends string = string,
-C extends SubscriptionEvent = SubscriptionEvent,
+  K extends string = string,
+  C extends SubscriptionEvent = SubscriptionEvent,
 >(): SubscriptionsManager<K, C> => {
   const subscriptions = useRef({} as Record<K, Set<C>>)
 
-  const names = useCallback<SubscriptionsManager<K, C>['names']>((name) => {
+  const names = useCallback<SubscriptionsManager<K, C>['names']>(name => {
     if (name) {
-      return Object.keys(subscriptions.current).filter((key) => key.includes(name))
+      return Object.keys(subscriptions.current).filter(key => key.includes(name))
     }
 
     return Object.keys(subscriptions.current)

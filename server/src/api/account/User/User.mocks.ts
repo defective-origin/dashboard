@@ -5,7 +5,7 @@ export default Array.from({length: 10}, (_, i): User => ({
   id: new mongoose.Types.ObjectId().toString(),
   name: `NAME_${i}`,
   email: `NAME_${i}@mail.com`,
-  image: "https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Photos.png",
+  image: 'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Photos.png',
   role: 'ADMIN',
   status: 'ACTIVE',
   settings: {

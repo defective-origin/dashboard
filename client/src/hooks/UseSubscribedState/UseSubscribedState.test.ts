@@ -7,9 +7,9 @@ import useSubscribedState from './UseSubscribedState.hook'
 
 describe('[useSubscribedState] hook', () => {
   it('should return value and setter', () => {
-    const { result } = renderHook(() => useSubscribedState("value"))
+    const { result } = renderHook(() => useSubscribedState('value'))
 
-    expect(result.current).toEqual(["value", expect.any(Function)])
+    expect(result.current).toEqual(['value', expect.any(Function)])
   })
 
   it('should set new value if argument changes', () => {
@@ -23,7 +23,7 @@ describe('[useSubscribedState] hook', () => {
   it('should set new value via setter', () => {
     const { result } = renderHook(() => useSubscribedState(1))
 
-    act(() => result.current[1]?.(2) );
+    act(() => result.current[1]?.(2))
 
     expect(result.current).toEqual([2, expect.any(Function)])
   })

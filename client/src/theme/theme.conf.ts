@@ -1,6 +1,6 @@
 import { toVar } from './theme.tools'
 
-export type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'contrast-primary'  | 'contrast-secondary'
+export type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'contrast-primary' | 'contrast-secondary'
 export const COLORS: Color[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'contrast-primary', 'contrast-secondary']
 
 export type ColorShadeNumber = 1 | 2 | 3 | 4 | 5 | 6
@@ -12,8 +12,8 @@ export const SIZES: Size[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 export type Direction = 'x' | 'y' | 'xy'
 export const DIRECTION: Direction[] = ['x', 'y', 'xy']
 
-export type SizeElements = 'text' | 'icon' | 'space' | 'scroll' | "radius"
-export const ELEMENTS: SizeElements[] = ['text', 'icon', 'space', 'scroll', "radius"] // TODO: hide scroll on mobile!
+export type SizeElements = 'text' | 'icon' | 'space' | 'scroll' | 'radius'
+export const ELEMENTS: SizeElements[] = ['text', 'icon', 'space', 'scroll', 'radius'] // TODO: hide scroll on mobile!
 
 export type PaletteColor = Color | `${Color}-${ColorShadeNumber}`
 export const PALETTE_COLORS: PaletteColor[] = COLORS.reduce((acc, color) => {
@@ -57,6 +57,6 @@ export const COLOR_ORDER: Record<Color, number> = {
   success: 3,
   primary: 4,
   secondary: 5,
-  "contrast-primary": 6,
-  "contrast-secondary": 7,
+  'contrast-primary': 6,
+  'contrast-secondary': 7,
 }

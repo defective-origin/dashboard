@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import useFunc from '../UseFunc'
 
 export type SnapshotReturnOptions<T> = {
@@ -40,8 +40,8 @@ export type SnapshotReturnOptions<T> = {
  * <button disabled={!snapshot.hasPrev} onClick={snapshot.prev}>Undo</button>
  * <button disabled={!snapshot.hasNext} onClick={snapshot.next}>Redo</button>
  */
-export function useHistory<T = undefined>(): SnapshotReturnOptions<T | undefined>;
-export function useHistory<T>(value: T): SnapshotReturnOptions<T>;
+export function useHistory<T = undefined>(): SnapshotReturnOptions<T | undefined>
+export function useHistory<T>(value: T): SnapshotReturnOptions<T>
 export function useHistory(value?: unknown) {
   const [stack, setStack] = useState([value])
   const [position, setPosition] = useState(0)

@@ -19,7 +19,7 @@ export type TogglerReturnOptions = {
  */
 export const useToggler = (options?: TogglerOptions): TogglerReturnOptions => {
   const [isOn, turn] = useState(!!options)
-  const toggle = useCallback(() => turn((flag) => !flag), [])
+  const toggle = useCallback(() => turn(flag => !flag), [])
   const on = useCallback(() => turn(true), [])
   const off = useCallback(() => turn(false), [])
 

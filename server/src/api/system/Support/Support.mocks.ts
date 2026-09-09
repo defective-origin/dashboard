@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { SupportRequest } from './Support.model'
 
-export default Array.from({length: 10}, (_, i): SupportRequest => ({
+export default Array.from({length: 10}, (): SupportRequest => ({
   id: new mongoose.Types.ObjectId().toString(),
   reason: 'BUG',
   content: 'report description',

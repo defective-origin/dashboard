@@ -6,11 +6,11 @@ export type DatabaseCollection = {
 }
 
 export async function prefill(collections: DatabaseCollection[]) {
-  console.info("Clear existing data ...")
+  console.info('Clear existing data ...')
   await Promise.all(collections.map(collection => collection.model.deleteMany({})))
-  console.info("Existing data cleared")
+  console.info('Existing data cleared')
 
-  console.info("Insert mock data ...")
+  console.info('Insert mock data ...')
   await Promise.all(collections.map(collection => collection.model.insertMany(collection.mocks)))
-  console.info("Mock data inserted")
+  console.info('Mock data inserted')
 }

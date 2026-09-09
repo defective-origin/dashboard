@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { StyledEngineProvider, ThemeProvider as MuiThemeProvider, createTheme  } from '@mui/material'
+import { StyledEngineProvider, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material'
 
 // ---| core |---
 import { Breakpoint, useBreakpoint, useMode } from 'hooks'
@@ -7,7 +7,7 @@ import { Breakpoint, useBreakpoint, useMode } from 'hooks'
 import './theme.scss'
 
 
-const THEME = createTheme({ cssVariables: true });
+const THEME = createTheme({ cssVariables: true })
 export class MediaBreakpoint implements Breakpoint {
   constructor(
     public names: string[],
@@ -63,8 +63,8 @@ export type ThemeProviderProps = React.PropsWithChildren<{
 export function ThemeProvider(props: ThemeProviderProps) {
   const breakpoint = useBreakpoint(MEDIA_BREAKPOINTS)
   const [theme, set] = useState<ThemeVariant>(getCurrentTheme())
-  const current = props.theme ?? theme;
-  
+  const current = props.theme ?? theme
+
   const is = useCallback((value: ThemeVariant) => theme === value, [theme])
   const toggle = useCallback(() => set(curr => curr === 'dark' ? 'light': 'dark'), [set])
 

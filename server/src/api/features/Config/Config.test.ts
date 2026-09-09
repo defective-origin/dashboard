@@ -15,7 +15,7 @@ describe(`[${PATHNAME}] api`, () => {
   describe('[read] endpoint', () => {
     it('should fetch all records', async () => {
       const response = await server.get(`/${PATHNAME}`)
-  
+
       expect(response.status).toBe(200)
       expect(response.body.length).toBe(MOCK_SAVED_RECORDS.length)
       expect(response.body).toMatchObject(MOCK_SAVED_RECORDS)
@@ -23,7 +23,7 @@ describe(`[${PATHNAME}] api`, () => {
 
     it('should fetch record by id', async () => {
       const response = await server.get(`/${PATHNAME}/${savedRecord?.id}`)
-  
+
       expect(response.status).toBe(200)
       expect(response.body).toMatchObject(MOCK_SAVED_RECORD)
     })
@@ -39,7 +39,7 @@ describe(`[${PATHNAME}] api`, () => {
       expect(record).not.toBeNull()
       expect(record?.toObject()).toMatchObject({ name: MOCK_OPERATION_RECORD.name })
     })
-  
+
     it('should fetch operation status', async () => {
       const response = await server.post(`/${PATHNAME}`).send(MOCK_OPERATION_RECORD)
 
@@ -76,7 +76,7 @@ describe(`[${PATHNAME}] api`, () => {
 
     it('should fetch operation status', async () => {
       const response = await server.delete(`/${PATHNAME}/${savedRecord?.id}`)
-  
+
       expect(response.status).toBe(200)
     })
   })

@@ -9,7 +9,7 @@ let updater: (...args: unknown[]) => void
 const element = { clientHeight: 10000, clientWidth: 10000 } as Element
 
 vi.mock('../../dom/UseResizeObserver', () => ({
-  default: vi.fn((cb) => { updater = cb }),
+  default: vi.fn(cb => { updater = cb }),
 }))
 
 describe('[useBreakpoint] hook', () => {

@@ -1,19 +1,24 @@
 # Use Node.js base image
-FROM node:20
+FROM node:20-alpine
 
 # Set the working directory
 WORKDIR /app
 
+# Update system packages to fix OS vulnerabilities
+RUN apk update && apk upgrade --no-cache
+
 # Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
+COPY package*.json yarn.lock* ./
+RUN yarn install --frozen-lockfile && yarn cache clean
 
 # Copy the application code and build it
 COPY . .
-RUN npm run build
+RUN yarn run build
 
 # Expose the application port
 EXPOSE 3000
 
 # Command to run the app
 CMD ["node", "dist/index.js"]
+
+# can build image without building server [with typescript and other source files]

@@ -6,7 +6,7 @@ export const isBrowser = typeof window !== 'undefined'
 export const isNavigator = typeof navigator !== 'undefined'
 
 // types
-export type Dictionary<T> = Record<string, T>;
+export type Dictionary<T> = Record<string, T>
 
 export type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? (...args: P) => R : never
 export type FirstParameters<F> = F extends (x: infer P, ...args: any[]) => any ? P : never
@@ -25,7 +25,7 @@ export type FlattenObjectFullPathKeys<T, Prefix extends string = ''> = {
   [K in keyof T]: T[K] extends object
     ? FlattenObjectFullPathKeys<T[K], `${Prefix}${K & string}.`>
     : `${Prefix}${K & string}`;
-}[keyof T];
+}[keyof T]
 
 // // this solution freeze application when types are recalculating
 // // because it has infinity depth check
@@ -48,11 +48,10 @@ export type FlattenObjectFullPathKeys<T, Prefix extends string = ''> = {
  */
 export type FlattenObjectKeys<T, Prefix extends string = ''> = {
   [K in keyof T]: T[K] extends object
-    ?
-      | FlattenObjectKeys<T[K], `${Prefix}${K & string}.`> // Recurse into child objects
+    ? FlattenObjectKeys<T[K], `${Prefix}${K & string}.`> // Recurse into child objects
       | `${Prefix}${K & string}` // Include the partial path
     : `${Prefix}${K & string}`; // For primitives, just return the full path
-}[keyof T];
+}[keyof T]
 
 // // this solution freeze application when types are recalculating
 // // because it has infinity depth check
@@ -73,7 +72,7 @@ export type RepeatText<
   Text extends string,
   Count extends number,
   Joined extends string = '',
-  Acc extends 0[] = []
+  Acc extends 0[] = [],
 > = Acc['length'] extends Count ? Joined : RepeatText<Text, Count, `${Joined}${Text}`, [0,...Acc]>
 
 /** RepeatText<'Text', ':', 3> => 'Text' | 'Text:Text' | 'Text:Text:Text' | 'Text:Text:Text:Text' */
@@ -83,7 +82,7 @@ export type RepeatWithSep<
   Count extends number = 3,
   Joined extends string = Text,
   Acc extends 0[] = [],
-  Result extends string = `${Joined}${Sep}${Text}`
+  Result extends string = `${Joined}${Sep}${Text}`,
 > = Acc['length'] extends Count
   ? Text | Joined
   : Result | RepeatWithSep<Text, Sep, Count, Result, [0,...Acc]>
@@ -99,7 +98,7 @@ export type ClearObject<
       ? never
       : Key
     : never,
-  TResult = { [key in ClearKeys]: T[key] }
+  TResult = { [key in ClearKeys]: T[key] },
 > = TResult
 
 export function clearProps<

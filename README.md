@@ -20,20 +20,65 @@ All you need to display them is to use ready-made widgets, boards and APIs by co
 - packages should be fixed. Without `^`.
 - yarn in script must have `run` command, example: `yarn run a && yarn run b`
 
-### Start app
+### Start app 
 ```sh
+# Run client and server in parallel  
 yarn dev
+
+# Check client
+yarn dev:client
+
+# Check server
+yarn dev:server
 ```
 
-### Check app
+### Lint app  
 ```sh
+# Run linters on client and server in parallel 
+yarn lint
+
+# Run linters on client
+yarn lint:client
+
+# Run linters on server
+yarn lint:server
+```
+
+### Test app 
+```sh
+# Test client and server in parallel  
+yarn test
+
+# Test client
+yarn test:client
+
+# Test server
+yarn test:server
+```
+
+### Check app 
+```sh
+# Validate client and server in parallel  
 yarn verify
+
+# Validate client
+yarn verify:client
+
+# Validate server
+yarn verify:server
 ```
 
 ### Build app
 ```sh
+# Compile client and server in parallel 
 yarn build
-```    
+
+# Compile client
+yarn build:client
+
+# Compile server
+yarn build:server
+```
 
 ### List of workspaces
 ```sh

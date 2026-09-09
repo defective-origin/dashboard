@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { Log } from './Log.model'
 
-export default Array.from({length: 10}, (_, i): Log => ({
+export default Array.from({length: 10}, (): Log => ({
   id: new mongoose.Types.ObjectId().toString(),
   name: 'INFO',
   content: 'content',

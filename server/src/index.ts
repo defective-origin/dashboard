@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
-import Database from './services/Database'
-import Router from './services/Router'
-import api from './api'
+import Database from 'services/Database'
+import Router from 'services/Router'
+import api from 'api'
 
 dotenv.config()
 

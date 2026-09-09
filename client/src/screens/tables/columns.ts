@@ -5,7 +5,7 @@ import User, { UserProps } from 'screens/views/User'
 import { Markup, MarkupListProps } from 'screens/views/MarkupMenu'
 
 export type ClipboardColumnOptions = Pick<ClipboardProps, 'content'>
-export type ClipboardColumn<T extends TableRecord,> = TableColumn<T, ClipboardProps> & ClipboardColumnOptions
+export type ClipboardColumn<T extends TableRecord> = TableColumn<T, ClipboardProps> & ClipboardColumnOptions
 
 export const clipboardColumn = <T extends TableRecord>(column: ClipboardColumn<T>): ClipboardColumn<T> => ({
   width: 30,
@@ -35,7 +35,7 @@ export const AttachColumn = <T extends TableRecord>(column: TextColumn<T>): Text
 
 
 export type MarkupsColumnOptions = Pick<MarkupListProps, 'items'>
-export type MarkupsColumn<T extends TableRecord,> = TableColumn<T, MarkupListProps> & MarkupsColumnOptions
+export type MarkupsColumn<T extends TableRecord> = TableColumn<T, MarkupListProps> & MarkupsColumnOptions
 
 export const markupsColumn = <T extends TableRecord>(column: MarkupsColumn<T>): MarkupsColumn<T> => ({
   minWidth: 170,
@@ -48,7 +48,7 @@ export const markupsColumn = <T extends TableRecord>(column: MarkupsColumn<T>): 
 
 
 export type UserColumnOptions = Partial<Pick<UserProps, 'id' | 'v'>>
-export type UserColumn<T extends TableRecord,> = TableColumn<T, UserProps> & UserColumnOptions
+export type UserColumn<T extends TableRecord> = TableColumn<T, UserProps> & UserColumnOptions
 
 export const userColumn = <T extends TableRecord>(column: UserColumn<T>): UserColumn<T> => ({
   minWidth: 100,

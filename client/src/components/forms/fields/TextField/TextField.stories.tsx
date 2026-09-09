@@ -30,7 +30,7 @@ export const Demo: Story = {
     checkOnBlur: true,
     checkOnChange: true,
     rules: [
-      (value) => value.length > 5 && 'TEXT CANNOT BE MORE THEN 5 CHARS',
+      value => value.length > 5 && 'TEXT CANNOT BE MORE THEN 5 CHARS',
     ],
   },
 }

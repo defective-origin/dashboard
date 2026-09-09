@@ -20,8 +20,8 @@ export type ModeReturnOptions<E extends Element> = ElementRef<E>
  * useMode(theme, [media.name, 'a'], 'b')
  * useMode(ref, theme, [media.name, 'a'], 'b', (element) => 'c', (element) => ['d', 'm'])
  */
-export function useMode<E extends Element>(...args: ModeOptions<E>): ModeReturnOptions<E>;
-export function useMode<E extends Element>(ref: ElementOptions<E>, ...args: ModeOptions<E>): ModeReturnOptions<E>;
+export function useMode<E extends Element>(...args: ModeOptions<E>): ModeReturnOptions<E>
+export function useMode<E extends Element>(ref: ElementOptions<E>, ...args: ModeOptions<E>): ModeReturnOptions<E>
 export function useMode(refOrOption: unknown, ...args: unknown[]) {
   const ref = useElement(isMode(refOrOption) ? document.body : refOrOption as Element, document.body)
 

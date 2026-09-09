@@ -24,7 +24,7 @@ export type Feature = ChangeStamps & {
   public: boolean
   tags: string[] // TODO: add tag schema! // TODO: should be merge with  parent feature tags [...a, ...b]
   /**
-   * Base configurations which are merged by feature parent key  
+   * Base configurations which are merged by feature parent key
    * @example
    * {
    *  theme: 'light',

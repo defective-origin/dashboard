@@ -23,7 +23,7 @@ export default Array.from({length: 10}, (_, i): Feature => ({
           from: 'range.from',
           to: 'range.to',
         },
-      }
+      },
     ][i % 2],
     prop1: '{{state.range.from}}',
     prop2: '{{state.tags[0]}}',

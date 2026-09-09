@@ -4,5 +4,5 @@
     "outDir": "dist",
   },
   "include": ["src", "env.d.ts"],
-  "exclude": ["./**/*jest.setup.ts", "./**/*.test.ts"]
+  "exclude": ["./**/*test.setup.ts", "./**/*.test.ts"]
 }

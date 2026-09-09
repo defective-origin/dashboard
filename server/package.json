@@ -6,9 +6,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
-    "test": "jest --detectOpenHandles",
     "prefill": "tsx ./src/prefill.ts",
     "build": "tsc --project tsconfig.production.json",
     "start": "node dist/index.js",
@@ -17,8 +17,12 @@
     "pods:up": "podman-compose up -d",
     "pods:down": "podman-compose down",
     "pods:check": "podman ps -a",
-    "lint": "eslint .",
-    "lint:fix": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "yarn run lint:es && yarn run lint:typecheck",
+    "lint:es": "eslint .",
+    "lint:es:fix": "eslint . --fix",
+    "lint:typecheck": "tsc --noEmit",
     "verify": "yarn run lint && yarn run test"
   },
   "dependencies": {
@@ -28,19 +32,20 @@
     "mongoose": "9.9.5"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "5.10.0",
     "@types/cors": "2.8.19",
     "@types/express": "5.0.6",
-    "@types/jest": "30.0.0",
     "@types/mongoose": "5.11.97",
     "@types/supertest": "7.2.1",
-    "@typescript-eslint/eslint-plugin": "5.62.0",
-    "@typescript-eslint/parser": "5.62.0",
-    "eslint": "8.57.1",
-    "jest": "30.5.1",
+    "eslint": "10.10.0",
+    "fast-glob": "3.3.3",
+    "globals": "17.12.0",
     "mongodb-memory-server": "11.2.0",
     "supertest": "7.2.2",
-    "ts-jest": "29.4.12",
     "tsx": "4.23.13",
-    "typescript": "7.0.2"
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "5.0.0"
   }
 }

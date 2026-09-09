@@ -8,7 +8,6 @@ import { cn, mix } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
-import Scroll from 'components/layouts/Scroll'
 import Layout from 'components/layouts/Layout'
 import Content from 'components/layouts/Content'
 import Footer from 'components/layouts/Footer'
@@ -21,11 +20,11 @@ import css from './Popup.module.scss'
 import { TogglerReturnOptions, useToggler } from 'hooks'
 
 
-export type PopupVariant =
-| 'bottom-start' | 'bottom' | 'bottom-end'
-| 'left-start' | 'left' | 'left-end'
-| 'right-start' | 'right' | 'right-end'
-| 'top-start' | 'top' | 'top-end'
+export type PopupVariant
+  = 'bottom-start' | 'bottom' | 'bottom-end'
+  | 'left-start' | 'left' | 'left-end'
+  | 'right-start' | 'right' | 'right-end'
+  | 'top-start' | 'top' | 'top-end'
 
 export type PopupTriggerOptions = TogglerReturnOptions
 
@@ -123,7 +122,7 @@ export function Popup(props: PopupProps) {
       arrow={arrow}
       open={open ?? toggler.isOn}
       slotProps={{
-        tooltip: { className: cn(css.card, arrow && css.arrow) } 
+        tooltip: { className: cn(css.card, arrow && css.arrow) },
       }}
       onOpen={() => {
         toggler.on()

@@ -1,8 +1,6 @@
-/* eslint-disable no-var */
-
 import supertest from 'supertest'
-import Router from './Router.service'
-import api from '../../api'
+import Router from './Router.service.js'
+import api from '../../api/index.js'
 
 
 declare global {

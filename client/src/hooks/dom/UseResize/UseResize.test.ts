@@ -7,7 +7,7 @@ import useResize from './UseResize.hook'
 
 let updater: (...args: unknown[]) => void
 vi.mock('../UseResizeObserver', () => ({
-  default: vi.fn((cb) => { updater = cb }),
+  default: vi.fn(cb => { updater = cb }),
 }))
 
 describe('[useResize] hook', () => {

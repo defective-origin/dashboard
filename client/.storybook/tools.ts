@@ -1,7 +1,7 @@
-import type { InputType } from '@storybook/types'
+import type { ArgTypes } from '@storybook/react'
 import { toVar } from '../src/theme'
 
-export const tableDocs = (summary: unknown, defaultSummary?: unknown) => ({
+export const tableDocs = (summary?: string, defaultSummary?: string) => ({
   type: {
     summary,
   },
@@ -11,38 +11,38 @@ export const tableDocs = (summary: unknown, defaultSummary?: unknown) => ({
 })
 
 // fields
-export const string = (summary: unknown = 'string', defaultSummary?: unknown): InputType => ({
+export const string = (summary: string = 'string', defaultSummary?: string): ArgTypes[string] => ({
   type: 'string',
   table: tableDocs(summary, defaultSummary),
 })
 
-export const boolean = (defaultSummary?: unknown): InputType => ({
+export const boolean = (defaultSummary?: string): ArgTypes[string] => ({
   type: 'boolean',
   control: 'boolean',
   table: tableDocs('boolean', defaultSummary),
 })
 
-export const number = (summary: unknown = 'number', defaultSummary?: unknown): InputType => ({
+export const number = (summary = 'number', defaultSummary?: string): ArgTypes[string] => ({
   type: 'number',
   table: tableDocs(summary, defaultSummary),
 })
 
-export const css = (defaultSummary?: unknown): InputType => ({
+export const css = (defaultSummary?: string): ArgTypes[string] => ({
   control: 'object',
   table: tableDocs('CSSProperties', defaultSummary),
 })
 
-export const element = (defaultSummary?: unknown): InputType => ({
+export const element = (defaultSummary?: string): ArgTypes[string] => ({
   control: 'object',
   table: tableDocs('ElementOptions<HTMLElement>', defaultSummary),
 })
 
-export const object = (summary?: unknown, defaultSummary?: unknown): InputType => ({
+export const object = (summary?: string, defaultSummary?: string): ArgTypes[string] => ({
   control: 'object',
   table: tableDocs(summary, defaultSummary),
 })
 
-export const variants = (items: unknown[], summary: unknown, defaultSummary?: unknown): InputType => ({
+export const variants = (items: unknown[], summary: string, defaultSummary?: string): ArgTypes[string] => ({
   options: items,
   type: typeof items[0] as 'string',
   control: {
@@ -51,22 +51,22 @@ export const variants = (items: unknown[], summary: unknown, defaultSummary?: un
   table: tableDocs(summary, defaultSummary),
 })
 
-export const reactNode = (withContent?: boolean): InputType => ({
+export const reactNode = (withContent?: boolean): ArgTypes[string] => ({
   type: 'string',
   table: tableDocs('ReactNode', withContent ? 'content' : undefined),
 })
 
-export const list = (summary: unknown): InputType => ({
+export const list = (summary: string): ArgTypes[string] => ({
   control: 'object',
   table: tableDocs(`${summary}[]`),
 })
 
-export const func = (summary: unknown = 'function'): InputType => ({
+export const func = (summary = 'function'): ArgTypes[string] => ({
   control: 'object',
   table: tableDocs(summary),
 })
 
-export const event = (summary: unknown = '(e) => void'): InputType => func(summary)
+export const event = (summary = '(e) => void'): ArgTypes[string] => func(summary)
 
 
 export const field = {

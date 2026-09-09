@@ -46,9 +46,12 @@ yarn preview // Launch built application.
 ```
 
 #### Launches the test runner in the interactive watch mode.
-
 ```
+# Run test only once
 yarn test
+
+# Run test with watch flag
+yarn test:watch
 ```
 
 #### Code checkers
@@ -66,6 +69,7 @@ yarn lint:es
 yarn lint:es:fix
 yarn lint:css
 yarn lint:css:fix
+yarn lint:deps
 ```
 
 #### Check code after changes
@@ -75,16 +79,11 @@ yarn verify
 ```
 
 #### Code generator
-
-To generate structure parts of code.
-
 ```
+# To generate structure parts of code.
 yarn gen:init
-```
 
-To generate small parts of code.
-
-```
+# To generate small parts of code.
 yarn gen
 ```
 

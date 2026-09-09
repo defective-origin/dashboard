@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type ValOrFunc<T, Args extends any[]> = T | ((...args: Args) => T);
+export type ValOrFunc<T, Args extends any[]> = T | ((...args: Args) => T)
 
 /**
  * Returns value from function or value as is

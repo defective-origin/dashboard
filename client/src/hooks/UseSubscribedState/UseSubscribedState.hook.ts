@@ -19,6 +19,7 @@ export const useSubscribedState = <S = undefined>(value: S,deps: DependencyList 
   }
 
   // We leave the effect only for tracking additional deps, if they are needed
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { setState(value) }, deps)
 
   return [state, setState]

@@ -6,5 +6,5 @@ export default Array.from({length: 10}, (_, i): Donation => ({
   content: 'content',
   meta: 'meta',
   value: i*i,
-  reason: { id: new mongoose.Types.ObjectId().toString() }
+  reason: { id: new mongoose.Types.ObjectId().toString() },
 }))

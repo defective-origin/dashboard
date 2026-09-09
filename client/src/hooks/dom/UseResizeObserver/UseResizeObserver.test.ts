@@ -11,18 +11,18 @@ describe('[useResizeObserver] hook', () => {
   const options = { ref: element }
 
   beforeEach(() => {
-    observer = undefined;
+    observer = undefined
     // Создаем полноценный класс mock-конструктор
     const MockResizeObserver = vi.fn().mockImplementation(function () {
       observer = {
         observe: vi.fn(),
         unobserve: vi.fn(),
         disconnect: vi.fn(),
-      };
-      return observer;
-    });
+      }
+      return observer
+    })
 
-    vi.stubGlobal('ResizeObserver', MockResizeObserver);
+    vi.stubGlobal('ResizeObserver', MockResizeObserver)
   })
 
   it('should subscribe on changes on mount', () => {

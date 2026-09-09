@@ -11,7 +11,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
   },
-  "eslint.validate": ["javascript"],
+  "eslint.validate": ["javascript", "typescript"],
 
   // vs code highlight
   "editor.guides.indentation": true,

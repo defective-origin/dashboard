@@ -16,7 +16,7 @@ export type NumberOptions = Intl.NumberFormatOptions & {
 export function getMaxUnit(value: NumberValue, units: NumberUnit[] = NUMBER_OPTIONS, reverse?: boolean) {
   const items = reverse ? units.toReversed() : units
 
-  return items.find((unit) => (Number(value) / unit.value) >= 1)
+  return items.find(unit => (Number(value) / unit.value) >= 1)
 }
 
 export const isNumber = (value: NumberValue) => {

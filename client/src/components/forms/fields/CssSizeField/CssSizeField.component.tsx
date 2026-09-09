@@ -50,7 +50,7 @@ export function CssSizeField(props: CssSizeFieldProps) {
 
   const change = useCallback((value: string, event: React.ChangeEvent) =>
     value && onChange?.(value, event)
-  , [options, onChange])
+  , [onChange])
 
   return (
     <TextField

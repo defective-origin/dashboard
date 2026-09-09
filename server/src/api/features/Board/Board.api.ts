@@ -38,8 +38,8 @@ router.delete(`/${PATHNAME}/:id`, (req, res, next) => {
 // markups
 router.put(`/${PATHNAME}/:id/markups/:markupId`, (req, res, next) => {
   BoardModel.findOneAndUpdate(
-    { "_id": req.params.id, "markups._id": req.params.markupId },
-    { "$set": { "markups.$": req.body } },
+    { '_id': req.params.id, 'markups._id': req.params.markupId },
+    { '$set': { 'markups.$': req.body } },
   )
     .then(() => res.sendStatus(200))
     .catch(next)

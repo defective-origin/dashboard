@@ -36,9 +36,12 @@ yarn run prefill
 ```
 
 ### Launches tests
-
 ```
+# Run test only once
 yarn test
+
+# Run test with watch flag
+yarn test:watch
 ```
 
 #### Code checkers
@@ -52,6 +55,9 @@ Other commands just check parts of code.
 ```sh
 yarn lint
 yarn lint:fix
+
+# check imports
+yarn lint:typecheck
 ```
 
 ### Check app

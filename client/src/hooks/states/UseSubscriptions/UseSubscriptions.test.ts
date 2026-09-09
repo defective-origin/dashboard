@@ -10,10 +10,10 @@ describe('[useSubscriptions] hook', () => {
     const { result } = renderHook(() => useSubscriptions())
 
     expect(result.current).toEqual({
-      "emit": expect.any(Function),
-      "names": expect.any(Function),
-      "off": expect.any(Function),
-      "on": expect.any(Function),
+      'emit': expect.any(Function),
+      'names': expect.any(Function),
+      'off': expect.any(Function),
+      'on': expect.any(Function),
     })
   })
 })

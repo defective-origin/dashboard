@@ -40,14 +40,14 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    tsconfigPaths: true // Включает нативное разрешение путей
+    tsconfigPaths: true, // Включает нативное разрешение путей
   },
   // only for gh pages
   base: process.env.NODE_ENV === 'production' ? '/dashboard/' : './',
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: 'src/tests/setup.ts',
+    setupFiles: 'src/tests/vitest.setup.ts',
   },
   // it fix issue when build removes
   // :global and :root styles written in component styles
@@ -57,13 +57,13 @@ export default defineConfig({
     },
   },
   css: {
-  preprocessorOptions: {
-    scss: {
+    preprocessorOptions: {
+      scss: {
         // allows to remove import from each .scss file
-      additionalData: `
+        additionalData: `
         @use "/src/theme" as *;
       `,
+      },
     },
   },
-},
 })

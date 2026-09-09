@@ -6,7 +6,7 @@ import Icon, { IconProps } from 'components/views/Icon'
 import { TableColumn, TableRecord } from './Table.types'
 
 export type TextColumnOptions = Pick<TextProps, 'format' | 'placeholder' | 'color' | 'ellipsis' | 'bold' | 'nowrap'>
-export type TextColumn<T extends TableRecord,> = TableColumn<T, TextProps> & TextColumnOptions
+export type TextColumn<T extends TableRecord> = TableColumn<T, TextProps> & TextColumnOptions
 
 export const textColumn = <T extends TableRecord>(column: TextColumn<T>): TextColumn<T> => ({
   sort: true,
@@ -43,7 +43,7 @@ export const dateColumn = <T extends TableRecord>(column: TextColumn<T>) => text
 
 
 export type IconColumnOptions = IconProps
-export type IconColumn<T extends TableRecord,> = TableColumn<T, IconColumnOptions> & IconColumnOptions
+export type IconColumn<T extends TableRecord> = TableColumn<T, IconColumnOptions> & IconColumnOptions
 
 export const iconColumn = <T extends TableRecord>(column: IconColumn<T>): IconColumn<T> => ({
   cell: Icon,

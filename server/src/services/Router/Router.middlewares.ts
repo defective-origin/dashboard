@@ -2,11 +2,11 @@ import { NextFunction, Request, Response } from 'express'
 import UserModel from 'api/account/User/User.model'
 import { Storage } from 'tools'
 
-export function ErrorMiddleware(err: Error, req: Request, res: Response, _next: NextFunction) {
+export function ErrorMiddleware(err: Error, req: Request, res: Response) {
   res.status(500).json(err)
 }
 
-export function NotFoundMiddleware(req: Request, res: Response, _next: NextFunction) {
+export function NotFoundMiddleware(req: Request, res: Response) {
   res.status(404).end()
 }
 
@@ -24,10 +24,10 @@ export function AuthMiddleware (req: Request, res: Response, next: NextFunction)
 
   Storage.init(() => {
     UserModel.findOne({})
-    .then(user => {
-      Storage.set('user', user?.toJSON())
-      next()
-    })
-    .catch(next)
+      .then(user => {
+        Storage.set('user', user?.toJSON())
+        next()
+      })
+      .catch(next)
   })
 }

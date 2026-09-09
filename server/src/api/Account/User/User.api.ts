@@ -4,7 +4,7 @@ import { Storage } from 'tools'
 
 const router = Router()
 
-router.get(`/auth`, (req, res, next) => {
+router.get('/auth', (req, res, next) => {
   UserModel.findById(Storage.get('user').id, { staff: 0, bookmarks: 0 })
     .then(records => res.json(records))
     .catch(next)
@@ -42,7 +42,7 @@ router.delete(`/${PATHNAME}/:id`, (req, res, next) => {
 
 
 // bookmarks
-router.get(`/${PATHNAME}/bookmarks/:id`, (req, res, next) => {
+router.get(`/${PATHNAME}/bookmarks/:id`, (req, res) => {
   const user = Storage.get('user') as User
   const bookmark = user.bookmarks.find(bookmark => bookmark.id === req.params.id)
 

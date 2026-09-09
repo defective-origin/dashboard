@@ -89,7 +89,7 @@ export function Overlay(props: OverlayProps) {
     height: v === 'full' ? undefined : height,
   }
 
-  useMode(container, containerClassName, (element) => {
+  useMode(container, containerClassName, element => {
     const position = element && getComputedStyle(element).getPropertyValue('position')
     if (position && position === 'static' && !window) {
       return css.OverlayContainer

@@ -21,18 +21,18 @@ export type DeviceIconVariant = 'developer_mode_tv' | 'tv' | 'computer' | 'table
 export type AccountIconVariant = 'login' | 'logout' | 'person' | 'person_add' | 'account_circle' | 'support_agent' | 'settings' | 'language' | 'group'
 export type ProductIconVariant = 'thumb_up' | 'thumb_down' | 'star' | 'payments' | 'favorite' | 'logo_dev' | 'copyright' | 'beenhere' | 'local_atm' | 'confirmation_number' | 'help'
 export type DashboardIconVariant = 'dashboard' | 'insert_chart' | 'data_thresholding' | 'data_object' | 'dashboard_customize'
-export type IconVariant =
-| DeviceIconVariant
-| KeyboardIconVariant
-| ActionIconVariant
-| StatusIconVariant
-| ThemeIconVariant
-| WindowActionIconVariant
-| MenuActionIconVariant
-| AccountIconVariant
-| ProductIconVariant
-| DashboardIconVariant
-| 'auto_stories' | 'schedule' | 'table_rows' | 'book'
+export type IconVariant
+  = DeviceIconVariant
+  | KeyboardIconVariant
+  | ActionIconVariant
+  | StatusIconVariant
+  | ThemeIconVariant
+  | WindowActionIconVariant
+  | MenuActionIconVariant
+  | AccountIconVariant
+  | ProductIconVariant
+  | DashboardIconVariant
+  | 'auto_stories' | 'schedule' | 'table_rows' | 'book'
 
 export type IconColor = Color
 export type IconSize = Size

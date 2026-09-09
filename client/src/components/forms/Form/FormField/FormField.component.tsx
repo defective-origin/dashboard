@@ -160,6 +160,6 @@ FormField.displayName = 'FormField'
 
 export default FormField
 
-export function formField<P extends FieldProps,>(cmp: React.ComponentType<P>, defaultProps?: Partial<FormFieldProps>) {
+export function formField<P extends FieldProps>(cmp: React.ComponentType<P>, defaultProps?: Partial<FormFieldProps>) {
   return (props: Omit<FormFieldProps, 'as'> & P) => <FormField as={cmp as React.ComponentType} {...defaultProps} {...props} />
 }

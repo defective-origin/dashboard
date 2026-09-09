@@ -22,7 +22,7 @@ export const useHotKeys = (): HotKeysReturnOptions => {
     delete keys[key]
 
     setHotkeys(keys)
-  }, [hotkeys])
+  }, [hotkeys, setHotkeys])
 
   return useMemo(() => ({ add, remove }), [add, remove])
 }

@@ -25,7 +25,7 @@ export function init(routes: Route[], prefix = process.env.API_NAME) {
 
   // add route endpoints
   routes.forEach(route => app.use(prefix, route.api))
-  
+
   // post middleware
   app.use(
     middlewares.NotFoundMiddleware,
@@ -35,7 +35,7 @@ export function init(routes: Route[], prefix = process.env.API_NAME) {
   // add listener
   server.on('listening', () => console.log('Server started on port:', (server.address() as AddressInfo)?.port))
   server.on('close', () => console.warn('Server stopped.'))
-  server.on('error', (err) => console.error('Server error: ', err))
+  server.on('error', err => console.error('Server error: ', err))
 
   return server
 }

@@ -8,11 +8,11 @@ import LocaleProvider, { LocaleProviderProps } from 'locale/locale.context'
 import ThemeProvider, { ThemeProviderProps } from 'theme/theme.context'
 import ApiProvider, { ApiProviderProps } from 'api/api.context'
 
-export type LauncherProps = 
-& ApiProviderProps
-& LocaleProviderProps
-& ThemeProviderProps
-& RouterProviderProps
+export type LauncherProps 
+  = ApiProviderProps
+  & LocaleProviderProps
+  & ThemeProviderProps
+  & RouterProviderProps
 
 /**
  * Run all providers.

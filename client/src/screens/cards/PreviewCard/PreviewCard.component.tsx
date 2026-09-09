@@ -32,7 +32,7 @@ export type PreviewCardProps<V extends NavLinkVariant> = NavLinkProps<V> & {
  * @example
  * <PreviewCard />
  */
-export function PreviewCard<V extends NavLinkVariant,>(props: PreviewCardProps<V>) {
+export function PreviewCard<V extends NavLinkVariant>(props: PreviewCardProps<V>) {
   const { options, children, className, ...otherProps } = props
   const _className = cn(css.PreviewCard, className)
   const bookmark = useBookmark(options?.id)
