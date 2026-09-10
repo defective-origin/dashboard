@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import MarkupsView from './MarkupsView.component'
 // import useMarkupsView from './MarkupsView.hooks'
 // import MarkupsViewProvider, MarkupsView from './MarkupsView.context'

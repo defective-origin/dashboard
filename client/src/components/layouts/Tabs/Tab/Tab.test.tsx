@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import Tab from './Tab.component'
 // import useTab from './Tab.hooks'
 // import TabProvider, Tab from './Tab.context'
 
 describe('[Tab] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<Tab />)
+    const container = render(<Tab />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import DonationTable from './DonationTable.component'
 // import useDonationTable from './DonationTable.hooks'
 // import DonationTableProvider, DonationTable from './DonationTable.context'
 
 describe('[DonationTable] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<DonationTable />)
+    const container = render(<DonationTable />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

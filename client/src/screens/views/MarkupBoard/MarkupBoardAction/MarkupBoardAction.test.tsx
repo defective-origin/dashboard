@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import MarkupBoardAction from './MarkupBoardAction.component'
 // import useMarkupBoardAction from './MarkupBoardAction.hooks'
 // import MarkupBoardActionProvider, MarkupBoardAction from './MarkupBoardAction.context'

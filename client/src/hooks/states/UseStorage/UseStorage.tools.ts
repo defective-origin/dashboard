@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type BrowserStorageEventListener = (newValue?: any) => void
+export type BrowserStorageEventListener = () => void
 
 export class BrowserStorage {
   constructor(public storage: Storage) {}
@@ -8,19 +7,29 @@ export class BrowserStorage {
   keys = () => Object.keys(this.storage)
   toEventKey = (key: string) => `storage:${key}`
 
-  notify = (key: string) => document.body.dispatchEvent(new CustomEvent(this.toEventKey(key)))
+  notify = (key: string) => {
+    // notify current page
+    document.dispatchEvent(new CustomEvent(this.toEventKey(key)))
+    // notify other browser tabs
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: this.toEventKey(key),
+      storageArea: this.storage,
+    }))
+  }
+
   subscribe = (key: string, listener: BrowserStorageEventListener) => {
-    document.body.addEventListener(this.toEventKey(key), listener)
-    // listen other tabs or iframes
-    // https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+    // listen current page
+    document.addEventListener(this.toEventKey(key), listener)
+    // listen other browser tabs
     window.addEventListener('storage', event => {
       if (key === event.key) {
-        listener(event.newValue)
+        listener()
       }
     })
   }
+
   unsubscribe = (key: string, listener: BrowserStorageEventListener) => {
-    document.body.removeEventListener(this.toEventKey(key), listener)
+    document.removeEventListener(this.toEventKey(key), listener)
     window.removeEventListener('storage', listener)
   }
 
@@ -33,7 +42,7 @@ export class BrowserStorage {
 
     try {
       return JSON.parse(value) as T
-    } catch (error) {
+    } catch {
       this.storage.removeItem(key)
 
       return defaultValue

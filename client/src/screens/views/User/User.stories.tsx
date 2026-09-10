@@ -1,14 +1,12 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import User, { UserProps } from './User.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import User from './User.component'
 
 const meta: Meta<typeof User> = {
   component: User,
   title: 'Screens/Views/User',
   tags: ['autodocs'],
   argTypes: {
-    id: field.number(),
+    id: field.string(),
     className: field.string(),
     children: field.reactNode(),
   },
@@ -21,6 +19,6 @@ type Story = StoryObj<typeof User>
 export const Demo: Story = {
   parameters: params('User'),
   args: {
-    id: 1,
+    id: '1',
   },
 }

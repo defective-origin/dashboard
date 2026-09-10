@@ -1,9 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
 import Scroll, { ScrollProps } from './Scroll.component'
-import { DIRECTION, SIZES } from 'theme'
 
 const meta: Meta<typeof Scroll> = {
   title: 'Components/Layouts/Scroll',
@@ -19,8 +16,8 @@ const meta: Meta<typeof Scroll> = {
     children: field.reactNode(),
     visible: field.boolean(),
     indent: field.number('Margin', 2),
-    v: field.variants(DIRECTION, 'ScrollVariant', 'y'),
-    size: field.variants(SIZES, 'ScrollBarSize', 'md'),
+    v: field.variants(theme.DIRECTION, 'ScrollVariant', 'y'),
+    size: field.size('ScrollBarSize', 'md'),
     container: field.element(),
     actions: field.object('Offset'),
     back: field.object('Offset'),
@@ -53,7 +50,7 @@ export const Demo: Story = {
 }
 
 export const Variants: Story = {
-  parameters: params('View', DIRECTION),
+  parameters: params('View', theme.DIRECTION),
   render,
   args: {
     v: 'xy',
@@ -62,7 +59,7 @@ export const Variants: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('View', SIZES),
+  parameters: params('View', theme.SIZES),
   render,
   args: {
     v: 'xy',

@@ -6,14 +6,11 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
+    "@chromatic-com/storybook",
   ],
-  framework: {
-    name: "@storybook/react-vite",
-    options: {},
-  },
+  framework: '@storybook/react-vite',
   docs: {
     autodocs: "tag",
   },

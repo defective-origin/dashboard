@@ -11,7 +11,9 @@ exports[`[SelectField] component > should render component 1`] = `
       <div
         aria-expanded="false"
         aria-haspopup="listbox"
+        aria-labelledby="[field]"
         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-18x85q0-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id="field"
         role="combobox"
         tabindex="0"
       >

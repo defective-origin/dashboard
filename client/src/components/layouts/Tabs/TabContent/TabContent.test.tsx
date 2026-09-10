@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import TabContent from './TabContent.component'
 // import useTabContent from './TabContent.hooks'
 // import TabContentProvider, TabContent from './TabContent.context'

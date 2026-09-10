@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Footer from './Footer.component'
 // import useFooter from './Footer.hooks'
 // import FooterProvider, Footer from './Footer.context'

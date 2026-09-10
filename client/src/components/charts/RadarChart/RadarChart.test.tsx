@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import RadarChart from './RadarChart.component'
 // import useRadarChart from './RadarChart.hooks'
 // import RadarChartProvider, RadarChart from './RadarChart.context'

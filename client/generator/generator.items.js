@@ -41,7 +41,8 @@ export const Component = ({
   defaultName = 'Component',
   defaultSubpath = 'components',
   withStories,
-  files = ['component', 'test', 'module', withStories && 'stories'],
+  withTests,
+  files = ['component', withTests && 'test', 'module', withStories && 'stories'],
   module = {
     notExports: ['test', 'module', 'stories'],
     defaultExport: 'component',

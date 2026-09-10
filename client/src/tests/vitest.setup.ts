@@ -1,11 +1,22 @@
+import '@testing-library/jest-dom/vitest'
 import { expect, afterEach } from 'vitest'
-import { cleanup } from '@testing-library/react'
 import * as matchers from '@testing-library/jest-dom/matchers'
-import '@testing-library/jest-dom'
+import * as overrides from './vitest.overrides'
+import * as tl from '@testing-library/react'
+
 
 // extends Vitest's expect method with methods from react-testing-library
 expect.extend(matchers)
 
+
+// override and add new functionality for tests globally
+globalThis.act = tl.act
+globalThis.waitFor = tl.waitFor
+globalThis.render = overrides.render
+globalThis.renderHook = overrides.renderHook
+
+
+// stub functionality
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation(query => ({
@@ -34,5 +45,5 @@ Object.defineProperty(window, 'ResizeObserver', {
 
 // runs a cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
-  cleanup()
+  tl.cleanup()
 })

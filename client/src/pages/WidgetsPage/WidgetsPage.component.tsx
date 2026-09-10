@@ -1,7 +1,6 @@
 import React from 'react'
 
 // ---| core |---
-import { t } from 'locale'
 import { cn } from 'tools'
 import { Widget, useWidgets } from 'api'
 

@@ -1,10 +1,7 @@
-// eslint-disable-next-line no-restricted-imports
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
+import Button from 'components/actions/Button'
 import Block from 'components/layouts/Block'
 import Toast, { ToastOptions } from './Toast.component'
-import { DIRECTION, COLORS } from 'theme'
-import Button from 'components/actions/Button'
 import { toast } from './Toast.tools'
 
 const Notification = (props: ToastOptions) => {
@@ -29,8 +26,8 @@ const meta: Meta<typeof Notification> = {
   tags: ['autodocs'],
   argTypes: {
     content: field.reactNode(),
-    color: field.variants(COLORS, 'AlertColor', 'primary'),
-    v: field.variants(DIRECTION, 'BlockVariant', 'x'),
+    color: field.variants(theme.COLORS, 'AlertColor', 'primary'),
+    v: field.variants(theme.DIRECTION, 'BlockVariant', 'x'),
     onClose: field.event(),
     onSuccess: field.event(),
   },

@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import AppContent from './AppContent.component'
 
 describe('[AppContent] component', () => {

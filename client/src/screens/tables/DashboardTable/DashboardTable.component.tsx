@@ -1,5 +1,3 @@
-import React, { useMemo } from 'react'
-
 // ---| core |---
 import { cn } from 'tools'
 import { Board, useBoards } from 'api'
@@ -7,7 +5,6 @@ import { Board, useBoards } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
 import css from './DashboardTable.module.scss'

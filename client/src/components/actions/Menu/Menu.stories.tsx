@@ -1,9 +1,7 @@
-/* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Menu, { MenuItem, MenuProps, MenuTriggerOptions } from './Menu.component'
+import { Meta, StoryObj, SB_CSS, field, params } from 'storybook'
 import Block from 'components/layouts/Block'
 import Item from 'components/layouts/Item'
+import Menu, { MenuItem, MenuProps, MenuTriggerOptions } from './Menu.component'
 
 const VARIANTS: MenuProps['horizontal'][] = [false, true]
 const ITEMS: MenuItem[] = [

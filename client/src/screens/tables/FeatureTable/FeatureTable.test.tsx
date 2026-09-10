@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import FeatureTable from './FeatureTable.component'
 // import useFeatureTable from './FeatureTable.hooks'
 // import FeatureTableProvider, FeatureTable from './FeatureTable.context'

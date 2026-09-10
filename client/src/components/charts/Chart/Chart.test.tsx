@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Chart from './Chart.component'
 // import useChart from './Chart.hooks'
 // import ChartProvider, Chart from './Chart.context'

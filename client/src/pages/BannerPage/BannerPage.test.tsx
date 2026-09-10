@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import BannerPage from './BannerPage.component'
 // import useBannerPage from './BannerPage.hooks'
 // import BannerPageProvider, BannerPage from './BannerPage.context'
 
 describe('[BannerPage] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<BannerPage />)
+    const container = render(<BannerPage />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

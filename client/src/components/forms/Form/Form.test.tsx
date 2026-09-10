@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Form from './Form.component'
 
 describe('[Form] component', () => {

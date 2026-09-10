@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import TableBody from './TableBody.component'
 // import useTableBody from './TableBody.hooks'
 // import TableBodyProvider, TableBody from './TableBody.context'

@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import SupportTable, { SupportTableProps } from './SupportTable.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import SupportTable from './SupportTable.component'
 
 const meta: Meta<typeof SupportTable> = {
   component: SupportTable,

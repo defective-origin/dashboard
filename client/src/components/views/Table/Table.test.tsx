@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Table from './Table.component'
 // import useTable from './Table.hooks'
 // import TableProvider, Table from './Table.context'

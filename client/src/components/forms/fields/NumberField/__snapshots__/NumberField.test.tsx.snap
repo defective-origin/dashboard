@@ -14,7 +14,8 @@ exports[`[NumberField] component > should render component 1`] = `
         <input
           aria-invalid="false"
           class="MuiInputBase-input MuiOutlinedInput-input css-1pzfmz2-MuiInputBase-input-MuiOutlinedInput-input"
-          id="_r_0_"
+          id="field"
+          name="[field]"
           type="number"
           value="0"
         />

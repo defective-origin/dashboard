@@ -1,10 +1,5 @@
-// ---| tests |---
-import { MockInstance } from 'vitest'
-import { renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useStorage from './UseStorage.hook'
-import { BrowserStorage, LocalStorage } from './UseStorage.tools'
+import { BrowserStorage, BrowserStorageEventListener, LocalStorage } from './UseStorage.tools'
 
 
 describe('[useStorage] hook', () => {
@@ -15,10 +10,10 @@ describe('[useStorage] hook', () => {
   it('should return options', () => {
     const { result } = renderHook(() => useStorage('name', { storage: LocalStorage }))
 
-    result.current.set(3)
+    act(() => result.current.set(3))
 
     expect(result.current).toEqual({
-      state: undefined,
+      state: 3,
       get: expect.any(Function),
       set: expect.any(Function),
       mutate: expect.any(Function),
@@ -34,7 +29,7 @@ describe('[useStorage] hook', () => {
   it('should set value', () => {
     const { result } = renderHook(() => useStorage('name', { storage: LocalStorage }))
 
-    result.current.set('VALUE')
+    act(() => result.current.set('VALUE'))
 
     expect(result.current.get()).toEqual('VALUE')
   })
@@ -43,17 +38,14 @@ describe('[useStorage] hook', () => {
 describe('[useStorage] tools', () => {
   describe('[BrowserStorage] class', () => {
     let storage: BrowserStorage
-    let dispatchSpy: MockInstance
+    let mockListener: BrowserStorageEventListener
 
     beforeEach(() => {
-      dispatchSpy = vi.spyOn(document.body, 'dispatchEvent')
+      localStorage.clear()
       storage = new BrowserStorage(localStorage)
+      mockListener = vi.fn()
     })
 
-    afterEach(() => {
-      dispatchSpy.mockRestore()
-      storage.clear()
-    })
 
     describe('[toEventKey] func', () => {
       it('should return storage key', () => {
@@ -65,8 +57,8 @@ describe('[useStorage] tools', () => {
       it('should return saved keys', () => {
         expect(storage.keys()).toEqual([])
 
-        storage.set('value1', 1)
-        storage.set('value2', 2)
+        act(() => storage.set('value1', 1))
+        act(() => storage.set('value2', 2))
 
         expect(storage.keys()).toEqual(['value1', 'value2'])
       })
@@ -74,66 +66,73 @@ describe('[useStorage] tools', () => {
 
     describe('[clear] func', () => {
       it('should remove all saved keys', () => {
-        storage.set('value1', 1)
-        storage.set('value2', 2)
+        act(() => storage.set('value1', 1))
+        act(() => storage.set('value2', 2))
 
         expect(storage.keys().length).toEqual(2)
 
-        storage.clear()
+        act(() => storage.clear())
 
         expect(storage.keys().length).toEqual(0)
       })
 
       it('should notify about changes for each removed value', () => {
-        storage.set('value1', 1)
-        storage.set('value2', 2)
+        act(() => storage.set('value1', 1))
+        act(() => storage.set('value2', 2))
 
-        storage.clear()
+        storage.subscribe('value1', mockListener)
+        storage.subscribe('value2', mockListener)
 
-        expect(dispatchSpy).toHaveBeenCalledTimes(4)
+        act(() => storage.clear())
+
+        expect(mockListener).toHaveBeenCalledTimes(2)
       })
     })
 
     describe('[get] func', () => {
       it('should return value', () => {
-        expect(storage.get('value')).toEqual(undefined)
+        expect(storage.get('test-key')).toEqual(undefined)
 
-        storage.set('value', 1)
+        act(() => storage.set('test-key', 1))
 
-        expect(storage.get('value')).toEqual(1)
+        expect(storage.get('test-key')).toEqual(1)
       })
 
       it('should return default value if not exist', () => {
-        expect(storage.get('value', 'DEFAULT_VALUE')).toEqual('DEFAULT_VALUE')
+        expect(storage.get('test-key', 'DEFAULT_VALUE')).toEqual('DEFAULT_VALUE')
       })
     })
 
     describe('[set] func', () => {
       it('should save any value', () => {
-        storage.set('string', 'value')
+        act(() => storage.set('string', 'value'))
         expect(storage.get('string')).toEqual('value')
 
-        storage.set('number', 1)
+        act(() => storage.set('number', 1))
         expect(storage.get('number')).toEqual(1)
 
-        storage.set('object', { num: 1, string: 'val' })
+        act(() => storage.set('object', { num: 1, string: 'val' }))
         expect(storage.get('object')).toEqual({ num: 1, string: 'val' })
       })
 
       it('should notify about changes', () => {
-        storage.set('value', 1)
+        storage.subscribe('test-key', mockListener)
 
-        expect(dispatchSpy).toHaveBeenCalled()
+        act(() => storage.set('test-key', 1))
+
+        expect(mockListener).toHaveBeenCalled()
       })
 
       it('should not notify about changes if old and new values the same', () => {
-        storage.set('value', 1)
+        storage.subscribe('test-key', mockListener)
 
-        expect(dispatchSpy).toHaveBeenCalledTimes(1)
+        act(() => storage.set('test-key', 1))
 
-        storage.set('value', 1)
+        expect(mockListener).toHaveBeenCalledTimes(1)
 
-        expect(dispatchSpy).toHaveBeenCalledTimes(1)
+        act(() => storage.set('test-key', 1))
+
+        expect(mockListener).toHaveBeenCalledTimes(1)
       })
     })
 
@@ -141,120 +140,82 @@ describe('[useStorage] tools', () => {
       it('should save any value', () => {
         expect(storage.get('value')).toEqual(undefined)
 
-        storage.mutate('value', (prev: number = 0) => prev + 1)
+        act(() => storage.mutate('value', (prev: number = 0) => prev + 1))
 
         expect(storage.get('value')).toEqual(1)
       })
 
       it('should notify about changes', () => {
-        storage.mutate('value', () => 1)
+        storage.subscribe('test-key', mockListener)
 
-        expect(dispatchSpy).toHaveBeenCalled()
+        act(() => storage.mutate('test-key', () => 1))
+
+        expect(mockListener).toHaveBeenCalled()
       })
     })
 
     describe('[remove] func', () => {
       it('should save any value', () => {
-        storage.set('value', 1)
+        act(() => storage.set('value', 1))
 
         expect(storage.get('value')).toEqual(1)
 
-        storage.remove('value')
+        act(() => storage.remove('value'))
 
         expect(storage.get('value')).toEqual(undefined)
       })
 
       it('should notify about changes', () => {
-        storage.set('value', 1)
-        storage.remove('value')
+        storage.subscribe('test-key', mockListener)
 
-        expect(dispatchSpy).toHaveBeenCalledTimes(2)
+        act(() => storage.set('test-key', 1))
+        act(() => storage.remove('test-key'))
+
+        expect(mockListener).toHaveBeenCalledTimes(2)
       })
 
       it('should not notify about changes if value was not existed', () => {
-        storage.remove('value')
+        storage.subscribe('test-key', mockListener)
 
-        expect(dispatchSpy).not.toHaveBeenCalled()
+        act(() => storage.remove('test-key'))
+
+        expect(mockListener).not.toHaveBeenCalled()
       })
     })
 
     describe('[notify] func', () => {
       it('should dispatch a custom event on document.body with the correct type', () => {
+        storage.subscribe('test-key', mockListener)
+
         storage.notify('test-key')
 
-        expect(dispatchSpy).toHaveBeenCalledTimes(1)
-
-        // Grab the actual event passed to dispatchEvent
-        const callArg = dispatchSpy.mock.calls[0][0] as CustomEvent
-        expect(callArg.type).toEqual('storage:test-key')
-        expect(callArg).toBeInstanceOf(CustomEvent)
+        expect(mockListener).toHaveBeenCalledTimes(1)
       })
     })
 
     describe('[subscribe] func', () => {
-      let bodyAddSpy: MockInstance
-      let windowAddSpy: MockInstance
-
-      beforeEach(() => {
-        bodyAddSpy = vi.spyOn(document.body, 'addEventListener')
-        windowAddSpy = vi.spyOn(window, 'addEventListener')
-      })
-
-      afterEach(() => {
-        bodyAddSpy.mockRestore()
-        windowAddSpy.mockRestore()
-      })
-
-      it('should attach event listeners to body and window', () => {
-        const mockListener = vi.fn()
+      it('should trigger subscribed function when storage event occurs', () => {
         storage.subscribe('test-key', mockListener)
 
-        expect(bodyAddSpy).toHaveBeenCalledWith('storage:test-key', mockListener)
-        expect(windowAddSpy).toHaveBeenCalledWith('storage', expect.any(Function))
-      })
+        act(() => storage.notify('test-key'))
 
-      it('should trigger listener when a matching storage event occurs', () => {
-        const mockListener = vi.fn()
-        storage.subscribe('test-key', mockListener)
-
-        // Find the anonymous storage handler that was passed to window.addEventListener
-        const storageCall = windowAddSpy.mock.calls.find(call => call[0] === 'storage')
-        const registeredStorageHandler = storageCall?.[1]
-
-        expect(registeredStorageHandler).toBeDefined()
-
-        // Simulate a matching event
-        const matchingEvent = new StorageEvent('storage', { key: 'test-key', newValue: 'mocked-value' })
-        registeredStorageHandler(matchingEvent)
-        expect(mockListener).toHaveBeenCalledWith('mocked-value')
-
-        // Simulate a non-matching event (should not trigger listener)
-        const nonMatchingEvent = new StorageEvent('storage', { key: 'different-key', newValue: 'ignored' })
-        registeredStorageHandler(nonMatchingEvent)
         expect(mockListener).toHaveBeenCalledTimes(1)
       })
     })
 
     describe('[unsubscribe] func', () => {
-      let bodyRemoveSpy: MockInstance
-      let windowRemoveSpy: MockInstance
+      it('should not call subscribed function after unsubscribe', () => {
+        storage.subscribe('test-key', mockListener)
 
-      beforeEach(() => {
-        bodyRemoveSpy = vi.spyOn(document.body, 'removeEventListener')
-        windowRemoveSpy = vi.spyOn(window, 'removeEventListener')
-      })
+        act(() => storage.notify('test-key'))
 
-      afterEach(() => {
-        bodyRemoveSpy.mockRestore()
-        windowRemoveSpy.mockRestore()
-      })
+        expect(mockListener).toHaveBeenCalledTimes(1)
 
-      it('should remove body event listener', () => {
-        const mockListener = vi.fn()
         storage.unsubscribe('test-key', mockListener)
 
-        expect(bodyRemoveSpy).toHaveBeenCalledWith('storage:test-key', mockListener)
-        expect(windowRemoveSpy).toHaveBeenCalledWith('storage', mockListener)
+        act(() => storage.notify('test-key'))
+
+        expect(mockListener).toHaveBeenCalledTimes(1)
       })
     })
   })

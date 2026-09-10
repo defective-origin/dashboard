@@ -27,8 +27,10 @@ export function AppContent(props: AppContentProps) {
 
   return (
     <Content as='main' area='center' className={_className} {...otherProps}>
-      <Outlet />
-      {children}
+      <React.Suspense fallback={<h1>Loading...</h1>}>
+        <Outlet />
+        {children}
+      </React.Suspense>
     </Content>
   )
 }

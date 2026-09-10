@@ -1,14 +1,10 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import JsonField from './JsonField.component'
 // import useJsonField from './JsonField.hooks'
 // import JsonFieldProvider, JsonField from './JsonField.context'
 
 describe('[JsonField] component', () => {
   it('should render component', () => {
-    const container = render(<JsonField />)
+    const container = render(<JsonField path='field' />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

@@ -45,9 +45,24 @@ export default defineConfig({
   // only for gh pages
   base: process.env.NODE_ENV === 'production' ? '/dashboard/' : './',
   test: {
+    // Defines global variables like 'describe', 'test', and 'expect' so they don't need to be explicitly imported in every test file
     globals: true,
+
+    // Runs each test file in an isolated VM context while reusing worker threads to avoid recreating heavy DOM environments from scratch
+    pool: 'vmThreads',
+
+    // Persists transformed code to the file system, significantly speeding up subsequent test runs by skipping recompilation of unchanged files
+    fsModuleCache: true,
+
+    // Simulates a browser environment in Node.js, providing essential web APIs like 'window' and 'document' for React component testing
     environment: 'jsdom',
+
+    // Path to a configuration file that runs custom setup logic (e.g., configuring testing libraries, global mocks) before executing the test suite
     setupFiles: 'src/tests/vitest.setup.ts',
+
+    // clear mocks before each tests
+    clearMocks: true,
+    // mockReset: true,
   },
   // it fix issue when build removes
   // :global and :root styles written in component styles

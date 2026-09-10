@@ -42,10 +42,11 @@ const ERROR_CALLBACK = () => { throw new Error('Callback cannot be called') }
  *
  * useEffect(() => fetch().then(fn), [fn]) // it works fine
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const useFunc = <F extends Function>(cb: F): F => {
   const ref = useRef<F>(ERROR_CALLBACK as never)
 
+  // eslint-disable-next-line react-hooks/refs
   ref.current = cb
 
   return useCallback((...args: unknown[]) => ref.current(...args), []) as never

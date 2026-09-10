@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import MarkupBoardLine from './MarkupBoardLine.component'
 // import useMarkupBoardLine from './MarkupBoardLine.hooks'
 // import MarkupBoardLineProvider, MarkupBoardLine from './MarkupBoardLine.context'

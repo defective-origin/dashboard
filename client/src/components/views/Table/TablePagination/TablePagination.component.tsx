@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'

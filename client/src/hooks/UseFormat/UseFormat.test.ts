@@ -1,7 +1,3 @@
-// ---| tests |---
-import { renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useFormat from './UseFormat.hook'
 
 

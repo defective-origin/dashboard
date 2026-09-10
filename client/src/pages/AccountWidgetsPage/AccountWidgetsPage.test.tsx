@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import AccountWidgetsPage from './AccountWidgetsPage.component'
 // import useAccountWidgetsPage from './AccountWidgetsPage.hooks'
 // import AccountWidgetsPageProvider, AccountWidgetsPage from './AccountWidgetsPage.context'
 
 describe('[AccountWidgetsPage] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<AccountWidgetsPage />)
+    const container = render(<AccountWidgetsPage />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

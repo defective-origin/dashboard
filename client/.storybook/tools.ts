@@ -1,5 +1,8 @@
 import type { ArgTypes } from '@storybook/react'
-import { toVar } from '../src/theme'
+import { SIZES, Size, toVar } from '../src/theme'
+
+// path app theme variables and tools for stories
+export * as theme from '../src/theme'
 
 export const tableDocs = (summary?: string, defaultSummary?: string) => ({
   type: {
@@ -22,9 +25,9 @@ export const boolean = (defaultSummary?: string): ArgTypes[string] => ({
   table: tableDocs('boolean', defaultSummary),
 })
 
-export const number = (summary = 'number', defaultSummary?: string): ArgTypes[string] => ({
+export const number = (summary = 'number', defaultSummary?: number): ArgTypes[string] => ({
   type: 'number',
-  table: tableDocs(summary, defaultSummary),
+  table: tableDocs(summary, defaultSummary?.toString()),
 })
 
 export const css = (defaultSummary?: string): ArgTypes[string] => ({
@@ -50,6 +53,8 @@ export const variants = (items: unknown[], summary: string, defaultSummary?: str
   },
   table: tableDocs(summary, defaultSummary),
 })
+
+export const size = (summary: string, defaultSummary?: Size) => field.variants(SIZES, summary, defaultSummary)
 
 export const reactNode = (withContent?: boolean): ArgTypes[string] => ({
   type: 'string',
@@ -81,6 +86,7 @@ export const field = {
   object,
   event,
   func,
+  size,
 }
 
 // params
@@ -106,8 +112,8 @@ export const params = (name: string, variants?: unknown[], defaultVariant?: unkn
 
 
 export const SB_CSS = {
-  margin: toVar('sb-margin-color'),
-  space: toVar('sb-space-color'),
-  border: toVar('sb-border'),
-  item: toVar('sb-item-color'),
+  margin: toVar('color-warning-5'),
+  space: toVar('color-success-5'),
+  border: toVar('divider-color'),
+  item: toVar('color-secondary-5'),
 }

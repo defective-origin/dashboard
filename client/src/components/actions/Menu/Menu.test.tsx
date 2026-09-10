@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Menu from './Menu.component'
 
 describe('[Menu] component', () => {

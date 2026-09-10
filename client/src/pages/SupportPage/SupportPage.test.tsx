@@ -1,12 +1,8 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import SupportPage from './SupportPage.component'
 
 describe('[SupportPage] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<SupportPage />)
+    const container = render(<SupportPage />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

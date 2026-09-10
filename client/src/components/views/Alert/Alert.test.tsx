@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Alert from './Alert.component'
 
 describe('[Alert] component', () => {

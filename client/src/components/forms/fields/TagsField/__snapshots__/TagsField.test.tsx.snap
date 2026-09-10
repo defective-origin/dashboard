@@ -7,6 +7,7 @@ exports[`[TagsField] component > should render component 1`] = `
   >
     <div
       class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon _TagsField_9b8e4f css-120s2v5-MuiAutocomplete-root"
+      name="[field]"
     >
       <div
         class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root _TextField_38db33 css-cmpglg-MuiFormControl-root-MuiTextField-root"
@@ -21,7 +22,7 @@ exports[`[TagsField] component > should render component 1`] = `
             autocapitalize="none"
             autocomplete="off"
             class="MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused css-13meb6w-MuiInputBase-input-MuiOutlinedInput-input"
-            id="_r_0_"
+            id="field"
             role="combobox"
             spellcheck="false"
             type="text"

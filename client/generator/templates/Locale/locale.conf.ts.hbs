@@ -4,7 +4,6 @@ import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
 // ---| core |---
-import { ENV } from 'App/App.conf'
 import { FlattenObjectKeys } from 'tools/react.tools'
 
 // ---| self |---
@@ -59,7 +58,7 @@ i18next
     nonExplicitSupportedLngs: true,
 
     fallbackLng: 'en',
-    debug: ENV.MODE.DEV,
+    debug: import.meta.env.DEV,
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

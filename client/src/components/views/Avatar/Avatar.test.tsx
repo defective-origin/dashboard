@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Avatar from './Avatar.component'
 // import useAvatar from './Avatar.hooks'
 // import AvatarProvider, Avatar from './Avatar.context'

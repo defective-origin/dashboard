@@ -1,8 +1,6 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Chart, { ChartProps } from './Chart.component'
+import { Meta, StoryObj, field, params } from 'storybook'
 import { ComposedChart } from 'recharts'
+import Chart from './Chart.component'
 
 
 const meta: Meta<typeof Chart> = {

@@ -6,7 +6,6 @@ export type EventKey = string | (string | number | undefined | null)[]
 export const initEventName = (keys: EventKey) => Array.isArray(keys) ? keys.join(':') : keys
 
 export type ExtendedEventMap = HTMLElementEventMap & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
   [customEventName: string & {}]: CustomEvent<any>;
 }
 

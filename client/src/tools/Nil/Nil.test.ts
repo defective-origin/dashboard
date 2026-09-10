@@ -1,4 +1,3 @@
-// ---| self |---
 import * as tools from './Nil.tools'
 
 describe('[Nil] tools', () => {

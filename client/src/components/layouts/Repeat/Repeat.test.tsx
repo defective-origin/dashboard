@@ -1,9 +1,4 @@
 import React from 'react'
-
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Repeat, { RepeatItem } from './Repeat.component'
 
 type ItemProps = { content: React.ReactNode }

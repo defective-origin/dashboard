@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Clipboard from './Clipboard.component'
 // import useClipboard from './Clipboard.hooks'
 // import ClipboardProvider, Clipboard from './Clipboard.context'

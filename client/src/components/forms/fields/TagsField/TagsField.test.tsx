@@ -1,14 +1,10 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import TagsField from './TagsField.component'
 // import useTagsField from './TagsField.hooks'
 // import TagsFieldProvider, TagsField from './TagsField.context'
 
 describe('[TagsField] component', () => {
   it('should render component', () => {
-    const container = render(<TagsField />)
+    const container = render(<TagsField path='field' />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

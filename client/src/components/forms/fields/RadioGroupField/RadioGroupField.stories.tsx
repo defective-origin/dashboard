@@ -1,8 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { COLORS, SIZES } from 'theme'
-import RadioGroupField, { RadioGroupFieldProps } from './RadioGroupField.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import RadioGroupField from './RadioGroupField.component'
 
 const meta: Meta<typeof RadioGroupField> = {
   component: RadioGroupField,

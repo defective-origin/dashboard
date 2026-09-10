@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import CssSizeField from './CssSizeField.component'
 
 describe('[CssSizeField] component', () => {

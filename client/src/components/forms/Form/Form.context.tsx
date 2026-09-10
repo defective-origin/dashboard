@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { SubscriptionsManager } from 'hooks'
 
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type FormPath<O extends {} = {}> = (string & {}) // | react.FlattenObjectFullPathKeys<O>
 export type FormEvent<O extends object = object> = (value: any, store: O) => void
 export type FormRule<O extends object = object, R = any> = (value: any, store?: O) => R | undefined | false

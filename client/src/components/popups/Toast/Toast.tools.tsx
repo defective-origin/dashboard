@@ -1,4 +1,4 @@
-import { toast as reactToast, Id, ToastOptions as MuiToastOptions } from 'react-toastify'
+import { toast as reactToast, ToastOptions as MuiToastOptions } from 'react-toastify'
 
 // ---| core |---
 // ---| pages |---
@@ -15,6 +15,8 @@ const ALERT_ICON_MAP: Record<AlertColor, IconVariant> = {
   info: 'info',
   warning: 'warning',
   error: 'error',
+  'contrast-primary': 'info',
+  'contrast-secondary': 'info',
 }
 
 const showToast = (data: ToastOptions, options: MuiToastOptions<ToastOptions>) => reactToast(Toast, {

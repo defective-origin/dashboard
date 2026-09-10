@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import WidgetTable from './WidgetTable.component'
 // import useWidgetTable from './WidgetTable.hooks'
 // import WidgetTableProvider, WidgetTable from './WidgetTable.context'
 
 describe('[WidgetTable] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<WidgetTable />)
+    const container = render(<WidgetTable />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

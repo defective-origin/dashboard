@@ -1,11 +1,8 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Text from 'components/views/Text'
 import Table, { TableProps } from './Table.component'
 import { TableColumn } from './Table.types'
 import column from './Table.tools'
-import { Color } from 'theme'
 
 type Item = {
   name: string;
@@ -74,7 +71,7 @@ const COLUMNS: TableColumn<Item>[] = [
     field: 'gdp',
     format: 'currency',
     mapper: (_, __, field) => {
-      let color: Color = 'primary'
+      let color: theme.Color
 
       if (field < 1_000_000) {
         color = 'error'

@@ -1,13 +1,10 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Link, { LinkProps } from './Link.component'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
-import { COLORS, SIZES } from 'theme'
 import { ICONS } from 'components/views/Icon'
+import Link, { LinkProps } from './Link.component'
 
 const LINK_ICONS = [undefined, ...ICONS]
-const LINK_COLORS = COLORS.slice(0, 6)
+const LINK_COLORS = theme.COLORS.slice(0, 6)
 
 const meta: Meta<typeof Link> = {
   title: 'Components/Actions/Link',
@@ -19,7 +16,7 @@ const meta: Meta<typeof Link> = {
     href: field.string(),
     start: field.variants(LINK_ICONS, 'IconVariant'),
     end: field.variants(LINK_ICONS, 'IconVariant'),
-    size: field.variants(SIZES, 'LinkSize', 'md'),
+    size: field.size('LinkSize', 'md'),
     color: field.variants(LINK_COLORS, 'LinkColor', 'primary'),
     active: field.boolean(),
     withIcon: field.boolean(),
@@ -56,8 +53,8 @@ export const Demo: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('Size', SIZES),
-  render: () => initVariants('size', SIZES),
+  parameters: params('Size', theme.SIZES),
+  render: () => initVariants('size', theme.SIZES),
 }
 
 export const Colors: Story = {

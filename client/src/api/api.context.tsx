@@ -2,7 +2,10 @@ import { QueryClient, QueryClientProvider, QueryClientProviderProps } from '@tan
 
 // ---| self |---
 
-export const apiClient = new QueryClient()
+
+export { QueryClient } from '@tanstack/react-query'
+
+export const CLIENT = new QueryClient()
 
 export type ApiProviderProps = Partial<QueryClientProviderProps>
 
@@ -14,7 +17,7 @@ export type ApiProviderProps = Partial<QueryClientProviderProps>
  * <ApiProvider defaultProp={1} />
  */
 function ApiProvider(props: ApiProviderProps) {
-  const { client = apiClient, ...otherProps } = props
+  const { client = CLIENT, ...otherProps } = props
 
   return <QueryClientProvider client={client} {...otherProps} />
 }

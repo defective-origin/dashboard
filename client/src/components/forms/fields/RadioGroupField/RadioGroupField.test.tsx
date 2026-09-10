@@ -1,14 +1,10 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import RadioGroupField from './RadioGroupField.component'
 // import useRadioGroupField from './RadioGroupField.hooks'
 // import RadioGroupFieldProvider, RadioGroupField from './RadioGroupField.context'
 
 describe('[RadioGroupField] component', () => {
   it('should render component', () => {
-    const container = render(<RadioGroupField />)
+    const container = render(<RadioGroupField path='field' />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

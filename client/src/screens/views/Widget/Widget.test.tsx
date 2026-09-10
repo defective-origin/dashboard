@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Widget from './Widget.component'
 // import useWidget from './Widget.hooks'
 // import WidgetProvider, Widget from './Widget.context'

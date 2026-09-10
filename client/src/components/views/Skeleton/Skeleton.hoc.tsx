@@ -19,8 +19,7 @@ export type WithSkeletonProps = SkeletonProps & {
  * @example
  * export default withSkeleton(Icon, () => ({ v: 'circular', wrap: true }))
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const withSkeleton = <P extends {}>(
+export const withSkeleton = <P extends object>(
   WrappedComponent: React.ComponentType<P>,
   mapper?: (props: P) => SkeletonProps,
 ) => {

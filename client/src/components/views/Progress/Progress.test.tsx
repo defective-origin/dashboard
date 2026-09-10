@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Progress from './Progress.component'
 
 describe('[Progress] component', () => {

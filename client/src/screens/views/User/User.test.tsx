@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import User from './User.component'
 // import useUser from './User.hooks'
 // import UserProvider, User from './User.context'
 
 describe('[User] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<User />)
+    const container = render(<User />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

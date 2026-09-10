@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Playground from './Playground.component'
 // import usePlayground from './Playground.hooks'
 // import PlaygroundProvider, Playground from './Playground.context'

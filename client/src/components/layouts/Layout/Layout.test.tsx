@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Layout from './Layout.component'
 
 describe('[Layout] component', () => {

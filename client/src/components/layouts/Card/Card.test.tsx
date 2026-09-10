@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Card from './Card.component'
 
 describe('[Card] component', () => {

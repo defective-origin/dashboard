@@ -15,6 +15,7 @@ export default function (plop) {
   // - Doesn`t have any postfix in component name
   plop.setGenerator('Component', items.Component({
     withStories: true,
+    withTests: true,
   }))
 
   // Create a Screen component.
@@ -28,6 +29,7 @@ export default function (plop) {
     description: 'Create a screen component',
     defaultSubpath: 'screens',
     withStories: true,
+    withTests: true,
   }))
 
   // Create a Page component.
@@ -41,6 +43,7 @@ export default function (plop) {
     description: 'Create a page component',
     postfixName: 'Page',
     defaultSubpath: 'pages',
+    withTests: true,
   }))
 
   // Create a reusable, pure, unified Hook.

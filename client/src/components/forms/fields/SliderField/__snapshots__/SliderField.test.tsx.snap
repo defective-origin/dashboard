@@ -7,6 +7,7 @@ exports[`[SliderField] component > should render component 1`] = `
   >
     <span
       class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeSmall _SliderField_4258ee css-hgkhyn-MuiSlider-root"
+      id="field"
     >
       <span
         class="MuiSlider-rail css-hat6nr-MuiSlider-rail"
@@ -28,6 +29,7 @@ exports[`[SliderField] component > should render component 1`] = `
           data-index="0"
           max="100"
           min="0"
+          name="[field]"
           step="1"
           style="border: 0px; clip-path: inset(50%); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
           type="range"

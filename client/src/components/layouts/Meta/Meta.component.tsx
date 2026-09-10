@@ -16,6 +16,7 @@ export type MetaItem
 
 
 export type MetaProps = HelmetProps & {
+  children?: React.ReactNode
   title?: string
   description?: string
   keywords?: string | string[]

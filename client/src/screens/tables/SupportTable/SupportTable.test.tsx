@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import SupportTable from './SupportTable.component'
 // import useSupportTable from './SupportTable.hooks'
 // import SupportTableProvider, SupportTable from './SupportTable.context'
 
 describe('[SupportTable] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<SupportTable />)
+    const container = render(<SupportTable />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

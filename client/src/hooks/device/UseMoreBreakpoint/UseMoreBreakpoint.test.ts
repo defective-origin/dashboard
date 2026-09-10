@@ -1,17 +1,9 @@
-// ---| tests |---
-import { act, renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useMoreBreakpoint from './UseMoreBreakpoint.hook'
 
 
 const ITEMS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 const BREAKPOINT = { count: 5, size: 1000 }
 const BREAKPOINTS = [BREAKPOINT]
-
-vi.mock('../UseBreakpoint', () => ({
-  default: vi.fn(() => BREAKPOINT),
-}))
 
 describe('[useMoreBreakpoint] hook', () => {
   it('should return items', () => {

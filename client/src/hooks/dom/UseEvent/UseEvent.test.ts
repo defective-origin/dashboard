@@ -1,7 +1,3 @@
-// ---| tests |---
-import { renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useEvent from './UseEvent.hook'
 
 

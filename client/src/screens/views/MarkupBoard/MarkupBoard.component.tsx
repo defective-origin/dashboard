@@ -105,55 +105,6 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
   // TODO:  minimum one row and column
   // TODO: blocks: [{ name: 'Section', key: 'SECTION', as: Section[pass via children], actions:[link, nav, buttonGroup] }]
 
-  const isPlaceFree = useFunc((row1: number, column1: number, row2: number, column2: number) => {
-    const area = matrix.selectArea(markup.areas, row1, column1, row2, column2)
-
-    return matrix.every(area, item => item === EMPTY_CELL)
-  })
-
-  const updateSelection = useFunc((row: number, column: number) => {
-    if (selectionRef.current && startCellRef.current) {
-      const place = matrix.toCoordinate(startCellRef.current.row, startCellRef.current.column, row + 1, column + 1)
-      const isFree = isPlaceFree(place.startRow, place.startCol, place.endRow, place.endCol)
-
-      selectionRef.current.style.display = 'block'
-      selectionRef.current.style.background = isFree ? 'var(--color-secondary-6)' : 'var(--color-error-6)'
-      selectionRef.current.style.gridArea = `${place.startRow}/${place.startCol}/${place.endRow}/${place.endCol}`
-    }
-  })
-
-  const startSelection = useFunc((row: number, column: number) => {
-    startCellRef.current = { row, column }
-    updateSelection(row, column)
-  })
-
-  const endSelection = useFunc((row?: number, column?: number) => {
-    const start = startCellRef.current
-
-    // reset selection
-    if (selectionRef.current) {
-      selectionRef.current.style.display = 'none'
-      selectionRef.current.style.background = 'none'
-      selectionRef.current.style.gridArea = 'auto'
-    }
-    startCellRef.current = null
-
-    if (!row || !column || !select || !start) {
-      return
-    }
-
-    // check selected place
-    if (!isPlaceFree(start.row, start.column, row, column)) {
-      return onError?.(new PositionBoardError())
-    }
-
-    // change markup
-    const areas = matrix.replace(markup.areas, toKey(select), EMPTY_CELL)
-    change({
-      areas: matrix.replaceArea(areas, start.row, start.column, row, column, toKey(select)),
-    })
-  })
-
   const toGridIndex = useFunc((index: number) => Math.floor(index / 2))
   const isGap = useFunc((index: number, length: number) => index !== 0 && index !== length - 1 && index % 2 === 0)
   const isBorder = useFunc((index: number, span: number) => index === 0 || index === span - 1)
@@ -206,6 +157,56 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
   const replaceItem = useFunc((from: T, to: T) => change({
     areas: matrix.replace(markup.areas, toKey(from), toKey(to)),
   }))
+
+  const isPlaceFree = useFunc((row1: number, column1: number, row2: number, column2: number) => {
+    const area = matrix.selectArea(markup.areas, row1, column1, row2, column2)
+
+    return matrix.every(area, item => item === EMPTY_CELL)
+  })
+
+  const updateSelection = useFunc((row: number, column: number) => {
+    if (selectionRef.current && startCellRef.current) {
+      const place = matrix.toCoordinate(startCellRef.current.row, startCellRef.current.column, row + 1, column + 1)
+      const isFree = isPlaceFree(place.startRow, place.startCol, place.endRow, place.endCol)
+
+      selectionRef.current.style.display = 'block'
+      selectionRef.current.style.background = isFree ? 'var(--color-secondary-6)' : 'var(--color-error-6)'
+      selectionRef.current.style.gridArea = `${place.startRow}/${place.startCol}/${place.endRow}/${place.endCol}`
+    }
+  })
+
+  const startSelection = useFunc((row: number, column: number) => {
+    startCellRef.current = { row, column }
+    updateSelection(row, column)
+  })
+
+  const endSelection = useFunc((row?: number, column?: number) => {
+    const start = startCellRef.current
+
+    // reset selection
+    if (selectionRef.current) {
+      selectionRef.current.style.display = 'none'
+      selectionRef.current.style.background = 'none'
+      selectionRef.current.style.gridArea = 'auto'
+    }
+    startCellRef.current = null
+
+    if (!row || !column || !select || !start) {
+      return
+    }
+
+    // check selected place
+    if (!isPlaceFree(start.row, start.column, row, column)) {
+      return onError?.(new PositionBoardError())
+    }
+
+    // change markup
+    const areas = matrix.replace(markup.areas, toKey(select), EMPTY_CELL)
+    change({
+      areas: matrix.replaceArea(areas, start.row, start.column, row, column, toKey(select)),
+    })
+  })
+
 
   // subscribe on outside click
   useEvent('mouseup', () => endSelection(), { disable: !view })

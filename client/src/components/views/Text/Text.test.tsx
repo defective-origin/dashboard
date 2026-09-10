@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Text from './Text.component'
 
 describe('[Text] component', () => {

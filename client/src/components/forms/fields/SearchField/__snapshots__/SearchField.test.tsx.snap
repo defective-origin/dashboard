@@ -19,7 +19,8 @@ exports[`[SearchField] component > should render component 1`] = `
         <input
           aria-invalid="false"
           class="MuiInputBase-input MuiOutlinedInput-input css-1q55ijt-MuiInputBase-input-MuiOutlinedInput-input"
-          id="_r_0_"
+          id="field"
+          name="[field]"
           type="text"
           value=""
         />

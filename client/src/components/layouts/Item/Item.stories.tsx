@@ -1,9 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Item, { ItemProps } from './Item.component'
+import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
-import { COLORS, SIZES, toVar } from 'theme'
+import Item, { ItemProps } from './Item.component'
 
 const AREAS: ItemProps['area'][] = ['left', 'right', 'center', 'top', 'bottom']
 
@@ -35,9 +32,9 @@ const meta: Meta<typeof Item> = {
     stretch: field.boolean(),
     grow: field.number('FlexGrow'),
     style: field.css(),
-    g: field.variants(SIZES, 'BlockSpace'),
-    p: field.variants(SIZES, 'BlockSpace'),
-    m: field.variants(SIZES, 'BlockSpace'),
+    g: field.size('BlockSpace'),
+    p: field.size('BlockSpace'),
+    m: field.size('BlockSpace'),
   },
 }
 
@@ -70,15 +67,15 @@ export const Area: Story = {
 }
 
 export const Spaces: Story = {
-  parameters: params('Margin[m] | Padding[p] | Gap[g]', SIZES),
+  parameters: params('Margin[m] | Padding[p] | Gap[g]', theme.SIZES),
   render: () => (
     <Block g='xxs' v='x'>
-      {SIZES.filter(Boolean).map((size, i) => (
+      {theme.SIZES.filter(Boolean).map((size, i) => (
         <Item
           key={size}
-          width={toVar('space', size)}
-          height={toVar('space', size)}
-          background={toVar('color', `${COLORS[i]}-4`)}
+          width={theme.toVar('space', size)}
+          height={theme.toVar('space', size)}
+          background={theme.toVar('color', `${theme.COLORS[i]}-4`)}
         />
       ))}
     </Block>

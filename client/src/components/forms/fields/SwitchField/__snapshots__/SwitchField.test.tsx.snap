@@ -13,6 +13,8 @@ exports[`[SwitchField] component > should render component 1`] = `
       >
         <input
           class="PrivateSwitchBase-input MuiSwitch-input css-12xagqm-MuiSwitchBase-root"
+          id="field"
+          name="[field]"
           role="switch"
           type="checkbox"
         />

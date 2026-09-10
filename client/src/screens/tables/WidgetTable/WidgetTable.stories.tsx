@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import WidgetTable, { WidgetTableProps } from './WidgetTable.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import WidgetTable from './WidgetTable.component'
 
 const meta: Meta<typeof WidgetTable> = {
   component: WidgetTable,

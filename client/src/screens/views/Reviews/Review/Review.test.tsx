@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import Review from './Review.component'
 // import useReview from './Review.hooks'
 // import ReviewProvider, Review from './Review.context'
 
 describe('[Review] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<Review rate={0} content={'content'} />)
+    const container = render(<Review rate={0} content='content' />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

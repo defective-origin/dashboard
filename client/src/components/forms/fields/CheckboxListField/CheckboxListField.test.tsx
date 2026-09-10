@@ -1,12 +1,8 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import CheckboxListField from './CheckboxListField.component'
 
 describe('[CheckboxListField] component', () => {
   it('should render component', () => {
-    const container = render(<CheckboxListField />)
+    const container = render(<CheckboxListField path='field' />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })

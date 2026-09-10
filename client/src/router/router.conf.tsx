@@ -20,7 +20,7 @@ import AccountDashboardsPage from 'pages/AccountDashboardsPage'
 import { ROUTE_LINKS } from './router.constants'
 
 
-export const APP_ROUTES = createBrowserRouter([
+export const initAppRoutes = () => createBrowserRouter([
   {
     path: ROUTE_LINKS.ROOT,
     element: <App />,

@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Skeleton from './Skeleton.component'
 // import useSkeleton from './Skeleton.hooks'
 // import SkeletonProvider, Skeleton from './Skeleton.context'

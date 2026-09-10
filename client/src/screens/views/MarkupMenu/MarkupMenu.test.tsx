@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import MarkupMenu from './MarkupMenu.component'
 // import useMarkupMenu from './MarkupMenu.hooks'
 // import MarkupMenuProvider, MarkupMenu from './MarkupMenu.context'

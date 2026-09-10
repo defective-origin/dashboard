@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import useFunc from '../UseFunc'
 
-export type SnapshotReturnOptions<T> = {
+export type HistoryReturnOptions<T> = {
   value: T
   hasPrev: boolean
   hasNext: boolean
@@ -40,8 +40,8 @@ export type SnapshotReturnOptions<T> = {
  * <button disabled={!snapshot.hasPrev} onClick={snapshot.prev}>Undo</button>
  * <button disabled={!snapshot.hasNext} onClick={snapshot.next}>Redo</button>
  */
-export function useHistory<T = undefined>(): SnapshotReturnOptions<T | undefined>
-export function useHistory<T>(value: T): SnapshotReturnOptions<T>
+export function useHistory<T = undefined>(): HistoryReturnOptions<T | undefined>
+export function useHistory<T>(value: T): HistoryReturnOptions<T>
 export function useHistory(value?: unknown) {
   const [stack, setStack] = useState([value])
   const [position, setPosition] = useState(0)
@@ -58,14 +58,14 @@ export function useHistory(value?: unknown) {
       value: stack[position],
       hasPrev,
       hasNext,
-      prev: () => { hasPrev && setPosition(prev => prev - 1) },
-      next: () => { hasNext && setPosition(prev => prev + 1) },
+      prev: () => { setPosition(curr => hasPrev ? curr - 1 : curr) },
+      next: () => { setPosition(curr => hasNext ? curr + 1 : curr) },
       reset: (newValue = value) => update([newValue]),
       push: (value: unknown) => update([...stack, value], position + 1),
       pull: (value: unknown) => {
-        // https://stackoverflow.com/questions/26568536/remove-all-items-after-an-index
-        stack.length = position
-        update(stack, position - 1)
+        const newStack = stack.slice(0, position)
+
+        update(newStack, position - 1)
 
         return value
       },

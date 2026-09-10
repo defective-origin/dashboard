@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Actions from './Actions.component'
 
 describe('[Actions] component', () => {

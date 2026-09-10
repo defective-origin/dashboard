@@ -1,8 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { COLORS, SIZES } from 'theme'
-import CheckboxListField, { CheckboxListFieldProps } from './CheckboxListField.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import CheckboxListField from './CheckboxListField.component'
 
 const meta: Meta<typeof CheckboxListField> = {
   component: CheckboxListField,

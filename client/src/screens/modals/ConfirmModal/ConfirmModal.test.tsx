@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import ConfirmModal from './ConfirmModal.component'
 // import useConfirmModal from './ConfirmModal.hooks'
 // import ConfirmModalProvider, ConfirmModal from './ConfirmModal.context'
 
 describe('[ConfirmModal] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<ConfirmModal />)
+    const container = render(<ConfirmModal />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

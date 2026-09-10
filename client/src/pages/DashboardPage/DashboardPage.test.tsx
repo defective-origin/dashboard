@@ -1,12 +1,8 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import DashboardPage from './DashboardPage.component'
 
 describe('[DashboardPage] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<DashboardPage />)
+    const container = render(<DashboardPage />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

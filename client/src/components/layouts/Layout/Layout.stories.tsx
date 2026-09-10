@@ -1,10 +1,7 @@
-/* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { SIZES } from 'theme'
-import Layout, { LayoutProps } from './Layout.component'
+import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
 import Item from 'components/layouts/Item'
 import Tag from 'components/views/Tag'
+import Layout, { LayoutProps } from './Layout.component'
 
 const CARD_VARIANTS: LayoutProps['v'][] = ['x', 'y', 'column', 'row', 'board']
 const LAYOUT_VARIANTS: LayoutProps['v'][] = ['columns', 'rows', 'top', 'right', 'bottom', 'left']
@@ -19,9 +16,9 @@ const meta: Meta<typeof Layout> = {
   argTypes: {
     className: field.string(),
     children: field.reactNode(),
-    g: field.variants(SIZES, 'LayoutSpace'),
-    p: field.variants(SIZES, 'LayoutSpace'),
-    m: field.variants(SIZES, 'LayoutSpace'),
+    g: field.size('LayoutSpace'),
+    p: field.size('LayoutSpace'),
+    m: field.size('LayoutSpace'),
     v: field.variants(VARIANTS, 'LayoutVariant'),
     justifies: field.variants(JUSTIFIES, 'JustifyItems'),
     aligns: field.variants(ALIGNS, 'AlignItems'),
@@ -106,7 +103,7 @@ export const Variants: Story = {
 }
 
 export const Spaces: Story = {
-  parameters: params('Margin[m] | Padding[p] | Gap[g]', SIZES),
+  parameters: params('Margin[m] | Padding[p] | Gap[g]', theme.SIZES),
   render,
   args: {
     v: 'columns',
