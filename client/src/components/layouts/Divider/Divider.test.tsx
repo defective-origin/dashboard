@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Divider from './Divider.component'
 
 describe('[Divider] component', () => {

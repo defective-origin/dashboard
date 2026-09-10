@@ -1,29 +1,28 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
+    /* Bundler mode */
+    "target": "ES2022",
     "lib": ["ESNext", "ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
+    "moduleResolution": "Bundler",
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "*": ["./src/*"]
+      "*": ["./src/*"],
+      "storybook": ["./.storybook"]
     },
 
     /* Linting */
     "strict": true,
+    "skipLibCheck": true,
     "noUnusedLocals": true,
+    "resolveJsonModule": true,
     "noUnusedParameters": true,
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["vitest/globals"]
   },
-  "include": ["src", "eslint.config.js", "stylelint.config.js", "vite.config.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "eslint.config.js", "stylelint.config.js", "vite.config.ts", "src/**/*.d.ts"]
 }

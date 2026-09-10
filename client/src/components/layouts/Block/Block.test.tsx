@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Block from './Block.component'
 
 describe('[Block] component', () => {

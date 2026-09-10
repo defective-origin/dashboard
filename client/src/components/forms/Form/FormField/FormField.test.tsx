@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import FormField from './FormField.component'
 // import useFormField from './FormField.hooks'
 // import FormFieldProvider, FormField from './FormField.context'

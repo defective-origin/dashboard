@@ -1,4 +1,3 @@
-// ---| self |---
 import * as tools from './Number.tools'
 
 describe('[Number] tools', () => {

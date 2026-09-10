@@ -1,17 +1,11 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { COLORS, SIZES } from 'theme'
-import Tabs, { TabsProps } from './Tabs.component'
-
-const VARIANTS: TabsProps['v'][] = ['success', 'info', 'warning', 'error']
+import { Meta, StoryObj, field, params } from 'storybook'
+import Tabs from './Tabs.component'
 
 const meta: Meta<typeof Tabs> = {
   component: Tabs,
   title: 'Components/Tabs',
   tags: ['autodocs'],
   argTypes: {
-    name: field.string(),
     className: field.string(),
     children: field.reactNode(),
   },
@@ -25,13 +19,5 @@ export const Demo: Story = {
   parameters: params('Tabs'),
   args: {
     name: 'Demo',
-  },
-}
-
-export const Variants: Story = {
-  parameters: params('View', VARIANTS),
-  args: {
-    name: 'Demo',
-    v: 'success',
   },
 }

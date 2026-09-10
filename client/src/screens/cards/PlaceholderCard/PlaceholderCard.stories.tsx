@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, field, params } from 'storybook'
 import PlaceholderCard from './PlaceholderCard.component'
 
 const meta: Meta<typeof PlaceholderCard> = {

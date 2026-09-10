@@ -1,5 +1,3 @@
-import React from 'react'
-
 // ---| core |---
 import { TranslateKeys } from 'locale'
 
@@ -16,7 +14,6 @@ import { IconVariant } from 'components/views/Icon'
  *    - https://siteclinic.ru/blog/usability/kak-vybrat-shirinu-sajta/
  *  - Hd screens: https://support.lenovo.com/ru/ru/solutions/ht104457-what-do-hd-hd-and-fhd-mean
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type MarkupScreenWidth = 0 | 576 | 768 | 992 | 1200 | 1366 | 1920 | 2562 | 3840 | 7680 | (number & {})
 
 export class MarkupScreen {

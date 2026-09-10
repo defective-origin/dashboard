@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import TableCell from './TableCell.component'
 // import useTableCell from './TableCell.hooks'
 // import TableCellProvider, TableCell from './TableCell.context'

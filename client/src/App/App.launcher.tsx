@@ -1,14 +1,12 @@
 import React from 'react'
-import { QueryClient } from '@tanstack/react-query'
-import { createMemoryRouter } from 'react-router-dom'
 
 // ---| core |---
-import RouterProvider, { RouterProviderProps } from 'router/router.context'
+import RouterProvider, { createMemoryRouter, RouterProviderProps } from 'router/router.context'
 import LocaleProvider, { LocaleProviderProps } from 'locale/locale.context'
 import ThemeProvider, { ThemeProviderProps } from 'theme/theme.context'
-import ApiProvider, { ApiProviderProps } from 'api/api.context'
+import ApiProvider, { ApiProviderProps, QueryClient } from 'api/api.context'
 
-export type LauncherProps 
+export type LauncherProps
   = ApiProviderProps
   & LocaleProviderProps
   & ThemeProviderProps
@@ -41,26 +39,21 @@ export function Launcher(props: LauncherProps) {
 }
 
 
-export type MockLauncherProps = LauncherProps & {
-  // If the component requires a specific URL (e.g. for useMatch or useParams)
-  route?: string;
-}
-
 /** Launcher for tests and storybook */
-export const MockLauncher = (props: MockLauncherProps) => {
-  const { children, theme, route = '/' } = props
+export const MockLauncher = (props: LauncherProps) => {
+  const { children, theme } = props
   const client = new QueryClient({
     defaultOptions: {
       queries: { retry: false, gcTime: Infinity },
     },
-  });
+  })
 
   const router = createMemoryRouter(
     [{ path: '*', element: children }],
-    { initialEntries: [route] }
-  );
+    { initialEntries: ['/'] },
+  )
 
   return <Launcher client={client} router={router} theme={theme} />
-};
+}
 
 export default Launcher

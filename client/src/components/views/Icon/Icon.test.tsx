@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Icon from './Icon.component'
 
 describe('[Icon] component', () => {

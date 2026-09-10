@@ -1,13 +1,10 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Button, { ButtonProps } from './Button.component'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
-import { COLORS, SIZES } from 'theme'
+import Button, { ButtonProps } from './Button.component'
 import { ICONS } from 'components/views/Icon'
 
 const BUTTON_ICONS = [undefined, ...ICONS]
-const BUTTON_COLORS = COLORS.slice(0, 6)
+const BUTTON_COLORS = theme.COLORS.slice(0, 6)
 const VARIANTS: ButtonProps['v'][] = ['text', 'outlined', 'contained']
 
 const meta: Meta<typeof Button> = {
@@ -19,7 +16,7 @@ const meta: Meta<typeof Button> = {
     tooltip: field.reactNode(),
     start: field.variants(BUTTON_ICONS, 'IconVariant'),
     end: field.variants(BUTTON_ICONS, 'IconVariant'),
-    size: field.variants(SIZES, 'ButtonSize', 'md'),
+    size: field.size('ButtonSize', 'md'),
     v: field.variants(VARIANTS, 'ButtonVariant', 'body1'),
     color: field.variants(BUTTON_COLORS, 'ButtonColor', 'primary'),
     active: field.boolean(),
@@ -60,8 +57,8 @@ export const Variants: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('Size', SIZES),
-  render: () => initVariants('size', SIZES),
+  parameters: params('Size', theme.SIZES),
+  render: () => initVariants('size', theme.SIZES),
 }
 
 export const Colors: Story = {

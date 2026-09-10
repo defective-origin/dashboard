@@ -1,6 +1,4 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, field, params } from 'storybook'
 import CssSizeField from './CssSizeField.component'
 
 const meta: Meta<typeof CssSizeField> = {

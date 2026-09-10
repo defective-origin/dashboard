@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Markup from './Markup.component'
 // import useMarkup from './Markup.hooks'
 // import MarkupProvider, Markup from './Markup.context'

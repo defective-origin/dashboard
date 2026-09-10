@@ -4,18 +4,16 @@ import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
 // ---| core |---
-import { ENV } from 'App/App.conf'
 import { react } from 'tools'
 
 // ---| self |---
 import i18n from './i18n'
-import l10n from './l10n'
+// import l10n from './l10n'
 
 
 export type Languages = keyof typeof i18n
 // union or string. Be careful. It allows to use intellisense but it doesn't highlight misspelling
 // https://stackoverflow.com/questions/61047551/typescript-union-of-string-and-string-literals
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type TranslateKeys = (string & {}) | react.FlattenObjectFullPathKeys<typeof i18n.en>
 
 /**
@@ -62,7 +60,7 @@ i18next
     nonExplicitSupportedLngs: true,
 
     fallbackLng: 'en',
-    // debug: ENV.MODE.DEV,
+    // debug: import.meta.env.DEV,
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

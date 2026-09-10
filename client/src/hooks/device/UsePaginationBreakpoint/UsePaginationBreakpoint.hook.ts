@@ -69,8 +69,8 @@ export const usePaginationBreakpoint = <T, E extends Element, B extends Paginati
     return allItems.slice(start, end)
   }, [allItems, breakpoint.count, page])
 
-  const prev = useFunc(() => { hasPrev && setPage(page - 1) })
-  const next = useFunc(() => { hasNext && setPage(page + 1) })
+  const prev = useFunc(() => { setPage(curr => hasPrev ? curr - 1 : curr) })
+  const next = useFunc(() => { setPage(curr => hasNext ? curr + 1 : curr) })
 
   return useMemo(
     () => ({ ...breakpoint, items, page, pages, hasPrev, hasNext, prev, next }),

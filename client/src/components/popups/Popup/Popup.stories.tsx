@@ -1,10 +1,8 @@
-/* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Popup, { PopupProps, PopupTriggerOptions } from './Popup.component'
+import { Meta, StoryObj, SB_CSS, field, params } from 'storybook'
 import Layout from 'components/layouts/Layout'
 import Item from 'components/layouts/Item'
 import Text from 'components/views/Text'
+import Popup, { PopupProps, PopupTriggerOptions } from './Popup.component'
 
 const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} background={o.isOn ? 'orange' : SB_CSS.item} />
 

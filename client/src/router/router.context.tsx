@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   RouterProvider as RrdRouterProvider,
   RouterProviderProps as RrdRouterProviderProps,
 } from 'react-router-dom'
 
 // ---| self |---
-import { APP_ROUTES } from './router.conf'
+import { initAppRoutes } from './router.conf'
 
+export { createMemoryRouter } from 'react-router-dom'
 export type RouterProviderProps = Partial<RrdRouterProviderProps>
 
 /**
@@ -17,9 +18,15 @@ export type RouterProviderProps = Partial<RrdRouterProviderProps>
  * <RouterProvider />
  */
 export function RouterProvider(props: RouterProviderProps) {
-  const { router = APP_ROUTES, ...otherProps } = props
+  const { router, ...otherProps } = props
 
-  return <RrdRouterProvider router={router} {...otherProps} />
+  const config = useMemo(() => {
+    if (router) return router
+
+    return initAppRoutes()
+  }, [router])
+
+  return <RrdRouterProvider router={config} {...otherProps} />
 }
 
 RouterProvider.displayName = 'RouterProvider'

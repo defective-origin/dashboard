@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import TableRowMenu from './TableRowMenu.component'
 // import useTableRowMenu from './TableRowMenu.hooks'
 // import TableRowMenuProvider, TableRowMenu from './TableRowMenu.context'

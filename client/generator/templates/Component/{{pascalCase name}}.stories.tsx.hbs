@@ -1,19 +1,12 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { COLORS, SIZES } from 'theme'
-import {{pascalCase name}}, { {{pascalCase name}}Props } from './{{pascalCase name}}.component'
-
-const VARIANTS: {{pascalCase name}}Props['v'][] = ['success', 'info', 'warning', 'error']
+import { Meta, StoryObj, field, params, theme } from 'storybook'
+import {{pascalCase name}} from './{{pascalCase name}}.component'
 
 const meta: Meta<typeof {{pascalCase name}}> = {
   component: {{pascalCase name}},
   title: 'Components/{{pascalCase name}}',
   tags: ['autodocs'],
   argTypes: {
-    name: field.string(),
     className: field.string(),
-    children: field.reactNode(),
   },
 }
 
@@ -24,14 +17,6 @@ type Story = StoryObj<typeof {{pascalCase name}}>
 export const Demo: Story = {
   parameters: params('{{pascalCase name}}'),
   args: {
-    name: 'Demo',
-  },
-}
-
-export const Variants: Story = {
-  parameters: params('View', VARIANTS),
-  args: {
-    name: 'Demo',
-    v: 'success',
+    className: 'Demo',
   },
 }

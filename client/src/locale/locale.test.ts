@@ -1,6 +1,3 @@
-import { renderHook } from '@testing-library/react'
-
-// ---| self |---
 import * as tools from './locale.tools'
 import useLocale from './locale.hooks'
 
@@ -43,7 +40,10 @@ describe('[Locale] hook', () => {
     expect(result.current).toMatchObject({
       changeLanguage: expect.any(Function),
       language: 'en',
-      languages: undefined,
+      languages: [
+        'en-US',
+        'en',
+      ],
       t: expect.any(Function),
     })
   })

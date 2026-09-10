@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Clipboard, { ClipboardProps } from './Clipboard.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import Clipboard from './Clipboard.component'
 
 const meta: Meta<typeof Clipboard> = {
   component: Clipboard,

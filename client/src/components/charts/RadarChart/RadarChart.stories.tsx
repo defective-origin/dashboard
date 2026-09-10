@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import RadarChart, { RadarChartProps } from './RadarChart.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import RadarChart from './RadarChart.component'
 
 const ITEMS = [
   {

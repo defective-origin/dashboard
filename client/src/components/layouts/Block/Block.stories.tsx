@@ -1,13 +1,10 @@
-/* eslint-disable no-restricted-imports */
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Block, { BlockProps } from './Block.component'
+import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
+import Tag from 'components/views/Tag'
 import Item from 'components/layouts/Item'
 import Layout from 'components/layouts/Layout'
-import { DIRECTION, SIZES } from 'theme'
-import Tag from 'components/views/Tag'
+import Block, { BlockProps } from './Block.component'
 
-const VARIANTS: BlockProps['v'][] = [...DIRECTION, 'cards']
+const VARIANTS: BlockProps['v'][] = [...theme.DIRECTION, 'cards']
 const ALIGNS: BlockProps['aligns'][] = ['flex-start', 'center', 'flex-end', 'baseline', 'stretch' ]
 const JUSTIFIES: BlockProps['justifies'][] = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']
 
@@ -18,9 +15,9 @@ const meta: Meta<typeof Block> = {
   argTypes: {
     className: field.string(),
     children: field.reactNode(),
-    g: field.variants(SIZES, 'BlockSpace'),
-    p: field.variants(SIZES, 'BlockSpace'),
-    m: field.variants(SIZES, 'BlockSpace'),
+    g: field.size('BlockSpace'),
+    p: field.size('BlockSpace'),
+    m: field.size('BlockSpace'),
     v: field.variants(VARIANTS, 'BlockVariant', 'y'),
     justifies: field.variants(JUSTIFIES, 'JustifyContent'),
     aligns: field.variants(ALIGNS, 'AlignItems'),
@@ -99,7 +96,7 @@ export const Variants: Story = {
 }
 
 export const Spaces: Story = {
-  parameters: params('Margin[m] | Padding[p] | Gap[g]', SIZES),
+  parameters: params('Margin[m] | Padding[p] | Gap[g]', theme.SIZES),
   render,
   args: {
     v: 'cards',

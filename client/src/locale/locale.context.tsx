@@ -16,7 +16,7 @@ export type LocaleProviderProps = React.PropsWithChildren & Partial<I18nextProvi
 export function LocaleProvider(props: LocaleProviderProps) {
   const { i18n = i18next, ...otherProps } = props
 
-  return <I18nextProvider i18n={i18next} {...otherProps} />
+  return <I18nextProvider i18n={i18n} {...otherProps} />
 }
 
 LocaleProvider.displayName = 'LocaleProvider'

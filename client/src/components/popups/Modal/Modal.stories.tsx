@@ -1,8 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Modal, { ModalProps } from './Modal.component'
+import { Meta, StoryObj, field, params } from 'storybook'
 import Button from 'components/actions/Button'
+import Modal, { ModalProps } from './Modal.component'
 import { modal } from './Modal.hooks'
 
 const VARIANTS: ModalProps['position'][] = ['center', 'right']
@@ -27,13 +25,15 @@ type Story = StoryObj<typeof Modal>
 
 const render = (props: ModalProps) => {
   return (
-    <>
-      <Modal {...props}>
+    <div>
+      <Modal name='global' {...props}>
         <div style={{ height: 2000 }} />
       </Modal>
 
+      <Modal.Container name='global' />
+
       <Button content='Open modal' onClick={() => modal({ name: 'global' })} />
-    </>
+    </div>
   )
 }
 

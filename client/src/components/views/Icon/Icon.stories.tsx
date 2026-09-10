@@ -1,9 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Icon, { IconProps } from './Icon.component'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
-import { COLORS, SIZES } from 'theme'
+import Icon, { IconProps } from './Icon.component'
 import { ICONS } from './Icon.constants'
 
 const meta: Meta<typeof Icon> = {
@@ -12,8 +9,8 @@ const meta: Meta<typeof Icon> = {
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),
-    size: field.variants(SIZES, 'IconSize', 'md'),
-    color: field.variants(COLORS, 'IconColor', 'primary'),
+    size: field.size('IconSize', 'md'),
+    color: field.variants(theme.COLORS, 'IconColor', 'primary'),
     v: field.variants(ICONS, 'IconVariant'),
     fill: field.boolean(),
     loading: field.boolean(),
@@ -47,13 +44,13 @@ export const Highlight: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('Size', SIZES, 'md'),
-  render: () => initVariants('size', SIZES),
+  parameters: params('Size', theme.SIZES, 'md'),
+  render: () => initVariants('size', theme.SIZES),
 }
 
 export const Colors: Story = {
-  parameters: params('Color', COLORS, 'primary'),
-  render: () => initVariants('color', COLORS),
+  parameters: params('Color', theme.COLORS, 'primary'),
+  render: () => initVariants('color', theme.COLORS),
 }
 
 export const Loading: Story = {

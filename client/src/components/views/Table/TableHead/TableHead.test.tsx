@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import TableHead from './TableHead.component'
 // import useTableHead from './TableHead.hooks'
 // import TableHeadProvider, TableHead from './TableHead.context'

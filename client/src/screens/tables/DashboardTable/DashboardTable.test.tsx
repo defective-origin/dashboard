@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import DashboardTable from './DashboardTable.component'
 // import useDashboardTable from './DashboardTable.hooks'
 // import DashboardTableProvider, DashboardTable from './DashboardTable.context'
 
 describe('[DashboardTable] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<DashboardTable />)
+    const container = render(<DashboardTable />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

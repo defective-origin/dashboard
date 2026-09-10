@@ -1,8 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { SIZES } from 'theme'
-import Avatar, { AvatarProps } from './Avatar.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import Avatar from './Avatar.component'
 
 const src = 'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp'
 
@@ -11,7 +8,7 @@ const meta: Meta<typeof Avatar> = {
   title: 'Components/Views/Avatar',
   tags: ['autodocs'],
   argTypes: {
-    size: field.variants(SIZES, 'AvatarSize'),
+    size: field.size('AvatarSize'),
     className: field.string(),
     content: field.reactNode(),
     children: field.reactNode(),

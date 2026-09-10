@@ -1,16 +1,29 @@
-// ---| tests |---
-import { act, renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useResize from './UseResize.hook'
 
 
-let updater: (...args: unknown[]) => void
-vi.mock('../UseResizeObserver', () => ({
-  default: vi.fn(cb => { updater = cb }),
-}))
-
 describe('[useResize] hook', () => {
+  let element: HTMLDivElement
+  let triggerResizeObserver: (entries: Partial<ResizeObserverEntry>[]) => void
+
+  beforeEach(() => {
+    element = document.createElement('div')
+    Object.defineProperties(element, {
+      clientWidth: { value: 10000, configurable: true },
+      clientHeight: { value: 10000, configurable: true },
+    })
+
+    // don't mock self implementation like useResizeObserver
+    // in order to not stick to implementation
+    vi.stubGlobal('ResizeObserver', class MockResizeObserver {
+      constructor(cb: (entries: Partial<ResizeObserverEntry>[]) => void) {
+        triggerResizeObserver = cb
+      }
+      observe = vi.fn()
+      unobserve = vi.fn()
+      disconnect = vi.fn()
+    })
+  })
+
   it('should return default options', () => {
     const { result } = renderHook(() => useResize())
     expect(result.current).toEqual({
@@ -27,32 +40,22 @@ describe('[useResize] hook', () => {
   })
 
   it('should observe resizing', () => {
-    const element = { ...document.body, getBoundingClientRect: vi.fn() }
+    const rect = {
+      width: 100,
+      height: 100,
+      left: 100,
+      right: 100,
+      top: 100,
+      bottom: 100,
+      x: 100,
+      y: 100,
+    }
+    vi.spyOn(element, 'getBoundingClientRect').mockReturnValue({ toJSON: () => {}, ...rect })
+
     const { result } = renderHook(() => useResize({ ref: element }))
 
-    element.getBoundingClientRect.mockReturnValue({
-      width: 100,
-      height: 100,
-      left: 100,
-      right: 100,
-      top: 100,
-      bottom: 100,
-      x: 100,
-      y: 100,
-    })
+    act(() => triggerResizeObserver([]))
 
-    act(() => updater())
-
-    expect(result.current).toEqual({
-      ref: { current: element },
-      width: 100,
-      height: 100,
-      left: 100,
-      right: 100,
-      top: 100,
-      bottom: 100,
-      x: 100,
-      y: 100,
-    })
+    expect(result.current).toEqual({ ref: { current: element }, ...rect})
   })
 })

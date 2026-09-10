@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Markup, { MarkupProps } from './Markup.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import Markup from './Markup.component'
 import { MarkupScreenWidth } from './Markup.constants'
 
 const MARKUPS: MarkupScreenWidth[] = [0, 576, 768, 992, 1200, 1366, 1920, 2562, 3840, 7680]

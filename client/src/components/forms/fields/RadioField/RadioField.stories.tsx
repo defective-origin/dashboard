@@ -1,6 +1,4 @@
-/* eslint-disable no-restricted-imports */
-import { params } from '../../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, params } from 'storybook'
 import RadioField from './RadioField.component'
 
 const meta: Meta<typeof RadioField> = {

@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Spec from './Spec.component'
 // import useSpec from './Spec.hooks'
 // import SpecProvider, Spec from './Spec.context'

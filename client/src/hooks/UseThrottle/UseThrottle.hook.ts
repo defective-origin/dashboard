@@ -7,9 +7,9 @@ import useFunc from '../states/UseFunc'
  * @example
  * const state = useThrottle(options)
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const useThrottle = <F extends Function>(cb: F, limit = 300): F => {
-  const lastRun = useRef(Date.now())
+  const lastRun = useRef(0)
 
   return useFunc((...args: unknown[]) => {
     if (Date.now() - lastRun.current >= limit) {

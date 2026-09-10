@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-restricted-imports
-import { SB_CSS, field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, SB_CSS, field, params } from 'storybook'
 import Item from 'components/layouts/Item'
 import Block from 'components/layouts/Block'
 import Overlay, { OverlayProps } from './Overlay.component'

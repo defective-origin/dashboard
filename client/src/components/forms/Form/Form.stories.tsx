@@ -1,11 +1,10 @@
-import { params } from '../../../../.storybook/tools'
 import { Title, Subtitle, Primary, Controls, Stories } from '@storybook/blocks'
-import type { Meta, StoryObj } from '@storybook/react'
-import Form from './Form.component'
+import { Meta, StoryObj, params } from 'storybook'
 import Text from 'components/views/Text'
 import Actions from 'components/actions/Actions'
 import Layout from 'components/layouts/Layout'
 import Field from 'components/forms/fields'
+import Form from './Form.component'
 import { useWatch } from './Form.hooks'
 
 const WatchField = ({ path }: { path: string | string[] }) => {

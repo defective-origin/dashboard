@@ -1,12 +1,8 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import MenuItem from './MenuItem.component'
 
 describe('[MenuItem] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<MenuItem />)
+    const container = render(<MenuItem />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

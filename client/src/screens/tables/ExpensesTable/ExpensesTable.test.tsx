@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import ExpensesTable from './ExpensesTable.component'
 // import useExpensesTable from './ExpensesTable.hooks'
 // import ExpensesTableProvider, ExpensesTable from './ExpensesTable.context'
 
 describe('[ExpensesTable] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<ExpensesTable />)
+    const container = render(<ExpensesTable />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

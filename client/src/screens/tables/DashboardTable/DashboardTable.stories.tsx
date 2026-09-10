@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import DashboardTable, { DashboardTableProps } from './DashboardTable.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import DashboardTable from './DashboardTable.component'
 
 const meta: Meta<typeof DashboardTable> = {
   component: DashboardTable,

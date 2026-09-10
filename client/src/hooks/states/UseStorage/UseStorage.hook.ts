@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 // ---| self |---
 import { LocalStorage, SessionStorage, BrowserStorage } from './UseStorage.tools'
@@ -19,7 +19,7 @@ export type StorageOptions<T> = {
  */
 export const useStorage = <T>(key: string, options: StorageOptions<T>) => {
   const { defaultValue, storage } = options
-  const [state, setState] = useState<T | undefined>(defaultValue)
+  const [state, setState] = useState<T | undefined>(storage.get(key, defaultValue))
 
   const get = useCallback(() => storage.get(key, defaultValue), [defaultValue, key, storage])
   const mutate = useCallback((callback: (prev?: T) => T) => storage.mutate(key, callback, defaultValue), [defaultValue, key, storage])
@@ -28,20 +28,9 @@ export const useStorage = <T>(key: string, options: StorageOptions<T>) => {
     storage.set(key, val)
   }, [key, storage])
 
-  // initialize state
-  useLayoutEffect(() => {
-    const value = get()
-    if (value != undefined) {
-      setState(value)
-    } else if (options.defaultValue != undefined) {
-      set(options.defaultValue)
-    }
-  }, [get, options.defaultValue, set])
-
-
   // subscribe on change
   useEffect(() => {
-    const update = (newValue?: T) => setState(newValue)
+    const update = () => setState(get())
 
     storage.subscribe(key, update)
 

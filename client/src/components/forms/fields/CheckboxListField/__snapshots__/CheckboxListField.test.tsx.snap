@@ -7,6 +7,7 @@ exports[`[CheckboxListField] component > should render component 1`] = `
   >
     <div
       class="layout item _CheckboxListField_4f3cbd"
+      id="field"
     />
   </div>
 </DocumentFragment>

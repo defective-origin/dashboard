@@ -1,8 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Alert, { AlertProps } from './Alert.component'
+import { Meta, StoryObj, field, params } from 'storybook'
 import Block from 'components/layouts/Block'
+import Alert, { AlertProps } from './Alert.component'
 
 const COLORS: AlertProps['color'][] = ['success', 'info', 'warning', 'error']
 

@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Meta, { MetaItem } from './Meta.component'
 
 describe('[Meta] component', () => {

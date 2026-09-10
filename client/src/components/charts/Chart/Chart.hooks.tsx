@@ -1,14 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { CategoricalChartProps } from 'recharts/types/chart/generateCategoricalChart'
-import {
-  LegendProps,
-  ResponsiveContainerProps,
-  TooltipProps,
-} from 'recharts'
+import React, { useMemo } from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
-
 // ---| pages |---
 // ---| screens |---
 // ---| components |---

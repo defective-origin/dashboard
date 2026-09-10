@@ -14,6 +14,8 @@ exports[`[CheckboxField] component > should render component 1`] = `
         <input
           class="PrivateSwitchBase-input css-12xagqm-MuiSwitchBase-root"
           data-indeterminate="false"
+          id="field"
+          name="[field]"
           type="checkbox"
         />
         <svg

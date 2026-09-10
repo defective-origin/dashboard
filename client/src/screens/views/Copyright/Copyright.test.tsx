@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Copyright from './Copyright.component'
 // import useCopyright from './Copyright.hooks'
 // import CopyrightProvider, Copyright from './Copyright.context'

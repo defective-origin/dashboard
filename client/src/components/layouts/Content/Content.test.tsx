@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Content from './Content.component'
 // import useContent from './Content.hooks'
 // import ContentProvider, Content from './Content.context'

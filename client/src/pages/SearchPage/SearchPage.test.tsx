@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import SearchPage from './SearchPage.component'
 // import useSearchPage from './SearchPage.hooks'
 // import SearchPageProvider, SearchPage from './SearchPage.context'
 
 describe('[SearchPage] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<SearchPage />)
+    const container = render(<SearchPage />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

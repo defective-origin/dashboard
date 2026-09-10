@@ -34,7 +34,7 @@ export const useElement = <E extends Element>(
 ): ElementRef<E> => {
   // Try to get element only from selector because
   // if default element has set we won't be able to change ref
-  const [, refresh] = useState<unknown>() // TODO: how have this worked without state?
+  const [, refresh] = useState<unknown>()
   const ref = useRef<unknown>(getNode(element))
 
   // initialize value if element options was provided.

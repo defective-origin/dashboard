@@ -1,10 +1,7 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Text, { TextProps } from './Text.component'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
-import { COLORS, SIZES } from 'theme'
 import Spec from 'components/views/Spec'
+import Text, { TextProps } from './Text.component'
 
 const ALIGNMENTS: TextProps['align'][] = ['right', 'center', 'left']
 const VARIANTS: TextProps['v'][] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'button', 'caption', 'overline']
@@ -22,9 +19,9 @@ const meta: Meta<typeof Text> = {
     className: field.string(),
     content: field.reactNode(),
     children: field.reactNode(true),
-    size: field.variants(SIZES, 'TextSize', 'md'),
+    size: field.size('TextSize', 'md'),
     v: field.variants(VARIANTS, 'TextVariant', 'body1'),
-    color: field.variants(COLORS, 'TextColor', 'primary'),
+    color: field.variants(theme.COLORS, 'TextColor', 'primary'),
     align: field.variants(ALIGNMENTS, 'TextAlign', 'left'),
     format: field.variants(FORMATS, 'FormatVariant', 'default'),
     placeholder: field.reactNode(),
@@ -62,13 +59,13 @@ export const Variants: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('Size', SIZES),
-  render: () => initVariants('size', SIZES),
+  parameters: params('Size', theme.SIZES),
+  render: () => initVariants('size', theme.SIZES),
 }
 
 export const Colors: Story = {
-  parameters: params('Color', COLORS),
-  render: () => initVariants('color', COLORS),
+  parameters: params('Color', theme.COLORS),
+  render: () => initVariants('color', theme.COLORS),
 }
 
 export const Alignments: Story = {

@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import AppHeader from './AppHeader.component'
 
 describe('[AppHeader] component', () => {

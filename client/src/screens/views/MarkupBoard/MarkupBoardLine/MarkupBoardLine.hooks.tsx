@@ -1,5 +1,3 @@
-import React from 'react'
-
 // ---| core |---
 import { emitEvent, useEvent } from 'hooks'
 
@@ -21,7 +19,9 @@ export type MarkupLineActionPayload = {
 }
 
 export const emitMarkupLineAction = (v: MarkupLineVariant, index?: number, detail = {}) => {
-  typeof index === 'number' && emitEvent<MarkupLineActionPayload>(['markup', v, index], detail)
+  if (typeof index === 'number') {
+    emitEvent<MarkupLineActionPayload>(['markup', v, index], detail)
+  }
 }
 
 

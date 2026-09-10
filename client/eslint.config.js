@@ -40,8 +40,8 @@ export default [
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': 'off',
       '@typescript-eslint/no-explicit-any': ['warn', { ignoreRestArgs: true }],
+      'react-refresh/only-export-components': 'off',
 
       // @stylistic rules (replaces formatting rules removed from ESLint core)
       '@stylistic/indent': ['warn', 2],
@@ -66,6 +66,7 @@ export default [
         minProperties: Infinity,
       }],
       '@stylistic/jsx-quotes': ['warn', 'prefer-single'],
+      '@stylistic/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
 
       // typescript rules
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
@@ -104,7 +105,7 @@ export default [
             '@emotion/react',
             '@emotion/styled',
             '@mui/material',
-            'react-helmet',
+            'react-helmet-async',
           ],
         }],
       }],

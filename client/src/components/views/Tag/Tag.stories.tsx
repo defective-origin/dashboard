@@ -1,10 +1,7 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { COLORS, SIZES } from 'theme'
-import Tag, { TagProps } from './Tag.component'
+import { Meta, StoryObj, field, params, theme} from 'storybook'
 import Block from 'components/layouts/Block'
 import TextStoriesMeta from 'components/views/Text/Text.stories'
+import Tag, { TagProps } from './Tag.component'
 
 const meta: Meta<typeof Tag> = {
   component: Tag,
@@ -37,13 +34,13 @@ export const Demo: Story = {
 }
 
 export const Sizes: Story = {
-  parameters: params('Size', SIZES),
-  render: () => initVariants('size', SIZES),
+  parameters: params('Size', theme.SIZES),
+  render: () => initVariants('size', theme.SIZES),
 }
 
 export const Colors: Story = {
-  parameters: params('Color', COLORS),
-  render: () => initVariants('color', COLORS),
+  parameters: params('Color', theme.COLORS),
+  render: () => initVariants('color', theme.COLORS),
 }
 
 export const Loading: Story = {

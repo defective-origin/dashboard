@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import ButtonGroup, { ButtonGroupProps } from './ButtonGroup.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import ButtonGroup from './ButtonGroup.component'
 
 const meta: Meta<typeof ButtonGroup> = {
   component: ButtonGroup,

@@ -1,7 +1,3 @@
-// ---| tests |---
-import { act, renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useSubscribedState from './UseSubscribedState.hook'
 
 

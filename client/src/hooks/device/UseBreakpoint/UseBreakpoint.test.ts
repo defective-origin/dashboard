@@ -1,35 +1,50 @@
-// ---| tests |---
-import { act, renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useBreakpoint, { Breakpoint } from './UseBreakpoint.hook'
 
 
-let updater: (...args: unknown[]) => void
-const element = { clientHeight: 10000, clientWidth: 10000 } as Element
+class TestBreakpoint implements Breakpoint {
+  constructor(
+    public name: string,
+    public size = Number.MAX_SAFE_INTEGER,
+  ) {}
+}
 
-vi.mock('../../dom/UseResizeObserver', () => ({
-  default: vi.fn(cb => { updater = cb }),
-}))
+const BREAKPOINTS = [
+  new TestBreakpoint('first', 1000),
+  new TestBreakpoint('second'),
+]
+
 
 describe('[useBreakpoint] hook', () => {
+  let element: HTMLDivElement
+  let triggerResizeObserver: (entries: Partial<ResizeObserverEntry>[]) => void
+
+  beforeEach(() => {
+    element = document.createElement('div')
+    Object.defineProperties(element, {
+      clientWidth: { value: 10000, configurable: true },
+      clientHeight: { value: 10000, configurable: true },
+    })
+
+    // don't mock self implementation like useResizeObserver
+    // in order to not stick to implementation
+    vi.stubGlobal('ResizeObserver', class MockResizeObserver {
+      constructor(cb: (entries: Partial<ResizeObserverEntry>[]) => void) {
+        triggerResizeObserver = cb
+      }
+      observe = vi.fn()
+      unobserve = vi.fn()
+      disconnect = vi.fn()
+    })
+  })
+
   const resize = (size: number) => {
-    Object.assign(element, { clientHeight: size, clientWidth: size })
+    Object.defineProperties(element, {
+      clientWidth: { value: size, configurable: true },
+      clientHeight: { value: size, configurable: true },
+    })
 
-    updater()
+    triggerResizeObserver([])
   }
-
-  class TestBreakpoint implements Breakpoint {
-    constructor(
-      public name: string,
-      public size = Number.MAX_SAFE_INTEGER,
-    ) {}
-  }
-
-  const BREAKPOINTS = [
-    new TestBreakpoint('first', 1000),
-    new TestBreakpoint('second'),
-  ]
 
   it('should observe width change', async () => {
     const { result } = renderHook(() => useBreakpoint(BREAKPOINTS, { ref: element }))

@@ -73,9 +73,9 @@ export type ItemReturnOptions<O extends object> = O & {
 export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnOptions<O> => {
   const {
     fit,
-    column,
-    row,
-    span,
+    // column,
+    // row,
+    // span,
     visible = true,
     color,
     position,

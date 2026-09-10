@@ -14,7 +14,7 @@ export type HotKeysReturnOptions = {
 export const useHotKeys = (): HotKeysReturnOptions => {
   const [hotkeys, setHotkeys] = useState<Record<string, () => void>>({})
 
-  const add = useCallback((key: string, handler: () => void) => setHotkeys({ ...hotkeys, [key]: handler }), [])
+  const add = useCallback((key: string, handler: () => void) => setHotkeys(prev => ({ ...prev, [key]: handler })), [])
 
   const remove = useCallback((key: string) => {
     const keys = { ...hotkeys }
@@ -22,7 +22,7 @@ export const useHotKeys = (): HotKeysReturnOptions => {
     delete keys[key]
 
     setHotkeys(keys)
-  }, [hotkeys, setHotkeys])
+  }, [hotkeys])
 
   return useMemo(() => ({ add, remove }), [add, remove])
 }

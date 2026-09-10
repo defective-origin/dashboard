@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import AxisChart, { AxisChartProps } from './AxisChart.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import AxisChart from './AxisChart.component'
 
 const ITEMS = [
   {

@@ -3,17 +3,17 @@
     "target": "ES2022",
     "module": "Preserve",
     "moduleResolution": "Bundler", 
-    "strict": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
     "types": ["node", "vitest/globals"],
     "lib": ["es2023"],
     "paths": {
-      "tools": ["./src/tools/index.ts"],
-      "services/*": ["./src/services/*"],
-      "api": ["./src/api/index.ts"],
-      "api/*": ["./src/api/*"]
-    }
+      "*": ["./src/*"]
+    },
+
+    
+    /* Linting */
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
   },
   "include": ["src", "env.d.ts", "vitest.setup.ts", "vitest.config.ts", "eslint.config.js"]
 }

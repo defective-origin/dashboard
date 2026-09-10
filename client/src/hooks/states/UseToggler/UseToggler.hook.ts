@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useLayoutEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
 
 export type TogglerOptions = unknown
 
@@ -18,21 +18,27 @@ export type TogglerReturnOptions = {
  * const state = useToggler(options)
  */
 export const useToggler = (options?: TogglerOptions): TogglerReturnOptions => {
-  const [isOn, turn] = useState(!!options)
+  const flag = !!options
+  const [isOn, turn] = useState(flag)
+  const [prevFlag, setPrevOptions] = useState(flag)
+
   const toggle = useCallback(() => turn(flag => !flag), [])
   const on = useCallback(() => turn(true), [])
   const off = useCallback(() => turn(false), [])
 
-  useLayoutEffect(() => turn(!!options), [options])
+  if (flag !== prevFlag) {
+    setPrevOptions(flag)
+    turn(flag)
+  }
 
-  return {
+  return useMemo(() => ({
     isOn,
     isOff: !isOn,
     toggle,
     on,
     off,
     turn,
-  }
+  }), [isOn, off, on, toggle])
 }
 
 export default useToggler

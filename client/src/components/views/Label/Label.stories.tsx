@@ -1,7 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Label, { LabelProps } from './Label.component'
+import { Meta, StoryObj, field, params } from 'storybook'
+import Label from './Label.component'
 
 const meta: Meta<typeof Label> = {
   component: Label,

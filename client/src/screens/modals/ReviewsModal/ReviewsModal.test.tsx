@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import ReviewsModal from './ReviewsModal.component'
 // import useReviewsModal from './ReviewsModal.hooks'
 // import ReviewsModalProvider, ReviewsModal from './ReviewsModal.context'

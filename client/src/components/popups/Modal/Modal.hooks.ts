@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 
 // ---| core |---
-import { emitEvent, useEvent, useFunc } from 'hooks'
+import { emitEvent, initEventName, useEvent, useFunc } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -15,7 +15,7 @@ export type ModalDetails = {
   name: ModalName // TODO: d.ts extend interface depends on name
 } & Record<string, any>
 
-export const initModalKey = (name: ModalName = 'global') => `modal:${name}`
+export const initModalKey = (name: ModalName = 'global') => initEventName(['modal', name])
 
 
 /** Returns modal details when modal is called */
@@ -25,7 +25,7 @@ export const useModal = <T extends ModalDetails>(name?: ModalName) => {
   const onClose = useFunc(() => setOptions(undefined))
 
   // listen to open modal event
-  useEvent(['modal', name], e => {
+  useEvent(initModalKey(name), e => {
     const { detail } = e as CustomEvent<T>
     if (detail.name === name) {
       setOptions(detail)
@@ -37,4 +37,5 @@ export const useModal = <T extends ModalDetails>(name?: ModalName) => {
 
 export default useModal
 
+// TODO: change interface to modal(name, options)
 export const modal = (detail: ModalDetails) => emitEvent(initModalKey(detail.name), detail)

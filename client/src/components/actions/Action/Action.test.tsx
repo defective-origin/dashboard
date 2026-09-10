@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Action from './Action.component'
 // import useAction from './Action.hooks'
 // import ActionProvider, Action from './Action.context'

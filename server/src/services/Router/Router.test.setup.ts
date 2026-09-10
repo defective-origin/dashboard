@@ -1,16 +1,20 @@
 import supertest from 'supertest'
+import api from 'api'
 import Router from './Router.service.js'
-import api from '../../api/index.js'
-
 
 declare global {
-  /** mocked express app for test  */
+  /** Mocked Express app instance for API integration testing */
   var server: supertest.Agent
 }
 
+// Initialize the Express router with API endpoints
 const app = Router.init(api, '/')
 
-// Initialize supertest with app routing
+// Initialize supertest with app routing before running tests
 beforeAll(() => {
-  global.server = supertest(app as never)
+  // If the worker is reused, global.server might already be initialized.
+  // We check for it to avoid redundant recreations during non-isolated runs.
+  if (!global.server) {
+    global.server = supertest(app as never)
+  }
 })

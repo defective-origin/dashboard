@@ -1,10 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import { COLORS, SIZES } from 'theme'
-import ConfirmModal, { ConfirmModalProps } from './ConfirmModal.component'
-
-const VARIANTS: ConfirmModalProps['position'][] = ['success', 'info', 'warning', 'error']
+import { Meta, StoryObj, field, params } from 'storybook'
+import ConfirmModal from './ConfirmModal.component'
 
 const meta: Meta<typeof ConfirmModal> = {
   component: ConfirmModal,
@@ -25,13 +20,5 @@ export const Demo: Story = {
   parameters: params('ConfirmModal'),
   args: {
     name: 'Demo',
-  },
-}
-
-export const Variants: Story = {
-  parameters: params('View', VARIANTS),
-  args: {
-    name: 'Demo',
-    v: 'success',
   },
 }

@@ -1,8 +1,6 @@
-// eslint-disable-next-line no-restricted-imports
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Skeleton, { SkeletonProps } from './Skeleton.component'
+import { Meta, StoryObj, field, params } from 'storybook'
 import Block from 'components/layouts/Block'
+import Skeleton, { SkeletonProps } from './Skeleton.component'
 
 const VARIANTS: SkeletonProps['v'][] = ['text', 'rounded', 'circular']
 

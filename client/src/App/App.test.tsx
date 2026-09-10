@@ -1,12 +1,8 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import App from './App.component'
 
 describe('[App] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<App />)
+    const container = render(<App />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

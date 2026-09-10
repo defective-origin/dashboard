@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import PlaceholderCard from './PlaceholderCard.component'
 
 describe('[PlaceholderCard] component', () => {

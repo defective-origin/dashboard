@@ -1,7 +1,3 @@
-// ---| tests |---
-import { act, renderHook } from '@testing-library/react'
-
-// ---| self |---
 import useToggler from './UseToggler.hook'
 
 
@@ -19,7 +15,7 @@ describe('[useToggler] hook', () => {
   })
 
   it('should toggle state', () => {
-    const { result } = renderHook(() => useToggler({}))
+    const { result } = renderHook(() => useToggler(false))
 
     act(() => { result.current.toggle() })
 

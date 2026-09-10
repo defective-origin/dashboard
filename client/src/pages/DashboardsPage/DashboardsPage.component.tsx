@@ -2,7 +2,6 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { t } from 'locale'
 import { Board, useBoards } from 'api'
 
 // ---| pages |---

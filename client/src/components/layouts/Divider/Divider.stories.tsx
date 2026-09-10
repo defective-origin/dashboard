@@ -1,8 +1,6 @@
-/* eslint-disable no-restricted-imports */
-import { field, params } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
-import Divider, { DividerProps } from './Divider.component'
+import { Meta, StoryObj, field, params } from 'storybook'
 import Block from 'components/layouts/Block'
+import Divider, { DividerProps } from './Divider.component'
 
 const VARIANTS: DividerProps['v'][] = ['x', 'y']
 

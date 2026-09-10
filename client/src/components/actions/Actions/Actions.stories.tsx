@@ -1,6 +1,4 @@
-/* eslint-disable no-restricted-imports */
-import { params, field } from '../../../../.storybook/tools'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj, field, params } from 'storybook'
 import Actions, { ActionItem } from './Actions.component'
 
 const ITEMS: ActionItem[] = [
@@ -47,5 +45,5 @@ export const Demo: Story = {
     menu: 'top',
     g: 'xxl',
   },
-  render: (props) => <Actions items={ITEMS} {...props} />,
+  render: props => <Actions items={ITEMS} {...props} />,
 }

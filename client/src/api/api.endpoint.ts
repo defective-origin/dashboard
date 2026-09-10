@@ -1,13 +1,11 @@
 import { useMemo } from 'react'
 import axios, { AxiosRequestConfig } from 'axios'
-import { MutateOptions, UseMutateAsyncFunction, useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions } from '@tanstack/react-query'
-import { ENV } from 'App/App.conf'
+import { MutateOptions, UseMutateAsyncFunction, useMutation, UseMutationOptions, UseMutationResult, useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query'
 import { Json, Ref } from './api.types'
-import { apiClient } from './api.context'
 
 
 const api = axios.create({
-  baseURL: ENV.SYSTEM.API,
+  baseURL: import.meta.env.VITE_API,
   timeout: 1000,
 })
 
@@ -36,6 +34,7 @@ export type RestMutationEndpointResult<P = Json, T = Json, E = Error> = UseMutat
 
 export const useRestMutationEndpoint = <P = Json, T = Json, E = Error>(options: RestMutationEndpointOptions<P, T, E>): RestMutationEndpointResult<P, T, E> => {
   const { pathname, method, request, invalidate, url, onSuccess, ...queryOptions } = options
+  const apiClient = useQueryClient()
 
   const mutation = useMutation<T, E, P>({
     ...queryOptions,

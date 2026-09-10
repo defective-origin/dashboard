@@ -16,8 +16,7 @@ export type WithPopupProps = {
  * @example
  * export default withPopup(Button, () => ({ className: css.name }))
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const withPopup = <P extends {}>(
+export const withPopup = <P extends object>(
   WrappedComponent: React.ComponentType<P>,
   mapper?: (props: P) => PopupProps,
 ) => {

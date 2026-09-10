@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Help from './Help.component'
 // import useHelp from './Help.hooks'
 // import HelpProvider, Help from './Help.context'

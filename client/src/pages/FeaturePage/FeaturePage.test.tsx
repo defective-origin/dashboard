@@ -1,14 +1,10 @@
-// ---| tests |---
-import { renderWithLauncher } from 'tests'
-
-// ---| self |---
 import FeaturePage from './FeaturePage.component'
 // import useFeaturePage from './FeaturePage.hooks'
 // import FeaturePageProvider, FeaturePage from './FeaturePage.context'
 
 describe('[FeaturePage] component', () => {
   it('should render component', () => {
-    const container = renderWithLauncher(<FeaturePage />)
+    const container = render(<FeaturePage />, { launcher: true })
 
     expect(container.snapshot()).toMatchSnapshot()
   })

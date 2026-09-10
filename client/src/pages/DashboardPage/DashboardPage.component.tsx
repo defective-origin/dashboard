@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -41,7 +41,6 @@ export function DashboardPage(props: DashboardPageProps) {
   const navigate = useNavigate()
   const board = useBoard(id)
   const mutations = useBoardMutations()
-  const [widget, setWidget] = useState<string>()
   const history = useHistory<BoardMarkup>()
   const manager = useRef<MarkupBoardManager>(null)
 

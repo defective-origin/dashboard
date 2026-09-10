@@ -1,7 +1,3 @@
-// ---| tests |---
-import { render } from 'tests'
-
-// ---| self |---
 import Label from './Label.component'
 // import useLabel from './Label.hooks'
 // import LabelProvider, Label from './Label.context'
