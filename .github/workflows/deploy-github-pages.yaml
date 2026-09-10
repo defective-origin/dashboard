@@ -30,22 +30,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'yarn'
+
+      # Enable Corepack to activate Yarn 4 from the repository
+      - name: Enable Corepack
+        run: corepack enable
+
+      # Install dependencies using immutable mode for CI
       - name: Install dependencies
-        run: yarn
+        run: yarn install --immutable
+
+      # Build the workspaces using the root script
       - name: Build
         run: yarn build
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
           path: 'client/dist'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

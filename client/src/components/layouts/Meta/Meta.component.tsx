@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react'
-import Helmet, { HelmetProps } from 'react-helmet'
+import { Helmet , HelmetProps } from 'react-helmet-async'
 
 // ---| self |---
 import './Meta.module.scss'
 
 export type HeadMeta<V extends string, P extends object> = { v: V } & P
-export type MetaItem = HeadMeta<'title', JSX.IntrinsicElements['title']>
-                      | HeadMeta<'style', JSX.IntrinsicElements['style']>
-                      | HeadMeta<'base', JSX.IntrinsicElements['base']>
-                      | HeadMeta<'link', JSX.IntrinsicElements['link']>
-                      | HeadMeta<'meta', JSX.IntrinsicElements['meta']>
-                      | HeadMeta<'script', JSX.IntrinsicElements['script']>
-                      | HeadMeta<'noscript', JSX.IntrinsicElements['noscript']>
+export type MetaItem
+  = HeadMeta<'title', React.JSX.IntrinsicElements['title']>
+  | HeadMeta<'style', React.JSX.IntrinsicElements['style']>
+  | HeadMeta<'base', React.JSX.IntrinsicElements['base']>
+  | HeadMeta<'link', React.JSX.IntrinsicElements['link']>
+  | HeadMeta<'meta', React.JSX.IntrinsicElements['meta']>
+  | HeadMeta<'script', React.JSX.IntrinsicElements['script']>
+  | HeadMeta<'noscript', React.JSX.IntrinsicElements['noscript']>
 
 
 export type MetaProps = HelmetProps & {
@@ -39,7 +40,7 @@ export function Meta(props: MetaProps) {
       const autoItems = [
         { v: 'meta', name: 'description', content: description },
         { v: 'meta', name: 'keywords', content: keywords?.toString() },
-        { v: 'meta', name: 'viewport', content: `width=device-width, initial-scale=${viewport}}` },
+        { v: 'meta', name: 'viewport', content: `width=device-width, initial-scale=${viewport}` },
         { v: 'meta', property: 'og:title', content: title },
         { v: 'meta', property: 'og:description', content: description },
         { v: 'meta', property: 'og:locale', content: locale },
@@ -49,7 +50,7 @@ export function Meta(props: MetaProps) {
       ].filter(item => item.content) as MetaItem[]
 
       return [...autoItems, ...items]
-        .map(({ v: Tag, ...metaProps }, idx) => <Tag key={idx} {...metaProps as JSX.IntrinsicAttributes} />)
+        .map(({ v: Tag, ...metaProps }, idx) => <Tag key={idx} {...metaProps as React.JSX.IntrinsicAttributes} />)
 
     }, [description, items, keywords, locale, title, type, viewport])
 

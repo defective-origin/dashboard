@@ -3,7 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "workspaces": ["client", "server"],
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "dev:client": "yarn workspace client run dev",
     "dev:server": "yarn workspace server run dev",
@@ -20,6 +23,12 @@
     "verify:client": "yarn workspace client run verify",
     "verify:server": "yarn workspace server run verify",
     "verify": "yarn workspaces foreach --include client --include server run verify",
+    "packages:clean": "rimraf node_modules client/node_modules server/node_modules .yarn/cache yarn.lock",
+    "packages:reinstall": "yarn packages:clean && yarn install",
     "ws": "yarn workspaces list --json"
+  },
+  "packageManager": "yarn@4.18.0",
+  "devDependencies": {
+    "rimraf": "6.1.3"
   }
 }

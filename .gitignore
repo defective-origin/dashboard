@@ -4,4 +4,6 @@
 # .idea
 .idea
 
+# installed packages
 node_modules/
+install-state.gz

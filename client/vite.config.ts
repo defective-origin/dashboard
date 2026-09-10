@@ -40,7 +40,7 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    tsconfigPaths: true, // Включает нативное разрешение путей
+    tsconfigPaths: true,
   },
   // only for gh pages
   base: process.env.NODE_ENV === 'production' ? '/dashboard/' : './',
