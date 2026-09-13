@@ -1,9 +1,3 @@
-/* INJECT_IMPORT_PLACE */
-import ru from './ru.json'
-import en from './en.json'
-
-export default {
-  /* INJECT_EXPORT_PLACE */
-  ru,
-  en,
-}
+/* INJECT_EXPORT_PLACE */
+export { default as ru } from './ru.json'
+export { default as en } from './en.json'

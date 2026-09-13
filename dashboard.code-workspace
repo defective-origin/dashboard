@@ -5,6 +5,10 @@
 		},
 		{
 			"path": "server"
+		},
+	    {
+		  "name": "Root project folder",
+		  "path": "."
 		}
 	],
 	"settings": {}

@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test'
+
+
+test.describe('[{{pascalCase name}}] scope', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:3000/login')
+  })
+
+  test('Check location', async ({ page }) => {
+    await expect(page).toHaveTitle(/{{pascalCase name}}/)
+  })
+
+  test.describe('[Authentication] workflow', () => {
+    test('should successfully log in with valid credentials', async ({ page }) => {
+      await page.getByLabel('Email').fill('user@example.com')
+      await page.getByLabel('Password').fill('securePassword123')
+
+      await page.getByRole('button', { name: 'Sign In' }).click()
+
+      await expect(page).toHaveURL('http://localhost:3000/dashboard')
+      await expect(page.getByRole('heading', { name: 'Welcome' })).toBeVisible()
+      await expect(page.getByText('Dashboard page')).toBeVisible()
+      await expect(page.getByTestId('icon-5')).toBeVisible()
+    })
+  })
+})

@@ -24,13 +24,4 @@ export const toCapital = (value: StringValue, whitespace = ' ') => toString(valu
 /** Abc def */
 export const toTitle = (value: StringValue) => capitalize(toString(value))
 
-export default {
-  isString,
-  toString,
-  toUppercase,
-  toLowercase,
-  capitalize,
-  toCapital,
-  toTitle,
-}
-
+export const isMatch = (what: string | RegExp, where: string) => new RegExp(what).test(where)

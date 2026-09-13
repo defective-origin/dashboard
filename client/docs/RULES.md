@@ -18,7 +18,7 @@
 ```
 
 ### Prop names
-__Static content__ is rendered via props `label`, `title`, `content`, `children`.
+__Static content__ is rendered via props `label` `title` `content` `children`.
 
 __Dynamic content__ from back-end via props `value`. In extreme cases through static props.
 
@@ -35,17 +35,6 @@ All api union types should have `uppercase` notation
 ```typescript
 type ACCESS = 'PRIVATE' | 'PUBLIC'
 ```
-
-### Variables
-- Names: describes __structure__ and __not__ be bound to __realization__ and __business__
-- Size Unit: __rem__
-- Size [text, scroll, button, link, icon]: __xxs | xs | sm | md | lg | xl | xxl__
-- Space [gap, padding, margin]: __xxs | xs | sm | md | lg | xl | xxl__
-- Color: __primary | secondary | success | info | warning | error | disable__
-- Media: __mobile | tablet | desktop | tv | vertical | horizontal__
-- Layout[Grid]: __board | row | rows | column | columns | header | footer | left-aside | right-aside | grid__
-- Block[Flex]: __x | y | xy | cards__
-- Direction: __x | y | xy__
 
 ### Architecture
 #### Microfrontends | Micro | Microservice
@@ -74,7 +63,7 @@ type ACCESS = 'PRIVATE' | 'PUBLIC'
 #### When you override ui framework variables
 ```scss
 :root {
-  // --ui-framework-color: var(--account-framework-color);
+  // --component-color: var(--framework-color);
 }
 ```
 
@@ -82,11 +71,11 @@ type ACCESS = 'PRIVATE' | 'PUBLIC'
 ```scss
 :global {
   .dark {
-    // --ui-framework-color: color;
+    // --component-color: color;
   }
 
   .light {
-    // --ui-framework-color: color;
+    // --component-color: color;
   }
 }
 ```
@@ -187,4 +176,11 @@ items: T[]
 // by component name: Column, ColumnItem ...
 column: Column
 columns: Column[]
+```
+
+### TODO and FIXME comments in code
+- New Tech debt ticket can be created instead of leaving todo in code 
+- Todos should be fixed asap in order to prevent high increasing technical debts
+```typescript
+// TODO: [firstname_secondname] necessary actions
 ```

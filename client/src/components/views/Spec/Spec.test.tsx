@@ -1,29 +1,10 @@
 import Spec from './Spec.component'
-// import useSpec from './Spec.hooks'
-// import SpecProvider, Spec from './Spec.context'
+
 
 describe('[Spec] component', () => {
   it('should render component', () => {
-    const container = render(<Spec />)
+    const container = render(<Spec name='User' content='Looser' />)
 
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Spec] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useSpec())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Spec] context', () => {
-//   const wrapper = (props: SpecProps) => <SpecProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useSpec(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

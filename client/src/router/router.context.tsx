@@ -20,11 +20,7 @@ export type RouterProviderProps = Partial<RrdRouterProviderProps>
 export function RouterProvider(props: RouterProviderProps) {
   const { router, ...otherProps } = props
 
-  const config = useMemo(() => {
-    if (router) return router
-
-    return initAppRoutes()
-  }, [router])
+  const config = useMemo(() => router ?? initAppRoutes(), [router])
 
   return <RrdRouterProvider router={config} {...otherProps} />
 }

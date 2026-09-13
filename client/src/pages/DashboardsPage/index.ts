@@ -1,7 +1,4 @@
-/* INJECT_IMPORT_PLACE */
+import React from 'react'
 
-/* INJECT_DEFAULT_EXPORT_PLACE */
-export { default } from './DashboardsPage.component'
-
-/* INJECT_EXPORT_PLACE */
+export default React.lazy(() => import('./DashboardsPage.component'))
 export * from './DashboardsPage.component'

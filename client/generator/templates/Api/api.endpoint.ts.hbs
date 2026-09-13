@@ -1,0 +1,13 @@
+import { Id } from '../api.types'
+import api from '../api.endpoint'
+
+
+const PATHNAME = '{{dashCase  name}}s'
+
+export type {{pascalCase name}} = {
+  id: string
+}
+
+export const use{{pascalCase name}} = (id?: Id) => api.useRestReadEndpoint<{{pascalCase name}}>(`${PATHNAME}/${id}`, { enabled: !!id })
+export const use{{pascalCase name}}s = () => api.useRestReadEndpoint<{{pascalCase name}}[]>(PATHNAME)
+export const use{{pascalCase name}}Mutations = () => api.useRestMutations<{{pascalCase name}}>(PATHNAME)

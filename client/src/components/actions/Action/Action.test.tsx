@@ -1,6 +1,5 @@
 import Action from './Action.component'
-// import useAction from './Action.hooks'
-// import ActionProvider, Action from './Action.context'
+
 
 describe('[Action] component', () => {
   it('should render component', () => {
@@ -9,21 +8,3 @@ describe('[Action] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Action] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useAction())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Action] context', () => {
-//   const wrapper = (props: ActionProps) => <ActionProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useAction(), { wrapper })
-//
-//     expect(result.current).toEqualTruthy()
-//   })
-// })

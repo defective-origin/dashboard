@@ -1,12 +1,12 @@
-import React from "react";
-import type { Preview } from "@storybook/react";
-import { DocsContainer } from '@storybook/addon-docs/blocks';
-import { withThemeByClassName } from '@storybook/addon-themes';
+import React from "react"
+import type { Preview } from "@storybook/react"
+import { DocsContainer } from '@storybook/addon-docs/blocks'
+import { withThemeByClassName } from '@storybook/addon-themes'
 
 // ---| core |---
 import { MockLauncher } from '../src/App/App.launcher'
 
-import "./index.scss";
+import "./index.scss"
 
 const preview: Preview = {
   decorators: [
@@ -30,13 +30,13 @@ const preview: Preview = {
     docs: {
       container: ({ context, ...other }) => {
         // 1. Trying to retrieve the theme from deep hidden fields of the Storybook store (for pure MDX)
-        // In SB 8.3+, this is usually userGlobals; in earlier versions, it's store.globals
+        // In SB 8.3+, this is usually userGlobals in earlier versions, it's store.globals
         const storeGlobals = 
           (context as any).store?.userGlobals?.globals || 
           (context as any).store?.globals?.globals || 
-          (context as any).store?.globals;
+          (context as any).store?.globals
 
-        const currentTheme = storeGlobals?.theme || context.globals?.theme || "light";
+        const currentTheme = storeGlobals?.theme || context.globals?.theme || "light"
 
         // It's hack. Decorators doesn't work with mdx files without any stories
         return (
@@ -53,6 +53,6 @@ const preview: Preview = {
       },
     },
   },
-};
+}
 
-export default preview;
+export default preview

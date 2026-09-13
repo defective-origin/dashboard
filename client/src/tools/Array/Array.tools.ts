@@ -1,4 +1,4 @@
-import nil from 'tools/Nil'
+import * as nil from '../Nil'
 
 /** create array without false values */
 export const initArray = (...args: unknown[]) => {
@@ -104,16 +104,4 @@ export const nearest = <T>(items: T[] = [], what: number, selector: (item: T) =>
 
     return curr < prev ? current : previous
   })
-}
-
-export default {
-  initArray,
-  toString,
-  toArray,
-  between,
-  remove,
-  repeat,
-  insert,
-  nearest,
-  sort,
 }

@@ -1,6 +1,5 @@
 import Label from './Label.component'
-// import useLabel from './Label.hooks'
-// import LabelProvider, Label from './Label.context'
+
 
 describe('[Label] component', () => {
   it('should render component', () => {
@@ -9,21 +8,3 @@ describe('[Label] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Label] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useLabel())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Label] context', () => {
-//   const wrapper = (props: LabelProps) => <LabelProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useLabel(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })
