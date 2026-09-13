@@ -1,6 +1,5 @@
 import Overlay from './Overlay.component'
-// import useOverlay from './Overlay.hooks'
-// import OverlayProvider, Overlay from './Overlay.context'
+
 
 describe('[Overlay] component', () => {
   it('should render component', () => {

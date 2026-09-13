@@ -11,7 +11,7 @@ export type PropsWithItems<T, OwnProps extends object = object> = OwnProps & {
 export type RepeatVariantProps<
   RC extends Record<string, any>,
 > = {
-  [key in keyof RC]: { variant?: key, hide?: boolean } & React.ComponentProps<RC[key]>
+  [key in keyof RC]: { variant?: key; hide?: boolean } & React.ComponentProps<RC[key]>
 }[keyof RC]
 
 export type RepeatComponent<P extends object = any> = React.ElementType<P> | string | Record<string, React.ElementType<P> | string>

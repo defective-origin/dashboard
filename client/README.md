@@ -2,69 +2,55 @@
 
 ### Links
 - [App](https://defective-origin.github.io/dashboard/)
-- [Requirements and components](https://defective-origin.github.io/dashboard/storybook/)
-- [UI Framework](https://mui.com/material-ui/all-components/)
-- [Icons](https://fonts.google.com/icons?icon.query=dark+mode)
 
-### Menu
+## Menu
+- [Code](./docs/CODE.md)
+- [Design](./docs/DESIGN.md)
 - [Structure](./docs/STRUCTURE.md)
-- [Rules](./docs/RULES.md)
-- [Roadmap](./docs/ROADMAP.md)
 - [Environment](./docs/ENV.md)
 
-### Code part
-
-- The first time you open a project, you will be prompted to install all required __VS Code extensions__. You can also install them __manually__ by opening the extensions tab and start searching for __@recommended__.
-- We don't use **Prettier** because of [issue with printWidth](https://github.com/prettier/prettier/issues/3468)
-
-## Launch app
-### Before start
-
-Install extensions which described in **.vscode/.settings** file
-
-### Available Scripts
-
-In the project directory, you can run:
-
-#### Installs all necessary packages.
-
-```
-yarn
-```
-
-#### Launches application on [url](http://localhost:5173/).
-
-```
+## Commands
+### Launches application on [url](http://localhost:5173/).
+```sh
 yarn dev
 ```
 
-#### Production Preview
+### Production Preview
+```sh
+yarn build # Build application for production.
+yarn preview # Launch built application.
+```
 
-```
-yarn build // Build application for production.
-yarn preview // Launch built application.
-```
-
-#### Launches the test runner in the interactive watch mode.
-```
-# Run test only once
+### Launches the test runner in the interactive watch mode.
+```sh
+# Run unit and e2e tests
 yarn test
 
-# Run test with watch flag
-yarn test:watch
+# Run unit tests only once
+yarn test:unit
+
+# Run unit tests with watch flag
+yarn test:unit:watch
+
+# Run unit tests for snapshot updates
+yarn test:unit:snap
+
+# Run e2e tests only once
+yarn test:e2e
+
+# Run e2e tests in ui mode
+yarn test:e2e:ui
 ```
 
-#### Code checkers
-
-Commands with **:fix** prefix - fix linter errors.
-
-Other commands just check parts of code.
-
-#### Launches all lint checkers for code and styles.
-
+### Code checkers
 ```sh
+# run all linters
 yarn lint
+
+# fix all linter issues
 yarn lint:fix
+
+# run linters and fixes partially 
 yarn lint:es
 yarn lint:es:fix
 yarn lint:css
@@ -72,20 +58,15 @@ yarn lint:css:fix
 yarn lint:deps
 ```
 
-#### Check code after changes
-
-```
+### Check code after changes
+```sh
 yarn verify
 ```
 
-#### Code generator
-```
-# To generate structure parts of code.
-yarn gen:init
-
-# To generate small parts of code.
+### Code generator
+Generate parts of code and insert in appropriate folders
+```sh
 yarn gen
 ```
 
-For more information check file **/STRUCTURE.md**
-
+For more information check [Structure](./docs/STRUCTURE.md)

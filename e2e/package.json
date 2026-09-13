@@ -1,0 +1,34 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "test": "yarn bddgen && yarn playwright test",
+    "test:ui": "yarn bddgen && yarn playwright test --ui",
+    "test:build": "yarn bddgen",
+    "lint": "yarn run lint:es && yarn run lint:typecheck",
+    "lint:es": "eslint .",
+    "lint:es:fix": "eslint . --fix",
+    "lint:typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mongoose": "9.9.5",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@types/mongoose": "5.11.97",
+    "@types/node": "24.0.0",
+    "eslint": "10.10.0",
+    "playwright-bdd": "9.2.1",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0"
+  }
+}

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export type ValOrFunc<T, Args extends any[]> = T | ((...args: Args) => T)
 
 /**
@@ -61,10 +59,4 @@ export const isEmpty = (value: any): boolean => {
   }
 
   return false
-}
-
-export default {
-  isEmpty,
-  arrToObj,
-  fromValOrFunc,
 }

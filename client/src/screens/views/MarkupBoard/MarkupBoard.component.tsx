@@ -93,7 +93,7 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
   } = props
   const _className = cn(css.MarkupBoard, className)
   const [select, setSelect] = useState<T>()
-  const startCellRef = useRef<{ row: number, column: number }>(null)
+  const startCellRef = useRef<{ row: number; column: number }>(null)
   const selectionRef = useRef<HTMLDivElement>(null)
   const markup = useMemo(() => value ?? initMarkup(0, 1, 1, 4), [value])
   const grid = useMemo(() => toMarkupGrid(markup), [markup])

@@ -1,6 +1,4 @@
 import MarkupBoard from './MarkupBoard.component'
-// import useBoard from './MarkupBoard.hooks'
-// import BoardProvider, MarkupBoard from './MarkupBoard.context'
 import * as tools from './MarkupBoard.tools'
 
 describe('[MarkupBoard] component', () => {
@@ -92,21 +90,3 @@ describe('[MarkupBoard] tools', () => {
     })
   })
 })
-
-// describe('[MarkupBoard] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useBoard())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[MarkupBoard] context', () => {
-//   const wrapper = (props: BoardProps) => <BoardProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useBoard(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

@@ -19,11 +19,11 @@ const getOptions = <E extends Element>(ref: React.RefObject<E | null>): ResizeRe
 }
 
 export type ResizeOptions<E extends Element> = ResizeObserverOptions<E> & {
-  onResize?: (options: ResizeReturnOptions<E>) => void;
+  onResize?: (options: ResizeReturnOptions<E>) => void
 }
 
 export type ResizeReturnOptions<E extends Element> = Omit<DOMRect, 'toJSON'> & {
-  ref: ElementRef<E>,
+  ref: ElementRef<E>
 }
 
 /**

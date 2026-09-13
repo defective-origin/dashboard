@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "yzhang.markdown-all-in-one",
+    "streetsidesoftware.code-spell-checker",
+    "aaron-bond.better-comments",
+    "mskelton.npm-outdated",
+    "fanaticpythoner.better-todo-tree",
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "ms-playwright.playwright"
+  ]
+}

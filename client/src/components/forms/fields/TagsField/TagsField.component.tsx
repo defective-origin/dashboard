@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete'
+import MuiAutocomplete from '@mui/material/Autocomplete'
 
 // ---| core |---
 import { cn } from 'tools'

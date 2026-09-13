@@ -12,7 +12,7 @@ export type PaginationBreakpointOptions<E extends Element> = BreakpointOptions<E
 export type PaginationBreakpointReturnOptions<T, E extends Element, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
   items: T[]
   page: number
-  pages: number,
+  pages: number
   hasPrev: boolean
   hasNext: boolean
   prev: () => void

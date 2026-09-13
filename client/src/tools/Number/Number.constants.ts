@@ -1,6 +1,6 @@
 export type Unit<T> = {
-  value: T,
-  sign?: string,
+  value: T
+  sign?: string
 }
 export type NumberUnit = Unit<number>
 

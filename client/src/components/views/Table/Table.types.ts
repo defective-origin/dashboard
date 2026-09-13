@@ -52,11 +52,11 @@ export type TableColumnFilter<T extends TableRecord, P extends object = object> 
 
 export type TableColumnDisplay = {
   /** disable actions for column in column menu. Bu default true */
-  customizable?: boolean;
+  customizable?: boolean
   /** hide column in table by default. Can be changed in column menu */
-  hidden?: boolean;
+  hidden?: boolean
   /** initial column position. Can be changed in column menu */
-  position?: number;
+  position?: number
   /** Set cell width. It's copied from minWidth if `fixed` is set */
   width?: number
   /** Set min cell width */

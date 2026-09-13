@@ -1,28 +1,37 @@
-export const InputPrompt = (options = {}) => ({
-  message: `Enter ${options.name}`,
-  type: 'input',
+export const Prompt = (options = {}) => ({
+  message: [options.info, `Enter ${options.name}`].filter(Boolean).join('\n'),
   ...options,
 })
 
-export const StringInputPrompt = (options = {}) => InputPrompt({
+export const ConfirmPrompt = (options = {}) => Prompt({
   ...options,
-  filter: input => {
-    const filteredInput = [
-      options.prefix ? `${options.prefix} ` : '',
-      input ?? '',
-      options.postfix ? ` ${options.postfix}` : '',
-    ].join('')
+  type: 'confirm',
+  default: false,
+})
 
-    return options.filter?.(filteredInput) ?? filteredInput
+export const StringPrompt = (options = {}) => Prompt({
+  ...options,
+  type: 'input',
+  filter: input => {
+    const text = [options.prefix, input, options.postfix].filter(Boolean).join(' ')
+
+    return options.filter?.(text) ?? text
   },
 })
 
-export const NameInputPrompt = (options = {}) => StringInputPrompt({ name: 'name', ...options })
-export const SubpathInputPrompt = (options = {}) => StringInputPrompt({ name: 'subpath', ...options })
+export const NamePrompt = (options = {}) => StringPrompt({ name: 'name', ...options })
+
+export const PathPrompt = (options = {}) => StringPrompt({
+  ...options,
+  name: 'path',
+  filter: input => input.trim().replace(/\s+/g, '/'),
+})
+
 
 export default {
-  Input: InputPrompt,
-  StringInput: StringInputPrompt,
-  NameInput: NameInputPrompt,
-  SubpathInput: SubpathInputPrompt,
+  Prompt: Prompt,
+  Confirm: ConfirmPrompt,
+  String: StringPrompt,
+  Name: NamePrompt,
+  Path: PathPrompt,
 }

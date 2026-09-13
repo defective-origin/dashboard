@@ -65,14 +65,3 @@ export const toSize = (v: NumberValue, options?: NumberOptions) => toNumber(v, {
 
 /** 123.46 T  - G, K, T */
 export const toWeight = (v: NumberValue, options?: NumberOptions) => toNumber(v, { units: WEIGHT_OPTIONS, ...options })
-
-export default {
-  isNumber,
-  formatNumber,
-  toNumber,
-  toAmount,
-  toPercent,
-  toCurrency,
-  toSize,
-  toWeight,
-}

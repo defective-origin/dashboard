@@ -1,6 +1,5 @@
 import Popup from './Popup.component'
-// import usePopup from './Popup.hooks'
-// import PopupProvider, Popup from './Popup.context'
+
 
 describe('[Popup] component', () => {
   it('should render component', () => {

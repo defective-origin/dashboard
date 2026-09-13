@@ -22,7 +22,7 @@ export type BannerProps = {
   absolute?: boolean
   loading?: boolean
   visible?: boolean
-  image?: ImageVariant,
+  image?: ImageVariant
   // TODO: add size
 }
 

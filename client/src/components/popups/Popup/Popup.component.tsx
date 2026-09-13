@@ -29,7 +29,7 @@ export type PopupVariant
 export type PopupTriggerOptions = TogglerReturnOptions
 
 export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
-  open?: boolean;
+  open?: boolean
   arrow?: boolean
   title?: React.ReactNode
   actions?: mix.ValOrFunc<ButtonProps[], [PopupTriggerOptions]>

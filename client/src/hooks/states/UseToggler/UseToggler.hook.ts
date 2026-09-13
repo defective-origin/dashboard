@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
 export type TogglerOptions = unknown
 
 export type TogglerReturnOptions = {
-  isOn: boolean;
-  isOff: boolean;
-  on: () => void;
-  off: () => void;
-  toggle: () => void;
-  turn: Dispatch<SetStateAction<boolean>>;
+  isOn: boolean
+  isOff: boolean
+  on: () => void
+  off: () => void
+  toggle: () => void
+  turn: Dispatch<SetStateAction<boolean>>
 }
 
 /**

@@ -28,7 +28,7 @@ export const ACTION_MAP = {
 
 export type GenericActionItem = RepeatItem<typeof ACTION_MAP>
 export type CustomActionItem = React.ElementType | React.ReactNode
-export type ActionWithMenu<T> = (T & { items?: ActionWithMenu<T>, hide?: boolean })
+export type ActionWithMenu<T> = (T & { items?: ActionWithMenu<T>; hide?: boolean })
 export type ActionItem = ActionWithMenu<GenericActionItem> | CustomActionItem
 
 export type ActionsProps = PropsWithItems<ActionItem, BlockProps> & {

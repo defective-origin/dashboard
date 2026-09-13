@@ -7,7 +7,7 @@ import { ElementOptions, useElement } from '../UseElement'
 
 export type PortalOptions<E extends Element> = {
   ref?: ElementOptions<E>
-  disable?: boolean;
+  disable?: boolean
 }
 
 export type PortalReturnOptions = React.ReactPortal | React.ReactNode | null

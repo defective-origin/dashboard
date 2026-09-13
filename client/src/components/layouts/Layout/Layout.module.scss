@@ -3,10 +3,6 @@
   grid-template-rows: auto 1fr auto;
 }
 
-:root {
-  // --ui-framework-color: var(--account-framework-color);
-}
-
 :global {
   .layout {
     display: grid;

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "Preserve",
+    "moduleResolution": "Bundler", 
+    "types": ["node"],
+    "lib": ["es2023"],
+    "paths": {
+      "*": ["./src/*"]
+    },
+
+    
+    /* Linting */
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["src", "env.d.ts", "eslint.config.js", "playwright.config.ts", ]
+}

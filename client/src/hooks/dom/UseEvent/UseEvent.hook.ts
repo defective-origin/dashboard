@@ -6,7 +6,7 @@ export type EventKey = string | (string | number | undefined | null)[]
 export const initEventName = (keys: EventKey) => Array.isArray(keys) ? keys.join(':') : keys
 
 export type ExtendedEventMap = HTMLElementEventMap & {
-  [customEventName: string & {}]: CustomEvent<any>;
+  [customEventName: string & {}]: CustomEvent<any>
 }
 
 export type EventOptions<E extends Element> = AddEventListenerOptions & {

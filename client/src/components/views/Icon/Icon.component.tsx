@@ -34,6 +34,8 @@ export type IconVariant
   | DashboardIconVariant
   | 'auto_stories' | 'schedule' | 'table_rows' | 'book'
 
+const RTL_ICONS: Set<IconVariant> = new Set(['left_panel_open', 'left_panel_close', 'keyboard_arrow_left', 'keyboard_arrow_right'])
+
 export type IconColor = Color
 export type IconSize = Size
 
@@ -63,6 +65,7 @@ export const Icon = (props: IconProps) => {
       [`c-${color}`]: color,
       ['icon--fill']: fill,
       ['icon--outline']: !fill,
+      ['rtl']: v && RTL_ICONS.has(v),
     },
     className,
   )

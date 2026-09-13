@@ -6,7 +6,7 @@ export const PATHNAME = 'users'
 export type StaffAccess = 'WIDGETS' | 'BOARDS' | 'ACCOUNTS'
 export type Staff = {
   user: Ref
-  active: boolean,
+  active: boolean
   access: StaffAccess[]
 }
 

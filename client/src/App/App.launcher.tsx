@@ -1,6 +1,7 @@
 import React from 'react'
 
 // ---| core |---
+// Provider imports must be made directly from the context files to avoid circular dependencies.
 import RouterProvider, { createMemoryRouter, RouterProviderProps } from 'router/router.context'
 import LocaleProvider, { LocaleProviderProps } from 'locale/locale.context'
 import ThemeProvider, { ThemeProviderProps } from 'theme/theme.context'

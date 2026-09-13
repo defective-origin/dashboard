@@ -28,8 +28,8 @@ export type ScrollVariant = Direction
 
 export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
   /** Shift scroll from top */
-  top?: number;
-  zIndex?: number;
+  top?: number
+  zIndex?: number
   v?: ScrollVariant
   /** Actions offset. */
   actions?: Offset
@@ -38,7 +38,7 @@ export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
   /** Extra overlay content. */
   children?: React.ReactNode
   trackClassName?: string
-  cernerClassName?: string,
+  cernerClassName?: string
   actionsClassName?: string
 }
 

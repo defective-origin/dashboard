@@ -1,168 +1,69 @@
-import fs from 'fs'
 import path from 'path'
-import tools from './generator.tools.js'
 
-export const InjectAction = ({ place, target, template, abortOnFail = false, data }) => ({
+export const templateFolder = path => `templates/${path}`
+
+/**
+ * Inject file exports in module file.
+ * @param {string} place - Place for injection.
+ * @param {string} target - Path for file to inject template.
+ * @param {string} template - Text to inject
+ */
+export const InjectAction = ({ target, template, place }) => ({
   type: 'append',
   path: target,
   pattern: `/* INJECT_${place}_PLACE */`,
-  template,
-  abortOnFail,
-  data,
+  template: templateFolder(template),
+  abortOnFail: false,
 })
 
-export const MODULE_INJECT_TEMPLATES = {
-  common: {
-    IMPORT: 'import * from \'{FILE_PATH}\'',
-    EXPORT: 'export * from \'{FILE_PATH}\'',
-    DEFAULT_EXPORT: 'export { default } from \'{FILE_PATH}\'',
+export const FileAction = ({ target, template, isExported, injects = {} }) => [
+  {
+    type: 'add',
+    path: target,
+    templateFile: templateFolder(template),
+    skipIfExists: true,
+    abortOnFail: false,
   },
-  partial: {
-    IMPORT: 'import {{snakeCase name}} from \'{FILE_PATH}\'',
-    EXPORT: '  {{snakeCase name}},',
-  },
+  Object.entries(injects).map(([place, templates]) =>
+    templates.map(template => InjectAction({ target, place, template })),
+  ),
+  isExported && ModuleFile(target),
+]
+
+export const ModuleFile = (exportFile, removeExt = ['.tsx?']) => {
+  const fileName = path.basename(exportFile).replace(new RegExp(removeExt.join('|')), '')
+  const inject = path.extname(exportFile) === '.json'
+    ? `export { default as {{snakeCase name}} } from './${fileName}'`
+    : `export * from './${fileName}'`
+
+  return FileAction({
+    target: `${path.dirname(exportFile)}/index.ts`,
+    template: templateFolder('Module/index.hbs'),
+    injects: { EXPORT: [inject] },
+  })
 }
 
-/**
- * Inject file imports, exports in module file.
- * @param {'IMPORT' | 'EXPORT' | 'DEFAULT_EXPORT'} place - Place for injection.
- * @param {'common' | 'partial'} type - Place for injection.
- * @param {string} target - Path for file to inject template.
- */
-export const ModuleInjectAction = ({place, type, target, filePath, removeExt = ['.tsx?'], data}) => {
-  const template = MODULE_INJECT_TEMPLATES[type][place]
-    .replace('{FILE_PATH}', filePath)
-    .replace(new RegExp(removeExt.join('|')), '')
-
-  return InjectAction({ place, target, template, data })
-}
-
-export const BaseFileAction = ({ target, template, skipIfExists = true, abortOnFail = false, data }) => ({
-  type: 'add',
-  path: target,
-  templateFile: template,
-  skipIfExists,
-  abortOnFail,
-  data,
-})
-
-export const ModuleFileAction = ({
-  target: folderTarget,
-  type = 'common',
-  imports = [],
-  exports = [],
-  defaultExport,
-  skipIfExists,
-  abortOnFail,
-  fileName = 'index.ts',
-  data,
-}) => {
-  const template = `templates/Module/${type}.${fileName}.hbs`
-  const target = `${folderTarget}/${fileName}`
-  const injectOptions = { type, target, data }
-
-  return [
-    BaseFileAction({ target, template, skipIfExists, abortOnFail, data }),
-    imports?.map(filePath => ModuleInjectAction({ ...injectOptions, place: 'IMPORT', filePath })),
-    exports?.map(filePath => ModuleInjectAction({ ...injectOptions, place: 'EXPORT', filePath })),
-    defaultExport && ModuleInjectAction({ ...injectOptions, place: 'DEFAULT_EXPORT', filePath: defaultExport }),
-  ]
-}
-
-export const FileAction = ({
-  target,
-  template,
-  skipIfExists,
-  abortOnFail,
-  module, // { target, type, import, export, defaultExport }
-  indexName,
-  data,
-}) => {
-  const filePath = module?.target && `./${path.relative(module.target, target)}`
-  const imports = module?.import && [filePath]
-  const exports = module?.export && [filePath]
-  const defaultExport = module?.defaultExport && [filePath]
-
-  return [
-    BaseFileAction({ target, template, skipIfExists, abortOnFail }),
-    module && ModuleFileAction({
-      target: module.target,
-      type: module.type,
-      imports,
-      exports,
-      defaultExport,
-      skipIfExists,
-      abortOnFail,
-      fileName: indexName,
-      data,
-    }),
-  ]
-}
-
-export const FolderAction = ({
-  target,
-  template,
-  files = [], // ['file_postfix_1', 'file_postfix_2', undefined, false, null, 0]
-  ext = '.hbs',
-  skipIfExists,
-  isSubmodule = false,
-  abortOnFail = false,
-  module, // { type, imports, notExports, defaultExport }
-  indexName,
-  data,
-}) => {
-  const clearFiles = files.filter(Boolean)
-  const folderFiles = fs.readdirSync(`generator/${template}`)
-    // take only necessary files
-    .filter(fileName => tools.hasMatch(clearFiles, fileName))
-    // remove template extension
-    .map(fileName => fileName.replace(ext, ''))
-    // add path relative to folder
-    .map(fileName => `./${fileName}`)
-  const imports = module?.imports && folderFiles.filter(fileName => tools.hasMatch(module?.imports, fileName))
-  const exports = module?.notExports && folderFiles.filter(fileName => !tools.hasMatch(module?.notExports, fileName))
-  const defaultExport = module?.defaultExport && folderFiles.find(fileName => tools.isMatch(module?.defaultExport, fileName))
-  const filePatterns = clearFiles.length ? `*{${clearFiles.join(',')}}*` : '*'
+export const FolderAction = ({ target, template, isExported, ignore = [] }) => {
+  const folder = templateFolder(template)
 
   return [
     {
       type: 'addMany',
-      skipIfExists,
-      abortOnFail,
+      abortOnFail: false,
+      skipIfExists: true,
       destination: target,
-      templateFiles: `${template}/${filePatterns}${ext}`,
-      base: template,
-      globOptions: {
-        braceExpansion: true,
-      },
-      data,
+      base: folder,
+      templateFiles: [
+        `${folder}/**/*.hbs`,
+        ...ignore.filter(Boolean).map(part => `!${folder}/**/*${part}*`),
+      ],
     },
-    module && ModuleFileAction({
-      target,
-      type: module.type,
-      imports,
-      exports,
-      defaultExport,
-      skipIfExists,
-      abortOnFail,
-      fileName: indexName,
-      data,
-    }),
-    isSubmodule && ModuleFileAction({
-      target: path.dirname(target),
-      exports: [ `./${path.basename(target)}` ],
-      skipIfExists,
-      abortOnFail,
-      fileName: indexName,
-      data,
-    }),
+    isExported && ModuleFile(target),
   ]
 }
 
 export default {
   Inject: InjectAction,
-  ModuleInject: ModuleInjectAction,
   File: FileAction,
-  ModuleFile: ModuleFileAction,
   Folder: FolderAction,
 }

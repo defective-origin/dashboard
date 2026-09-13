@@ -17,10 +17,10 @@ import css from './BannerPage.module.scss'
 export type BannerVariant = 'empty' | 'greeting' | 'error' | 401 | 403 | 404 | 500 | 502 | 503
 
 export const BANNER_PAGE_MAP: Record<BannerVariant, {
-  title: TranslateKeys,
-  subtitle?: TranslateKeys,
-  text?: TranslateKeys,
-  image?: ImageVariant,
+  title: TranslateKeys
+  subtitle?: TranslateKeys
+  text?: TranslateKeys
+  image?: ImageVariant
 }> = {
   empty: { image: 'empty', title: 'MESSAGE.NO_DATA' },
   greeting: { title: 'MESSAGE.GREETING', subtitle: 'MESSAGE.READ_GUIDE' },

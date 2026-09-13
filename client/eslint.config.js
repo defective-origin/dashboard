@@ -67,6 +67,16 @@ export default [
       }],
       '@stylistic/jsx-quotes': ['warn', 'prefer-single'],
       '@stylistic/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
+      '@stylistic/member-delimiter-style': ['error', {
+        multiline: {
+          delimiter: 'none',
+        },
+        singleline: {
+          delimiter: 'semi',
+          requireLast: false,
+        },
+        multilineDetection: 'brackets',
+      }],
 
       // typescript rules
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],

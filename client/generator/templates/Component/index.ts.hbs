@@ -1,0 +1,8 @@
+{{#if isLazy}}
+import React from 'react'
+
+export default React.lazy(() => import('./{{pascalCase name}}.component'))
+{{else}}
+export { default } from './{{pascalCase name}}.component'
+{{/if}}
+export * from './{{pascalCase name}}.component'

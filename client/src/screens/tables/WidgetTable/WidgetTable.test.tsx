@@ -1,6 +1,5 @@
 import WidgetTable from './WidgetTable.component'
-// import useWidgetTable from './WidgetTable.hooks'
-// import WidgetTableProvider, WidgetTable from './WidgetTable.context'
+
 
 describe('[WidgetTable] component', () => {
   it('should render component', () => {
@@ -9,21 +8,3 @@ describe('[WidgetTable] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[WidgetTable] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useWidgetTable())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[WidgetTable] context', () => {
-//   const wrapper = (props: WidgetTableProps) => <WidgetTableProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useWidgetTable(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

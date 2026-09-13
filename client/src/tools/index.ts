@@ -1,9 +1,4 @@
-/* INJECT_IMPORT_PLACE */
-
-/* INJECT_DEFAULT_EXPORT_PLACE */
-
 /* INJECT_EXPORT_PLACE */
-export * from './Matrix'
 export * as mix from './Mix'
 export * as matrix from './Matrix'
 export * as obj from './Object'

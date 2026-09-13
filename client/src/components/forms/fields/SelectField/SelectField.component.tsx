@@ -16,7 +16,7 @@ import css from './SelectField.module.scss'
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
 export type SelectFieldProps = FieldProps & {
-  items?: SelectFieldItem[];
+  items?: SelectFieldItem[]
 }
 
 /**

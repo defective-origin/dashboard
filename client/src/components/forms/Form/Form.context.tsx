@@ -6,7 +6,7 @@ import { SubscriptionsManager } from 'hooks'
 export type FormPath<O extends {} = {}> = (string & {}) // | react.FlattenObjectFullPathKeys<O>
 export type FormEvent<O extends object = object> = (value: any, store: O) => void
 export type FormRule<O extends object = object, R = any> = (value: any, store?: O) => R | undefined | false
-export type FormFieldState<V = any> = { init?: V, value?: V, errors?: FormErrors | FormFieldErrors[] }
+export type FormFieldState<V = any> = { init?: V; value?: V; errors?: FormErrors | FormFieldErrors[] }
 
 export type FormFieldErrors<E = any> = E[]
 export type FormErrors<O extends object = object> = {

@@ -5,15 +5,15 @@ import { TableColumn } from './Table.types'
 import column from './Table.tools'
 
 type Item = {
-  name: string;
-  code?: string;
-  population?: number;
-  size?: number;
-  density?: number;
-  salary?: number;
-  gdp?: number;
-  date?: Date;
-  isBig?: boolean;
+  name: string
+  code?: string
+  population?: number
+  size?: number
+  density?: number
+  salary?: number
+  gdp?: number
+  date?: Date
+  isBig?: boolean
 }
 
 const COLUMNS: TableColumn<Item>[] = [
