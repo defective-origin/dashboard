@@ -1,11 +1,11 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 
 // ---| components |---
 import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| core |---
-import { cn } from 'tools'
-import { PortalReturnOptions, usePortal } from 'hooks'
+import { cn, react } from 'tools'
 
 // ---| self |---
 import css from './Portal.module.scss'
@@ -23,16 +23,23 @@ export type PortalProps = {
 
 /**
  * Allows portal content if into portal container.
- *
- * How to use
  * @example
+ * <Portal.Container name='page-name' />
+ *
  * <Portal name='page-name'>Content</Portal>
  * <Portal name='page-name' content="Content" />
+ * <Portal name='page-name' content="Content" disabled={isAdmin} />
  */
-export function Portal(props: PortalProps): PortalReturnOptions {
+export function Portal(props: PortalProps) {
   const { name, disable, content, children = content } = props
 
-  return usePortal(children, { ref: () => document.getElementById(initPortalKey(name)), disable })
+  if (disable) {
+    return content
+  }
+
+  const elem = react.getElement(() => document.getElementById(initPortalKey(name)), document.body)
+
+  return elem && createPortal(children, elem)
 }
 
 Portal.displayName = 'Portal'
@@ -43,16 +50,13 @@ export type PortalContainerProps = BlockProps & {
 
 /**
  * Create portal container.
- *
- * How to use
  * @example
  * <Portal.Container name='page-name' />
  */
 Portal.Container = function PortalContainer(props: PortalContainerProps) {
   const { name, children, className, ...otherProps } = props
-  const _className = cn(css.PortalContainer, className)
 
-  return <Block id={initPortalKey(name)} className={_className} {...otherProps}>{children}</Block>
+  return <Block id={initPortalKey(name)} className={cn(css.PortalContainer, className)} {...otherProps}>{children}</Block>
 }
 
 export default Portal

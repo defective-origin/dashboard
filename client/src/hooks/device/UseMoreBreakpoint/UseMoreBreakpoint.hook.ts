@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import useBreakpoint, { Breakpoint, BreakpointOptions, BreakpointReturnOptions } from '../UseBreakpoint'
+import useBreakpoint, { Breakpoint, BreakpointOptions } from '../UseBreakpoint'
 import { useToggler } from 'hooks/states'
 
 export type MoreBreakpoint = Breakpoint & {
@@ -7,7 +7,7 @@ export type MoreBreakpoint = Breakpoint & {
   count: number
 }
 
-export type MoreBreakpointOptions<E extends Element> = BreakpointOptions<E> & {
+export type MoreBreakpointOptions = BreakpointOptions & {
   /**
    * Exclude last item if 'allItems.length > breakpoint.count'.
    * It can be helpful when you need to add 'More' dropdown button to list.
@@ -15,7 +15,7 @@ export type MoreBreakpointOptions<E extends Element> = BreakpointOptions<E> & {
   excludeLast?: boolean
 }
 
-export type MoreBreakpointReturnOptions<T, E extends Element, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
+export type MoreBreakpointReturnOptions<T, B extends Breakpoint> = B & {
   items: T[]
   remainingItems: T[]
   more: () => void
@@ -26,7 +26,6 @@ export type MoreBreakpointReturnOptions<T, E extends Element, B extends Breakpoi
  * Detect container size breakpoint.
  * Allows to work with items which is not displayed.
  * By default observe document.body size.
- *
  * @example
  * // screen size
  * export class MenuMoreBreakpoint implements MoreBreakpoint {
@@ -55,11 +54,11 @@ export type MoreBreakpointReturnOptions<T, E extends Element, B extends Breakpoi
  * // Observe vertical size with known element ref
  * const options = useMoreBreakpoint(items, MENU_MORE_BREAKPOINTS, { direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
-export const useMoreBreakpoint = <T, E extends Element, B extends MoreBreakpoint>(
+export function useMoreBreakpoint<T, B extends MoreBreakpoint>(
   allItems: T[],
   breakpoints: B[],
-  options?: MoreBreakpointOptions<E>,
-): MoreBreakpointReturnOptions<T, E, B> => {
+  options?: MoreBreakpointOptions,
+): MoreBreakpointReturnOptions<T, B> {
   const breakpoint = useBreakpoint(breakpoints, options)
   const showAllItems = useToggler()
   const count = useMemo(() => {

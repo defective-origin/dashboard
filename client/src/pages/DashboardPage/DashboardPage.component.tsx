@@ -5,7 +5,7 @@ import { cn } from 'tools'
 import { t } from 'locale'
 import { useHistory } from 'hooks'
 import { BoardMarkup, useBoard, useBoardMutations } from 'api'
-import { generateRouterPath, useNavigate, useParams } from 'router'
+import { useAppNavigate, useParams } from 'router'
 
 // ---| pages |---
 import FeaturePage, { FEATURE_SNAPSHOT_ID, FeaturePageProps } from 'pages/FeaturePage'
@@ -14,10 +14,11 @@ import Widget from 'screens/views/Widget'
 import MarkupMenu from 'screens/views/MarkupMenu'
 import MarkupBoard, { MarkupBoardManager } from 'screens/views/MarkupBoard'
 // ---| components |---
-import Menu from 'components/actions/Menu'
-import Popup from 'components/popups/Popup'
 import Button from 'components/actions/Button'
 import { modal } from 'components/popups/Modal'
+import Actions from 'components/layouts/Actions'
+import Divider from 'components/layouts/Divider'
+import Dropdown from 'components/actions/Dropdown'
 import { SelectField } from 'components/forms/fields/SelectField'
 import { CssSizeField } from 'components/forms/fields/CssSizeField'
 
@@ -29,16 +30,13 @@ export type DashboardPageProps = FeaturePageProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <DashboardPage />
  */
 export function DashboardPage(props: DashboardPageProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.DashboardPage, className)
   const { id } = useParams()
-  const navigate = useNavigate()
+  const navigate = useAppNavigate()
   const board = useBoard(id)
   const mutations = useBoardMutations()
   const history = useHistory<BoardMarkup>()
@@ -89,7 +87,7 @@ export function DashboardPage(props: DashboardPageProps) {
 
   return (
     <FeaturePage
-      className={_className}
+      className={cn(css.DashboardPage, className)}
       options={board.data}
       nav={
         <MarkupMenu
@@ -99,47 +97,34 @@ export function DashboardPage(props: DashboardPageProps) {
           onSave={markups => mutations.update({ ...board.data, markups })}
         />
       }
-      menu={[
-        // { start: 'undo', tooltip: t('ACTION.UNDO'), active: history.hasPrev, onClick: history.prev },
-        // { start: 'redo', tooltip: t('ACTION.REDO'), active: history.hasNext, onClick: history.next },
-        { start: 'dashboard_customize', tooltip: t('ACTION.ADD_WIDGET') },
-        {
-          start: 'remove_selection',
-          tooltip: t('ACTION.CLEAR'),
-          onClick: () => modal({
-            name: 'confirm',
-            content: t('MESSAGE.CONFIRM.CLEAR_BOARD'),
-            onSuccess: manager.current?.clear,
-          }),
-        },
-        <Popup
-          arrow
-          title={t('LABEL.GRID')}
-          actions={o => [
-            { content: t('ACTION.SAVE'), start: 'save', color: 'success' },
-            { content: t('ACTION.CLOSE'), start: 'close', onClick: o.off },
-          ]}
-          trigger={o => (
-            <Button
-              className={_className}
-              size='sm'
-              start='space_dashboard'
-              tooltip={t('LABEL.GRID')}
-              active={o.isOn}
-              onClick={o.toggle}
-            />
-          )}
+      extra={[
+        // <Button start='undo' tooltip={t('ACTION.UNDO')} active={history.hasPrev} onClick={history.prev} />,
+        // <Button start='redo' tooltip={t('ACTION.REDO')} active={history.hasNext} onClick={history.next} />,
+        <Button start='dashboard_customize' tooltip={t('ACTION.ADD_WIDGET')} />,
+        <Button start='remove_selection' tooltip={t('ACTION.CLEAR')} onClick={() => modal({
+          name: 'confirm',
+          content: t('MESSAGE.CONFIRM.CLEAR_BOARD'),
+          onSuccess: manager.current?.clear,
+        })} />,
+        <Dropdown
           disableHoverListener
+          start='space_dashboard'
+          title={t('LABEL.GRID')}
+          tooltip={t('LABEL.GRID')}
+          actions={o => [
+            <Button content={t('ACTION.SAVE')} start='save' color='success' />,
+            <Button content={t('ACTION.CLOSE')} start='close' onClick={o.off} />,
+          ]}
         >
           {/* TODO: create GapField */}
-          <CssSizeField label={t('LABEL.WIDTH')} value={history.value?.width.toString()} formats={['px']} disabled />
           <SelectField label={t('LABEL.HEIGHT')} items={HEIGHT_SELECT_ITEMS} value={history.value?.height} onChange={manager.current?.resize} />
-          <CssSizeField label={t('LABEL.GAP')} />
-        </Popup>,
+          <CssSizeField label={t('LABEL.WIDTH')} value={history.value?.width.toString()} formats={['px']} disabled />
+          <CssSizeField label={t('LABEL.GAP')} formats={['rem']} />
+        </Dropdown>,
       ]}
       onRemove={() => {
         mutations.remove(board.data)
-        navigate('BOARDS')
+        navigate({ to: 'BOARDS' })
       }}
       onClone={() => console.log('CREATE CLONE')}
       onInherit={() => console.log('INHERIT')}
@@ -156,20 +141,20 @@ export function DashboardPage(props: DashboardPageProps) {
         onChange={history.push}
         onError={error => console.log('handleError', error)}
         widget={id => (
-          <Menu
-            size='xs'
-            horizontal
-            v='top-start'
-            items={[
-              { start: 'settings', tooltip: t('ACTION.SETTINGS') },
-              { start: 'resize', tooltip: t('ACTION.REPLACE'), onClick: () => manager.current?.placeItem(id) },
-              { start: 'move_up', tooltip: t('ACTION.SUBSTITUTION'), onClick: () => manager.current?.replaceItem(id, '123') },
-              { start: 'delete_forever', tooltip: t('ACTION.REMOVE'), onClick: () => manager.current?.removeItem(id) },
-              { variant: 'divider', v: 'y' },
-              { variant: 'link', tooltip: t('ACTION.OPEN_WIDGET'), href: generateRouterPath('WIDGET', { id }), target: '_blank' },
-            ]}
-            trigger={() => <Widget id={id} />}
-          />
+          <Dropdown
+            size='lg'
+            popupSide='top-start'
+            trigger={<Widget id={id} />}
+          >
+            <Actions>
+              <Actions.Button start='settings' tooltip={t('ACTION.SETTINGS')} />
+              <Actions.Button start='resize' tooltip={t('ACTION.REPLACE')} onClick={() => manager.current?.placeItem(id)} />
+              <Actions.Button start='move_up' tooltip={t('ACTION.SUBSTITUTION')} onClick={() => manager.current?.replaceItem(id, '123')} />
+              <Actions.Button start='delete_forever' tooltip={t('ACTION.REMOVE')} onClick={() => manager.current?.removeItem(id)} />
+              <Divider v='y' />
+              <Actions.AppLink tooltip={t('ACTION.OPEN_WIDGET')} to='WIDGET' params={{ id }} target='_blank' />
+            </Actions>
+          </Dropdown>
         )}
       />
 

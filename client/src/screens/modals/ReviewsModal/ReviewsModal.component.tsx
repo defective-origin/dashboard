@@ -21,19 +21,16 @@ export type ReviewsModalProps = ModalProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <ReviewsModal />
  */
 export function ReviewsModal(props: ReviewsModalProps) {
   const { name = 'feature-review', children, className, ...otherProps } = props
-  const _className = cn(css.ReviewsModal, className)
   const modal = useModal<ReviewsModalDetails>(name)
 
   return (
     <Modal
-      className={_className}
+      className={cn(css.ReviewsModal, className)}
       title={t('LABEL.REVIEWS')}
       name={name}
       open={modal.open}

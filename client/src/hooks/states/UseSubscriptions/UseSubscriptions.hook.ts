@@ -19,7 +19,6 @@ export type SubscriptionsManager<
 
 /**
  * Hook descriptions
- *
  * @example
  * const state = useSubscriptions(options)
  *
@@ -33,10 +32,10 @@ export type SubscriptionsManager<
  * // get all names which includes name
  * obj.names('a.b')
  */
-export const useSubscriptions = <
+export function useSubscriptions<
   K extends string = string,
   C extends SubscriptionEvent = SubscriptionEvent,
->(): SubscriptionsManager<K, C> => {
+>(): SubscriptionsManager<K, C> {
   const subscriptions = useRef({} as Record<K, Set<C>>)
 
   const names = useCallback<SubscriptionsManager<K, C>['names']>(name => {

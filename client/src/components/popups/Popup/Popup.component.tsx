@@ -8,12 +8,11 @@ import { cn, mix } from 'tools'
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
-import Layout from 'components/layouts/Layout'
-import Content from 'components/layouts/Content'
-import Footer from 'components/layouts/Footer'
-import ButtonGroup from 'components/actions/ButtonGroup'
+import Block from 'components/layouts/Block'
 import Header from 'components/layouts/Header'
-import Button, { ButtonProps } from 'components/actions/Button'
+import Footer from 'components/layouts/Footer'
+import Content from 'components/layouts/Content'
+import Button from 'components/actions/Button'
 
 // ---| self |---
 import css from './Popup.module.scss'
@@ -29,10 +28,10 @@ export type PopupVariant
 export type PopupTriggerOptions = TogglerReturnOptions
 
 export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
-  open?: boolean;
+  open?: boolean
   arrow?: boolean
   title?: React.ReactNode
-  actions?: mix.ValOrFunc<ButtonProps[], [PopupTriggerOptions]>
+  footer?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
   v?: PopupVariant
   maxHeight?: number
   maxWidth?: number
@@ -47,16 +46,14 @@ export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
 // TODO: add withPopup hoc like withSkeleton
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Popup
  *   title={t('LABEL.SCREENS')?.toUpperCase()}
- *   actions={[
- *     { content: t('ACTION.SAVE'), color: 'success', onClick: () => onSave?.(sizes) },
- *     { content: t('ACTION.CANCEL'), onClick: onCancel },
+ *   footer={o => [
+ *     <Button content={t('ACTION.SAVE')} start='save' color='success' onClick={() => onSave?.(sort(Object.values(enabled)))} />,
+ *     <Button content={t('ACTION.CLOSE')} start='close' onClick={o.off} />,
  *   ]}
- *   trigger={(options) => (
+ *   trigger={options => (
  *      <Button
  *        active={options.isOn}
  *        onClick={options.on}
@@ -68,12 +65,11 @@ export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
  *  Popup Content
  * </Popup>
  */
-export function Popup(props: PopupProps) {
+export function Popup(props: PopupProps) { // TODO: make actions ad common components via header, footer prop?
   const {
-    open, trigger, arrow, title, content, actions, maxHeight = 300, maxWidth, v = 'top',
+    open, trigger, arrow, title, content, footer, maxHeight = 300, maxWidth, v = 'top',
     disableHoverListener, onOpen, onClose, children, className, ...otherProps
   } = props
-  const _className = cn(css.Popup, className)
   const toggler = useToggler()
   const isMouseInsideRef = useRef<boolean>(false)
 
@@ -84,13 +80,13 @@ export function Popup(props: PopupProps) {
 
   return (
     <MuiTooltip
-      className={_className}
+      className={cn(css.Popup, className)}
       disableHoverListener={disableHoverListener}
       title={(
-        <Layout
-          v='tcb'
-          // g='xxs'
-          p='xxs'
+        <Block
+          v='y'
+          g='xxs'
+          p='xs'
           maxHeight={maxHeight}
           maxWidth={maxWidth}
           onMouseEnter={() => { isMouseInsideRef.current = true }}
@@ -104,19 +100,15 @@ export function Popup(props: PopupProps) {
           )}
 
           <Content>
-            <Text size='xxs' content={mix.fromValOrFunc(content, toggler)} />
-            {mix.fromValOrFunc(children, toggler)}
+            {mix.fromValOrFunc(content ?? children, toggler)}
           </Content>
 
-          {actions && (
+          {footer && (
             <Footer>
-              <ButtonGroup
-                className={css.PopupActions}
-                items={mix.fromValOrFunc(actions, toggler).map(item => ({ ...item, size: 'xxs' }))}
-              />
+              {mix.fromValOrFunc(footer, toggler)}
             </Footer>
           )}
-        </Layout>
+        </Block>
       )}
       placement={v}
       arrow={arrow}

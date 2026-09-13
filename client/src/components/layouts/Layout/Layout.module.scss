@@ -3,8 +3,10 @@
   grid-template-rows: auto 1fr auto;
 }
 
-:root {
-  // --ui-framework-color: var(--account-framework-color);
+@mixin clear-child-area() {
+  & > * {
+    grid-area: auto !important;
+  }
 }
 
 :global {
@@ -15,6 +17,8 @@
     &--board {
       grid-auto-columns: 1fr;
       grid-auto-rows: 1fr;
+
+      @include clear-child-area;
     }
 
     // TODO: add board-dense: x, y
@@ -23,24 +27,32 @@
       grid-template-columns: min-content;
       grid-auto-flow: column; /* Set the auto-placement algorithm to column */
       grid-auto-columns: min-content;
+
+      @include clear-child-area;
     }
 
     &--y {
       grid-template-rows: min-content;
       grid-auto-flow: row; /* Set the auto-placement algorithm to row */
       grid-auto-rows: min-content;
+
+      @include clear-child-area;
     }
 
     &--row {
       grid-template-columns: 1fr;
       grid-auto-flow: column; /* Set the auto-placement algorithm to column */
       grid-auto-columns: 1fr;
+
+      @include clear-child-area;
     }
 
     &--column {
       grid-template-rows: 1fr;
       grid-auto-flow: row; /* Set the auto-placement algorithm to row */
       grid-auto-rows: 1fr;
+
+      @include clear-child-area;
     }
 
     &--lcr {

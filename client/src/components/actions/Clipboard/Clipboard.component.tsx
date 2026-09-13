@@ -16,14 +16,11 @@ export type ClipboardProps = ButtonProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Clipboard />
  */
 export function Clipboard(props: ClipboardProps) {
   const { content, className, ...otherProps } = props
-  const _className = cn(css.Clipboard, className)
   const [isActive, setIsActive] = useState<boolean>()
   const tooltip = isActive ? `Copied: ${content}` : `Copy: ${content}`
 
@@ -44,9 +41,8 @@ export function Clipboard(props: ClipboardProps) {
       start='content_copy'
       tooltip={tooltip}
       active={isActive}
-      className={_className}
+      className={cn(css.Clipboard, className)}
       onClick={copy}
-      clear
       {...otherProps}
     />
   )

@@ -11,8 +11,6 @@ export type ApiProviderProps = Partial<QueryClientProviderProps>
 
 /**
  * Setup Api context.
- *
- * How to use
  * @example
  * <ApiProvider defaultProp={1} />
  */

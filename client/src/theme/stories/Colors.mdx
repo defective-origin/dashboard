@@ -1,12 +1,13 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
 import { COLORS, PALETTE } from '../theme.conf.ts';
 import { toName } from '../theme.tools.ts';
+import { toVar } from '../theme.tools.ts';
 
 
 <Meta title="Requirements/Colors" />
 
 # Colors
-**Colors:** `primary` `secondary` `success` `info` `warning` `error` `constrast` `bacground`   
+**Colors:** `primary` `secondary` `success` `info` `warning` `error` `contrast-primary` `contrast-secondary`   
 **Sub colors:** `1` - `6`   
 **Variable template:** `--color-{color}` `--color-{color}-{sub-color}`   
 
@@ -16,7 +17,7 @@ import { toName } from '../theme.tools.ts';
       key={color}
       title={color}
       subtitle={toName('color', color)}
-      colors={PALETTE[color]}
+      colors={PALETTE.filter(c => c.startsWith(color)).map(c => toVar('color', c))}
     />
   ))}
 </ColorPalette>

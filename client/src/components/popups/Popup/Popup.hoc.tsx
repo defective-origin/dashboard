@@ -9,31 +9,29 @@ import React from 'react'
 import Popup, { PopupProps } from './Popup.component'
 
 export type WithPopupProps = {
-  popup?: React.ReactNode | PopupProps
+  tooltip?: PopupProps
+} | {
+  tooltip?: React.ReactNode
+  tooltipSide?: PopupProps['v']
 }
 
 /**
+ * Extend any component by popup opportunity
  * @example
- * export default withPopup(Button, () => ({ className: css.name }))
+ * export default withPopup(Button)
  */
-export const withPopup = <P extends object>(
-  WrappedComponent: React.ComponentType<P>,
-  mapper?: (props: P) => PopupProps,
-) => {
-  const hoc = (props: P & Omit<WithPopupProps, 'v'>) => {
-    const { popup, ...other } = props
-    const item = <WrappedComponent {...(other as P)} />
-    const tooltipProps = typeof popup === 'object' ? popup : { content: popup }
+export function withPopup<P extends object>(WrappedComponent: React.ComponentType<P>) {
+  const hoc = (props: P & WithPopupProps) => {
+    const { tooltip, tooltipSide, ...other } = props as any
+    const trigger = <WrappedComponent {...other} />
 
-    if (popup !== null && popup !== undefined && popup !== false) {
-      return (
-        <Popup {...tooltipProps} {...mapper?.(other as P)}>
-          {item}
-        </Popup>
-      )
+    if (tooltip !== null && tooltip !== undefined && tooltip !== false) {
+      const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip, v: tooltipSide }
+
+      return <Popup {...tooltipProps} trigger={trigger} />
     }
 
-    return item
+    return trigger
   }
   hoc.displayName = `withPopup(${WrappedComponent.displayName || WrappedComponent.name})`
 

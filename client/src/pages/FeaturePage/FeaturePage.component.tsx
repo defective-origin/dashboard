@@ -17,7 +17,7 @@ import Tag from 'components/views/Tag'
 import Text from 'components/views/Text'
 import Icon from 'components/views/Icon'
 import Label from 'components/views/Label'
-import Image from 'components/views/Image'
+import Media from 'components/views/Media'
 import Field from 'components/forms/fields'
 import Block from 'components/layouts/Block'
 import { Form } from 'components/forms/Form'
@@ -29,6 +29,8 @@ import Clipboard from 'components/actions/Clipboard'
 
 // ---| self |---
 import css from './FeaturePage.module.scss'
+import Button from 'components/actions/Button'
+import Divider from 'components/layouts/Divider'
 
 export const FEATURE_SNAPSHOT_ID = 'FEATURE_SNAPSHOT_ID'
 
@@ -42,14 +44,11 @@ export type FeaturePageProps<T extends Feature = Feature> = PageProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <FeaturePage />
  */
 export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
-  const { snapshotId = FEATURE_SNAPSHOT_ID, menu = [], options, onInherit, onClone, onRemove, children, className, ...otherProps } = props
-  const _className = cn(css.FeaturePage, className)
+  const { extra, snapshotId = FEATURE_SNAPSHOT_ID, options, onInherit, onClone, onRemove, children, className, ...otherProps } = props
   const bookmark = useBookmark(options?.id)
   const info = useToggler()
   const edit = useToggler()
@@ -67,7 +66,7 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
 
   return (
     <Page
-      className={_className}
+      className={cn(css.FeaturePage, className)}
       as={Form}
       title={
         <Block v='x' aligns='center'>
@@ -78,64 +77,54 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
       }
       init={options}
       m='xs'
-      menu={[
-        ...menu,
-        !!menu.length && { variant: 'divider', v: 'y' },
-        {
-          start: 'photo_camera', tooltip: t('ACTION.UPDATE_SNAPSHOT'), onClick: () => h2i.toPng(document.getElementById(snapshotId) as HTMLElement)
-            .then(dataUrl => {
-              // TODO: save file
-              const img = new Image()
-              img.src = dataUrl
-              img.width = 300
-              // img.height = 300
-              img.style.position = 'absolute'
-              img.style.top = '50%'
-              img.style.left = '50%'
-              document.body.appendChild(img)
-            }),
-        },
-        onClone && {
-          // start: 'library_add',
-          start: 'content_copy',
-          tooltip: t('ACTION.CREATE_CLONE'),
-          onClick: onClone,
-        },
-        onInherit && {
-          start: 'tenancy',
-          tooltip: t('ACTION.INHERIT'),
-          onClick: onInherit,
-        },
-        onRemove && {
-          start: 'delete_forever',
-          tooltip: t('ACTION.REMOVE'),
-          onClick: () => modal({
-            name: 'confirm',
-            content: t('MESSAGE.CONFIRM.REMOVE'),
-            onSuccess: onRemove,
-          }),
-        },
-        { variant: 'divider', v: 'y' },
-        { start: 'save', tooltip: t('ACTION.SAVE'), disabled: true },
-        { start: 'undo', tooltip: t('ACTION.UNDO') },
-        { start: 'redo', tooltip: t('ACTION.REDO') },
-        { start: 'edit_square', tooltip: t('ACTION.EDIT'), active: edit.isOn, onClick: edit.toggle },
-        { variant: 'divider', v: 'y' },
-        { start: 'fullscreen', tooltip: t('ACTION.FULLSCREEN') },
-        { start: 'refresh', tooltip: t('ACTION.REFRESH') },
-        { start: 'settings', tooltip: t('ACTION.SETTINGS'), active: settings.isOn, onClick: settings.toggle },
-        { start: 'description', info: 'sync', tooltip: info.isOn ? t('ACTION.SHOW_PREVIEW') : t('ACTION.SHOW_INFO'), active: info.isOn, onClick: info.toggle },
-        { start: 'reviews', tooltip: t('ACTION.SHOW_REVIEWS'), onClick: () => modal({ name: 'feature-review', options: options?.reviews }) },
-        { start: 'beenhere', tooltip: t('ACTION.ADD_BOOKMARK'), active: bookmark.isOn, onClick: () => bookmark.toggle(options) },
-        { start: 'payments', tooltip: t('ACTION.PAY') },
+      extra={[
+        extra,
+        !!extra && <Divider v='y' />,
+        <Button start='photo_camera' tooltip={t('ACTION.UPDATE_SNAPSHOT')} onClick={() => h2i.toPng(document.getElementById(snapshotId) as HTMLElement)
+          .then(dataUrl => {
+            // TODO: save file
+            const img = new Image()
+            img.src = dataUrl
+            img.width = 300
+            // img.height = 300
+            img.style.position = 'absolute'
+            img.style.top = '50%'
+            img.style.left = '50%'
+            document.body.appendChild(img)
+          })}
+        />,
+        onClone && <Button start='content_copy' tooltip={t('ACTION.CREATE_CLONE')} onClick={onClone} />,
+        onInherit && <Button start='tenancy' tooltip={t('ACTION.INHERIT')} onClick={onInherit} />,
+        onRemove && <Button start='delete_forever' tooltip={t('ACTION.REMOVE')} onClick={() => modal({
+          name: 'confirm',
+          content: t('MESSAGE.CONFIRM.REMOVE'),
+          onSuccess: onRemove,
+        })} />,
+
+        <Divider v='y' />,
+
+        <Button start='save' tooltip={t('ACTION.SAVE')} />,
+        <Button start='undo' tooltip={t('ACTION.UNDO')} />,
+        <Button start='redo' tooltip={t('ACTION.REDO')} />,
+        <Button start='edit_square' tooltip={t('ACTION.EDIT')} active={edit.isOn} onClick={edit.toggle} />,
+
+        <Divider v='y' />,
+
+        <Button start='fullscreen' tooltip={t('ACTION.FULLSCREEN')} />,
+        <Button start='refresh' tooltip={t('ACTION.REFRESH')} />,
+        <Button start='settings' tooltip={t('ACTION.SETTINGS')} active={settings.isOn} onClick={settings.toggle} />,
+        <Button start='description' tooltip={info.isOn ? t('ACTION.SHOW_PREVIEW') : t('ACTION.SHOW_INFO')} active={info.isOn} onClick={info.toggle} />,
+        <Button start='reviews' tooltip={t('ACTION.SHOW_REVIEWS')} onClick={() => modal({ name: 'feature-review', options: options?.reviews })} />,
+        <Button start='beenhere' tooltip={t('ACTION.ADD_BOOKMARK')} active={bookmark.isOn} onClick={() => bookmark.toggle(options)} />,
+        <Button start='payments' tooltip={t('ACTION.PAY')} />,
       ]}
       {...otherProps}
     >
       <Page.Content className={css.Content} g='lg' p='sm'>
-        <Scroll v='y' size='xxs' />
+        <Scroll v='y' />
 
         <Section visible={info.isOn} maxWidth={760} justify='center' g='xs'>
-          <Image src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' />
+          <Media src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' />
           <Block v='x' g='xxs'>
             <User id={options?.createdBy?.id} />
 
@@ -178,7 +167,7 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
         </Block>
 
         <Block v='y' g='xxs' p='xs' justify='stretch'>
-          <Scroll v='y' size='xxs' />
+          <Scroll v='y' thin />
           {/* TODO: highlight if options is not matched */}
           <Field.Json path='options' disabled={edit.isOff} />
         </Block>

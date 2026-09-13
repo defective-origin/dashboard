@@ -14,8 +14,6 @@ export type ChartFormatsReturnOptions<N extends string> = Partial<Record<N, (val
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Chart />
  */

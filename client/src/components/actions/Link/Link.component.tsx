@@ -1,48 +1,34 @@
 import React from 'react'
-import MuiLink from '@mui/material/Link'
 
 // ---| core |---
 import { cn } from 'tools'
 
 // ---| components |---
-import Icon from 'components/views/Icon'
-import Action, { ActionProps } from 'components/actions/Action'
+import { ButtonStyleOptions, useButtonStyle } from '../Button'
+import { withPopup } from 'components/popups/Popup'
 
 // ---| self |---
 import css from './Link.module.scss'
-import { isNewTabLink } from './Link.tools'
 
-export type LinkProps = ActionProps & {
-  withIcon?: boolean
-}
+export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & ButtonStyleOptions
 
 /**
- * Component description.
- *
- * How to use
+ * Allows to open other sites.
  * @example
  * <Link />
  */
-export function Link(props: LinkProps) {
-  const { end, href, target, withIcon, className, ...otherProps } = props
-  const _className = cn(css.Link, className)
-  const isOpenInNewTab = isNewTabLink(href, target)
-  const linkTarget = isOpenInNewTab ? '_blank' : target
-  const showLinkIcon = withIcon || isOpenInNewTab
+export const Link = withPopup((props: LinkProps) => {
+  const { className, ...otherProps } = useButtonStyle({ end: 'open_in_new', ...props })
 
   return (
-    <Action
-      as={MuiLink}
-      className={_className}
-      target={linkTarget}
-      rel={isOpenInNewTab ? 'noreferrer' : undefined}
-      underline='hover'
-      href={href}
-      end={end || showLinkIcon && <Icon size={props.size} v='open_in_new' />}
+    <a
       {...otherProps}
+      className={cn(css.Link, className)}
+      target='_blank'
+      rel='noreferrer'
     />
   )
-}
+})
 
 Link.displayName = 'Link'
 

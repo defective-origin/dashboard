@@ -2,37 +2,32 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
+import { AppLink } from 'router'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Image, { ImageProps } from 'components/views/Image'
-import NavLink from 'components/actions/NavLink'
+import Media, { MediaProps } from 'components/views/Media'
 
 // ---| self |---
 import css from './Logo.module.scss'
 
-export type LogoProps = {
+export type LogoProps = Pick<MediaProps, 'width' | 'height'> & {
   className?: string
-  width?: ImageProps['width']
-  height?: ImageProps['height']
 }
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Logo />
  */
 export function Logo(props: LogoProps) {
-  const { width = 42, height, className, ...otherProps } = props
-  const _className = cn(css.Logo, className)
+  const { width, height, className, ...otherProps } = props
 
   return (
-    <NavLink className={_className} to='ROOT' clear {...otherProps}>
-      <Image className={css.Image} v='logo' width={width} height={height} />
-    </NavLink>
+    <AppLink className={cn(css.Logo, className)} to='ROOT' {...otherProps}>
+      <Media className={css.Image} v='logo' width={width} height={height} />
+    </AppLink>
   )
 }
 

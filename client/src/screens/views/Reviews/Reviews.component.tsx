@@ -20,18 +20,15 @@ export type ReviewsProps = BlockProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Reviews />
  */
 export function Reviews(props: ReviewsProps) {
   const { items = [], children, className, ...otherProps } = props
-  const _className = cn(css.Reviews, className)
 
   // TODO: show first 5 items. After them add show all buttons. On this button click open drawer
   return (
-    <Block className={_className} g='md' {...otherProps}>
+    <Block className={cn(css.Reviews, className)} g='md' {...otherProps}>
       {items.slice(0, 5).map(review => <Review key={review.id} {...review} />)}
 
       {children}

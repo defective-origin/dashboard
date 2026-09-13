@@ -18,17 +18,14 @@ export type ContentProps = LayoutProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Content />
  */
 export function Content(props: ContentProps) {
   const { scroll, children, className, ...otherProps } = props
-  const _className = cn(css.Content, className)
 
   return (
-    <Layout className={_className} area='center' g='xxs' {...otherProps}>
+    <Layout className={cn(css.Content, className)} area='center' g='xxs' {...otherProps}>
       {children}
 
       {scroll && <Scroll v={scroll} actions />}

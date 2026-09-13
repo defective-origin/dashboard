@@ -20,18 +20,15 @@ export type UserProps = BlockProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <User />
  */
 export function User(props: UserProps) {
   const { id, className, ...otherProps } = props
-  const _className = cn(css.User, className)
   const user = useUser(id)
 
   return (
-    <Block v='x' g='xs' aligns='center' className={_className} {...otherProps}>
+    <Block className={cn(css.User, className)} v='x' g='xs' aligns='center' {...otherProps}>
       <Avatar alt='user 4' size='lg' src={user.data?.image} />
       <Text content={user.data?.name ?? user.data?.email} size='xs' nowrap />
     </Block>

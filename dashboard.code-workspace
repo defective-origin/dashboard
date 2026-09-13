@@ -5,6 +5,13 @@
 		},
 		{
 			"path": "server"
+		},
+		{
+			"path": "e2e"
+		},
+	  {
+		  "name": "Root project folder",
+		  "path": "."
 		}
 	],
 	"settings": {}

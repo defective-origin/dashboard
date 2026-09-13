@@ -27,17 +27,14 @@ export type AlertProps = {
 
 /**
  * A notification in order to show some message.
- *
- * How to use
  * @example
  * <Alert />
  */
-export function Alert(props: AlertProps) {
+export function Alert(props: AlertProps) { // TODO: add icon and remove mui. icon, title, message, actions
   const { title, color, content, children = content, className, ...otherProps } = props
-  const _className = cn(css.Alert, className)
 
   return (
-    <MuiAlert className={_className} severity={color} {...otherProps}>
+    <MuiAlert className={cn(css.Alert, className)} severity={color} {...otherProps}>
       {title && <MuiAlertTitle><Text.H4 size='sm' content={title} /></MuiAlertTitle>}
       <Text.Caption content={children} />
     </MuiAlert>

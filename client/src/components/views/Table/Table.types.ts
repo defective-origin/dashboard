@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { arr, react } from 'tools'
+import { arr, obj } from 'tools'
 
 export type TableColumnAlign = 'left' | 'center' | 'right'
 export type TableOrder = arr.SortOrder
@@ -24,7 +24,7 @@ export type TableColumnCellView<T extends TableRecord, P extends object = object
   /** Align cell content horizontally. By default `align` used */
   alignCell?: TableColumnAlign
   /** Path to value from record */
-  field?: react.FlattenObjectKeys<T> // TODO: remove field and not take value by this field. add key to set uniq id
+  field?: obj.FlattenKeys<T> // TODO: remove field and not take value by this field. add key to set uniq id
   /** Custom cell content render component */
   cell?: React.FunctionComponent<P>
   // TODO: add editCell
@@ -43,7 +43,7 @@ export type TableColumnSorting<T extends TableRecord, P extends object = object>
   /** Default sort ordering `asc`, `desc` */
   order?: TableOrder
   /** Sort field. Sort by column.field by default */
-  sortBy?: react.FlattenObjectKeys<T>
+  sortBy?: obj.FlattenKeys<T>
   /** Sort column by `asc`, `desc` */
   sort?: boolean | TableSort<T, P>
 }
@@ -52,11 +52,11 @@ export type TableColumnFilter<T extends TableRecord, P extends object = object> 
 
 export type TableColumnDisplay = {
   /** disable actions for column in column menu. Bu default true */
-  customizable?: boolean;
+  customizable?: boolean
   /** hide column in table by default. Can be changed in column menu */
-  hidden?: boolean;
+  hidden?: boolean
   /** initial column position. Can be changed in column menu */
-  position?: number;
+  position?: number
   /** Set cell width. It's copied from minWidth if `fixed` is set */
   width?: number
   /** Set min cell width */

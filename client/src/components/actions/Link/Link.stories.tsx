@@ -19,8 +19,6 @@ const meta: Meta<typeof Link> = {
     size: field.size('LinkSize', 'md'),
     color: field.variants(LINK_COLORS, 'LinkColor', 'primary'),
     active: field.boolean(),
-    withIcon: field.boolean(),
-    loading: field.boolean(),
     className: field.string(),
     children: field.reactNode(true),
   },
@@ -32,7 +30,7 @@ type Story = StoryObj<typeof Link>
 
 const initVariants = <P extends keyof LinkProps>(prop: P, items: LinkProps[P][]) => (
   <Block minWidth={200} g='xs' v='x' aligns='center'>
-    {items.map((item, idx) => <Link key={idx} start='settings' content={item as string} end='close' size='xs' {...{ [prop]: item }}/>)}
+    {items.map((item, idx) => <Link key={idx} v='outlined' start='settings' content={item as string} end='close' size='xs' {...{ [prop]: item }}/>)}
   </Block>
 )
 
@@ -44,11 +42,9 @@ export const Demo: Story = {
     v: 'outlined',
     size: 'md',
     color: 'primary',
-    loading: false,
     start: 'settings',
     href: 'https://google.com',
     active: false,
-    withIcon: true,
   },
 }
 
@@ -60,32 +56,4 @@ export const Sizes: Story = {
 export const Colors: Story = {
   parameters: params('Color', LINK_COLORS),
   render: () => initVariants('color', LINK_COLORS),
-}
-
-export const Loading: Story = {
-  parameters: params('If `loading` is `true` the Skeleton component is shown.'),
-  args: {
-    content: 'content to hide',
-    loading: true,
-  },
-}
-
-export const Redirect: Story = {
-  parameters: params('If link is not belongs to current app or has blank flag then show `redirect icon`.'),
-  render: () => (
-    <Block minWidth={200} g='xs' aligns='center'>
-      {
-        [
-          { variant: 'link', href: '/localhost:5173/', withIcon: true },
-          { variant: 'link', content: 'http://localhost:5173/', href: 'http://localhost:5173/' },
-          { variant: 'link', content: 'localhost:5173/', href: 'localhost:5173/' },
-          { variant: 'link', content: '/localhost:5173/', href: '/localhost:5173/' },
-          { variant: 'link', content: '/localhost:5173/', href: '/localhost:5173/', target: '_blank' },
-          { variant: 'link', content: 'https://google.com', href: 'https://google.com' },
-          { variant: 'link', content: 'google.com', href: 'google.com' },
-          { variant: 'link', content: '/google.com', href: '/google.com' },
-        ].map((props, idx) => <Link key={idx} size='xs' {...props as LinkProps}/>)
-      }
-    </Block>
-  ),
 }

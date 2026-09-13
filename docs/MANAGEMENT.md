@@ -1,11 +1,11 @@
 # [↤](../README.md) Management
 
 ### Tasks
-- epos - Contains list of epics
-- epic - Contains list of features
-- feature - Contains list of independent tasks
-- task - Contains subtasks for each type of teammate
-- subtask - [ba, sa, design, be, fe, devops, fix, bugfix]
+- Epos: Contains list of epics
+- Epic: Contains list of features
+- Feature: Contains list of independent tasks
+- Task: Contains subtasks for each type of teammate
+- Subtask: contains tickets for `ba` `sa` `design` `be` `fe` `devops` `fix` `bugfix`
 
 ### Sprints
 - Long sprint [2 weeks]
@@ -19,11 +19,11 @@ Releases every day. the tasks are then small and tasty. Start with large sprints
 - Everyday release notes
 
 ### Development curve exponent
-#### __Best__ - Unification -> Feature.
+#### Best:  Unification -> Feature.
 ![Best](https://cdn.kastatic.org/ka-perseus-graphie/c20300b085c99b99e30ed444620ba6a0ed506208.svg)
-#### __Middle__ - Partial Unification -> Feature -> Partial Unification
+#### Middle: Partial Unification -> Feature -> Partial Unification
 ![Middle](https://www.joinc12.com/wp-content/uploads/2022/03/Growth-cycle-1024x599.png)
-#### __Worst__ - Feature -> Without Unification or Partial Unification
+#### Worst: Feature -> Without Unification or Partial Unification
 ![Worst](https://www.cloudxdpo.com/hubfs/products_increase.jpg)
 
 ### Tech Debt

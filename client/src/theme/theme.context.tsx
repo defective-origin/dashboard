@@ -50,13 +50,11 @@ const getCurrentTheme = () => window.matchMedia('(prefers-color-scheme: dark)').
 
 export type ThemeProviderProps = React.PropsWithChildren<{
   /** it's used for storybook only */
-  theme?: ThemeVariant;
+  theme?: ThemeVariant
 }>
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <ThemeProvider />
  */

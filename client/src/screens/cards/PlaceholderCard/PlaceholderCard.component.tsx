@@ -19,17 +19,14 @@ export type PlaceholderCardProps = ItemProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <PlaceholderCard />
  */
 export function PlaceholderCard(props: PlaceholderCardProps) {
   const { name = 'COMPONENT', children, className, ...otherProps } = props
-  const _className = cn(css.PlaceholderCard, className)
 
   return (
-    <Item className={_className} p='xl' {...otherProps}>
+    <Item className={cn(css.PlaceholderCard, className)} p='xl' {...otherProps}>
       <Text.Body2
         className={css.Message}
         color='secondary'

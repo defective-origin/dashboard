@@ -18,14 +18,12 @@ export type SliderFieldProps = FieldProps<number | number[]> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <SliderField />
  */
 export function SliderField(props: SliderFieldProps) {
   const { value = 0, marks, onChange, className, ...otherProps } = props
-  const _className = cn(css.SliderField, className)
+
   const handleChange = useCallback((event: Event, value: number | number[]) =>
     onChange?.(value, event)
   , [onChange])
@@ -33,7 +31,7 @@ export function SliderField(props: SliderFieldProps) {
   return (
     <MuiSliderField
       size='small'
-      className={_className}
+      className={cn(css.SliderField, className)}
       value={value}
       marks={marks}
       onChange={handleChange}

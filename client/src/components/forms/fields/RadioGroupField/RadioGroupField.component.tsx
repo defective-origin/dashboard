@@ -21,17 +21,14 @@ export type RadioGroupFieldProps = FieldProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <RadioGroupField />
  */
 export function RadioGroupField(props: RadioGroupFieldProps) {
   const { columns, value, items = [], id, name, className, ...otherProps } = props
-  const _className = cn(css.RadioGroupField, className)
 
   return (
-    <Layout className={_className} columns={columns}>
+    <Layout className={cn(css.RadioGroupField, className)} columns={columns}>
       {items.map((item, idx) => <RadioField
         key={idx}
         id={`${id}.${idx}`}

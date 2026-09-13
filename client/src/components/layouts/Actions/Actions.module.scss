@@ -1,0 +1,14 @@
+.Actions {
+}
+
+.group {
+  gap: 0;
+  border: var(--border);
+
+  & > * {
+    border-right: var(--border);
+    border-bottom: var(--border);
+    padding: var(--space-xs);
+    border-radius: 0;
+  }
+}

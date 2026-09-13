@@ -10,20 +10,17 @@ import { AlertColor } from 'components/views/Alert'
 // ---| self |---
 import { Toast, ToastOptions, initToastKey } from './Toast.component'
 
-const ALERT_ICON_MAP: Record<AlertColor, IconVariant> = {
+const ALERT_ICON_MAP: Partial<Record<AlertColor, IconVariant>> = {
   success: 'check_circle',
   info: 'info',
   warning: 'warning',
   error: 'error',
-  'contrast-primary': 'info',
-  'contrast-secondary': 'info',
 }
 
 const showToast = (data: ToastOptions, options: MuiToastOptions<ToastOptions>) => reactToast(Toast, {
   ...options,
   data: { ...options.data, ...data },
-  type: data?.color ?? 'info',
-  icon: () => <Icon v={ALERT_ICON_MAP[data?.color ?? 'info']} />,
+  icon: () => <Icon v={data?.color ? ALERT_ICON_MAP[data.color] : 'info'} />,
 })
 
 const message = (options: ToastOptions) => showToast(options, {
@@ -42,14 +39,12 @@ const guard = (options: ToastOptions) => showToast(options, {
   theme: 'light',
   containerId: initToastKey('guards'),
   autoClose: false,
-  closeButton: false,
   closeOnClick: false,
   draggable: false,
 })
 
 /**
  * Hook descriptions
- *
  * @example
  * const options = useToast(conf)
  */

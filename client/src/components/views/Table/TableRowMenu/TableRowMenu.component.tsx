@@ -6,39 +6,27 @@ import { cn } from 'tools'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Button from 'components/actions/Button'
-import Menu, { MenuItem, MenuProps } from 'components/actions/Menu'
+import Dropdown, { DropdownProps } from 'components/actions/Dropdown'
 
 // ---| self |---
 import css from './TableRowMenu.module.scss'
 import { TableColumn, TableRecord } from '../Table.types'
 
-export type TableRowMenuItem = MenuItem
-export type TableRowMenuProps<T extends TableRecord> = Omit<MenuProps, 'trigger'> & {
+
+export type TableRowMenuProps<T extends TableRecord> = DropdownProps & {
   record?: T
   column?: TableColumn<T>
 }
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TableRowMenu />
  */
 export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>) {
-  const { record, column, items, className, ...otherProps } = props
-  const _className = cn(css.TableRowMenu, className)
+  const { record, column, className, ...otherProps } = props
 
-  return (
-    <Menu
-      v='left'
-      items={items}
-      className={_className}
-      trigger={o => <Button start='more_vert' active={o.isOn} clear />}
-      {...otherProps}
-    />
-  )
+  return <Dropdown className={cn(css.TableRowMenu, className)} start='more_vert' {...otherProps} />
 }
 
 TableRowMenu.displayName = 'TableRowMenu'

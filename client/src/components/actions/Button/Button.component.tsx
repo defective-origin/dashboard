@@ -1,42 +1,25 @@
 import React from 'react'
-import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button'
 
 // ---| core |---
-import { cn } from 'tools'
-
 // ---| components |---
-import Action, { ActionProps } from 'components/actions/Action'
+import { withPopup } from 'components/popups/Popup'
 
 // ---| self |---
-import css from './Button.module.scss'
+import { ButtonStyleOptions, useButtonStyle } from './Button.hooks'
 
-export type ButtonVariant = MuiButtonProps['variant']
 
-export type ButtonProps = ActionProps & {
-  v?: ButtonVariant
-}
-
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonStyleOptions
 
 /**
- * Component description.
- *
- * How to use
+ * Simple button without inner logic.
  * @example
- * <Button />
+ * <Button start='icon-name' content='Cancel' end='icon-name' onCLick={handleClick} popup='click me' />
  */
-export const Button = (props: ButtonProps) => {
-  const { v, className, ...otherProps } = props
-  const _className = cn(css.Button, className)
+export const Button = withPopup((props: ButtonProps) => {
+  const updatedProps = useButtonStyle(props)
 
-  return (
-    <Action
-      as={MuiButton}
-      className={_className}
-      variant={v}
-      {...otherProps}
-    />
-  )
-}
+  return <button {...updatedProps} />
+})
 
 Button.displayName = 'Button'
 

@@ -10,6 +10,7 @@ import { cn } from 'tools'
 // ---| self |---
 import css from './{{pascalCase name}}.module.scss'
 
+
 export type {{pascalCase name}}Props = {
   className?: string
   children?: React.ReactNode
@@ -17,16 +18,17 @@ export type {{pascalCase name}}Props = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <{{pascalCase name}} />
  */
 export function {{pascalCase name}}(props: {{pascalCase name}}Props) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.{{pascalCase name}}, className)
 
-  return <div className={_className} {...otherProps}>{children}</div>
+  return (
+    <div className={cn(css.{{pascalCase name}}, className)} {...otherProps}>
+      {children}
+    </div>
+  )
 }
 
 {{pascalCase name}}.displayName = '{{pascalCase name}}'

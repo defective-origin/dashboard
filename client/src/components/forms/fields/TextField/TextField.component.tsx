@@ -19,21 +19,19 @@ export type TextFieldProps = FieldProps<string> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TextField />
  */
 export function TextField(props: TextFieldProps) {
   const { value = '', onChange, className, ...otherProps } = props
-  const _className = cn(css.TextField, className)
+
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
     onChange?.(event.target.value, event)
   , [onChange])
 
   return (
     <MuiTextField
-      className={_className}
+      className={cn(css.TextField, className)}
       size='small'
       value={value}
       rows={otherProps.multiline ? 5 : undefined}

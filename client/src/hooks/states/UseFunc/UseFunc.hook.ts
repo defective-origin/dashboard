@@ -6,7 +6,6 @@ const ERROR_CALLBACK = () => { throw new Error('Callback cannot be called') }
 /**
  * Return stable function bound with ref.
  * It can be useful for events and handlers.
- *
  * @example
  * const [current, setCurrent] = useState(1) // getter
  * const fn = useFunc(() => setCurrent(current + 1))
@@ -43,7 +42,7 @@ const ERROR_CALLBACK = () => { throw new Error('Callback cannot be called') }
  * useEffect(() => fetch().then(fn), [fn]) // it works fine
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export const useFunc = <F extends Function>(cb: F): F => {
+export function useFunc<F extends Function>(cb: F): F {
   const ref = useRef<F>(ERROR_CALLBACK as never)
 
   // eslint-disable-next-line react-hooks/refs

@@ -3,12 +3,11 @@ import useFunc from '../states/UseFunc'
 
 /**
  * Hook descriptions
- *
  * @example
  * const state = useThrottle(options)
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export const useThrottle = <F extends Function>(cb: F, limit = 300): F => {
+export function useThrottle<F extends Function>(cb: F, limit = 300): F {
   const lastRun = useRef(0)
 
   return useFunc((...args: unknown[]) => {

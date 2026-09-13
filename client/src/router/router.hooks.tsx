@@ -1,24 +1,23 @@
 
-import { NavigateOptions as ReactNavigateOptions, useNavigate as useRouterNavigate } from 'react-router-dom'
-import { RouteLinks } from './router.constants'
+import { NavigateOptions as ReactNavigateOptions, useMatch, useNavigate as useRouterNavigate } from 'react-router-dom'
 import { useFunc } from 'hooks'
-import { generateRouterPath, GenerateRouterPathOptions } from './router.tools'
+import { generateAppPath, AppLinkOptions, AppLinkVariant } from './router.tools'
 
-export type NavigateOptions<Name extends RouteLinks> = ReactNavigateOptions & {
-  params: GenerateRouterPathOptions<Name>
-}
+export type AppNavigateOptions<Name extends AppLinkVariant> = ReactNavigateOptions & AppLinkOptions<Name>
 
-export function useNavigate<Name extends RouteLinks>() {
+export function useAppNavigate<Name extends AppLinkVariant>() {
   const nav = useRouterNavigate()
 
-  return useFunc((name: Name, options?: NavigateOptions<Name>) => {
-    return nav(
-      generateRouterPath(
-        name,
-        options?.params as any,
-      ),
-      options,
-    )
+  return useFunc((options: AppNavigateOptions<Name> = {}) => {
+    const { to, params, search, ...other } = options
+    const path = generateAppPath({ to, params, search })
+
+    return nav(path, other)
   },
   )
 }
+
+export const useAppMatch = <Name extends AppLinkVariant>(options: AppLinkOptions<Name>) => {
+  return useMatch(generateAppPath(options))
+}
+

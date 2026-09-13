@@ -57,7 +57,6 @@ export type MarkupBoardProps<T = any> = {
  * Grid examples:
  * - https://grid.layoutit.com/
  * - https://cssgrid-generator.netlify.app/
- *
  * @example
  * const items = [
  *   { id: 1 },
@@ -91,9 +90,8 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
     ref, id, view, items, value, widget,
     toKey = item => (item as object).toString(), onChange, onError, className, ...otherProps
   } = props
-  const _className = cn(css.MarkupBoard, className)
   const [select, setSelect] = useState<T>()
-  const startCellRef = useRef<{ row: number, column: number }>(null)
+  const startCellRef = useRef<{ row: number; column: number }>(null)
   const selectionRef = useRef<HTMLDivElement>(null)
   const markup = useMemo(() => value ?? initMarkup(0, 1, 1, 4), [value])
   const grid = useMemo(() => toMarkupGrid(markup), [markup])
@@ -227,7 +225,7 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
   }
 
   return (
-    <div id={id} className={_className} style={toCssGrid(grid)} {...otherProps}>
+    <div id={id} className={cn(css.MarkupBoard, className)} style={toCssGrid(grid)} {...otherProps}>
       {/* lines */}
       {!view && grid.rows.map((size, idx) => <MarkupBoardLine key={toUniqKey(idx, size)} v='row' index={idx} span={grid.columns.length} />)}
       {!view && grid.columns.map((size, idx) => <MarkupBoardLine key={toUniqKey(idx, size)} v='column' index={idx} span={grid.rows.length} />)}

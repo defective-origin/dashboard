@@ -1,57 +1,50 @@
 import React from 'react'
-import MuiCard from '@mui/material/Card'
-import MuiCardActionArea from '@mui/material/CardActionArea'
-import MuiCardActions from '@mui/material/CardActions'
-import MuiCardContent from '@mui/material/CardContent'
-import MuiCardHeader from '@mui/material/CardHeader'
-import MuiCardMedia from '@mui/material/CardMedia'
 
 // ---| core |---
 import { cn } from 'tools'
 
 // ---| components |---
+import Media from 'components/views/Media'
+import Aside from 'components/layouts/Aside'
+import Header from 'components/layouts/Header'
+import Footer from 'components/layouts//Footer'
+import Content from 'components/layouts/Content'
+import Actions from 'components/layouts/Actions'
 import Divider from 'components/layouts/Divider'
+import Layout, { LayoutProps } from 'components/layouts/Layout'
 
 // ---| self |---
 import css from './Card.module.scss'
 
-export type CardProps = {
-  horizontal?: boolean
-  divided?: boolean
-  style?: React.CSSProperties
-  className?: string
-  children?: React.ReactNode
-}
 
+export type CardProps = LayoutProps & {
+  divided?: boolean
+}
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Card />
  */
-export const Card = (props: CardProps) => {
-  const { divided, horizontal, children, className, ...otherProps } = props
-  const _className = cn(css.Card, {
-    [css.horizontal]: horizontal,
-    [css.divided]: divided,
-  }, className)
+export const Card = (props: CardProps) => { // TODO: add stories
+  const { divided, children, className, ...otherProps } = props
 
+  // TODO: divide by [role='header'], [role='footer']
   return (
-    <MuiCard className={_className} {...otherProps}>
+    <Layout className={cn(css.Card, divided && css.divided, className)} g='xs' {...otherProps}>
       {children}
-    </MuiCard>
+    </Layout>
   )
 }
 
 Card.displayName = 'Card'
 
-Card.ActionArea = MuiCardActionArea
-Card.Actions = MuiCardActions
-Card.Content = MuiCardContent
-Card.Header = MuiCardHeader
-Card.Media = MuiCardMedia
+Card.Media = Media
+Card.Aside = Aside
+Card.Footer = Footer
+Card.Header = Header
+Card.Content = Content
+Card.Actions = Actions
 Card.Divider = Divider
 
 export default Card

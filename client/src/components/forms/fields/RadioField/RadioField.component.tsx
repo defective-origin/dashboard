@@ -19,14 +19,11 @@ export type RadioFieldProps = FieldProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <RadioField />
  */
 export function RadioField(props: RadioFieldProps) {
   const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
-  const _className = cn(css.RadioField, className)
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     checked && onChange?.(value, event)
@@ -39,7 +36,7 @@ export function RadioField(props: RadioFieldProps) {
       disabled={disabled}
       control={
         <MuiRadioField
-          className={_className}
+          className={cn(css.RadioField, className)}
           size='small'
           value={value}
           checked={checked}

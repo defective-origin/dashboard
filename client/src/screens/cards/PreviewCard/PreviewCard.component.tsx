@@ -5,6 +5,7 @@ import { cn } from 'tools'
 import { t } from 'locale'
 import { useFunc } from 'hooks'
 import { Feature, useBookmark } from 'api'
+import { AppLink, AppLinkProps, AppLinkVariant } from 'router'
 
 // ---| pages |---
 // ---| screens |---
@@ -14,12 +15,11 @@ import Label from 'components/views/Label'
 import Card from 'components/layouts/Card'
 import Block from 'components/layouts/Block'
 import Button from 'components/actions/Button'
-import NavLink, { NavLinkProps, NavLinkVariant } from 'components/actions/NavLink'
 
 // ---| self |---
 import css from './PreviewCard.module.scss'
 
-export type PreviewCardProps<V extends NavLinkVariant> = NavLinkProps<V> & {
+export type PreviewCardProps<V extends AppLinkVariant> = AppLinkProps<V> & {
   options?: Feature
   className?: string
   children?: React.ReactNode
@@ -27,14 +27,11 @@ export type PreviewCardProps<V extends NavLinkVariant> = NavLinkProps<V> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <PreviewCard />
  */
-export function PreviewCard<V extends NavLinkVariant>(props: PreviewCardProps<V>) {
+export function PreviewCard<V extends AppLinkVariant>(props: PreviewCardProps<V>) {
   const { options, children, className, ...otherProps } = props
-  const _className = cn(css.PreviewCard, className)
   const bookmark = useBookmark(options?.id)
 
   const toggleBookmark = useFunc((event: React.MouseEvent) => {
@@ -43,26 +40,28 @@ export function PreviewCard<V extends NavLinkVariant>(props: PreviewCardProps<V>
   })
 
   return (
-    <NavLink className={_className} clear {...otherProps}>
-      <Card>
-        <Card.Content style={{ height: '-webkit-fill-available' }}>
-          <Block v='x' g='xxs' justifies='space-between' aligns='center'>
-            <Text content={options?.name} size='xs' />
-            <Button start='beenhere' size='sm' active={bookmark.isOn} onClick={toggleBookmark} />
-          </Block>
+    <AppLink className={cn(css.PreviewCard, className)} v='wrapper' {...otherProps}>
+      <Card v='y'>
+        <Card.Header g='xxs' p='sm' justifies='space-between' aligns='center'>
+          <Text content={options?.name} size='xs' />
+          <Button start='beenhere' size='sm' active={bookmark.isOn} onClick={toggleBookmark} />
+        </Card.Header>
 
-          <Block v='x' g='xxs' className={css.Meta}>
-            <Label icon='star' content={options?.rate} format='number' tooltip={t('LABEL.RATE')} />
-            <Label icon='payments' content={options?.price} format='currency' tooltip={t('LABEL.PRICE')} />
-            <Label icon='schedule' content={options?.updatedAt} format='day-of-month-year' tooltip={t('LABEL.LAST_UPDATE')} />
-          </Block>
+        {children && (
+          <Card.Content>
+            {children}
+          </Card.Content>
+        )}
 
-          {children}
-        </Card.Content>
+        <Card.Media height={300} width='100%' src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' />
 
-        <Card.Media component='img' image='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' sx={{ height: 300 }} />
+        <Block v='x' g='xxs' className={css.Meta}>
+          <Label icon='star' content={options?.rate} format='number' tooltip={t('LABEL.RATE')} />
+          <Label icon='payments' content={options?.price} format='currency' tooltip={t('LABEL.PRICE')} />
+          <Label icon='schedule' content={options?.updatedAt} format='day-of-month-year' tooltip={t('LABEL.LAST_UPDATE')} />
+        </Block>
       </Card>
-    </NavLink>
+    </AppLink>
   )
 }
 

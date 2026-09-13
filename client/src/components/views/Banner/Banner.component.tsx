@@ -5,7 +5,7 @@ import { cn } from 'tools'
 
 // ---| components |---
 import Text from 'components/views/Text'
-import Image, { ImageVariant } from 'components/views/Image'
+import Media, { MediaVariant } from 'components/views/Media'
 import Progress from 'components/views/Progress'
 import Block from 'components/layouts/Block'
 
@@ -22,14 +22,12 @@ export type BannerProps = {
   absolute?: boolean
   loading?: boolean
   visible?: boolean
-  image?: ImageVariant,
+  image?: MediaVariant
   // TODO: add size
 }
 
 /**
  * Component render banner with image and text.
- *
- * How to use
  * @example
  * <Banner
  *  src='error.jpg'
@@ -55,7 +53,6 @@ export function Banner(props: BannerProps) {
     contentClassName,
     ...otherProps
   } = props
-  const _className = cn(css.Banner, { [css.Absolute]: absolute }, className)
   // TODO: move to screens but what about table banner? use global theme context?
 
   if (!visible && !loading) {
@@ -63,12 +60,12 @@ export function Banner(props: BannerProps) {
   }
 
   return (
-    <Block className={_className} stretch {...otherProps}>
+    <Block className={cn(css.Banner, { [css.Absolute]: absolute }, className)} stretch {...otherProps}>
       <Progress className={css.Progress} visible={loading} />
 
       {!loading && (
         <Block className={cn(css.Content, contentClassName)}>
-          <Image v={image} />
+          <Media v={image} />
 
           {title && <Text.H4 align='center' color='primary' ellipsis content={title} />}
           {subtitle && <Text.H5 align='center' color='primary' ellipsis content={subtitle} />}

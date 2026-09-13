@@ -164,7 +164,6 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  */
 export function Form<O extends object>(props: FormProps<O>) {
   const { init, manager, checkOnSubmit, notifyParent, onSubmit, onChange, onReset, children, className, ...otherProps } = props
-  const _className = cn(css.Form, className)
   const [initial] = useState<O>({} as O)
   const [state] = useState<O>({} as O)
   const [errors] = useState({} as FormErrors<O>)
@@ -248,7 +247,7 @@ export function Form<O extends object>(props: FormProps<O>) {
   const focus = useFunc<FormManager<O>['focus']>(path => document.getElementById(path)?.focus())
 
   const connect = useFunc<FormManager<O>['connect']>(field => {
-    fields[field.path] = field
+    obj.set(fields, field.path, field)
 
     if (field.init !== undefined) {
       obj.set(initial, field.path, field.init)
@@ -258,8 +257,7 @@ export function Form<O extends object>(props: FormProps<O>) {
   })
 
   const disconnect = useFunc<FormManager<O>['disconnect']>(field => {
-    delete fields[field.path]
-
+    obj.del(fields, field.path)
     obj.del(initial, field.path, true)
     obj.del(errors, field.path, true)
   })
@@ -287,7 +285,7 @@ export function Form<O extends object>(props: FormProps<O>) {
 
   // html form handlers
   const resetForm = useFunc(() => reset())
-  const submitForm = useFunc((event: React.MouseEvent<HTMLFormElement>) => {
+  const submitForm = useFunc((event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
     submit()
   })
@@ -296,7 +294,7 @@ export function Form<O extends object>(props: FormProps<O>) {
     <FormContext.Provider value={formManager as unknown as FormManager<object>}>
       <Layout
         as='form'
-        className={_className}
+        className={cn(css.Form, className)}
         onSubmit={submitForm}
         onReset={resetForm}
         {...otherProps}

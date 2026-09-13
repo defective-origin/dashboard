@@ -54,7 +54,7 @@ export const variants = (items: unknown[], summary: string, defaultSummary?: str
   table: tableDocs(summary, defaultSummary),
 })
 
-export const size = (summary: string, defaultSummary?: Size) => field.variants(SIZES, summary, defaultSummary)
+export const size = (summary: string = 'Size', defaultSummary?: Size) => field.variants(SIZES, summary, defaultSummary)
 
 export const reactNode = (withContent?: boolean): ArgTypes[string] => ({
   type: 'string',

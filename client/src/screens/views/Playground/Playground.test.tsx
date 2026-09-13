@@ -1,6 +1,4 @@
 import Playground from './Playground.component'
-// import usePlayground from './Playground.hooks'
-// import PlaygroundProvider, Playground from './Playground.context'
 
 describe('[Playground] component', () => {
   it('should render component', () => {
@@ -9,21 +7,3 @@ describe('[Playground] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[Playground] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => usePlayground())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[Playground] context', () => {
-//   const wrapper = (props: PlaygroundProps) => <PlaygroundProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => usePlayground(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

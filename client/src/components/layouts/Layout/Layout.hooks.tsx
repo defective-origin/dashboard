@@ -44,7 +44,6 @@ export type LayoutReturnOptions<O extends object> = ItemReturnOptions<O>
  * Allows to work with Grid items.
  *
  * https://doka.guide/css/grid-guide/
- *
  * @example
  * const options = useLayout(conf)
  */

@@ -20,14 +20,11 @@ export type CheckboxListFieldProps = FieldProps<CheckboxValue[]> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <CheckboxListField />
  */
 export function CheckboxListField(props: CheckboxListFieldProps) {
   const { columns, value, items = [], id, name, onChange, className, ...otherProps } = props
-  const _className = cn(css.CheckboxListField, className)
 
   const handleChange = useCallback((v: CheckboxValue, event: React.ChangeEvent<HTMLInputElement>) => {
     if (v) {
@@ -38,7 +35,7 @@ export function CheckboxListField(props: CheckboxListFieldProps) {
   }, [value, onChange])
 
   return (
-    <Layout id={id} className={_className} columns={columns}>
+    <Layout id={id} className={cn(css.CheckboxListField, className)} columns={columns}>
       {items.map((item, idx) =>
         <CheckboxField
           key={idx}

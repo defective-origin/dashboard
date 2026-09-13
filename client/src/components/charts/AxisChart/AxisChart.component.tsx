@@ -48,14 +48,11 @@ export type AxisChartProps = ChartProps<typeof AXIS_ITEMS_MAP> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <AxisChart />
  */
 export function AxisChart(props: AxisChartProps) {
   const { refs, x, y, xr, yr, formats, grid, brush, items, children, className, ...otherProps } = props
-  const _className = cn(css.AxisChart, className)
   const formatMap = useChartFormats(formats)
   const zeroRefLines = useMemo(() => ({
     x: xr && items?.length,
@@ -65,7 +62,7 @@ export function AxisChart(props: AxisChartProps) {
   // TODO: add linear gradient https://recharts.org/en-US/api/AreaChart
 
   return (
-    <Chart className={_className} context={ComposedChart} items={items} map={AXIS_ITEMS_MAP} formats={formats} {...otherProps}>
+    <Chart className={cn(css.AxisChart, className)} context={ComposedChart} items={items} map={AXIS_ITEMS_MAP} formats={formats} {...otherProps}>
       {grid && <CartesianGrid strokeDasharray='3 3' stroke='var(--color-primary)' strokeWidth={0.4} strokeOpacity={0.4} {...toProps(grid)} />}
       {brush && <Brush height={14} stroke='var(--color-primary)' strokeWidth={0.4} strokeOpacity={0.4} tickFormatter={formatMap.x} {...toProps(brush)} />}
 

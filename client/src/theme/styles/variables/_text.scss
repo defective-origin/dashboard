@@ -6,8 +6,8 @@ $text-name: text;
 @mixin init-text-variables() {
   @include tools.init-size-variables(
     $text-name,
-    0.75rem,                                      /* 12px - Meta/labels */
-    0.875rem,                                     /* 14px - Sidebar/code/secondary UI */
+    clamp(0.5rem, 0.11vw + 0.70rem, 0.70rem),     /* 8px -> 11px (Meta/labels) */
+    clamp(0.75rem, 0.11vw + 0.70rem, 0.875rem),   /* 12px -> 14px (Sidebar/code/secondary UI) */
     clamp(0.938rem, 0.22vw + 0.89rem, 1rem),      /* 15px -> 16px (Base body) */
     clamp(1.063rem, 0.43vw + 0.96rem, 1.188rem),  /* 17px -> 19px (Subheadings/lead text) */
     clamp(1.25rem, 0.87vw + 1.05rem, 1.5rem),     /* 20px -> 24px (h3) */

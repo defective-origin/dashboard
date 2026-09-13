@@ -1,6 +1,5 @@
 import Footer from './Footer.component'
-// import useFooter from './Footer.hooks'
-// import FooterProvider, Footer from './Footer.context'
+
 
 describe('[Footer] component', () => {
   it('should render component', () => {

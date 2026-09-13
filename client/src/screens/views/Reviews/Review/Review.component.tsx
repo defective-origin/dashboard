@@ -20,17 +20,14 @@ export type ReviewProps = BlockProps & FeatureReview
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Review />
  */
 export function Review(props: ReviewProps) {
   const { rate, content, updatedAt, createdBy, children, className, ...otherProps } = props
-  const _className = cn(css.Review, className)
 
   return (
-    <Block className={_className} g='xs' {...otherProps}>
+    <Block className={cn(css.Review, className)} g='xs' {...otherProps}>
       <Block v='x' {...otherProps}>
         <User id={createdBy?.id} />
         <Block v='y' {...otherProps}>

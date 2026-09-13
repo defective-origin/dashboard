@@ -21,14 +21,11 @@ export type FormButtonProps = ButtonProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <FormButton />
  */
 export function FormButton(props: FormButtonProps) {
   const { path, type, children, onClick, className, ...otherProps } = props
-  const _className = cn(css.FormButton, className)
   const form = useForm()
 
   const handleClick = useFunc((event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -43,7 +40,7 @@ export function FormButton(props: FormButtonProps) {
     onClick?.(event)
   })
 
-  return <Button className={_className} type={type} onClick={handleClick} {...otherProps}>{children}</Button>
+  return <Button className={cn(css.FormButton, className)} type={type} onClick={handleClick} {...otherProps}>{children}</Button>
 }
 
 FormButton.displayName = 'FormButton'

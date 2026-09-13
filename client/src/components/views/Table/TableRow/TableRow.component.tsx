@@ -24,17 +24,19 @@ export type TableRowProps<T extends TableRecord> = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TableRow />
  */
 export const TableRow = React.memo(<T extends TableRecord>(props: TableRowProps<T>) => {
   const { id = 'head', item, th = !item, columns, onSort, className, ...otherProps } = props
-  const _className = cn(css.TableRow, { [css.Hover]: !th }, className)
 
   return (
-    <MuiTableRow id={id as string} className={_className} tabIndex={-1} {...otherProps}>
+    <MuiTableRow
+      id={id as string}
+      className={cn(css.TableRow, { [css.Hover]: !th }, className)}
+      tabIndex={-1}
+      {...otherProps}
+    >
       {columns?.map(column => (
         <TableCell
           id={`${id}-${column.key}`}

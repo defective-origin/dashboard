@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete'
+import MuiAutocomplete from '@mui/material/Autocomplete'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -19,20 +19,17 @@ export type TagsFieldProps = FieldProps<string[]> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TagsField />
  */
 export function TagsField(props: TagsFieldProps) {
   const { value = [], options = [], onChange, className, ...otherProps } = props
-  const _className = cn(css.TagsField, className)
 
   return (
     <MuiAutocomplete
       multiple
       options={options}
-      className={_className}
+      className={cn(css.TagsField, className)}
       size='small'
       value={value}
       disableCloseOnSelect

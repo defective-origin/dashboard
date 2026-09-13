@@ -34,19 +34,16 @@ export type RadarChartProps = ChartProps<typeof RADAR_ITEMS_MAP> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <RadarChart />
  */
 export function RadarChart(props: RadarChartProps) {
   const { formats, radius, angle, grid, children, className, ...otherProps } = props
-  const _className = cn(css.RadarChart, className)
   const formatMap = useChartFormats(formats)
   const radiusLabelAngle = 360 / (props.items?.length ?? 1)
 
   return (
-    <Chart className={_className} context={RechartRadarChart} map={RADAR_ITEMS_MAP} formats={formats} {...otherProps}>
+    <Chart className={cn(css.RadarChart, className)} context={RechartRadarChart} map={RADAR_ITEMS_MAP} formats={formats} {...otherProps}>
       {grid && <PolarGrid gridType='circle' {...toProps(grid)} />}
       {angle && <PolarAngleAxis tickFormatter={formatMap.angle} {...toProps(angle)} />}
       {radius && <PolarRadiusAxis orientation='middle' stroke='transparent' angle={radiusLabelAngle} tickFormatter={formatMap.radius} {...toProps(radius)} />}

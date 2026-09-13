@@ -8,18 +8,18 @@ import { emitEvent, initEventName, useEvent, useFunc } from 'hooks'
 // ---| components |---
 // ---| self |---
 
-export type ModalName = 'global' | 'feature-review' | 'confirm'
+export type ModalName = 'feature-review' | 'confirm'
 
 export type ModalDetails = {
   /** insert to named container and open this modal by name */
   name: ModalName // TODO: d.ts extend interface depends on name
 } & Record<string, any>
 
-export const initModalKey = (name: ModalName = 'global') => initEventName(['modal', name])
+export const initModalKey = (name: string) => initEventName(['modal', name])
 
 
 /** Returns modal details when modal is called */
-export const useModal = <T extends ModalDetails>(name?: ModalName) => {
+export const useModal = <T extends ModalDetails>(name: ModalName) => {
   const [options, setOptions] = useState<T>()
 
   const onClose = useFunc(() => setOptions(undefined))

@@ -16,19 +16,16 @@ export type WidgetsPageProps = Partial<SearchPageProps<Widget>>
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <WidgetsPage />
  */
 export function WidgetsPage(props: WidgetsPageProps) {
   const { className } = props
-  const _className = cn(css.WidgetsPage, className)
   const widgets = useWidgets()
 
   return (
     <SearchPage
-      className={_className}
+      className={cn(css.WidgetsPage, className)}
       name='LABEL.WIDGETS'
       to='WIDGET'
       items={widgets.data}

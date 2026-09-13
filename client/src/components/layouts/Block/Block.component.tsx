@@ -16,8 +16,6 @@ export type BlockProps<E extends React.ElementType = React.ElementType> = react.
 /**
  * Flex orientation component.
  * Allows to work with flex items.
- *
- * How to use
  * @example
  * <Block g='md' p='md' v="xy" />
  */

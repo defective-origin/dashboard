@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import useResizeObserver, { ResizeObserverOptions } from '../UseResizeObserver'
-import useElement, { ElementRef } from '../UseElement'
+import { react } from 'tools'
 
-const getOptions = <E extends Element>(ref: React.RefObject<E | null>): ResizeReturnOptions<E> => {
-  const rect = ref.current?.getBoundingClientRect()
+const getOptions = (ref: react.ElementSelector): ResizeReturnOptions => {
+  const elem = react.getElement<Element>(ref, document.body)
+  const rect = elem?.getBoundingClientRect()
 
   return {
-    ref,
     bottom: rect?.bottom ?? 0,
     height: rect?.height ?? 0,
     left: rect?.left ?? 0,
@@ -18,27 +18,23 @@ const getOptions = <E extends Element>(ref: React.RefObject<E | null>): ResizeRe
   }
 }
 
-export type ResizeOptions<E extends Element> = ResizeObserverOptions<E> & {
-  onResize?: (options: ResizeReturnOptions<E>) => void;
+export type ResizeOptions = ResizeObserverOptions & {
+  onResize?: (options: ResizeReturnOptions) => void
 }
 
-export type ResizeReturnOptions<E extends Element> = Omit<DOMRect, 'toJSON'> & {
-  ref: ElementRef<E>,
-}
+export type ResizeReturnOptions = Omit<DOMRect, 'toJSON'>
 
 /**
  * Observe element resize and return element size, position options.
  * By default observe body change.
- *
  * @example
  * const state = useResize({ direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
-export const useResize = <E extends Element>(options?: ResizeOptions<E>): ResizeReturnOptions<E> => {
-  const ref = useElement<E>(options?.ref, document.body)
-  const [result, setResult] = useState(() => getOptions<E>(ref))
+export function useResize(options?: ResizeOptions): ResizeReturnOptions {
+  const [result, setResult] = useState(() => getOptions(options?.ref))
 
   useResizeObserver(() => {
-    const opt = getOptions<E>(ref)
+    const opt = getOptions(options?.ref)
 
     options?.onResize?.(opt)
     setResult(opt)

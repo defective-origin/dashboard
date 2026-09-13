@@ -15,19 +15,16 @@ export type WidgetTableProps = FeatureTableProps<Widget>
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <WidgetTable />
  */
 export function WidgetTable(props: WidgetTableProps) {
   const { className, ...otherProps } = props
-  const _className = cn(css.WidgetTable, className)
   const widgets = useWidgets()
 
   return (
     <FeatureTable
-      className={_className}
+      className={cn(css.WidgetTable, className)}
       items={widgets.data}
       loading={widgets.isLoading}
       {...otherProps}

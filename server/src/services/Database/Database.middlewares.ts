@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { Storage } from 'tools'
-import { ref, ChangeStamps } from './Database.schemas'
+import { ref, ChangeStamps, ModelRef } from './Database.schemas'
 
 export function UserStampsMiddleware(schema: mongoose.Schema<ChangeStamps>) {
   if (!schema.options.ChangeStamps) {
@@ -16,35 +16,28 @@ export function UserStampsMiddleware(schema: mongoose.Schema<ChangeStamps>) {
 
   // if you don't call next then tests will get errors
   // bulkWrite doesn't work on pre save
-  schema.pre('updateOne', function (this, next) {
+  schema.pre('updateOne', function () {
     this.set('updatedBy', Storage.get('user'))
-    next()
   })
-  schema.pre('updateMany', function (this, next) {
+  schema.pre('updateMany', function () {
     this.set('updatedBy', Storage.get('user'))
-    next()
   })
-  schema.pre('findOneAndUpdate', function (this, next) {
+  schema.pre('findOneAndUpdate', function () {
     this.set('updatedBy', Storage.get('user'))
-    next()
   })
 
-  schema.pre('validate', function (this, next) {
-    const user = Storage.get('user')
+  schema.pre('validate', function () {
+    const user = Storage.get('user') as ModelRef
 
     // protection if someone passes an empty object
     this.createdBy = this.createdBy?.id ? { id: this.createdBy.id } : user
     this.updatedBy = user
-    next()
   })
 }
 
 export function SerializationMiddleware(schema: mongoose.Schema<ChangeStamps>) {
   schema.set('toJSON', {
     virtuals: true,
-    transform: function (_, ret) {
-      delete ret._id
-      delete ret.__v
-    },
+    versionKey: false,
   })
 }

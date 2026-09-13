@@ -13,11 +13,10 @@ export type StorageOptions<T> = {
 /**
  * Allow to get, to set and to watch storage value.
  * LocalStorage is used by default
- *
  * @example
  * const [value, setValue] = useStorage('VALUE_NAME', DEFAULT_VALUE)
  */
-export const useStorage = <T>(key: string, options: StorageOptions<T>) => {
+export function useStorage<T>(key: string, options: StorageOptions<T>) {
   const { defaultValue, storage } = options
   const [state, setState] = useState<T | undefined>(storage.get(key, defaultValue))
 

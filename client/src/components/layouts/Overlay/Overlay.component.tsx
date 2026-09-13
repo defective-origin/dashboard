@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
-import { ElementOptions, useMode } from 'hooks'
+import { cn, react } from 'tools'
+import { useMode } from 'hooks'
 
 // ---| pages |---
 // ---| screens |---
@@ -29,14 +29,12 @@ export type OverlayProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Set class name on overlay container when overlay mounted. */
   containerClassName?: string
   /** Container selector. If not passed then takes first parent node. */
-  container?: ElementOptions<HTMLElement>
+  container?: react.ElementSelector<HTMLElement>
 }
 
 /**
  * Allows to create overlay's components like: Modal, Drawer, DIalog and so on.
  * Adds position relative to parent component if parent component has position static.
- *
- * How to use
  * @example
  * export class ModalBreakpoint implements Breakpoint {
  *   constructor(
@@ -77,10 +75,6 @@ export function Overlay(props: OverlayProps) {
     ...otherProps
   } = props
   const overlayRef = useRef<HTMLDivElement>(null)
-  const _className = cn(css.Overlay, {
-    [css.Backdrop]: backdrop,
-    [css.Window]: window,
-  }, className)
 
   const _contentClassName = cn(css.OverlayContent, css[v], contentClassName)
   const styles = {
@@ -97,7 +91,13 @@ export function Overlay(props: OverlayProps) {
   })
 
   return (
-    <div className={_className} ref={overlayRef}>
+    <div
+      ref={overlayRef}
+      className={cn(css.Overlay, {
+        [css.Backdrop]: backdrop,
+        [css.Window]: window,
+      }, className)}
+    >
       <div className={_contentClassName} style={styles} {...otherProps}>
         {children}
       </div>

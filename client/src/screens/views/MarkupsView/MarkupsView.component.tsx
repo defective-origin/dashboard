@@ -26,21 +26,18 @@ export type MarkupsViewProps<T = any> = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <MarkupsView />
  */
 export function MarkupsView<T = any>(props: MarkupsViewProps<T>) {
   const { items, widgets, widget, toKey, children, className, ...otherProps } = props
-  const _className = cn(css.MarkupsView, className)
   const breakpoints = useMemo(() => items?.map(item => ({ size: item.width, ...item })) ?? [], [items])
   const breakpoint = useBreakpoint(breakpoints)
 
   // TODO: add slider with breakpoints sizes on it
 
   return (
-    <div className={_className} style={toCssGrid(breakpoint)} {...otherProps}>
+    <div className={cn(css.MarkupsView, className)} style={toCssGrid(breakpoint)} {...otherProps}>
       {widget && widgets?.map(item =>
         <Item className={css.Item} key={toKey?.(item)} area={toKey?.(item)}>
           {widget(item)}

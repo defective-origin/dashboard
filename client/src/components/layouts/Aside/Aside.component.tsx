@@ -15,16 +15,13 @@ export type AsideProps = LayoutProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Aside />
  */
 export function Aside(props: AsideProps) {
   const { area = 'left', children, className, ...otherProps } = props
-  const _className = cn(css.Aside, className)
 
-  return <Layout className={_className} area={area} v='y' {...otherProps}>{children}</Layout>
+  return <Layout className={cn(css.Aside, className)} area={area} v='y' {...otherProps}>{children}</Layout>
 }
 
 Aside.displayName = 'Aside'

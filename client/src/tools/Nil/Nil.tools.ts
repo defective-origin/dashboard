@@ -9,10 +9,3 @@ export function isUndefined(value: unknown): value is undefined {
 export function isNil(value: unknown): value is null | undefined {
   return isNull(value) || isUndefined(value)
 }
-
-export default {
-  isNull,
-  isUndefined,
-  isNil,
-}
-

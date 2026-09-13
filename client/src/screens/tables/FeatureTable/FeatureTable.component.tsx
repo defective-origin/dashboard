@@ -7,7 +7,8 @@ import { Feature } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Table, { TableProps, TableRowMenuItem } from 'components/views/Table'
+import Button from 'components/actions/Button'
+import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
 import css from './FeatureTable.module.scss'
@@ -17,28 +18,22 @@ export type FeatureTableProps<T extends Feature> = TableProps<T>
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <FeatureTable />
  */
 export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>) {
   const { columns, children, className, ...otherProps } = props
-  const _className = cn(css.FeatureTable, className)
-
-  const actions = useMemo<TableRowMenuItem[]>(() => [
-    { start: 'edit', content: 'Edit' },
-    { start: 'delete_forever', content: 'Delete' },
-    // add details
-  ], [])
 
   const combinedColumns = useMemo(() => [...FEATURE_COLUMNS, ...(columns ?? [])], [columns])
 
   return (
     <Table
-      className={_className}
+      className={cn(css.FeatureTable, className)}
       columns={combinedColumns}
-      actions={actions}
+      actions={[
+        <Button start='edit' content='Edit' />,
+        <Button start='delete_forever' content='Delete' />,
+      ]}
       pagination
       {...otherProps}
     >

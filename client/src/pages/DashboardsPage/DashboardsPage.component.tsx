@@ -16,21 +16,18 @@ export type DashboardsPageProps = Partial<SearchPageProps<Board>>
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <DashboardsPage />
  */
 export function DashboardsPage(props: DashboardsPageProps) {
   const { className } = props
-  const _className = cn(css.DashboardsPage, className)
   const boards = useBoards()
 
   // TODO: add markups to preview card
 
   return (
     <SearchPage
-      className={_className}
+      className={cn(css.DashboardsPage, className)}
       name='LABEL.DASHBOARDS'
       to='BOARD'
       items={boards.data}

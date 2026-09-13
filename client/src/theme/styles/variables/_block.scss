@@ -1,0 +1,22 @@
+@use '../tools';
+
+$box-shadow-name: box-shadow;
+
+@mixin init-box-shadow-variables() {
+  @include tools.init-size-variables(
+    $box-shadow-name,
+    tools.shadow(1),
+    tools.shadow(3),
+    tools.shadow(5),
+    tools.shadow(7),
+    tools.shadow(9),
+    tools.shadow(11),
+    tools.shadow(13),
+  );
+}
+
+@mixin attach-box-shadow-size-variables() {
+  .sh {
+    @include tools.attach-size-variables($box-shadow-name, font-size);
+  }
+}

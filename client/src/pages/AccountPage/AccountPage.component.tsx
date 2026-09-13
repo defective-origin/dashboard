@@ -3,12 +3,13 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 import { useAccount } from 'api'
-import { Outlet } from 'router'
+import { AppLink, Outlet } from 'router'
 
 // ---| pages |---
-import Page, { PageMenuItem, PageProps } from 'pages/Page'
+import Page, { PageProps } from 'pages/Page'
 // ---| screens |---
 // ---| components |---
+import Button from 'components/actions/Button'
 
 // ---| self |---
 import css from './AccountPage.module.scss'
@@ -17,26 +18,26 @@ export type AccountPageProps = PageProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <AccountPage />
  */
 export function AccountPage(props: AccountPageProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.AccountPage, className)
   const account = useAccount()
 
-  const menu: PageMenuItem[] = [
-    { variant: 'nav', start: 'person', to: 'ACCOUNT' },
-    { variant: 'nav', start: 'data_thresholding' },
-    { variant: 'nav', start: 'insert_chart', to: 'ACCOUNT_WIDGETS' },
-    { variant: 'nav', start: 'dashboard', to: 'ACCOUNT_BOARDS' },
-    { start: 'logout', onClick: account.logout },
-  ]
-
   return (
-    <Page className={_className} name='LABEL.ACCOUNT' menu={menu} {...otherProps}>
+    <Page
+      className={cn(css.AccountPage, className)}
+      name='LABEL.ACCOUNT'
+      extra={[
+        <AppLink start='person' to='ACCOUNT' />,
+        <AppLink start='data_thresholding' to='APPS' />,
+        <AppLink start='insert_chart' to='ACCOUNT_WIDGETS' />,
+        <AppLink start='dashboard' to='ACCOUNT_BOARDS' />,
+        <Button start='logout' onClick={account.logout} />,
+      ]}
+      {...otherProps}
+    >
       <Page.Content p='xs'>
         <Outlet />
 

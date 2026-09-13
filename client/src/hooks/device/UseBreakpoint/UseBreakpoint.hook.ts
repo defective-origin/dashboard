@@ -1,12 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { react } from 'tools'
 import useResizeObserver, { ResizeObserverOptions } from '../../dom/UseResizeObserver'
-import useElement, { ElementRef } from '../../dom/UseElement'
-
-export const getBreakpoint = <B extends Breakpoint>(breakpoints: B[], direction?: BreakpointDirection, element?: Element | null) => {
-  const size = direction === 'y' ? element?.clientHeight : element?.clientWidth
-
-  return breakpoints.find(breakpoint => !size || size <= breakpoint.size) as B
-}
 
 export type BreakpointDirection = 'x' | 'y'
 
@@ -15,18 +9,13 @@ export type Breakpoint = {
   size: number
 }
 
-export type BreakpointOptions<E extends Element> = ResizeObserverOptions<E> & {
+export type BreakpointOptions = ResizeObserverOptions & {
   direction?: BreakpointDirection
-}
-
-export type BreakpointReturnOptions<E extends Element, B extends Breakpoint> = B & {
-  ref: ElementRef<E>
 }
 
 /**
  * Detect container size breakpoint.
  * By default observe document.body size.
- *
  * @example
  * // screen size
  * export class MediaBreakpoint implements Breakpoint {
@@ -61,16 +50,21 @@ export type BreakpointReturnOptions<E extends Element, B extends Breakpoint> = B
  *
  * useMode(options.names)
  */
-export const useBreakpoint = <E extends Element, B extends Breakpoint>(
+export function useBreakpoint<B extends Breakpoint>(
   breakpoints: B[],
-  options?: BreakpointOptions<E>,
-): BreakpointReturnOptions<E, B> => {
-  const ref = useElement<E>(options?.ref, document.body)
-  const [current, setCurrent] = useState(() => getBreakpoint(breakpoints, options?.direction, ref.current))
+  options?: BreakpointOptions,
+) {
+  const [current, setCurrent] = useState<B>()
 
-  useResizeObserver(() => setCurrent(getBreakpoint(breakpoints, options?.direction, ref.current)), options)
+  useResizeObserver(() => {
+    const elem = react.getElement(options?.ref, document.body)
+    const size = options?.direction === 'y' ? elem?.clientHeight : elem?.clientWidth
+    const breakpoint = breakpoints.find(breakpoint => !size || size <= breakpoint.size)
 
-  return useMemo(() => ({ ref, ...current as B }), [ref, current])
+    setCurrent(breakpoint)
+  }, options)
+
+  return useMemo(() => ({ ...current } as B), [current])
 }
 
 export default useBreakpoint

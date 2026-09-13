@@ -18,8 +18,6 @@ export type WidgetProps = ItemProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Widget />
  */

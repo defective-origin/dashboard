@@ -13,7 +13,7 @@ import './Icon.module.scss'
 
 export type ThemeIconVariant = 'light_mode' | 'dark_mode'
 export type WindowActionIconVariant = 'fullscreen' | 'fullscreen_exit' | 'zoom_out_map' | 'zoom_in_map' | 'open_in_new' | 'resize'
-export type MenuActionIconVariant = 'more_vert' | 'more_horiz'
+export type MenuActionIconVariant = 'more_vert' | 'more_horiz' | 'visibility'
 export type ActionIconVariant = 'close' | 'left_panel_open' | 'left_panel_close' | 'delete' | 'delete_forever' | 'edit' | 'edit_square' | 'download' | 'file_copy' | 'health_cross' | 'content_copy' | 'search' | 'add'
 export type StatusIconVariant = 'info' | 'warning' | 'error' | 'check_circle' | 'check'
 export type KeyboardIconVariant = 'keyboard' | 'keyboard_arrow_up' | 'keyboard_arrow_down' | 'keyboard_arrow_left' | 'keyboard_arrow_right'
@@ -34,6 +34,8 @@ export type IconVariant
   | DashboardIconVariant
   | 'auto_stories' | 'schedule' | 'table_rows' | 'book'
 
+const RTL_ICONS: Set<IconVariant> = new Set(['left_panel_open', 'left_panel_close', 'keyboard_arrow_left', 'keyboard_arrow_right'])
+
 export type IconColor = Color
 export type IconSize = Size
 
@@ -49,27 +51,32 @@ export type IconProps = {
 
 /**
  * Displaying font icons.
- *
- * How to use
  * @example
  * <Icon />
  */
-export const Icon = (props: IconProps) => {
+export const Icon = withSkeleton((props: IconProps) => {
   const { size, v, fill, color, className, ...otherProps } = props
-  const _className = cn(
-    'icon',
-    'material-symbols-outlined', {
-      [`i-${size}`]: size,
-      [`c-${color}`]: color,
-      ['icon--fill']: fill,
-      ['icon--outline']: !fill,
-    },
-    className,
-  )
 
-  return <span className={_className} {...otherProps}>{v}</span>
-}
+  return (
+    <span
+      className={cn(
+        'icon',
+        'material-symbols-outlined', {
+          [`i-${size}`]: size,
+          [`c-${color}`]: color,
+          ['icon--fill']: fill,
+          ['icon--outline']: !fill,
+          ['rtl']: v && RTL_ICONS.has(v),
+        },
+        className,
+      )}
+      {...otherProps}
+    >
+      {v}
+    </span>
+  )
+}, () => ({ v: 'circular', wrap: true }))
 
 Icon.displayName = 'Icon'
 
-export default withSkeleton(Icon, () => ({ v: 'circular', wrap: true }))
+export default Icon

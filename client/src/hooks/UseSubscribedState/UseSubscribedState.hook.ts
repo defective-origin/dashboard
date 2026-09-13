@@ -1,13 +1,12 @@
-import { DependencyList, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { DependencyList, Dispatch, SetStateAction, useLayoutEffect, useState } from 'react'
 
 /**
  * Hook descriptions
- *
  * @example
  * const state = useSubscribedState(dynamicValue)
  * const state = useSubscribedState(5, [dep1, dep2])
  */
-export const useSubscribedState = <S = undefined>(value: S,deps: DependencyList = []): [S, Dispatch<SetStateAction<S>>] => {
+export function useSubscribedState<S = undefined>(value: S,deps: DependencyList = []): [S, Dispatch<SetStateAction<S>>] {
   const [state, setState] = useState<S>(value)
   const [prevValue, setPrevValue] = useState<S>(value)
 
@@ -19,8 +18,8 @@ export const useSubscribedState = <S = undefined>(value: S,deps: DependencyList 
   }
 
   // We leave the effect only for tracking additional deps, if they are needed
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { setState(value) }, deps)
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
+  useLayoutEffect(() => { setState(value) }, deps)
 
   return [state, setState]
 }

@@ -10,12 +10,12 @@ import { useFunc, useThrottle } from 'hooks'
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
+import Block from 'components/layouts/Block'
 import Help, { HelpProps } from 'components/views/Help'
 
 // ---| self |---
 import css from './FormField.module.scss'
 import { FormFieldErrors, FormRule, useForm } from '../Form.context'
-import Block from 'components/layouts/Block'
 
 export type FieldProps<V = any> = {
   id?: string
@@ -52,8 +52,6 @@ export type FormFieldProps<V = any, F extends object = object> = {
  * Allows to connect common input field to form.
  *
  * Field should have next props: name, value, onChange, onBlur.
- *
- * How to use
  * @example
  * const rules = [
  *    (value) => value.length > 50 ? "MAX LENGTH is 50 chars" : undefined
@@ -75,7 +73,6 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
     as: Field, path, init, rules, label, help, throttle, checkOnBlur, checkOnChange,
     fit, required, disabled, toInit, toProps, onChange, className, ...otherProps
   } = props
-  const _className = cn(css.FormField, className)
   const form = useForm<F>()
   const [value, setValue] = useState<V | undefined>()
   const [errors, setErrors] = useState<FormFieldErrors>([])
@@ -108,7 +105,7 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
     form?.setValue(path, initial)
   })
 
-  const handleBlur = useFunc(() => { checkOnBlur && check() })
+  const handleBlur = useFunc(() => { if (checkOnBlur) check() })
 
   // connect field manager to form
   useEffect(() => {
@@ -127,7 +124,7 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
   const helpProps = typeof help === 'object' ? help : { content: help }
 
   return (
-    <FormControl className={_className} required={required} disabled={disabled}>
+    <FormControl className={cn(css.FormField, className)} required={required} disabled={disabled}>
       {label && (
         <FormLabel id={path} className={css.label}>
           <Text content={label} size='xxs' />

@@ -19,21 +19,18 @@ export type ExpensesTableProps = TableProps<Expense> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <ExpensesTable />
  */
 export function ExpensesTable(props: ExpensesTableProps) {
   const { type, children, className, ...otherProps } = props
-  const _className = cn(css.ExpensesTable, className)
   const response = useExpenses(type)
 
   // TODO: add '+' to table in order to add new record
 
   return (
     <Table
-      className={_className}
+      className={cn(css.ExpensesTable, className)}
       title={type}
       items={response.data}
       loading={response.isLoading}

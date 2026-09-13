@@ -5,7 +5,8 @@
   "type": "module",
   "workspaces": [
     "client",
-    "server"
+    "server",
+    "e2e"
   ],
   "scripts": {
     "dev:client": "yarn workspace client run dev",

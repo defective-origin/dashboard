@@ -8,30 +8,29 @@ import Page, { PageProps } from 'pages/Page'
 // ---| screens |---
 import SupportTable from 'screens/tables/SupportTable'
 // ---| components |---
+import Button from 'components/actions/Button'
 
 // ---| self |---
 import css from './SupportPage.module.scss'
+
 
 export type SupportPageProps = PageProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <SupportPage />
  */
 export function SupportPage(props: SupportPageProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.SupportPage, className)
 
   // TODO: add stepper to see progress
 
   return (
     <Page
-      className={_className}
+      className={cn(css.SupportPage, className)}
       name='LABEL.SUPPORT'
-      menu={[{ start: 'add', tooltip: 'new request' }]}
+      extra={<Button start='add' tooltip='new request' />}
       {...otherProps}
     >
       <Page.Content p='sm'>

@@ -29,7 +29,6 @@ const meta: Meta<typeof Notification> = {
     color: field.variants(theme.COLORS, 'AlertColor', 'primary'),
     v: field.variants(theme.DIRECTION, 'BlockVariant', 'x'),
     onClose: field.event(),
-    onSuccess: field.event(),
   },
 }
 
@@ -43,6 +42,5 @@ export const Demo: Story = {
     v: 'x',
     content: 'Test Message',
     onClose: () => console.log('CLOSE EVENT'),
-    onSuccess: () => console.log('SUCCESS EVENT'),
   },
 }

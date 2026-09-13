@@ -9,10 +9,10 @@ import { arr, cn, mix } from 'tools'
 import { initMarkup, MarkupOptions, sort } from 'screens/views/MarkupBoard'
 // ---| components |---
 import Text from 'components/views/Text'
-import Popup from 'components/popups/Popup'
 import Button from 'components/actions/Button'
 import Layout from 'components/layouts/Layout'
-import ButtonGroup from 'components/actions/ButtonGroup'
+import Actions from 'components/layouts/Actions'
+import Dropdown from 'components/actions/Dropdown'
 import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
@@ -29,14 +29,11 @@ export type MarkupMenuProps = BlockProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <MarkupMenu />
  */
 export function MarkupMenu(props: MarkupMenuProps) {
   const { select, items, onSelect, onSave, className, ...otherProps } = props
-  const _className = cn(css.MarkupMenu, className)
   const [enabled, setEnabled] = useState<Record<number, MarkupOptions>>({})
   const sorted = useMemo(() => sort(items), [items])
   const markups = useMemo(() => {
@@ -56,12 +53,10 @@ export function MarkupMenu(props: MarkupMenuProps) {
   // TODO: forbid to remove laptop markup
   const toggle = (markup: MarkupOptions) => {
     if (enabled[markup.width]) {
-      delete enabled[markup.width]
+      setEnabled(({ [markup.width]: _, ...rest }) => rest)
     } else {
-      enabled[markup.width] = markup
+      setEnabled(curr => ({ ...curr, [markup.width]: markup }))
     }
-
-    setEnabled({ ...enabled })
   }
 
   useLayoutEffect(() => {
@@ -81,35 +76,31 @@ export function MarkupMenu(props: MarkupMenuProps) {
   }, [select, sorted, onSelect])
 
   return (
-    <Block className={_className} v='x' g='xs' aligns='center' {...otherProps}>
-      <ButtonGroup
-        className={css.MarkupMenuScreens}
-        items={sorted?.map(m => {
+    <Block className={cn(css.MarkupMenu, className)} v='x' g='xs' aligns='center' {...otherProps}>
+      <Actions className={css.MarkupMenuScreens} size='xs' group>
+        {sorted?.map(m => {
           const screen = MARKUP_SCREEN_MAP[m.width]
 
-          return {
-            start: screen.icon,
-            tooltip: { title: t(screen.label), content: <MarkupSpec options={m} /> },
-            active: m.width === select?.width,
-            onClick: () => onSelect?.(m),
-          }
+          return (
+            <Actions.Button
+              start={screen.icon}
+              tooltip={{ title: t(screen.label), content: <MarkupSpec options={m} /> }}
+              active={m.width === select?.width}
+              onClick={() => onSelect?.(m)}
+            />
+          )
         })}
-      />
+      </Actions>
 
-      <Popup
+      <Dropdown
+        arrow
+        start='settings_slow_motion'
+        tooltip={t('ACTION.CHANGE_MARKUP_LIST')}
         title={t('LABEL.SCREENS')}
         actions={o => [
-          { content: t('ACTION.SAVE'), start: 'save', size: 'xxs', color: 'success', onClick: () => onSave?.(sort(Object.values(enabled))) },
-          { content: t('ACTION.CLOSE'), start: 'close', size: 'xxs', onClick: o.off },
+          <Button content={t('ACTION.SAVE')} start='save' color='success' onClick={() => onSave?.(sort(Object.values(enabled)))} />,
+          <Button content={t('ACTION.CLOSE')} start='close' onClick={o.off} />,
         ]}
-        trigger={o => (
-          <Button
-            active={o.isOn}
-            onClick={o.toggle}
-            start='settings_slow_motion'
-            tooltip={t('ACTION.CHANGE_MARKUP_LIST')}
-          />
-        )}
         disableHoverListener
       >
         <Layout className={css.MarkupMenuList} columns='auto 1fr auto' justifies='center' aligns='center'>
@@ -122,7 +113,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
             </Fragment>
           ))}
         </Layout>
-      </Popup>
+      </Dropdown>
     </Block>
   )
 }

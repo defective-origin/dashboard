@@ -6,20 +6,8 @@ describe('[use{{pascalCase name}}] hook', () => {
     const { result } = renderHook(() => use{{pascalCase name}}())
 
     // act works automatic only for DOM interaction events and rerender() func
-    // act(() => { result.toggle() })
+    act(() => { result.toggle() })
 
     expect(result.current).toEqual(null)
   })
 })
-
-// describe('[use{{pascalCase name}}] tools', () => {
-//   describe('[action name] func', () => {
-//     it('should do something', () => {
-//       const mockValue = 0
-// 
-//       const result = doSomething(mockValue)
-// 
-//       expect(result).toEqual()
-//     })
-//   })
-// })

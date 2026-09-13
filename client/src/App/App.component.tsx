@@ -19,14 +19,11 @@ export type AppProps = LayoutProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <App />
  */
 export function App(props: AppProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.App, className)
 
   // TODO: избегать функций и хуков по возможности. Использовать глобальные вызовы. например modal({}), toast.success()
 
@@ -42,14 +39,14 @@ export function App(props: AppProps) {
   // TODO: useEffect(() => theme.set(account.user?.settings.theme.toLowerCase()), [account])
 
   return (
-    <Layout className={_className} stretch v='left' {...otherProps}>
+    <Layout className={cn(css.App, className)} stretch v='left' {...otherProps}>
       <AppMenu />
       <AppHeader />
       <AppContent />
 
       {children}
 
-      <Modal.Container name='global' />
+      <Modal.Container />
 
       <Toast.Container name='alerts' position='top-center' />
       <Toast.Container name='messages' position='bottom-right' />

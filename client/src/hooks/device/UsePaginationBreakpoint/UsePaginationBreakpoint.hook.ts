@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import useBreakpoint, { Breakpoint, BreakpointOptions, BreakpointReturnOptions } from '../UseBreakpoint'
+import useBreakpoint, { Breakpoint, BreakpointOptions } from '../UseBreakpoint'
 import useFunc from '../../states/UseFunc'
 
 export type PaginationBreakpoint = Breakpoint & {
@@ -7,12 +7,12 @@ export type PaginationBreakpoint = Breakpoint & {
   count: number
 }
 
-export type PaginationBreakpointOptions<E extends Element> = BreakpointOptions<E>
+export type PaginationBreakpointOptions = BreakpointOptions
 
-export type PaginationBreakpointReturnOptions<T, E extends Element, B extends Breakpoint> = BreakpointReturnOptions<E, B> & {
+export type PaginationBreakpointReturnOptions<T, B extends Breakpoint> = B & {
   items: T[]
   page: number
-  pages: number,
+  pages: number
   hasPrev: boolean
   hasNext: boolean
   prev: () => void
@@ -24,7 +24,6 @@ export type PaginationBreakpointReturnOptions<T, E extends Element, B extends Br
  * Allows to paginate by breakpoint items count.
  * By default observe document.body size.
  * This hook can be useful in sliders and charts.
- *
  * @example
  * // screen size
  * export class GridPaginationBreakpoint implements PaginationBreakpoint {
@@ -52,11 +51,11 @@ export type PaginationBreakpointReturnOptions<T, E extends Element, B extends Br
  * // Observe vertical size with known element ref
  * const options = usePaginationBreakpoint(items, GRID_BREAKPOINTS, { direction: 'y', ref: elementRef, ...resizeObserverOptions })
  */
-export const usePaginationBreakpoint = <T, E extends Element, B extends PaginationBreakpoint>(
+export function usePaginationBreakpoint<T, B extends PaginationBreakpoint>(
   allItems: T[],
   breakpoints: B[],
-  options?: PaginationBreakpointOptions<E>,
-): PaginationBreakpointReturnOptions<T, E, B> => {
+  options?: PaginationBreakpointOptions,
+): PaginationBreakpointReturnOptions<T, B> {
   const breakpoint = useBreakpoint(breakpoints, options)
   const [page, setPage] = useState(1)
   const pages = Math.ceil(allItems.length / breakpoint.count)

@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 
 // ---| core |---
-import { useElement, useEvent, useFunc, useMode, useResizeObserver } from 'hooks'
+import { useEvent, useFunc, useMode, useResizeObserver } from 'hooks'
 import { Direction, px } from 'theme'
-import { cn } from 'tools'
+import { cn, react } from 'tools'
 
 // ---| self |---
 import './Scroll.module.scss'
@@ -28,8 +28,8 @@ export type ScrollVariant = Direction
 
 export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
   /** Shift scroll from top */
-  top?: number;
-  zIndex?: number;
+  top?: number
+  zIndex?: number
   v?: ScrollVariant
   /** Actions offset. */
   actions?: Offset
@@ -37,16 +37,11 @@ export type ScrollProps = Omit<ScrollBarOptions, 'v' | 'enabled' | 'back'> & {
   back?: Offset
   /** Extra overlay content. */
   children?: React.ReactNode
-  trackClassName?: string
-  cernerClassName?: string,
-  actionsClassName?: string
 }
 
 /**
  * Scroll which allow to scroll parent block and also by back buttons.
  * Adds position relative to parent component if parent component has position static.
- *
- * How to use
  * @example
  * <div style={{ width: 5000, height: 5000 }}>
  *   <Scroll v={scroll} actions visible />
@@ -61,23 +56,17 @@ export function Scroll(props: ScrollProps) {
     actions,
     children,
     className,
-    trackClassName,
-    cernerClassName,
-    actionsClassName,
     container = () => overlayRef.current?.parentElement,
     ...otherOptions
   } = props
   const overlayRef = useRef<HTMLDivElement>(null)
-  const containerRef = useElement(container)
   const backOffset = offset(back, 50)
   const actionOffset = offset(actions, 50)
-  const hasBarX = ['x', 'xy'].includes(v)
-  const hasBarY = ['y', 'xy'].includes(v)
-  const barX = useScrollBar({ enabled: hasBarX, v: 'x', back: backOffset?.x, className: trackClassName, container, ...otherOptions })
-  const barY = useScrollBar({ enabled: hasBarY, v: 'y', back: backOffset?.y, className: trackClassName, container, ...otherOptions })
+  const barX = useScrollBar({ enabled: ['x', 'xy'].includes(v), v: 'x', back: backOffset?.x, container, ...otherOptions })
+  const barY = useScrollBar({ enabled: ['y', 'xy'].includes(v), v: 'y', back: backOffset?.y, container, ...otherOptions })
 
-  // TODO: fix shadow
   // TODO: fix size calculation
+  // TODO: hide scroll on mobile!
 
   const display = useFunc((isMouseInside?: boolean) => {
     barY?.display(isMouseInside)
@@ -85,18 +74,19 @@ export function Scroll(props: ScrollProps) {
   })
 
   const refresh = useFunc(() => {
-    const parent = containerRef.current
+    const parent = react.getElement(container)
     if (!parent) {
       return
     }
 
     // move overlay block
     if (overlayRef.current) {
-      // TODO: use sticky instead?
-      overlayRef.current.style.left = px(parent.scrollLeft)
-      overlayRef.current.style.top = px(parent.scrollTop + top)
-      overlayRef.current.style.height = px(parent.offsetHeight - top)
-      overlayRef.current.style.width = px(parent.offsetWidth)
+      Object.assign(overlayRef.current.style, {
+        left: px(parent.scrollLeft),
+        top: px(parent.scrollTop + top),
+        height: px(parent.offsetHeight - top),
+        width: px(parent.offsetWidth),
+      })
     }
 
     // resize scrollbars
@@ -123,7 +113,7 @@ export function Scroll(props: ScrollProps) {
 
         {actions && (
           <div
-            className={cn('scroll-actions', actionsClassName)}
+            className='scroll-actions'
             style={{ left: actionOffset.x, bottom: actionOffset.y }}
           >
             {barY?.button}
@@ -136,10 +126,10 @@ export function Scroll(props: ScrollProps) {
       {barX?.element}
 
       <div
-        className={cn('scroll-cerner', cernerClassName)}
+        className='scroll-cerner'
         style={{
-          marginRight: hasBarY ? otherOptions.indent : undefined,
-          marginBottom: hasBarX ? otherOptions.indent : undefined,
+          marginRight: barY ? otherOptions.indent : undefined,
+          marginBottom: barX ? otherOptions.indent : undefined,
         }}
       />
 
