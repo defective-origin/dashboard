@@ -1,11 +1,6 @@
-:root {
-  // --ui-framework-color: var(--account-framework-color);
-}
-
 .AppMenu {
   @include stretch;
-}
 
-.Copyright {
-  margin: 8px 0;
+  background-color: var(--color-contrast-secondary);
+  box-shadow: var(--box-shadow-xxs);
 }

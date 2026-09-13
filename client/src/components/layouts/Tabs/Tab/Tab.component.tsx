@@ -17,16 +17,13 @@ export type TabProps = MuiTabProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Tab />
  */
 export function Tab(props: TabProps) {
   const { className, ...otherProps } = props
-  const _className = cn(css.Tab, className)
 
-  return <MuiTab className={_className} {...otherProps} />
+  return <MuiTab className={cn(css.Tab, className)} {...otherProps} />
 }
 
 Tab.displayName = 'Tab'

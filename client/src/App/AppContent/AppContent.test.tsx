@@ -1,5 +1,6 @@
 import AppContent from './AppContent.component'
 
+
 describe('[AppContent] component', () => {
   it('should render component', () => {
     const container = render(<AppContent />)
@@ -7,21 +8,3 @@ describe('[AppContent] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[AppContent] hook', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useAppContent())
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[AppContent] context', () => {
-//   const wrapper = (props: AppContentProps) => <AppContentProvider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => useAppContent(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

@@ -6,3 +6,25 @@
   width: $width;
   height: $height;
 }
+
+@function shadow($level, $color: var(--color-primary-rgb)) {
+  // first color
+  $umbra-y: round($level * 0.46 + 1);
+  $umbra-blur: round($level * 0.62 + 1);
+  $umbra-spread: - round($level * 0.3);
+
+  // second color
+  $penumbra-y: $level;
+  $penumbra-blur: round($level * 1.55 + 1);
+  $penumbra-spread: round($level * 0.125);
+
+  // third color
+  $ambient-y: round($level * 0.38);
+  $ambient-blur: round($level * 1.9 + 1);
+  $ambient-spread: round($level * 0.33);
+
+  @return
+    0 #{$umbra-y}px #{$umbra-blur}px #{$umbra-spread}px rgba(#{$color}, 0.2),
+    0 #{$penumbra-y}px #{$penumbra-blur}px #{$penumbra-spread}px rgba(#{$color}, 0.14),
+    0 #{$ambient-y}px #{$ambient-blur}px #{$ambient-spread}px rgba(#{$color}, 0.12);
+}

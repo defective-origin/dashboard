@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -34,8 +34,6 @@ export type CssSizeFieldProps = TextFieldProps & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <CssSizeField formats={['fr', 'px']} />
  */
@@ -44,29 +42,12 @@ export function CssSizeField(props: CssSizeFieldProps) {
   const _className = cn(css.CssSizeField, className)
   const [format, setFormat] = useState<CssSize>(formats[0])
   const options = CSS_SIZE_OPTIONS[format]
-  const valueFormat = useMemo(() => Object.keys(CSS_SIZE_OPTIONS).find(f => props.value?.includes(f)), [props.value])
 
   // TODO: call onChange only if value is valid
-
-  const change = useCallback((value: string, event: React.ChangeEvent) =>
-    value && onChange?.(value, event)
-  , [onChange])
-
-  return (
-    <TextField
-      className={_className}
-      value={options.default && undefined}
-      disabled={options.default === ''}
-      onChange={change}
-      {...otherProps}
-    />
-  )
-
   const handleChange = useCallback((value: string, event: React.ChangeEvent) =>
     value && onChange?.(options.format(value || options.default), event)
   , [options, onChange])
 
-  // TODO: implement
   return (
     <TextField
       className={_className}
@@ -83,6 +64,7 @@ export function CssSizeField(props: CssSizeFieldProps) {
               value={format}
               items={formats.map(format => ({ value: format, children: format }))}
               onChange={setFormat}
+              disabled={formats.length < 2}
             />
           ),
         },

@@ -16,8 +16,6 @@ export type LayoutProps<E extends React.ElementType = React.ElementType> = react
  * Pay attention that preset components,
  * like: Content, Header and so on,
  * have block layout.
- *
- * How to use
  * @example
  * // grid markup
  * <Layout>

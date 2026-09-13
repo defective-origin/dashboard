@@ -55,14 +55,11 @@ export type ChartProps<M extends object> = Omit<ResponsiveContainerProps, 'child
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Chart />
  */
 export function Chart<M extends object>(props: ChartProps<M>) {
   const { formats, map, options, syncId, items, loading, tooltip, legend, context: ChartContext, children, className, ...otherProps } = props
-  const _className = cn(css.Chart, className)
   const formatMap = useChartFormats(formats)
   const [highlight, setHighlight] = useState<Payload['dataKey']>()
   const onHighlight = useCallback((o: Payload) => setHighlight(o.dataKey), [])
@@ -97,7 +94,7 @@ export function Chart<M extends object>(props: ChartProps<M>) {
 
   return (
     <ResponsiveContainer
-      className={_className}
+      className={cn(css.Chart, className)}
       height='100%'
       width='100%'
       {...otherProps}

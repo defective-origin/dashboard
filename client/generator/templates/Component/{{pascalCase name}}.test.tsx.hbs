@@ -1,6 +1,5 @@
 import {{pascalCase name}} from './{{pascalCase name}}.component'
-// import use{{pascalCase name}} from './{{pascalCase name}}.hooks'
-// import {{pascalCase name}}Provider, {{{pascalCase name}}} from './{{pascalCase name}}.context'
+
 
 describe('[{{pascalCase name}}] component', () => {
   it('should render component', () => {
@@ -9,24 +8,3 @@ describe('[{{pascalCase name}}] component', () => {
     expect(container.snapshot()).toMatchSnapshot()
   })
 })
-
-// describe('[{{pascalCase name}}] hooks', () => {
-//   it('should return options', () => {
-//     const { result } = renderHook(() => use{{pascalCase name}}())
-//
-//    // act works automatic only for DOM interaction events and rerender() func
-//    // act(() => { result.toggle() })
-//
-//     expect(result.current).toEqual(null)
-//   })
-// })
-
-// describe('[{{pascalCase name}}] context', () => {
-//   const wrapper = (props: {{pascalCase name}}Props) => <{{pascalCase name}}Provider { ...props } />
-//
-//   it('should return options', () => {
-//     const { result } = renderHook(() => use{{pascalCase name}}(), { wrapper })
-//
-//     expect(result.current).toBeTruthy()
-//   })
-// })

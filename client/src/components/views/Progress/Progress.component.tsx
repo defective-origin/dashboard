@@ -3,7 +3,7 @@ import MuiCircularProgress from '@mui/material/CircularProgress'
 import MuiLinearProgress from '@mui/material/LinearProgress'
 
 // ---| core |---
-import { cn, react } from 'tools'
+import { cn } from 'tools'
 
 // ---| self |---
 import css from './Progress.module.scss'
@@ -24,28 +24,20 @@ export type ProgressProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Progress />
  */
 export function Progress(props: ProgressProps) {
   const { visible, v = 'circular', value, className, ...otherProps } = props
-  const _className = cn(css.Progress, className)
   const Tag = PROGRESS_MAP[v]
 
   if (!visible) {
     return null
   }
 
-  return <Tag className={_className} value={value} {...otherProps} />
+  return <Tag className={cn(css.Progress, className)} value={value} {...otherProps} />
 }
 
 Progress.displayName = 'Progress'
 
-export default react.attachOverrides(Progress, {
-  Circular: { v: 'circular' },
-  Linear: { v: 'linear' },
-}, {
-  memoize: true,
-})
+export default Progress

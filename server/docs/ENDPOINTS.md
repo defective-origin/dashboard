@@ -1,14 +1,12 @@
 # [↤](../README.md) Api
 
 ### Rules
-- Use restful approach
-- Route starts with __{BASE_URL}/{API}/{API_VERSION}/{ENDPOINT}__
-- Should use only __POST__ requests
+- Use `restful` approach
+- Route starts with `{BASE_URL}/{API}/{API_VERSION}/{ENDPOINT}`
+- Should use auto generation of `swagger` schemas
 
 ## Endpoint
-### Routes
-
-### Requests - use base restful approach
+### Routes: use base restful approach
 - `/articles/`      [GET] - Get list of items
 - `/articles/{id}`  [GET] - Get item
 - `/articles/`      [POST] - Create new item
@@ -16,7 +14,7 @@
 - `/articles/{id}`  [DELETE] - Delete item
 
 
-### Response - can be built on frontend
+### Response: can be built on frontend
 ```typescript
 {
   // response status 200/300/400/500 ...

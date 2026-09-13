@@ -8,7 +8,7 @@ import { cn } from 'tools'
 import Page from 'pages/Page'
 // ---| screens |---
 // ---| components |---
-import { ImageVariant } from 'components/views/Image'
+import { MediaVariant } from 'components/views/Media'
 import Banner from 'components/views/Banner'
 
 // ---| self |---
@@ -17,10 +17,10 @@ import css from './BannerPage.module.scss'
 export type BannerVariant = 'empty' | 'greeting' | 'error' | 401 | 403 | 404 | 500 | 502 | 503
 
 export const BANNER_PAGE_MAP: Record<BannerVariant, {
-  title: TranslateKeys,
-  subtitle?: TranslateKeys,
-  text?: TranslateKeys,
-  image?: ImageVariant,
+  title: TranslateKeys
+  subtitle?: TranslateKeys
+  text?: TranslateKeys
+  image?: MediaVariant
 }> = {
   empty: { image: 'empty', title: 'MESSAGE.NO_DATA' },
   greeting: { title: 'MESSAGE.GREETING', subtitle: 'MESSAGE.READ_GUIDE' },
@@ -41,18 +41,15 @@ export type BannerPageProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <BannerPage />
  */
 export function BannerPage(props: BannerPageProps) {
   const { v = 'empty', children, className, ...otherProps } = props
-  const _className = cn(css.BannerPage, className)
   const status = BANNER_PAGE_MAP[v]
 
   return (
-    <Page className={_className} {...otherProps}>
+    <Page className={cn(css.BannerPage, className)} {...otherProps}>
       <Page.Content>
         <Banner
           className={css.Banner}

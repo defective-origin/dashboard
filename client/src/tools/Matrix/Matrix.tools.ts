@@ -254,30 +254,3 @@ export const around = <T>(matrix: T[][], what: T): T[][] => {
 
   return result
 }
-
-
-export default {
-  initMatrix,
-  toString,
-  toCoordinate,
-  toItems,
-  toPlaces,
-  map,
-  some,
-  clone,
-  every,
-  replace,
-  replaceArea,
-  selectArea,
-  selectRowsMatch,
-  selectColumnsMatch,
-  selectRow,
-  selectColumn,
-  insertRow,
-  insertColumn,
-  removeRow,
-  removeColumn,
-  extendRows,
-  extendColumns,
-  around,
-}

@@ -18,11 +18,10 @@ export type LocaleReturnOptions = {
 
 /**
  * Hook descriptions
- *
  * @example
  * const options = useLocale(conf)
  */
-export const useLocale = (): LocaleReturnOptions => {
+export function useLocale(): LocaleReturnOptions {
   return useMemo(() => ({
     language: 'en',
     languages: i18next.languages as Languages[],

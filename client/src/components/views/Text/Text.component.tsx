@@ -1,17 +1,16 @@
-import React from 'react'
-import MuiTypography, { TypographyProps as MuiTypographyProps } from '@mui/material/Typography'
+import React, { useMemo } from 'react'
+import MuiTypography from '@mui/material/Typography'
 
 // ---| core |---
-import { cn, react } from 'tools'
+import { cn, nil } from 'tools'
 import { Color, Size } from 'theme'
-import { FormatOptions, useFormat } from 'hooks'
 
 // ---| components |---
 import { withSkeleton } from 'components/views/Skeleton'
 
 // ---| self |---
 import './Text.module.scss'
-import { TEXT_FORMAT_MAP } from './Text.tools'
+import { TEXT_FORMAT_MAP } from './Text.constants'
 
 const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
   h1: 'xl',
@@ -32,15 +31,17 @@ const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
 
 export type TextFormat = keyof typeof TEXT_FORMAT_MAP
 export type TextVariant = 'button' | 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'overline'
-export type TextAlign = MuiTypographyProps['align']
+export type TextAlign = 'justify' | 'left' | 'right' | 'center' | 'inherit'
 export type TextColor = Color
 export type TextSize = Size
 
-export type TextProps = FormatOptions<TextFormat> & {
+export type TextProps = {
+  format?: TextFormat
+  placeholder?: boolean | React.ReactNode
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  size?: TextSize
+  size?: TextSize // TODO: remove and render only by tag?
   color?: TextColor
   v?: TextVariant
   align?: TextAlign
@@ -54,8 +55,6 @@ export type TextProps = FormatOptions<TextFormat> & {
 /**
  * Displaying text.
  *
- * How to use
- *
  * @example
  * <Text
  *    v='overline'
@@ -66,15 +65,16 @@ export type TextProps = FormatOptions<TextFormat> & {
  *    ellipsis={3}
  * />
  */
-export function Text(props: TextProps) { // FIXME: extend with useItem
+export const Text = withSkeleton((props: TextProps) => { // FIXME: extend with useItem and rename to Typo
   const {
     v = 'body2',
     size = TEXT_SIZE_MAP[v],
     height,
     bold, // TODO: rename to b()bold, i(italic) and so on
-    color = 'primary',
+    color,
     ellipsis,
     format,
+    align = 'left',
     nowrap,
     placeholder,
     style,
@@ -83,15 +83,8 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     className,
     ...otherProps
   } = props
-  const _className = cn('text', {
-    nowrap,
-    ellipsis,
-    [`t-${size}`]: size,
-    [`c-${color}`]: color,
-  }, className)
   // TODO: add fixing number formats: units, millions, ... (fix: "M", by, to)
   // TODO: text animation on resize add by default on Text component
-  const _content = useFormat(content, TEXT_FORMAT_MAP, { format, placeholder })
   const styles = {
     ...style,
     lineHeight: height,
@@ -99,37 +92,35 @@ export function Text(props: TextProps) { // FIXME: extend with useItem
     WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
   }
 
+  const formatted = useMemo(() => {
+    if (nil.isNil(content) && placeholder) {
+      return typeof placeholder === 'boolean' ? 'unknown' : placeholder
+    } else if (nil.isNil(content) || !format) {
+      return content
+    }
+
+    return TEXT_FORMAT_MAP[format](content as string)
+  }, [content, format, placeholder])
+
   return (
     <MuiTypography
-      className={_className}
+      className={cn('text', {
+        nowrap,
+        ellipsis,
+        [`t-${size}`]: size,
+        [`c-${color}`]: color,
+      }, className)}
       variant={v}
-      align='left'
+      align={align}
       style={styles}
       {...otherProps}
     >
-      {_content}
+      {formatted}
       {children}
     </MuiTypography>
   )
-}
+}, props => ({ v: 'text', children: props.children || props.content }))
 
 Text.displayName = 'Text'
 
-
-export default react.attachOverrides(withSkeleton(Text, props => ({ v: 'text', children: props.children || props.content })), {
-  H1: { v: 'h1' },
-  H2: { v: 'h2' },
-  H3: { v: 'h3' },
-  H4: { v: 'h4' },
-  H5: { v: 'h5' },
-  H6: { v: 'h6' },
-  Body1: { v: 'body1' },
-  Body2: { v: 'body2' },
-  Subtitle1: { v: 'subtitle1' },
-  Subtitle2: { v: 'subtitle2' },
-  Button: { v: 'button' },
-  Caption: { v: 'caption' },
-  Overline: { v: 'overline' },
-}, {
-  memoize: true,
-})
+export default Text

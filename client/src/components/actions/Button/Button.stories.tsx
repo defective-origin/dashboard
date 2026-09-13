@@ -2,10 +2,11 @@ import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
 import Button, { ButtonProps } from './Button.component'
 import { ICONS } from 'components/views/Icon'
+import { ButtonVariant } from './Button.hooks'
 
 const BUTTON_ICONS = [undefined, ...ICONS]
-const BUTTON_COLORS = theme.COLORS.slice(0, 6)
-const VARIANTS: ButtonProps['v'][] = ['text', 'outlined', 'contained']
+const BUTTON_COLORS = theme.COLORS
+const VARIANTS: ButtonVariant[] = ['text', 'outlined', 'filled', 'wrapper']
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Actions/Button',
@@ -17,10 +18,9 @@ const meta: Meta<typeof Button> = {
     start: field.variants(BUTTON_ICONS, 'IconVariant'),
     end: field.variants(BUTTON_ICONS, 'IconVariant'),
     size: field.size('ButtonSize', 'md'),
-    v: field.variants(VARIANTS, 'ButtonVariant', 'body1'),
+    v: field.variants(VARIANTS, 'ButtonVariant', 'outlined'),
     color: field.variants(BUTTON_COLORS, 'ButtonColor', 'primary'),
     active: field.boolean(),
-    loading: field.boolean(),
     className: field.string(),
     children: field.reactNode(true),
   },
@@ -44,7 +44,6 @@ export const Demo: Story = {
     v: 'outlined',
     size: 'md',
     color: 'primary',
-    loading: false,
     start: 'settings',
     end: 'close',
     active: false,
@@ -64,12 +63,4 @@ export const Sizes: Story = {
 export const Colors: Story = {
   parameters: params('Color', BUTTON_COLORS),
   render: () => initVariants('color', BUTTON_COLORS),
-}
-
-export const Loading: Story = {
-  parameters: params('If `loading` is `true` the Skeleton component is shown.'),
-  args: {
-    content: 'content to hide',
-    loading: true,
-  },
 }

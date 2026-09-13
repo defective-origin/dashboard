@@ -16,17 +16,14 @@ export type AccountDashboardsPageProps = PageProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <AccountDashboardsPage />
  */
 export function AccountDashboardsPage(props: AccountDashboardsPageProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.AccountDashboardsPage, className)
 
   return (
-    <Page className={_className} name='LABEL.DASHBOARDS' {...otherProps}>
+    <Page className={cn(css.AccountDashboardsPage, className)} name='LABEL.DASHBOARDS' {...otherProps}>
       <Page.Content>
         <DashboardTable />
 

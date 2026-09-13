@@ -5,23 +5,28 @@ Allows users to create boards which show different widgets.
 The main task of our application is a convenient, fast and independent display of data.
 All you need to display them is to use ready-made widgets, boards and APIs by connecting them or implementing your own and registering them.
 
-1) Independence of parts - API, widget, metrics collection (on its side)
-2) Security - I don’t know anything about you and your data
-3) Easy to use - Managing widgets, boards, settings
+1) Independence of parts: API, widget, metrics collection (on its side)
+2) Security: I don’t know anything about you and your data
+3) Easy to use: Managing widgets, boards, settings
 
-### Menu
+## Menu
 - [Frontend](./client/README.md)
 - [Backend](./server/README.md)
-- [Design](./docs/DESIGN.md)
+- [E2E](./e2e/README.md)
+- [DevOps](./docs/DEVOPS.md)
 - [Management](./docs/MANAGEMENT.md)
 - [Repository](./docs/REPOSITORY.md)
 
-## Global commands
-- packages should be fixed. Without `^`.
-- yarn in script must have `run` command, example: `yarn run a && yarn run b`
+## Before start
+The first time you open a project, you will be prompted to install all required `VS Code extensions`. Which described and can be found in `.vscode/.settings` file of __client__ and __server__ app. You can also install them __manually__ by opening the extensions tab and start searching for `@recommended`.
+- `Prettier` is forbidden because of [issue with printWidth](https://github.com/prettier/prettier/issues/3468)
 
+## Global commands
 ### Work with packages
 ```sh
+# Install all necessary packages
+yarn
+
 # Remove all packages and clear cache
 yarn packages:clean
 

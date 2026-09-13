@@ -18,8 +18,6 @@ export type TabContentProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TabContent />
  */

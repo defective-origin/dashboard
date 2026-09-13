@@ -3,7 +3,7 @@ import MuiAlert from '@mui/material/Alert'
 import MuiAlertTitle from '@mui/material/AlertTitle'
 
 // ---| core |---
-import { cn, react } from 'tools'
+import { cn } from 'tools'
 import { Color } from 'theme'
 
 // ---| pages |---
@@ -15,7 +15,7 @@ import Text from 'components/views/Text'
 import css from './Alert.module.scss'
 
 
-export type AlertColor = Exclude<Color, 'primary' | 'secondary' | 'bg' | 'contrast'>
+export type AlertColor = Extract<Color, 'success' | 'info' | 'warning' | 'error'>
 
 export type AlertProps = {
   title?: React.ReactNode
@@ -27,30 +27,20 @@ export type AlertProps = {
 
 /**
  * A notification in order to show some message.
- *
- * How to use
  * @example
  * <Alert />
  */
-export function Alert(props: AlertProps) {
+export function Alert(props: AlertProps) { // TODO: add icon and remove mui. icon, title, message, actions
   const { title, color, content, children = content, className, ...otherProps } = props
-  const _className = cn(css.Alert, className)
 
   return (
-    <MuiAlert className={_className} severity={color} {...otherProps}>
-      {title && <MuiAlertTitle><Text.H4 size='sm' content={title} /></MuiAlertTitle>}
-      <Text.Caption content={children} />
+    <MuiAlert className={cn(css.Alert, className)} severity={color} {...otherProps}>
+      {title && <MuiAlertTitle><Text v='h4' size='sm' content={title} /></MuiAlertTitle>}
+      <Text v='caption' content={children} />
     </MuiAlert>
   )
 }
 
 Alert.displayName = 'Alert'
 
-export default react.attachOverrides(Alert, {
-  Error: { color: 'error' },
-  Warning: { color: 'warning' },
-  Info: { color: 'info' },
-  Success: { color: 'success' },
-}, {
-  memoize: true,
-})
+export default Alert

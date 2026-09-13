@@ -1,20 +1,16 @@
-:root {
-  // --ui-framework-color: var(--account-framework-color);
-}
-
 .Modal {
 }
 
 .Content {
   position: absolute;
   width: 550px;
-  height: fit-content;
 }
 
 .center {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: fit-content;
   max-height: 90%;
 }
 

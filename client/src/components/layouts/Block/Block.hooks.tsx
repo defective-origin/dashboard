@@ -31,7 +31,6 @@ export type BlockReturnOptions<O extends object> = ItemReturnOptions<O>
 
 /**
  * Hook descriptions
- *
  * @example
  * const options = useBlock(conf)
  */

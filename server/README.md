@@ -1,16 +1,15 @@
 # [↤](../README.md) Backend
 
 ### Menu
+- [Code](../client/docs/CODE.md) like in client
 - [Endpoints](./docs/ENDPOINTS.md)
 - [Structure](./docs/STRUCTURE.md)
 
-## Commands
-### Program installation
+## Necessary programs
 - [Podman](https://podman.io/) - allows to work with containers
 - [Postman](https://learning.postman.com/docs/getting-started/installation/installation-and-updates/) or [Robo 3T](https://robomongo.org/) - allows to work with database
 
-
-
+## Commands
 ### Start app
 Build containers if it's first launch
 ```sh
@@ -36,7 +35,7 @@ yarn run prefill
 ```
 
 ### Launches tests
-```
+```sh
 # Run test only once
 yarn test
 
@@ -45,15 +44,11 @@ yarn test:watch
 ```
 
 #### Code checkers
-
-Commands with **:fix** prefix - fix linter errors.
-
-Other commands just check parts of code.
-
-#### Launches all lint checkers for code and styles.
-
 ```sh
+# run all linters
 yarn lint
+
+# fix linter errors
 yarn lint:fix
 
 # check imports

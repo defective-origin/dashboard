@@ -83,7 +83,7 @@ export const Formats: Story = {
         ['Date', Date.now(), DATE_FORMATS],
       ].map(([name, value, variants], idx) => (
         <Block key={idx}>
-          <Text.H5 size='md' content={name} />
+          <Text v='h5' size='md' content={name} />
           <Block v='y'>
             {(variants as never[]).map(item =>
               <Spec

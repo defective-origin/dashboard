@@ -17,7 +17,7 @@ export function init() {
   return mongoose
 }
 
-export function run(url = process.env.MONGO_DATABASE_URL) {
+export function run(url = process.env.MONGODB_URL) {
   return mongoose.connect(url)
 }
 

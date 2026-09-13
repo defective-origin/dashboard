@@ -16,17 +16,14 @@ export type AppHeaderProps = HeaderProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <AppHeader />
  */
 export function AppHeader(props: AppHeaderProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.AppHeader, className)
 
   return (
-    <Header className={_className} as='header' area='top' justifies='space-between' g='xxs' p='xxs' v='lcr' columns='1fr auto 1fr' {...otherProps}>
+    <Header className={cn(css.AppHeader, className)} as='header' area='top' justifies='space-between' g='xxs' p='md' v='lcr' columns='1fr auto 1fr' {...otherProps}>
       {children}
 
       <Portal.Container name='page-name' v='x' aligns='center' g='xxs' area='left' />

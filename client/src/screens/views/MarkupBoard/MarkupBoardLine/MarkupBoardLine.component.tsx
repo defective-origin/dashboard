@@ -23,14 +23,11 @@ export type MarkupBoardLineProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <MarkupBoardLine />
  */
 export function MarkupBoardLine(props: MarkupBoardLineProps) {
   const { v = 'row', index = 0, span = 0, className, children, ...otherProps } = props
-  const _className = cn(css.MarkupBoardLine, index % 2 === 0 ? css[v] : css.gap, className)
   const ref = useRef<HTMLDivElement>(null)
   const area = v === 'row'
     ? `${index + 1}/${1}/${index + 1}/${span + 1}`
@@ -53,7 +50,12 @@ export function MarkupBoardLine(props: MarkupBoardLineProps) {
   })
 
   return (
-    <Item ref={ref} className={_className} area={area} {...otherProps}>
+    <Item
+      ref={ref}
+      className={cn(css.MarkupBoardLine, index % 2 === 0 ? css[v] : css.gap, className)}
+      area={area}
+      {...otherProps}
+    >
       {children}
     </Item>
   )

@@ -21,17 +21,14 @@ export type MarkupSpecProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <MarkupSpec />
  */
 export function MarkupSpec(props: MarkupSpecProps) {
   const { options, children, className, ...otherProps } = props
-  const _className = cn(css.MarkupSpec, className)
 
   return (
-    <div className={_className} {...otherProps}>
+    <div className={cn(css.MarkupSpec, className)} {...otherProps}>
       <Spec name={t('LABEL.MARKUP.WIDTH')} content={options?.width} />
       <Spec name={t('LABEL.MARKUP.HEIGHT')} content={options?.height} />
       <Spec name={t('LABEL.MARKUP.COLUMNS')} content={options?.columns.length} />

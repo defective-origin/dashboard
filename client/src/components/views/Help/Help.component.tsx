@@ -2,41 +2,36 @@ import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
-import { Size } from 'theme'
 
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Button from 'components/actions/Button'
-import Popup, { PopupProps } from 'components/popups/Popup'
+import Dropdown, { DropdownProps } from 'components/actions/Dropdown'
 
 
 // ---| self |---
 import css from './Help.module.scss'
 
-export type HelpProps = PopupProps & {
-  size?: Size
-}
+export type HelpProps = DropdownProps
 
 /**
  * Show description in popup.
- *
- * How to use
  * @example
  * <Help title='Title' content='Content' maxWidth={500} />
  */
 export function Help(props: HelpProps) {
-  const { size, className, ...otherProps } = props
-  const _className = cn(css.Help, className)
+  const { content, children, className, ...otherProps } = props
 
   return (
-    <Popup
-      className={_className}
+    <Dropdown
+      className={cn(css.Help, className)}
+      popupSide='top'
+      start='help'
       arrow
-      v='top'
-      trigger={o => <Button start='help' active={o.isOn} size={size} />}
       {...otherProps}
-    />
+    >
+      {content && children}
+    </Dropdown>
   )
 }
 

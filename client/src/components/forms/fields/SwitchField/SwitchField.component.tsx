@@ -19,21 +19,19 @@ export type SwitchFieldProps = FieldProps<boolean> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <SwitchField />
  */
 export function SwitchField(props: SwitchFieldProps) {
   const { value, checked = !!value, onChange, className, ...otherProps } = props
-  const _className = cn(css.SwitchField, className)
+
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     onChange?.(checked, event)
   , [onChange])
 
   return (
     <MuiSwitchField
-      className={_className}
+      className={cn(css.SwitchField, className)}
       size='small'
       checked={checked}
       onChange={handleChange}

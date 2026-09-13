@@ -14,7 +14,7 @@ export type FeatureFlag = TimeStamps & {
 export const useFeatureFlags = () => {
   const response = api.useRestReadEndpoint<FeatureFlag[]>(PATHNAME)
 
-  useEffect(() => {
+  useEffect(() => { // TODO: change on useMemo and don't store in singleton
     FEATURE_FLAGS_STORE.clear()
 
     if (response.data) {

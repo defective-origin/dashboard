@@ -28,8 +28,6 @@ export type MetaProps = HelmetProps & {
 
 /**
  * Allows add application metadata.
- *
- * How to use
  * @example
  * <Meta />
  */

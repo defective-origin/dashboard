@@ -15,16 +15,13 @@ export type FooterProps = BlockProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Footer />
  */
 export function Footer(props: FooterProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.Footer, className)
 
-  return <Block className={_className} area='bottom' v='x' {...otherProps}>{children}</Block>
+  return <Block className={cn(css.Footer, className)} area='bottom' v='x' {...otherProps}>{children}</Block>
 }
 
 Footer.displayName = 'Footer'

@@ -26,18 +26,23 @@ export type AvatarProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Avatar />
  */
 export function Avatar(props: AvatarProps) {
   const { src, size, alt = 'user image', content, children = content, className, ...otherProps } = props
-  const _className = cn(css.Avatar, {
-    [`icon--${size}`]: size,
-  }, className)
 
-  return <MuiAvatar className={_className} alt={alt} src={src} children={children} {...otherProps} />
+  return (
+    <MuiAvatar
+      className={cn(css.Avatar, {
+        [`icon--${size}`]: size,
+      }, className)}
+      alt={alt}
+      src={src}
+      children={children}
+      {...otherProps}
+    />
+  )
 }
 
 Avatar.displayName = 'Avatar'

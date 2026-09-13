@@ -1,14 +1,40 @@
 version: "3.8"
-name: server
+name: services
 
 services:
   mongodb-pod:
     image: mongo:latest
     container_name: mongodb-pod
+    restart: unless-stopped
     ports:
       - "27017:27017"
     volumes:
       - mongodb_volumes:/data/db
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_volumes:/data
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.4
+    container_name: elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=${ELASTICSEARCH_SECURITY}
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_volumes:/usr/share/elasticsearch/data
+
 volumes:
   mongodb_volumes:
+  redis_volumes:
+  elasticsearch_volumes:

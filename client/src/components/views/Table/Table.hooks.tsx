@@ -5,7 +5,8 @@ import { obj, arr } from 'tools'
 
 // ---| self |---
 import { TableColumn, TableFilter, TableOrder, TableRecord, TableSort } from './Table.types'
-import TableRowMenu, { TableRowMenuItem } from './TableRowMenu'
+import TableRowMenu from './TableRowMenu'
+
 
 const ORDER_NEXT_MAP: Record<TableOrder | 'undefined', TableOrder | undefined> = {
   undefined: 'asc',
@@ -17,7 +18,7 @@ export type TableManagerOptions<T extends TableRecord> = {
   items?: T[]
   columns?: TableColumn<T>[]
   filters?: TableFilter<T>[]
-  actions?: TableRowMenuItem[]
+  actions?: React.ReactNode
 }
 
 export const useTableManager = <T extends TableRecord>(options: TableManagerOptions<T>) => {

@@ -11,7 +11,7 @@ All config variables are in one of the file
 .env.[mode].local   # only loaded in specified mode, ignored by git
 ```
 
-Only variables prefixed with VITE\_ are exposed to your Vite-processed code. e.g. for the following env variables:
+Only variables prefixed with `VITE_` are exposed to your Vite-processed code. e.g. for the following env variables:
 
 ```
 VITE_SOME_KEY=123

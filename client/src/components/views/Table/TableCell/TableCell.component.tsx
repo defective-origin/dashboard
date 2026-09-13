@@ -28,8 +28,6 @@ export type TableCellProps<T extends TableRecord> = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TableCell />
  */

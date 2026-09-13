@@ -21,20 +21,17 @@ export type TableHeadProps<T extends TableRecord> = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TableHead />
  */
 export function TableHead<T extends TableRecord>(props: TableHeadProps<T>) {
   const { onSort, columns, className, ...otherProps } = props
-  const _className = cn(css.TableHead, className)
   const style: React.CSSProperties = {
     zIndex: (columns?.length ?? 0) + 1,
   }
 
   return (
-    <MuiTableHead className={_className} style={style} {...otherProps}>
+    <MuiTableHead className={cn(css.TableHead, className)} style={style} {...otherProps}>
       <TableRow columns={columns} onSort={onSort} th />
     </MuiTableHead>
   )

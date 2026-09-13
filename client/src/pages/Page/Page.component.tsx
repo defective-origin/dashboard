@@ -1,16 +1,18 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { TranslateKeys, t } from 'locale'
 import { cn, react } from 'tools'
+import { useAccount } from 'api'
 
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
 import Portal from 'components/layouts/Portal'
 import Meta, { MetaItem } from 'components/layouts/Meta'
-import Actions, { ActionItem } from 'components/actions/Actions'
+import Actions from 'components/layouts/Actions'
 import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Avatar from 'components/views/Avatar'
 
 import Item from 'components/layouts/Item'
 import Aside from 'components/layouts/Aside'
@@ -23,49 +25,47 @@ import Section from 'components/layouts/Section'
 // ---| self |---
 import css from './Page.module.scss'
 
-export type PageMenuItem = ActionItem
 
 export type PageProps = LayoutProps & {
-  title?: ReactNode
   name?: TranslateKeys
   meta?: MetaItem[]
-  menu?: ActionItem[]
-  extra?: ReactNode
-  nav?: ReactNode
+  title?: React.ReactNode
+  extra?: React.ReactNode
+  nav?: React.ReactNode
 }
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Page />
  */
 export function Page(props: PageProps) {
-  const { title, nav, extra, menu = [], name, meta, children, className, ...otherProps } = props
-  const _className = cn(css.Page, className)
+  const { title, nav, extra, name, meta, children, className, ...otherProps } = props
   const pageName = t(name)
-  const tabName = t('LABEL.PAGE_NAME', { title: pageName })
+  const account = useAccount()
 
   return (
-    <Layout className={_className} v='columns' {...otherProps}>
-      <Meta title={tabName} items={meta} />
+    <Layout className={cn(css.Page, className)} v='columns' {...otherProps}>
+      <Meta title={t('LABEL.PAGE_NAME', { title: pageName })} items={meta} />
 
-      <Portal name='page-name' content={<Text.H1 size='md' color='primary' content={title ?? pageName} />} />
+      <Portal name='page-name' content={<Text v='h1' size='md' color='primary' content={title ?? pageName} />} />
       <Portal name='page-nav' content={nav} />
-      <Portal
-        name='page-extra'
-        content={(
-          <>
-            {extra}
-            <Actions items={menu} g='xxs' size='sm' />
-          </>
-        )}
-      />
+      <Portal name='page-extra' content={
+        <Actions g='xxs' size='sm'>
+          {extra}
+
+
+          {account.isAuthorized
+            ? (
+              <Actions.AppLink to='ACCOUNT' size='md' color='primary'>
+                <Avatar size='md' />
+              </Actions.AppLink>
+            ) : <Actions.AppLink to='ROOT' start='person' size='md' color='primary' onClick={account.login} />
+          }
+        </Actions>
+      } />
 
       {children}
-
-      <div className={css.copyright}>{t('MESSAGE.COPYRIGHT', { year: (new Date).getFullYear() })}</div>
     </Layout>
   )
 }

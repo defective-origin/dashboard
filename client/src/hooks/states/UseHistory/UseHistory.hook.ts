@@ -15,7 +15,6 @@ export type HistoryReturnOptions<T> = {
 // TODO: rename to Stack?
 /**
  * Allows to save value change history.
- *
  * @example
  * // if value is not set then undefined will be first value
  * const snapshot = useHistory()

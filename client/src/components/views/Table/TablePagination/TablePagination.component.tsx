@@ -33,14 +33,11 @@ export type TablePaginationProps = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TablePagination />
  */
 export function TablePagination(props: TablePaginationProps) {
   const { rowsPerPageOptions = DEFAULT_OPTIONS, rowsPerPage = rowsPerPageOptions[1], items, visible, onChange, className, ...otherProps } = props
-  const _className = cn(css.TablePagination, className)
   const [page, setPage] = React.useState(0)
   const [currentRowsPerPage, setCurrentRowsPerPage] = React.useState(rowsPerPage)
   const count = items?.length ?? 0
@@ -75,7 +72,7 @@ export function TablePagination(props: TablePaginationProps) {
   }
 
   return (
-    <Block className={_className} v='x' justifies='space-between' aligns='center' {...otherProps}>
+    <Block className={cn(css.TablePagination, className)} v='x' justifies='space-between' aligns='center' {...otherProps}>
       <Label
         className={css.TablePaginationLabel}
         icon='file_copy'

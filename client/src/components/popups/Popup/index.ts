@@ -1,7 +1,3 @@
-/* INJECT_IMPORT_PLACE */
-
-/* INJECT_DEFAULT_EXPORT_PLACE */
 export { default } from './Popup.component'
-
-/* INJECT_EXPORT_PLACE */
 export * from './Popup.component'
+export * from './Popup.hoc'

@@ -1,10 +1,10 @@
 import { Meta, StoryObj, field, params } from 'storybook'
 import Button from 'components/actions/Button'
 import Modal, { ModalProps } from './Modal.component'
-import { modal } from './Modal.hooks'
+import useModal, { modal } from './Modal.hooks'
 
 const VARIANTS: ModalProps['position'][] = ['center', 'right']
-const NAMES: ModalProps['name'][] = ['global']
+const NAMES: ModalProps['name'][] = ['confirm']
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Popups/Modal',
@@ -23,30 +23,48 @@ export default meta
 
 type Story = StoryObj<typeof Modal>
 
-const render = (props: ModalProps) => {
-  return (
-    <div>
-      <Modal name='global' {...props}>
-        <div style={{ height: 2000 }} />
-      </Modal>
-
-      <Modal.Container name='global' />
-
-      <Button content='Open modal' onClick={() => modal({ name: 'global' })} />
-    </div>
-  )
-}
-
 export const Demo: Story = {
   parameters: params('Modal'),
-  render,
   args: {
     position: 'center',
     title: 'Title',
-    name: 'global',
+    name: 'confirm',
     actions: [
-      { content: 'Reset', color: 'info' },
-      { content: 'Save', color: 'success' },
+      <Button content='Confirm' color='success' />,
+      <Button content='cancel' start='close' color='error' />,
     ],
+  },
+  render: props => {
+    const ConfirmModal = () => {
+      const modal = useModal('confirm')
+
+      return (
+        <Modal
+          title='Confirm operation'
+          actions={[
+            <Button content='Confirm' color='success' onClick={() => {
+              modal.onSuccess?.()
+              modal.onClose?.()
+            }} />,
+            <Button content='cancel' start='close' color='error' onClick={modal.onClose} />,
+          ]}
+          open={modal.open}
+          onClose={modal.onClose}
+          {...props}
+        >
+          <div style={{ height: 2000 }} />
+        </Modal>
+      )
+    }
+
+    return (
+      <div>
+        <ConfirmModal />
+
+        <Modal.Container />
+
+        <Button content='Open modal' onClick={() => modal({ name: 'confirm' })} />
+      </div>
+    )
   },
 }

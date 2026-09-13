@@ -16,17 +16,14 @@ export type AccountWidgetsPageProps = PageProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <AccountWidgetsPage />
  */
 export function AccountWidgetsPage(props: AccountWidgetsPageProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.AccountWidgetsPage, className)
 
   return (
-    <Page className={_className} name='LABEL.WIDGETS' {...otherProps}>
+    <Page className={cn(css.AccountWidgetsPage, className)} name='LABEL.WIDGETS' {...otherProps}>
       <Page.Content>
         <WidgetTable />
 

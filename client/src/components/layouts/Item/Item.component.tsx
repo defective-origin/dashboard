@@ -12,8 +12,6 @@ export type ItemProps<E extends React.ElementType = React.ElementType> = react.C
 
 /**
  * Item for layout and block.
- *
- * How to use
  * @example
  * <Item />
  */

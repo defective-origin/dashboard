@@ -25,20 +25,17 @@ export type DividerProps = Omit<TextProps, 'v'> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Divider v='y' content='text' format='uppercase' />
  */
 export function Divider(props: DividerProps) {
   const { v ='x', content, children, className, ...otherProps } = props
-  const _className = cn(css.Divider, css[v], className)
   const hasContent = content ?? children
   const _content = children ?? <Text content={content} {...otherProps} />
 
   return (
     <MuiDivider
-      className={_className}
+      className={cn(css.Divider, css[v], className)}
       orientation={DIVIDER_VARIANT_MAP[v]}
       children={hasContent && _content}
     />

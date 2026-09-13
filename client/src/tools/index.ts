@@ -1,9 +1,5 @@
-/* INJECT_IMPORT_PLACE */
-
-/* INJECT_DEFAULT_EXPORT_PLACE */
-
 /* INJECT_EXPORT_PLACE */
-export * from './Matrix'
+export * as react from './React'
 export * as mix from './Mix'
 export * as matrix from './Matrix'
 export * as obj from './Object'
@@ -17,5 +13,4 @@ export * as num from './Number'
 // export { default as wk } from 'weak-key'
 export { default as cn } from 'classnames'
 
-export * as react from './react.tools'
 export * as h2i from 'html-to-image'

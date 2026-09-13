@@ -1,19 +1,20 @@
 import { Meta, StoryObj, field, params, theme } from 'storybook'
+import Button from 'components/actions/Button'
 import Text from 'components/views/Text'
 import Table, { TableProps } from './Table.component'
 import { TableColumn } from './Table.types'
 import column from './Table.tools'
 
 type Item = {
-  name: string;
-  code?: string;
-  population?: number;
-  size?: number;
-  density?: number;
-  salary?: number;
-  gdp?: number;
-  date?: Date;
-  isBig?: boolean;
+  name: string
+  code?: string
+  population?: number
+  size?: number
+  density?: number
+  salary?: number
+  gdp?: number
+  date?: Date
+  isBig?: boolean
 }
 
 const COLUMNS: TableColumn<Item>[] = [
@@ -151,8 +152,8 @@ export const Demo: Story = {
     pagination: true,
     loading: false,
     actions: [
-      { start: 'add', content: 'Add' },
-      { start: 'delete_forever', content: 'Delete' },
+      <Button start='edit' content='Edit' />,
+      <Button start='delete_forever' content='Delete' />,
     ],
     keygen: (item, index) => `${item.name}-${item.code}-${index}`,
   },

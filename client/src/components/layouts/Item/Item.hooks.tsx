@@ -66,7 +66,6 @@ export type ItemReturnOptions<O extends object> = O & {
 
 /**
  * Hook descriptions
- *
  * @example
  * const options = useItem(conf)
  */
@@ -86,7 +85,7 @@ export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnO
     justify,
     place,
     stretch,
-    background,
+    background, // TODO: rename to bg
     border,
     flex,
     m, p, g,

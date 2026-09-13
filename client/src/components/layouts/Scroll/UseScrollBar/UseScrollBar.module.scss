@@ -8,12 +8,12 @@
 
   // thumb
   --scroll-thumb-radius: 2px;
-  --scroll-thumb-color: #33333331;
-  --scroll-thumb-color--hover: #33333354;
-  --scroll-thumb-color--active: #33333354;
+  --scroll-thumb-color: var(--color-primary-5);
+  --scroll-thumb-color--hover: var(--color-primary-4);
+  --scroll-thumb-color--active: var(--color-primary-3);
 
   // shadow
-  --scroll-shadow-color: #0000000F;
+  --scroll-shadow-color: var(--color-primary-6);
 }
 
 :global {
@@ -40,9 +40,16 @@
     position: relative;
     background: var(--scroll-thumb-color);
     border-radius: var(--scroll-thumb-radius);
+    width: 0.5rem;
+    height: 0.5rem;
 
     &:hover { background: var(--scroll-thumb-color--hover); }
     &:active { background: var(--scroll-thumb-color--active); }
+  }
+
+  .scroll-thin {
+    width: 0.25rem;
+    height: 0.25rem;
   }
 
   .scroll-back-button {

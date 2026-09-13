@@ -22,8 +22,6 @@ export type TabsProps = Pick<MuiTabsProps, 'value'> & ItemProps & {
 
 /**
  * Allows to bind tab content with tab button.
- *
- * How to use
  * @example
  * <Tabs.Provider value='OPTIONS'>
  *   <Tabs p='xs'>
@@ -32,7 +30,7 @@ export type TabsProps = Pick<MuiTabsProps, 'value'> & ItemProps & {
  *   </Tabs>
  *
  *   <Block v='y' g='xxs' p='xs' justify='stretch'>
- *     <Scroll v='y' size='xxs' />
+ *     <Scroll v='y' thin />
  *
  *     <Tabs.TabContent value='OPTIONS'>
  *       <Field.Json path='options' />
@@ -52,12 +50,11 @@ export type TabsProps = Pick<MuiTabsProps, 'value'> & ItemProps & {
  */
 export function Tabs(props: TabsProps) {
   const { value, children, className, ...otherProps } = useItem(props)
-  const _className = cn(css.Tabs, className)
   const tabs = useTabs()
 
   return (
     <MuiTabs
-      className={_className}
+      className={cn(css.Tabs, className)}
       value={tabs?.value ?? value}
       onChange={(_, val) => tabs?.setValue(val)}
       {...otherProps}

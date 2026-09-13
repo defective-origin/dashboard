@@ -1,0 +1,7 @@
+:global {
+  // for custom item flipping if rtl doesn't support in item.
+  // For example arrow icons
+  [dir='rtl'] .rtl {
+    transform: scaleX(-1);
+  }
+}

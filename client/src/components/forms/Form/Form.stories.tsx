@@ -1,7 +1,7 @@
 import { Title, Subtitle, Primary, Controls, Stories } from '@storybook/blocks'
 import { Meta, StoryObj, params } from 'storybook'
 import Text from 'components/views/Text'
-import Actions from 'components/actions/Actions'
+import Actions from 'components/layouts/Actions'
 import Layout from 'components/layouts/Layout'
 import Field from 'components/forms/fields'
 import Form from './Form.component'

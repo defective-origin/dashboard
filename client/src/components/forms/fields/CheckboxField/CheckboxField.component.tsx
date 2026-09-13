@@ -33,14 +33,11 @@ export type CheckboxFieldProps = FieldProps<CheckboxValue> & {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <CheckboxField />
  */
 export function CheckboxField(props: CheckboxFieldProps) {
   const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
-  const _className = cn(css.CheckboxField, className)
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     onChange?.(toValue(checked, value), event)
@@ -53,7 +50,7 @@ export function CheckboxField(props: CheckboxFieldProps) {
       disabled={disabled}
       control={
         <MuiCheckboxField
-          className={_className}
+          className={cn(css.CheckboxField, className)}
           size='small'
           value={value}
           checked={checked}

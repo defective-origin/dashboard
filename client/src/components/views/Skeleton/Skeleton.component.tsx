@@ -21,16 +21,13 @@ export type SkeletonProps = {
 
 /**
  * A placeholder preview of the content.
- *
- * How to use
  * @example
  * <Skeleton />
  */
 export function Skeleton(props: SkeletonProps) {
   const { v, children, className, ...otherProps } = props
-  const _className = cn(css.Skeleton, className)
 
-  return <MuiSkeleton className={_className} variant={v} {...otherProps}>{children}</MuiSkeleton>
+  return <MuiSkeleton className={cn(css.Skeleton, className)} variant={v} {...otherProps}>{children}</MuiSkeleton>
 }
 
 Skeleton.displayName = 'Skeleton'

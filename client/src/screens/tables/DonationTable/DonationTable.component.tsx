@@ -8,6 +8,7 @@ import { Donation, useDonations } from 'api'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+import Button from 'components/actions/Button'
 import Table, { TableProps } from 'components/views/Table'
 
 // ---| self |---
@@ -18,26 +19,23 @@ export type DonationTableProps = TableProps<Donation>
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <DonationTable />
  */
 export function DonationTable(props: DonationTableProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.DonationTable, className)
   const requests = useDonations()
 
   return (
     <Table
       title={t('LABEL.DONATIONS')}
-      className={_className}
+      className={cn(css.DonationTable, className)}
       columns={DONATION_COLUMNS}
       items={requests.data}
       loading={requests.isLoading}
       menu={[
-        { start: 'refresh', tooltip: 'Refresh', onClick: () => requests.refetch() },
-        { start: 'add', tooltip: 'new request' },
+        <Button start='refresh' tooltip='Refresh' onClick={() => requests.refetch()} />,
+        <Button start='add' tooltip='new request' />,
       ]}
       pagination
       {...otherProps}

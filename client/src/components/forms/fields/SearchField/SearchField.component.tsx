@@ -15,18 +15,15 @@ export type SearchFieldProps = TextFieldProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <SearchField />
  */
 export function SearchField(props: SearchFieldProps) {
   const { slotProps, className, ...otherProps } = props
-  const _className = cn(css.SearchField, className)
 
   return (
     <TextField
-      className={_className}
+      className={cn(css.SearchField, className)}
       slotProps={{
         ...slotProps,
         input: {

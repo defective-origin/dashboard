@@ -58,7 +58,7 @@ export default defineConfig({
     environment: 'jsdom',
 
     // Path to a configuration file that runs custom setup logic (e.g., configuring testing libraries, global mocks) before executing the test suite
-    setupFiles: 'src/tests/vitest.setup.ts',
+    setupFiles: 'tests/vitest.setup.ts',
 
     // clear mocks before each tests
     clearMocks: true,

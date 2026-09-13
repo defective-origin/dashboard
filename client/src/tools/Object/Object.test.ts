@@ -91,4 +91,22 @@ describe('[Object] tools', () => {
       expect(tools.del({ a: { b: { c: 1 } }, d: 2 }, 'a.b.c', true)).toEqual({ d: 2 })
     })
   })
+
+  describe('[clear] func', () => {
+    it('should remove all undefined values', () => {
+      expect(tools.clear({ a: { b: { c: 1 }, d: undefined }, e: undefined })).toEqual({ a: { b: { c: 1 }, d: undefined } })
+    })
+  })
+
+  describe('[flattenKeys] func', () => {
+    it('should return array with all keys', () => {
+      expect(tools.flattenKeys({ a: { b: { c: 1 } } })).toEqual(['a', 'a.b', 'a.b.c'])
+    })
+  })
+
+  describe('[flattenLeafKeys] func', () => {
+    it('should return array with leaf keys', () => {
+      expect(tools.flattenLeafKeys({ a: { b: { c: 1 } } })).toEqual(['a.b.c'])
+    })
+  })
 })

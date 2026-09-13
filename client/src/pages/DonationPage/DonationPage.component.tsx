@@ -9,6 +9,7 @@ import Page, { PageProps } from 'pages/Page'
 import DonationTable from 'screens/tables/DonationTable'
 import ExpensesTable from 'screens/tables/ExpensesTable'
 // ---| components |---
+import Button from 'components/actions/Button'
 
 // ---| self |---
 import css from './DonationPage.module.scss'
@@ -17,22 +18,19 @@ export type DonationPageProps = PageProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <DonationPage />
  */
 export function DonationPage(props: DonationPageProps) {
   const { children, className, ...otherProps } = props
-  const _className = cn(css.DonationPage, className)
 
   // TODO: show cold map by  day, week, month, year, period. show list of dons on cell hover
 
   return (
     <Page
-      className={_className}
+      className={cn(css.DonationPage, className)}
       name='LABEL.PAYMENTS'
-      menu={[{ start: 'add', tooltip: 'new request' }]}
+      extra={<Button start='add' tooltip='request' />}
       {...otherProps}
     >
       <Page.Content p='sm' g='sm'>

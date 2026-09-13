@@ -16,19 +16,16 @@ import css from './SelectField.module.scss'
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
 export type SelectFieldProps = FieldProps & {
-  items?: SelectFieldItem[];
+  items?: SelectFieldItem[]
 }
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <SelectField />
  */
 export function SelectField(props: SelectFieldProps) {
   const { value = '', name, onChange, items = [], className, ...otherProps } = props
-  const _className = cn(css.SelectField, className)
 
   const handleChange = useCallback((event: SelectChangeEvent<unknown>) =>
     onChange?.(event.target.value, event)
@@ -38,7 +35,7 @@ export function SelectField(props: SelectFieldProps) {
   return (
     <MuiSelectField
       labelId={name}
-      className={_className}
+      className={cn(css.SelectField, className)}
       size='small'
       value={value}
       onChange={handleChange}

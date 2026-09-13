@@ -1,13 +1,10 @@
 :root {
+  /* init variables */
   @include init-text-variables;
   @include init-icon-variables;
   @include init-space-variables;
-  @include init-scroll-variables;
   @include init-radius-variables;
-
-  // shadow
-  --box-shadow-color: rgb(var(--color-primary) 0.05);
-  --box-shadow: 0 4px 6px -1px var(--box-shadow-color), 0 2px 4px -2px var(--box-shadow-color);
+  @include init-box-shadow-variables;
 
   // border and dividers
   --divider-color: color-mix(in srgb, var(--color-secondary) 8%, transparent);
@@ -21,12 +18,14 @@
   --lh-heading: 1.25; /* Tight line-height for headings to avoid gaps */
   --lh-body: 1.65;    /* Spacious line-height for long-form reading comfort */
 
+
+  /* attach modifiers */
   @include attach-text-size-variables;
   @include attach-icon-size-variables;
   @include attach-space-variables;
   @include attach-radius-variables;
-  @include attach-scroll-size-variables;
   @include attach-color-variables;
+  @include attach-box-shadow-size-variables;
 }
 
 // use light, dark class on element to prevent changing theme on it
@@ -34,7 +33,23 @@
 .dark { @include init-color-variables(#F8FAFC, #94A3B8, #56b843, #60A5FA, #FBBF24, #F87171, #333333, #2c2b2b); }
 
 html {
-  font-size: 16px;
+  /* Smooth scaling from 14px on smartphones to 18px on desktops */
+  font-size: clamp(14px, 0.4vw + 12.5px, 18px);
+}
+
+/* For standard monitors with very high resolution (4K+) */
+@media screen and (width >= 2560px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+/* For TVs / Smart TVs / Support integrated browsers */
+@media screen and (width >= 1280px) and (pointer: coarse),
+  screen and (pointer: none) and (-webkit-video-playable-inline) {
+  html {
+    font-size: 24px;
+  }
 }
 
 body {
@@ -58,18 +73,6 @@ i, em {
   font-style: italic;
 }
 
-del {
-
-}
-
-ins {
-
-}
-
-mark {
-
-}
-
 a {
   color: var(--color-info);
   text-decoration: none;
@@ -80,29 +83,28 @@ a {
   }
 }
 
-blockquote {
-
-}
-
-q {
-
-}
-
-cite  {
-
-}
-
 code {
   font-family: var(--font-code);
 }
 
-time {
 
-}
-
-abbr {
-
-}
+q {}
+s {}
+p {}
+kbd {}
+var {}
+sup {}
+sub {}
+pre {}
+del {}
+ins {}
+span {}
+mark {}
+time {}
+abbr {}
+cite  {}
+small {}
+blockquote {}
 
 // /* --- Semantic Web Scrollbars --- */
 // ::-webkit-scrollbar {
@@ -122,4 +124,3 @@ abbr {
 // ::-webkit-scrollbar-thumb:hover {
 //   background: color-mix(in srgb, var(--color-primary) 35%, transparent);
 // }
-

@@ -19,14 +19,11 @@ export type JsonFieldProps = FieldProps<object>
  * Component description.
  *
  * Styles: https://www.npmjs.com/package/json-edit-react/v/1.11.9#themes--styles
- *
- * How to use
  * @example
  * <JsonField />
  */
 export function JsonField(props: JsonFieldProps) {
   const { disabled, value = {}, onChange, className, ...otherProps } = props
-  const _className = cn(css.JsonField, className)
 
   const handleChange = useCallback<UpdateFunction>(opts => onChange?.(opts.newData as object), [onChange])
 
@@ -34,7 +31,7 @@ export function JsonField(props: JsonFieldProps) {
 
   return (
     <JsonEditor
-      className={_className}
+      className={cn(css.JsonField, className)}
       data={value}
       viewOnly={disabled}
       showCollectionCount={false}

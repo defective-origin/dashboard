@@ -7,8 +7,9 @@ import { t } from 'locale'
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
-import Modal, { ModalDetails, ModalProps, useModal } from 'components/popups/Modal'
 import Text from 'components/views/Text'
+import Button from 'components/actions/Button'
+import Modal, { ModalDetails, ModalProps, useModal } from 'components/popups/Modal'
 
 // ---| self |---
 import css from './ConfirmModal.module.scss'
@@ -22,31 +23,24 @@ export type ConfirmModalProps = ModalProps
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <ConfirmModal />
  */
 export function ConfirmModal(props: ConfirmModalProps) {
   const { name = 'confirm', className, ...otherProps } = props
-  const _className = cn(css.ConfirmModal, className)
   const modal = useModal<ConfirmModalDetails>(name)
 
   return (
     <Modal
-      className={_className}
+      className={cn(css.ConfirmModal, className)}
       name={name}
       title={t('ACTION.CONFIRM_OPERATION')}
       actions={[
-        {
-          content: 'Confirm',
-          color: 'success',
-          onClick: () => {
-            modal.onSuccess?.()
-            modal.onClose?.()
-          },
-        },
-        { content: 'Cancel', color: 'error', onClick: modal.onClose },
+        <Button content='Confirm' color='success' onClick={() => {
+          modal.onSuccess?.()
+          modal.onClose?.()
+        }} />,
+        <Button content={t('ACTION.CANCEL')} start='close' color='error' onClick={modal.onClose} />,
       ]}
       open={modal.open}
       onClose={modal.onClose}

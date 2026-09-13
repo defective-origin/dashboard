@@ -7,11 +7,10 @@ export type HotKeysReturnOptions = {
 
 /**
  * Hook descriptions
- *
  * @example
  * const options = useHotKeys(conf)
  */
-export const useHotKeys = (): HotKeysReturnOptions => {
+export function useHotKeys(): HotKeysReturnOptions {
   const [hotkeys, setHotkeys] = useState<Record<string, () => void>>({})
 
   const add = useCallback((key: string, handler: () => void) => setHotkeys(prev => ({ ...prev, [key]: handler })), [])

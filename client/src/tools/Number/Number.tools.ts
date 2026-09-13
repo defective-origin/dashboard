@@ -13,7 +13,7 @@ export type NumberOptions = Intl.NumberFormatOptions & {
   units?: NumberUnit[]
 }
 
-export function getMaxUnit(value: NumberValue, units: NumberUnit[] = NUMBER_OPTIONS, reverse?: boolean) {
+export const getMaxUnit = (value: NumberValue, units: NumberUnit[] = NUMBER_OPTIONS, reverse?: boolean) => {
   const items = reverse ? units.toReversed() : units
 
   return items.find(unit => (Number(value) / unit.value) >= 1)
@@ -24,7 +24,7 @@ export const isNumber = (value: NumberValue) => {
 }
 
 /** Return fixed decimal string without rounding fraction part and sign */
-export function formatNumber(value: NumberValue, options?: NumberOptions) {
+export const formatNumber = (value: NumberValue, options?: NumberOptions) => {
   const fractionDigits = 20
   const [integer, fraction] = Intl.NumberFormat('en', { ...options, minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits })
     .format(Number(value))
@@ -36,7 +36,7 @@ export function formatNumber(value: NumberValue, options?: NumberOptions) {
 }
 
 /** 123,456,789.98 or 123.98 M */
-export function toNumber(value: NumberValue, options?: NumberOptions) {
+export const toNumber = (value: NumberValue, options?: NumberOptions) => {
   if (!isNumber(value)) {
     return value
   }
@@ -65,14 +65,3 @@ export const toSize = (v: NumberValue, options?: NumberOptions) => toNumber(v, {
 
 /** 123.46 T  - G, K, T */
 export const toWeight = (v: NumberValue, options?: NumberOptions) => toNumber(v, { units: WEIGHT_OPTIONS, ...options })
-
-export default {
-  isNumber,
-  formatNumber,
-  toNumber,
-  toAmount,
-  toPercent,
-  toCurrency,
-  toSize,
-  toWeight,
-}

@@ -44,16 +44,3 @@ export const toDayOfMonthYear = (v: DateValue, defaultPostfix?: string) => {
 
   return `${day}${postfix} of ${toMonthName(v)} ${toYear(v)}`
 }
-
-export default {
-  isDate,
-  toDate,
-  toDay,
-  toMonth,
-  toYear,
-  toDayMonthYear,
-  toDayOfMonthYear,
-  toDayName,
-  toMonthName,
-}
-

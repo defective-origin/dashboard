@@ -1,279 +1,100 @@
-import prompts from './generator.prompts.js'
 import actions from './generator.actions.js'
-import tools from './generator.tools.js'
-
-const ITEM_PROMPT_MAP = {
-  name: prompts.NameInput,
-  subpath: prompts.SubpathInput,
-}
+import prompts from './generator.prompts.js'
 
 export const Item = ({
   description,
-  prompts = {},
+  prompts = [],
   actions = [],
   data = {},
-} = {}) => {
-  const filteredPrompts = Object.keys(prompts).reduce((acc, name) => {
-    // remove fields from input if we pass value via data
-    if (!(name in data)) {
-      const prompt = ITEM_PROMPT_MAP[name]
-      const options = prompts[name]
+} = {}) => ({
+  data,
+  description,
+  prompts,
+  actions: actions.flat(Infinity).filter(Boolean),
+})
 
-      acc.push(prompt(options))
-    }
-
-    return acc
-  }, [])
-  const filteredActions = actions
-    // add possibility to have nested items
-    .map(action => action?.actions ? action.actions : action)
-
-  return {
-    description,
-    prompts: tools.list(filteredPrompts),
-    actions: tools.list(filteredActions),
-  }
-}
-
-export const Component = ({
-  description = 'Create a reusable, pure, unified component',
-  postfixName,
-  defaultName = 'Component',
-  defaultSubpath = 'components',
+export const Component = (info, {
+  description,
+  namePostfix,
+  defaultPath,
   withStories,
-  withTests,
-  files = ['component', withTests && 'test', 'module', withStories && 'stories'],
-  module = {
-    notExports: ['test', 'module', 'stories'],
-    defaultExport: 'component',
-  },
-  data,
-  isSubmodule,
+  tests, // 'unit' | 'e2e'
 } = {}) => Item({
   description,
-  prompts: {
-    name: { default: defaultName, postfix: postfixName },
-    subpath: { default: defaultSubpath },
-  },
-  actions: [
-    actions.Folder({
-      target: '{{subpath}}/{{pascalCase name}}',
-      template: 'templates/Component',
-      files,
-      module,
-      data,
-      isSubmodule,
-    }),
+  prompts: [
+    prompts.Name({ default: 'Component', postfix: namePostfix, info }),
+    prompts.Path({ default: defaultPath }),
+    prompts.Confirm({ name: 'isLazy', message: 'Should be lazy loadable?' }),
   ],
-  data,
-})
-
-export const Hook = ({
-  description = 'Create a reusable, pure, unified react hook',
-  postfixName,
-  defaultName = 'Hook',
-  defaultSubpath = 'hooks',
-  files = ['hook', 'test'],
-  module = {
-    notExports: ['test'],
-    defaultExport: 'hook',
-  },
-  data,
-  isSubmodule = true,
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: defaultName, postfix: postfixName },
-    subpath: { default: defaultSubpath },
-  },
   actions: [
     actions.Folder({
-      target: '{{subpath}}/Use{{pascalCase name}}',
-      template: 'templates/Hook',
-      files,
-      module,
-      data,
-      isSubmodule,
+      target: '{{path}}/{{pascalCase name}}',
+      template: 'Component',
+      ignore: [!withStories && 'stories', tests === 'e2e' ? 'test' : 'e2e'],
     }),
   ],
 })
 
-export const Tool = ({
-  description = 'Create a reusable, pure, unified react tool',
-  postfixName,
-  defaultName = 'Tools',
-  defaultSubpath = 'tools',
-  files = ['tools', 'test'],
-  module = {
-    notExports: ['test'],
-    defaultExport: 'tools',
-  },
-  data,
-  isSubmodule = true,
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: defaultName, postfix: postfixName },
-    subpath: { default: defaultSubpath },
-  },
+
+export const Hook = info => Item({
+  description: 'Create a reusable, pure, unified react hook',
+  prompts: [
+    prompts.Name({ default: 'Hook', info }),
+    prompts.Path(),
+  ],
   actions: [
     actions.Folder({
-      target: '{{subpath}}/{{pascalCase name}}',
-      template: 'templates/Tool',
-      files,
-      module,
-      data,
-      isSubmodule,
+      target: 'hooks/{{path}}/Use{{pascalCase name}}',
+      template: 'Hook',
+      isExported: true,
     }),
   ],
 })
 
-export const Store = ({
-  files = ['component', 'selectors', 'actions', 'mocks'],
-  module = {
-    notExports: [],
-    defaultExport: 'component',
-  },
-} = {}) => Item({
-  description: 'Init Store config folder',
+
+export const Tool = info => Item({
+  description: 'Create a reusable, pure, unified react tool',
+  prompts: [
+    prompts.Name({ default: 'Tools', info }),
+    prompts.Path(),
+  ],
   actions: [
     actions.Folder({
-      target: 'store',
-      template: 'templates/Store',
-      files,
-      module,
+      target: 'tools/{{path}}/{{pascalCase name}}',
+      template: 'Tool',
+      isExported: true,
     }),
   ],
 })
 
-export const StoreSlice = ({
-  description = 'Create a Store Slice',
-  postfixName = 'Slice',
-  defaultName = 'Name',
-  defaultSubpath = 'store',
-  files = ['store', 'selectors', 'actions', 'mocks', 'test'],
-  module = {
-    notExports: ['test'],
-    defaultExport: 'hooks',
-  },
-  data,
-  isSubmodule = true,
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: defaultName, postfix: postfixName },
-    subpath: { default: defaultSubpath },
-  },
-  actions: [
-    actions.Folder({
-      target: '{{subpath}}/{{pascalCase name}}',
-      template: 'templates/Store/StoreSlice',
-      files,
-      module,
-      data,
-      isSubmodule,
-    }),
+export const Api = info => Item({
+  description: 'Create Api endpoint',
+  prompts: [
+    prompts.Name({ default: 'Endpoint', info }),
+    prompts.Path(),
   ],
-  data,
-})
-
-export const Api = ({
-  files = ['requests', 'tools', 'component', 'mocks'],
-  module = {
-    notExports: [],
-    defaultExport: 'component',
-  },
-} = {}) => Item({
-  description: 'Init Api config folder',
   actions: [
-    actions.Folder({
-      target: 'api',
-      template: 'templates/Api',
-      files,
-      module,
+    actions.File({
+      target: 'api/{{path}}/{{pascalCase name}}.endpoint.ts',
+      template: 'Api/api.endpoint.ts.hbs',
+      isExported: true,
     }),
   ],
 })
 
-export const ApiSlice = ({
-  description = 'Create a Api Slice',
-  postfixName = 'Slice',
-  defaultName = 'Name',
-  defaultSubpath = 'api',
-  files = ['requests', 'tools', 'schemas', 'mocks'],
-  module = {
-    notExports: [],
-    defaultExport: 'requests',
-  },
-  data,
-  isSubmodule = true,
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: defaultName, postfix: postfixName },
-    subpath: { default: defaultSubpath },
-  },
-  actions: [
-    actions.Folder({
-      target: '{{subpath}}/{{pascalCase name}}',
-      template: 'templates/Api/ApiSlice',
-      files,
-      module,
-      data,
-      isSubmodule,
-    }),
+export const Locale = info => Item({
+  description: 'Create locale language format and translate maps',
+  prompts: [
+    prompts.Name({ default: 'en', info }),
   ],
-  data,
-})
-
-export const Language = ({
-  description = 'Create Language format and translate maps',
-  defaultName = 'en',
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: defaultName },
-  },
   actions: [
-    [ 'i18n', 'l10n' ].map(submodule => [
-      actions.ModuleFile({
-        type: 'partial',
-        target: `locale/${submodule}`,
-      }),
+    [ 'i18n', 'l10n' ].map(type => [
       actions.File({
-        target: `locale/${submodule}/{{snakeCase name}}.json`,
-        template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
-        module: {
-          target: `locale/${submodule}`,
-          type: 'partial',
-          import: true,
-          export: true,
-        },
+        target: `locale/${type}/{{dashCase name}}.json`,
+        template: `Locale/${type}.json.hbs`,
+        isExported: true,
       }),
     ]),
-  ],
-})
-
-export const Locale = ({
-  description = 'Init Locale config folder with default translate and format maps',
-  files = ['conf', 'test', 'context', 'hook', 'tool'],
-  module = {
-    notExports: ['test'],
-    defaultExport: ['context'],
-  },
-} = {}) => Item({
-  description,
-  prompts: {
-    name: { default: 'en' },
-  },
-  actions: [
-    actions.Folder({
-      target: 'locale',
-      template: 'templates/Locale',
-      files,
-      module,
-    }),
-    Language(),
   ],
 })
 
@@ -281,10 +102,6 @@ export default {
   Component,
   Hook,
   Tool,
-  Store,
-  StoreSlice,
   Api,
-  ApiSlice,
   Locale,
-  Language,
 }

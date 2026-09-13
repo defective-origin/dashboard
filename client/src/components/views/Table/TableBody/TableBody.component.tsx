@@ -24,17 +24,14 @@ export type TableBodyProps<T extends TableRecord> = {
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <TableBody />
  */
 export function TableBody<T extends TableRecord>(props: TableBodyProps<T>) {
   const { items, columns, keygen = DEFAULT_KEYGEN, className, ...otherProps } = props
-  const _className = cn(css.TableBody, className)
 
   return (
-    <MuiTableBody className={_className} {...otherProps}>
+    <MuiTableBody className={cn(css.TableBody, className)} {...otherProps}>
       {items?.map((item, idx) =>
         <TableRow key={keygen(item, idx)} id={keygen(item, idx)} columns={columns} item={item} />,
       )}

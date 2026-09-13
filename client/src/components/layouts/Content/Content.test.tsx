@@ -1,6 +1,5 @@
 import Content from './Content.component'
-// import useContent from './Content.hooks'
-// import ContentProvider, Content from './Content.context'
+
 
 describe('[Content] component', () => {
   it('should render component', () => {

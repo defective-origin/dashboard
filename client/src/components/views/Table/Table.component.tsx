@@ -12,7 +12,7 @@ import Text from 'components/views/Text'
 import Block, { BlockProps } from 'components/layouts/Block'
 import Scroll from 'components/layouts/Scroll'
 import Banner from 'components/views/Banner'
-import Actions, { ActionItem } from 'components/actions/Actions'
+import Actions from 'components/layouts/Actions'
 
 // ---| self |---
 import css from './Table.module.scss'
@@ -21,7 +21,6 @@ import TableBody from './TableBody'
 import { useTableManager } from './Table.hooks'
 import TablePagination from './TablePagination'
 import { TableColumn, TableFilter, TableKeygen, TableRecord } from './Table.types'
-import { TableRowMenuItem } from './TableRowMenu'
 
 export type TableProps<T extends TableRecord> = BlockProps & {
   title?: React.ReactNode
@@ -30,15 +29,13 @@ export type TableProps<T extends TableRecord> = BlockProps & {
   filters?: TableFilter<T>[]
   pagination?: boolean
   loading?: boolean
-  actions?: TableRowMenuItem[]
-  menu?: ActionItem[]
+  actions?: React.ReactNode
+  menu?: React.ReactNode
   keygen?: TableKeygen<T>
 }
 
 /**
  * Component description.
- *
- * How to use
  * @example
  * <Table />
  */
@@ -47,7 +44,6 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
     menu, title, actions, width = '100%', height = '100%', minHeight, loading, items,
     columns, filters, pagination, keygen, children, className, ...otherProps
   } = props
-  const _className = cn(css.Table, className)
   const [pageItems, setItems] = React.useState<T[]>()
   const manager = useTableManager({ items, columns, filters, actions })
 
@@ -61,11 +57,11 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
   // TODO: fix all columns if there is no scroll!
   // TODO: add search, filters, hide/show columns, info drawer[pass component for body]
   return (
-    <Block className={_className} style={{ width, height, minHeight }} {...otherProps}>
+    <Block className={cn(css.Table, className)} style={{ width, height, minHeight }} {...otherProps}>
       <Block className={css.TableHeader} v='x' justifies='space-between' aligns='center'>
         <Text>{title}</Text>
         <TablePagination visible={!!pagination} items={items} onChange={setItems} />
-        <Actions items={menu} g='xxs' size='sm' justifies='end' />
+        <Actions g='xxs' size='sm' justifies='end'>{menu}</Actions>
       </Block>
 
       <MuiTableContainer className={css.TableContainer} sx={{ height: '100%', width: '100%' }}>
@@ -76,7 +72,7 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
           {children}
         </MuiTable>
 
-        <Scroll key={pageItems?.length} v='xy' size='sm' top={33}>
+        <Scroll key={pageItems?.length} v='xy' top={33} thin>
           <Banner
             image='empty'
             loading={loading}

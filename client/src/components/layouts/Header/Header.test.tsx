@@ -1,6 +1,5 @@
 import Header from './Header.component'
-// import useHeader from './Header.hooks'
-// import HeaderProvider, Header from './Header.context'
+
 
 describe('[Header] component', () => {
   it('should render component', () => {

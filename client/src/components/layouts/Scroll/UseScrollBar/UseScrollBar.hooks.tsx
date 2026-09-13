@@ -1,9 +1,9 @@
 import React, { useMemo, useRef } from 'react'
 
 // ---| core |---
-import { cn, obj } from 'tools'
-import { Direction, Size, px } from 'theme'
-import { useElement, ElementOptions, useEvent, useFunc } from 'hooks'
+import { cn, obj, react } from 'tools'
+import { Direction, px } from 'theme'
+import { useEvent, useFunc } from 'hooks'
 
 // ---| components |---
 import Button from 'components/actions/Button'
@@ -25,17 +25,14 @@ export type SizeOptions = {
 }
 
 export type ScrollShift = number | undefined
-export type ScrollBarSize = Size
 export type ScrollBarVariant = Exclude<Direction, 'xy'>
 
 export type ScrollBarOptions = ScrollOptions & {
   className?: string
-  thumbClassName?: string
-  backClassName?: string
+  /** Thing scroll bar should be used for popups and small blocks */
+  thin?: boolean
   /** Show back button when position more then passed value. By default 0 */
   back?: ScrollShift
-  /** Size of bar, thumb, back button. */
-  size?: ScrollBarSize
   /** Scrollbar direction. */
   v?: ScrollBarVariant
   /** Is scrollbar on. By default true. */
@@ -45,7 +42,7 @@ export type ScrollBarOptions = ScrollOptions & {
   /** Space between scroll and border. */
   indent?: number
   /** Container selector. If not passed then takes first parent node. */
-  container?: ElementOptions<HTMLElement>
+  container?: react.ElementSelector<HTMLElement>
 }
 
 export type ScrollBarReturnOptions = null | {
@@ -58,7 +55,6 @@ export type ScrollBarReturnOptions = null | {
 
 /**
  * Hook descriptions
- *
  * @example
  * const options = useScrollBar(conf)
  */
@@ -66,17 +62,14 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   const {
     v = 'y',
     back,
+    thin,
     indent = 2,
-    size = 'md',
     visible,
     enabled = true,
     behavior ='smooth',
     className,
-    backClassName,
-    thumbClassName,
     container,
   } = options
-  const containerRef = useElement(container)
   const optionsRef = useRef<SizeOptions>(null)
   const startMovePos = useRef<ScrollShift | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -86,13 +79,6 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   const backButtonRef = useRef<HTMLDivElement>(null)
   const isMouseInsideContainer = useRef(false)
   const property = SCROLLBAR_PROPERTY_MAP[v]
-  const scrollTrackClassName = cn('scroll-track', {
-    [`scroll-track--${v}`]: v,
-  }, className)
-  const scrollThumbClassName = cn('scroll-thumb', {
-    [`scroll-thumb--${v}`]: v,
-    [`s-${size}`]: size,
-  }, thumbClassName)
 
   const initOptions = useFunc((container = 0, content = 0, position = 0) => {
     const track = obj.get(trackRef.current, property.height)
@@ -147,7 +133,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
 
     // show scroll side shadow
     display(shadowStartRef, position)
-    display(shadowEndRef, position + container + 1 >= content)
+    display(shadowEndRef, position + container + 1 < content)
   })
 
   const endMove = useFunc((event: MouseEvent) => {
@@ -168,7 +154,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
       const position = delta * optionsRef.current.pages
 
       startMove(event)
-      containerRef.current?.scrollBy({ [property.pos]: position })
+      react.getElement(container)?.scrollBy({ [property.pos]: position })
     }
   })
 
@@ -177,7 +163,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   useEvent('mousemove', move, { disable: !enabled })
   useEvent('mouseup', endMove, { disable: !enabled })
 
-  const scrollBack = useFunc(() => containerRef.current?.scrollTo({ [property.pos]: 0, behavior }))
+  const scrollBack = useFunc(() => react.getElement(container)?.scrollTo({ [property.pos]: 0, behavior }))
 
   return useMemo(() => !enabled ? null : ({
     display: displayScrollbar,
@@ -189,25 +175,21 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
       </>
     ),
     element: (
-      <div ref={trackRef} className={scrollTrackClassName} style={{ [property.margin]: px(indent) }}>
-        <div ref={thumbRef} className={scrollThumbClassName} />
+      <div ref={trackRef} className={cn('scroll-track', `scroll-track--${v}`, className)} style={{ [property.margin]: px(indent) }}>
+        <div ref={thumbRef} className={cn('scroll-thumb', `scroll-thumb--${v}`, thin && 'scroll-thin')} />
       </div>
     ),
     button: (
-      <div ref={backButtonRef} className={cn('scroll-back-button', backClassName)}>
+      <div ref={backButtonRef} className={cn('scroll-back-button')}>
         <Button
-          size={size}
+          size='md'
           start={v === 'x' ? 'keyboard_arrow_left' : 'keyboard_arrow_up'}
           onClick={scrollBack}
           v='outlined'
         />
       </div>
     ),
-  }), [
-    enabled, v, scrollTrackClassName, property.margin,
-    indent, scrollThumbClassName, backClassName, size,
-    displayScrollbar, refresh, scrollBack,
-  ])
+  }), [enabled, v, className, property.margin, indent, thin, displayScrollbar, refresh, scrollBack])
 }
 
 export default useScrollBar
