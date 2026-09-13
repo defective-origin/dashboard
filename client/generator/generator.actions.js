@@ -12,25 +12,30 @@ export const InjectAction = ({ place, target, template, abortOnFail = false, dat
 })
 
 export const MODULE_INJECT_TEMPLATES = {
-  common: {
-    IMPORT: 'import * from \'{FILE_PATH}\'',
-    EXPORT: 'export * from \'{FILE_PATH}\'',
-    DEFAULT_EXPORT: 'export { default } from \'{FILE_PATH}\'',
+  jsx: {
+    EXPORT: ['export * from \'{FILE_PATH}\''],
+    DEFAULT_EXPORT: [
+      'export { default } from \'{FILE_PATH}\'',
+      '// export default React.lazy(() => import(\'{FILE_PATH}\'))',
+    ],
   },
-  partial: {
-    IMPORT: 'import {{snakeCase name}} from \'{FILE_PATH}\'',
-    EXPORT: '  {{snakeCase name}},',
+  common: {
+    EXPORT: ['export * from \'{FILE_PATH}\''],
+    DEFAULT_EXPORT: ['export { default } from \'{FILE_PATH}\''],
+  },
+  json: {
+    EXPORT: ['export { default as {{snakeCase name}} } from \'{FILE_PATH}\''],
   },
 }
 
 /**
- * Inject file imports, exports in module file.
- * @param {'IMPORT' | 'EXPORT' | 'DEFAULT_EXPORT'} place - Place for injection.
- * @param {'common' | 'partial'} type - Place for injection.
+ * Inject file exports in module file.
+ * @param {'EXPORT' | 'DEFAULT_EXPORT'} place - Place for injection.
+ * @param {'common' | 'json' | 'jsx'} type - Pattern to fill.
  * @param {string} target - Path for file to inject template.
  */
 export const ModuleInjectAction = ({place, type, target, filePath, removeExt = ['.tsx?'], data}) => {
-  const template = MODULE_INJECT_TEMPLATES[type][place]
+  const template = MODULE_INJECT_TEMPLATES[type][place].join('\n')
     .replace('{FILE_PATH}', filePath)
     .replace(new RegExp(removeExt.join('|')), '')
 
@@ -49,7 +54,6 @@ export const BaseFileAction = ({ target, template, skipIfExists = true, abortOnF
 export const ModuleFileAction = ({
   target: folderTarget,
   type = 'common',
-  imports = [],
   exports = [],
   defaultExport,
   skipIfExists,
@@ -63,7 +67,6 @@ export const ModuleFileAction = ({
 
   return [
     BaseFileAction({ target, template, skipIfExists, abortOnFail, data }),
-    imports?.map(filePath => ModuleInjectAction({ ...injectOptions, place: 'IMPORT', filePath })),
     exports?.map(filePath => ModuleInjectAction({ ...injectOptions, place: 'EXPORT', filePath })),
     defaultExport && ModuleInjectAction({ ...injectOptions, place: 'DEFAULT_EXPORT', filePath: defaultExport }),
   ]
@@ -74,12 +77,11 @@ export const FileAction = ({
   template,
   skipIfExists,
   abortOnFail,
-  module, // { target, type, import, export, defaultExport }
+  module, // { target, type, export, defaultExport }
   indexName,
   data,
 }) => {
   const filePath = module?.target && `./${path.relative(module.target, target)}`
-  const imports = module?.import && [filePath]
   const exports = module?.export && [filePath]
   const defaultExport = module?.defaultExport && [filePath]
 
@@ -88,7 +90,6 @@ export const FileAction = ({
     module && ModuleFileAction({
       target: module.target,
       type: module.type,
-      imports,
       exports,
       defaultExport,
       skipIfExists,
@@ -107,7 +108,7 @@ export const FolderAction = ({
   skipIfExists,
   isSubmodule = false,
   abortOnFail = false,
-  module, // { type, imports, notExports, defaultExport }
+  module, // { type, notExports, defaultExport }
   indexName,
   data,
 }) => {
@@ -119,7 +120,6 @@ export const FolderAction = ({
     .map(fileName => fileName.replace(ext, ''))
     // add path relative to folder
     .map(fileName => `./${fileName}`)
-  const imports = module?.imports && folderFiles.filter(fileName => tools.hasMatch(module?.imports, fileName))
   const exports = module?.notExports && folderFiles.filter(fileName => !tools.hasMatch(module?.notExports, fileName))
   const defaultExport = module?.defaultExport && folderFiles.find(fileName => tools.isMatch(module?.defaultExport, fileName))
   const filePatterns = clearFiles.length ? `*{${clearFiles.join(',')}}*` : '*'
@@ -140,7 +140,6 @@ export const FolderAction = ({
     module && ModuleFileAction({
       target,
       type: module.type,
-      imports,
       exports,
       defaultExport,
       skipIfExists,

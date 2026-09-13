@@ -237,7 +237,7 @@ export const Language = ({
   actions: [
     [ 'i18n', 'l10n' ].map(submodule => [
       actions.ModuleFile({
-        type: 'partial',
+        type: 'json',
         target: `locale/${submodule}`,
       }),
       actions.File({
@@ -245,7 +245,7 @@ export const Language = ({
         template: `templates/Locale/${submodule}/${submodule}.json.hbs`,
         module: {
           target: `locale/${submodule}`,
-          type: 'partial',
+          type: 'json',
           import: true,
           export: true,
         },

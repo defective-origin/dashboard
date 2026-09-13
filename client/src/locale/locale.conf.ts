@@ -7,8 +7,8 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import { react } from 'tools'
 
 // ---| self |---
-import i18n from './i18n'
-// import l10n from './l10n'
+import * as i18n from './i18n'
+// import * as l10n from './l10n'
 
 
 export type Languages = keyof typeof i18n
