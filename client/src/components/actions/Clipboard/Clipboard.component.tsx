@@ -4,8 +4,6 @@ import React, { useCallback, useState } from 'react'
 import { cn } from 'tools'
 import { emitEvent, useEvent } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/actions/Button'
 

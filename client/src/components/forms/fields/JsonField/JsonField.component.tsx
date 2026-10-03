@@ -4,8 +4,6 @@ import { JsonEditor, UpdateFunction } from 'json-edit-react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Icon from 'components/views/Icon'
 import { FieldProps, formField } from 'components/forms/Form'

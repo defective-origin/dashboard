@@ -109,11 +109,3 @@ export const docs = (text: string) => ({
 export const params = (name: string, variants?: unknown[], defaultVariant?: unknown) => ({
   docs: Array.isArray(variants) ? docsWithVariants(name, variants, defaultVariant) : docs(name),
 })
-
-
-export const SB_CSS = {
-  margin: toVar('color-warning-5'),
-  space: toVar('color-success-5'),
-  border: toVar('divider-color'),
-  item: toVar('color-secondary-5'),
-}

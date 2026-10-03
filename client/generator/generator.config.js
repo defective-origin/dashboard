@@ -21,6 +21,7 @@ export default function (plop) {
   - Tests can select only by role attribute, labels and in some cases by testid
   `, {
     description: 'Create a reusable, pure, unified component',
+    type: 'COMPONENT',
     defaultPath: 'components',
     tests: 'unit',
     withStories: true,
@@ -38,6 +39,7 @@ export default function (plop) {
   - Tests can select only by role attribute, labels and in some cases by testid
   `, {
     description: 'Create a screen component',
+    type: 'SCREEN',
     defaultPath: 'screens',
     tests: 'e2e',
     withStories: true,
@@ -56,6 +58,7 @@ export default function (plop) {
   - Tests can select only by role attribute, labels and in some cases by testid
   `, {
     description: 'Create a page component',
+    type: 'PAGE',
     defaultPath: 'pages',
     namePostfix: 'Page',
     tests: 'e2e',

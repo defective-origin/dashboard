@@ -1,34 +1,9 @@
-@mixin override($name) {
-  --toastify-color-#{$name}: var(--color-#{$name}-6);
-  --toastify-text-color-#{$name}: var(--color-#{$name});
-  --toastify-icon-color-#{$name}: var(--color-#{$name});
-}
-
-:root {
-  --toastify-font-family: var(--font-main);
-
-  @include override(info);
-  @include override(success);
-  @include override(warning);
-  @include override(error);
-}
-
-:global {
-  .dark {
-    --toastify-color-dark: #121212;
-    --toastify-text-color-dark: #FFFFFF;
-  }
-
-  .light {
-    --toastify-color-light: #FFFFFF;
-    --toastify-text-color-light: #757575;
-  }
-}
-
 .Toast {
-  width: 100%;
+  background: transparent;
+  box-shadow: none;
 }
 
-:global(.Toastify__close-button) {
-  color: var(--color-primary);
+:global(.Toastify__toast):has(.Toast) {
+  padding: 0;
+  border-radius: var(--radius-xs);
 }

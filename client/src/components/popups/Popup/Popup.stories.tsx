@@ -1,10 +1,10 @@
-import { Meta, StoryObj, SB_CSS, field, params } from 'storybook'
-import Layout from 'components/layouts/Layout'
+import { Meta, StoryObj, field, params } from 'storybook'
+import Block from 'components/layouts/Block'
 import Item from 'components/layouts/Item'
 import Text from 'components/views/Text'
 import Popup, { PopupProps, PopupTriggerOptions } from './Popup.component'
 
-const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} background={o.isOn ? 'orange' : SB_CSS.item} />
+const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} bg={o.isOn ? 'primary' : undefined} border />
 
 const VARIANTS: PopupProps['v'][] = [
   'left-start', 'top-end', 'top', 'top-start', 'right-start',
@@ -29,7 +29,7 @@ export default meta
 type Story = StoryObj<typeof Popup>
 
 const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][]) => (
-  <Layout g='xl' p='xl' justify='space-between' columns={5}>
+  <Block g='xl' p='xl' justify='space-between' columns={5}>
     {items.map((item, idx) => item
       ? (
         <Popup
@@ -42,7 +42,7 @@ const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][
       )
       : <div key={idx} />,
     )}
-  </Layout>
+  </Block>
 )
 
 export const Demo: Story = {

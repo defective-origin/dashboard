@@ -1,8 +1,6 @@
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Icon from 'components/views/Icon'
 import { formField } from 'components/forms/Form'

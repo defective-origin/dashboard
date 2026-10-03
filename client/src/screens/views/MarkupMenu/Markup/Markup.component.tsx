@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import { cn } from 'tools'
 import { t } from 'locale'
 
-// ---| pages |---
 // ---| screens |---
 import { MarkupOptions, sort } from 'screens/views/MarkupBoard'
 // ---| components |---

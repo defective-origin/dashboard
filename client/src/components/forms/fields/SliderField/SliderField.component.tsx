@@ -4,8 +4,6 @@ import MuiSliderField, { SliderProps as MuiSliderFieldProps } from '@mui/materia
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
 

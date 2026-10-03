@@ -12,5 +12,6 @@ export * as num from './Number'
 // export { default as _ } from 'lodash-es'
 // export { default as wk } from 'weak-key'
 export { default as cn } from 'classnames'
+export { css as jss } from '@emotion/css'
 
 export * as h2i from 'html-to-image'

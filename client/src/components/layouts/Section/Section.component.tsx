@@ -3,19 +3,19 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
-import Block from 'components/layouts/Block'
+import Header from 'components/layouts/Header'
+import Content from 'components/layouts/Content'
 import Actions from 'components/layouts/Actions'
-import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Block, { BlockProps } from 'components/layouts/Block'
 import Scroll, { ScrollVariant } from 'components/layouts/Scroll'
 
 // ---| self |---
 import css from './Section.module.scss'
 
-export type SectionProps = LayoutProps & {
+
+export type SectionProps = BlockProps & {
   scroll?: ScrollVariant
   title?: React.ReactNode
   actions?: React.ReactNode
@@ -29,22 +29,21 @@ export type SectionProps = LayoutProps & {
 export function Section(props: SectionProps) {
   const { scroll, v, g, title, actions, children, className, ...otherProps } = props
 
-  // FIXME: height='min-content'
   return (
-    <Layout className={cn(css.Section, className)} v='y' g='xs' {...otherProps}>
+    <Block as='section' className={cn(css.Section, className)} g='xs' {...otherProps}>
       {(title || actions) && (
-        <Block className={css.Header} v='x' justifies='space-between'>
-          <Text className={css.Title} content={title} v='h3' />
+        <Header className={css.Header} v='x' justifies='space-between'>
+          <Text className={css.Title} v='h3' content={title} />
 
-          <Actions className={css.Actions}>{actions}</Actions>
-        </Block>
+          <Actions>{actions}</Actions>
+        </Header>
       )}
 
-      <Layout className={css.Content} v={v} g={g}>
+      <Content v={v} g={g}>
         {scroll && <Scroll v={scroll} thin />}
         {children}
-      </Layout>
-    </Layout>
+      </Content>
+    </Block>
   )
 }
 

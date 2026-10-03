@@ -14,7 +14,7 @@ export const textColumn = <T extends TableRecord>(column: TextColumn<T>): TextCo
   mapper: (_, __, field) => ({ content: field }),
   ...column,
   props: {
-    v: 'caption',
+    v: 'span',
     size: 'xxs',
     format: column.format,
     placeholder: column.placeholder,

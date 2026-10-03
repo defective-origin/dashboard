@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useContext } from 'react'
 import { SubscriptionsManager } from 'hooks'
 import { obj } from 'tools'

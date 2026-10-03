@@ -4,8 +4,6 @@ import MuiAutocomplete from '@mui/material/Autocomplete'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { TextField } from 'components/forms/fields/TextField'
 import { FieldProps, formField } from 'components/forms/Form'

@@ -3,8 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn, mix } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Button from 'components/actions/Button'
 import Popup, { PopupProps } from 'components/popups/Popup'

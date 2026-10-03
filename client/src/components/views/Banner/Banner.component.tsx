@@ -69,7 +69,7 @@ export function Banner(props: BannerProps) {
 
           {title && <Text v='h4' align='center' color='primary' ellipsis content={title} />}
           {subtitle && <Text v='h5' align='center' color='primary' ellipsis content={subtitle} />}
-          {text && <Text v='body1' align='center' color='primary' content={text} />}
+          {text && <Text align='center' color='primary' content={text} />}
 
           {children}
         </Block>

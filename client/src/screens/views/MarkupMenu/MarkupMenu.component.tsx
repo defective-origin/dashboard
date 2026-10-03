@@ -4,13 +4,11 @@ import React, { Fragment, useLayoutEffect, useMemo, useState } from 'react'
 import { t } from 'locale'
 import { arr, cn, mix } from 'tools'
 
-// ---| pages |---
 // ---| screens |---
 import { initMarkup, MarkupOptions, sort } from 'screens/views/MarkupBoard'
 // ---| components |---
 import Text from 'components/views/Text'
 import Button from 'components/actions/Button'
-import Layout from 'components/layouts/Layout'
 import Actions from 'components/layouts/Actions'
 import Dropdown from 'components/actions/Dropdown'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -77,7 +75,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
 
   return (
     <Block className={cn(css.MarkupMenu, className)} v='x' g='xs' aligns='center' {...otherProps}>
-      <Actions className={css.MarkupMenuScreens} size='xs' group>
+      <Actions className={css.MarkupMenuScreens} size='sm' group>
         {sorted?.map(m => {
           const screen = MARKUP_SCREEN_MAP[m.width]
 
@@ -94,6 +92,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
 
       <Dropdown
         arrow
+        size='sm'
         start='settings_slow_motion'
         tooltip={t('ACTION.CHANGE_MARKUP_LIST')}
         title={t('LABEL.SCREENS')}
@@ -103,7 +102,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
         ]}
         disableHoverListener
       >
-        <Layout className={css.MarkupMenuList} columns='auto 1fr auto' justifies='center' aligns='center'>
+        <Block className={css.MarkupMenuList} v='grid' columns='auto 1fr auto' justifies='center' aligns='center'>
           {markups.map(markup => (
             <Fragment key={markup.width}>
               <Markup tooltipSide='left' options={markup} />
@@ -112,7 +111,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
               {!enabled[markup.width] && <Button size='xs' start='add' color='success' onClick={() => toggle(markup)} />}
             </Fragment>
           ))}
-        </Layout>
+        </Block>
       </Dropdown>
     </Block>
   )

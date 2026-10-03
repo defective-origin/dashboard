@@ -5,7 +5,6 @@ import { cn } from 'tools'
 import { t } from 'locale'
 import { SupportRequest, useSupportRequests } from 'api'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Button from 'components/actions/Button'

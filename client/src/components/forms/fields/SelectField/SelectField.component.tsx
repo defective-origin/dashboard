@@ -5,8 +5,6 @@ import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/Me
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
 
@@ -16,7 +14,7 @@ import css from './SelectField.module.scss'
 export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
 
 export type SelectFieldProps = FieldProps & {
-  items?: SelectFieldItem[]
+  items?: SelectFieldItem[] // TODO: replace on common items ReactNode
 }
 
 /**
@@ -39,7 +37,7 @@ export function SelectField(props: SelectFieldProps) {
       size='small'
       value={value}
       onChange={handleChange}
-      disabled={items.length < 2 ? true : undefined}
+      disabled={items.length < 2 && undefined}
       {...otherProps}
     >
       {items.map(item => <MuiMenuItem className={css.Option} {...item} />)}

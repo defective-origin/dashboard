@@ -1,8 +1,8 @@
 import React from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
-import { Color, Size } from 'theme'
+import { cn, jss } from 'tools'
+import { Color, Size, toColor, toSize } from 'theme'
 
 // ---| components |---
 import { withSkeleton } from 'components/views/Skeleton'
@@ -55,20 +55,21 @@ export type IconProps = {
  * <Icon />
  */
 export const Icon = withSkeleton((props: IconProps) => {
-  const { size, v, fill, color, className, ...otherProps } = props
+  const { size, v, fill, color, style, className, ...otherProps } = props
 
   return (
     <span
       className={cn(
         'icon',
         'material-symbols-outlined', {
-          [`i-${size}`]: size,
-          [`c-${color}`]: color,
           ['icon--fill']: fill,
           ['icon--outline']: !fill,
           ['rtl']: v && RTL_ICONS.has(v),
-        },
-        className,
+        }, jss({
+          ...style,
+          fontSize: size && toSize('icon', size),
+          color: color && toColor(color),
+        }), className,
       )}
       {...otherProps}
     >

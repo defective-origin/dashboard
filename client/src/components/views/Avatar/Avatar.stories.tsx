@@ -31,16 +31,8 @@ export const Demo: Story = {
 export const AvatarGroup: Story = {
   parameters: params('Avatar group'),
   render: () => (
-    <Avatar.Group
-      max={4}
-      size='sm'
-      total={5000}
-      items={[
-        { alt: 'user 1', src },
-        { alt: 'user 2', src },
-      ]}
-    >
-      <Avatar alt='user 3' content='H' />
+    <Avatar.Group max={4} size='sm' total={5000}>
+      <Avatar alt='user 3' src={src} />
       <Avatar alt='user 4' src={src} />
     </Avatar.Group>
   ),

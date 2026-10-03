@@ -4,12 +4,12 @@ import React from 'react'
 import { cn } from 'tools'
 import { Widget, useWidgets } from 'api'
 
-// ---| pages |---
 // ---| screens |---
+import FeatureTable, { FeatureTableProps } from 'screens/tables/FeatureTable'
 // ---| components |---
+
 // ---| self |---
 import css from './WidgetTable.module.scss'
-import FeatureTable, { FeatureTableProps } from '../FeatureTable'
 
 export type WidgetTableProps = FeatureTableProps<Widget>
 

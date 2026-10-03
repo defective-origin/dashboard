@@ -3,8 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Dropdown, { DropdownProps } from 'components/actions/Dropdown'
 

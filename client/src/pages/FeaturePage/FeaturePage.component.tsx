@@ -22,7 +22,6 @@ import Field from 'components/forms/fields'
 import Block from 'components/layouts/Block'
 import { Form } from 'components/forms/Form'
 import Scroll from 'components/layouts/Scroll'
-import Layout from 'components/layouts/Layout'
 import { modal } from 'components/popups/Modal'
 import Section from 'components/layouts/Section'
 import Clipboard from 'components/actions/Clipboard'
@@ -68,6 +67,7 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
     <Page
       className={cn(css.FeaturePage, className)}
       as={Form}
+      name={options?.name}
       title={
         <Block v='x' aligns='center'>
           {edit.isOff && options?.name}
@@ -120,16 +120,16 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
       ]}
       {...otherProps}
     >
-      <Page.Content className={css.Content} g='lg' p='sm'>
+      <Page.Content className={css.Content} v='grid' g='lg' p='sm' justifies='center'>
         <Scroll v='y' />
 
-        <Section visible={info.isOn} maxWidth={760} justify='center' g='xs'>
+        <Section visible={info.isOn} maxWidth={760} g='xs'>
           <Media src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' />
           <Block v='x' g='xxs'>
             <User id={options?.createdBy?.id} />
 
             {edit.isOff && (
-              <Block v='y'>
+              <Block>
                 <Block v='x' g='xxs'>
                   <Label icon='star' content={options?.rate} format='number' tooltip={t('LABEL.RATE')} />
                   <Label icon='payments' content={options?.price} format='currency' tooltip={t('LABEL.PRICE')} />
@@ -139,34 +139,34 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
               </Block>
             )}
             {edit.isOn && (
-              <Layout columns={2} g='xxs'>
+              <Block columns={2} v='grid' g='xxs'>
                 <Field.Select path='public' label={t('LABEL.PUBLIC')} items={ACCESS_SELECT_ITEMS} />
                 <Field.Number path='price' label={t('LABEL.PRICE')} />
-              </Layout>
+              </Block>
             )}
           </Block>
 
           {edit.isOn && <Field.Tags path='tags' label={t('LABEL.TAGS')} options={options?.tags} />}
           {edit.isOff && (
             <Block v='x' g='xxs'>
-              {options?.tags.map(tag => <Tag key={tag} v='body2' size='xxs' content={tag} />)}
+              {options?.tags.map(tag => <Tag key={tag} size='xxs' content={tag} />)}
             </Block>
           )}
 
-          {edit.isOff && <Text v='body2' size='xs' content={options?.content} />}
+          {edit.isOff && <Text size='xs' content={options?.content} />}
           {edit.isOn && <Field.Text path='content' label={t('LABEL.CONTENT')} multiline />}
         </Section>
 
-        <Block visible={info.isOff}>{children}</Block>
+        <Block stretch visible={info.isOff}>{children}</Block>
       </Page.Content>
 
-      <Page.RightAside className={css.Options} visible={settings.isOn} rows='auto 1fr' g='xxs' width={500}>
-        <Block v='x' g='xxs' p='xs'>
+      <Page.RightAside className={css.Options} visible={settings.isOn} v='grid' rows='auto 1fr' g='xxs' width={500}>
+        <Block v='x' g='xxs' p='xs' aligns='center'>
           <Icon v='data_object' size='xs' />
-          <Text content={t('LABEL.OPTIONS')} />
+          <Text v='h4' content={t('LABEL.OPTIONS')} />
         </Block>
 
-        <Block v='y' g='xxs' p='xs' justify='stretch'>
+        <Block g='xxs' p='xs' justify='stretch'>
           <Scroll v='y' thin />
           {/* TODO: highlight if options is not matched */}
           <Field.Json path='options' disabled={edit.isOff} />

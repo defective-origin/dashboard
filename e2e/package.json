@@ -17,8 +17,8 @@
     "lint:typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "mongoose": "9.9.5",
-    "dotenv": "17.4.2"
+    "dotenv": "17.4.2",
+    "mongoose": "9.9.5"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

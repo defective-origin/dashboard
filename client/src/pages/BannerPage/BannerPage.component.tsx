@@ -50,7 +50,7 @@ export function BannerPage(props: BannerPageProps) {
 
   return (
     <Page className={cn(css.BannerPage, className)} {...otherProps}>
-      <Page.Content>
+      <Page.Content v='grid'>
         <Banner
           className={css.Banner}
           title={t(status.title)?.toUpperCase()}

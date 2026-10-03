@@ -13,8 +13,8 @@ import * as i18n from './i18n'
 
 export type Languages = keyof typeof i18n
 // union or string. Be careful. It allows to use intellisense but it doesn't highlight misspelling
-// https://stackoverflow.com/questions/61047551/typescript-union-of-string-and-string-literals
-export type TranslateKeys = obj.FlattenLeafKeys<typeof i18n.en> // | (string & {})
+export type TranslateKeys = obj.FlattenLeafKeys<typeof i18n.en>
+export type TranslateKeysOrStr = TranslateKeys | (string & {})
 
 /**
  * // the translations

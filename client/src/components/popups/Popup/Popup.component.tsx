@@ -4,8 +4,6 @@ import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Toolt
 // ---| core |---
 import { cn, mix } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
 import Block from 'components/layouts/Block'
@@ -84,9 +82,9 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
       disableHoverListener={disableHoverListener}
       title={(
         <Block
-          v='y'
           g='xxs'
           p='xs'
+          data-role='dialog'
           maxHeight={maxHeight}
           maxWidth={maxWidth}
           onMouseEnter={() => { isMouseInsideRef.current = true }}
@@ -94,7 +92,7 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
         >
           {title && (
             <Header>
-              <Text content={title} size='xs' />
+              <Text v='h5' content={title} />
               {disableHoverListener && <Button start='close' size='xxs' onClick={close} />}
             </Header>
           )}

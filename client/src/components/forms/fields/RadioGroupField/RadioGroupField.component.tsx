@@ -3,10 +3,8 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Layout from 'components/layouts/Layout'
+import Block from 'components/layouts/Block'
 import { FieldProps, formField } from 'components/forms/Form'
 import { RadioField, RadioFieldProps } from '../RadioField'
 
@@ -15,7 +13,7 @@ import { RadioField, RadioFieldProps } from '../RadioField'
 import css from './RadioGroupField.module.scss'
 
 export type RadioGroupFieldProps = FieldProps & {
-  items?: RadioFieldProps[]
+  items?: RadioFieldProps[] // TODO: replace on common items ReactNode
   columns?: number
 }
 
@@ -28,7 +26,7 @@ export function RadioGroupField(props: RadioGroupFieldProps) {
   const { columns, value, items = [], id, name, className, ...otherProps } = props
 
   return (
-    <Layout className={cn(css.RadioGroupField, className)} columns={columns}>
+    <Block className={cn(css.RadioGroupField, className)} v='grid' columns={columns}>
       {items.map((item, idx) => <RadioField
         key={idx}
         id={`${id}.${idx}`}
@@ -37,7 +35,7 @@ export function RadioGroupField(props: RadioGroupFieldProps) {
         checked={item.value === value}
         {...otherProps} />,
       )}
-    </Layout>
+    </Block>
   )
 }
 

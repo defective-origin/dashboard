@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { TranslateKeys, t } from 'locale'
+import { TranslateKeys, TranslateKeysOrStr, t } from 'locale'
 import { cn, react } from 'tools'
 import { useAccount } from 'api'
 
@@ -9,14 +9,13 @@ import { useAccount } from 'api'
 // ---| components |---
 import Text from 'components/views/Text'
 import Portal from 'components/layouts/Portal'
-import Meta, { MetaItem } from 'components/layouts/Meta'
+import Meta, { MetaItem } from 'components/Meta'
 import Actions from 'components/layouts/Actions'
-import Layout, { LayoutProps } from 'components/layouts/Layout'
 import Avatar from 'components/views/Avatar'
 
 import Item from 'components/layouts/Item'
 import Aside from 'components/layouts/Aside'
-import Block from 'components/layouts/Block'
+import Block, { BlockProps } from 'components/layouts/Block'
 import Content from 'components/layouts/Content'
 import Footer from 'components/layouts/Footer'
 import Header from 'components/layouts/Header'
@@ -26,8 +25,8 @@ import Section from 'components/layouts/Section'
 import css from './Page.module.scss'
 
 
-export type PageProps = LayoutProps & {
-  name?: TranslateKeys
+export type PageProps = BlockProps & {
+  name?: TranslateKeysOrStr
   meta?: MetaItem[]
   title?: React.ReactNode
   extra?: React.ReactNode
@@ -41,19 +40,18 @@ export type PageProps = LayoutProps & {
  */
 export function Page(props: PageProps) {
   const { title, nav, extra, name, meta, children, className, ...otherProps } = props
-  const pageName = t(name)
+  const pageName = t(name as TranslateKeys)
   const account = useAccount()
 
   return (
-    <Layout className={cn(css.Page, className)} v='columns' {...otherProps}>
-      <Meta title={t('LABEL.PAGE_NAME', { title: pageName })} items={meta} />
+    <Block className={cn(css.Page, className)} v='columns' {...otherProps}>
+      <Meta title={pageName} items={meta} />
 
       <Portal name='page-name' content={<Text v='h1' size='md' color='primary' content={title ?? pageName} />} />
       <Portal name='page-nav' content={nav} />
       <Portal name='page-extra' content={
         <Actions g='xxs' size='sm'>
           {extra}
-
 
           {account.isAuthorized
             ? (
@@ -66,7 +64,7 @@ export function Page(props: PageProps) {
       } />
 
       {children}
-    </Layout>
+    </Block>
   )
 }
 
@@ -78,7 +76,6 @@ export default react.attachComponents(Page, {
   Content,
   Section,
   Block,
-  Layout,
   LeftAside: Aside.Left,
   RightAside: Aside.Right,
 })

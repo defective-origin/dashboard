@@ -4,8 +4,6 @@ import MuiModal from '@mui/material/Modal'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Card from 'components/layouts/Card'
 import Scroll from 'components/layouts/Scroll'
@@ -59,7 +57,7 @@ export function Modal(props: ModalProps) {
       onClose={onClose}
       {...otherProps}
     >
-      <Card className={cn(css.Content, css[position])} v='y' p='md'>
+      <Card className={cn(css.Content, css[position])} p='md' data-role='dialog'>
         {(title || icon) && (
           <Card.Header>
             <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -76,7 +74,7 @@ export function Modal(props: ModalProps) {
           {children}
         </Card.Content>
 
-        {actions && <Card.Actions size='xxs'>{actions}</Card.Actions>}
+        {actions && <Card.Actions size='xxs' action='outlined' g='xs'>{actions}</Card.Actions>}
       </Card>
     </MuiModal>
   )

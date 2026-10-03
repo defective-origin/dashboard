@@ -5,12 +5,6 @@ import { obj } from 'tools'
 export const IS_BROWSER = typeof window !== 'undefined'
 export const IS_NAVIGATOR = typeof navigator !== 'undefined'
 
-// types
-export type Dictionary<T> = Record<string, T>
-
-export type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? (...args: P) => R : never
-export type FirstParameters<F> = F extends (x: infer P, ...args: any[]) => any ? P : never
-export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P : never
 
 // work with props
 export type GeneralProps<T extends Element> = React.DOMAttributes<T> & React.HTMLAttributes<T>

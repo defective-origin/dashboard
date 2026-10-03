@@ -4,8 +4,6 @@ import MuiSkeleton from '@mui/material/Skeleton'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---

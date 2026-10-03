@@ -1,19 +1,22 @@
 import { Meta, StoryObj, field, params } from 'storybook'
 import Block from 'components/layouts/Block'
 import Alert, { AlertProps } from './Alert.component'
+import Button from 'components/actions/Button'
 
-const COLORS: AlertProps['color'][] = ['success', 'info', 'warning', 'error']
+const VARIANTS: AlertProps['v'][] = ['success', 'info', 'warning', 'error']
 
 const meta: Meta<typeof Alert> = {
   title: 'Components/Views/Alert',
   component: Alert,
   tags: ['autodocs'],
   argTypes: {
+    v: field.variants(VARIANTS, 'AlertVariant'),
+    inline: field.boolean('false'),
+    clear: field.boolean('false'),
+    title: field.reactNode(),
+    content: field.reactNode(true),
     className: field.string(),
     children: field.reactNode(),
-    content: field.reactNode(true),
-    title: field.reactNode(),
-    color: field.variants(COLORS, 'AlertColor', 'success'),
   },
 }
 
@@ -30,14 +33,17 @@ const initVariants = <P extends keyof AlertProps>(prop: P, items: AlertProps[P][
 export const Demo: Story = {
   parameters: params('Alert'),
   args: {
-    color: 'success',
+    v: 'success',
+    inline: false,
+    clear: false,
     title: 'Title: Lorem ipsum',
     content: 'Content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam, quam?',
+    actions: <Button content='text' />,
   },
 }
 
 export const Colors: Story = {
-  parameters: params('Color', COLORS),
-  render: () => initVariants('color', COLORS),
+  parameters: params('Color', VARIANTS),
+  render: () => initVariants('v', VARIANTS),
 }
 

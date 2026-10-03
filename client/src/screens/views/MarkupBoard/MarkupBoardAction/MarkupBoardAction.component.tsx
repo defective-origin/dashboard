@@ -5,7 +5,6 @@ import { t } from 'locale'
 import { cn } from 'tools'
 import { TogglerReturnOptions } from 'hooks'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Popup from 'components/popups/Popup'

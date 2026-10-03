@@ -1,150 +1,123 @@
 import React from 'react'
 
 // ---| core |---
-import { cn, obj } from 'tools'
-import { Color, Size } from 'theme'
+import { cn, str, jss } from 'tools'
+import { Color, Palette, Size, Space, toSpace, toVar } from 'theme'
 
 // ---| self |---
 import './Item.module.scss'
 
-export type ItemSpace = Size | 'none'
+
 export type ItemColor = Color | 'none'
 export type ItemArea = 'left' | 'right' | 'top' | 'bottom' | 'center'
 
 export type ItemOptions = {
-  g?: ItemSpace
-  gap?: React.CSSProperties['gap']
-  p?: ItemSpace
-  padding?: React.CSSProperties['padding']
-  m?: ItemSpace
-  margin?: React.CSSProperties['margin']
-  display?: React.CSSProperties['display']
-  flex?: React.CSSProperties['flex']
-  order?: React.CSSProperties['order']
-  area?: ItemArea | React.CSSProperties['gridArea']
-  minWidth?: React.CSSProperties['minWidth']
-  minHeight?: React.CSSProperties['minHeight']
+  // block model
+  g?: str.RepeatWithSep<Space, ' ', 1>
+  p?: str.RepeatWithSep<Space, ' ', 3>
+  m?: str.RepeatWithSep<Space, ' ', 3>
   width?: React.CSSProperties['width']
-  height?: React.CSSProperties['height']
+  minWidth?: React.CSSProperties['minWidth']
   maxWidth?: React.CSSProperties['maxWidth']
+  height?: React.CSSProperties['height']
+  minHeight?: React.CSSProperties['minHeight']
   maxHeight?: React.CSSProperties['maxHeight']
-  grow?: React.CSSProperties['flexGrow']
-  shrink?: React.CSSProperties['flexShrink']
-  basis?: React.CSSProperties['flexBasis']
-  align?: React.CSSProperties['alignSelf']
-  justify?: React.CSSProperties['justifySelf']
-  place?: React.CSSProperties['placeSelf']
-  background?: React.CSSProperties['background']
-  border?: React.CSSProperties['border']
-  position?: React.CSSProperties['position']
-  color?: React.CSSProperties['color']
+  border?: React.CSSProperties['border'] | boolean
+  radius?: Size
+  display?: React.CSSProperties['display']
+  bg?: Palette
+  sh?: Size
 
+  // position
+  pos?: React.CSSProperties['position']
   top?: React.CSSProperties['top']
   bottom?: React.CSSProperties['bottom']
   left?: React.CSSProperties['left']
   right?: React.CSSProperties['right']
 
-  visible?: boolean
+  // layout
+  order?: React.CSSProperties['order']
+  align?: React.CSSProperties['alignSelf']
+  justify?: React.CSSProperties['justifySelf']
+  place?: React.CSSProperties['placeSelf']
 
-  column?: string
-  row?: string
-  span?: string
+  // grid
+  row?: React.CSSProperties['gridRow']
+  column?: React.CSSProperties['gridColumn']
+  area?: React.CSSProperties['gridArea'] | ItemArea
 
+  // flex
+  flex?: React.CSSProperties['flex']
+  grow?: React.CSSProperties['flexGrow']
+  shrink?: React.CSSProperties['flexShrink']
+  basis?: React.CSSProperties['flexBasis']
 
+  // custom
   fit?: boolean
+  visible?: boolean
   stretch?: boolean
   style?: React.CSSProperties
   className?: string
-  children?: React.ReactNode
 }
 
 export type ItemReturnOptions<O extends object> = O & {
   className: string
-  children: React.ReactNode
-  style: React.CSSProperties
 }
 
 /**
- * Hook descriptions
+ * Allows set base block styles
  * @example
- * const options = useItem(conf)
+ * const modifiedProps = useItem(props)
  */
 export const useItem = <O extends object>(options: O & ItemOptions): ItemReturnOptions<O> => {
   const {
-    fit,
-    // column,
-    // row,
-    // span,
-    visible = true,
-    color,
-    position,
-    display,
-    area,
-    align,
-    order,
-    justify,
-    place,
-    stretch,
-    background, // TODO: rename to bg
-    border,
-    flex,
+    // block model
     m, p, g,
-    margin, padding, gap,
-    grow, shrink, basis,
-    minWidth, width, maxWidth,
-    minHeight, height, maxHeight,
-    top, bottom, left, right,
-    children,
-    className,
+    width, minWidth, maxWidth,
+    height, minHeight, maxHeight,
+    border, radius, display, bg, sh,
+    // position
+    pos, top, bottom, left, right,
+    // layout
+    order, align, justify, place,
+    // grid
+    area, row, column,
+    // flex props
+    flex, grow, shrink, basis,
+    // custom
+    fit,
+    visible = true,
+    stretch,
     style,
+    className,
     ...otherOptions
   } = options
-  // TODO: add variants to p, m, g sizes: 'xl', 'xl xl', toSize('xl xl 0 xl', sep=' ')
-  // TODO: background, border, box shadow
 
   return {
     ...otherOptions,
-    children,
     className: cn('item', {
-      [`p-${p}`]: p,
-      [`m-${m}`]: m,
-      [`g-${g}`]: g,
-      invisible: !visible,
       stretch,
       fit,
-    }, className),
-    style: obj.clear({
-      order,
-      gridArea: area,
-      alignSelf: align,
-      justifySelf: justify,
-      placeSelf: place,
-      flex,
-      flexGrow: grow, flexShrink: shrink, flexBasis: basis,
-      margin, padding, gap,
-      minWidth, width, maxWidth,
-      minHeight, height, maxHeight,
-      top, bottom, left, right,
-      background,
-      border,
-      display,
-      position,
-      color,
-
-      // grid-column-start
-      // grid-column-end
-      // grid-row-start
-      // grid-row-end
-      // grid-column
-      // grid-row
-
-
-      // gap,
-      // row-gap,
-      // column-gap
-
+    }, jss({
+      // block model
+      margin: toSpace(m), padding: toSpace(p), gap: toSpace(g),
+      width, minWidth, maxWidth,
+      height, minHeight, maxHeight,
+      border: typeof border === 'boolean' ? toVar('border') : border,
+      borderRadius: radius && toVar(`radius-${radius}`),
+      boxShadow: sh && toVar(`box-shadow-${sh}`),
+      display: visible? display : 'none', // TODO: if invisible then return null
+      background: bg && toVar('color', bg),
+      // position
+      position: pos, top, bottom, left, right,
+      // layout
+      order, alignSelf: align, justifySelf: justify, placeSelf: place,
+      // grid
+      gridArea: area, gridRow: row, gridColumn: column,
+      // flex props
+      flex, flexGrow: grow, flexShrink: shrink, flexBasis: basis,
       ...style,
-    }),
+    }), className),
   } as ItemReturnOptions<O>
 }
 

@@ -1,28 +1,37 @@
 import React from 'react'
-import MuiAlert from '@mui/material/Alert'
-import MuiAlertTitle from '@mui/material/AlertTitle'
 
 // ---| core |---
 import { cn } from 'tools'
 import { Color } from 'theme'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
+import Block from 'components/layouts/Block'
+import Actions from 'components/layouts/Actions'
+import { Icon, IconVariant } from 'components/views/Icon'
 
 // ---| self |---
 import css from './Alert.module.scss'
 
 
-export type AlertColor = Extract<Color, 'success' | 'info' | 'warning' | 'error'>
+export const ALERT_ICON_MAP: Partial<Record<AlertVariant, IconVariant>> = {
+  success: 'check',
+  info: 'info',
+  warning: 'warning',
+  error: 'error',
+}
+
+export type AlertVariant = Extract<Color, 'success' | 'info' | 'warning' | 'error'>
 
 export type AlertProps = {
+  v?: AlertVariant
+  inline?: boolean
+  clear?: boolean
   title?: React.ReactNode
+  actions?: React.ReactNode
   className?: string
-  children?: React.ReactNode
   content?: React.ReactNode
-  color?: AlertColor
+  children?: React.ReactNode
 }
 
 /**
@@ -31,13 +40,21 @@ export type AlertProps = {
  * <Alert />
  */
 export function Alert(props: AlertProps) { // TODO: add icon and remove mui. icon, title, message, actions
-  const { title, color, content, children = content, className, ...otherProps } = props
+  const { title, v = 'info', inline, clear, content, actions, children = content, className, ...otherProps } = props
 
   return (
-    <MuiAlert className={cn(css.Alert, className)} severity={color} {...otherProps}>
-      {title && <MuiAlertTitle><Text v='h4' size='sm' content={title} /></MuiAlertTitle>}
-      <Text v='caption' content={children} />
-    </MuiAlert>
+    <Block className={cn(css.Alert, className)} v='x' p='sm' g='sm' bg={!clear ? `${v}-6` : undefined} {...otherProps}>
+      <Icon v={ALERT_ICON_MAP[v]} color={v} size='md' />
+
+      <Block g='xs'>
+        {title && <Text v='h5' size='sm' content={title} />}
+
+        <Block p='xxs' g='xs' v={inline ? 'x' : 'y'} aligns={inline ? 'center' : 'end'}>
+          <Text size='xs' content={children} />
+          {actions && <Actions size='sm' v='x' g='xs' justifies='end' action='outlined'>{actions}</Actions>}
+        </Block>
+      </Block>
+    </Block>
   )
 }
 

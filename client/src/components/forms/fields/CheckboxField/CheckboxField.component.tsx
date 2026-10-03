@@ -5,8 +5,6 @@ import MuiCheckboxField from '@mui/material/Checkbox'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
 

@@ -10,16 +10,20 @@ export const Item = ({
   data,
   description,
   prompts,
-  actions: actions.flat(Infinity).filter(Boolean),
+  actions: actions.flat(Infinity).filter(Boolean)
+    // Inject static `variables` into `hbs` templates
+    .map(action => ({ ...action, data: { ...data, ...action.data } })),
 })
 
 export const Component = (info, {
   description,
+  type,
   namePostfix,
   defaultPath,
   withStories,
   tests, // 'unit' | 'e2e'
 } = {}) => Item({
+  data: { componentType: type },
   description,
   prompts: [
     prompts.Name({ default: 'Component', postfix: namePostfix, info }),

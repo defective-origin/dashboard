@@ -4,8 +4,6 @@ import Text, { TextProps } from 'components/views/Text'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---
@@ -26,7 +24,8 @@ export function Tag(props: TagProps) {
   return (
     <Text
       className={cn(css.Tag, !outline && css.fill, className)}
-      v='caption'
+      v='span'
+      format='uppercase'
       color={color}
       {...otherProps}
     >

@@ -1,8 +1,6 @@
 import React from 'react'
 
 // ---| core |---
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---

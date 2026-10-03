@@ -3,8 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Dropdown, { DropdownProps } from 'components/actions/Dropdown'
 
@@ -30,7 +28,7 @@ export function Help(props: HelpProps) {
       arrow
       {...otherProps}
     >
-      {content && children}
+      {content ?? children}
     </Dropdown>
   )
 }

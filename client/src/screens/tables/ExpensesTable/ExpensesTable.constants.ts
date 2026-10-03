@@ -1,5 +1,5 @@
 import { TableColumn } from 'components/views/Table'
-import column from '../columns'
+import column from 'screens/tables/columns'
 import { Expense } from 'api'
 
 export const EXPENSE_COLUMNS: TableColumn<Expense>[] = [

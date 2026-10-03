@@ -2,7 +2,7 @@ import { Title, Subtitle, Primary, Controls, Stories } from '@storybook/blocks'
 import { Meta, StoryObj, params } from 'storybook'
 import Text from 'components/views/Text'
 import Actions from 'components/layouts/Actions'
-import Layout from 'components/layouts/Layout'
+import Block from 'components/layouts/Block'
 import Field from 'components/forms/fields'
 import Form from './Form.component'
 import { useWatch } from './Form.hooks'
@@ -11,14 +11,14 @@ const WatchField = ({ path }: { path: string | string[] }) => {
   const field = useWatch(path)
 
   return (
-    <Layout g='xxs'>
+    <Block g='xxs'>
       <Text size='xxs' content={`Fields: ${JSON.stringify(path)}`} />
       <Text size='xxs' content={`value: ${JSON.stringify(field?.value)}`} color='info' />
 
       {!!Object.keys(field?.errors ?? []).length && (
         <Text size='xxs' content={`errors: ${JSON.stringify(field?.errors)}`} color='error' />
       )}
-    </Layout>
+    </Block>
   )
 }
 
@@ -63,7 +63,7 @@ export const Demo: Story = {
   },
   render: () => (
     <Form onSubmit={formLog} onChange={formLog} onReset={log} p='xxl' checkOnSubmit>
-      <Layout g='xs'>
+      <Block g='xs'>
         <WatchField path='slider' />
         <Actions g='xs'>
           <Text content='GLOBAL FORM ACTIONS' />
@@ -77,15 +77,15 @@ export const Demo: Story = {
           <Form.Submit content='Submit' color='success' size='xs' />
         </Actions>
 
-        <Layout g='xs' columns={4}>
+        <Block g='xs' v='grid' columns={4}>
           <Field.Slider path='slider' label='Slider' init={75} onChange={log} />
           <Field.Number path='number' label='Number' init={75} help='Help text' onChange={log} />
 
           <Field.Select path='select' label='Select' init='value0' help='Help text' onChange={log} items={SELECT_ITEMS} />
           <Field.Text path='text' label='Text' init='value' help='Help text' onChange={log} rules={TEXT_RULES} checkOnChange />
-        </Layout>
+        </Block>
 
-        <Layout g='xs' columns={6}>
+        <Block g='xs' v='grid' columns={6}>
           <Field.Checkbox path='with' label='With Value' init='checkbox' checked onChange={log} />
           <Field.Checkbox path='without' label='Without Value' checked onChange={log} />
 
@@ -94,9 +94,9 @@ export const Demo: Story = {
 
           <Field.Radio path='radio1' label='Radio1' init={1} onChange={log} />
           <Field.Radio path='radio2' label='Radio2' init={2} onChange={log} checked />
-        </Layout>
+        </Block>
 
-        <Layout g='xs' columns={2}>
+        <Block g='xs' v='grid' columns={2}>
           <Field.RadioGroup path='radio-group' label='Radio Group'
             init='b'
             items={TOGGLING_ITEMS}
@@ -107,16 +107,16 @@ export const Demo: Story = {
             items={TOGGLING_ITEMS}
             columns={TOGGLING_ITEMS.length}
           />
-        </Layout>
+        </Block>
 
-        <Layout g='xs'>
+        <Block g='xs'>
           <Actions g='xs'>
             <Text content='GROUP' />
             <Form.Reset path='group' content='Reset' color='info' size='xs' />
             <Form.Submit path='group' content='Submit' color='success' size='xs' />
           </Actions>
 
-          <Layout columns={7} g='xs'>
+          <Block v='grid' columns={7} g='xs'>
             <Field.Radio path='group.radio' label='Radio' init='radio value' onChange={log} />
             <Field.Switch path='group.switch' label='Switch' init={true} onChange={log} />
             <Field.Checkbox path='group.checkbox' label='Checkbox' init='checkbox' checked onChange={log} />
@@ -124,17 +124,17 @@ export const Demo: Story = {
             <Field.Select path='group.select' label='Select' init='value1' help='Help text' onChange={log} items={SELECT_ITEMS} />
             <Field.Text path='group.text' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
             <Field.Number path='group.number' label='Number' init={50} help='Help text' onChange={log} />
-          </Layout>
-        </Layout>
+          </Block>
+        </Block>
 
-        <Layout g='xs'>
+        <Block g='xs'>
           <Actions g='xs'>
             <Text content='LIST' />
             <Form.Reset path='list' content='Reset' color='info' size='xs' />
             <Form.Submit path='list' content='Submit' color='success' size='xs' />
           </Actions>
 
-          <Layout columns={7} g='xs'>
+          <Block v='grid' columns={7} g='xs'>
             <Field.Radio path='list.0' label='Radio' init='radio value' onChange={log} />
             <Field.Switch path='list.1' label='Switch' init={true} onChange={log} />
             <Field.Checkbox path='list.2' label='Checkbox' init='checkbox' checked onChange={log} />
@@ -142,9 +142,9 @@ export const Demo: Story = {
             <Field.Select path='list.4' label='Select' init='value2' help='Help text' items={SELECT_ITEMS} onChange={log} />
             <Field.Text path='list.5' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
             <Field.Number path='list.6' label='Number' init={25} help='Help text' onChange={log} />
-          </Layout>
-        </Layout>
-      </Layout>
+          </Block>
+        </Block>
+      </Block>
     </Form>
   ),
 }
@@ -166,14 +166,14 @@ export const InitializeViaForm: Story = {
         number: 50,
       },
     }} onSubmit={formLog} onChange={formLog} onReset={log} p='xxl'>
-      <Layout g='xs'>
+      <Block g='xs'>
         <Actions g='xs'>
           <Text content='GLOBAL FORM ACTIONS' />
           <Actions.Button type='reset' content='Reset' color='info' size='xs' />
           <Actions.Button type='submit' content='Submit' color='success' size='xs' />
         </Actions>
 
-        <Layout columns={5} g='xs'>
+        <Block v='grid' columns={5} g='xs'>
           <Field.Radio path='radio1' label='Radio 1' init='radio value 1' onChange={log} />
           <Field.Radio path='radio2' label='Radio 2' init='radio value 2' onChange={log} />
           <Field.Checkbox path='checkbox1' label='Checkbox 1' init='checkbox' onChange={log} />
@@ -184,8 +184,8 @@ export const InitializeViaForm: Story = {
           <Field.Select path='group.select' label='Select' help='Help text' onChange={log} items={SELECT_ITEMS} />
           <Field.Text path='group.text' label='Text' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
           <Field.Number path='group.number' label='Number' help='Help text' onChange={log} required />
-        </Layout>
-      </Layout>
+        </Block>
+      </Block>
     </Form>
   ),
 }
@@ -198,7 +198,7 @@ export const FormActions: Story = {
   `),
   render: () => (
     <Form onSubmit={formLog} onChange={formLog} onReset={log} p='xxl'>
-      <Layout g='xs'>
+      <Block g='xs'>
         <Actions g='xs'>
           <Text content='GLOBAL FORM ACTIONS' />
           <Actions.Button type='reset' content='Reset' color='info' size='xs' />
@@ -213,7 +213,7 @@ export const FormActions: Story = {
 
         <Field.Slider path='slider' label='Slider' init={75} onChange={log} />
 
-        <Layout g='xs'>
+        <Block g='xs'>
           <Actions g='xs'>
             <Text content='GROUP' />
             <Form.Reset path='group' content='Reset' color='info' size='xs' />
@@ -221,9 +221,9 @@ export const FormActions: Story = {
           </Actions>
 
           <Field.Slider path='group.slider' label='Slider' init={50} onChange={log} />
-        </Layout>
+        </Block>
 
-        <Layout g='xs'>
+        <Block g='xs'>
           <Actions g='xs'>
             <Text content='LIST' />
             <Form.Reset path='list' content='Reset' color='info' size='xs' />
@@ -231,8 +231,8 @@ export const FormActions: Story = {
           </Actions>
 
           <Field.Slider path='list.0' label='Slider' init={25} onChange={log} />
-        </Layout>
-      </Layout>
+        </Block>
+      </Block>
     </Form>
   ),
 }
@@ -244,14 +244,14 @@ export const WatchFields: Story = {
   `),
   render: () => (
     <Form onSubmit={formLog} onChange={formLog} onReset={log} p='xxl'>
-      <Layout g='xs' width={400}>
+      <Block g='xs' width={400}>
         <Actions.Button type='reset' content='Reset' color='info' size='xs' />
 
         <Field.Slider path='slider' label='Slider' init={50} onChange={log} />
         <Field.Text path='group.text' label='Text' help='Help text' rules={TEXT_RULES} init='value' checkOnChange onChange={log} />
         <WatchField path='group.text' />
         <WatchField path={['group.text', 'slider']} />
-      </Layout>
+      </Block>
     </Form>
   ),
 }

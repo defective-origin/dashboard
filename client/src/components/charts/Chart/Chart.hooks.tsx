@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react'
 
 // ---| core |---
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { TEXT_FORMAT_MAP, TextFormat } from 'components/views/Text'
 

@@ -4,8 +4,6 @@ import { NavLink, NavLinkProps } from 'react-router-dom'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { ButtonStyleOptions, useButtonStyle } from 'components/actions/Button'
 import { withPopup } from 'components/popups/Popup'

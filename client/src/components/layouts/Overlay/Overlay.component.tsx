@@ -4,8 +4,6 @@ import React, { useRef } from 'react'
 import { cn, react } from 'tools'
 import { useMode } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---

@@ -4,7 +4,7 @@ import Spec from 'components/views/Spec'
 import Text, { TextProps } from './Text.component'
 
 const ALIGNMENTS: TextProps['align'][] = ['right', 'center', 'left']
-const VARIANTS: TextProps['v'][] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'button', 'caption', 'overline']
+const VARIANTS: TextProps['v'][] = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span']
 const TEXT_FORMATS: TextProps['format'][] = ['title', 'capitalize', 'lowercase', 'uppercase']
 const NUMBER_FORMATS: TextProps['format'][] = ['weight', 'size', 'currency', 'amount', 'number', 'percent', 'decimal-percent']
 const DATE_FORMATS: TextProps['format'][] = ['day', 'day-name', 'month', 'month-name', 'year', 'date', 'day/month/year', 'day-of-month-year']
@@ -20,7 +20,7 @@ const meta: Meta<typeof Text> = {
     content: field.reactNode(),
     children: field.reactNode(true),
     size: field.size('TextSize', 'md'),
-    v: field.variants(VARIANTS, 'TextVariant', 'body1'),
+    v: field.variants(VARIANTS, 'TextVariant', 'p'),
     color: field.variants(theme.COLORS, 'TextColor', 'primary'),
     align: field.variants(ALIGNMENTS, 'TextAlign', 'left'),
     format: field.variants(FORMATS, 'FormatVariant', 'default'),
@@ -44,7 +44,7 @@ export const Demo: Story = {
   parameters: params('Text [Requirements](?path=/docs/requirements-typography--docs)'),
   args: {
     content: CONTENT,
-    v: 'body1',
+    v: 'p',
     size: 'md',
     align: 'left',
     color: 'primary',
@@ -84,7 +84,7 @@ export const Formats: Story = {
       ].map(([name, value, variants], idx) => (
         <Block key={idx}>
           <Text v='h5' size='md' content={name} />
-          <Block v='y'>
+          <Block>
             {(variants as never[]).map(item =>
               <Spec
                 key={item}

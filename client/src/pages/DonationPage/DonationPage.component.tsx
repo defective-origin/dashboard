@@ -33,7 +33,7 @@ export function DonationPage(props: DonationPageProps) {
       extra={<Button start='add' tooltip='request' />}
       {...otherProps}
     >
-      <Page.Content p='sm' g='sm'>
+      <Page.Content v='grid' p='sm' g='sm'>
         <ExpensesTable type='PLANS' area='1 / 1 / 2 / 2' />
         <ExpensesTable type='NEEDS' area='1 / 2 / 2 / 3' />
         <ExpensesTable type='OTHERS' area='1 / 3 / 2 / 4' />

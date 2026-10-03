@@ -3,29 +3,17 @@ import { ToastContainer as RTToastContainer, ToastContentProps as RTToastContent
 import 'react-toastify/dist/ReactToastify.css'
 
 // ---| core |---
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Text from 'components/views/Text'
-import Actions from 'components/layouts/Actions'
-import { AlertColor } from 'components/views/Alert'
-import Block, { BlockVariant } from 'components/layouts/Block'
+import Alert, { AlertProps } from 'components/views/Alert'
 
 // ---| self |---
 import css from './Toast.module.scss'
 
-export type ToastName = 'messages' | 'guards' | 'alerts'
 
+export type ToastName = 'messages' | 'guards' | 'alerts'
 export const initToastKey = (name: ToastName) => `toast:${name}`
 
-export type ToastOptions = {
-  content?: React.ReactNode
-  actions?: React.ReactNode
-  color?: AlertColor
-  v?: BlockVariant
-  onClose?: () => void
-}
-
+export type ToastOptions = AlertProps
 export type ToastProps = RTToastContentProps<ToastOptions>
 
 /**
@@ -34,18 +22,9 @@ export type ToastProps = RTToastContentProps<ToastOptions>
  * <Toast />
  */
 export function Toast(props: ToastProps) {
-  const { data = {} as ToastOptions } = props
+  const { data } = props
 
-  // TODO: override background color variables
-  return (
-    <Block className={css.Toast} justifies='space-between' v={data.v ?? 'x'} g='xs'>
-      <Text v='h4' color='primary' content={data.content} />
-
-      <Actions size='xxs' v='x' g='xs' justifies='end'>
-        {data.actions}
-      </Actions>
-    </Block>
-  )
+  return <Alert className={css.Toast} clear {...data} />
 }
 
 Toast.displayName = 'Toast'

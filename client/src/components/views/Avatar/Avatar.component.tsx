@@ -1,13 +1,11 @@
 import React from 'react'
-import MuiAvatar from '@mui/material/Avatar'
-import MuiAvatarGroup from '@mui/material/AvatarGroup'
+import Media from 'components/views/Media'
+import Block from 'components/layouts/Block'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, react } from 'tools'
 import { Size } from 'theme'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---
@@ -21,7 +19,6 @@ export type AvatarProps = {
   size?: AvatarSize
   content?: string
   className?: string
-  children?: React.ReactNode
 }
 
 /**
@@ -30,16 +27,15 @@ export type AvatarProps = {
  * <Avatar />
  */
 export function Avatar(props: AvatarProps) {
-  const { src, size, alt = 'user image', content, children = content, className, ...otherProps } = props
+  const { src, size, alt = 'user image', className, ...otherProps } = props
 
   return (
-    <MuiAvatar
-      className={cn(css.Avatar, {
-        [`icon--${size}`]: size,
-      }, className)}
+    <Media
+      className={cn(css.Avatar, size && `t--${size}`, className)}
       alt={alt}
       src={src}
-      children={children}
+      width={`var(--icon-${size})`}
+      height={`var(--icon-${size})`}
       {...otherProps}
     />
   )
@@ -49,7 +45,6 @@ Avatar.displayName = 'Avatar'
 
 
 export type AvatarGroupProps = {
-  items?: AvatarProps[]
   total?: number
   max?: number
   size?: AvatarSize
@@ -58,19 +53,15 @@ export type AvatarGroupProps = {
 }
 
 Avatar.Group = (props: AvatarGroupProps) => {
-  const { items = [], max, total = 3, size, children, ...otherProps } = props
+  const { max, total = 3, size, children, className, ...otherProps } = props
+  const visibleItems = React.Children.toArray(children).slice(0, max)
+  const updated = react.injectProp(visibleItems, 1, { size }, node => react.isExemplar(node, [Avatar]))
 
-  // TODO: Fix text avatar where one or two letters
-  // TODO: Fix total avatar with count. +5k
   return (
-    <MuiAvatarGroup
-      total={total}
-      {...otherProps}
-    >
-      {items.slice(0, max).map((item, idx) => <Avatar key={idx} size={size} {...item} />)}
-
-      {children}
-    </MuiAvatarGroup>
+    <Block className={cn(css.AvatarGroup, className)} v='x' {...otherProps}>
+      {updated}
+      {total}
+    </Block>
   )
 }
 

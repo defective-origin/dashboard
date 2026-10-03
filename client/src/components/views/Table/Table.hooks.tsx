@@ -76,7 +76,7 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
       column.key = column.key ?? column.field ?? idx
 
       // setup name by field name by default
-      column.name = column.name ?? column.field?.split('.').at(-1)
+      column.name = column.name ?? (column.field as string)?.split('.').at(-1)
 
       // setup alignment
       column.alignCell = column.alignCell ?? column.align

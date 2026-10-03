@@ -4,8 +4,6 @@ import MuiDivider, { DividerProps as MuiDividerProps } from '@mui/material/Divid
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text, { TextProps } from 'components/views/Text'
 

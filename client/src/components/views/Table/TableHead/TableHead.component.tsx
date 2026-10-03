@@ -4,8 +4,6 @@ import MuiTableHead from '@mui/material/TableHead'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---

@@ -4,7 +4,6 @@ import React from 'react'
 import { t } from 'locale'
 import { cn } from 'tools'
 
-// ---| pages |---
 // ---| screens |---
 import { MarkupOptions, toItems } from 'screens/views/MarkupBoard'
 // ---| components |---

@@ -1,52 +1,23 @@
-import { toast as reactToast, ToastOptions as MuiToastOptions } from 'react-toastify'
+import { toast as reactToast } from 'react-toastify'
 
 // ---| core |---
-// ---| pages |---
-// ---| screens |---
-// ---| components |---
-import Icon, { IconVariant } from 'components/views/Icon'
-import { AlertColor } from 'components/views/Alert'
-
 // ---| self |---
-import { Toast, ToastOptions, initToastKey } from './Toast.component'
+import { initToastKey, Toast, ToastName, ToastOptions } from './Toast.component'
 
-const ALERT_ICON_MAP: Partial<Record<AlertColor, IconVariant>> = {
-  success: 'check_circle',
-  info: 'info',
-  warning: 'warning',
-  error: 'error',
-}
-
-const showToast = (data: ToastOptions, options: MuiToastOptions<ToastOptions>) => reactToast(Toast, {
-  ...options,
-  data: { ...options.data, ...data },
-  icon: () => <Icon v={data?.color ? ALERT_ICON_MAP[data.color] : 'info'} />,
-})
-
-const message = (options: ToastOptions) => showToast(options, {
-  containerId: initToastKey('messages'),
-  data: { v: 'y' },
-})
-
-const alert = (options: ToastOptions) => showToast(options, {
-  theme: 'colored',
-  containerId: initToastKey('alerts'),
+const createToast = (containerName: ToastName) => (data: ToastOptions) => reactToast(Toast, {
+  data,
   autoClose: false,
+  containerId: initToastKey(containerName),
 })
 
-const guard = (options: ToastOptions) => showToast(options, {
-  toastId: 'guard',
-  theme: 'light',
-  containerId: initToastKey('guards'),
-  autoClose: false,
-  closeOnClick: false,
-  draggable: false,
-})
 
 /**
- * Hook descriptions
+ * Allows call toasts
  * @example
- * const options = useToast(conf)
+ * toast.message({ title: 'Info', content: 'Text', actions: <Button content='Edit' /> })
  */
-
-export const toast = { message, alert, guard }
+export const toast = {
+  message: createToast('messages'),
+  alert: createToast('alerts'),
+  guard: createToast('guards'),
+}

@@ -81,7 +81,7 @@ export function GuidePage(props: GuidePageProps) {
         </Actions>
       </Page.LeftAside>
 
-      <Page.Content className={css.Content} p='xs' g='sm' scroll='y'>
+      <Page.Content className={css.Content} v='grid' p='xs' g='sm' scroll='y'>
         <Text v='h2' content={current?.name} />
 
         {current?.content}

@@ -4,10 +4,8 @@ import React, { useCallback, useImperativeHandle, useLayoutEffect, useMemo, useS
 import { cn, obj, react } from 'tools'
 import { useFunc, useSubscriptions } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './Form.module.scss'
@@ -15,7 +13,7 @@ import FormButton from './FormButton'
 import { FormContext, FormFieldManager, FormManager, FormErrors, FormEvent, FormPath } from './Form.context'
 
 
-export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
+export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
   init?: O
   // TODO: validateTrigger={["onSubmit", "onChange"]}
   // TODO: pass manager instead of ref
@@ -78,7 +76,7 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  * const TOGGLING_ITEMS = [{ label: 'a', value: 'a' }, { label: 'b', value: 'b' }]
  *
  * <Form init={INIT} onSubmit={formLog} onChange={formLog} onReset={log} p='xxl' checkOnSubmit>
- *   <Layout g='xs'>
+ *   <Block g='xs'>
  *     <WatchField path='slider' />
  *     <Actions g='xs'>
  *       <Text content='GLOBAL FORM ACTIONS' />
@@ -92,15 +90,15 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  *       <Form.Submit content='Submit' color='success' size='xs' />
  *     </Actions>
  *
- *     <Layout g='xs' columns={4}>
+ *     <Block g='xs' v='grid' columns={4}>
  *       <Field.Slider path='slider' label='Slider' init={75} onChange={log} />
  *       <Field.Number path='number' label='Number' init={75} help='Help text' onChange={log} />
  *
  *       <Field.Select path='select' label='Select' init='value0' help='Help text' onChange={log} items={SELECT_ITEMS} />
  *       <Field.Text path='text' label='Text' init='value' help='Help text' onChange={log} rules={TEXT_RULES} checkOnChange />
- *     </Layout>
+ *     </Block>
  *
- *     <Layout g='xs' columns={6}>
+ *     <Block g='xs' v='grid' columns={6}>
  *       <Field.Checkbox path='with' label='With Value' init='checkbox' checked onChange={log} />
  *       <Field.Checkbox path='without' label='Without Value' checked onChange={log} />
  *
@@ -109,9 +107,9 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  *
  *       <Field.Radio path='radio1' label='Radio1' init={1} onChange={log} />
  *       <Field.Radio path='radio2' label='Radio2' init={2} onChange={log} checked />
- *     </Layout>
+ *     </Block>
  *
- *     <Layout g='xs' columns={2}>
+ *     <Block g='xs' v='grid' columns={2}>
  *       <Field.RadioGroup path='radio-group' label='Radio Group'
  *         init='b'
  *         items={TOGGLING_ITEMS}
@@ -122,16 +120,16 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  *         items={TOGGLING_ITEMS}
  *         columns={TOGGLING_ITEMS.length}
  *       />
- *     </Layout>
+ *     </Block>
  *
- *     <Layout g='xs'>
+ *     <Block g='xs'>
  *       <Actions g='xs'>
  *         <Text content='GROUP' />
  *         <Form.Reset path='group' content='Reset' color='info' size='xs' />
  *         <Form.Submit path='group' content='Submit' color='success' size='xs' />
  *       </Actions>
  *
- *       <Layout columns={7} g='xs'>
+ *       <Block v='grid' columns={7} g='xs'>
  *         <Field.Radio path='group.radio' label='Radio' init='radio value' onChange={log} />
  *         <Field.Switch path='group.switch' label='Switch' init={true} onChange={log} />
  *         <Field.Checkbox path='group.checkbox' label='Checkbox' init='checkbox' checked onChange={log} />
@@ -139,17 +137,17 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  *         <Field.Select path='group.select' label='Select' init='value1' help='Help text' onChange={log} items={SELECT_ITEMS} />
  *         <Field.Text path='group.text' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
  *         <Field.Number path='group.number' label='Number' init={50} help='Help text' onChange={log} />
- *       </Layout>
- *     </Layout>
+ *       </Block>
+ *     </Block>
  *
- *     <Layout g='xs'>
+ *     <Block g='xs'>
  *       <Actions g='xs'>
  *         <Text content='LIST' />
  *         <Form.Reset path='list' content='Reset' color='info' size='xs' />
  *         <Form.Submit path='list' content='Submit' color='success' size='xs' />
  *       </Actions>
  *
- *       <Layout columns={7} g='xs'>
+ *       <Block v='grid' columns={7} g='xs'>
  *         <Field.Radio path='list.0' label='Radio' init='radio value' onChange={log} />
  *         <Field.Switch path='list.1' label='Switch' init={true} onChange={log} />
  *         <Field.Checkbox path='list.2' label='Checkbox' init='checkbox' checked onChange={log} />
@@ -157,9 +155,9 @@ export type FormProps<O extends object> = Pick<LayoutProps, 'p' | 'g' | 'v'> & {
  *         <Field.Select path='list.4' label='Select' init='value2' help='Help text' items={SELECT_ITEMS} onChange={log} />
  *         <Field.Text path='list.5' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
  *         <Field.Number path='list.6' label='Number' init={25} help='Help text' onChange={log} />
- *       </Layout>
- *     </Layout>
- *   </Layout>
+ *       </Block>
+ *     </Block>
+ *   </Block>
  * </Form>
  */
 export function Form<O extends object>(props: FormProps<O>) {
@@ -172,7 +170,7 @@ export function Form<O extends object>(props: FormProps<O>) {
 
   const toFields = useCallback((path?: string) => {
     if (path) {
-      return Object.values(fields).filter(field => field.path.startsWith(path))
+      return Object.values(fields).filter(field => (field.path as string).startsWith(path))
     }
 
     return Object.values(fields)
@@ -247,7 +245,8 @@ export function Form<O extends object>(props: FormProps<O>) {
   const focus = useFunc<FormManager<O>['focus']>(path => document.getElementById(path)?.focus())
 
   const connect = useFunc<FormManager<O>['connect']>(field => {
-    obj.set(fields, field.path, field)
+    // eslint-disable-next-line react-hooks/immutability
+    fields[field.path] = field
 
     if (field.init !== undefined) {
       obj.set(initial, field.path, field.init)
@@ -257,7 +256,9 @@ export function Form<O extends object>(props: FormProps<O>) {
   })
 
   const disconnect = useFunc<FormManager<O>['disconnect']>(field => {
-    obj.del(fields, field.path)
+    // eslint-disable-next-line react-hooks/immutability
+    delete fields[field.path]
+
     obj.del(initial, field.path, true)
     obj.del(errors, field.path, true)
   })
@@ -292,7 +293,7 @@ export function Form<O extends object>(props: FormProps<O>) {
 
   return (
     <FormContext.Provider value={formManager as unknown as FormManager<object>}>
-      <Layout
+      <Block
         as='form'
         className={cn(css.Form, className)}
         onSubmit={submitForm}
@@ -300,7 +301,7 @@ export function Form<O extends object>(props: FormProps<O>) {
         {...otherProps}
       >
         {children}
-      </Layout>
+      </Block>
     </FormContext.Provider>
   )
 }

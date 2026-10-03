@@ -3,8 +3,6 @@ import { useMemo, useState } from 'react'
 // ---| core |---
 import { emitEvent, initEventName, useEvent, useFunc } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 // ---| self |---
 

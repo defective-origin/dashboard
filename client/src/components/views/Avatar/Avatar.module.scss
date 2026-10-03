@@ -1,2 +1,17 @@
 .Avatar {
+  border-radius: 50%;
+  text-align: center;
+  object-fit: cover;
+  color: transparent;
+  text-indent: 10000px;
+  box-shadow: var(--box-shadow-xs);
+}
+
+.AvatarGroup {
+  position: relative;
+
+  .Avatar:not(:last-child) {
+    position: relative;
+    left: 25%;
+  }
 }

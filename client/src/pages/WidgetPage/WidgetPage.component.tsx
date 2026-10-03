@@ -37,13 +37,13 @@ export function WidgetPage(props: WidgetPageProps) {
       options={widget.data}
       onRemove={() => {
         mutations.remove(widget.data)
-        navigate('WIDGETS')
+        navigate({ to: 'WIDGETS' })
       }}
       onClone={() => console.log('CREATE CLONE')}
       onInherit={() => console.log('INHERIT')}
       {...otherProps}
     >
-      <Playground previewId={FEATURE_SNAPSHOT_ID} />
+      <Playground previewId={FEATURE_SNAPSHOT_ID} stretch />
       {children}
     </FeaturePage>
   )

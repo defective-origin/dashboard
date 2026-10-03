@@ -4,7 +4,6 @@ import React from 'react'
 import { cn } from 'tools'
 import { t } from 'locale'
 
-// ---| pages |---
 // ---| screens |---
 import Reviews, { ReviewItem } from 'screens/views/Reviews'
 // ---| components |---

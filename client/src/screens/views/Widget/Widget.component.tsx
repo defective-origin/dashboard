@@ -3,7 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Item, { ItemProps } from 'components/layouts/Item'

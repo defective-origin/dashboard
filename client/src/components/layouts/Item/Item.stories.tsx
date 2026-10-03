@@ -1,4 +1,4 @@
-import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
 import Item, { ItemProps } from './Item.component'
 
@@ -8,12 +8,12 @@ const render = (props: ItemProps) => {
   const { m, p, ...otherProps } = props
 
   return (
-    <Item background={SB_CSS.margin}>
+    <Item bg='warning-5'>
       {/* prevent margins from collapsing */}
       <div style={{ height: '0.5px' }} />
 
-      <Item background={SB_CSS.space} m={m} p={p}>
-        <Item minWidth={100} minHeight={100} background={SB_CSS.item} {...otherProps} />
+      <Item bg='success-5' m={m} p={p}>
+        <Item minWidth={100} minHeight={100} bg='secondary-5' {...otherProps} />
       </Item>
 
       {/* prevent margins from collapsing */}
@@ -75,7 +75,7 @@ export const Spaces: Story = {
           key={size}
           width={theme.toVar('space', size)}
           height={theme.toVar('space', size)}
-          background={theme.toVar('color', `${theme.COLORS[i]}-4`)}
+          bg={`${theme.COLORS[i]}-4`}
         />
       ))}
     </Block>

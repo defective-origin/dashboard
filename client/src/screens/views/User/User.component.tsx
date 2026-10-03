@@ -4,7 +4,6 @@ import React from 'react'
 import { cn } from 'tools'
 import { Id, useUser } from 'api'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'

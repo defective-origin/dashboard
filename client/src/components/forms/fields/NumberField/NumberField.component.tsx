@@ -4,8 +4,6 @@ import MuiTextField from '@mui/material/TextField'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
 

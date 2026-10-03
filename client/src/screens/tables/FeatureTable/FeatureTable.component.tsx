@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import { cn } from 'tools'
 import { Feature } from 'api'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Button from 'components/actions/Button'

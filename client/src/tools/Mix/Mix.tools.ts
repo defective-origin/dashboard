@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? (...args: P) => R : never
+export type FirstParameters<F> = F extends (x: infer P, ...args: any[]) => any ? P : never
+export type TailParameters<F> = F extends (x: any, ...args: infer P) => any ? P : never
 export type ValOrFunc<T, Args extends any[]> = T | ((...args: Args) => T)
 
 /**

@@ -1,4 +1,4 @@
-import { Meta, StoryObj, SB_CSS, field, params } from 'storybook'
+import { Meta, StoryObj, field, params } from 'storybook'
 import Item from 'components/layouts/Item'
 import Block from 'components/layouts/Block'
 import Overlay, { OverlayProps } from './Overlay.component'
@@ -34,9 +34,9 @@ export default meta
 type Story = StoryObj<typeof Overlay>
 
 const render = (props: OverlayProps) => (
-  <Block width={400} height={400} border={SB_CSS.border}>
+  <Block width={400} height={400} border>
     <Overlay {...props}>
-      <Item stretch background={SB_CSS.item} minWidth={50} minHeight={50} />
+      <Item stretch bg='secondary-5' minWidth={50} minHeight={50} />
     </Overlay>
   </Block>
 )

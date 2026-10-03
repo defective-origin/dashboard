@@ -3,7 +3,7 @@ import JsonField from './JsonField.component'
 
 const meta: Meta<typeof JsonField> = {
   component: JsonField,
-  title: 'Components/JsonField',
+  title: 'Components/Forms/JsonField',
   tags: ['autodocs'],
   argTypes: {
     name: field.string(),

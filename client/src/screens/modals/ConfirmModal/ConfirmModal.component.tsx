@@ -4,7 +4,6 @@ import React from 'react'
 import { cn } from 'tools'
 import { t } from 'locale'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'

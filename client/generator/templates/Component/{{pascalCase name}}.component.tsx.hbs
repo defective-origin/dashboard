@@ -3,9 +3,16 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
+{{#if (eq componentType 'PAGE')}}
 // ---| pages |---
 // ---| screens |---
 // ---| components |---
+{{else if (eq componentType 'SCREEN')}}
+// ---| screens |---
+// ---| components |---
+{{else}}
+// ---| components |---
+{{/if}}
 
 // ---| self |---
 import css from './{{pascalCase name}}.module.scss'

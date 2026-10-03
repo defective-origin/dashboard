@@ -3,7 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Item, { ItemProps } from 'components/layouts/Item'
@@ -25,8 +24,8 @@ export function Playground(props: PlaygroundProps) {
   const { previewId, children, className, ...otherProps } = props
 
   return (
-    <Item className={cn(css.Playground, className)} stretch {...otherProps}>
-      <PlaceholderCard id={previewId} height={300} name='PLAYGROUND' area='top' position='sticky' top={0} />
+    <Item className={cn(css.Playground, className)} {...otherProps}>
+      <PlaceholderCard id={previewId} height={300} name='PLAYGROUND' />
       {children}
     </Item>
   )

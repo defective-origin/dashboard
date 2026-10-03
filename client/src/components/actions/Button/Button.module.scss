@@ -8,28 +8,48 @@
     border-radius: var(--radius-xs);
     background: transparent;
     gap: var(--space-xs);
-    padding: 0 var(--space-xs);
+    padding: var(--space-xxs) var(--space-xs);
     border: none;
     cursor: pointer;
-  }
-
-  .button:hover .button-content {
-    flex-grow: 1;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: var(--font-main);
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
 
   .outlined {
     border: 1px solid currentcolor;
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:active {
+      background: transparent;
+      color: var(--color-secondary-3);
+    }
   }
 
-  .filled {
+  .filled,
+  .filled:hover,
+  .filled:active {
     color: var(--color-contrast-primary);
+
+    &:disabled {
+      color: var(--color-secondary-3);
+      background: var(--color-secondary-6);
+    }
   }
 
-  .text {
+  .text:disabled,
+  .text:disabled:hover,
+  .text:disabled:active {
+    background: transparent;
+    color: var(--color-secondary-3);
   }
 
   .wrapper {
     padding: 0;
+    color: var(--color-primary);
   }
 }
 

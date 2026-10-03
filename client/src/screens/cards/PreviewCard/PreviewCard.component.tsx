@@ -7,7 +7,6 @@ import { useFunc } from 'hooks'
 import { Feature, useBookmark } from 'api'
 import { AppLink, AppLinkProps, AppLinkVariant } from 'router'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'

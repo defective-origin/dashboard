@@ -3,8 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { withPopup } from 'components/popups/Popup'
 import Text, { TextProps } from 'components/views/Text'
@@ -30,7 +28,7 @@ export const Label = withPopup((props: LabelProps) => {
 
   return (
     <Block className={cn(css.Label, className)} v='x' g='xxs' aligns='center' {...otherProps}>
-      <Icon v={icon} size='xs' /> {children || <Text v='body2' size='xxs' content={content} format={format} />}
+      <Icon v={icon} size='xs' /> {children || <Text size='xxs' content={content} format={format} />}
     </Block>
   )
 })

@@ -3,8 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Block, { BlockProps } from 'components/layouts/Block'
 
@@ -21,7 +19,7 @@ export type FooterProps = BlockProps
 export function Footer(props: FooterProps) {
   const { children, className, ...otherProps } = props
 
-  return <Block className={cn(css.Footer, className)} area='bottom' v='x' {...otherProps}>{children}</Block>
+  return <Block as='footer' className={cn(css.Footer, className)} area='bottom' v='x' {...otherProps}>{children}</Block>
 }
 
 Footer.displayName = 'Footer'

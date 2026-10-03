@@ -13,8 +13,6 @@ import {
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Banner from 'components/views/Banner'
 

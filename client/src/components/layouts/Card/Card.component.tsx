@@ -11,13 +11,13 @@ import Footer from 'components/layouts//Footer'
 import Content from 'components/layouts/Content'
 import Actions from 'components/layouts/Actions'
 import Divider from 'components/layouts/Divider'
-import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './Card.module.scss'
 
 
-export type CardProps = LayoutProps & {
+export type CardProps = BlockProps & {
   divided?: boolean
 }
 
@@ -31,9 +31,9 @@ export const Card = (props: CardProps) => { // TODO: add stories
 
   // TODO: divide by [role='header'], [role='footer']
   return (
-    <Layout className={cn(css.Card, divided && css.divided, className)} g='xs' {...otherProps}>
+    <Block as='article' className={cn(css.Card, divided && css.divided, className)} g='xs' {...otherProps}>
       {children}
-    </Layout>
+    </Block>
   )
 }
 

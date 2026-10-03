@@ -5,8 +5,6 @@ import { cn } from 'tools'
 import { t } from 'locale'
 import { useFunc } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Label from 'components/views/Label'
 import { Text } from 'components/views/Text'

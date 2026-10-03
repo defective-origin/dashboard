@@ -5,7 +5,6 @@ import { cn } from 'tools'
 import { t } from 'locale'
 import { FeatureReview } from 'api'
 
-// ---| pages |---
 // ---| screens |---
 import User from 'screens/views/User'
 // ---| components |---
@@ -30,13 +29,13 @@ export function Review(props: ReviewProps) {
     <Block className={cn(css.Review, className)} g='xs' {...otherProps}>
       <Block v='x' {...otherProps}>
         <User id={createdBy?.id} />
-        <Block v='y' {...otherProps}>
+        <Block {...otherProps}>
           <Label icon='schedule' content={updatedAt} format='day-of-month-year' tooltip={t('LABEL.LAST_UPDATE')} />
           <Label icon='star' content={rate} format='number' tooltip={t('LABEL.RATE')} />
         </Block>
       </Block>
 
-      <Text v='body2' size='xs' content={content} />
+      <Text size='xs' content={content} />
 
       {children}
     </Block>

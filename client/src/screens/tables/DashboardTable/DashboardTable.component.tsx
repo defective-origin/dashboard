@@ -2,14 +2,13 @@
 import { cn } from 'tools'
 import { Board, useBoards } from 'api'
 
-// ---| pages |---
 // ---| screens |---
+import FeatureTable, { FeatureTableProps } from 'screens/tables/FeatureTable'
 // ---| components |---
 
 // ---| self |---
 import css from './DashboardTable.module.scss'
 import { DASHBOARD_COLUMNS } from './DashboardTable.constants'
-import FeatureTable, { FeatureTableProps } from '../FeatureTable'
 
 export type DashboardTableProps = FeatureTableProps<Board>
 

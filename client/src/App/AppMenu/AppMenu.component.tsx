@@ -28,10 +28,10 @@ export function AppMenu(props: AppMenuProps) {
   // TODO: install Boards and Apps as SPA
 
   return (
-    <Aside className={cn(css.AppMenu, className)} as='nav' v='tcb' g='xs' {...otherProps}>
-      <Logo width='1.5rem' />
+    <Aside className={cn(css.AppMenu, className)} as='nav' v='tcb' g='xs' p='xs' {...otherProps}>
+      <Logo width='2rem' />
 
-      <Actions className={css.Main} v='y' g='xs' grow={1} size='md' tooltipSide='right' color='primary'>
+      <Actions className={css.Main} v='y' g='xs' grow={1} size='lg' tooltipSide='right' color='primary'>
         <Actions.AppLink start='crossword' to='APPS' tooltip={t('LABEL.APPS')} />
         <Actions.AppLink start='dashboard' to='BOARDS' tooltip={t('LABEL.BOARDS')} />
         <Actions.AppLink start='widgets' to='WIDGETS' tooltip={t('LABEL.WIDGETS')} />
@@ -42,7 +42,7 @@ export function AppMenu(props: AppMenuProps) {
         {children}
       </Actions>
 
-      <Actions className={css.Extra} v='y' g='xs' size='md' tooltipSide='right' color='primary'>
+      <Actions className={css.Extra} v='y' g='xs' size='lg' tooltipSide='right' color='primary'>
         <Actions.Button start='brightness_alert' tooltip={t('LABEL.ALERT')} color='error' />
         <Actions.AppLink start='auto_stories' to='GUIDE' tooltip={t('LABEL.GUIDE')} />
         <Actions.AppLink start='local_atm' to='DONATION' tooltip={t('LABEL.DONATION')} />

@@ -4,7 +4,6 @@ import React from 'react'
 import { cn } from 'tools'
 import { t } from 'locale'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Item, { ItemProps } from 'components/layouts/Item'
@@ -29,7 +28,6 @@ export function PlaceholderCard(props: PlaceholderCardProps) {
     <Item className={cn(css.PlaceholderCard, className)} p='xl' {...otherProps}>
       <Text
         className={css.Message}
-        v='body2'
         color='secondary'
         format='capitalize'
         content={t('MESSAGE.UNDER_CONSTRUCTION', { name })}

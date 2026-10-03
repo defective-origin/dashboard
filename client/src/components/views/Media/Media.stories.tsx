@@ -19,5 +19,6 @@ export const Demo: Story = {
   parameters: params('Media'),
   args: {
     className: 'Demo',
+    v: 'logo',
   },
 }

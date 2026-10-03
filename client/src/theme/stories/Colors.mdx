@@ -1,7 +1,5 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
-import { COLORS, PALETTE } from '../theme.conf.ts';
-import { toName } from '../theme.tools.ts';
-import { toVar } from '../theme.tools.ts';
+import { COLORS, PALETTE, toColor, toName } from '../theme.tools.ts';
 
 
 <Meta title="Requirements/Colors" />
@@ -17,7 +15,7 @@ import { toVar } from '../theme.tools.ts';
       key={color}
       title={color}
       subtitle={toName('color', color)}
-      colors={PALETTE.filter(c => c.startsWith(color)).map(c => toVar('color', c))}
+      colors={PALETTE.filter(c => c.startsWith(color)).map(toColor)}
     />
   ))}
 </ColorPalette>

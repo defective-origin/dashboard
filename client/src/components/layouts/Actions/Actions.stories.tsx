@@ -6,7 +6,7 @@ const VARIANTS = ['x', 'y']
 
 const meta: Meta<typeof Actions> = {
   component: Actions,
-  title: 'Components/Actions/Actions',
+  title: 'Components/Layouts/Actions',
   tags: ['autodocs'],
   argTypes: {
     g: field.size('BlockSpace'),

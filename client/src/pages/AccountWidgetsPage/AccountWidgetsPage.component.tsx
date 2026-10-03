@@ -24,7 +24,7 @@ export function AccountWidgetsPage(props: AccountWidgetsPageProps) {
 
   return (
     <Page className={cn(css.AccountWidgetsPage, className)} name='LABEL.WIDGETS' {...otherProps}>
-      <Page.Content>
+      <Page.Content v='grid'>
         <WidgetTable />
 
         {children}

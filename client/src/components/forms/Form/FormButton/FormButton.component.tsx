@@ -4,8 +4,6 @@ import React from 'react'
 import { cn, react } from 'tools'
 import { useFunc } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Button, { ButtonProps } from 'components/actions/Button'
 

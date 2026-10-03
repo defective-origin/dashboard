@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react'
-import MuiTypography from '@mui/material/Typography'
 
 // ---| core |---
-import { cn, nil } from 'tools'
-import { Color, Size } from 'theme'
+import { cn, jss, nil } from 'tools'
+import { Color, Size, toColor, toSize } from 'theme'
 
 // ---| components |---
 import { withSkeleton } from 'components/views/Skeleton'
@@ -12,25 +11,9 @@ import { withSkeleton } from 'components/views/Skeleton'
 import './Text.module.scss'
 import { TEXT_FORMAT_MAP } from './Text.constants'
 
-const TEXT_SIZE_MAP: Record<TextVariant, TextSize> = {
-  h1: 'xl',
-  h2: 'lg',
-  h3: 'md',
-  h4: 'sm',
-  h5: 'xs',
-  h6: 'xs',
-  body1: 'md',
-  body2: 'sm',
-  subtitle1: 'sm',
-  subtitle2: 'sm',
-  button: 'md',
-  caption: 'sm',
-  overline: 'xs',
-}
-
 
 export type TextFormat = keyof typeof TEXT_FORMAT_MAP
-export type TextVariant = 'button' | 'caption' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'overline'
+export type TextVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 export type TextAlign = 'justify' | 'left' | 'right' | 'center' | 'inherit'
 export type TextColor = Color
 export type TextSize = Size
@@ -41,7 +24,7 @@ export type TextProps = {
   className?: string
   children?: React.ReactNode
   content?: React.ReactNode
-  size?: TextSize // TODO: remove and render only by tag?
+  size?: TextSize
   color?: TextColor
   v?: TextVariant
   align?: TextAlign
@@ -65,10 +48,10 @@ export type TextProps = {
  *    ellipsis={3}
  * />
  */
-export const Text = withSkeleton((props: TextProps) => { // FIXME: extend with useItem and rename to Typo
+export const Text = withSkeleton((props: TextProps) => { // FIXME: rename to Typo
   const {
-    v = 'body2',
-    size = TEXT_SIZE_MAP[v],
+    v: Tag = 'p',
+    size,
     height,
     bold, // TODO: rename to b()bold, i(italic) and so on
     color,
@@ -85,12 +68,6 @@ export const Text = withSkeleton((props: TextProps) => { // FIXME: extend with u
   } = props
   // TODO: add fixing number formats: units, millions, ... (fix: "M", by, to)
   // TODO: text animation on resize add by default on Text component
-  const styles = {
-    ...style,
-    lineHeight: height,
-    fontWeight: bold ? 'bold' : undefined,
-    WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
-  }
 
   const formatted = useMemo(() => {
     if (nil.isNil(content) && placeholder) {
@@ -103,21 +80,23 @@ export const Text = withSkeleton((props: TextProps) => { // FIXME: extend with u
   }, [content, format, placeholder])
 
   return (
-    <MuiTypography
+    <Tag
       className={cn('text', {
         nowrap,
         ellipsis,
-        [`t-${size}`]: size,
-        [`c-${color}`]: color,
-      }, className)}
-      variant={v}
-      align={align}
-      style={styles}
+      }, jss({
+        ...style,
+        lineHeight: height,
+        fontWeight: bold ? 'bold' : undefined,
+        WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
+        textAlign: align,
+        fontSize: size && toSize('text', size),
+        color: color && toColor(color),
+      }), className)}
       {...otherProps}
     >
-      {formatted}
-      {children}
-    </MuiTypography>
+      {children ?? formatted}
+    </Tag>
   )
 }, props => ({ v: 'text', children: props.children || props.content }))
 

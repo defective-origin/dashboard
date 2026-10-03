@@ -1,5 +1,7 @@
 export default function (plop) {
-  plop.setHelper('pascalPath', function (text) {
+  plop.setHelper('eq', (a, b) => a === b)
+
+  plop.setHelper('pascalPath', text => {
     if (!text) return ''
 
     return text

@@ -1,0 +1,29 @@
+/// Set height and width for tag.
+///
+/// @param {number} $width Tag width.
+/// @param {number} $height Tag height.
+@mixin stretch($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+
+@function shadow($level, $color: rgba(29, 30, 38, .05)) {
+  $mul: 1;
+
+  // first color
+  $umbra-y: round($level * $mul);
+  $umbra-blur: round($level * $mul + 3);
+
+  // second color
+  $penumbra-y: round($level * $mul + 3);
+  $penumbra-blur: round($level * $mul + 6);
+
+  // third color
+  $ambient-y: round($level * $mul);
+  $ambient-blur: round($level * $mul + 6);
+
+  @return
+    0 #{$umbra-y}px #{$umbra-blur}px #{$color},
+    0 #{$penumbra-y}px #{$penumbra-blur}px #{$color},
+    0 #{$ambient-y}px #{$ambient-blur}px #{$color};
+}

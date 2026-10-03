@@ -5,7 +5,6 @@ import { t } from 'locale'
 import { cn } from 'tools'
 import { Donation, useDonations } from 'api'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Button from 'components/actions/Button'

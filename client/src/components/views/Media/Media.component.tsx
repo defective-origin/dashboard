@@ -3,8 +3,6 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { withSkeleton } from 'components/views/Skeleton'
 
@@ -24,10 +22,10 @@ export type MediaVariant = keyof typeof MEDIA_MAP
 export type MediaProps = {
   v?: MediaVariant
   src?: string
+  alt?: string
   width?: string | number
   height?: string | number
   className?: string
-  children?: React.ReactNode
 }
 
 /**
@@ -36,14 +34,18 @@ export type MediaProps = {
  * <Media />
  */
 export const Media = withSkeleton((props: MediaProps) => {
-  const { width, height, v, src, children, className, ...otherProps } = props
+  const { width, height, v, src, alt, className, ...otherProps } = props
   const imgSrc = src ?? MEDIA_MAP[v as MediaVariant]
 
   // TODO: change tag depends on content, svg, img, video, sound and other
   return (
-    <img className={cn(css.Media, className)} src={imgSrc} style={{ width, height }} {...otherProps}>
-      {children}
-    </img>
+    <img
+      className={cn(css.Media, className)}
+      src={imgSrc}
+      alt={alt}
+      style={{ width, height }}
+      {...otherProps}
+    />
   )
 }, () => ({ v: 'rounded', wrap: true }))
 

@@ -26,13 +26,13 @@
 - Size [components, spaces]: `xxs` `xs` `sm` `md` `lg` `xl` `xxl`
 
 #### Layout
-- Template: `--{item}-{variant}`
 - Media: `mobile` `tablet` `desktop` `tv` `vertical` `horizontal`
 - Direction: `x` `y` `xy`
-- Block[Flex]: `x` `y` `xy` `cards`
-- Layout[Grid]: `board` `row` `rows` `column` `columns` `header` `footer` `left-aside` `right-aside` `grid`
+- Areas: `left` `right` `top` `bottom` `center`
+- Block[Flex]: `x` `y` `xy` `cards` `flex`
+- Block[Grid]: `board` `row` `rows` `column` `columns` `top` `bottom` `left` `right` `lcr` `lc` `cr` `tcb` `tc` `cb` `grid`
 
-### Layout
+##### Rules
 - Use `Block` model layout
 - Use `gaps` instead of `margin` in order to add spaces between items
 - Use `Hybrid layout` = adaptive + responsive

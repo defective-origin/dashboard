@@ -1,26 +1,22 @@
 import React from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
-import { Color, Size } from 'theme'
+import { cn, jss } from 'tools'
+import { Color, Size, toColor, toSize } from 'theme'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Text from 'components/views/Text'
 import Icon, { IconVariant } from 'components/views/Icon'
 
 // ---| self |---
 import './Button.module.scss'
 
-export const OVERFLOW_ATTR = 'data-collect' // TODO: move inside hook useOverflow which will collect items when space is not enough
 
 export const initAsideContent = (content: React.ReactNode, options: ButtonStyleOptions) => {
   if (!content || typeof content !== 'string') {
     return content
   }
 
-  return <Icon v={content as IconVariant} fill={options.active} size={options.size} />
+  return <Icon v={content as IconVariant} fill={options.active} />
 }
 
 
@@ -43,6 +39,7 @@ export type ButtonStyleOptions = {
   className?: string
   content?: React.ReactNode
   children?: React.ReactNode
+  style?: React.CSSProperties
 }
 
 /**
@@ -51,31 +48,31 @@ export type ButtonStyleOptions = {
  * const updatedProps = useActionStyle(props)
  */
 export function useButtonStyle<P extends ButtonStyleOptions>(options: P) {
-  const { size, color, v, start, end, active, className, children, content, ...other } = options
-  const colorClassName = v === 'filled' ? `b-${color}` : `c-${color}`
+  const { size, color, v, start, end, active, className, children, content, style, ...other } = options
 
-  // TODO: do size as in mui and icon variant
+  // TODO: do processing prop. spinner should rotating on start or end icon. should take Promise on click
   return {
     ...other,
-    className: cn('button', v, colorClassName, active, className),
-    [OVERFLOW_ATTR]: true,
+    className: cn('button', v, jss({
+      ...style,
+      fontSize: size && toSize('text', size),
+      ...v === 'filled' ? {
+        background: color && toColor(color),
+        '&:hover': { background: `color-mix(in srgb, ${toColor(color)} 80%, black)` },
+        '&:active': { background: `color-mix(in srgb, ${toColor(color)} 90%, black)` },
+      } : {
+        color: color && toColor(color),
+        '&:hover': { background: color && toColor(`${color}-6`) },
+        '&:active': { background: color && toColor(`${color}-5`) },
+      },
+    }), active, className),
     children: v === 'wrapper'
       ? children
       : (
         <>
           {initAsideContent(start, options)}
 
-          {children}
-
-          {content && (
-            <Text
-              className='button-content'
-              v='button'
-              format='uppercase'
-              size={size}
-              content={content}
-            />
-          )}
+          {content ?? children}
 
           {initAsideContent(end, options)}
         </>

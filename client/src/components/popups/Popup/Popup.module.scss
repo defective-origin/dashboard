@@ -5,8 +5,7 @@
   color: var(--color-primary);
   background-color: var(--color-contrast-secondary);
   padding: 0;
-  border: var(--border);
-  box-shadow: var(--box-shadow-xxs);
+  box-shadow: var(--box-shadow-xs);
 }
 
 .card.card:not(.arrow) {

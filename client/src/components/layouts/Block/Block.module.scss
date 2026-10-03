@@ -1,15 +1,167 @@
+@mixin init-grid-markup() {
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+}
+
+@mixin clear-child-area() {
+  & > * {
+    grid-area: auto !important;
+  }
+}
+
+
 :global {
   .block {
-    display: flex;
-
-    // template
-    &--x { flex-flow: row nowrap; }
-    &--y { flex-flow: column nowrap; }
-    &--xy { flex-flow: row wrap; }
-    &--cards { flex-flow: row wrap; align-content: stretch; }
+    // flex templates
+    &--flex { display: flex; }
+    &--x { display: flex; flex-flow: row nowrap; }
+    &--y { display: flex; flex-flow: column nowrap; }
+    &--xy { display: flex; flex-flow: row wrap; }
+    &--cards { display: flex; flex-flow: row wrap; align-content: stretch; }
 
     &--cards > * {
       flex-grow: 1;
+    }
+
+    // grid templates
+    &--grid {
+      display: grid;
+    }
+
+    &--board {
+      display: grid;
+      grid-auto-columns: 1fr;
+      grid-auto-rows: 1fr;
+
+      @include clear-child-area;
+    }
+
+    // TODO: add board-dense: x, y
+
+    &--row {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-flow: column; /* Set the auto-placement algorithm to column */
+      grid-auto-columns: 1fr;
+
+      @include clear-child-area;
+    }
+
+    &--column {
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-auto-flow: row; /* Set the auto-placement algorithm to row */
+      grid-auto-rows: 1fr;
+
+      @include clear-child-area;
+    }
+
+    &--lcr {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+
+      @include clear-child-area;
+    }
+
+    &--lc {
+      display: grid;
+      grid-template-columns: auto 1fr;
+
+      @include clear-child-area;
+    }
+
+    &--cr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      @include clear-child-area;
+    }
+
+    &--tcb {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+
+      @include clear-child-area;
+    }
+
+    &--tc {
+      display: grid;
+      grid-template-rows: auto 1fr;
+
+      @include clear-child-area;
+    }
+
+    &--cb {
+      display: grid;
+      grid-template-rows: 1fr auto;
+
+      @include clear-child-area;
+    }
+
+    &--rows {
+      display: grid;
+
+      @include init-grid-markup;
+
+      grid-template-areas:
+        'top top top'
+        'left center right'
+        'bottom bottom bottom';
+    }
+
+    &--columns {
+      display: grid;
+
+      @include init-grid-markup;
+
+      grid-template-areas:
+        'left top right'
+        'left center right'
+        'left bottom right';
+    }
+
+    &--top {
+      display: grid;
+
+      @include init-grid-markup;
+
+      grid-template-areas:
+        'top top top'
+        'left center right'
+        'left bottom right';
+    }
+
+    &--bottom {
+      display: grid;
+
+      @include init-grid-markup;
+
+      grid-template-areas:
+        'left top right'
+        'left center right'
+        'bottom bottom bottom';
+    }
+
+    &--left {
+      display: grid;
+
+      @include init-grid-markup;
+
+      grid-template-areas:
+        'left top top'
+        'left center right'
+        'left bottom bottom';
+    }
+
+    &--right {
+      display: grid;
+
+      @include init-grid-markup;
+
+      grid-template-areas:
+        'top top right'
+        'left center right'
+        'bottom bottom right';
     }
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type StringValue = string | number
 
 export const toString = (value: StringValue) => String(value).trim()
@@ -37,10 +38,10 @@ export type RepeatText<
 
 /** RepeatText<'Text', ':', 3> => 'Text' | 'Text:Text' | 'Text:Text:Text' | 'Text:Text:Text:Text' */
 export type RepeatWithSep<
-  Text extends string,
+  Text extends string | number,
   Sep extends string,
-  Count extends number = 2,
-  Joined extends string = Text,
+  Count extends number,
+  Joined extends string | number = Text,
   Acc extends 0[] = [],
   Result extends string = `${Joined}${Sep}${Text}`,
 > = Acc['length'] extends Count

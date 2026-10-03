@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import { cn } from 'tools'
 import { useBreakpoint } from 'hooks'
 
-// ---| pages |---
 // ---| screens |---
 import { MarkupOptions, toCssGrid } from 'screens/views/MarkupBoard'
 // ---| components |---

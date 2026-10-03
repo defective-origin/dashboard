@@ -4,8 +4,6 @@ import MuiSwitchField from '@mui/material/Switch'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
 

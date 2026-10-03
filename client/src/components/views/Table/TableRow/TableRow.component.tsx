@@ -4,8 +4,6 @@ import MuiTableRow from '@mui/material/TableRow'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 
 // ---| self |---

@@ -4,8 +4,6 @@ import React from 'react'
 import { cn } from 'tools'
 import { AppLink } from 'router'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Media, { MediaProps } from 'components/views/Media'
 

@@ -1,7 +1,6 @@
 import { Canvas, Meta, Typeset } from '@storybook/blocks';
 import * as TextStories from '../../components/views/Text/Text.stories.tsx';
-import { SIZES } from '../theme.conf.ts';
-import { toVar } from '../theme.tools.ts';
+import { SIZES, toSize } from '../theme.tools.ts';
 
 <Meta title="Requirements/Typography" />
 
@@ -18,7 +17,7 @@ export const SampleText = 'Lorem ipsum dolor sit amet.';
 **Variable template:** `--text-{size}`
 
 <Typeset
-  fontSizes={SIZES.map(size => toVar('text', size))}
+  fontSizes={SIZES.map(size => toSize('text', size))}
   fontWeight='400'
   sampleText={SampleText}
   fontFamily='var(--font-main)'

@@ -10,7 +10,7 @@ export const toArray = (value: unknown | unknown[]) => {
   return Array.isArray(value) ? value : initArray(value)
 }
 
-export const toString = <T = any>(arr: T[], sep = ', ') => {
+export const toString = <T>(arr: T[], sep = ', ') => {
   return arr.join(sep)
 }
 

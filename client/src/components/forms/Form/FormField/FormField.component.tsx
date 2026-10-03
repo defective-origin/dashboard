@@ -6,8 +6,6 @@ import { FormControl, FormLabel } from '@mui/material'
 import { cn } from 'tools'
 import { useFunc, useThrottle } from 'hooks'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
 import Block from 'components/layouts/Block'
@@ -128,7 +126,7 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
       {label && (
         <FormLabel id={path} className={css.label}>
           <Text content={label} size='xxs' />
-          {help && <Help size='xs' {...helpProps} />}
+          {help && <Help size='xs' {...helpProps as HelpProps} />}
         </FormLabel>
       )}
 
@@ -145,7 +143,7 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
       />
 
       {!!errors?.length && (
-        <Block v='y'>
+        <Block>
           {errors.map(error => <Text content={error} color='error' size='xxs' />)}
         </Block>
       )}

@@ -8,11 +8,9 @@
 
 :global {
   .icon {
-    font-size: var(--icon-inline);
+    /* Perfectly matches adjacent text height */
+    font-size: 1.1em;
     color: currentcolor;
-
-    // width: var(--icon-inline);
-    // height: var(--icon-inline);
 
     &--outline { @include style-icon; }
     &--fill { @include style-icon(1); }

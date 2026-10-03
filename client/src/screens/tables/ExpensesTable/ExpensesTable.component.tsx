@@ -4,7 +4,6 @@ import React from 'react'
 import { cn } from 'tools'
 import { Expense, ExpenseType, useExpenses } from 'api'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Table, { TableProps } from 'components/views/Table'

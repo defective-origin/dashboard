@@ -33,7 +33,7 @@ export function SupportPage(props: SupportPageProps) {
       extra={<Button start='add' tooltip='new request' />}
       {...otherProps}
     >
-      <Page.Content p='sm'>
+      <Page.Content v='grid' p='sm'>
         <SupportTable />
 
         {children}

@@ -242,7 +242,7 @@ Props Orders. Should be sorted by length
 
 ## Components
 - Use `format` prop of `Text` component for data formatting
-- Use base structure components for layout: `Layout` `Block` `Scroll` `Overlay` `Repeat` `Item` `Portal`
+- Use base structure components for layout: `Block` `Scroll` `Overlay` `Repeat` `Item` `Portal`
 - Build composition components with attached components like: `Page` `Page.Header` `Page.Content` `Page.Footer` `Page.Section`
 - Create pair components for list of items: `Alert` -> `Alert.List`, `Text` -> `Text.List`
 
@@ -309,18 +309,25 @@ When you override ui framework variables
 ```scss
 :root {
   // --component-color: var(--framework-color);
+  --toastify-color-error: var(--color-error-6);
+  --toastify-text-color-error: var(--color-error);
+  --toastify-icon-color-error: var(--color-error);
 }
 ```
 
-When you write unified component without ui framework
+When you write unified component without ui framework and variables
 ```scss
 :global {
   .dark {
     // --component-color: color;
+    --toastify-color-dark: #121212;
+    --toastify-text-color-dark: #FFFFFF;
   }
 
   .light {
     // --component-color: color;
+    --toastify-color-light: #FFFFFF;
+    --toastify-text-color-light: #757575;
   }
 }
 ```

@@ -3,9 +3,8 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| screens |---
 // ---| components |---
-import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Block, { BlockProps } from 'components/layouts/Block'
 import Modal from 'components/popups/Modal'
 import Toast from 'components/popups/Toast'
 
@@ -15,7 +14,7 @@ import AppMenu from './AppMenu'
 import AppHeader from './AppHeader'
 import AppContent from './AppContent'
 
-export type AppProps = LayoutProps
+export type AppProps = BlockProps
 
 /**
  * Component description.
@@ -39,7 +38,7 @@ export function App(props: AppProps) {
   // TODO: useEffect(() => theme.set(account.user?.settings.theme.toLowerCase()), [account])
 
   return (
-    <Layout className={cn(css.App, className)} stretch v='left' {...otherProps}>
+    <Block className={cn(css.App, className)} stretch v='left' {...otherProps}>
       <AppMenu />
       <AppHeader />
       <AppContent />
@@ -51,7 +50,7 @@ export function App(props: AppProps) {
       <Toast.Container name='alerts' position='top-center' />
       <Toast.Container name='messages' position='bottom-right' />
       <Toast.Container name='guards' position='bottom-center' width={700} />
-    </Layout>
+    </Block>
   )
 }
 

@@ -5,8 +5,6 @@ import MuiTableContainer from '@mui/material/TableContainer'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -59,7 +57,7 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
   return (
     <Block className={cn(css.Table, className)} style={{ width, height, minHeight }} {...otherProps}>
       <Block className={css.TableHeader} v='x' justifies='space-between' aligns='center'>
-        <Text>{title}</Text>
+        <Text v='h4'>{title}</Text>
         <TablePagination visible={!!pagination} items={items} onChange={setItems} />
         <Actions g='xxs' size='sm' justifies='end'>{menu}</Actions>
       </Block>

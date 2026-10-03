@@ -5,8 +5,6 @@ import MuiTableSortLabel from '@mui/material/TableSortLabel'
 // ---| core |---
 import { cn, obj } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import Text from 'components/views/Text'
 
@@ -46,7 +44,7 @@ export function TableCell<T extends TableRecord>(props: TableCellProps<T>) {
   if (th) {
     return (
       <MuiTableCell id={id} className={_className} align={column.align} style={style} {...otherProps}>
-        {!column.sort && <Text v='caption' size='xxs' content={column.name} bold />}
+        {!column.sort && <Text v='span' format='uppercase' size='xxs' content={column.name} bold />}
 
         {column.sort && (
           <MuiTableSortLabel
@@ -54,7 +52,7 @@ export function TableCell<T extends TableRecord>(props: TableCellProps<T>) {
             direction={column.order}
             onClick={() => onSort?.(column)}
           >
-            <Text v='caption' size='xxs' content={column.name} bold />
+            <Text v='span' format='uppercase' size='xxs' content={column.name} bold />
           </MuiTableSortLabel>
         )}
       </MuiTableCell>

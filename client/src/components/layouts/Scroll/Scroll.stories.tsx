@@ -1,4 +1,4 @@
-import { Meta, StoryObj, SB_CSS, field, params, theme } from 'storybook'
+import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Block from 'components/layouts/Block'
 import Scroll, { ScrollProps } from './Scroll.component'
 
@@ -24,7 +24,7 @@ export default meta
 type Story = StoryObj<typeof Scroll>
 
 const render = (props: ScrollProps) => (
-  <Block v='x' width={300} height={300} border={SB_CSS.border}>
+  <Block v='x' width={300} height={300} border>
     <Scroll children='Scroll overlay content' {...props}/>
     <Block minWidth={1000} minHeight={1000} />
   </Block>

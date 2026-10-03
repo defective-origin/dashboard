@@ -1,18 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as num from '../Number'
+
+
+export type Obj = { [key: string]: any }
+export type Dictionary<T> = Record<string, T>
 
 const OBJECT_KEY_SEPARATOR = '.'
 
 /** Performance optimization */
 const OBJECT_KEY_MAP: Record<string, string[]> = {}
-
-export type Obj = { [key: string]: any }
-
-export const clone = <T extends object>(obj?: T): T => {
-  return JSON.parse(JSON.stringify(obj))
-}
-
 export const toKeys = (path?: string) => {
-  return path ? OBJECT_KEY_MAP[path as string] ?? path?.split(OBJECT_KEY_SEPARATOR) : []
+  if (!path) {
+    return []
+  } else if (!(path in OBJECT_KEY_MAP)) {
+    OBJECT_KEY_MAP[path] = path?.split(OBJECT_KEY_SEPARATOR)
+  }
+
+  return OBJECT_KEY_MAP[path]
 }
 
 export const toPath = (keys?: string[]) => {
@@ -25,6 +29,10 @@ export const toObject = <T extends object>(target: T, ...args: T[]) => {
 
 export const isObject = (value: any): value is object => {
   return (typeof value === 'object' || typeof value === 'function') && (value !== null)
+}
+
+export const clone = <T extends object>(obj?: T): T => {
+  return JSON.parse(JSON.stringify(obj))
 }
 
 export const has = (obj: Obj, path?: string): boolean => {

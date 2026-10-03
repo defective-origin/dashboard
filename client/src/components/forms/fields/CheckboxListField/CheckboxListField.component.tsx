@@ -3,10 +3,8 @@ import React, { useCallback } from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Layout from 'components/layouts/Layout'
+import Block from 'components/layouts/Block'
 import { FieldProps, formField } from 'components/forms/Form'
 import { CheckboxField, CheckboxFieldProps, CheckboxValue } from '../CheckboxField'
 
@@ -14,7 +12,7 @@ import { CheckboxField, CheckboxFieldProps, CheckboxValue } from '../CheckboxFie
 import css from './CheckboxListField.module.scss'
 
 export type CheckboxListFieldProps = FieldProps<CheckboxValue[]> & {
-  items?: CheckboxFieldProps[]
+  items?: CheckboxFieldProps[] // TODO: replace on common items ReactNode
   columns?: number
 }
 
@@ -35,7 +33,7 @@ export function CheckboxListField(props: CheckboxListFieldProps) {
   }, [value, onChange])
 
   return (
-    <Layout id={id} className={cn(css.CheckboxListField, className)} columns={columns}>
+    <Block id={id} className={cn(css.CheckboxListField, className)} v='grid' columns={columns}>
       {items.map((item, idx) =>
         <CheckboxField
           key={idx}
@@ -47,7 +45,7 @@ export function CheckboxListField(props: CheckboxListFieldProps) {
           {...otherProps}
         />,
       )}
-    </Layout>
+    </Block>
   )
 }
 

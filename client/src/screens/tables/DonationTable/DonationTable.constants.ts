@@ -1,6 +1,6 @@
 import { Donation } from 'api'
 import { TableColumn } from 'components/views/Table'
-import column from '../columns'
+import column from 'screens/tables/columns'
 
 export const DONATION_COLUMNS: TableColumn<Donation>[] = [
   column.clipboard({

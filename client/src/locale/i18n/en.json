@@ -8,6 +8,7 @@
     "CLEAR": "Clear",
     "CLOSE": "Close",
     "LOGIN": "Login",
+    "CANCEL": "Cancel",
     "LOGOUT": "Logout",
     "REMOVE": "Remove",
     "PREVIEW": "Preview",
@@ -83,7 +84,6 @@
     "USAGE": "Usage: {{count}}",
     "DESCRIPTION": "Description",
     "LAST_UPDATE" : "Last update",
-    "PAGE_NAME": "{{title}} Page",
     "ROWS_PER_PAGE": "Rows per page",
     "MARKUP": {
       "GAP": "Gap",

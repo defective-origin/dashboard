@@ -3,7 +3,7 @@ import TagsField from './TagsField.component'
 
 const meta: Meta<typeof TagsField> = {
   component: TagsField,
-  title: 'Components/TagsField',
+  title: 'Components/Forms/TagsField',
   tags: ['autodocs'],
   argTypes: {
     className: field.string(),

@@ -4,7 +4,6 @@ import React, { useImperativeHandle, useMemo, useRef, useState } from 'react'
 import { arr, cn, matrix } from 'tools'
 import { useEvent, useFunc } from 'hooks'
 
-// ---| pages |---
 // ---| screens |---
 // ---| components |---
 import Item from 'components/layouts/Item'
@@ -270,7 +269,7 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
       )}
 
       {/* selected area */}
-      {select && <Item ref={selectionRef} display='none' />}
+      {select && <Item ref={selectionRef} />}
 
       {/* widgets */}
       {widget && items?.map(item => {

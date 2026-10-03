@@ -3,8 +3,6 @@ import React, { useCallback, useState } from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
 import { TextField, TextFieldProps } from 'components/forms/fields/TextField'
 import { SelectField } from 'components/forms/fields/SelectField'

@@ -117,7 +117,7 @@ export function DashboardPage(props: DashboardPageProps) {
           ]}
         >
           {/* TODO: create GapField */}
-          <SelectField label={t('LABEL.HEIGHT')} items={HEIGHT_SELECT_ITEMS} value={history.value?.height} onChange={manager.current?.resize} />
+          <SelectField label={t('LABEL.HEIGHT')} items={HEIGHT_SELECT_ITEMS} value={history.value?.height} onChange={val => manager.current?.resize(val)} />
           <CssSizeField label={t('LABEL.WIDTH')} value={history.value?.width.toString()} formats={['px']} disabled />
           <CssSizeField label={t('LABEL.GAP')} formats={['rem']} />
         </Dropdown>,

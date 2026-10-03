@@ -24,7 +24,7 @@ export function AccountDashboardsPage(props: AccountDashboardsPageProps) {
 
   return (
     <Page className={cn(css.AccountDashboardsPage, className)} name='LABEL.DASHBOARDS' {...otherProps}>
-      <Page.Content>
+      <Page.Content v='grid'>
         <DashboardTable />
 
         {children}

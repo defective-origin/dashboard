@@ -3,15 +3,14 @@ import React from 'react'
 // ---| core |---
 import { cn } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './Header.module.scss'
 
-export type HeaderProps = LayoutProps
+
+export type HeaderProps = BlockProps
 
 /**
  * Component description.
@@ -21,7 +20,19 @@ export type HeaderProps = LayoutProps
 export function Header(props: HeaderProps) {
   const { children, className, ...otherProps } = props
 
-  return <Layout className={cn(css.Header, className)} area='top' v='cr' aligns='center' {...otherProps}>{children}</Layout>
+  return (
+    <Block
+      as='header'
+      className={cn(css.Header, className)}
+      area='top'
+      aligns='center'
+      v='x'
+      justifies='space-between'
+      {...otherProps}
+    >
+      {children}
+    </Block>
+  )
 }
 
 Header.displayName = 'Header'

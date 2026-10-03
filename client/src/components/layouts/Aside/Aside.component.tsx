@@ -3,15 +3,13 @@ import React from 'react'
 // ---| core |---
 import { cn, react } from 'tools'
 
-// ---| pages |---
-// ---| screens |---
 // ---| components |---
-import Layout, { LayoutProps } from 'components/layouts/Layout'
+import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './Aside.module.scss'
 
-export type AsideProps = LayoutProps
+export type AsideProps = BlockProps
 
 /**
  * Component description.
@@ -21,7 +19,7 @@ export type AsideProps = LayoutProps
 export function Aside(props: AsideProps) {
   const { area = 'left', children, className, ...otherProps } = props
 
-  return <Layout className={cn(css.Aside, className)} area={area} v='y' {...otherProps}>{children}</Layout>
+  return <Block as='aside' className={cn(css.Aside, className)} area={area} {...otherProps}>{children}</Block>
 }
 
 Aside.displayName = 'Aside'
