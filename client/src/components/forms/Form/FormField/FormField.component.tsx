@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useMemo, useState } from 'react'
-import { FormControl, FormLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -29,7 +28,7 @@ export type FieldProps<V = any> = {
 
 export type FormFieldProps<V = any, F extends object = object> = {
   as: React.ComponentType<FieldProps<V>>
-  path: string
+  path?: string
   init?: V
   label?: React.ReactNode
   rules?: FormRule<F, string>[]
@@ -74,13 +73,16 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
   const form = useForm<F>()
   const [value, setValue] = useState<V | undefined>()
   const [errors, setErrors] = useState<FormFieldErrors>([])
-  const name = useMemo(() => path?.split('.')?.map(key => `[${key}]`).join(''), [path])
+  const name = useMemo(() => path?.split('.').map(key => `[${key}]`).join(''), [path]) // TODO: fix name
 
   const check = useFunc((val = value) => {
     const errors = rules?.map(rule => rule(val, form?.state)).filter(Boolean) ?? []
 
+    if (path) {
+      form?.setErrors(path, errors)
+    }
+
     setErrors(errors)
-    form?.setErrors(path, errors)
   })
 
   const set = useThrottle((value: V) => {
@@ -88,55 +90,62 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
       check(value)
     }
 
-    setValue(value)
-    form?.setValue(path, value)
+    if (path) {
+      form?.setValue(path, value)
+    }
 
+    setValue(value)
     onChange?.(value, form?.state)
   }, throttle ? 300 : 0)
 
   const reset = useFunc(() => {
-    const initial = form ? form?.get(path).init : init
+    const initial = form && path ? form?.get(path).init : init
+
+    if (path) {
+      form?.setErrors(path, [])
+      form?.setValue(path, initial)
+    }
 
     setErrors([])
     setValue(initial)
-    form?.setErrors(path, [])
-    form?.setValue(path, initial)
   })
 
   const handleBlur = useFunc(() => { if (checkOnBlur) check() })
 
   // connect field manager to form
   useEffect(() => {
-    const initial = toInit ? toInit(form ? form?.get(path).init : init, props) : init
-    const fieldManager = { path, init: initial, set, reset, check }
+    const initial = toInit ? toInit(form && path ? form?.get(path).init : init, props) : init
 
     setValue(initial)
 
-    form?.connect(fieldManager)
+    if (path) {
+      form?.connect({ path, init: initial, set, reset, check })
 
-    return () => form?.disconnect(fieldManager)
+      return () => form?.disconnect(path)
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [init, path, form, check, reset, set, toInit])
 
-  const fieldProps = toProps?.(form ? form?.get(path).value : value, props)
+  const fieldProps = toProps?.(form && path ? form?.get(path).value : value, props)
   const helpProps = typeof help === 'object' ? help : { content: help }
 
   return (
-    <FormControl className={cn(css.FormField, className)} required={required} disabled={disabled}>
+    <Block className={cn(css.FormField, className)}>
       {label && (
-        <FormLabel id={path} className={css.label}>
-          <Text content={label} size='xxs' />
+        <label htmlFor={path} className={css.label}>
+          <Text content={label} size='xs' />
+          {required && <Text size='xs' color='error' content='*' />}
           {help && <Help size='xs' {...helpProps as HelpProps} />}
-        </FormLabel>
+        </label>
       )}
 
       <Field
         id={path}
-        className={cn(fit && css.fit)}
         name={name}
         value={value}
         onBlur={handleBlur}
         onChange={set}
+        required={required}
         disabled={disabled}
         {...otherProps}
         {...fieldProps}
@@ -144,10 +153,10 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
 
       {!!errors?.length && (
         <Block>
-          {errors.map(error => <Text content={error} color='error' size='xxs' />)}
+          {errors.map(error => <Text key={error} content={error} color='error' size='xxs' />)}
         </Block>
       )}
-    </FormControl>
+    </Block>
   )
 }
 

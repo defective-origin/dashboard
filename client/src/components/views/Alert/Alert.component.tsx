@@ -39,7 +39,7 @@ export type AlertProps = {
  * @example
  * <Alert />
  */
-export function Alert(props: AlertProps) { // TODO: add icon and remove mui. icon, title, message, actions
+export function Alert(props: AlertProps) {
   const { title, v = 'info', inline, clear, content, actions, children = content, className, ...otherProps } = props
 
   return (

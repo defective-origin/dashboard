@@ -1,50 +1,56 @@
 import React, { useCallback } from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, react } from 'tools'
 
 // ---| components |---
 import Block from 'components/layouts/Block'
 import { FieldProps, formField } from 'components/forms/Form'
-import { CheckboxField, CheckboxFieldProps, CheckboxValue } from '../CheckboxField'
+import CheckboxFormField, { CheckboxField, CheckboxFieldProps, CheckboxValue } from '../CheckboxField'
 
 // ---| self |---
 import css from './CheckboxListField.module.scss'
 
+
 export type CheckboxListFieldProps = FieldProps<CheckboxValue[]> & {
-  items?: CheckboxFieldProps[] // TODO: replace on common items ReactNode
   columns?: number
+  children?: React.ReactNode
 }
 
 /**
  * Component description.
  * @example
- * <CheckboxListField />
+ * <CheckboxListField path='radio-group' label='Radio Group' init={['b']} columns={2}>
+ *   <CheckboxField label='a' value='a' />
+ *   <CheckboxField label='b' value='b' />
+ * </CheckboxListField>
  */
 export function CheckboxListField(props: CheckboxListFieldProps) {
-  const { columns, value, items = [], id, name, onChange, className, ...otherProps } = props
+  const { columns, value, id, name, onChange, className, children, ...otherProps } = props
 
   const handleChange = useCallback((v: CheckboxValue, event: React.ChangeEvent<HTMLInputElement>) => {
     if (v) {
       onChange?.([...value ?? [], v])
     } else {
-      onChange?.(value?.filter(i => i !== event.target.value) ?? [])
+      onChange?.(value?.filter(i => i !== v) ?? [])
     }
   }, [value, onChange])
 
   return (
     <Block id={id} className={cn(css.CheckboxListField, className)} v='grid' columns={columns}>
-      {items.map((item, idx) =>
-        <CheckboxField
-          key={idx}
-          id={`${id}.${idx}`}
-          name={`${name}[]`}
-          {...item}
-          checked={!!value?.includes(item.value)}
-          onChange={handleChange}
-          {...otherProps}
-        />,
-      )}
+      {React.Children.map(children, (child, idx) => {
+        if (!React.isValidElement<CheckboxFieldProps>(child) || !react.isExemplar(child, [CheckboxField, CheckboxFormField])) {
+          return child
+        }
+
+        return React.cloneElement(child, {
+          ...otherProps,
+          id: `${id}.${idx}`,
+          name: `${name}[]`,
+          checked: !!value?.includes(child.props.value),
+          onChange: handleChange,
+        })
+      })}
     </Block>
   )
 }

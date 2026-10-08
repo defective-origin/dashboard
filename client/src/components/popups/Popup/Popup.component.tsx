@@ -3,6 +3,7 @@ import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Toolt
 
 // ---| core |---
 import { cn, mix } from 'tools'
+import { TogglerReturnOptions, useToggler } from 'hooks'
 
 // ---| components |---
 import Text from 'components/views/Text'
@@ -14,7 +15,6 @@ import Button from 'components/actions/Button'
 
 // ---| self |---
 import css from './Popup.module.scss'
-import { TogglerReturnOptions, useToggler } from 'hooks'
 
 
 export type PopupVariant
@@ -49,7 +49,7 @@ export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
  *   title={t('LABEL.SCREENS')?.toUpperCase()}
  *   footer={o => [
  *     <Button content={t('ACTION.SAVE')} start='save' color='success' onClick={() => onSave?.(sort(Object.values(enabled)))} />,
- *     <Button content={t('ACTION.CLOSE')} start='close' onClick={o.off} />,
+ *     <Button content={t('ACTION.CLOSE')} start='close' color='primary' onClick={o.off} />,
  *   ]}
  *   trigger={options => (
  *      <Button
@@ -78,26 +78,24 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
 
   return (
     <MuiTooltip
-      className={cn(css.Popup, className)}
       disableHoverListener={disableHoverListener}
       title={(
         <Block
-          g='xxs'
-          p='xs'
           data-role='dialog'
           maxHeight={maxHeight}
           maxWidth={maxWidth}
+          className={cn(css.Popup, className)}
           onMouseEnter={() => { isMouseInsideRef.current = true }}
           onMouseLeave={() => { isMouseInsideRef.current = false }}
         >
           {title && (
-            <Header>
+            <Header className={css.header} p='xs'>
               <Text v='h5' content={title} />
               {disableHoverListener && <Button start='close' size='xxs' onClick={close} />}
             </Header>
           )}
 
-          <Content>
+          <Content p='xs'>
             {mix.fromValOrFunc(content ?? children, toggler)}
           </Content>
 

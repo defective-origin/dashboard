@@ -67,8 +67,8 @@ export const Icon = withSkeleton((props: IconProps) => {
           ['rtl']: v && RTL_ICONS.has(v),
         }, jss({
           ...style,
-          fontSize: size && toSize('icon', size),
-          color: color && toColor(color),
+          fontSize: toSize('icon', size),
+          color: toColor(color),
         }), className,
       )}
       {...otherProps}

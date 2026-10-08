@@ -1,5 +1,5 @@
 import { Meta, StoryObj, params } from 'storybook'
-import SelectField from './SelectField.component'
+import SelectField, { SelectFieldItem } from './SelectField.component'
 
 const meta: Meta<typeof SelectField> = {
   title: 'Components/Forms/SelectField',
@@ -19,10 +19,10 @@ export const Demo: Story = {
     label: 'Label',
     init: 'value0',
     help: 'help text',
-    items: [
-      { value: 'value0', children: 'FIRST' },
-      { value: 'value1', children: 'SECOND' },
-      { value: 'value2', children: 'THIRD' },
+    children: [
+      <SelectFieldItem value='value0' children='FIRST' />,
+      <SelectFieldItem value='value1' children='SECOND' />,
+      <SelectFieldItem value='value2' children='THIRD' />,
     ],
   },
 }

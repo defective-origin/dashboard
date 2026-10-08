@@ -58,11 +58,6 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
   // TODO: build table options by options attached with component
   // TODO: update snapshot on save?
 
-  const ACCESS_SELECT_ITEMS = [
-    { value: true, children: t('LABEL.PUBLIC') },
-    { value: false, children: t('LABEL.PRIVATE') },
-  ]
-
   return (
     <Page
       className={cn(css.FeaturePage, className)}
@@ -133,14 +128,17 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
                 <Block v='x' g='xxs'>
                   <Label icon='star' content={options?.rate} format='number' tooltip={t('LABEL.RATE')} />
                   <Label icon='payments' content={options?.price} format='currency' tooltip={t('LABEL.PRICE')} />
-                  <Label icon='visibility' content={ACCESS_SELECT_ITEMS.find(i => i.value === options?.public)?.children} tooltip={t('LABEL.ACCESS')} />
+                  <Label icon='visibility' content={options?.public ? t('LABEL.PUBLIC') : t('LABEL.PRIVATE')} tooltip={t('LABEL.ACCESS')} />
                 </Block>
                 <Label icon='schedule' content={options?.updatedAt} format='day-of-month-year' tooltip={t('LABEL.LAST_UPDATE')} />
               </Block>
             )}
             {edit.isOn && (
               <Block columns={2} v='grid' g='xxs'>
-                <Field.Select path='public' label={t('LABEL.PUBLIC')} items={ACCESS_SELECT_ITEMS} />
+                <Field.Select path='public' label={t('LABEL.PUBLIC')}>
+                  <Field.SelectItem value={true} children={t('LABEL.PUBLIC')} />
+                  <Field.SelectItem value={false} children={t('LABEL.PRIVATE')} />
+                </Field.Select>
                 <Field.Number path='price' label={t('LABEL.PRICE')} />
               </Block>
             )}

@@ -25,6 +25,7 @@ export function Help(props: HelpProps) {
       className={cn(css.Help, className)}
       popupSide='top'
       start='help'
+      v='wrapper'
       arrow
       {...otherProps}
     >

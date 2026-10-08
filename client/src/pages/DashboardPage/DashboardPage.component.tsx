@@ -80,11 +80,6 @@ export function DashboardPage(props: DashboardPageProps) {
   // TODO: add section space_dashboard, window, team_dashboard, auto_awesome_mosaic
 
 
-  const HEIGHT_SELECT_ITEMS = [
-    { value: 'auto', children: t('ACTION.FIT_CONTENT') },
-    { value: '100%', children: t('ACTION.FIT_SCREEN') },
-  ]
-
   return (
     <FeaturePage
       className={cn(css.DashboardPage, className)}
@@ -113,11 +108,14 @@ export function DashboardPage(props: DashboardPageProps) {
           tooltip={t('LABEL.GRID')}
           actions={o => [
             <Button content={t('ACTION.SAVE')} start='save' color='success' />,
-            <Button content={t('ACTION.CLOSE')} start='close' onClick={o.off} />,
+            <Button content={t('ACTION.CLOSE')} start='close' color='primary' onClick={o.off} />,
           ]}
         >
           {/* TODO: create GapField */}
-          <SelectField label={t('LABEL.HEIGHT')} items={HEIGHT_SELECT_ITEMS} value={history.value?.height} onChange={val => manager.current?.resize(val)} />
+          <SelectField label={t('LABEL.HEIGHT')} value={history.value?.height} onChange={val => manager.current?.resize(val)}>
+            <SelectField.Item value='auto' children={t('ACTION.FIT_CONTENT')} />
+            <SelectField.Item value='100%' children={t('ACTION.FIT_SCREEN')} />
+          </SelectField>
           <CssSizeField label={t('LABEL.WIDTH')} value={history.value?.width.toString()} formats={['px']} disabled />
           <CssSizeField label={t('LABEL.GAP')} formats={['rem']} />
         </Dropdown>,

@@ -2,13 +2,13 @@
   @include init-size-variables(icon, 0.75rem, 1rem, 1.25rem, 1.5rem, 2rem, 2.5rem, 3rem);
   @include init-size-variables(
     text,
-    clamp(0.5rem, 0.458rem + 0.208vw, 0.625rem),    /* 8px -> 10px (Meta/labels) */
-    clamp(0.75rem, 0.708rem + 0.208vw, 0.875rem),   /* 12px -> 14px (Sidebar/code/secondary UI) */
-    clamp(0.875rem, 0.917rem + 0.103vw, 1rem),      /* 14px -> 16px (Base body) */
-    clamp(1rem, 1.021rem + 0.208vw, 1.25rem),       /* 16px -> 20px (Subheadings/lead text) */
-    clamp(1.25rem, 1.167rem + 0.417vw, 1.5rem),     /* 20px -> 24px (h3) */
-    clamp(1.625rem, 1.458rem + 0.833vw, 2.125rem),  /* 26px -> 32px (h2) */
-    clamp(2.125rem, 2.083rem + 1.302vw, 2.25rem),   /* 32px -> 36px (h1) */
+    clamp(0.5rem, 0.4643rem + 0.1786vw, 0.625rem),    /* 8px -> 10px (Meta/labels) */
+    clamp(0.625rem, 0.5893rem + 0.1786vw, 0.75rem),   /* 10px -> 12px (Sidebar/code/secondary UI) */
+    clamp(0.75rem, 0.7143rem + 0.1786vw, 0.875rem),   /* 12px -> 14px (Base body) */
+    clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem),      /* 14px -> 16px (Subheadings/lead text) */
+    clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem),       /* 16px -> 20px (h3) */
+    clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem),     /* 20px -> 24px (h2) */
+    clamp(1.5rem, 1.3571rem + 0.7143vw, 2rem),        /* 24px -> 32px (h1) */
   );
   @include init-size-variables(
     space,
@@ -42,7 +42,7 @@
   );
 
   // border and dividers
-  --divider-color: color-mix(in srgb, var(--color-secondary) 8%, transparent);
+  --divider-color: var(--color-secondary-5);
   --border-width: 1px;
   --border: var(--border-width) solid var(--divider-color);
   --border-dashed: var(--border-width) dashed var(--divider-color);
@@ -55,7 +55,7 @@
 }
 
 // use light, dark class on element to prevent changing theme on it
-.light { @include init-color-variables(#111111, #6C6F80, #6dbf3c, #1e61fd, #FFAE00, #ff3100, #F5F6FA, #F8F8F8); }
+.light { @include init-color-variables(#111111, #6C6F80, #50a71c, #1e61fd, #F7AF12, #ff3100, #F5F6FA, #F8F8F8); }
 .dark { @include init-color-variables(#F8FAFC, #94A3B8, #56b843, #60A5FA, #FBBF24, #F87171, #333333, #2c2b2b); }
 
 html {

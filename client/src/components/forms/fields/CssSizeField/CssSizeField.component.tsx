@@ -57,13 +57,9 @@ export function CssSizeField(props: CssSizeFieldProps) {
         input: {
           ...slotProps?.input,
           endAdornment: (
-            <SelectField
-              className={css.Filters}
-              value={format}
-              items={formats.map(format => ({ value: format, children: format }))}
-              onChange={setFormat}
-              disabled={formats.length < 2}
-            />
+            <SelectField className={css.Filters} value={format} onChange={setFormat}>
+              {formats.map(format => <SelectField.Item value={format} children={format} />)}
+            </SelectField>
           ),
         },
       }}

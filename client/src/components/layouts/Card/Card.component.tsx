@@ -31,7 +31,7 @@ export const Card = (props: CardProps) => { // TODO: add stories
 
   // TODO: divide by [role='header'], [role='footer']
   return (
-    <Block as='article' className={cn(css.Card, divided && css.divided, className)} g='xs' {...otherProps}>
+    <Block as='article' className={cn(css.Card, divided && css.divided, className)} {...otherProps}>
       {children}
     </Block>
   )

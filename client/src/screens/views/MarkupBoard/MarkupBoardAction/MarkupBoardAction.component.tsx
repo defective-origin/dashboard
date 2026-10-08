@@ -7,10 +7,9 @@ import { TogglerReturnOptions } from 'hooks'
 
 // ---| screens |---
 // ---| components |---
-import Popup from 'components/popups/Popup'
-import { IconVariant } from 'components/views/Icon'
 import Button from 'components/actions/Button'
-import Actions from 'components/layouts/Actions'
+import Dropdown from 'components/actions/Dropdown'
+import { IconVariant } from 'components/views/Icon'
 import { CssSizeField } from 'components/forms/fields/CssSizeField'
 
 // ---| self |---
@@ -52,39 +51,28 @@ export function MarkupBoardAction(props: MarkupBoardActionProps) {
   }
 
   return (
-    <Popup
+    <Dropdown
       arrow
-      title={name}
-      footer={o =>
-        <Actions>
-          {actions?.(value, o)}
-          <Button content={t('ACTION.CLOSE')} start='close' onClick={() => {
-            o.off()
-            reset()
-          }} />
-        </Actions>
+      title={name as string}
+      className={cn(css.MarkupBoardAction, className)}
+      size='xxs'
+      start={icon}
+      tooltip={name}
+      v='wrapper'
+      style={{ gridArea: area }}
+      actions={o =>[
+        actions?.(value, o),
+        <Button content={t('ACTION.CLOSE')} start='close' color='primary' onClick={() => {
+          o.off()
+          reset()
+        }} />]
       }
-      trigger={o => (
-        <Button
-          className={cn(css.MarkupBoardAction, className)}
-          size='xxs'
-          start={icon}
-          tooltip={name}
-          active={o.isOn}
-          onClick={o.toggle}
-          style={{ gridArea: area }}
-          onMouseEnter={highlight}
-          onMouseLeave={() => {
-            if (o.isOff) {
-              reset()
-            }
-          }}
-          {...otherProps}
-        />
-      )}
+      onMouseEnter={highlight}
+      onMouseLeave={reset}
       onOpen={highlight}
       onClose={reset}
       disableHoverListener
+      {...otherProps}
     >
       <CssSizeField
         label={t('LABEL.SIZE')}
@@ -96,7 +84,7 @@ export function MarkupBoardAction(props: MarkupBoardActionProps) {
         }}
       />
       {children}
-    </Popup>
+    </Dropdown>
   )
 }
 

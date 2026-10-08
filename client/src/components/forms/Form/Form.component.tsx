@@ -67,13 +67,6 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *   }
  * }
  *
- * const SELECT_ITEMS = [
- *   { value: 'value0', children: 'FIRST' },
- *   { value: 'value1', children: 'SECOND' },
- *   { value: 'value2', children: 'THIRD' },
- * ]
- *
- * const TOGGLING_ITEMS = [{ label: 'a', value: 'a' }, { label: 'b', value: 'b' }]
  *
  * <Form init={INIT} onSubmit={formLog} onChange={formLog} onReset={log} p='xxl' checkOnSubmit>
  *   <Block g='xs'>
@@ -94,8 +87,12 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *       <Field.Slider path='slider' label='Slider' init={75} onChange={log} />
  *       <Field.Number path='number' label='Number' init={75} help='Help text' onChange={log} />
  *
- *       <Field.Select path='select' label='Select' init='value0' help='Help text' onChange={log} items={SELECT_ITEMS} />
  *       <Field.Text path='text' label='Text' init='value' help='Help text' onChange={log} rules={TEXT_RULES} checkOnChange />
+ *       <Field.Select path='select' label='Select' init='value0' help='Help text' onChange={log}>
+ *         <Field.SelectItem value='value0' children='FIRST' />
+ *         <Field.SelectItem value='value1' children='SECOND' />
+ *         <Field.SelectItem value='value2' children='THIRD' />
+ *       </Field.Select>
  *     </Block>
  *
  *     <Block g='xs' v='grid' columns={6}>
@@ -110,16 +107,14 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *     </Block>
  *
  *     <Block g='xs' v='grid' columns={2}>
- *       <Field.RadioGroup path='radio-group' label='Radio Group'
- *         init='b'
- *         items={TOGGLING_ITEMS}
- *         columns={TOGGLING_ITEMS.length}
- *       />
- *       <Field.CheckboxList path='checkbox-list' label='Checkbox List'
- *         init={['b']}
- *         items={TOGGLING_ITEMS}
- *         columns={TOGGLING_ITEMS.length}
- *       />
+ *       <Field.RadioGroup path='radio-group' label='Radio Group' init='b' columns={2}>
+ *         <Field.Radio label='a' init='a' />
+ *         <Field.Radio label='b' init='b' />
+ *       </Field.RadioGroup>
+ *       <Field.CheckboxList path='checkbox-list' label='Checkbox List' init={['b']} columns={2}>
+ *         <Field.Checkbox label='a' init='a' />
+ *         <Field.Checkbox label='b' init='b' />
+ *       </Field.CheckboxList>
  *     </Block>
  *
  *     <Block g='xs'>
@@ -134,7 +129,11 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *         <Field.Switch path='group.switch' label='Switch' init={true} onChange={log} />
  *         <Field.Checkbox path='group.checkbox' label='Checkbox' init='checkbox' checked onChange={log} />
  *         <Field.Slider path='group.slider' label='Slider' init={50} onChange={log} />
- *         <Field.Select path='group.select' label='Select' init='value1' help='Help text' onChange={log} items={SELECT_ITEMS} />
+ *         <Field.Select path='group.select' label='Select' init='value1' help='Help text' onChange={log}>
+ *           <Field.SelectItem value='value0' children='FIRST' />
+ *           <Field.SelectItem value='value1' children='SECOND' />
+ *           <Field.SelectItem value='value2' children='THIRD' />
+ *         </Field.Select>
  *         <Field.Text path='group.text' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
  *         <Field.Number path='group.number' label='Number' init={50} help='Help text' onChange={log} />
  *       </Block>
@@ -152,7 +151,11 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *         <Field.Switch path='list.1' label='Switch' init={true} onChange={log} />
  *         <Field.Checkbox path='list.2' label='Checkbox' init='checkbox' checked onChange={log} />
  *         <Field.Slider path='list.3' label='Slider' init={25} onChange={log} />
- *         <Field.Select path='list.4' label='Select' init='value2' help='Help text' items={SELECT_ITEMS} onChange={log} />
+ *         <Field.Select path='list.4' label='Select' init='value2' help='Help text'>
+ *           <Field.SelectItem value='value0' children='FIRST' />
+ *           <Field.SelectItem value='value1' children='SECOND' />
+ *           <Field.SelectItem value='value2' children='THIRD' />
+ *         </Field.Select>
  *         <Field.Text path='list.5' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
  *         <Field.Number path='list.6' label='Number' init={25} help='Help text' onChange={log} />
  *       </Block>
@@ -255,12 +258,12 @@ export function Form<O extends object>(props: FormProps<O>) {
     field.reset()
   })
 
-  const disconnect = useFunc<FormManager<O>['disconnect']>(field => {
+  const disconnect = useFunc<FormManager<O>['disconnect']>(path => {
     // eslint-disable-next-line react-hooks/immutability
-    delete fields[field.path]
+    delete fields[path]
 
-    obj.del(initial, field.path, true)
-    obj.del(errors, field.path, true)
+    obj.del(initial, path, true)
+    obj.del(errors, path, true)
   })
 
   // reinitialize form

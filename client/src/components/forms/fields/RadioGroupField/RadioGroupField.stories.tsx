@@ -1,13 +1,14 @@
 import { Meta, StoryObj, field, params } from 'storybook'
 import RadioGroupField from './RadioGroupField.component'
+import { RadioField } from '../RadioField'
 
 const meta: Meta<typeof RadioGroupField> = {
   component: RadioGroupField,
   title: 'Components/Forms/RadioGroupField',
   tags: ['autodocs'],
   argTypes: {
-    items: field.list('RadioFieldProps'),
     columns: field.number(),
+    children: field.reactNode(),
   },
 }
 
@@ -21,11 +22,9 @@ export const Demo: Story = {
     label: 'Radio Group',
     columns: 2,
     init: 'b',
-    items: [
-      { label: 'a', value: 'a' },
-      { label: 'b', value: 'b' },
-      { label: 'c', value: 'c' },
-      { label: 'd', value: 'd' },
+    children: [
+      <RadioField label='a' value='a' />,
+      <RadioField label='b' value='b' />,
     ],
   },
 }

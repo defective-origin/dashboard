@@ -57,14 +57,14 @@ const render = (props: BlockProps) => {
             key={idx}
             minWidth={['xy', 'cards'].includes(v) ? 100 : 20}
             minHeight={20}
-            bg='secondary-5'
+            bg='primary-4'
           />,
         )}
 
         {([...CARD_VARIANTS, ...LAYOUT_VARIANTS].includes(v)) && ['left', 'right', 'top', 'bottom', 'center'].map(v =>
           <Item
             key={v}
-            bg='secondary-5'
+            bg='primary-4'
             area={props.v && LAYOUT_VARIANTS.includes(props.v) ? v : undefined}
             minHeight={20}
             minWidth={20}
@@ -74,7 +74,7 @@ const render = (props: BlockProps) => {
         {(LINE_VARIANTS.includes(v)) && Array.from(Array(v.length).keys()).map(v =>
           <Item
             key={v}
-            bg='secondary-5'
+            bg='primary-4'
             minHeight={20}
             minWidth={20}
           />,
@@ -120,7 +120,7 @@ export const Flex: Story = {
               key={idx}
               minWidth={['xy', 'cards'].includes(v ?? '') ? 50 : 20}
               minHeight={20}
-              bg='secondary-5'
+              bg='primary-4'
             />,
           )}
         </Block>
@@ -133,7 +133,7 @@ export const Flex: Story = {
 export const Grid: Story = {
   parameters: params('Grid', GRID_VARIANTS),
   render: () => (
-    <Block g='xs' v='board' columns={3} pos='relative'>
+    <Block g='xs' v='board' columns={3}>
       {GRID_VARIANTS.filter(Boolean).map(v => (
         <Block key={v} bg='success-5' v={v} g='xxs' p='xxs' columns={v === 'board' ? 2 : undefined} pos='relative'>
           <Tag
@@ -150,7 +150,7 @@ export const Grid: Story = {
           {([...CARD_VARIANTS, ...LAYOUT_VARIANTS].includes(v)) && ['left', 'right', 'top', 'bottom', 'center'].map(i =>
             <Item
               key={i}
-              bg='secondary-5'
+              bg='primary-4'
               area={LAYOUT_VARIANTS.includes(v) ? i : undefined}
               minHeight={v && ['x', 'y'].includes(v) ? 20 : 50}
               minWidth={v && ['x', 'y'].includes(v) ? 20 : 50}
@@ -160,7 +160,7 @@ export const Grid: Story = {
           {(LINE_VARIANTS.includes(v)) && Array.from(Array(v?.length).keys()).map(v =>
             <Item
               key={v}
-              bg='secondary-5'
+              bg='primary-4'
               minHeight={20}
               minWidth={20}
             />,

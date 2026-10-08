@@ -12,7 +12,7 @@ import Portal from 'components/layouts/Portal'
 import Meta, { MetaItem } from 'components/Meta'
 import Actions from 'components/layouts/Actions'
 import Avatar from 'components/views/Avatar'
-
+import Dropdown from 'components/actions/Dropdown'
 import Item from 'components/layouts/Item'
 import Aside from 'components/layouts/Aside'
 import Block, { BlockProps } from 'components/layouts/Block'
@@ -47,19 +47,18 @@ export function Page(props: PageProps) {
     <Block className={cn(css.Page, className)} v='columns' {...otherProps}>
       <Meta title={pageName} items={meta} />
 
-      <Portal name='page-name' content={<Text v='h1' size='md' color='primary' content={title ?? pageName} />} />
+      <Portal name='page-name' content={<Text v='h1' size='lg' color='primary' content={title ?? pageName} />} />
       <Portal name='page-nav' content={nav} />
       <Portal name='page-extra' content={
-        <Actions g='xxs' size='sm'>
+        <Actions g='xxs' size='sm' aligns='center'>
           {extra}
 
-          {account.isAuthorized
-            ? (
-              <Actions.AppLink to='ACCOUNT' size='md' color='primary'>
-                <Avatar size='md' />
-              </Actions.AppLink>
-            ) : <Actions.AppLink to='ROOT' start='person' size='md' color='primary' onClick={account.login} />
-          }
+          <Dropdown arrow popupSide='bottom-end' trigger={<Avatar src={account.user.data?.image} size='md' />}>
+            {account.isAuthorized
+              ? <Actions.Button start='logout' content={t('ACTION.LOGIN')} onClick={account.logout} />
+              : <Actions.Button start='login' content={t('ACTION.LOGOUT')} onClick={account.login} />
+            }
+          </Dropdown>
         </Actions>
       } />
 

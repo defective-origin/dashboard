@@ -18,7 +18,11 @@ export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & ButtonSt
  * <Link />
  */
 export const Link = withPopup((props: LinkProps) => {
-  const { className, ...otherProps } = useButtonStyle({ end: 'open_in_new', ...props })
+  const { className, ...otherProps } = useButtonStyle({
+    color: props.v !== 'wrapper' ? 'info' : undefined,
+    end: 'open_in_new',
+    ...props,
+  })
 
   return (
     <a

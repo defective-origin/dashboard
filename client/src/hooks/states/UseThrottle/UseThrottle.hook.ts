@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import useFunc from '../states/UseFunc'
+import useFunc from '../UseFunc'
 
 /**
  * Hook descriptions

@@ -1,58 +1,55 @@
-:global {
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    box-sizing: border-box;
-    border-radius: var(--radius-xs);
-    background: transparent;
-    gap: var(--space-xs);
-    padding: var(--space-xxs) var(--space-xs);
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-family: var(--font-main);
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
+.Button {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border: none;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: var(--font-main);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
 
-  .outlined {
-    border: 1px solid currentcolor;
+.outlined {
+  border: 1px solid currentcolor;
 
-    &:disabled,
-    &:disabled:hover,
-    &:disabled:active {
-      background: transparent;
-      color: var(--color-secondary-3);
-    }
-  }
-
-  .filled,
-  .filled:hover,
-  .filled:active {
-    color: var(--color-contrast-primary);
-
-    &:disabled {
-      color: var(--color-secondary-3);
-      background: var(--color-secondary-6);
-    }
-  }
-
-  .text:disabled,
-  .text:disabled:hover,
-  .text:disabled:active {
+  &:disabled,
+  &:disabled:hover,
+  &:disabled:active {
     background: transparent;
     color: var(--color-secondary-3);
   }
+}
 
-  .wrapper {
-    padding: 0;
-    color: var(--color-primary);
+.filled,
+.filled:hover,
+.filled:active {
+  color: var(--color-contrast-primary);
+
+  &:disabled {
+    color: var(--color-secondary-3);
+    background: var(--color-secondary-6);
   }
 }
 
+.text:disabled,
+.text:disabled:hover,
+.text:disabled:active {
+  background: transparent;
+  color: var(--color-secondary-3);
+}
 
-.Button {
+.wrapper {
+  padding: 0;
+  color: var(--color-primary);
+}
+
+.end:last-child {
+  margin-inline-start: auto;
 }

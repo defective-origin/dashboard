@@ -35,7 +35,7 @@ export function ConfirmModal(props: ConfirmModalProps) {
       name={name}
       title={t('ACTION.CONFIRM_OPERATION')}
       actions={[
-        <Button content='Confirm' color='success' onClick={() => {
+        <Button content='Confirm' start='check' color='success' onClick={() => {
           modal.onSuccess?.()
           modal.onClose?.()
         }} />,

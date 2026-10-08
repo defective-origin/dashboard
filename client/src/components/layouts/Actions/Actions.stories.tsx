@@ -30,21 +30,21 @@ export const Demo: Story = {
     return (
       <Actions size='lg' {...props}>
         <CustomItem />
-        <Actions.Button tooltip='Edit' start='tv' />,
-        <Actions.Button tooltip='Full screen' start='fullscreen' />,
+        <Actions.Button tooltip='Edit' start='tv' />
+        <Actions.Button tooltip='Full screen' start='fullscreen' />
         <Divider />
-        <Actions.Link tooltip='Add Widget' start='add' />,
-        <Actions.Link tooltip='Resize' start='computer' />,
+        <Actions.Link tooltip='Add Widget' start='add' />
+        <Actions.Link start='computer' content='Link' />
         <Actions.Dropdown tooltip='Docs' start='book'>
-          <Actions.Link tooltip='Full screen' start='fullscreen' />,
-          <Actions.Dropdown tooltip='Add Widget' start='add'>
-            <Actions.Link tooltip='Full screen' start='fullscreen' />,
+          <Actions.Link start='fullscreen' content='Action' />
+          <Actions.Dropdown start='add' content='Action' popupSide='right'>
+            <Actions.Link start='fullscreen' content='Link' />
           </Actions.Dropdown>
         </Actions.Dropdown>
         <Divider />
-        <Actions.AppLink tooltip='Remove' start='delete' to='ROOT' />,
-        <Actions.AppLink tooltip='Add to Menu' start='beenhere' to='BOARDS' />,
-        <Actions.AppLink tooltip='Settings' start='settings' to='WIDGETS' />,
+        <Actions.AppLink tooltip='Remove' start='delete' to='ROOT' />
+        <Actions.AppLink tooltip='Add to Menu' start='beenhere' to='BOARDS' />
+        <Actions.AppLink tooltip='Settings' start='settings' to='WIDGETS' />
       </Actions>
     )
   },

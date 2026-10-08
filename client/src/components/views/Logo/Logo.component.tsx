@@ -23,7 +23,7 @@ export function Logo(props: LogoProps) {
   const { width, height, className, ...otherProps } = props
 
   return (
-    <AppLink className={cn(css.Logo, className)} to='ROOT' {...otherProps}>
+    <AppLink className={cn(css.Logo, className)} v='wrapper' to='ROOT' {...otherProps}>
       <Media className={css.Image} v='logo' width={width} height={height} />
     </AppLink>
   )

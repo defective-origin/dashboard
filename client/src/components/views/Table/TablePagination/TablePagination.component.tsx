@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -63,8 +63,6 @@ export function TablePagination(props: TablePaginationProps) {
 
   useEffect(() => updateItems(), [updateItems, items])
 
-  const rowsOptions = useMemo(() => rowsPerPageOptions.map(num => ({ value: num, children: num })), [rowsPerPageOptions])
-
   if (!visible) {
     return null
   }
@@ -79,7 +77,7 @@ export function TablePagination(props: TablePaginationProps) {
       />
       <Divider v='y' />
 
-      <Block v='x' justifies='space-between' aligns='center'>
+      <Block v='x' justifies='space-between' aligns='center' p='0 xxs'>
         <Button className={css.TablePaginationAction} start='first_page' disabled={!hasPrev} onClick={() => hasPrev && onPageChange(0)} />
         <Button className={css.TablePaginationAction} start='chevron_left' disabled={!hasPrev} onClick={() => hasPrev && onPageChange(page - 1)} />
         <Text content={page + 1} size='xxs' />
@@ -93,12 +91,9 @@ export function TablePagination(props: TablePaginationProps) {
         tooltip={t('LABEL.ROWS_PER_PAGE')}
         className={css.TablePaginationLabel}
       >
-        <SelectField
-          className={css.TablePaginationSelect}
-          value={currentRowsPerPage}
-          items={rowsOptions}
-          onChange={onRowsPerPageChange}
-        />
+        <SelectField className={css.TablePaginationSelect} value={currentRowsPerPage} onChange={onRowsPerPageChange}>
+          {rowsPerPageOptions.map(num => <SelectField.Item key={num} value={num} children={num} />)}
+        </SelectField>
       </Label>
     </Block>
   )

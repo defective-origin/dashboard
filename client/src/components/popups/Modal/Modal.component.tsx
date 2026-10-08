@@ -5,6 +5,7 @@ import MuiModal from '@mui/material/Modal'
 import { cn } from 'tools'
 
 // ---| components |---
+import Text from 'components/views/Text'
 import Card from 'components/layouts/Card'
 import Scroll from 'components/layouts/Scroll'
 import Button from 'components/actions/Button'
@@ -51,30 +52,27 @@ export function Modal(props: ModalProps) {
 
   return (
     <MuiModal
-      className={cn(css.Modal, className)}
       container={() => document.getElementById(CONTAINER_ID) ?? document.body}
       open={!!open}
       onClose={onClose}
       {...otherProps}
     >
-      <Card className={cn(css.Content, css[position])} p='md' data-role='dialog'>
-        {(title || icon) && (
-          <Card.Header>
-            <span style={{ display: 'flex', alignItems: 'center' }}>
-              {icon && <Icon v={icon} />}
-              {title}
-            </span>
-            <Button start='close' onClick={onClose} />
-          </Card.Header>
-        )}
+      <Card className={cn(css.Modal, css[position], className)} data-role='dialog'>
+        <Card.Header p='sm'>
+          <Text v='h4'>
+            {icon && <Icon v={icon} />}
+            {title}
+          </Text>
+          <Button start='close' size='sm' onClick={onClose} />
+        </Card.Header>
 
-        <Card.Content>
+        <Card.Content p='sm'>
           <Scroll v='y' thin />
 
           {children}
         </Card.Content>
 
-        {actions && <Card.Actions size='xxs' action='outlined' g='xs'>{actions}</Card.Actions>}
+        {actions && <Card.Actions p='sm' size='xxs' action='outlined' g='xs' justifies='end'>{actions}</Card.Actions>}
       </Card>
     </MuiModal>
   )

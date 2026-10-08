@@ -75,7 +75,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
 
   return (
     <Block className={cn(css.MarkupMenu, className)} v='x' g='xs' aligns='center' {...otherProps}>
-      <Actions className={css.MarkupMenuScreens} size='sm' group>
+      <Actions className={css.MarkupMenuScreens} size='sm' radius='xs' group>
         {sorted?.map(m => {
           const screen = MARKUP_SCREEN_MAP[m.width]
 
@@ -98,7 +98,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
         title={t('LABEL.SCREENS')}
         actions={o => [
           <Button content={t('ACTION.SAVE')} start='save' color='success' onClick={() => onSave?.(sort(Object.values(enabled)))} />,
-          <Button content={t('ACTION.CLOSE')} start='close' onClick={o.off} />,
+          <Button content={t('ACTION.CLOSE')} start='close' color='primary' onClick={o.off} />,
         ]}
         disableHoverListener
       >

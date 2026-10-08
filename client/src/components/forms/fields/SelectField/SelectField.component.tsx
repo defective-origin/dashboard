@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import MuiSelectField, { SelectChangeEvent } from '@mui/material/Select'
-import MuiMenuItem, { MenuItemProps as MuiMenuItemProps } from '@mui/material/MenuItem'
+import MuiMenuItem from '@mui/material/MenuItem'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -11,25 +11,28 @@ import { FieldProps, formField } from 'components/forms/Form'
 // ---| self |---
 import css from './SelectField.module.scss'
 
-export type SelectFieldItem = MuiMenuItemProps // TODO: replace by MenuItem component from components
+
+export const SelectFieldItem = MuiMenuItem
 
 export type SelectFieldProps = FieldProps & {
-  items?: SelectFieldItem[] // TODO: replace on common items ReactNode
+  children?: React.ReactNode
 }
 
 /**
- * Component description.
+ * Allows to use Select input
  * @example
- * <SelectField />
+ * <SelectField label='Value' value='val1' onChange={console.log}>
+ *   <SelectField.Item value='val1' children='Name 1' />
+ *   <SelectField.Item value='val2' children='Name 2' />
+ * </SelectField>
  */
 export function SelectField(props: SelectFieldProps) {
-  const { value = '', name, onChange, items = [], className, ...otherProps } = props
+  const { value = '', name, onChange, className, children, ...otherProps } = props
 
   const handleChange = useCallback((event: SelectChangeEvent<unknown>) =>
     onChange?.(event.target.value, event)
   , [onChange])
 
-  // TODO: Select should allows to get simple items and convert them [1,2] => [{ value: 1, children: 1 }, { value: 2, children: 2 }]
   return (
     <MuiSelectField
       labelId={name}
@@ -37,13 +40,15 @@ export function SelectField(props: SelectFieldProps) {
       size='small'
       value={value}
       onChange={handleChange}
-      disabled={items.length < 2 && undefined}
+      disabled={React.Children.toArray(children).length < 2}
       {...otherProps}
     >
-      {items.map(item => <MuiMenuItem className={css.Option} {...item} />)}
+      {children}
     </MuiSelectField>
   )
 }
+
+SelectField.Item = SelectFieldItem
 
 SelectField.displayName = 'SelectField'
 

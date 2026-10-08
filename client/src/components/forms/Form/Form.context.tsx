@@ -36,7 +36,7 @@ export type FormManager<O extends object> = SubscriptionsManager<FormPath<O>, Fo
   submit: (path?: FormPath<O>) => void
   focus: (path: FormPath<O>) => void
   connect: (field: FormFieldManager<O>) => void
-  disconnect: (field: FormFieldManager<O>) => void
+  disconnect: (path: FormPath<O>) => void
 }
 
 export const FormContext = React.createContext<FormManager<object> | null>(null)

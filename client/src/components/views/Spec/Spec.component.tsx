@@ -30,7 +30,7 @@ export function Spec(props: SpecProps) {
 
   return (
     <Block className={cn(css.Spec, className)} v={vertical ? 'y' : 'x'} g={vertical ? undefined : size} {...otherProps}>
-      <Text className={css.Name} format='title' size={size} color={color} bold content={`${name}${sep}`} />
+      <Text className={css.Name} format='title' size={size} color='primary' bold content={`${name}${sep}`} />
 
       <Block className={css.Content} justifies={justifies} grow={1} v='xy'>
         <Text

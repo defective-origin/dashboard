@@ -16,7 +16,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Button
  * <Button start='icon-name' content='Cancel' end='icon-name' onCLick={handleClick} popup='click me' />
  */
 export const Button = withPopup((props: ButtonProps) => {
-  const updatedProps = useButtonStyle(props)
+  const updatedProps = useButtonStyle({ color: 'primary', ...props })
 
   return <button {...updatedProps} />
 })

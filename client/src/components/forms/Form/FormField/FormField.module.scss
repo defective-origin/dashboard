@@ -1,6 +1,4 @@
 .FormField {
-  display: flex;
-  flex-direction: column;
 }
 
 .label {
@@ -8,10 +6,3 @@
   align-items: center;
 }
 
-.fit {
-  align-self: flex-start;
-}
-
-:global(.MuiFormLabel-asterisk) {
-  color: #FFD700;
-}

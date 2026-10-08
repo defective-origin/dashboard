@@ -3,21 +3,19 @@
 
 
 .Item {
-  border: var(--border);
   box-shadow: var(--box-shadow-xxs);
   border-radius: var(--radius-xxs);
+  background: var(--color-contrast-primary);
   display: grid;
   align-items: stretch;
   justify-content: stretch;
 
   &.Select {
-    border: 1px solid var(--color-warning-6);
     background: var(--color-warning-6);
     opacity: 0.5;
   }
 
   &:hover {
-    border: 1px solid var(--color-info-6);
     background: var(--color-info-6);
   }
 }

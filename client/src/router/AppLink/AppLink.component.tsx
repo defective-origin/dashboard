@@ -24,6 +24,7 @@ export type AppLinkProps<Name extends AppLinkVariant> = NavLinkProps & AppLinkOp
 export const AppLink = withPopup(<Name extends AppLinkVariant>(props: AppLinkProps<Name>) => {
   const active = !!useAppMatch(props)
   const { to, params, search, className, ...otherProps } = useButtonStyle({
+    color: props.v !== 'wrapper' ? 'info' : undefined,
     end: props.target === '_blank' ? 'open_in_new' : undefined,
     ...props,
     active: active || props.active,

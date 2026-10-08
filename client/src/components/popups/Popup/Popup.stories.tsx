@@ -1,7 +1,6 @@
 import { Meta, StoryObj, field, params } from 'storybook'
 import Block from 'components/layouts/Block'
 import Item from 'components/layouts/Item'
-import Text from 'components/views/Text'
 import Popup, { PopupProps, PopupTriggerOptions } from './Popup.component'
 
 const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} bg={o.isOn ? 'primary' : undefined} border />
@@ -18,6 +17,9 @@ const meta: Meta<typeof Popup> = {
   tags: ['autodocs'],
   argTypes: {
     v: field.variants(VARIANTS, 'PopupVariant'),
+    title: field.reactNode(),
+    content: field.reactNode(),
+    footer: field.reactNode(),
     trigger: field.func(),
     className: field.string(),
     children: field.reactNode(),
@@ -29,15 +31,18 @@ export default meta
 type Story = StoryObj<typeof Popup>
 
 const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][]) => (
-  <Block g='xl' p='xl' justify='space-between' columns={5}>
+  <Block g='xl' p='xl' justify='space-between' v='grid' columns={5}>
     {items.map((item, idx) => item
       ? (
         <Popup
+          arrow
           key={idx}
           trigger={trigger}
+          title='Title'
+          footer='Footer'
           {...{ [prop]: item }}
         >
-          <Text color='primary'>Content</Text>
+          Content
         </Popup>
       )
       : <div key={idx} />,
@@ -48,9 +53,12 @@ const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][
 export const Demo: Story = {
   parameters: params('Popup'),
   args: {
-    children: <Text color='primary'>Content</Text>,
+    title: 'Title',
+    children: 'Content',
+    footer: 'Footer',
     trigger,
     v: 'top',
+    arrow: true,
   },
 }
 

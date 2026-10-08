@@ -26,7 +26,7 @@ export function FormButton(props: FormButtonProps) {
   const { path, type, children, onClick, className, ...otherProps } = props
   const form = useForm()
 
-  const handleClick = useFunc((event: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = useFunc((event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     if (type === 'submit') {

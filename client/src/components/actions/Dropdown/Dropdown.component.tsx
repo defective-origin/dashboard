@@ -5,16 +5,16 @@ import { cn, mix } from 'tools'
 
 // ---| components |---
 import Button from 'components/actions/Button'
+import Actions from 'components/layouts/Actions'
 import Popup, { PopupProps } from 'components/popups/Popup'
 
 // ---| self |---
 import css from './Dropdown.module.scss'
-import Actions from 'components/layouts/Actions'
 
 
 export type DropdownProps
   = React.ComponentProps<typeof Button>
-  & Pick<PopupProps, 'trigger' | 'arrow' | 'disableHoverListener' | 'footer' | 'title'> & {
+  & Pick<PopupProps, 'trigger' | 'arrow' | 'disableHoverListener' | 'footer' | 'title' | 'onOpen' | 'onClose'> & {
     popupSide?: PopupProps['v']
     actions?: PopupProps['footer']
   }
@@ -25,7 +25,7 @@ export type DropdownProps
  * <Dropdown />
  */
 export function Dropdown(props: DropdownProps) {
-  const { disableHoverListener, actions, title, arrow, popupSide, trigger, children, className, ...otherProps } = props
+  const { disableHoverListener, actions, title, arrow, popupSide, trigger, onOpen, onClose, children, className, ...otherProps } = props
   // TODO: open on full screen on mobile
 
   return (
@@ -34,21 +34,26 @@ export function Dropdown(props: DropdownProps) {
       v={popupSide}
       title={title}
       disableHoverListener={disableHoverListener}
-      footer={toggler => (
-        <Actions size='xxs'>
+      footer={actions && (toggler => (
+        <Actions className={css.actions} size='xxs' v='row'>
           {mix.fromValOrFunc(actions, toggler)}
         </Actions>
-      )}
+      ))}
       trigger={trigger ?? (options => (
         <Button
           className={cn(css.Dropdown, className)}
           active={options.isOn}
           onClick={options.on}
+          end={otherProps.content && 'chevron_right'}
           {...otherProps}
         />
       ))}
+      onOpen={onOpen}
+      onClose={onClose}
     >
-      {children}
+      <Actions size='xxs' v='row' weight={400} format='capitalize' aligns='stretch'>
+        {children}
+      </Actions>
     </Popup>
   )
 }

@@ -8,7 +8,7 @@ import CheckboxListFormField from './CheckboxListField'
 import RadioFormField from './RadioField'
 import RadioGroupField from './RadioGroupField'
 import SwitchFormField from './SwitchField'
-import SelectFormField from './SelectField'
+import SelectFormField, { SelectFieldItem } from './SelectField'
 import CssSizeFormField from './CssSizeField'
 
 // TODO: add UrlField, FileField, ColorField, ImageField, DateField, DateRangeField
@@ -23,6 +23,7 @@ export default {
   RadioGroup: RadioGroupField,
   Switch: SwitchFormField,
   Select: SelectFormField,
+  SelectItem: SelectFieldItem,
   Tags: TagsFormField,
   CssSize: CssSizeFormField,
 }

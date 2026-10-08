@@ -90,8 +90,8 @@ export const Text = withSkeleton((props: TextProps) => { // FIXME: rename to Typ
         fontWeight: bold ? 'bold' : undefined,
         WebkitLineClamp: typeof ellipsis === 'number' ? ellipsis : undefined,
         textAlign: align,
-        fontSize: size && toSize('text', size),
-        color: color && toColor(color),
+        fontSize: toSize('text', size),
+        color: toColor(color),
       }), className)}
       {...otherProps}
     >

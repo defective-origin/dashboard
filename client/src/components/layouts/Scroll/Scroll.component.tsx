@@ -60,8 +60,8 @@ export function Scroll(props: ScrollProps) {
     ...otherOptions
   } = props
   const overlayRef = useRef<HTMLDivElement>(null)
-  const backOffset = offset(back, 50)
-  const actionOffset = offset(actions, 50)
+  const backOffset = offset(back, 25)
+  const actionOffset = offset(actions, 25)
   const barX = useScrollBar({ enabled: ['x', 'xy'].includes(v), v: 'x', back: backOffset?.x, container, ...otherOptions })
   const barY = useScrollBar({ enabled: ['y', 'xy'].includes(v), v: 'y', back: backOffset?.y, container, ...otherOptions })
 
@@ -114,7 +114,7 @@ export function Scroll(props: ScrollProps) {
         {actions && (
           <div
             className='scroll-actions'
-            style={{ left: actionOffset.x, bottom: actionOffset.y }}
+            style={{ right: actionOffset.x, bottom: actionOffset.y }}
           >
             {barY?.button}
             {barX?.button}

@@ -1,2 +1,10 @@
 .Dropdown {
 }
+
+.actions {
+  border-top: var(--border);
+  width: 100%;
+
+  & > * { border-radius: 0; border-right: var(--border); }
+  & > *:last-child { border-right: none; }
+}
