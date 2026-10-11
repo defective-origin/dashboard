@@ -98,7 +98,7 @@ export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>)
     return (
       <Tag
         className={cn('block', {
-          [`block--${v}`]: v,
+          [`block--${v}`]: !!v,
         }, jss({
           alignItems: aligns,
           justifyContent: justifies,
@@ -118,7 +118,7 @@ export function Block<E extends React.ElementType = 'div'>(props: BlockProps<E>)
   return (
     <Tag
       className={cn('block', {
-        [`block--${v}`]: !areas && v,
+        [`block--${v}`]: !areas && !!v,
       }, jss({
         placeItems: places,
         alignItems: aligns,

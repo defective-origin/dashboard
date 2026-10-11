@@ -83,7 +83,7 @@ export const Text = withSkeleton((props: TextProps) => { // FIXME: rename to Typ
     <Tag
       className={cn('text', {
         nowrap,
-        ellipsis,
+        ellipsis: !!ellipsis,
       }, jss({
         ...style,
         lineHeight: height,

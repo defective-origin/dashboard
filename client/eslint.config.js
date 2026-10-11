@@ -44,7 +44,7 @@ export default defineConfig([
           ],
         }, {
           message: 'Use import from "core" instead.',
-          group: ['lodash', 'lodash-es', '@emotion/css', 'classnames', 'weak-key'],
+          group: ['lodash', 'lodash-es', '@emotion/css'],
         }, {
           message: 'Use import from "locale", "router", "store" or "api" instead as ---| core |--- import.',
           group: [
