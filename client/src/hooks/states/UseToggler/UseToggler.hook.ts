@@ -1,6 +1,10 @@
-import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
+import useFunc from '../UseFunc'
 
-export type TogglerOptions = unknown
+export type TogglerOptions = {
+  onOn?: () => void
+  onOff?: () => void
+}
 
 export type TogglerReturnOptions = {
   isOn: boolean
@@ -8,7 +12,7 @@ export type TogglerReturnOptions = {
   on: () => void
   off: () => void
   toggle: () => void
-  turn: Dispatch<SetStateAction<boolean>>
+  turn: (flag: unknown) => void
 }
 
 /**
@@ -16,14 +20,21 @@ export type TogglerReturnOptions = {
  * @example
  * const state = useToggler(options)
  */
-export function useToggler(options?: TogglerOptions): TogglerReturnOptions {
-  const flag = !!options
-  const [isOn, turn] = useState(flag)
+export function useToggler(value?: unknown, options: TogglerOptions = {}): TogglerReturnOptions {
+  const flag = !!value
+  const [isOn, setIsOn] = useState(flag)
   const [prevFlag, setPrevOptions] = useState(flag)
 
-  const toggle = useCallback(() => turn(flag => !flag), [])
-  const on = useCallback(() => turn(true), [])
-  const off = useCallback(() => turn(false), [])
+  const on = useFunc(() => {
+    setIsOn(true)
+    options.onOn?.()
+  })
+  const off = useFunc(() =>{
+    setIsOn(false)
+    options.onOff?.()
+  })
+  const toggle = useFunc(() => isOn ? off() : on())
+  const turn = useFunc((flag: unknown) => flag ? on() : off())
 
   if (flag !== prevFlag) {
     setPrevOptions(flag)
@@ -37,7 +48,7 @@ export function useToggler(options?: TogglerOptions): TogglerReturnOptions {
     on,
     off,
     turn,
-  }), [isOn, off, on, toggle])
+  }), [isOn, off, on, toggle, turn])
 }
 
 export default useToggler

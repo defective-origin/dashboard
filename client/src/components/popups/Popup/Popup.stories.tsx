@@ -3,7 +3,7 @@ import Block from 'components/layouts/Block'
 import Item from 'components/layouts/Item'
 import Popup, { PopupProps, PopupTriggerOptions } from './Popup.component'
 
-const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} bg={o.isOn ? 'primary' : undefined} border />
+const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} bg={o.isOn ? 'primary' : undefined} onClick={o.on} border />
 
 const VARIANTS: PopupProps['v'][] = [
   'left-start', 'top-end', 'top', 'top-start', 'right-start',
@@ -17,6 +17,7 @@ const meta: Meta<typeof Popup> = {
   tags: ['autodocs'],
   argTypes: {
     v: field.variants(VARIANTS, 'PopupVariant'),
+    disableHoverListener: field.boolean(),
     title: field.reactNode(),
     content: field.reactNode(),
     footer: field.reactNode(),
@@ -29,6 +30,19 @@ const meta: Meta<typeof Popup> = {
 export default meta
 
 type Story = StoryObj<typeof Popup>
+
+export const Demo: Story = {
+  parameters: params('Popup'),
+  args: {
+    title: 'Title',
+    children: 'Content',
+    footer: 'Footer',
+    trigger,
+    v: 'top',
+    arrow: true,
+    disableHoverListener: false,
+  },
+}
 
 const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][]) => (
   <Block g='xl' p='xl' justify='space-between' v='grid' columns={5}>
@@ -49,18 +63,6 @@ const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][
     )}
   </Block>
 )
-
-export const Demo: Story = {
-  parameters: params('Popup'),
-  args: {
-    title: 'Title',
-    children: 'Content',
-    footer: 'Footer',
-    trigger,
-    v: 'top',
-    arrow: true,
-  },
-}
 
 export const Variants: Story = {
   parameters: params('View', VARIANTS),

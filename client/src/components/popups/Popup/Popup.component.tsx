@@ -70,13 +70,8 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
     p = 'xxs xs', open, trigger, arrow, title, content, footer, maxHeight = 300, maxWidth, v = 'top',
     disableHoverListener, onOpen, onClose, children, className, ...otherProps
   } = props
-  const toggler = useToggler()
+  const toggler = useToggler(false, { onOn: onOpen, onOff: onClose })
   const isMouseInsideRef = useRef<boolean>(false)
-
-  const close = () => {
-    toggler.off()
-    onClose?.()
-  }
 
   return (
     <MuiTooltip
@@ -94,7 +89,7 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
           {title && (
             <Header className={css.header} p='xs'>
               <Text v='h4' content={title} />
-              {disableHoverListener && <Button start='close' size='xxs' onClick={close} />}
+              {disableHoverListener && <Button start='close' size='xxs' onClick={toggler.off} />}
             </Header>
           )}
 
@@ -115,13 +110,10 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
       slotProps={{
         tooltip: { className: cn(css.card, arrow && css.arrow) },
       }}
-      onOpen={() => {
-        toggler.on()
-        onOpen?.()
-      }}
+      onOpen={toggler.on}
       onClose={() => {
         if (!isMouseInsideRef.current) {
-          close()
+          toggler.off()
         }
       }}
       {...otherProps}
