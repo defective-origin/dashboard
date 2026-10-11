@@ -50,7 +50,7 @@ export function MarkupBoardAction(props: MarkupBoardActionProps) {
   }
 
   const reset = () => {
-    triggerCountRef.current -= 1
+    triggerCountRef.current = Math.max(0, triggerCountRef.current - 1)
     if (!triggerCountRef.current) {
       markupLineManager.reset('row', row)
       markupLineManager.reset('column', column)
