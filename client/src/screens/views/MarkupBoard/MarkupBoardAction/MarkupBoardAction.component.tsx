@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // ---| core |---
 import { t } from 'locale'
@@ -38,16 +38,23 @@ export type MarkupBoardActionProps = {
 export function MarkupBoardAction(props: MarkupBoardActionProps) {
   const { area, size = '1fr', icon, name, row, column, actions, onSizeChange, children, className, ...otherProps } = props
   const [value, setValue] = useState(size)
+  const triggerCountRef = useRef(0)
   // TODO: do via form and onChange(form)
 
   const highlight = () => {
-    markupLineManager.highlight('row', row)
-    markupLineManager.highlight('column', column)
+    if (!triggerCountRef.current) {
+      markupLineManager.highlight('row', row)
+      markupLineManager.highlight('column', column)
+    }
+    triggerCountRef.current += 1
   }
 
   const reset = () => {
-    markupLineManager.reset('row', row)
-    markupLineManager.reset('column', column)
+    triggerCountRef.current -= 1
+    if (!triggerCountRef.current) {
+      markupLineManager.reset('row', row)
+      markupLineManager.reset('column', column)
+    }
   }
 
   return (

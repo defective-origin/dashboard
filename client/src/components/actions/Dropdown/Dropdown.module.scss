@@ -8,6 +8,7 @@
   & > * {
     border-radius: 0;
     border-right: var(--border);
+    justify-content: center;
 
     &:last-child { border-right: none; }
   }
