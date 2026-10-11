@@ -3,7 +3,7 @@ export * from './router.hooks'
 export * from './router.tools'
 export * from './AppLink'
 
-export { useParams, Outlet, generatePath } from 'react-router-dom'
+export { useParams, Outlet, generatePath, useSearchParams } from 'react-router-dom'
 
 // Don't export anything more.
 // It creates circle dependencies.

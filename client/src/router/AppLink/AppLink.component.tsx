@@ -34,6 +34,7 @@ export const AppLink = withPopup(<Name extends AppLinkVariant>(props: AppLinkPro
     <NavLink
       className={cn(css.AppLink, className)}
       to={generateAppPath({ to, params, search })}
+      prefetch='intent'
       {...otherProps}
     />
   )
