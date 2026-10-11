@@ -7,7 +7,7 @@
   height: $height;
 }
 
-@function shadow($level, $color: rgba(29, 30, 38, .05)) {
+@function shadow($level, $color: var(--color-shadow)) {
   $mul: 1;
 
   // first color

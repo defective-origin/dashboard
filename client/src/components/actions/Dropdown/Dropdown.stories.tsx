@@ -7,10 +7,13 @@ const meta: Meta<typeof Dropdown> = {
   title: 'Components/Actions/Dropdown',
   tags: ['autodocs'],
   argTypes: {
-    className: field.string(),
-    tooltip: field.reactNode(),
-    children: field.reactNode(),
+    title: field.reactNode(),
     content: field.reactNode(),
+    footer: field.reactNode(),
+    tooltip: field.reactNode(),
+    trigger: field.func(),
+    className: field.string(),
+    children: field.reactNode(),
   },
 }
 
@@ -21,9 +24,12 @@ type Story = StoryObj<typeof Dropdown>
 export const Demo: Story = {
   parameters: params('Dropdown'),
   args: {
-    className: 'Demo',
+    arrow: true,
     tooltip: 'tooltip',
+    title: 'Title',
     content: 'button name',
     children: 'dropdown content',
+    footer: 'Footer',
+    className: 'Demo',
   },
 }

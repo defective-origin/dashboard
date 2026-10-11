@@ -51,7 +51,7 @@ export function Dropdown(props: DropdownProps) {
       onOpen={onOpen}
       onClose={onClose}
     >
-      <Actions size='xxs' v='row' weight={400} format='capitalize' aligns='stretch'>
+      <Actions size='xxs' v='y' weight={400} format='capitalize' aligns='stretch'>
         {children}
       </Actions>
     </Popup>

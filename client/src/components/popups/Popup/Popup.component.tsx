@@ -4,6 +4,7 @@ import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Toolt
 // ---| core |---
 import { cn, mix } from 'tools'
 import { TogglerReturnOptions, useToggler } from 'hooks'
+import { Space } from 'theme'
 
 // ---| components |---
 import Text from 'components/views/Text'
@@ -26,6 +27,7 @@ export type PopupVariant
 export type PopupTriggerOptions = TogglerReturnOptions
 
 export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
+  p?: Space
   open?: boolean
   arrow?: boolean
   title?: React.ReactNode
@@ -65,7 +67,7 @@ export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
  */
 export function Popup(props: PopupProps) { // TODO: make actions ad common components via header, footer prop?
   const {
-    open, trigger, arrow, title, content, footer, maxHeight = 300, maxWidth, v = 'top',
+    p = 'xxs xs', open, trigger, arrow, title, content, footer, maxHeight = 300, maxWidth, v = 'top',
     disableHoverListener, onOpen, onClose, children, className, ...otherProps
   } = props
   const toggler = useToggler()
@@ -82,6 +84,7 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
       title={(
         <Block
           data-role='dialog'
+          radius='xs'
           maxHeight={maxHeight}
           maxWidth={maxWidth}
           className={cn(css.Popup, className)}
@@ -90,12 +93,12 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
         >
           {title && (
             <Header className={css.header} p='xs'>
-              <Text v='h5' content={title} />
+              <Text v='h4' content={title} />
               {disableHoverListener && <Button start='close' size='xxs' onClick={close} />}
             </Header>
           )}
 
-          <Content p='xs'>
+          <Content p={p}>
             {mix.fromValOrFunc(content ?? children, toggler)}
           </Content>
 

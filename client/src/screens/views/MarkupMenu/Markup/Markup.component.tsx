@@ -30,6 +30,7 @@ export function Markup(props: MarkupProps) {
 
   return (
     <Dropdown
+      arrow
       title={t(option.label)}
       className={cn(css.Markup, className)}
       start={option.icon}

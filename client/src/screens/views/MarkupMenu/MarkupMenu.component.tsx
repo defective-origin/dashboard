@@ -82,7 +82,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
           return (
             <Actions.Button
               start={screen.icon}
-              tooltip={{ title: t(screen.label), content: <MarkupSpec options={m} /> }}
+              tooltip={{ arrow: true, title: t(screen.label), content: <MarkupSpec options={m} /> }}
               active={m.width === select?.width}
               onClick={() => onSelect?.(m)}
             />
@@ -102,16 +102,14 @@ export function MarkupMenu(props: MarkupMenuProps) {
         ]}
         disableHoverListener
       >
-        <Block className={css.MarkupMenuList} v='grid' columns='auto 1fr auto' justifies='center' aligns='center'>
-          {markups.map(markup => (
-            <Fragment key={markup.width}>
-              <Markup tooltipSide='left' options={markup} />
-              <Text size='xxs' content={`> ${markup.width}`} />
-              {enabled[markup.width] && <Button size='xs' start='remove' color='error' onClick={() => toggle(markup)} disabled={markup.width === 992} />}
-              {!enabled[markup.width] && <Button size='xs' start='add' color='success' onClick={() => toggle(markup)} />}
-            </Fragment>
-          ))}
-        </Block>
+        {markups.map(markup => (
+          <Block key={markup.width} v='grid' columns='auto 1fr auto'>
+            <Markup popupSide='left' options={markup} />
+            <Text size='xxs' content={`> ${markup.width}`} align='center' />
+            {enabled[markup.width] && <Button size='xs' start='remove' color='error' onClick={() => toggle(markup)} disabled={markup.width === 992} />}
+            {!enabled[markup.width] && <Button size='xs' start='add' color='success' onClick={() => toggle(markup)} />}
+          </Block>
+        ))}
       </Dropdown>
     </Block>
   )

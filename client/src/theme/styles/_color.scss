@@ -29,6 +29,12 @@ $colors: primary, secondary, success, info, warning, error, contrast-primary, co
     'contrast-primary': $contrast-primary,
     'contrast-secondary': $contrast-secondary,
   );
+  $palette: map.set($palette, shadow, rgba(
+    color.channel($primary, 'red', $space: rgb),
+    color.channel($primary, 'green', $space: rgb),
+    color.channel($primary, 'blue', $space: rgb),
+    5%)
+  );
 
   @each $name, $color in $colors {
     $palette: map.set($palette, $name, $color);

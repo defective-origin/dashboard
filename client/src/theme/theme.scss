@@ -55,7 +55,7 @@
 }
 
 // use light, dark class on element to prevent changing theme on it
-.light { @include init-color-variables(#111111, #6C6F80, #50a71c, #1e61fd, #F7AF12, #ff3100, #F5F6FA, #F8F8F8); }
+.light { @include init-color-variables(#1D1E26, #6C6F80, #50a71c, #1e61fd, #F7AF12, #ff3100, #F5F6FA, #F8F8F8); }
 .dark { @include init-color-variables(#F8FAFC, #94A3B8, #56b843, #60A5FA, #FBBF24, #F87171, #333333, #2c2b2b); }
 
 html {

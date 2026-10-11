@@ -37,7 +37,7 @@ export const useTableManager = <T extends TableRecord>(options: TableManagerOpti
         fixed: true,
         cell: TableRowMenu,
         props: { padding: 0 },
-        mapper: (record, column) => ({ items: options.actions, record, column }),
+        mapper: (record, column) => ({ children: options.actions, record, column }),
       })
     }
 
