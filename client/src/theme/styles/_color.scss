@@ -7,14 +7,6 @@
 $color-name: color;
 $colors: primary, secondary, success, info, warning, error, contrast-primary, contrast-secondary;
 
-/// Create size.
-/// @param {number} $value Color.
-/// @param {number} $alpha Alpha shift unit in presents.
-/// @return {string} Joint value
-@function init-color($value, $alpha: 100%, $mix-color: white) {
-  @return color-mix(in srgb, $value $alpha, $mix-color);
-}
-
 /// Create css color palette: primary, secondary, success, info, warning, error, background, contrast.
 /// @param {color} $primary Color in hex format.
 /// @param {color} $secondary Color in hex format.
@@ -45,7 +37,10 @@ $colors: primary, secondary, success, info, warning, error, contrast-primary, co
     /* Set sub colors */
     @for $i from 1 through 6 {
       $new-name: '#{$name}-#{$i}';
-      $new-color: init-color($base-color, 100% - $i * $alpha);
+      $mix-percent: 100% - $i * $alpha;
+
+      /* main colors mix from text to background color */
+      $new-color: color-mix(in srgb, $base-color $mix-percent, $contrast-secondary);
       $palette: map.set($palette, $new-name, $new-color);
     }
   }
