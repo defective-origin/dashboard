@@ -5,15 +5,16 @@ import { cn } from 'tools'
 import { t } from 'locale'
 
 // ---| screens |---
-import { MarkupOptions, sort } from 'screens/views/MarkupBoard'
+import { MarkupOptions, sort, toItems } from 'screens/views/MarkupBoard'
 // ---| components |---
+import Spec from 'components/views/Spec'
 import Block, { BlockProps } from 'components/layouts/Block'
 import Dropdown, { DropdownProps } from 'components/actions/Dropdown'
 
 // ---| self |---
 import css from './Markup.module.scss'
 import { MARKUP_SCREEN_MAP } from './Markup.constants'
-import MarkupSpec from './MarkupSpec'
+
 
 export type MarkupProps = DropdownProps & {
   options?: MarkupOptions
@@ -36,7 +37,12 @@ export function Markup(props: MarkupProps) {
       start={option.icon}
       {...otherProps}
     >
-      <MarkupSpec options={options} />
+      <Spec name={t('LABEL.MARKUP.WIDTH')} content={options?.width} />
+      <Spec name={t('LABEL.MARKUP.HEIGHT')} content={options?.height} />
+      <Spec name={t('LABEL.MARKUP.COLUMNS')} content={options?.columns.length} />
+      <Spec name={t('LABEL.MARKUP.ROWS')} content={options?.rows.length} />
+      <Spec name={t('LABEL.MARKUP.GAP')} content={options?.gap} />
+      <Spec name={t('LABEL.MARKUP.ITEMS')} content={toItems(options).length} />
     </Dropdown>
   )
 }

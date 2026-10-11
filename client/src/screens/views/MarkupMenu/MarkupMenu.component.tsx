@@ -1,4 +1,4 @@
-import React, { Fragment, useLayoutEffect, useMemo, useState } from 'react'
+import React, { useLayoutEffect, useMemo, useState } from 'react'
 
 // ---| core |---
 import { t } from 'locale'
@@ -15,8 +15,7 @@ import Block, { BlockProps } from 'components/layouts/Block'
 
 // ---| self |---
 import css from './MarkupMenu.module.scss'
-import MarkupSpec from './Markup/MarkupSpec'
-import Markup, { MARKUP_SCREEN_MAP, MARKUP_SCREENS } from './Markup'
+import Markup, { MARKUP_SCREENS } from './Markup'
 
 export type MarkupMenuProps = BlockProps & {
   select?: MarkupOptions
@@ -76,18 +75,13 @@ export function MarkupMenu(props: MarkupMenuProps) {
   return (
     <Block className={cn(css.MarkupMenu, className)} v='x' g='xs' aligns='center' {...otherProps}>
       <Actions className={css.MarkupMenuScreens} size='sm' radius='xs' group>
-        {sorted?.map(m => {
-          const screen = MARKUP_SCREEN_MAP[m.width]
-
-          return (
-            <Actions.Button
-              start={screen.icon}
-              tooltip={{ arrow: true, title: t(screen.label), content: <MarkupSpec options={m} /> }}
-              active={m.width === select?.width}
-              onClick={() => onSelect?.(m)}
-            />
-          )
-        })}
+        {sorted?.map(m =>
+          <Markup
+            options={m}
+            active={m.width === select?.width}
+            onClick={() => onSelect?.(m)}
+          />,
+        )}
       </Actions>
 
       <Dropdown
