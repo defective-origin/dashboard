@@ -39,7 +39,7 @@ export function CheckboxListField(props: CheckboxListFieldProps) {
   return (
     <Block id={id} className={cn(css.CheckboxListField, className)} v='grid' columns={columns}>
       {React.Children.map(children, (child, idx) => {
-        if (!React.isValidElement<CheckboxFieldProps>(child) || !react.isExemplar(child, [CheckboxField, CheckboxFormField])) {
+        if (!react.isExemplar<CheckboxFieldProps>(child, [CheckboxField, CheckboxFormField])) {
           return child
         }
 

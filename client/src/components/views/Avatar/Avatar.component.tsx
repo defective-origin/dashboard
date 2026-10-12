@@ -1,24 +1,28 @@
 import React from 'react'
-import Media from 'components/views/Media'
-import Block from 'components/layouts/Block'
 
 // ---| core |---
 import { cn, react } from 'tools'
 import { Size } from 'theme'
 
 // ---| components |---
+import Text from 'components/views/Text'
+import Media from 'components/views/Media'
+import Block from 'components/layouts/Block'
+import Dropdown from 'components/actions/Dropdown'
+import { withPopup, WithPopupProps } from 'components/popups/Popup'
 
 // ---| self |---
 import css from './Avatar.module.scss'
 
-export type AvatarSize = Size
 
+export type AvatarSize = Size
 export type AvatarProps = {
   src?: string
   alt?: string
   size?: AvatarSize
   content?: string
   className?: string
+  style?: React.CSSProperties
 }
 
 /**
@@ -26,12 +30,12 @@ export type AvatarProps = {
  * @example
  * <Avatar />
  */
-export function Avatar(props: AvatarProps) {
-  const { src, size, alt = 'user image', className, ...otherProps } = props
+export const Avatar = withPopup((props: AvatarProps) => {
+  const { src, size = 'xs', alt = 'user image', className, ...otherProps } = props
 
   return (
     <Media
-      className={cn(css.Avatar, size && `t--${size}`, className)}
+      className={cn(css.Avatar, className)}
       alt={alt}
       src={src}
       width={`var(--icon-${size})`}
@@ -39,28 +43,52 @@ export function Avatar(props: AvatarProps) {
       {...otherProps}
     />
   )
+}) as {
+  (props: AvatarProps & WithPopupProps): React.JSX.Element
+  displayName: string
+  Group: (props: AvatarGroupProps) => React.JSX.Element
 }
 
 Avatar.displayName = 'Avatar'
 
 
 export type AvatarGroupProps = {
-  total?: number
   max?: number
   size?: AvatarSize
   className?: string
+  title?: React.ReactNode
   children?: React.ReactNode
 }
 
 Avatar.Group = (props: AvatarGroupProps) => {
-  const { max, total = 3, size, children, className, ...otherProps } = props
+  const { title, max = 3, size, children, className, ...otherProps } = props
   const visibleItems = React.Children.toArray(children).slice(0, max)
-  const updated = react.injectProp(visibleItems, 1, { size }, node => react.isExemplar(node, [Avatar]))
+  const count = React.Children.count(children)
 
   return (
-    <Block className={cn(css.AvatarGroup, className)} v='x' {...otherProps}>
-      {updated}
-      {total}
+    <Block className={cn(css.AvatarGroup, className)} v='x' width='85%' {...otherProps}>
+      {react.injectProp(1, visibleItems, (node, index) => {
+        if (react.isExemplar(node, [Avatar])) {
+          return { size, style: { right: `${index * (65 / count)}%`, zIndex: count - index } }
+        }
+      })}
+
+      {count > 1 && (
+        <Dropdown className={css.more} v='wrapper' start='expand_circle_up' title={title as string} g='xs' arrow>
+          {React.Children.map(children, node => {
+            if (react.isExemplar(node, [Avatar])) {
+              return (
+                <Block v='grid' columns='auto 1fr' g='sm' aligns='center'>
+                  {React.cloneElement(node, { size: 'lg', tooltip: undefined } as AvatarProps)}
+                  <Text content={(node.props as any).tooltip} />
+                </Block>
+              )
+            }
+
+            return null
+          })}
+        </Dropdown>
+      ) }
     </Block>
   )
 }

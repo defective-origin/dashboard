@@ -5,7 +5,7 @@ import Popup, { PopupProps, PopupTriggerOptions } from './Popup.component'
 
 const trigger = (o: PopupTriggerOptions) => <Item width={50} height={50} bg={o.isOn ? 'primary' : undefined} onClick={o.on} border />
 
-const VARIANTS: PopupProps['v'][] = [
+const VARIANTS: PopupProps['side'][] = [
   'left-start', 'top-end', 'top', 'top-start', 'right-start',
   'left', undefined, undefined, undefined, 'right',
   'left-end', 'bottom-end', 'bottom', 'bottom-start', 'right-end',
@@ -16,7 +16,7 @@ const meta: Meta<typeof Popup> = {
   title: 'Components/Popups/Popup',
   tags: ['autodocs'],
   argTypes: {
-    v: field.variants(VARIANTS, 'PopupVariant'),
+    side: field.variants(VARIANTS, 'PopupSide'),
     disableHoverListener: field.boolean(),
     title: field.reactNode(),
     content: field.reactNode(),
@@ -38,7 +38,7 @@ export const Demo: Story = {
     children: 'Content',
     footer: 'Footer',
     trigger,
-    v: 'top',
+    side: 'top',
     arrow: true,
     disableHoverListener: false,
   },
@@ -66,5 +66,5 @@ const initVariants = <P extends keyof PopupProps>(prop: P, items: PopupProps[P][
 
 export const Variants: Story = {
   parameters: params('View', VARIANTS),
-  render: () => initVariants('v', VARIANTS),
+  render: () => initVariants('side', VARIANTS),
 }

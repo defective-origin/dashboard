@@ -31,7 +31,7 @@ export function RadioGroupField(props: RadioGroupFieldProps) {
   return (
     <Block className={cn(css.RadioGroupField, className)} v='grid' columns={columns}>
       {React.Children.map(children, (child, idx) => {
-        if (!React.isValidElement<RadioFieldProps>(child) || !react.isExemplar(child, [RadioField, RadioFormField])) {
+        if (!react.isExemplar<RadioFieldProps>(child, [RadioField, RadioFormField])) {
           return child
         }
 

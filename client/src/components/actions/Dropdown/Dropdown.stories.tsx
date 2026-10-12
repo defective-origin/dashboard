@@ -9,7 +9,6 @@ const meta: Meta<typeof Dropdown> = {
   argTypes: {
     title: field.reactNode(),
     content: field.reactNode(),
-    footer: field.reactNode(),
     tooltip: field.reactNode(),
     trigger: field.func(),
     className: field.string(),
@@ -29,7 +28,6 @@ export const Demo: Story = {
     title: 'Title',
     content: 'button name',
     children: 'dropdown content',
-    footer: 'Footer',
     className: 'Demo',
   },
 }

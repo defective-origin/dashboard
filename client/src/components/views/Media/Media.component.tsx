@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, jss } from 'tools'
 
 // ---| components |---
 import { withSkeleton } from 'components/views/Skeleton'
@@ -26,6 +26,7 @@ export type MediaProps = {
   width?: string | number
   height?: string | number
   className?: string
+  style?: React.CSSProperties
 }
 
 /**
@@ -34,16 +35,15 @@ export type MediaProps = {
  * <Media />
  */
 export const Media = withSkeleton((props: MediaProps) => {
-  const { width, height, v, src, alt, className, ...otherProps } = props
+  const { width, height, v, src, alt, style, className, ...otherProps } = props
   const imgSrc = src ?? MEDIA_MAP[v as MediaVariant]
 
   // TODO: change tag depends on content, svg, img, video, sound and other
   return (
     <img
-      className={cn(css.Media, className)}
+      className={cn(css.Media, jss({ width, height, ...style }), className)}
       src={imgSrc}
       alt={alt}
-      style={{ width, height }}
       {...otherProps}
     />
   )

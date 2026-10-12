@@ -18,6 +18,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Button
 export const Button = withPopup((props: ButtonProps) => {
   const updatedProps = useButtonStyle({ color: 'primary', ...props })
 
+  // TODO: add processing with promise callback onClick and set icon progress_activity
   return <button {...updatedProps} />
 })
 

@@ -10,7 +10,7 @@ export type WithPopupProps = {
   tooltip?: PopupProps
 } | {
   tooltip?: React.ReactNode
-  tooltipSide?: PopupProps['v']
+  tooltipSide?: PopupProps['side']
 }
 
 /**
@@ -24,9 +24,9 @@ export function withPopup<P extends object>(WrappedComponent: React.ComponentTyp
     const trigger = <WrappedComponent {...other} />
 
     if (tooltip !== null && tooltip !== undefined && tooltip !== false) {
-      const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip, v: tooltipSide }
+      const tooltipProps = typeof tooltip === 'object' ? tooltip : { content: tooltip, side: tooltipSide }
 
-      return <Popup {...tooltipProps} trigger={trigger} />
+      return <Popup {...tooltipProps} trigger={trigger} arrow />
     }
 
     return trigger

@@ -4,13 +4,11 @@ import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Toolt
 // ---| core |---
 import { cn, mix } from 'tools'
 import { TogglerReturnOptions, useToggler } from 'hooks'
-import { Space } from 'theme'
 
 // ---| components |---
 import Text from 'components/views/Text'
-import Block from 'components/layouts/Block'
+import Block, { BlockProps } from 'components/layouts/Block'
 import Header from 'components/layouts/Header'
-import Footer from 'components/layouts/Footer'
 import Content from 'components/layouts/Content'
 import Button from 'components/actions/Button'
 
@@ -18,7 +16,7 @@ import Button from 'components/actions/Button'
 import css from './Popup.module.scss'
 
 
-export type PopupVariant
+export type PopupSide
   = 'bottom-start' | 'bottom' | 'bottom-end'
   | 'left-start' | 'left' | 'left-end'
   | 'right-start' | 'right' | 'right-end'
@@ -26,22 +24,22 @@ export type PopupVariant
 
 export type PopupTriggerOptions = TogglerReturnOptions
 
-export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
-  p?: Space
-  open?: boolean
-  arrow?: boolean
-  title?: React.ReactNode
-  footer?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
-  v?: PopupVariant
-  maxHeight?: number
-  maxWidth?: number
-  className?: string
-  content?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
-  children?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
-  trigger?: mix.ValOrFunc<React.ReactElement, [PopupTriggerOptions]>
-  onOpen?: () => void
-  onClose?: () => void
-}
+export type PopupProps
+  = Pick<MuiTooltipProps, 'disableHoverListener'>
+  & Pick<BlockProps, 'maxHeight' | 'maxWidth' | 'minWidth' | 'p' | 'g'>
+ & {
+   side?: PopupSide
+   open?: boolean
+   arrow?: boolean
+   title?: React.ReactNode
+   className?: string
+   content?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
+   children?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
+   footer?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
+   trigger?: mix.ValOrFunc<React.ReactElement, [PopupTriggerOptions]>
+   onOpen?: () => void
+   onClose?: () => void
+ }
 
 // TODO: add withPopup hoc like withSkeleton
 /**
@@ -67,7 +65,7 @@ export type PopupProps = Pick<MuiTooltipProps, 'disableHoverListener'> & {
  */
 export function Popup(props: PopupProps) { // TODO: make actions ad common components via header, footer prop?
   const {
-    p = 'xxs xs', open, trigger, arrow, title, content, footer, maxHeight = 300, maxWidth, v = 'top',
+    p = 'xxs xs', g, open, trigger, arrow, title, content, footer, minWidth, maxHeight = 300, maxWidth, side = 'top',
     disableHoverListener, onOpen, onClose, children, className, ...otherProps
   } = props
   const toggler = useToggler(false, { onOn: onOpen, onOff: onClose })
@@ -80,6 +78,7 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
         <Block
           data-role='dialog'
           radius='xs'
+          minWidth={minWidth}
           maxHeight={maxHeight}
           maxWidth={maxWidth}
           className={cn(css.Popup, className)}
@@ -93,18 +92,14 @@ export function Popup(props: PopupProps) { // TODO: make actions ad common compo
             </Header>
           )}
 
-          <Content p={p}>
+          <Content p={p} g={g}>
             {mix.fromValOrFunc(content ?? children, toggler)}
           </Content>
 
-          {footer && (
-            <Footer>
-              {mix.fromValOrFunc(footer, toggler)}
-            </Footer>
-          )}
+          {footer && mix.fromValOrFunc(footer, toggler)}
         </Block>
       )}
-      placement={v}
+      placement={side}
       arrow={arrow}
       open={open ?? toggler.isOn}
       slotProps={{

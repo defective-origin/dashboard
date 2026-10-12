@@ -14,11 +14,16 @@ import Button, { ButtonProps } from 'components/actions/Button'
 import css from './Actions.module.scss'
 
 
-export type ActionsProps = BlockProps & Pick<ButtonProps, 'size' | 'color' | 'format' | 'weight'> & {
-  /** Add border and separate actions by divider */
-  group?: boolean
-  action?: ButtonProps['v']
-}
+export type ActionsProps
+  = BlockProps
+  & Pick<ButtonProps, 'size' | 'color' | 'format' | 'weight'>
+  & {
+    /** Remove action border radius and stretch items */
+    menu?: boolean
+    /** Add border and separate actions by divider */
+    group?: boolean
+    action?: ButtonProps['v']
+  }
 
 /**
  * Component description.
@@ -43,13 +48,28 @@ export type ActionsProps = BlockProps & Pick<ButtonProps, 'size' | 'color' | 'fo
  * </Actions>
  */
 export function Actions(props: ActionsProps) {
-  const { size = 'xs', action, color, weight, format, tooltipSide, group, children, className, ...otherProps } = props
+  const { size = 'xs', menu, action, color, weight, format, tooltipSide, group, children, className, ...otherProps } = props
 
   // TODO: wrap into dropdown button if content not fit in area
 
   return (
-    <Block className={cn(css.Actions, group && css.group, className)} aligns='center' v='x' {...otherProps}>
-      {react.injectProp(children, 1, { size, tooltipSide, color, weight, format, v: action }, node => react.isExemplar(node, [Link, AppLink, Button, Dropdown]))}
+    <Block className={cn(css.Actions, group && css.group, className)} aligns={menu ? 'stretch' : 'center'} v='x' {...otherProps}>
+      {react.injectProp(1, children, node => {
+        if (react.isExemplar<React.ComponentProps<typeof Button>>(node, [Link, AppLink, Button, Dropdown])) {
+          return {
+            size,
+            color,
+            weight,
+            format,
+            v: action,
+            tooltipSide,
+            ...node.props,
+            tooltip: menu ? null : node.props.tooltip,
+            content: menu && !node.props.content ? node.props.tooltip : node.props.content,
+            style: menu ? { borderRadius: 0 } : undefined,
+          }
+        }
+      })}
     </Block>
   )
 }

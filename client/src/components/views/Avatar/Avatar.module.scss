@@ -10,8 +10,13 @@
 .AvatarGroup {
   position: relative;
 
-  .Avatar:not(:last-child) {
+  .Avatar {
     position: relative;
-    left: 25%;
   }
+}
+
+.more {
+  position: absolute;
+  right: 0;
+  top: -50%;
 }

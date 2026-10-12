@@ -23,7 +23,7 @@ export function Help(props: HelpProps) {
   return (
     <Dropdown
       className={cn(css.Help, className)}
-      popupSide='top'
+      side='top'
       start='help'
       v='wrapper'
       arrow

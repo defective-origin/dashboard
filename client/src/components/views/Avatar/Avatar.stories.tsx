@@ -11,7 +11,6 @@ const meta: Meta<typeof Avatar> = {
     size: field.size('AvatarSize'),
     className: field.string(),
     content: field.reactNode(),
-    children: field.reactNode(),
   },
 }
 
@@ -31,9 +30,13 @@ export const Demo: Story = {
 export const AvatarGroup: Story = {
   parameters: params('Avatar group'),
   render: () => (
-    <Avatar.Group max={4} size='sm' total={5000}>
-      <Avatar alt='user 3' src={src} />
-      <Avatar alt='user 4' src={src} />
+    <Avatar.Group max={4} size='sm'>
+      <Avatar alt='user 1' src={src} tooltip='Name 1' />
+      <Avatar alt='user 2' src={src} tooltip='Name 2' />
+      <Avatar alt='user 3' src={src} tooltip='Name 3' />
+      <Avatar alt='user 4' src={src} tooltip='Name 4' />
+      <Avatar alt='user 5' src={src} tooltip='Name 5' />
+      <Avatar alt='user 6' src={src} tooltip='Name 6' />
     </Avatar.Group>
   ),
 }

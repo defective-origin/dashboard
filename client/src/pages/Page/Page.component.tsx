@@ -53,7 +53,14 @@ export function Page(props: PageProps) {
         <Actions g='xxs' size='sm' aligns='center'>
           {extra}
 
-          <Dropdown arrow popupSide='bottom-end' trigger={<Avatar src={account.user.data?.image} size='md' />}>
+          <Dropdown
+            menu
+            arrow
+            minWidth={100}
+            side='bottom-end'
+            title={account.user.data?.name ?? account.user.data?.email}
+            trigger={<Avatar src={account.user.data?.image} size='md' />}
+          >
             {account.isAuthorized
               ? <Actions.Button start='logout' content={t('ACTION.LOGIN')} onClick={account.logout} />
               : <Actions.Button start='login' content={t('ACTION.LOGOUT')} onClick={account.login} />

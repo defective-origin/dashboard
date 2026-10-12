@@ -141,7 +141,7 @@ export function DashboardPage(props: DashboardPageProps) {
         widget={id => (
           <Dropdown
             size='lg'
-            popupSide='top-start'
+            side='top-start'
             trigger={<Widget id={id} />}
           >
             <Actions>

@@ -17,6 +17,7 @@ import Block, { BlockProps } from 'components/layouts/Block'
 import css from './MarkupMenu.module.scss'
 import Markup, { MARKUP_SCREENS } from './Markup'
 
+
 export type MarkupMenuProps = BlockProps & {
   select?: MarkupOptions
   items?: MarkupOptions[]
@@ -77,6 +78,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
       <Actions className={css.MarkupMenuScreens} size='sm' radius='xs' group>
         {sorted?.map(m =>
           <Markup
+            key={m.width}
             options={m}
             active={m.width === select?.width}
             onClick={() => onSelect?.(m)}
@@ -98,7 +100,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
       >
         {markups.map(markup => (
           <Block key={markup.width} v='grid' columns='auto 1fr auto'>
-            <Markup popupSide='left' options={markup} />
+            <Markup side='left' options={markup} />
             <Text size='xxs' content={`> ${markup.width}`} align='center' />
             {enabled[markup.width] && <Button size='xs' start='remove' color='error' onClick={() => toggle(markup)} disabled={markup.width === 992} />}
             {!enabled[markup.width] && <Button size='xs' start='add' color='success' onClick={() => toggle(markup)} />}

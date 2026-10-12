@@ -243,9 +243,9 @@ export function MarkupBoard<T = any>(props: MarkupBoardProps<T>) {
               // TODO: Forbid to remove last row and column
               return <MarkupBoardAddLine key={key} row={row} column={column} area={area} onColumnAdd={addColumn} onRowAdd={addRow} />
             } else if (isColumnBorder) {
-              return <MarkupBoardSetupLine size={grid.rows[row]} key={key} row={row} area={area} onSave={resizeRow} onRemove={removeRow} />
+              return <MarkupBoardSetupLine key={key} size={grid.rows[row]} row={row} area={area} onSave={resizeRow} onRemove={removeRow} />
             } else if (isRowBorder) {
-              return <MarkupBoardSetupLine size={grid.columns[column]} key={key} column={column} area={area} onSave={resizeColumn} onRemove={removeColumn} />
+              return <MarkupBoardSetupLine key={key} size={grid.columns[column]} column={column} area={area} onSave={resizeColumn} onRemove={removeColumn} />
             }
           }
 

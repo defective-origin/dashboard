@@ -175,7 +175,7 @@ export function attachComponents<
 }
 
 // work with children
-export const isExemplar = (node: React.ReactNode, components: React.ElementType<any>[]) => {
+export const isExemplar = <P = any>(node: React.ReactNode, components: React.ElementType<any>[]): node is React.ReactElement<P> => {
   return React.isValidElement(node) && components.some(cmp => node.type === cmp)
 }
 
@@ -192,20 +192,16 @@ export const isComponent = (value: any): value is React.ElementType | string =>
 
 
 
-export function injectProp(node: React.ReactNode, deep: number, prop: Record<string, unknown>, condition: (child: React.ReactNode) => boolean) {
-  return React.Children.map(node, child => {
+export function injectProp(deep: number, node: React.ReactNode, mutator: (child: React.ReactNode, index: number) => Record<string, unknown> | void) {
+  return React.Children.map(node, (child, index) => {
     if (!React.isValidElement<{ children: React.ReactNode }>(child)) {
       return child
     }
 
-    const nextProps = {}
-
-    if (condition(child as any)) {
-      Object.assign(nextProps, obj.clear(prop), child.props)
-    }
+    const nextProps = Object.assign({}, obj.clear(mutator(child, index) ?? {}))
 
     if (child.props.children && deep > 1) {
-      Object.assign(nextProps, { children: injectProp(child.props.children, deep - 1, prop, condition) })
+      Object.assign(nextProps, { children: injectProp(deep - 1, child.props.children, mutator) })
     }
 
     return React.cloneElement(child, nextProps)

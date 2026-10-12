@@ -37,7 +37,7 @@ export const Demo: Story = {
         <Actions.Link start='computer' content='Link' />
         <Actions.Dropdown tooltip='Docs' start='book'>
           <Actions.Link start='fullscreen' content='Action' />
-          <Actions.Dropdown start='add' content='Action' popupSide='right'>
+          <Actions.Dropdown start='add' content='Action' side='right'>
             <Actions.Link start='fullscreen' content='Link' />
           </Actions.Dropdown>
         </Actions.Dropdown>
