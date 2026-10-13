@@ -1,6 +1,6 @@
-import { useCallback, useRef } from 'react'
+import { useCallback } from 'react'
+import useRefState from '../UseRefState'
 
-const ERROR_CALLBACK = () => { throw new Error('Callback cannot be called') }
 
 // TODO: rename to useAction
 /**
@@ -43,12 +43,9 @@ const ERROR_CALLBACK = () => { throw new Error('Callback cannot be called') }
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function useFunc<F extends Function>(cb: F): F {
-  const ref = useRef<F>(ERROR_CALLBACK as never)
+  const ref = useRefState<F>(cb)
 
-  // eslint-disable-next-line react-hooks/refs
-  ref.current = cb
-
-  return useCallback((...args: unknown[]) => ref.current(...args), []) as never
+  return useCallback((...args: unknown[]) => ref.current(...args), [ref]) as never
 }
 
 export default useFunc

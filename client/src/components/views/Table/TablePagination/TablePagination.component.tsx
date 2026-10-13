@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // ---| core |---
 import { cn } from 'tools'
 import { t } from 'locale'
-import { useFunc } from 'hooks'
 
 // ---| components |---
 import Label from 'components/views/Label'
@@ -16,17 +15,24 @@ import { SelectField } from 'components/forms/fields/SelectField'
 // ---| self |---
 import css from './TablePagination.module.scss'
 
-const DEFAULT_OPTIONS = [10, 25, 50, 100]
+
+
+export type TablePaginationPageOptions = {
+  page: number
+  rows: number
+}
+export const ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100]
+export const DEFAULT_PAGINATION_OPTIONS: TablePaginationPageOptions = {
+  page: 0,
+  rows: ROWS_PER_PAGE_OPTIONS[1],
+}
 
 export type RowsPerPageOptions = number[]
-
-export type TablePaginationProps = {
-  items?: any[]
-  rowsPerPage?: number
-  rowsPerPageOptions?: number[]
+export type TablePaginationProps = TablePaginationPageOptions & {
+  records?: number
   visible?: boolean
   className?: string
-  onChange?: (items: any[]) => void
+  onChange?: (options: TablePaginationPageOptions) => void
 }
 
 /**
@@ -35,33 +41,12 @@ export type TablePaginationProps = {
  * <TablePagination />
  */
 export function TablePagination(props: TablePaginationProps) {
-  const { rowsPerPageOptions = DEFAULT_OPTIONS, rowsPerPage = rowsPerPageOptions[1], items, visible, onChange, className, ...otherProps } = props
-  const [page, setPage] = React.useState(0)
-  const [currentRowsPerPage, setCurrentRowsPerPage] = React.useState(rowsPerPage)
-  const count = items?.length ?? 0
-  const pages = Math.ceil(count / rowsPerPage)
+  const { page, rows, records = 0, visible, onChange, className, ...otherProps } = props
+  const pages = Math.ceil(records / rows)
   const hasNext = page < pages - 1
   const hasPrev = page > 0
 
-  const updateItems = useFunc(() => {
-    const rows = visible ? rowsPerPage : items?.length ?? 0
-    const start = page * rows
-    const end = start + rows
-
-    onChange?.(items?.slice(start, end) ?? [])
-  })
-
-  const onPageChange = useFunc((newPage: number) => {
-    setPage(newPage)
-    updateItems()
-  })
-
-  const onRowsPerPageChange = useFunc((value: number) => {
-    setCurrentRowsPerPage(value)
-    onPageChange(0)
-  })
-
-  useEffect(() => updateItems(), [updateItems, items])
+  const change = (options: Partial<TablePaginationPageOptions>) => onChange?.({ page, rows, ...options })
 
   if (!visible) {
     return null
@@ -78,11 +63,11 @@ export function TablePagination(props: TablePaginationProps) {
       <Divider v='y' />
 
       <Block v='x' justifies='space-between' aligns='center' p='0 xxs'>
-        <Button className={css.TablePaginationAction} start='first_page' disabled={!hasPrev} onClick={() => hasPrev && onPageChange(0)} />
-        <Button className={css.TablePaginationAction} start='chevron_left' disabled={!hasPrev} onClick={() => hasPrev && onPageChange(page - 1)} />
+        <Button className={css.TablePaginationAction} start='first_page' disabled={!hasPrev} onClick={() => change({ page: 0 })} />
+        <Button className={css.TablePaginationAction} start='chevron_left' disabled={!hasPrev} onClick={() => change({ page: page - 1 })} />
         <Text content={page + 1} size='xxs' />
-        <Button className={css.TablePaginationAction} start='chevron_right' disabled={!hasNext} onClick={() => hasNext && onPageChange(page + 1)} />
-        <Button className={css.TablePaginationAction} start='last_page' disabled={!hasNext} onClick={() => hasNext && onPageChange(pages)} />
+        <Button className={css.TablePaginationAction} start='chevron_right' disabled={!hasNext} onClick={() => change({ page: page + 1 })} />
+        <Button className={css.TablePaginationAction} start='last_page' disabled={!hasNext} onClick={() => change({ page: pages - 1 })} />
       </Block>
 
       <Divider v='y' />
@@ -91,8 +76,8 @@ export function TablePagination(props: TablePaginationProps) {
         tooltip={t('LABEL.ROWS_PER_PAGE')}
         className={css.TablePaginationLabel}
       >
-        <SelectField className={css.TablePaginationSelect} value={currentRowsPerPage} onChange={onRowsPerPageChange}>
-          {rowsPerPageOptions.map(num => <SelectField.Item key={num} value={num} children={num} />)}
+        <SelectField className={css.TablePaginationSelect} value={rows} onChange={rows => change({ rows, page: 0 })}>
+          {ROWS_PER_PAGE_OPTIONS.map(num => <SelectField.Item key={num} value={num} children={num} />)}
         </SelectField>
       </Label>
     </Block>

@@ -68,27 +68,27 @@
     width: 100%;
     height: 10px;
     top: 0;
-    background: linear-gradient(180deg, var(--scroll-shadow-color), transparent);
+    box-shadow:  inset 0 10px 10px -10px var(--scroll-shadow-color);
   }
 
   .shadow-y--end {
     width: 100%;
     height: 10px;
     bottom: 0;
-    background: linear-gradient(0deg, var(--scroll-shadow-color), transparent);
+    box-shadow:  inset 0 -10px 10px -10px var(--scroll-shadow-color);
   }
 
   .shadow-x--start {
     width: 10px;
     height: 100%;
     left: 0;
-    background: linear-gradient(90deg, var(--scroll-shadow-color), transparent);
+    box-shadow:  inset 10px 0 10px -10px var(--scroll-shadow-color);
   }
 
   .shadow-x--end {
     width: 10px;
     height: 100%;
     right: 0;
-    background: linear-gradient(270deg, var(--scroll-shadow-color), transparent);
+    box-shadow: inset -10px 0 10px -10px var(--scroll-shadow-color);
   }
 }

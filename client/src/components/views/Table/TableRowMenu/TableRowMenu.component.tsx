@@ -24,7 +24,7 @@ export type TableRowMenuProps<T extends TableRecord> = DropdownProps & {
 export function TableRowMenu<T extends TableRecord>(props: TableRowMenuProps<T>) {
   const { record, column, className, ...otherProps } = props
 
-  return <Dropdown className={cn(css.TableRowMenu, className)} start='more_vert' {...otherProps} />
+  return <Dropdown className={cn(css.TableRowMenu, className)} start='more_vert' menu arrow {...otherProps} />
 }
 
 TableRowMenu.displayName = 'TableRowMenu'
