@@ -46,7 +46,6 @@ export type ScrollBarOptions = ScrollOptions & {
 }
 
 export type ScrollBarReturnOptions = null | {
-  display: (isMouseInside?: boolean) => void
   refresh: (_container?: number, _content?: number, shift?: number) => void
   shadows: React.ReactNode
   element: React.ReactNode
@@ -76,7 +75,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   const thumbRef = useRef<HTMLDivElement>(null)
   const shadowStartRef = useRef<HTMLDivElement>(null)
   const shadowEndRef = useRef<HTMLDivElement>(null)
-  const backButtonRef = useRef<HTMLDivElement>(null)
+  const backButtonRef = useRef<HTMLButtonElement>(null)
   const isMouseInsideContainer = useRef(false)
   const property = SCROLLBAR_PROPERTY_MAP[v]
 
@@ -96,7 +95,7 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
     }
   })
 
-  const display = useFunc((ref: React.RefObject<HTMLDivElement | null>, isVisible: unknown = true) => {
+  const display = useFunc((ref: React.RefObject<HTMLElement | null>, isVisible: unknown = true) => {
     const state = isVisible ? 'visible' : 'hidden'
 
     obj.set(ref.current?.style, property.visibility, state)
@@ -163,10 +162,13 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
   useEvent('mousemove', move, { disable: !enabled })
   useEvent('mouseup', endMove, { disable: !enabled })
 
+  // show/hide scrollbars on container hover
+  useEvent('mouseover', () => displayScrollbar(true), { ref: container })
+  useEvent('mouseout', () => displayScrollbar(false), { ref: container })
+
   const scrollBack = useFunc(() => react.getElement(container)?.scrollTo({ [property.pos]: 0, behavior }))
 
   return useMemo(() => !enabled ? null : ({
-    display: displayScrollbar,
     refresh,
     shadows: (
       <>
@@ -180,16 +182,17 @@ export const useScrollBar = (options: ScrollBarOptions): ScrollBarReturnOptions 
       </div>
     ),
     button: (
-      <div ref={backButtonRef} className={cn('scroll-back-button')}>
-        <Button
-          size='md'
-          start={v === 'x' ? 'keyboard_arrow_left' : 'keyboard_arrow_up'}
-          onClick={scrollBack}
-          v='outlined'
-        />
-      </div>
+      <Button
+        ref={backButtonRef}
+        className={cn('scroll-back-button')}
+        size='md'
+        color='secondary'
+        start={v === 'x' ? 'keyboard_arrow_left' : 'keyboard_arrow_up'}
+        onClick={scrollBack}
+        v='outlined'
+      />
     ),
-  }), [enabled, v, className, property.margin, indent, thin, displayScrollbar, refresh, scrollBack])
+  }), [enabled, v, className, property.margin, indent, thin, refresh, scrollBack])
 }
 
 export default useScrollBar

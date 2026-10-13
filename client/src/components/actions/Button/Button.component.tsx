@@ -8,7 +8,9 @@ import { withPopup } from 'components/popups/Popup'
 import { ButtonStyleOptions, useButtonStyle } from './Button.hooks'
 
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonStyleOptions
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonStyleOptions & {
+  ref?: React.Ref<HTMLButtonElement>
+}
 
 /**
  * Simple button without inner logic.

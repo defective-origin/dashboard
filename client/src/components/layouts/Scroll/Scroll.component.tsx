@@ -9,6 +9,7 @@ import { cn, react } from 'tools'
 import './Scroll.module.scss'
 import useScrollBar, { ScrollBarOptions, ScrollShift } from './UseScrollBar'
 
+
 export type Offset = boolean | ScrollShift | {
   x: ScrollShift
   y: ScrollShift
@@ -68,11 +69,6 @@ export function Scroll(props: ScrollProps) {
   // TODO: fix size calculation
   // TODO: hide scroll on mobile!
 
-  const display = useFunc((isMouseInside?: boolean) => {
-    barY?.display(isMouseInside)
-    barX?.display(isMouseInside)
-  })
-
   const refresh = useFunc(() => {
     const parent = react.getElement(container)
     if (!parent) {
@@ -100,10 +96,6 @@ export function Scroll(props: ScrollProps) {
   // resize scroll on container resize and scroll
   useResizeObserver(refresh, { ref: container })
   useEvent('scroll', refresh, { ref: container })
-
-  // show/hide scrollbars on container hover
-  useEvent('mouseover', () => display(true), { ref: container })
-  useEvent('mouseout', () => display(false), { ref: container })
 
   // attach overlay anchor ref for getting parent if container selector is not provided
   return (
