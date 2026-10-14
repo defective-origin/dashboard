@@ -99,7 +99,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
         disableHoverListener
       >
         {markups.map(markup => (
-          <Block key={markup.width} v='grid' columns='auto 1fr auto'>
+          <Block key={markup.width} v='grid' columns='auto 1fr auto' aligns='center'>
             <Markup side='left' options={markup} />
             <Text size='xxs' content={`> ${markup.width}`} align='center' />
             {enabled[markup.width] && <Button size='xs' start='remove' color='error' onClick={() => toggle(markup)} disabled={markup.width === 992} />}

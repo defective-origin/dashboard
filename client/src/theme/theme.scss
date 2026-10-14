@@ -48,23 +48,32 @@
   --border-dashed: var(--border-width) dashed var(--divider-color);
 
   // fonts
-  --font-main: 'Montserrat', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-code: 'Fira Code', monospace;
-  --lh-heading: 1.25; /* Tight line-height for headings to avoid gaps */
-  --lh-body: 1.65;    /* Spacious line-height for long-form reading comfort */
+  --font: 'Montserrat', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 // use light, dark class on element to prevent changing theme on it
 .light { @include init-color-variables(#1D1E26, #6C6F80, #50a71c, #1e61fd, #F7AF12, #ff3100, #F5F6FA, #F8F8F8); }
 .dark { @include init-color-variables(#F8FAFC, #94A3B8, #56b843, #60A5FA, #FBBF24, #F87171, #333333, #2c2b2b); }
 
-html {
-  /* Smooth scaling from 14px on smartphones to 18px on desktops */
-  font-size: clamp(14px, 0.4vw + 12.5px, 18px);
+
+/* RESET STYLES */
+
+/* enable the correct border-box model for all elements applied by browsers */
+*, *::before, *::after {
+  font-family: var(--font);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
 
-* {
-  box-sizing: border-box;
+/* improving scrolling smoothness */
+html {
+  scroll-behavior: smooth;
+
+  /* Smooth scaling from 14px on smartphones to 18px on desktops */
+  font-size: clamp(14px, 0.4vw + 12.5px, 18px);
 }
 
 /* For standard monitors with very high resolution (4K+) */
@@ -82,33 +91,58 @@ html {
   }
 }
 
+
+/* configuring basic properties for the body */
 body {
-  font-family: var(--font-main);
+  font-family: var(--font);
   font-size: var(--text-sm);
-  line-height: var(--lh-body);
   color: var(--color-secondary);
+  min-height: 100vh;
+  text-rendering: optimizespeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* remove list markers (for `ul` and `ol`) — they almost always need to be removed */
+ul, ol {
+  list-style: none;
+}
+
+/* simplifying image handling */
+img, picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* fix table borders */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* inherit fonts for inputs and buttons (browsers break them by default) */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* making links more predictable */
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 // Text blocks should take sizes from area where it's places
 h1, h2, h3, h4, h5, h6 {
-  line-height: var(--lh-heading);
   color: var(--color-primary);
   margin: 0;
   font-weight: 500;
 }
 
-p { margin: 0; }
 b, strong { font-weight: 500; }
 i, em { font-style: italic; }
-code { font-family: var(--font-code); }
-
-a {
-  color: var(--color-info);
-  text-decoration: none;
-}
+a { color: var(--color-info); }
 
 
-
+p {}
 q {}
 s {}
 p {}
@@ -119,6 +153,7 @@ sub {}
 pre {}
 del {}
 ins {}
+code {}
 span {}
 mark {}
 time {}
@@ -126,22 +161,3 @@ abbr {}
 cite  {}
 small {}
 blockquote {}
-
-// /* --- Semantic Web Scrollbars --- */
-// ::-webkit-scrollbar {
-//   width: 8px;
-//   height: 8px;
-// }
-
-// ::-webkit-scrollbar-track {
-//   background: var(--color-contrast-primary);
-// }
-
-// ::-webkit-scrollbar-thumb {
-//   background: color-mix(in srgb, var(--color-primary) 20%, transparent);
-//   border-radius: 99px;
-// }
-
-// ::-webkit-scrollbar-thumb:hover {
-//   background: color-mix(in srgb, var(--color-primary) 35%, transparent);
-// }
