@@ -1,8 +1,7 @@
 import { Donation } from 'api'
-import { TableColumn } from 'components/views/Table'
 import column from 'screens/tables/columns'
 
-export const DONATION_COLUMNS: TableColumn<Donation>[] = [
+export const DONATION_COLUMNS = column.list<Donation>(
   column.clipboard({
     field: 'id',
   }),
@@ -23,4 +22,4 @@ export const DONATION_COLUMNS: TableColumn<Donation>[] = [
     bold: true,
     ellipsis: true,
   }),
-]
+)

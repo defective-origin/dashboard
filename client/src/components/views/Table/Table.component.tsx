@@ -3,7 +3,7 @@ import MuiTable from '@mui/material/Table'
 import MuiTableContainer from '@mui/material/TableContainer'
 
 // ---| core |---
-import { arr, cn, obj } from 'tools'
+import { arr, cn, mix, obj } from 'tools'
 
 // ---| components |---
 import Text from 'components/views/Text'
@@ -27,15 +27,26 @@ const ORDER_NEXT_MAP: Record<TableOrder | 'undefined', TableOrder | undefined> =
   desc: undefined,
 }
 
-export type TableProps<T extends TableRecord> = BlockProps & {
+export type TableProps<T extends TableRecord> = Omit<BlockProps, 'columns'> & {
+  /** table name */
   title?: React.ReactNode
+  /** records to show */
   items?: T[]
+  /** column configs */
   columns?: TableColumn<T>[]
+  /** filter items by conditions */
   filters?: TableFilter<T>[]
+  /** show pagination panel */
   pagination?: boolean
+  /** allows to customize columns */
+  customizable?: boolean
+  /** shows spinner */
   loading?: boolean
-  actions?: React.ReactNode
-  menu?: React.ReactNode
+  /** row actions */
+  actions?: mix.ValOrFunc<React.ReactNode, [T, TableColumn<T>]>
+  /** extra table actions */
+  extra?: React.ReactNode
+  /** row key generator */
   keygen?: TableKeygen<T>
 }
 
@@ -46,27 +57,65 @@ export type TableProps<T extends TableRecord> = BlockProps & {
  */
 export function Table<T extends TableRecord>(props: TableProps<T>) {
   const {
-    menu, title, actions, width = '100%', height = '100%', minHeight, loading, items,
-    columns, filters, pagination, keygen, children, className, ...otherProps
+    extra, title, actions, width = '100%', height = '100%', minHeight, loading, items,
+    columns, filters, customizable, pagination, keygen, children, className, ...otherProps
   } = props
   const [paginator, setPaginator] = React.useState(DEFAULT_PAGINATION_OPTIONS)
   const [sortColumn, setSortColumn] = useState<TableColumn<T>>()
-  const defaultColumns: TableColumn<T>[] = useMemo(() => { // TODO: add payload for column config?
+  const defaultColumns: TableColumn<T>[] = useMemo(() => {
+    if (!columns) {
+      return []
+    }
+
     // add actions
-    if (actions && !columns?.find(c => c.key === 'actions')) {
-      columns?.push({
+    if (actions && !columns.find(c => c.key === 'actions')) {
+      columns.push({
         key: 'actions',
         align: 'center',
         width: 33,
         fixed: true,
         cell: TableRowMenu,
         props: { padding: 0 },
-        mapper: (record, column) => ({ children: actions, record, column }),
+        mapper: (record, column) => ({ children: mix.fromValOrFunc(actions, record, column)}),
       })
     }
-    // TODO: calculate all settings in columns function
+
+    columns.forEach((column, idx) => {
+      // setup key
+      column.key = column.key ?? column.field ?? idx
+
+      // setup name by field name by default
+      column.name = column.name ?? (column.field as string)?.split('.').at(-1)
+
+      // setup alignment
+      column.alignCell = column.alignCell ?? column.align
+
+      // setup sort function
+      column.sortBy = column.sort ? column.sortBy ?? column.field : undefined
+      if (typeof column.sort === 'boolean') {
+        if (!column.sortBy) {
+          console.error(`If column has column.sort: true then column.field or column.sortBy should be set. Column: ${JSON.stringify(column)}`)
+          column.sort = undefined
+        } else {
+          column.sort = (_, __, value) => value
+        }
+      }
+
+      // setup render function
+      if (!column.render && column.cell && column.mapper) {
+        column.render = (item, column, value) => {
+          const Cell = column.cell as React.FC
+          const cellProps = column.mapper?.(item, column, value)
+
+          return <Cell {...column.props} {...cellProps} />
+        }
+      } else if (!column.render && column.field) {
+        column.render = (_, __, value) => value
+      }
+    })
+
     // setup left and right position for fixed columns
-    const fixedColumns = columns?.filter(column => column.fixed) ?? []
+    const fixedColumns = columns.filter(column => column.fixed)
 
     for (let i = 0, left = 0, right = 0; i < fixedColumns.length; i++) {
       const leftColumn = fixedColumns[i]
@@ -94,41 +143,7 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
       }
     }
 
-    columns?.forEach((column, idx) => {
-      // setup key
-      column.key = column.key ?? column.field ?? idx
-
-      // setup name by field name by default
-      column.name = column.name ?? (column.field as string)?.split('.').at(-1)
-
-      // setup alignment
-      column.alignCell = column.alignCell ?? column.align
-
-      // setup sort function
-      column.sortBy = column.sort ? column.sortBy ?? column.field : undefined
-      if (typeof column.sort === 'boolean') {
-        if (!column.sortBy) {
-          console.error(`If column has column.sort: true then column.field or column.sortBy should be set. Column: ${JSON.stringify(column)}`)
-          column.sort = undefined
-        } else {
-          column.sort = (_, __, field) => field
-        }
-      }
-
-      // setup render function
-      if (!column.render && column.cell && column.mapper) {
-        column.render = (item, column, field) => {
-          const Cell = column.cell as React.FC
-          const cellProps = column.mapper?.(item, column, field)
-
-          return <Cell {...column.props} {...cellProps} />
-        }
-      } else if (!column.render && column.field) {
-        column.render = (_, __, field) => field
-      }
-    })
-
-    return columns?.map(column => ({ ...column })) ?? []
+    return columns.map(column => ({ ...column }))
   }, [actions, columns])
 
   const visibleColumns = useMemo(() => {
@@ -146,14 +161,13 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
   const visibleItems = useMemo(() => {
     // filter items
     let result = filters?.length
-      ? items?.filter(item => filters?.every(filter => filter(item))) ?? []
+      ? items?.filter(item => filters?.some(filter => filter(item))) ?? []
       : items ?? []
 
     if (sortColumn) {
-      const order = ORDER_NEXT_MAP[sortColumn.order as TableOrder]
       const selector = (item: T) => (sortColumn.sort as TableSort<T>)(item, sortColumn, obj.get(item, sortColumn.sortBy))
 
-      result = order ? arr.sort(items, order, selector) ?? [] : result
+      result = sortColumn.order ? arr.sort(result, sortColumn.order, selector) ?? [] : result
     }
 
     if (pagination) {
@@ -167,20 +181,28 @@ export function Table<T extends TableRecord>(props: TableProps<T>) {
   }, [filters, items, sortColumn, pagination, paginator.page, paginator.rows])
 
   // TODO: save presets in local storage
-  // TODO: create filters component Filter.Container, Filter.Number, Filter.Range ...
   // TODO: table header make sticky when we scroll global scroll
-  // TODO: fix deep typescript recursion freeze
-  // TODO: add actions: view/edit (on line click), remove, add action under table
+  // TODO: fix deep typescript recursion freeze when object is deep and key cannot be calculated
   // TODO: add sort by html cell content
-  // TODO: add Reset button to last column: reset sorting and filters and other column settings
   // TODO: fix all columns if there is no scroll!
-  // TODO: add search, filters, hide/show columns, info drawer[pass component for body]
+  // TODO: add search, hide/show columns, reordering, sorting column, items filters, reset button to default columns
+  // TODO: add payload to table to spread for all configs instead of functions wrappers
   return (
     <Block className={cn(css.Table, className)} style={{ width, height, minHeight }} {...otherProps}>
       <Block className={css.TableHeader} v='x' justifies='space-between' aligns='center'>
-        <Text v='h4'>{title}</Text>
+        <Block v='x' g='xs'>
+          <Text v='h4'>{title}</Text>
+
+          {customizable && (
+            <Actions g='xxs' size='xs' justifies='end'>
+              <Actions.Button start='search' />
+              <Actions.Button start='settings' />
+            </Actions>
+          )}
+        </Block>
+
         <TablePagination visible={!!pagination} records={items?.length} onChange={setPaginator} {...paginator} />
-        <Actions g='xxs' size='sm' justifies='end'>{menu}</Actions>
+        <Actions g='xxs' size='xs' justifies='end'>{extra}</Actions>
       </Block>
 
       <MuiTableContainer className={css.TableContainer} sx={{ height: '100%', width: '100%' }}>

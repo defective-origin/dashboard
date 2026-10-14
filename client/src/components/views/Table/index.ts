@@ -1,5 +1,5 @@
 export { default } from './Table.component'
 export * from './Table.component'
 export * from './Table.types'
-export * from './Table.tools'
+export * from './Table.columns'
 export * from './TableRowMenu'

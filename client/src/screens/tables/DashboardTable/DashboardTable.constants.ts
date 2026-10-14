@@ -1,9 +1,8 @@
 import { Board } from 'api'
-import { TableColumn } from 'components/views/Table'
 import column from 'screens/tables/columns'
 
-export const DASHBOARD_COLUMNS: TableColumn<Board>[] = [
+export const DASHBOARD_COLUMNS = column.list<Board>(
   column.markups({
     field: 'markups',
   }),
-]
+)

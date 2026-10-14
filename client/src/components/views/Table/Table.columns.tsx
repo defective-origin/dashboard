@@ -76,7 +76,14 @@ export const booleanColumn = <T extends TableRecord>(column: IconColumn<T>): Ico
 
 // TODO: add condition, user, group, tag, yes-no and other columns
 
+
+export function columnList<T extends TableRecord>(...items: TableColumn<T>[]) {
+  return items
+}
+
+
 export default {
+  list: columnList,
   text: textColumn,
   number: numberColumn,
   date: dateColumn,

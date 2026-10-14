@@ -1,8 +1,7 @@
 import { Feature } from 'api'
-import { TableColumn } from 'components/views/Table'
 import column from 'screens/tables/columns'
 
-export const FEATURE_COLUMNS: TableColumn<Feature>[] = [
+export const FEATURE_COLUMNS = column.list<Feature>(
   column.clipboard({
     field: 'id',
     fixed: true,
@@ -39,4 +38,4 @@ export const FEATURE_COLUMNS: TableColumn<Feature>[] = [
   //   name: 'usage',
   //   mapper: record => ({ id: record.id, v: 'dashboard' }),
   // }),
-]
+)

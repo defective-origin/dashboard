@@ -1,4 +1,4 @@
-import defaultColumns, { TextColumn, textColumn } from 'components/views/Table/Table.tools'
+import defaultColumns, { TextColumn, textColumn } from 'components/views/Table/Table.columns'
 import Clipboard, { ClipboardProps } from 'components/actions/Clipboard'
 import { TableColumn, TableRecord } from 'components/views/Table'
 import User, { UserProps } from 'screens/views/User'

@@ -32,7 +32,7 @@ export function SupportTable(props: SupportTableProps) {
       columns={SUPPORT_COLUMNS}
       items={requests.data}
       loading={requests.isLoading}
-      menu={[
+      extra={[
         <Button start='refresh' tooltip='Refresh' onClick={() => requests.refetch()} />,
         <Button start='add' tooltip='Add Request' />,
       ]}

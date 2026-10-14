@@ -32,7 +32,7 @@ export function DonationTable(props: DonationTableProps) {
       columns={DONATION_COLUMNS}
       items={requests.data}
       loading={requests.isLoading}
-      menu={[
+      extra={[
         <Button start='refresh' tooltip='Refresh' onClick={() => requests.refetch()} />,
         <Button start='add' tooltip='new request' />,
       ]}

@@ -1,8 +1,7 @@
-import { TableColumn } from 'components/views/Table'
 import column from 'screens/tables/columns'
 import { Expense } from 'api'
 
-export const EXPENSE_COLUMNS: TableColumn<Expense>[] = [
+export const EXPENSE_COLUMNS = column.list<Expense>(
   column.text({
     field: 'name',
   }),
@@ -15,4 +14,4 @@ export const EXPENSE_COLUMNS: TableColumn<Expense>[] = [
     field: 'value',
     format: 'currency',
   }),
-]
+)

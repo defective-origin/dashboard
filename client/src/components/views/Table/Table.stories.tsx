@@ -2,8 +2,7 @@ import { Meta, StoryObj, field, params, theme } from 'storybook'
 import Button from 'components/actions/Button'
 import Text from 'components/views/Text'
 import Table, { TableProps } from './Table.component'
-import { TableColumn } from './Table.types'
-import column from './Table.tools'
+import column from './Table.columns'
 
 type Item = {
   name: string
@@ -17,7 +16,7 @@ type Item = {
   isBig?: boolean
 }
 
-const COLUMNS: TableColumn<Item>[] = [
+const COLUMNS = column.list<Item>(
   // base config with alignment, data mapping and props providing
   {
     fixed: true,
@@ -92,7 +91,7 @@ const COLUMNS: TableColumn<Item>[] = [
     field: 'date',
     name: 'Created',
   }),
-]
+)
 
 function createData(
   name: string,
@@ -151,6 +150,11 @@ export const Demo: Story = {
     height: 500,
     pagination: true,
     loading: false,
+    customizable: true,
+    title: 'Table Name',
+    extra: [
+      <Button start='info' content='Info' />,
+    ],
     actions: [
       <Button start='edit' content='Edit' />,
       <Button start='delete_forever' content='Delete' />,

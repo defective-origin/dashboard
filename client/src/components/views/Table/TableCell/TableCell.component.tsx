@@ -59,11 +59,11 @@ export function TableCell<T extends TableRecord>(props: TableCellProps<T>) {
     )
   }
 
-  const field = column.field && obj.get(item as T, column.field)
+  const value = column.field && obj.get(item as T, column.field)
 
   return (
     <MuiTableCell id={id} className={_className} align={column.alignCell} style={style} {...otherProps}>
-      {item && column.render?.(item, column, field)}
+      {item && column.render?.(item, column, value)}
     </MuiTableCell>
   )
 }

@@ -23,7 +23,7 @@ export type FeatureTableProps<T extends Feature> = TableProps<T>
 export function FeatureTable<T extends Feature>(props: FeatureTableProps<T>) {
   const { columns, children, className, ...otherProps } = props
 
-  const combinedColumns = useMemo(() => [...FEATURE_COLUMNS, ...(columns ?? [])], [columns])
+  const combinedColumns = useMemo(() => [...FEATURE_COLUMNS, ...(columns ?? [])] as T[], [columns])
 
   return (
     <Table

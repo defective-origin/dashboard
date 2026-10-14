@@ -1,8 +1,7 @@
 import { SupportRequest } from 'api'
-import { TableColumn } from 'components/views/Table'
 import column from 'screens/tables/columns'
 
-export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [
+export const SUPPORT_COLUMNS = column.list<SupportRequest>(
   column.clipboard({
     field: 'id',
   }),
@@ -39,4 +38,4 @@ export const SUPPORT_COLUMNS: TableColumn<SupportRequest>[] = [
     minWidth: 200,
     ellipsis: true,
   }),
-]
+)
