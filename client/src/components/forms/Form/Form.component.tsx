@@ -295,7 +295,7 @@ export function Form<O extends object>(props: FormProps<O>) {
   })
 
   return (
-    <FormContext.Provider value={formManager as unknown as FormManager<object>}>
+    <FormContext value={formManager as unknown as FormManager<object>}>
       <Block
         as='form'
         className={cn(css.Form, className)}
@@ -305,7 +305,7 @@ export function Form<O extends object>(props: FormProps<O>) {
       >
         {children}
       </Block>
-    </FormContext.Provider>
+    </FormContext>
   )
 }
 

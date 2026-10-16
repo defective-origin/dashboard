@@ -56,7 +56,7 @@
 .dark { @include init-color-variables(#F8FAFC, #94A3B8, #56b843, #60A5FA, #FBBF24, #F87171, #333333, #2c2b2b); }
 
 
-/* RESET STYLES */
+/* RESET AND NORMALIZE STYLES */
 
 /* enable the correct border-box model for all elements applied by browsers */
 *, *::before, *::after {

@@ -102,9 +102,9 @@ export function ThemeProvider(props: ThemeProviderProps) {
   return (
     <StyledEngineProvider injectFirst>
       <MuiThemeProvider theme={THEME}>
-        <ThemeContext.Provider value={value}>
+        <ThemeContext value={value}>
           { props.children }
-        </ThemeContext.Provider>
+        </ThemeContext>
       </MuiThemeProvider>
     </StyledEngineProvider>
   )
