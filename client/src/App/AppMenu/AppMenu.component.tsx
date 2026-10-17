@@ -10,6 +10,7 @@ import { useToggler } from 'hooks'
 import Logo from 'components/views/Logo'
 import Item from 'components/layouts/Item'
 import Actions from 'components/layouts/Actions'
+import Divider from 'components/layouts/Divider'
 import Aside, { AsideProps } from 'components/layouts/Aside'
 
 // ---| self |---
@@ -34,7 +35,7 @@ export function AppMenu(props: AppMenuProps) {
     <Aside className={cn(css.AppMenu, className)} as='nav' g='xs' p={menu.isOn ? 0 : 'xs'} {...otherProps}>
       <Logo width='2rem' />
 
-      <Actions className={css.Main} v='y' grow={1} size='md' tooltipSide='right' color='primary' weight={400} format='capitalize' menu={menu.isOn}>
+      <Actions className={css.Main} v='y' grow={1} size='md' tooltipSide='right' color='primary' weight={400} g='xxs' format='capitalize' menu={menu.isOn}>
         <Actions.AppLink start='crossword' to='APPS' tooltip={t('LABEL.APPS')} />
         <Actions.AppLink start='dashboard' to='BOARDS' tooltip={t('LABEL.BOARDS')} />
         <Actions.AppLink start='widgets' to='WIDGETS' tooltip={t('LABEL.WIDGETS')} />
@@ -46,6 +47,7 @@ export function AppMenu(props: AppMenuProps) {
 
         <Item stretch />
 
+        {menu.isOn ? <Divider v='x-end' content='General' /> : <Divider v='x' />}
         <Actions.Button start='brightness_alert' tooltip={t('LABEL.ALERT')} color='error' />
         <Actions.AppLink start='auto_stories' to='GUIDE' tooltip={t('LABEL.GUIDE')} />
         <Actions.AppLink start='local_atm' to='DONATION' tooltip={t('LABEL.DONATION')} />

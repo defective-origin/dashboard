@@ -1,11 +1,68 @@
 .Divider {
-  &.x {
-    width: auto; /* or ensure width is not set */
-    align-self: stretch;
+  display: flex;
+  text-align: center;
+  align-self: stretch;
+  align-items: center;
+  margin: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.x {
+  border-bottom: var(--border);
+}
+
+.x-start,
+.x-center,
+.x-end {
+  height: min-content;
+
+  &::before,
+  &::after {
+    content: '';
+    -ms-flex-item-align: center;
+    align-self: center;
+    width: 100%;
+    border-top: var(--border);
+    height: 0;
   }
 
-  &.y {
-    height: auto; /* or ensure height is not set */
-    align-self: stretch;
+  .content {
+    padding: 0 var(--space-sm);
   }
 }
+
+.x-start::before { width: 10%; }
+.x-start::after { width: 90%; }
+.x-end::before { width: 90%; }
+.x-end::after { width: 10%; }
+
+.y {
+  border-left: var(--border);
+}
+
+.y-start,
+.y-center,
+.y-end {
+  flex-direction: column;
+  width: min-content;
+
+  &::before,
+  &::after {
+    content: '';
+    -ms-flex-item-align: center;
+    align-self: center;
+    height: 100%;
+    border-left: var(--border);
+    width: 0;
+  }
+
+  .content {
+    padding: var(--space-sm) 0;
+  }
+}
+
+.y-start::before { height: 10%; }
+.y-start::after { height: 90%; }
+.y-end::before { height: 90%; }
+.y-end::after { height: 10%; }

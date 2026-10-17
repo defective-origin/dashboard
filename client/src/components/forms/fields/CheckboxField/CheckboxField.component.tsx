@@ -41,6 +41,7 @@ export function CheckboxField(props: CheckboxFieldProps) {
     onChange?.(toValue(checked, value), event)
   , [value, onChange])
 
+  // TODO: stick to 1rem
   return (
     <FormControlLabel
       label={label}

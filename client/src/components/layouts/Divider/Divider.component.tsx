@@ -1,42 +1,44 @@
 import React from 'react'
-import MuiDivider, { DividerProps as MuiDividerProps } from '@mui/material/Divider'
 
 // ---| core |---
 import { cn } from 'tools'
+import { Direction } from 'theme'
 
 // ---| components |---
-import Text, { TextProps } from 'components/views/Text'
+import Text from 'components/views/Text'
 
 // ---| self |---
 import css from './Divider.module.scss'
 
-export const DIVIDER_VARIANT_MAP: Record<'x' | 'y', MuiDividerProps['orientation']> = {
-  x: 'horizontal',
-  y: 'vertical',
-}
 
-export type DividerVariant = keyof typeof DIVIDER_VARIANT_MAP
-
-export type DividerProps = Omit<TextProps, 'v'> & {
+export type DividerVariant = Exclude<Direction, 'xy'> | `${Exclude<Direction, 'xy'>}-${'start' | 'center' | 'end'}`
+export type DividerProps = {
   v?: DividerVariant
+  content?: React.ReactNode
+  className?: string
+  children?: React.ReactNode
 }
 
 /**
- * Component description.
+ * Allows separate content.
  * @example
- * <Divider v='y' content='text' format='uppercase' />
+ * <Divider v='y' />
+ * <Divider v='y-start' content='text' />
+ * <Divider v='y-center' content='text' />
+ * <Divider v='y-end' content='text' />
  */
 export function Divider(props: DividerProps) {
-  const { v ='x', content, children, className, ...otherProps } = props
-  const hasContent = content ?? children
-  const _content = children ?? <Text content={content} {...otherProps} />
+  const { content, v ='x', className, children, ...otherProps } = props
+  const text = content || children
+
+  if (!text) {
+    return <hr className={cn(css.Divider, css[v], className)} {...otherProps} />
+  }
 
   return (
-    <MuiDivider
-      className={cn(css.Divider, css[v], className)}
-      orientation={DIVIDER_VARIANT_MAP[v]}
-      children={hasContent && _content}
-    />
+    <div className={cn(css.Divider, css[v], className)} {...otherProps}>
+      <Text className={css.content} v='span' size='xxs' content={text} />
+    </div>
   )
 }
 

@@ -133,8 +133,8 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
     <Block className={cn(css.FormField, className)}>
       {label && (
         <label htmlFor={path} className={css.label}>
-          <Text content={label} size='xs' />
-          {required && <Text size='xs' color='error' content='*' />}
+          <Text v='span' content={label} size='xs' />
+          {required && <Text v='span' size='xs' color='error' content='*' />}
           {help && <Help size='xs' {...helpProps as HelpProps} />}
         </label>
       )}
