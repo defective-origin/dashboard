@@ -59,7 +59,8 @@ export function SearchPage<T extends Feature>(props: SearchPageProps<T>) {
       }
       {...otherProps}
     >
-      <Page.Content v='columns' columns={3} scroll='y' p='md' g='md'>
+      <Page.Content v='columns' columns={3} p='md' g='md'>
+        <Page.Scroll v='y' actions />
         {items?.map((item, index) => <PreviewCard key={item.id ?? index} options={item} to={to} params={item} />)}
       </Page.Content>
 

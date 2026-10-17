@@ -70,10 +70,15 @@
 
 /* improving scrolling smoothness */
 html {
-  scroll-behavior: smooth;
-
-  /* Smooth scaling from 14px on smartphones to 18px on desktops */
+  font-family: var(--font);
   font-size: clamp(14px, 0.4vw + 12.5px, 18px);
+  color: var(--color-secondary);
+  line-height: 1.15;
+  text-size-adjust: 100%;
+  tab-size: 4;
+  text-rendering: optimizespeed;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
 /* For standard monitors with very high resolution (4K+) */
@@ -94,12 +99,8 @@ html {
 
 /* configuring basic properties for the body */
 body {
-  font-family: var(--font);
   font-size: var(--text-sm);
-  color: var(--color-secondary);
   min-height: 100vh;
-  text-rendering: optimizespeed;
-  -webkit-font-smoothing: antialiased;
 }
 
 /* remove list markers (for `ul` and `ol`) — they almost always need to be removed */
@@ -120,7 +121,7 @@ table {
 }
 
 /* inherit fonts for inputs and buttons (browsers break them by default) */
-input, button, textarea, select {
+input, button, textarea, select, optgroup {
   font: inherit;
 }
 
@@ -140,24 +141,54 @@ h1, h2, h3, h4, h5, h6 {
 b, strong { font-weight: 500; }
 i, em { font-style: italic; }
 a { color: var(--color-info); }
+small { font-size: 80%; }
+summary { display: list-item; }
 
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 1em;
+}
+
+/**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+legend { padding: 0; }
+
+/**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+progress { vertical-align: baseline; }
 
 p {}
 q {}
 s {}
 p {}
-kbd {}
 var {}
-sup {}
-sub {}
-pre {}
 del {}
 ins {}
-code {}
 span {}
 mark {}
 time {}
 abbr {}
 cite  {}
-small {}
 blockquote {}

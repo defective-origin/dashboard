@@ -15,6 +15,7 @@ import Avatar from 'components/views/Avatar'
 import Dropdown from 'components/actions/Dropdown'
 import Item from 'components/layouts/Item'
 import Aside from 'components/layouts/Aside'
+import Scroll from 'components/layouts/Scroll'
 import Block, { BlockProps } from 'components/layouts/Block'
 import Content from 'components/layouts/Content'
 import Footer from 'components/layouts/Footer'
@@ -82,6 +83,7 @@ export default react.attachComponents(Page, {
   Content,
   Section,
   Block,
+  Scroll,
   LeftAside: Aside.Left,
   RightAside: Aside.Right,
 })

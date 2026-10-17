@@ -5,14 +5,11 @@ import { cn } from 'tools'
 
 // ---| components |---
 import Block, { BlockProps } from 'components/layouts/Block'
-import Scroll, { ScrollVariant } from 'components/layouts/Scroll'
 
 // ---| self |---
 import css from './Content.module.scss'
 
-export type ContentProps = BlockProps & {
-  scroll?: ScrollVariant
-}
+export type ContentProps = BlockProps
 
 /**
  * Component description.
@@ -20,13 +17,11 @@ export type ContentProps = BlockProps & {
  * <Content />
  */
 export function Content(props: ContentProps) {
-  const { scroll, children, className, ...otherProps } = props
+  const { children, className, ...otherProps } = props
 
   return (
     <Block className={cn(css.Content, className)} area='center' g='xxs' {...otherProps}>
       {children}
-
-      {scroll && <Scroll v={scroll} actions />}
     </Block>
   )
 }

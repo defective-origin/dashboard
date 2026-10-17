@@ -21,15 +21,14 @@ import Media from 'components/views/Media'
 import Field from 'components/forms/fields'
 import Block from 'components/layouts/Block'
 import { Form } from 'components/forms/Form'
+import Button from 'components/actions/Button'
 import Scroll from 'components/layouts/Scroll'
 import { modal } from 'components/popups/Modal'
-import Section from 'components/layouts/Section'
+import Divider from 'components/layouts/Divider'
 import Clipboard from 'components/actions/Clipboard'
 
 // ---| self |---
 import css from './FeaturePage.module.scss'
-import Button from 'components/actions/Button'
-import Divider from 'components/layouts/Divider'
 
 export const FEATURE_SNAPSHOT_ID = 'FEATURE_SNAPSHOT_ID'
 
@@ -105,9 +104,9 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
 
         <Divider v='y' />,
 
-        <Button start='fullscreen' tooltip={t('ACTION.FULLSCREEN')} />,
+        <Button start='fullscreen' tooltip={t('LABEL.FULLSCREEN')} />,
         <Button start='refresh' tooltip={t('ACTION.REFRESH')} />,
-        <Button start='settings' tooltip={t('ACTION.SETTINGS')} active={settings.isOn} onClick={settings.toggle} />,
+        <Button start='settings' tooltip={t('LABEL.SETTINGS')} active={settings.isOn} onClick={settings.toggle} />,
         <Button start='description' tooltip={info.isOn ? t('ACTION.SHOW_PREVIEW') : t('ACTION.SHOW_INFO')} active={info.isOn} onClick={info.toggle} />,
         <Button start='reviews' tooltip={t('ACTION.SHOW_REVIEWS')} onClick={() => modal({ name: 'feature-review', options: options?.reviews })} />,
         <Button start='beenhere' tooltip={t('ACTION.ADD_BOOKMARK')} active={bookmark.isOn} onClick={() => bookmark.toggle(options)} />,
@@ -118,7 +117,7 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
       <Page.Content className={css.Content} v='grid' g='lg' p='sm' justifies='center'>
         <Scroll v='y' />
 
-        <Section visible={info.isOn} maxWidth={760} g='xs'>
+        <Block visible={info.isOn} maxWidth={760} g='xs'>
           <Media src='https://i.pinimg.com/736x/4e/8c/21/4e8c211774adefa4ca67d77e6eabd031.jpg' width='100%' />
           <Block v='x' g='xxs'>
             <User id={options?.createdBy?.id} />
@@ -153,7 +152,7 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
 
           {edit.isOff && <Text size='xs' content={options?.content} />}
           {edit.isOn && <Field.Text path='content' label={t('LABEL.CONTENT')} multiline />}
-        </Section>
+        </Block>
 
         <Block stretch visible={info.isOff}>{children}</Block>
       </Page.Content>

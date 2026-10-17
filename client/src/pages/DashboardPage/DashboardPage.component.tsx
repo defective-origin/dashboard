@@ -145,7 +145,7 @@ export function DashboardPage(props: DashboardPageProps) {
             trigger={<Widget id={id} />}
           >
             <Actions>
-              <Actions.Button start='settings' tooltip={t('ACTION.SETTINGS')} />
+              <Actions.Button start='settings' tooltip={t('LABEL.SETTINGS')} />
               <Actions.Button start='resize' tooltip={t('ACTION.REPLACE')} onClick={() => manager.current?.placeItem(id)} />
               <Actions.Button start='move_up' tooltip={t('ACTION.SUBSTITUTION')} onClick={() => manager.current?.replaceItem(id, '123')} />
               <Actions.Button start='delete_forever' tooltip={t('ACTION.REMOVE')} onClick={() => manager.current?.removeItem(id)} />
