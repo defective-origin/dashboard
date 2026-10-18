@@ -1,14 +1,23 @@
 .Actions {
+  align-items: center;
 }
 
 .group {
-  gap: 0;
-  border: var(--border);
+  align-items: stretch;
 
   & > * {
-    border-right: var(--border);
-    padding: var(--space-xs);
     border-radius: 0;
   }
-  & > *:last-child { border-right: none; }
+}
+
+.separate  > *:not(:last-child) {
+  position: relative;
+
+  &::after {
+    content: '';
+    right: -0.5px;
+    height: 100%;
+    border-right: var(--border);
+    position: absolute;
+  }
 }

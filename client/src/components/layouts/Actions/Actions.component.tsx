@@ -18,10 +18,12 @@ export type ActionsProps
   = BlockProps
   & Pick<ButtonProps, 'size' | 'color' | 'format' | 'weight'>
   & {
-    /** Remove action border radius and stretch items */
-    menu?: boolean
-    /** Add border and separate actions by divider */
+    /** show icons only and content moves to tooltip */
+    icons?: boolean
+    /** stretch items and remove border radius */
     group?: boolean
+    /** add divider after each item except last one */
+    separate?: boolean
     action?: ButtonProps['v']
   }
 
@@ -48,12 +50,12 @@ export type ActionsProps
  * </Actions>
  */
 export function Actions(props: ActionsProps) {
-  const { size = 'xs', menu, action, color, weight, format, tooltipSide, group, children, className, ...otherProps } = props
+  const { size = 'xs', separate, icons, action, color, weight, format, tooltipSide, group, children, className, ...otherProps } = props
 
   // TODO: wrap into dropdown button if content not fit in area
 
   return (
-    <Block className={cn(css.Actions, group && css.group, className)} aligns={menu ? 'stretch' : 'center'} v='x' {...otherProps}>
+    <Block className={cn(css.Actions, group && css.group, separate && css.separate, className)} v='x' {...otherProps}>
       {react.injectProp(1, children, node => {
         if (react.isExemplar<React.ComponentProps<typeof Button>>(node, [Link, AppLink, Button, Dropdown])) {
           return {
@@ -64,9 +66,8 @@ export function Actions(props: ActionsProps) {
             v: action,
             tooltipSide,
             ...node.props,
-            tooltip: menu ? null : node.props.tooltip,
-            content: menu && !node.props.content ? node.props.tooltip : node.props.content,
-            style: menu ? { borderRadius: 0 } : undefined,
+            tooltip: icons ? node.props.content : node.props.tooltip,
+            content: icons ? null : node.props.content,
           }
         }
       })}

@@ -27,7 +27,7 @@ export const Demo: Story = {
     placeholder: 'Enter text...',
     start: <Icon v='search' size='sm' />,
     end: (
-      <Actions menu>
+      <Actions group>
         <Actions.Button start='person' />
         <Actions.Button start='beenhere' />
         <Actions.Button start='payments' />

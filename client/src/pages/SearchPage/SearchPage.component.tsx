@@ -43,7 +43,7 @@ export function SearchPage<T extends Feature>(props: SearchPageProps<T>) {
           <SearchField
             path='search'
             end={
-              <Actions className={css.filters} aligns='stretch'>
+              <Actions className={css.filters} separate group>
                 <Actions.Button start='person' tooltip={t('LABEL.PERSONAL')} active={filter === 'personal'} onClick={() => change('personal')} />
                 <Actions.Button start='beenhere' tooltip={t('LABEL.BOOKMARKS')} active={filter === 'bookmarks'} onClick={() => change('bookmarks')} />
                 <Actions.Button start='payments' tooltip={t('LABEL.PAID')} active={filter === 'paid'} onClick={() => change('paid')} />

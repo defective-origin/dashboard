@@ -22,7 +22,7 @@ export type ItemOptions = {
   height?: React.CSSProperties['height']
   minHeight?: React.CSSProperties['minHeight']
   maxHeight?: React.CSSProperties['maxHeight']
-  border?: React.CSSProperties['border'] | boolean
+  border?: boolean
   radius?: Size
   display?: React.CSSProperties['display']
   bg?: Palette

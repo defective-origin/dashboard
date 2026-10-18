@@ -75,7 +75,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
 
   return (
     <Block className={cn(css.MarkupMenu, className)} v='x' g='xs' aligns='center' {...otherProps}>
-      <Actions className={css.MarkupMenuScreens} size='sm' radius='xs' group>
+      <Actions className={css.MarkupMenuScreens} size='sm' radius='xs' border separate group>
         {sorted?.map(m =>
           <Markup
             key={m.width}

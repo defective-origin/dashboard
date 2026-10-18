@@ -3,13 +3,4 @@
 
 .actions {
   border-top: var(--border);
-  width: 100%;
-
-  & > * {
-    border-radius: 0;
-    border-right: var(--border);
-    justify-content: center;
-
-    &:last-child { border-right: none; }
-  }
 }

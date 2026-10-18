@@ -5,8 +5,8 @@ import { cn, mix } from 'tools'
 
 // ---| components |---
 import Button from 'components/actions/Button'
+import Actions from 'components/layouts/Actions'
 import Popup, { PopupProps } from 'components/popups/Popup'
-import Actions, { ActionsProps } from 'components/layouts/Actions'
 
 // ---| self |---
 import css from './Dropdown.module.scss'
@@ -14,9 +14,9 @@ import css from './Dropdown.module.scss'
 
 export type DropdownProps
   = React.ComponentProps<typeof Button>
-  & Pick<ActionsProps, 'menu'>
   & Pick<PopupProps, 'trigger' | 'arrow' | 'disableHoverListener' | 'title' | 'onOpen' | 'onClose' | 'minWidth' | 'g' | 'side'> & {
     actions?: PopupProps['footer']
+    menu?: boolean
   }
 
 /**
@@ -38,7 +38,7 @@ export function Dropdown(props: DropdownProps) {
       minWidth={minWidth}
       disableHoverListener={disableHoverListener}
       footer={actions && (toggler => (
-        <Actions className={css.actions} size='xxs' v='row'>
+        <Actions className={css.actions} size='xxs' v='row' separate group>
           {mix.fromValOrFunc(actions, toggler)}
         </Actions>
       ))}
@@ -54,7 +54,7 @@ export function Dropdown(props: DropdownProps) {
       onOpen={onOpen}
       onClose={onClose}
     >
-      <Actions size='xs' v='y' g={g} weight={400} format='capitalize' aligns='stretch' menu={menu}>
+      <Actions size='xs' v='y' g={g} weight={400} format='capitalize' group>
         {children}
       </Actions>
     </Popup>
