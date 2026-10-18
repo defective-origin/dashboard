@@ -46,7 +46,10 @@ export function TablePagination(props: TablePaginationProps) {
   const hasNext = page < pages - 1
   const hasPrev = page > 0
 
-  const change = (options: Partial<TablePaginationPageOptions>) => onChange?.({ page, rows, ...options })
+  const change = (options: Partial<TablePaginationPageOptions>) => {
+    console.log('called')
+    onChange?.({ page, rows, ...options })
+  }
 
   if (!visible) {
     return null
@@ -54,29 +57,20 @@ export function TablePagination(props: TablePaginationProps) {
 
   return (
     <Block className={cn(css.TablePagination, className)} v='x' justifies='space-between' aligns='center' {...otherProps}>
-      <Label
-        className={css.TablePaginationLabel}
-        icon='file_copy'
-        content={pages}
-        tooltip={t('LABEL.PAGES')}
-      />
+      <Label className={css.label} icon='file_copy' content={pages} tooltip={t('LABEL.PAGES')} />
       <Divider v='y' />
 
       <Block v='x' justifies='space-between' aligns='center' p='0 xxs'>
-        <Button className={css.TablePaginationAction} start='first_page' disabled={!hasPrev} onClick={() => change({ page: 0 })} />
-        <Button className={css.TablePaginationAction} start='chevron_left' disabled={!hasPrev} onClick={() => change({ page: page - 1 })} />
+        <Button className={css.action} start='first_page' disabled={!hasPrev} onClick={() => change({ page: 0 })} />
+        <Button className={css.action} start='chevron_left' disabled={!hasPrev} onClick={() => change({ page: page - 1 })} />
         <Text content={page + 1} size='xxs' />
-        <Button className={css.TablePaginationAction} start='chevron_right' disabled={!hasNext} onClick={() => change({ page: page + 1 })} />
-        <Button className={css.TablePaginationAction} start='last_page' disabled={!hasNext} onClick={() => change({ page: pages - 1 })} />
+        <Button className={css.action} start='chevron_right' disabled={!hasNext} onClick={() => change({ page: page + 1 })} />
+        <Button className={css.action} start='last_page' disabled={!hasNext} onClick={() => change({ page: pages - 1 })} />
       </Block>
 
       <Divider v='y' />
-      <Label
-        icon='table_rows'
-        tooltip={t('LABEL.ROWS_PER_PAGE')}
-        className={css.TablePaginationLabel}
-      >
-        <SelectField className={css.TablePaginationSelect} value={rows} onChange={rows => change({ rows, page: 0 })}>
+      <Label className={css.label} icon='table_rows' tooltip={t('LABEL.ROWS_PER_PAGE')}>
+        <SelectField className={css.select} value={rows} onChange={rows => change({ rows, page: 0 })}>
           {ROWS_PER_PAGE_OPTIONS.map(num => <SelectField.Item key={num} value={num} content={num} />)}
         </SelectField>
       </Label>

@@ -1,37 +1,18 @@
-:root {
-  --table-pagination-bg-color: var(--color-contrast-secondary);
-}
-
 .TablePagination {
-  overflow: hidden;
   border: var(--border);
-  border-radius: var(--radius-xxs);
-  background: var(--table-pagination-bg-color);
+  border-radius: var(--radius-xs);
+  background: var(--color-contrast-secondary);
 }
 
-.TablePaginationLabel {
+.label {
   margin: 0 8px;
-
-  &:last-child {
-    margin-right: 0;
-  }
 }
 
-.TablePaginationSelect {
+.select {
   color: var(--color-primary);
   border: 0;
-
-  > div{
-    padding: 0;
-    padding-right: 28px;
-  }
-
-  fieldset {
-    outline: none;
-    border: none;
-  }
 }
 
-.TablePaginationAction {
+.action {
   padding: 0;
 }

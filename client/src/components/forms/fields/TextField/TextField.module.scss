@@ -5,12 +5,13 @@
   border-radius: var(--radius-xs);
   border: var(--border);
   gap: var(--space-xs);
+  padding: 0 var(--space-sm);
+  height: 2rem;
 }
 
 .input {
   flex-grow: 1;
   background: none;
-  margin: var(--space-xs);
   min-width: 100px;
   width: 0;
 

@@ -1,9 +1,10 @@
 .SelectField {
   background: var(--color-contrast-primary);
-  padding: var(--space-xs);
+  padding: var(--space-sm);
   transition: 0.4s;
   border: var(--border);
   border-radius: var(--radius-xs);
+  height: 2rem;
 
   &:hover,
   &:focus {

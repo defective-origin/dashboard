@@ -17,7 +17,7 @@
   inset: 0;
   background-color: var(--color-primary-5);
   transition: .4s;
-  border-radius: var(--radius-xs);
+  border-radius: 0.5rem;
 }
 
 .slider::before {
@@ -26,10 +26,11 @@
   height: 0.8rem;
   width: 0.8rem;
   left: 0.1rem;
-  bottom: 0.1rem;
+  bottom: 50%;
+  transform: translateY(50%);
   background-color: var(--color-contrast-primary);
   transition: .4s;
-  border-radius: var(--radius-xs);
+  border-radius: 0.5rem;
 }
 
 input:checked + .slider {
@@ -41,5 +42,5 @@ input:focus + .slider {
 }
 
 input:checked + .slider::before {
-  transform: translateX(1rem);
+  transform: translate(1rem, 50%);
 }
