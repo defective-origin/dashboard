@@ -1,14 +1,15 @@
 import React, { useCallback } from 'react'
-import MuiTextField from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
 
 // ---| components |---
 import { FieldProps, formField } from 'components/forms/Form'
+import { TextField } from 'components/forms/fields/TextField'
 
 // ---| self |---
 import css from './NumberField.module.scss'
+
 
 export type NumberFieldProps = FieldProps<number>
 
@@ -19,16 +20,15 @@ export type NumberFieldProps = FieldProps<number>
  */
 export function NumberField(props: NumberFieldProps) {
   const { value = 0, onChange, className, ...otherProps } = props
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(Number(event.target.value), event)
+  const handleChange = useCallback((val: string, event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(Number(val), event)
   }, [onChange])
 
   return (
-    <MuiTextField
+    <TextField
       className={cn(css.NumberField, className)}
       type='number'
-      size='small'
-      value={value}
+      value={value?.toString()}
       onChange={handleChange}
       {...otherProps}
     />

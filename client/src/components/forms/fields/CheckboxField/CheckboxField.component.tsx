@@ -1,6 +1,4 @@
 import React, { useCallback } from 'react'
-import { FormControlLabel } from '@mui/material'
-import MuiCheckboxField from '@mui/material/Checkbox'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -11,8 +9,8 @@ import { FieldProps, formField } from 'components/forms/Form'
 // ---| self |---
 import css from './CheckboxField.module.scss'
 
-export type CheckboxValue = string | boolean | number | undefined
 
+export type CheckboxValue = string | boolean | number | undefined
 const toValue = (checked?: boolean, value?: CheckboxValue) => {
   // if value passed
   // then value should be saved as string
@@ -35,28 +33,20 @@ export type CheckboxFieldProps = FieldProps<CheckboxValue> & {
  * <CheckboxField />
  */
 export function CheckboxField(props: CheckboxFieldProps) {
-  const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
+  const { value, checked = false, label, required, disabled, onChange, className, ...otherProps } = props
 
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
-    onChange?.(toValue(checked, value), event)
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+    onChange?.(toValue(event.target.checked, value), event)
   , [value, onChange])
 
-  // TODO: stick to 1rem
   return (
-    <FormControlLabel
-      label={label}
-      required={required}
-      disabled={disabled}
-      control={
-        <MuiCheckboxField
-          className={cn(css.CheckboxField, className)}
-          size='small'
-          value={value}
-          checked={checked}
-          onChange={handleChange}
-          {...otherProps}
-        />
-      }
+    <input
+      className={cn(css.CheckboxField, className)}
+      type='checkbox'
+      value={value?.toString()}
+      checked={checked}
+      onChange={handleChange}
+      {...otherProps}
     />
   )
 }

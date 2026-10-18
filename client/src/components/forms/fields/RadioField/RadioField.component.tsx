@@ -1,6 +1,4 @@
 import React, { useCallback } from 'react'
-import MuiRadioField from '@mui/material/Radio'
-import { FormControlLabel } from '@mui/material'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -21,27 +19,20 @@ export type RadioFieldProps = FieldProps & {
  * <RadioField />
  */
 export function RadioField(props: RadioFieldProps) {
-  const { value, checked, label, required, disabled, onChange, className, ...otherProps } = props
+  const { value, checked = false, label, required, disabled, onChange, className, ...otherProps } = props
 
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
-    checked && onChange?.(value, event)
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+    event.target.checked && onChange?.(value, event)
   , [onChange, value])
 
   return (
-    <FormControlLabel
-      label={label}
-      required={required}
-      disabled={disabled}
-      control={
-        <MuiRadioField
-          className={cn(css.RadioField, className)}
-          size='small'
-          value={value}
-          checked={checked}
-          onChange={handleChange}
-          {...otherProps}
-        />
-      }
+    <input
+      className={cn(css.RadioField, className)}
+      type='radio'
+      value={value?.toString()}
+      checked={checked}
+      onChange={handleChange}
+      {...otherProps}
     />
   )
 }

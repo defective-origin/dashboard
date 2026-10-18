@@ -133,17 +133,14 @@ export function FeaturePage<T extends Feature>(props: FeaturePageProps<T>) {
               </Block>
             )}
             {edit.isOn && (
-              <Block columns={2} v='grid' g='xxs'>
-                <Field.Select path='public' label={t('LABEL.PUBLIC')}>
-                  <Field.SelectItem value={true} children={t('LABEL.PUBLIC')} />
-                  <Field.SelectItem value={false} children={t('LABEL.PRIVATE')} />
-                </Field.Select>
+              <Block columns={2} v='grid' g='sm'>
                 <Field.Number path='price' label={t('LABEL.PRICE')} />
+                <Field.Switch path='public' label={t('LABEL.PUBLIC')} />
               </Block>
             )}
           </Block>
 
-          {edit.isOn && <Field.Tags path='tags' label={t('LABEL.TAGS')} options={options?.tags} />}
+          {edit.isOn && <Field.Tags path='tags' label={t('LABEL.TAGS')} value={options?.tags} />}
           {edit.isOff && (
             <Block v='x' g='xxs'>
               {options?.tags.map(tag => <Tag key={tag} size='xxs' content={tag} />)}

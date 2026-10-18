@@ -77,7 +77,7 @@ export function TablePagination(props: TablePaginationProps) {
         className={css.TablePaginationLabel}
       >
         <SelectField className={css.TablePaginationSelect} value={rows} onChange={rows => change({ rows, page: 0 })}>
-          {ROWS_PER_PAGE_OPTIONS.map(num => <SelectField.Item key={num} value={num} children={num} />)}
+          {ROWS_PER_PAGE_OPTIONS.map(num => <SelectField.Item key={num} value={num} content={num} />)}
         </SelectField>
       </Label>
     </Block>

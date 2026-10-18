@@ -1,6 +1,4 @@
 import React, { useCallback } from 'react'
-import MuiSelectField, { SelectChangeEvent } from '@mui/material/Select'
-import MuiMenuItem from '@mui/material/MenuItem'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -10,9 +8,8 @@ import { FieldProps, formField } from 'components/forms/Form'
 
 // ---| self |---
 import css from './SelectField.module.scss'
+import { SelectFieldItem } from './SelectFieldItem'
 
-
-export const SelectFieldItem = MuiMenuItem
 
 export type SelectFieldProps = FieldProps & {
   children?: React.ReactNode
@@ -22,29 +19,30 @@ export type SelectFieldProps = FieldProps & {
  * Allows to use Select input
  * @example
  * <SelectField label='Value' value='val1' onChange={console.log}>
- *   <SelectField.Item value='val1' children='Name 1' />
- *   <SelectField.Item value='val2' children='Name 2' />
+ *   <SelectField.Item value='val1' content='Name 1' />
+ *   <SelectField.Item value='val2' content='Name 2' />
  * </SelectField>
  */
 export function SelectField(props: SelectFieldProps) {
-  const { value = '', name, onChange, className, children, ...otherProps } = props
+  const { value, name, onChange, className, children, ...otherProps } = props
 
-  const handleChange = useCallback((event: SelectChangeEvent<unknown>) =>
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) =>
     onChange?.(event.target.value, event)
   , [onChange])
 
+  // TODO: base on dropdown
   return (
-    <MuiSelectField
-      labelId={name}
+    <select
       className={cn(css.SelectField, className)}
-      size='small'
       value={value}
       onChange={handleChange}
       disabled={React.Children.toArray(children).length < 2}
       {...otherProps}
-    >
+    > <button>
+        <selectedcontent className={css.selectedContent}></selectedcontent>
+      </button>
       {children}
-    </MuiSelectField>
+    </select>
   )
 }
 

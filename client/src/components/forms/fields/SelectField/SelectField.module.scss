@@ -1,2 +1,58 @@
 .SelectField {
+  background: var(--color-contrast-primary);
+  padding: var(--space-xs);
+  transition: 0.4s;
+  border: var(--border);
+  border-radius: var(--radius-xs);
+
+  &:hover,
+  &:focus {
+    background: var(--color-contrast-secondary);
+  }
+
+
+  &::picker-icon {
+    color: var(--color-secondary);
+    transition: 0.4s rotate;
+  }
+
+  &:open::picker-icon {
+    rotate: 180deg;
+  }
+}
+
+.selectedContent {
+  display: flex;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+selectedcontent .icon {
+  display: none;
+}
+
+::picker(select) {
+  border: none;
+  opacity: 0;
+  transition: all 0.4s allow-discrete;
+  border-radius: var(--radius-xs);
+  box-shadow: var(--box-shadow-xs);
+}
+
+:open::picker(select) {
+  opacity: 1;
+}
+
+@starting-style {
+  :open::picker(select) {
+    opacity: 0;
+  }
+}
+
+::picker(select) {
+  top: calc(anchor(bottom) + 1px);
+  left: anchor(10%);
 }

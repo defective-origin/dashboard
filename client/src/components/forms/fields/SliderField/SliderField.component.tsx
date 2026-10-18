@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import MuiSliderField, { SliderProps as MuiSliderFieldProps } from '@mui/material/Slider'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -10,8 +9,10 @@ import { FieldProps, formField } from 'components/forms/Form'
 // ---| self |---
 import css from './SliderField.module.scss'
 
-export type SliderFieldProps = FieldProps<number | number[]> & {
-  marks?: MuiSliderFieldProps['marks']
+export type SliderFieldProps = FieldProps<number> & {
+  min?: number
+  max?: number
+  step?: number
 }
 
 /**
@@ -20,18 +21,17 @@ export type SliderFieldProps = FieldProps<number | number[]> & {
  * <SliderField />
  */
 export function SliderField(props: SliderFieldProps) {
-  const { value = 0, marks, onChange, className, ...otherProps } = props
+  const { value = 0, onChange, className, ...otherProps } = props
 
-  const handleChange = useCallback((event: Event, value: number | number[]) =>
-    onChange?.(value, event)
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+    onChange?.(Number(event.target?.value), event)
   , [onChange])
 
   return (
-    <MuiSliderField
-      size='small'
+    <input
       className={cn(css.SliderField, className)}
+      type='range'
       value={value}
-      marks={marks}
       onChange={handleChange}
       {...otherProps}
     />

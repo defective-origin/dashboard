@@ -41,19 +41,14 @@ export function SearchPage<T extends Feature>(props: SearchPageProps<T>) {
       nav={
         <Form onChange={console.log}>
           <SearchField
-            className={css.Search}
             path='search'
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <Actions className={css.Filters} group>
-                    <Actions.Button start='person' tooltip={t('LABEL.PERSONAL')} active={filter === 'personal'} onClick={() => change('personal')} />
-                    <Actions.Button start='beenhere' tooltip={t('LABEL.BOOKMARKS')} active={filter === 'bookmarks'} onClick={() => change('bookmarks')} />
-                    <Actions.Button start='payments' tooltip={t('LABEL.PAID')} active={filter === 'paid'} onClick={() => change('paid')} />
-                  </Actions>
-                ),
-              },
-            }}
+            end={
+              <Actions className={css.filters} aligns='stretch'>
+                <Actions.Button start='person' tooltip={t('LABEL.PERSONAL')} active={filter === 'personal'} onClick={() => change('personal')} />
+                <Actions.Button start='beenhere' tooltip={t('LABEL.BOOKMARKS')} active={filter === 'bookmarks'} onClick={() => change('bookmarks')} />
+                <Actions.Button start='payments' tooltip={t('LABEL.PAID')} active={filter === 'paid'} onClick={() => change('paid')} />
+              </Actions>
+            }
           />
         </Form>
       }

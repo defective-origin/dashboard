@@ -29,6 +29,7 @@ export const Demo: Story = {
     rules: [
       value => value > 50 && 'NUMBER CANNOT BE MORE THEN 5',
     ],
+    onChange: console.log,
   },
 
 }

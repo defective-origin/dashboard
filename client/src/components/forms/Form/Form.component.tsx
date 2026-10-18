@@ -89,9 +89,9 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *
  *       <Field.Text path='text' label='Text' init='value' help='Help text' onChange={log} rules={TEXT_RULES} checkOnChange />
  *       <Field.Select path='select' label='Select' init='value0' help='Help text' onChange={log}>
- *         <Field.SelectItem value='value0' children='FIRST' />
- *         <Field.SelectItem value='value1' children='SECOND' />
- *         <Field.SelectItem value='value2' children='THIRD' />
+ *         <Field.SelectItem value='value0' content='FIRST' />
+ *         <Field.SelectItem value='value1' content='SECOND' />
+ *         <Field.SelectItem value='value2' content='THIRD' />
  *       </Field.Select>
  *     </Block>
  *
@@ -130,9 +130,9 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *         <Field.Checkbox path='group.checkbox' label='Checkbox' init='checkbox' checked onChange={log} />
  *         <Field.Slider path='group.slider' label='Slider' init={50} onChange={log} />
  *         <Field.Select path='group.select' label='Select' init='value1' help='Help text' onChange={log}>
- *           <Field.SelectItem value='value0' children='FIRST' />
- *           <Field.SelectItem value='value1' children='SECOND' />
- *           <Field.SelectItem value='value2' children='THIRD' />
+ *           <Field.SelectItem value='value0' content='FIRST' />
+ *           <Field.SelectItem value='value1' content='SECOND' />
+ *           <Field.SelectItem value='value2' content='THIRD' />
  *         </Field.Select>
  *         <Field.Text path='group.text' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
  *         <Field.Number path='group.number' label='Number' init={50} help='Help text' onChange={log} />
@@ -152,9 +152,9 @@ export type FormProps<O extends object> = Pick<BlockProps, 'p' | 'g' | 'v'> & {
  *         <Field.Checkbox path='list.2' label='Checkbox' init='checkbox' checked onChange={log} />
  *         <Field.Slider path='list.3' label='Slider' init={25} onChange={log} />
  *         <Field.Select path='list.4' label='Select' init='value2' help='Help text'>
- *           <Field.SelectItem value='value0' children='FIRST' />
- *           <Field.SelectItem value='value1' children='SECOND' />
- *           <Field.SelectItem value='value2' children='THIRD' />
+ *           <Field.SelectItem value='value0' content='FIRST' />
+ *           <Field.SelectItem value='value1' content='SECOND' />
+ *           <Field.SelectItem value='value2' content='THIRD' />
  *         </Field.Select>
  *         <Field.Text path='list.5' label='Text' init='value' help='Help text' rules={TEXT_RULES} checkOnChange onChange={log} />
  *         <Field.Number path='list.6' label='Number' init={25} help='Help text' onChange={log} />

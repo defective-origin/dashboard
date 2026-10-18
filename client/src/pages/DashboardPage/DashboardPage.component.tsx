@@ -113,8 +113,8 @@ export function DashboardPage(props: DashboardPageProps) {
         >
           {/* TODO: create GapField */}
           <SelectField label={t('LABEL.HEIGHT')} value={history.value?.height} onChange={val => manager.current?.resize(val)}>
-            <SelectField.Item value='auto' children={t('ACTION.FIT_CONTENT')} />
-            <SelectField.Item value='100%' children={t('ACTION.FIT_SCREEN')} />
+            <SelectField.Item value='auto' content={t('ACTION.FIT_CONTENT')} />
+            <SelectField.Item value='100%' content={t('ACTION.FIT_SCREEN')} />
           </SelectField>
           <CssSizeField label={t('LABEL.WIDTH')} value={history.value?.width.toString()} formats={['px']} disabled />
           <CssSizeField label={t('LABEL.GAP')} formats={['rem']} />

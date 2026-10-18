@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import MuiSwitchField from '@mui/material/Switch'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -23,18 +22,20 @@ export type SwitchFieldProps = FieldProps<boolean> & {
 export function SwitchField(props: SwitchFieldProps) {
   const { value, checked = !!value, onChange, className, ...otherProps } = props
 
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
-    onChange?.(checked, event)
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+    onChange?.(event.target.checked, event)
   , [onChange])
 
   return (
-    <MuiSwitchField
-      className={cn(css.SwitchField, className)}
-      size='small'
-      checked={checked}
-      onChange={handleChange}
-      {...otherProps}
-    />
+    <label className={cn(css.SwitchField, className)} {...otherProps}>
+      <input
+        type='checkbox'
+        value={value?.toString()}
+        checked={checked}
+        onChange={handleChange}
+      />
+      <span className={css.slider} />
+    </label>
   )
 }
 

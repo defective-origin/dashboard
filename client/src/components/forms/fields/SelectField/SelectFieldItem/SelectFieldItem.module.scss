@@ -1,0 +1,32 @@
+.SelectFieldItem {
+  display: flex;
+  gap: var(--space-xs);
+  background: var(--color-contrast-secondary);
+  justify-content: flex-start;
+  padding: var(--space-sm);
+  transition: 0.4s;
+  cursor: pointer;
+
+  &:hover { background: var(--color-secondary-6); }
+  &:focus { background: var(--color-secondary-5); }
+
+  &:first-of-type { border-radius: var(--radius-xs) var(--radius-xs) 0 0; }
+  &:last-of-type { border-radius: 0 0 var(--radius-xs) var(--radius-xs); }
+
+  &:checked {
+    font-weight: 500;
+    background: var(--color-secondary-5);
+  }
+
+  &::checkmark {
+    display: none;
+
+    // order: 1;
+    // margin-left: auto;
+    // content: '☑️';
+  }
+}
+
+.text {
+  flex-grow: 1;
+}

@@ -36,7 +36,7 @@ export type CssSizeFieldProps = TextFieldProps & {
  * <CssSizeField formats={['fr', 'px']} />
  */
 export function CssSizeField(props: CssSizeFieldProps) {
-  const { slotProps, formats = DEFAULT_FORMATS, onChange, className, ...otherProps } = props
+  const { formats = DEFAULT_FORMATS, onChange, className, ...otherProps } = props
   const _className = cn(css.CssSizeField, className)
   const [format, setFormat] = useState<CssSize>(formats[0])
   const options = CSS_SIZE_OPTIONS[format]
@@ -52,17 +52,11 @@ export function CssSizeField(props: CssSizeFieldProps) {
       value={options.default && undefined}
       disabled={options.default === ''}
       // type='number'
-      slotProps={{
-        ...slotProps,
-        input: {
-          ...slotProps?.input,
-          endAdornment: (
-            <SelectField className={css.Filters} value={format} onChange={setFormat}>
-              {formats.map(format => <SelectField.Item value={format} children={format} />)}
-            </SelectField>
-          ),
-        },
-      }}
+      end={
+        <SelectField className={css.Filters} value={format} onChange={setFormat}>
+          {formats.map(format => <SelectField.Item value={format} content={format} />)}
+        </SelectField>
+      }
       onChange={handleChange}
       {...otherProps}
     />

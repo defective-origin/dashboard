@@ -17,18 +17,12 @@ export type SearchFieldProps = TextFieldProps
  * <SearchField />
  */
 export function SearchField(props: SearchFieldProps) {
-  const { slotProps, className, ...otherProps } = props
+  const { className, ...otherProps } = props
 
   return (
     <TextField
       className={cn(css.SearchField, className)}
-      slotProps={{
-        ...slotProps,
-        input: {
-          ...slotProps?.input,
-          startAdornment: <Icon v='search' size='sm' />,
-        },
-      }}
+      start={<Icon className={css.icon} v='search' size='sm' />}
       {...otherProps}
     />
   )

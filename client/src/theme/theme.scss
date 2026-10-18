@@ -123,6 +123,7 @@ table {
 /* inherit fonts for inputs and buttons (browsers break them by default) */
 input, button, textarea, select, optgroup {
   font: inherit;
+  outline-color: var(--color-info-2);
 }
 
 /* making links more predictable */

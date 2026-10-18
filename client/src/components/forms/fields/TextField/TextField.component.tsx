@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import MuiTextField, { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField'
 
 // ---| core |---
 import { cn } from 'tools'
@@ -11,31 +10,36 @@ import { FieldProps, formField } from 'components/forms/Form'
 import css from './TextField.module.scss'
 
 export type TextFieldProps = FieldProps<string> & {
+  start?: React.ReactNode
+  end?: React.ReactNode
   multiline?: boolean
-  slotProps?: MuiTextFieldProps['slotProps']
+  placeholder?: string
+  type?: React.InputHTMLAttributes<HTMLInputElement>['type']
 }
 
 /**
- * Component description.
+ * Allows input short and long text.
  * @example
- * <TextField />
+ * <TextField placeholder='input text' />
+ * <TextField multiline />
  */
 export function TextField(props: TextFieldProps) {
-  const { value = '', onChange, className, ...otherProps } = props
+  const { start, end, multiline, placeholder, value = '', onChange, className, ...otherProps } = props
 
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     onChange?.(event.target.value, event)
   , [onChange])
 
+
   return (
-    <MuiTextField
-      className={cn(css.TextField, className)}
-      size='small'
-      value={value}
-      rows={otherProps.multiline ? 5 : undefined}
-      onChange={handleChange}
-      {...otherProps}
-    />
+    <label className={cn(css.TextField, className)}>
+      {start}
+      {multiline
+        ? <textarea className={css.input} rows={5} value={value} placeholder={placeholder} onChange={handleChange} {...otherProps} />
+        : <input className={css.input} type='text' value={value} placeholder={placeholder} onChange={handleChange} {...otherProps} />
+      }
+      {end}
+    </label>
   )
 }
 

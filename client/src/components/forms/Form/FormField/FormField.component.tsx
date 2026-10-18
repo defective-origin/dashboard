@@ -130,7 +130,7 @@ export function FormField<V, F extends object>(props: FormFieldProps<V, F>) {
   const helpProps = typeof help === 'object' ? help : { content: help }
 
   return (
-    <Block className={cn(css.FormField, className)}>
+    <Block className={cn(css.FormField, className)} v='grid' rows={label ? 'auto minmax(2rem, auto) 1fr' : undefined} aligns='center'>
       {label && (
         <label htmlFor={path} className={css.label}>
           <Text v='span' content={label} size='xs' />
