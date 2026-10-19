@@ -1,25 +1,19 @@
 import React from 'react'
-import MuiCircularProgress from '@mui/material/CircularProgress'
-import MuiLinearProgress from '@mui/material/LinearProgress'
 
 // ---| core |---
-import { cn } from 'tools'
+import { cn, jss } from 'tools'
+import { Color, Size, toColor, toSize } from 'theme'
 
 // ---| self |---
 import css from './Progress.module.scss'
 
-export const PROGRESS_MAP = {
-  circular: MuiCircularProgress,
-  linear: MuiLinearProgress,
-}
+const ICON_SIZE = 40
+const ICON_THICKNESS = 3.6
 
-export type ProgressVariant = keyof typeof PROGRESS_MAP
-// todo: add color
 export type ProgressProps = {
+  size?: Size
+  color?: Color
   className?: string
-  visible?: boolean
-  v?: ProgressVariant
-  value?: number
 }
 
 /**
@@ -28,14 +22,28 @@ export type ProgressProps = {
  * <Progress />
  */
 export function Progress(props: ProgressProps) {
-  const { visible, v = 'circular', value, className, ...otherProps } = props
-  const Tag = PROGRESS_MAP[v]
+  const { size, color, className, ...otherProps } = props
 
-  if (!visible) {
-    return null
-  }
-
-  return <Tag className={cn(css.Progress, className)} value={value} {...otherProps} />
+  return (
+    <div
+      className={cn(css.Progress, jss({ height: toSize('icon', size) }), className)}
+      role='progressbar'
+      {...otherProps}
+    >
+      <svg className={css.svg} viewBox={`0 0 ${ICON_SIZE} ${ICON_SIZE}`}>
+        <circle
+          className={css.circle}
+          cx={ICON_SIZE / 2}
+          cy={ICON_SIZE / 2}
+          r={(ICON_SIZE - ICON_THICKNESS) / 2}
+          fill='none'
+          stroke={color ? toColor(color) : 'currentColor'}
+          strokeWidth={ICON_THICKNESS}
+          strokeLinecap='round'
+        />
+      </svg>
+    </div>
+  )
 }
 
 Progress.displayName = 'Progress'

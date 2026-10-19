@@ -21,6 +21,7 @@ const meta: Meta<typeof Button> = {
     v: field.variants(VARIANTS, 'ButtonVariant', 'outlined'),
     color: field.variants(BUTTON_COLORS, 'ButtonColor', 'primary'),
     active: field.boolean(),
+    progress: field.boolean(),
     disabled: field.boolean(),
     className: field.string(),
     children: field.reactNode(true),
@@ -48,6 +49,7 @@ export const Demo: Story = {
     start: 'settings',
     end: 'close',
     active: false,
+    progress: false,
     disabled: false,
   },
 }

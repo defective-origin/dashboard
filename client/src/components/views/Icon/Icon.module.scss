@@ -6,13 +6,11 @@
     'opsz' $opacity;
 }
 
-:global {
-  .icon {
-    /* Perfectly matches adjacent text height */
-    font-size: 1.2em;
-    color: currentcolor;
-
-    &--outline { @include style-icon; }
-    &--fill { @include style-icon(1); }
-  }
+.Icon {
+  /* Perfectly matches adjacent text height */
+  font-size: 1.2em;
+  color: currentcolor;
 }
+
+.outline { @include style-icon; }
+.fill { @include style-icon(1); }

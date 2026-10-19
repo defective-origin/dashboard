@@ -5,6 +5,8 @@
   border: var(--border);
   border-radius: var(--radius-xs);
   height: 2rem;
+  display: flex;
+  align-items: center;
 
   &:hover,
   &:focus {

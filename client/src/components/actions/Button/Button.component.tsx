@@ -3,13 +3,16 @@ import React from 'react'
 // ---| core |---
 // ---| components |---
 import { withPopup } from 'components/popups/Popup'
+import Progress from 'components/views/Progress'
 
 // ---| self |---
+import css from './Button.module.scss'
 import { ButtonStyleOptions, useButtonStyle } from './Button.hooks'
 
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonStyleOptions & {
   ref?: React.Ref<HTMLButtonElement>
+  progress?: boolean
 }
 
 /**
@@ -18,10 +21,18 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Button
  * <Button start='icon-name' content='Cancel' end='icon-name' onClick={handleClick} popup='click me' />
  */
 export const Button = withPopup((props: ButtonProps) => {
-  const updatedProps = useButtonStyle({ color: 'primary', ...props })
+  const { progress, children, ...updatedProps } = useButtonStyle({
+    color: 'primary',
+    ...props,
+    disabled: props.progress || props.disabled,
+  })
 
-  // TODO: add processing with promise callback onClick and set icon progress_activity
-  return <button {...updatedProps} />
+  return (
+    <button {...updatedProps}>
+      {children}
+      {progress && <Progress className={css.progress} />}
+    </button>
+  )
 })
 
 Button.displayName = 'Button'

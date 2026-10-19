@@ -8,7 +8,7 @@ import { Color, Size, toColor, toSize } from 'theme'
 import { withSkeleton } from 'components/views/Skeleton'
 
 // ---| self |---
-import './Icon.module.scss'
+import css from './Icon.module.scss'
 
 
 export type ThemeIconVariant = 'light_mode' | 'dark_mode'
@@ -60,10 +60,10 @@ export const Icon = withSkeleton((props: IconProps) => {
   return (
     <span
       className={cn(
-        'icon',
+        css.Icon,
         'material-symbols-outlined', {
-          ['icon--fill']: fill,
-          ['icon--outline']: !fill,
+          [css.fill]: fill,
+          [css.outline]: !fill,
           ['rtl']: v && RTL_ICONS.has(v),
         }, jss({
           ...style,

@@ -23,6 +23,21 @@
   }
 }
 
+.Button:has(.progress) {
+  position: relative;
+
+  > *:not(.progress) {
+    color: transparent;
+  }
+
+  .progress {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60%;
+  }
+}
+
 .outlined {
   border: 1px solid currentcolor;
   box-shadow: var(--box-shadow-xxs);

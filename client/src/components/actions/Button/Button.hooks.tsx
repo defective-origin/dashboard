@@ -53,7 +53,6 @@ export function useButtonStyle<P extends ButtonStyleOptions>(options: P) {
   const { size, color, v, start, end, active, weight, format, className, children, content, style, ...other } = options
   const isIcon = !content && !children && [start, end].filter(Boolean).length === 1
 
-  // TODO: do processing prop. spinner should rotating on start or end icon. should take Promise on click
   return {
     ...other,
     className: cn(css.Button, v && css[v], jss({
@@ -76,7 +75,7 @@ export function useButtonStyle<P extends ButtonStyleOptions>(options: P) {
       <>
         {initAsideContent(start, options)}
 
-        {content ?? children}
+        {!isIcon && <span>{content ?? children}</span>}
 
         {initAsideContent(end, options, true)}
       </>

@@ -23,7 +23,7 @@ export type SkeletonProps = {
  * <Skeleton />
  */
 export function Skeleton(props: SkeletonProps) {
-  const { v, children, className, ...otherProps } = props
+  const { v, children, className, ...otherProps } = props // TODO: remove hoc wrapper props config
 
   return <MuiSkeleton className={cn(css.Skeleton, className)} variant={v} {...otherProps}>{children}</MuiSkeleton>
 }

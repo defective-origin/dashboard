@@ -61,7 +61,7 @@ export function Banner(props: BannerProps) {
 
   return (
     <Block className={cn(css.Banner, { [css.Absolute]: absolute }, className)} stretch {...otherProps}>
-      <Progress className={css.Progress} visible={loading} />
+      {loading && <Progress className={css.Progress} />}
 
       {!loading && (
         <Block className={cn(css.Content, contentClassName)}>
