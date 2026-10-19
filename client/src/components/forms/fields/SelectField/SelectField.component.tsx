@@ -12,6 +12,7 @@ import { SelectFieldItem } from './SelectFieldItem'
 
 
 export type SelectFieldProps = FieldProps & {
+  sub?: boolean
   children?: React.ReactNode
 }
 
@@ -24,7 +25,7 @@ export type SelectFieldProps = FieldProps & {
  * </SelectField>
  */
 export function SelectField(props: SelectFieldProps) {
-  const { value, name, onChange, className, children, ...otherProps } = props
+  const { sub, value, name, onChange, className, children, ...otherProps } = props
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) =>
     onChange?.(event.target.value, event)
@@ -33,7 +34,7 @@ export function SelectField(props: SelectFieldProps) {
   // TODO: base on dropdown
   return (
     <select
-      className={cn(css.SelectField, className)}
+      className={cn(css.SelectField, sub && css.sub, className)}
       value={value}
       onChange={handleChange}
       disabled={React.Children.toArray(children).length < 2}

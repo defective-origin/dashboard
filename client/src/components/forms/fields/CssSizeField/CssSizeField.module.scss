@@ -1,8 +1,9 @@
 .CssSizeField {
+  overflow: hidden;
 }
 
 .Filters {
-  border-radius: 0;
   border: 0;
   border-left: var(--border);
+  width: 4rem;
 }

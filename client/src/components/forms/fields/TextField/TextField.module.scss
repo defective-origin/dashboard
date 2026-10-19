@@ -5,7 +5,6 @@
   border-radius: var(--radius-xs);
   border: var(--border);
   gap: var(--space-xs);
-  padding: 0 var(--space-sm);
   height: 2rem;
 }
 
@@ -14,6 +13,7 @@
   background: none;
   min-width: 100px;
   width: 0;
+  margin: 0 var(--space-sm);
 
   &:focus {
     outline: 0;

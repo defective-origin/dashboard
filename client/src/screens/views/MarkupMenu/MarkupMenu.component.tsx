@@ -96,7 +96,7 @@ export function MarkupMenu(props: MarkupMenuProps) {
           <Button content={t('ACTION.SAVE')} start='save' color='success' onClick={() => onSave?.(sort(Object.values(enabled)))} />,
           <Button content={t('ACTION.CLOSE')} start='close' color='primary' onClick={o.off} />,
         ]}
-        disableHoverListener
+        disableHover
       >
         {markups.map(markup => (
           <Block key={markup.width} v='grid' columns='auto 1fr auto' aligns='center'>

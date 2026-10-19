@@ -1,27 +1,17 @@
 .Popup {
-  overflow: hidden;
+  padding: 0;
+  color: var(--color-primary);
+  background-color: var(--color-contrast-secondary);
+  box-shadow: var(--box-shadow-xs);
+  border-radius: var(--radius-xs);
+  font-size: var(--text-xxs);
 }
 
 .header {
   border-bottom: var(--border);
 }
 
-.card {
-  padding: 0;
-  color: var(--color-primary);
-  background-color: var(--color-contrast-secondary);
-  box-shadow: var(--box-shadow-xs);
-}
-
-.card.card:not(.arrow) {
-  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
-  margin-top: 0;
-  margin-right: 0;
-  margin-left: 0;
-  margin-bottom: 0;
-}
-
-:global(.MuiTooltip-arrow)::before {
-  background-color: var(--color-contrast-secondary);
-  box-shadow: var(--box-shadow-xs);
+.arrow {
+  filter: drop-shadow(0 1px 1px var(--color-shadow)) drop-shadow(0 1px 1px var(--color-shadow));
+  fill: var(--color-contrast-secondary);
 }

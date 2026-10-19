@@ -57,7 +57,7 @@ export function Modal(props: ModalProps) {
       onClose={onClose}
       {...otherProps}
     >
-      <Card className={cn(css.Modal, css[position], className)} data-role='dialog'>
+      <Card className={cn(css.Modal, css[position], className)} role='dialog'>
         <Card.Header p='sm'>
           <Text v='h4'>
             {icon && <Icon v={icon} />}

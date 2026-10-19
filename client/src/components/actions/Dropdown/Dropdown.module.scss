@@ -3,4 +3,8 @@
 
 .actions {
   border-top: var(--border);
+
+  & > * {
+    justify-content: center;
+  }
 }

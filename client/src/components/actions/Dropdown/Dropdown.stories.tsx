@@ -1,4 +1,5 @@
 import { Meta, StoryObj, field, params } from 'storybook'
+import Button from 'components/actions/Button'
 import Dropdown from './Dropdown.component'
 
 
@@ -27,7 +28,19 @@ export const Demo: Story = {
     tooltip: 'tooltip',
     title: 'Title',
     content: 'button name',
-    children: 'dropdown content',
+    disableHover: true,
+    menu: false,
+    children: (
+      <>
+        Content
+        <Button content='Save' start='save' color='success' />
+        <Button content='Close' start='close' color='primary' />
+      </>
+    ),
+    actions: o => [
+      <Button content='Save' start='save' color='success' />,
+      <Button content='Close' start='close' color='primary' onClick={o.off} />,
+    ],
     className: 'Demo',
   },
 }

@@ -78,7 +78,7 @@ export function MarkupBoardAction(props: MarkupBoardActionProps) {
       onMouseLeave={reset}
       onOpen={highlight}
       onClose={reset}
-      disableHoverListener
+      disableHover
       {...otherProps}
     >
       <CssSizeField

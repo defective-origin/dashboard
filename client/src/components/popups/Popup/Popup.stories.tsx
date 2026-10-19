@@ -17,7 +17,7 @@ const meta: Meta<typeof Popup> = {
   tags: ['autodocs'],
   argTypes: {
     side: field.variants(VARIANTS, 'PopupSide'),
-    disableHoverListener: field.boolean(),
+    disableHover: field.boolean(),
     title: field.reactNode(),
     content: field.reactNode(),
     footer: field.reactNode(),
@@ -40,7 +40,7 @@ export const Demo: Story = {
     trigger,
     side: 'top',
     arrow: true,
-    disableHoverListener: false,
+    disableHover: false,
   },
 }
 

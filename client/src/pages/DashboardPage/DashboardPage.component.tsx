@@ -102,7 +102,9 @@ export function DashboardPage(props: DashboardPageProps) {
           onSuccess: manager.current?.clear,
         })} />,
         <Dropdown
-          disableHoverListener
+          arrow
+          disableHover
+          g='xs'
           start='space_dashboard'
           title={t('LABEL.GRID')}
           tooltip={t('LABEL.GRID')}
@@ -144,7 +146,7 @@ export function DashboardPage(props: DashboardPageProps) {
             side='top-start'
             trigger={<Widget id={id} />}
           >
-            <Actions>
+            <Actions group>
               <Actions.Button start='settings' tooltip={t('LABEL.SETTINGS')} />
               <Actions.Button start='resize' tooltip={t('ACTION.REPLACE')} onClick={() => manager.current?.placeItem(id)} />
               <Actions.Button start='move_up' tooltip={t('ACTION.SUBSTITUTION')} onClick={() => manager.current?.replaceItem(id, '123')} />

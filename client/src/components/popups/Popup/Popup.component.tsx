@@ -1,5 +1,8 @@
-import React, { useRef } from 'react'
-import MuiTooltip, { TooltipProps as MuiTooltipProps } from '@mui/material/Tooltip'
+import React, { useRef, isValidElement, cloneElement } from 'react'
+import {
+  arrow as arrowUi, autoUpdate, flip, FloatingArrow, FloatingPortal, offset, shift, useFloating,
+  useFocus, useHover, useInteractions, useRole, useDismiss, safePolygon, Placement,
+} from '@floating-ui/react'
 
 // ---| core |---
 import { cn, mix } from 'tools'
@@ -16,32 +19,26 @@ import Button from 'components/actions/Button'
 import css from './Popup.module.scss'
 
 
-export type PopupSide
-  = 'bottom-start' | 'bottom' | 'bottom-end'
-  | 'left-start' | 'left' | 'left-end'
-  | 'right-start' | 'right' | 'right-end'
-  | 'top-start' | 'top' | 'top-end'
-
+export type PopupSide = Placement
 export type PopupTriggerOptions = TogglerReturnOptions
-
 export type PopupProps
-  = Pick<MuiTooltipProps, 'disableHoverListener'>
-  & Pick<BlockProps, 'maxHeight' | 'maxWidth' | 'minWidth' | 'p' | 'g'>
- & {
-   side?: PopupSide
-   open?: boolean
-   arrow?: boolean
-   title?: React.ReactNode
-   className?: string
-   content?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
-   children?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
-   footer?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
-   trigger?: mix.ValOrFunc<React.ReactElement, [PopupTriggerOptions]>
-   onOpen?: () => void
-   onClose?: () => void
- }
+  = Pick<BlockProps, 'maxHeight' | 'maxWidth' | 'minWidth' | 'p' | 'g'>
+  & {
+    role?: 'dialog' | 'menu' | 'tooltip'
+    disableHover?: boolean
+    side?: PopupSide
+    open?: boolean
+    arrow?: boolean
+    title?: React.ReactNode
+    className?: string
+    content?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
+    children?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
+    footer?: mix.ValOrFunc<React.ReactNode, [PopupTriggerOptions]>
+    trigger?: mix.ValOrFunc<React.ReactElement, [PopupTriggerOptions]>
+    onOpen?: () => void
+    onClose?: () => void
+  }
 
-// TODO: add withPopup hoc like withSkeleton
 /**
  * Component description.
  * @example
@@ -63,58 +60,93 @@ export type PopupProps
  *  Popup Content
  * </Popup>
  */
-export function Popup(props: PopupProps) { // TODO: make actions ad common components via header, footer prop?
+export function Popup(props: PopupProps) {
   const {
-    p = 'xxs xs', g, open, trigger, arrow, title, content, footer, minWidth, maxHeight = 300, maxWidth, side = 'top',
-    disableHoverListener, onOpen, onClose, children, className, ...otherProps
+    p = 'xs', g, open, trigger, arrow, title, content, footer, minWidth, maxHeight = 300, maxWidth, side = 'top',
+    disableHover, role = 'tooltip', onOpen, onClose, children, className, ...otherProps
   } = props
-  const toggler = useToggler(false, { onOn: onOpen, onOff: onClose })
-  const isMouseInsideRef = useRef<boolean>(false)
+  const toggler = useToggler(open, { onOn: onOpen, onOff: onClose })
+  const arrowRef = useRef<SVGSVGElement | null>(null)
+
+  const { refs, floatingStyles, context } = useFloating({
+    placement: side,
+    open: toggler.isOn,
+    onOpenChange: value => {
+      if (value) {
+        toggler.on()
+      } else {
+        toggler.off()
+      }
+    },
+    whileElementsMounted: autoUpdate,
+    middleware: [
+      offset(arrow ? 8 : 0),
+      flip(),
+      shift({ padding: 8 }),
+      // eslint-disable-next-line react-hooks/refs
+      arrowUi({ element: arrowRef }),
+    ],
+  })
+
+  const hover = useHover(context, {
+    enabled: !disableHover,
+    move: false,
+    delay: { open: 100, close: 0 },
+    handleClose: safePolygon(),
+  })
+
+  const focus = useFocus(context)
+  const dismiss = useDismiss(context)
+  const roles = useRole(context, { role })
+  const interactions = useInteractions([hover, focus, dismiss, roles])
+  const triggerItem = mix.fromValOrFunc(trigger, toggler)
+
+  if (!isValidElement<object>(triggerItem)) {
+    return null
+  }
+
 
   return (
-    <MuiTooltip
-      disableHoverListener={disableHoverListener}
-      title={(
-        <Block
-          data-role='dialog'
-          radius='xs'
-          minWidth={minWidth}
-          maxHeight={maxHeight}
-          maxWidth={maxWidth}
-          className={cn(css.Popup, className)}
-          onMouseEnter={() => { isMouseInsideRef.current = true }}
-          onMouseLeave={() => { isMouseInsideRef.current = false }}
-        >
-          {title && (
-            <Header className={css.header} p='xs'>
-              <Text v='h4' content={title} />
-              {disableHoverListener && <Button start='close' size='xxs' onClick={toggler.off} />}
-            </Header>
-          )}
-
-          <Content p={p} g={g}>
-            {mix.fromValOrFunc(content ?? children, toggler)}
-          </Content>
-
-          {footer && mix.fromValOrFunc(footer, toggler)}
-        </Block>
+    <>
+      {cloneElement(
+        triggerItem,
+        interactions.getReferenceProps({
+          ref: refs.setReference,
+          ...triggerItem.props,
+        }),
       )}
-      placement={side}
-      arrow={arrow}
-      open={open ?? toggler.isOn}
-      slotProps={{
-        tooltip: { className: cn(css.card, arrow && css.arrow) },
-      }}
-      onOpen={toggler.on}
-      onClose={() => {
-        if (!isMouseInsideRef.current) {
-          toggler.off()
-        }
-      }}
-      {...otherProps}
-    >
-      {mix.fromValOrFunc(trigger, toggler)}
-    </MuiTooltip>
+
+      {toggler.isOn && (
+        <FloatingPortal>
+          <Block
+            ref={refs.setFloating}
+            style={{ ...floatingStyles, zIndex: 1500 }}
+            {...interactions.getFloatingProps()}
+            radius='xs'
+            minWidth={minWidth}
+            maxHeight={maxHeight}
+            maxWidth={maxWidth}
+            className={cn(css.Popup, className)}
+            {...otherProps}
+          >
+            {title && (
+              <Header className={css.header} p='xs'>
+                <Text v='h5' size='xxs' content={title} />
+                {disableHover && <Button start='close' size='xxs' onClick={toggler.off} />}
+              </Header>
+            )}
+
+            <Content p={p} g={g}>
+              {mix.fromValOrFunc(content ?? children, toggler)}
+            </Content>
+
+            {footer && mix.fromValOrFunc(footer, toggler)}
+
+            {arrow && <FloatingArrow className={css.arrow} ref={arrowRef} context={context} />}
+          </Block>
+        </FloatingPortal>
+      )}
+    </>
   )
 }
 

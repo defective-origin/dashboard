@@ -53,7 +53,7 @@ export function CssSizeField(props: CssSizeFieldProps) {
       disabled={options.default === ''}
       // type='number'
       end={
-        <SelectField className={css.Filters} value={format} onChange={setFormat}>
+        <SelectField className={css.Filters} value={format} onChange={setFormat} sub>
           {formats.map(format => <SelectField.Item value={format} content={format} />)}
         </SelectField>
       }
