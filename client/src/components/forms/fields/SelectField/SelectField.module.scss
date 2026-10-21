@@ -36,7 +36,7 @@
 
 select,
 ::picker(select) {
-  appearance: base-select;
+  appearance: base-select; // TODO: input doesn't work without form
 }
 
 selectedcontent .icon {

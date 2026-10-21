@@ -57,3 +57,17 @@ export function repeat(text: string, count: number, separator = '') {
 
   return (text + separator).repeat(count - 1) + text
 }
+
+/** convert string value to typed value */
+export function toValue(text: string | undefined | null) {
+  if (!text) {
+    return text
+  }
+
+  try {
+    // parse value and number
+    return JSON.parse(text)
+  } catch {
+    return text
+  }
+}

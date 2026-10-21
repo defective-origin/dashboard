@@ -46,10 +46,7 @@ export function TablePagination(props: TablePaginationProps) {
   const hasNext = page < pages - 1
   const hasPrev = page > 0
 
-  const change = (options: Partial<TablePaginationPageOptions>) => {
-    console.log('called')
-    onChange?.({ page, rows, ...options })
-  }
+  const change = (options: Partial<TablePaginationPageOptions>) => onChange?.({ page, rows, ...options })
 
   if (!visible) {
     return null

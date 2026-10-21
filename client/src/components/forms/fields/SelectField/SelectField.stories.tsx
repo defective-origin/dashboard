@@ -18,6 +18,7 @@ export const Demo: Story = {
   args: {
     disabled: false,
     required: false,
+    multiple: false,
     label: 'Label',
     init: 'value0',
     help: 'help text',
@@ -25,6 +26,10 @@ export const Demo: Story = {
       <SelectFieldItem value='value0' content='FIRST' start={<Icon v='2k' />} end={<Icon v='2k' />} />,
       <SelectFieldItem value='value1' content='SECOND' start={<Icon v='4k' />} end={<Icon v='4k' />} />,
       <SelectFieldItem value='value2' content='THIRD' start={<Icon v='8k' />} end={<Icon v='8k' />} />,
+      <SelectFieldItem value={1} content='SECOND' />,
+      <SelectFieldItem value={2} content='THIRD' />,
+      <SelectFieldItem value={true} content='True' />,
+      <SelectFieldItem value={false} content='False' />,
     ],
   },
 }

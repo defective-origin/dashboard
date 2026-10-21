@@ -52,4 +52,12 @@ describe('[String] tools', () => {
       expect(tools.toTitle('test TESt')).toEqual('Test test')
     })
   })
+
+  describe('[toValue] func', () => {
+    it('should convert string to appropriate type', () => {
+      expect(tools.toValue('1.2')).toEqual(1.2)
+      expect(tools.toValue('true')).toEqual(true)
+      expect(tools.toValue('string')).toEqual('string')
+    })
+  })
 })

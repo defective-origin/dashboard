@@ -11,7 +11,7 @@ import css from './SelectFieldItem.module.scss'
 
 
 export type SelectFieldItemProps = {
-  value?: string | number
+  value?: string | number | boolean
   start?: React.ReactNode
   end?: React.ReactNode
   className?: string
@@ -25,10 +25,10 @@ export type SelectFieldItemProps = {
  * <SelectFieldItem />
  */
 export function SelectFieldItem(props: SelectFieldItemProps) {
-  const { start, end, content, children, className, ...otherProps } = props
+  const { value, start, end, content, children, className, ...otherProps } = props
 
   return (
-    <option className={cn(css.SelectFieldItem, className)} {...otherProps}>
+    <option className={cn(css.SelectFieldItem, className)} value={value?.toString()} {...otherProps}>
       {start}
       <Text className={css.text} v='span' content={content ?? children} />
       {end}
