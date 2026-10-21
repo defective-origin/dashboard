@@ -28,7 +28,6 @@ export const Demo: Story = {
   args: {
     content: 'sOmE TeXt',
     outline: false,
-    loading: false,
     bold: false,
   },
 }
@@ -41,12 +40,4 @@ export const Sizes: Story = {
 export const Colors: Story = {
   parameters: params('Color', theme.COLORS),
   render: () => initVariants('color', theme.COLORS),
-}
-
-export const Loading: Story = {
-  parameters: params('If `loading` is `true` the Skeleton component is shown.'),
-  args: {
-    content: 'content to hide',
-    loading: true,
-  },
 }

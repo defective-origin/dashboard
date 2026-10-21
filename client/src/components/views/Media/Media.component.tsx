@@ -4,8 +4,6 @@ import React from 'react'
 import { cn, jss } from 'tools'
 
 // ---| components |---
-import { withSkeleton } from 'components/views/Skeleton'
-
 // ---| self |---
 import css from './Media.module.scss'
 
@@ -34,7 +32,7 @@ export type MediaProps = {
  * @example
  * <Media />
  */
-export const Media = withSkeleton((props: MediaProps) => {
+export function Media(props: MediaProps) {
   const { width, height, v, src, alt, style, className, ...otherProps } = props
   const imgSrc = src ?? MEDIA_MAP[v as MediaVariant]
 
@@ -47,7 +45,7 @@ export const Media = withSkeleton((props: MediaProps) => {
       {...otherProps}
     />
   )
-}, () => ({ v: 'rounded', wrap: true }))
+}
 
 Media.displayName = 'Media'
 

@@ -5,8 +5,6 @@ import { cn, jss, nil } from 'tools'
 import { Color, Size, toColor, toSize } from 'theme'
 
 // ---| components |---
-import { withSkeleton } from 'components/views/Skeleton'
-
 // ---| self |---
 import './Text.module.scss'
 import { TEXT_FORMAT_MAP } from './Text.constants'
@@ -48,7 +46,7 @@ export type TextProps = {
  *    ellipsis={3}
  * />
  */
-export const Text = withSkeleton((props: TextProps) => { // FIXME: rename to Typo
+export function Text(props: TextProps) { // FIXME: rename to Typo
   const {
     v: Tag = 'p',
     size,
@@ -98,7 +96,7 @@ export const Text = withSkeleton((props: TextProps) => { // FIXME: rename to Typ
       {children ?? formatted}
     </Tag>
   )
-}, props => ({ v: 'text', children: props.children || props.content }))
+}
 
 Text.displayName = 'Text'
 

@@ -26,7 +26,6 @@ const meta: Meta<typeof Text> = {
     format: field.variants(FORMATS, 'FormatVariant', 'default'),
     placeholder: field.reactNode(),
     ellipsis: field.object('boolean | number'),
-    loading: field.boolean(),
   },
 }
 
@@ -49,7 +48,6 @@ export const Demo: Story = {
     align: 'left',
     color: 'primary',
     ellipsis: false,
-    loading: false,
   },
 }
 
@@ -107,13 +105,5 @@ export const Ellipsis: Story = {
   args: {
     content: CONTENT,
     ellipsis: 2,
-  },
-}
-
-export const Loading: Story = {
-  parameters: params('If `loading` is `true` the Skeleton component is shown.'),
-  args: {
-    content: 'content to hide',
-    loading: true,
   },
 }

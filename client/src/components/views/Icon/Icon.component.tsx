@@ -5,8 +5,6 @@ import { cn, jss } from 'tools'
 import { Color, Size, toColor, toSize } from 'theme'
 
 // ---| components |---
-import { withSkeleton } from 'components/views/Skeleton'
-
 // ---| self |---
 import css from './Icon.module.scss'
 
@@ -54,7 +52,7 @@ export type IconProps = {
  * @example
  * <Icon />
  */
-export const Icon = withSkeleton((props: IconProps) => {
+export function Icon(props: IconProps) {
   const { size, v, fill, color, style, className, ...otherProps } = props
 
   return (
@@ -76,7 +74,7 @@ export const Icon = withSkeleton((props: IconProps) => {
       {v}
     </span>
   )
-}, () => ({ v: 'circular', wrap: true }))
+}
 
 Icon.displayName = 'Icon'
 

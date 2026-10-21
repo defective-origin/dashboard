@@ -7,6 +7,7 @@ import { Color, Size, toColor, toSize } from 'theme'
 // ---| self |---
 import css from './Progress.module.scss'
 
+
 const ICON_SIZE = 40
 const ICON_THICKNESS = 3.6
 
@@ -17,9 +18,9 @@ export type ProgressProps = {
 }
 
 /**
- * Component description.
+ * Allows to show loading and processing progress.
  * @example
- * <Progress />
+ * <Progress size='xl' color='info' />
  */
 export function Progress(props: ProgressProps) {
   const { size, color, className, ...otherProps } = props

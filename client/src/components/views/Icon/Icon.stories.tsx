@@ -13,7 +13,6 @@ const meta: Meta<typeof Icon> = {
     color: field.variants(theme.COLORS, 'IconColor', 'primary'),
     v: field.variants(ICONS, 'IconVariant'),
     fill: field.boolean(),
-    loading: field.boolean(),
   },
 }
 
@@ -34,7 +33,6 @@ export const Demo: Story = {
     size: 'md',
     color: 'primary',
     fill: false,
-    loading: false,
   },
 }
 
@@ -51,12 +49,4 @@ export const Sizes: Story = {
 export const Colors: Story = {
   parameters: params('Color', theme.COLORS, 'primary'),
   render: () => initVariants('color', theme.COLORS),
-}
-
-export const Loading: Story = {
-  parameters: params('If `loading` is `true` the Skeleton component is shown.'),
-  args: {
-    v: 'light_mode',
-    loading: true,
-  },
 }
